@@ -1,0 +1,167 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Testable Predictions</h1>
+    <p class="kicker">Forecasts phrased only in terms of kernel invariants — resolution \(\lambda_q\) and effective spectral exponent \(D_{\mathrm{eff}}\) — plus instrument knobs.</p>
+    <p class="note">Each signal comes with a crisp <em>fail gate</em>. Math blocks respect your Math toggle; open the small expanders for experimental details.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Summary -->
+    <div class="card">
+      <h2>Summary — three near‑term signals</h2>
+      <ul>
+        <li><strong>S1 — ALP ladder (lab handle):</strong> a non‑harmonic axion‑like tower with base \(m_1\approx 65\,\mathrm{neV}\) (\(f_1\approx 15.717\,\mathrm{MHz}\)) and ratios \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\).</li>
+        <li><strong>S2 — Coherence cliff (pm scale):</strong> a step‑like change in interference/coherence as the effective probe scale crosses \(\lambda_q\) according to the fidelity law.</li>
+        <li><strong>S3 — Torsion / extra polarization (mHz band):</strong> space‑based interferometer strain templates \(h_T\sim \epsilon_T\,GE/(c^4 r)\) for large‑energy hubs.</li>
+      </ul>
+    </div>
+
+    <!-- S1: ALP ladder -->
+    <div class="card">
+      <h2>S1 — ALP ladder (non‑harmonic)</h2>
+      <p class="core">DREAM predicts a tower with a fixed base and non‑harmonic spacing controlled by \(D_{\mathrm{eff}}\):</p>
+      <div class="math-block">\[
+        \frac{m_n}{m_1}=n^{\,1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\ \Rightarrow\ f_1\approx 15.717\,\mathrm{MHz}.
+      \]</div>
+      <p>Distinguishes DREAM from linear KK spectra and sets concrete haloscope windows.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Windows.</strong> Center the first rung near \(f_1\approx 15.717\,\mathrm{MHz}\) (tens‑of‑neV mass scale). Subsequent rungs follow \(n^{1/D_{\mathrm{eff}}}\).</p>
+          <p><strong>Couplings &amp; exposure.</strong> Report per‑mode exposure and any mode‑dependent coupling assumptions; the ratio law is the discriminator.</p>
+          <p><strong>Fail gate.</strong> If the base window and the non‑harmonic ratios are excluded at the forecasted sensitivity, the ladder claim fails.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S2: Coherence cliff -->
+    <div class="card">
+      <h2>S2 — Coherence cliff (pm scale)</h2>
+      <p class="core">Fidelity vs. scale follows the retention law, producing a sharp transition as the effective probe crosses \(\lambda_q\):</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Interferometric, photonic, NV‑center, or atom‑optics platforms should show a step‑like change in contrast/visibility near \(\lambda\approx\lambda_q\).</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Scan protocol.</strong> Sweep baseline/wavelength/coherence length to traverse below/above \(\lambda_q\); record visibility and phase‑noise metrics.</p>
+          <p><strong>Analysis.</strong> Fit \(\alpha(\lambda)\) and estimate \(D_{\mathrm{eff}}\) jointly with instrumental nuisance terms.</p>
+          <p><strong>Fail gate.</strong> Repeated, controlled scans across the posited \(\lambda_q\) with no transition (within error bars) falsify the law as stated.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S3: Torsion / extra polarization -->
+    <div class="card">
+      <h2>S3 — Torsion / extra polarization (mHz band)</h2>
+      <p class="core">Large‑energy hubs could seed tensor/torsion content in the mHz band. A sketch amplitude:</p>
+      <div class="math-block">\[
+        h_T\sim\epsilon_T\,\frac{G\,E}{c^4 r}.
+      \]</div>
+      <p>Template families target extra polarization; cross‑correlate with astrophysical catalogs.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Templates.</strong> Include polarization content, source energetics \(E\), and distance \(r\). Use injection campaigns to calibrate sensitivity.</p>
+          <p><strong>Fail gate.</strong> Null at modeled levels across template families and observation spans falsifies this channel.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Windows & sensitivities -->
+    <div class="card">
+      <h2>Windows &amp; sensitivities (at a glance)</h2>
+      <div class="note">Illustrative values — adjust to your instrument. Report both base exposure and per‑mode assumptions.</div>
+      <div class="code" style="overflow:auto">
+        <table style="width:100%; border-collapse:collapse; font-size:0.95rem">
+          <thead>
+            <tr style="border-bottom:1px solid #2a2f5a">
+              <th style="text-align:left; padding:.4rem">Channel</th>
+              <th style="text-align:left; padding:.4rem">Primary observable</th>
+              <th style="text-align:left; padding:.4rem">Nominal window</th>
+              <th style="text-align:left; padding:.4rem">Fail gate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:.4rem">S1 — ALP ladder</td>
+              <td style="padding:.4rem">Base hit + non‑harmonic ratios</td>
+              <td style="padding:.4rem"><span class="math-inline">\(m_1\approx 65\,\mathrm{neV}\Rightarrow f_1\approx 15.717\,\mathrm{MHz}\)</span></td>
+              <td style="padding:.4rem">Exclude base &amp; ratios at forecast sensitivity</td>
+            </tr>
+            <tr>
+              <td style="padding:.4rem">S2 — Coherence cliff</td>
+              <td style="padding:.4rem">Visibility/contrast vs. effective scale</td>
+              <td style="padding:.4rem"><span class="math-inline">\(\lambda\approx\lambda_q\)</span> (pm‑scale regimes)</td>
+              <td style="padding:.4rem">No transition across scans → law fails</td>
+            </tr>
+            <tr>
+              <td style="padding:.4rem">S3 — Torsion/extra pol.</td>
+              <td style="padding:.4rem">Strain templates (mHz band)</td>
+              <td style="padding:.4rem"><span class="math-inline">\(h_T\sim\epsilon_T\,GE/(c^4 r)\)</span></td>
+              <td style="padding:.4rem">Null at modeled levels</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pre-registration & reporting -->
+    <div class="card">
+      <h2>Pre‑registration &amp; reporting</h2>
+      <ul>
+        <li>List invariant parameters used (\(\lambda_q, D_{\mathrm{eff}}\)) and instrument mapping of the effective scale \(\lambda\).</li>
+        <li>State windows (base + ladder rungs) and sensitivity assumptions per mode.</li>
+        <li>Fix fail gates ahead of time and share analysis notebooks / injection campaigns.</li>
+      </ul>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Joint fits.</strong> Ladder ratios + retention cliff constrain \(D_{\mathrm{eff}}\) more tightly than either alone; report joint posteriors.</p>
+          <p><strong>Systematics.</strong> Track bandwidths, losses, and coupling form‑factors as nuisance parameters rather than absorbing them into the invariants.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Cross‑checks -->
+    <div class="card">
+      <h2>Cross‑checks (lab ↔ sky)</h2>
+      <ul>
+        <li>Compare lab‑inferred \(D_{\mathrm{eff}}\) (ladder + cliff) to exponents from structure/entropy scaling.</li>
+        <li>Use independent platforms for the cliff (photonic, atom, NV) to de‑bias instrumental artifacts.</li>
+        <li>Correlate torsion templates with catalogs; look for multi‑messenger consistency.</li>
+      </ul>
+    </div>
+
+    <!-- Falsification recap -->
+    <div class="card">
+      <h2>Falsification recap</h2>
+      <ul>
+        <li><strong>Ladder:</strong> base + ratios decisively excluded → fail.</li>
+        <li><strong>Cliff:</strong> no scale transition near posited \(\lambda_q\) across platforms → fail.</li>
+        <li><strong>Torsion:</strong> null at modeled levels across templates/epochs → fail.</li>
+      </ul>
+      <p class="note">We do not “rescue” by unconstrained kernel tweaks; the invariant posture keeps the claims crisp.</p>
+    </div>
+
+    <!-- Speculative note (optional) -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>One may read these signals as footprints of how organizational regularities on MM survive finite‑resolution projection. This is a lens, not a requirement for the tests.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

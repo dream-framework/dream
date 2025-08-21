@@ -1,0 +1,172 @@
+{% block content %}
+<div class="container">
+
+    <div class="card hero">
+        <h1>Проверяемые предсказания</h1>
+        <p class="kicker">Прогнозы сформулированы только в терминах инвариантов ядра — разрешения \(\lambda_q\) и эффективного спектрального показателя \(D_{\mathrm{eff}}\) — плюс «ручек» прибора.</p>
+        <p class="note">У каждого сигнала есть чёткие <em>«ворота отказа»</em>. Математические блоки уважают переключатель «Математика»; откройте небольшие раскрывающиеся блоки для деталей эксперимента.</p>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+
+        <!-- Summary -->
+        <div class="card">
+            <h2>Сводка — три ближнесрочных сигнала</h2>
+            <ul>
+                <li><strong>S1 — «Лестница» ALP (лабораторная ручка):</strong> негармоническая аксионоподобная башня с базой \(m_1\approx 65\,\mathrm{neV}\) (\(f_1\approx 15.717\,\mathrm{MHz}\)) и отношениями \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\).</li>
+                <li><strong>S2 — «Обрыв» когерентности (пикометровый масштаб):</strong> ступенчатое изменение интерференции/когерентности при переходе эффективного масштаба зонда через \(\lambda_q\) согласно закону удержания.</li>
+                <li><strong>S3 — Торсион / доп. поляризация (мГц-полоса):</strong> шаблоны деформации для космических интерферометров \(h_T\sim \epsilon_T\,GE/(c^4 r)\) от мощных источников энергии.</li>
+            </ul>
+        </div>
+
+        <!-- S1: ALP ladder -->
+        <div class="card">
+            <h2>S1 — «Лестница» ALP (негармоническая)</h2>
+            <p class="core">DREAM предсказывает башню с фиксированной базой и негармонической разбивкой, управляемой \(D_{\mathrm{eff}}\):</p>
+            <div class="math-block">
+                \[
+                \frac{m_n}{m_1}=n^{\,1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\ \Rightarrow\ f_1\approx 15.717\,\mathrm{MHz}.
+                \]
+            </div>
+            <p>Это отличает DREAM от линейных KK-спектров и задаёт конкретные окна для галоскопов.</p>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Окна.</strong> Центрируйте первую ступень вокруг \(f_1\approx 15.717\,\mathrm{MHz}\) (масштаб масс в десятки neV). Последующие ступени следуют \(n^{1/D_{\mathrm{eff}}}\).</p>
+                    <p><strong>Связи и экспозиция.</strong> Отчитывайтесь по экспозиции для каждой моды и по допущениям о зависящих от мод связях; дискриминатор — закон отношений.</p>
+                    <p><strong>«Ворота отказа».</strong> Если базовое окно и негармонические отношения исключены на заявленной чувствительности, требование «лестницы» проваливается.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- S2: Coherence cliff -->
+        <div class="card">
+            <h2>S2 — «Обрыв» когерентности (пм-масштаб)</h2>
+            <p class="core">Фиделити по масштабу подчиняется закону удержания и даёт резкий переход при пересечении \(\lambda_q\):</p>
+            <div class="math-block">
+                \[
+                \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+                \]
+            </div>
+            <p>Интерферометрические, фотонные, NV-центровые или атомно-оптические платформы должны показывать ступенчатое изменение контраста/видимости около \(\lambda\approx\lambda_q\).</p>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Протокол скана.</strong> Меняйте базу/длину волны/длину когерентности, чтобы пройти ниже/выше \(\lambda_q\); записывайте метрики видимости и фазового шума.</p>
+                    <p><strong>Анализ.</strong> Подгоняйте \(\alpha(\lambda)\) и оценивайте \(D_{\mathrm{eff}}\) совместно с инструментальными «нечистотами».</p>
+                    <p><strong>«Ворота отказа».</strong> Повторяемые контролируемые сканы через заявленное \(\lambda_q\) без перехода (в пределах ошибок) фальсифицируют закон в данной формулировке.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- S3: Torsion / extra polarization -->
+        <div class="card">
+            <h2>S3 — Торсион / доп. поляризация (мГц-полоса)</h2>
+            <p class="core">Мощные источники энергии могут порождать тензорно-торсионный контент в мГц-полосе. Прикидочная амплитуда:</p>
+            <div class="math-block">
+                \[
+                h_T\sim\epsilon_T\,\frac{G\,E}{c^4 r}.
+                \]
+            </div>
+            <p>Семейства шаблонов нацелены на дополнительную поляризацию; выполняйте кросс-корреляцию с астрофизическими каталогами.</p>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Шаблоны.</strong> Включайте поляризационное содержимое, энергетику источника \(E\) и расстояние \(r\). Используйте инъекционные кампании для калибровки чувствительности.</p>
+                    <p><strong>«Ворота отказа».</strong> Нули на моделируемых уровнях по семействам шаблонов и интервалам наблюдений фальсифицируют этот канал.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Windows & sensitivities -->
+        <div class="card">
+            <h2>Окна и чувствительности (схематично)</h2>
+            <div class="note">Иллюстративные значения — подстройте под свой прибор. Отчитывайтесь и о базовой экспозиции, и о предположениях по модам.</div>
+            <div class="code" style="overflow:auto">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem">
+                    <thead>
+                        <tr style="border-bottom:1px solid #2a2f5a">
+                            <th style="text-align:left; padding:.4rem">Канал</th>
+                            <th style="text-align:left; padding:.4rem">Основная наблюдаемая</th>
+                            <th style="text-align:left; padding:.4rem">Номинальное окно</th>
+                            <th style="text-align:left; padding:.4rem">«Ворота отказа»</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:.4rem">S1 — «лестница» ALP</td>
+                            <td style="padding:.4rem">База + негармонические отношения</td>
+                            <td style="padding:.4rem"><span class="math-inline">\(m_1\approx 65\,\mathrm{neV}\Rightarrow f_1\approx 15.717\,\mathrm{MHz}\)</span></td>
+                            <td style="padding:.4rem">Исключить базу и отношения на заявленной чувствительности</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:.4rem">S2 — «обрыв» когерентности</td>
+                            <td style="padding:.4rem">Видимость/контраст vs. эффективный масштаб</td>
+                            <td style="padding:.4rem"><span class="math-inline">\(\lambda\approx\lambda_q\)</span> (пм-режимы)</td>
+                            <td style="padding:.4rem">Отсутствие перехода при сканах → закон рушится</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:.4rem">S3 — торсион/доп. пол.</td>
+                            <td style="padding:.4rem">Шаблоны деформации (мГц-полоса)</td>
+                            <td style="padding:.4rem"><span class="math-inline">\(h_T\sim\epsilon_T\,GE/(c^4 r)\)</span></td>
+                            <td style="padding:.4rem">Нули на моделируемых уровнях</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pre-registration & reporting -->
+        <div class="card">
+            <h2>Пререгистрация и отчётность</h2>
+            <ul>
+                <li>Укажите используемые инварианты (\(\lambda_q, D_{\mathrm{eff}}\)) и картирование эффективного масштаба \(\lambda\) на ручки прибора.</li>
+                <li>Задайте окна (база + ступени «лестницы») и допущения по чувствительности для каждой моды.</li>
+                <li>Зафиксируйте «ворота отказа» заранее и поделитесь ноутбуками анализа / инъекционными кампаниями.</li>
+            </ul>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Совместные подгонки.</strong> Отношения «лестницы» + «обрыв» удержания стягивают ограничения на \(D_{\mathrm{eff}}\) сильнее, чем каждый по отдельности; сообщайте совместные постериоры.</p>
+                    <p><strong>Систематика.</strong> Ведите полосу, потери и форм-факторы связи как «нечистоты», а не как часть инвариантов.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Cross-checks -->
+        <div class="card">
+            <h2>Перекрёстные проверки (лаборатория ↔ небо)</h2>
+            <ul>
+                <li>Сравните лабораторный \(D_{\mathrm{eff}}\) («лестница» + «обрыв») с показателями из структуры/энтропийного масштабирования.</li>
+                <li>Используйте независимые платформы для «обрыва» (фотоника, атомные, NV), чтобы снизить инструментальные смещения.</li>
+                <li>Коррелируйте торсионные шаблоны с каталогами; ищите межмессенджерную согласованность.</li>
+            </ul>
+        </div>
+
+        <!-- Falsification recap -->
+        <div class="card">
+            <h2>Резюме фальсификации</h2>
+            <ul>
+                <li><strong>«Лестница»:</strong> база + отношения решительно исключены → провал.</li>
+                <li><strong>«Обрыв»:</strong> нет перехода масштаба около заявленного \(\lambda_q\) на разных платформах → провал.</li>
+                <li><strong>Торсион:</strong> нули на моделируемых уровнях по шаблонам/эпохам → провал.</li>
+            </ul>
+            <p class="note">Мы не «спасаем» идею неограниченными твиками ядра; инвариантная позиция держит утверждения чёткими.</p>
+        </div>
+
+        <!-- Speculative note (optional) -->
+        <div class="card speculative">
+            <h2 class="kicker">Интерпретативная заметка (спекулятивно)</h2>
+            <p>Эти сигналы можно читать как отпечатки того, как организационные регулярности на MM переживают проекцию конечного разрешения. Это взгляд, а не требование для тестов.</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Повторно отрисовать математику после раскрытия «Показать подробнее»
+    document.querySelectorAll('details.more').forEach(d => {
+        d.addEventListener('toggle', () => d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+    });
+</script>
+{% endblock %}

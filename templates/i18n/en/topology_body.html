@@ -1,0 +1,112 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Topology → Particle &amp; Gauge Classes</h1>
+    <p class="kicker">Stable topological data on the 10D Meta‑Manifold (MM) label particle/gauge <em>classes</em>; individual 4D instances are projections under a finite‑resolution kernel.</p>
+    <p class="note">Core statements are below. Math details are tucked into small expanders and respect the Math toggle.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- What topology encodes -->
+    <div class="card">
+      <h2>What topology encodes</h2>
+      <ul>
+        <li><strong>Class labels:</strong> Integer‑valued or finite invariants (homotopy/cohomology, characteristic classes) that survive projection.</li>
+        <li><strong>Quantization:</strong> Charges appear as push‑forwards of integer classes; quantization is robust to kernel details.</li>
+        <li><strong>Selection rules:</strong> Class constraints forbid certain decays/mergers; allowed processes respect addition of classes.</li>
+      </ul>
+      <p class="note">DREAM’s stance is kernel‑agnostic: only <em>invariants</em> are empirical. The detailed micro‑geometry of MM is not reconstructed.</p>
+    </div>
+
+    <!-- Classes ↔ particles -->
+    <div class="card">
+      <h2>Classes ↔ particles/gauge sectors</h2>
+      <ul>
+        <li><strong>π<sub>3</sub>(G) ≅ ℤ</strong> (for many compact Lie groups): labels winding/instanton number → integer charge/family classes.</li>
+        <li><strong>H¹(MM, ℤ)</strong>: U(1) sectors / flux lines; first cohomology controls abelian holonomies.</li>
+        <li><strong>Characteristic classes</strong> (c₁, c₂, p₁,…): integrals over cycles fix quantized charges and anomaly counters.</li>
+      </ul>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Examples.</strong></p>
+          <div class="math-block">\[\deg(g)=\frac{1}{24\pi^2}\int_{S^3}\operatorname{tr}\big((g^{-1}\mathrm{d}g)^3\big)\in\mathbb{Z}\qquad (g:S^3\to SU(2)).\]</div>
+          <div class="math-block">\[Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint_\gamma A\in\mathbb{Z},\qquad c_1(E)=\big[\tfrac{F}{2\pi}\big]\in H^2(MM,\mathbb{Z}).\]</div>
+          <div class="math-block">\[k=\frac{1}{8\pi^2}\int_{\Sigma^4}\operatorname{tr}(F\wedge F)\in\mathbb{Z}\qquad (\text{second Chern / Pontryagin}).\]</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Projection of classes -->
+    <div class="card">
+      <h2>How classes project to 4D</h2>
+      <p>Classes on MM push‑forward to 4D via the kernel. Intuitively, we integrate an integer density over the preimage fiber of a 4D locus, weighted by the kernel.</p>
+      <div class="math-block">\[
+      Q_{\mathrm{4D}}(\Sigma)=\int_{\pi^{-1}(\Sigma)} K_{\lambda}(x;X)\,\mathcal{I}(X)\,\mathrm{d}\mu_{\mathrm{MM}}(X),
+      \]</div>
+      <p>where \(\mathcal{I}\) is a representative density (e.g., \(\tfrac{1}{8\pi^2}\operatorname{tr}F\wedge F\)). Integer‑valuedness is stable as long as the kernel respects locality/positivity and the fiber intersections are regular at our resolution.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Fiber picture.</strong> 4D regions correspond to “tubes” in MM via \(\pi^{-1}\). The kernel localizes contributions near the tube; coarse features survive, micro‑oscillations average out.</p>
+          <p><strong>Why quantization persists.</strong> Integer classes integrated over compact cycles remain integers under small deformations; finite‑resolution averaging preserves the integer as long as cycles are not torn or merged at the chosen \(\lambda\).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Consistency: index + anomalies -->
+    <div class="card">
+      <h2>Consistency: index &amp; anomalies</h2>
+      <p>Chiral matter and gauge sectors must satisfy index‑theorem and anomaly constraints; these live naturally at the topological level.</p>
+      <div class="math-block">\[
+      \mathrm{index}(\slashed{D})\;=\;\int_{\mathrm{MM}}\!\widehat{A}(T\,\mathrm{MM})\,\wedge\,\mathrm{ch}(E)\;\in\;\mathbb{Z}.
+      \]</div>
+      <p>Projected 4D content must reflect an integer index and anomaly cancellation (e.g., mixed gauge‑gravitational). These serve as <em>consistency gates</em> for any concrete particle assignment.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Anomaly language.</strong> Descents of characteristic classes (e.g., \(\operatorname{tr}F\wedge F\)) yield Chern–Simons terms on boundaries. Projection must not introduce uncancelled anomalies in the 4D effective theory.</p>
+          <p><strong>Empirical handle.</strong> Quantized charges and selection rules are the observable footprint of the underlying index/arithmetic.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Worked capsules -->
+    <div class="card">
+      <h2>Worked capsules</h2>
+      <p><strong>U(1) flux sector.</strong> Non‑trivial \(H^1(MM,\mathbb{Z})\) gives families of holonomies; 4D Wilson loops measure the class.</p>
+      <div class="math-block">\[W(\gamma)=\exp\!\Big(i\oint_\gamma A\Big),\qquad \frac{1}{2\pi}\oint_\gamma A\in\mathbb{Z}.\]</div>
+      <p><strong>Non‑abelian winding.</strong> Maps \(S^3\to G\) contribute integer classes; defects or instanton‑like sectors in 4D inherit that integer via projection.</p>
+      <div class="math-block">\[Q=\frac{1}{24\pi^2}\int_{S^3}\operatorname{tr}\big((g^{-1}\mathrm{d}g)^3\big)\in\mathbb{Z}.\]</div>
+    </div>
+
+    <!-- Falsification & observations -->
+    <div class="card">
+      <h2>Falsification &amp; observations</h2>
+      <ul>
+        <li><strong>Quantization tests:</strong> charges tied to \(H^k\) integrals must appear as integers to instrument precision.</li>
+        <li><strong>Selection rules:</strong> forbidden decays remain forbidden; allowed channels respect class addition.</li>
+        <li><strong>Anomaly safety:</strong> no uncancelled anomalies in the 4D effective content induced by projection.</li>
+      </ul>
+      <p class="note">These gates depend only on class data, not on a detailed parameterization of the kernel.</p>
+    </div>
+
+    <!-- Speculative -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive notes (speculative)</h2>
+      <p>The “identity” of a particle is read as membership in a topological class; apparent family structure may trace to different lifts of the same class across local projection conditions. Such readings are interpretive and not required for testing the kernel invariants.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

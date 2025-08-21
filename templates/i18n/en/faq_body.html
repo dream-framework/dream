@@ -1,0 +1,131 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>FAQ — as “Clouds”</h1>
+    <p class="kicker">Tap a cloud to reveal an answer. Core science and speculative notes are clearly separated.</p>
+    <p class="note">This version forces the Speculative section to show on this page while keeping answers collapsed until you open a cloud.</p>
+  </div>
+
+  <!-- LIGHTER CLOUD STYLE + SPEC VISIBILITY (page-only overrides) -->
+  <style>
+    /* Expansion behavior */
+    .cloud .a{display:none}
+    .cloud[open] .a{display:block}
+    .cloud > summary{list-style:none; cursor:pointer}
+    .cloud > summary::-webkit-details-marker{display:none}
+
+    /* Minimal arrow indicator */
+    .cloud > summary::after{
+      content:"▾"; float:right;
+      transform:rotate(0deg); transition:transform .15s ease;
+      color:var(--muted); font-size:.9rem;
+    }
+    .cloud[open] > summary::after{ transform:rotate(180deg) }
+
+    /* Lightweight visuals */
+    .clouds{gap:.75rem}
+    .cloud{
+      background:transparent !important;
+      border:1px solid rgba(42,47,90,.55) !important;
+      box-shadow:none !important;
+      border-radius:12px !important;
+      padding:.7rem .9rem !important;
+      transition:background .15s ease, border-color .15s ease;
+    }
+    .cloud:hover{ background:rgba(26,31,69,.28); border-color:rgba(42,47,90,.9) }
+    .cloud::before,.cloud::after{ display:none !important; content:none !important }
+
+    /* Type scale */
+    .cloud .q{ font-weight:600; font-size:.96rem; color:var(--text) }
+    .cloud .a{ font-size:.93rem; color:#cfd4ff }
+
+    /* --- PAGE-ONLY FIX: force speculative to be visible on this page --- */
+    /* If your global CSS sets .speculative {display:none}, it would hide the entire section.
+       We explicitly re-enable it here and only reveal answers on open. */
+    .card.speculative{ display:block !important }                 /* show the section card */
+    .cloud[open] .a.speculative{ display:block !important }       /* reveal speculative answers when opened */
+  </style>
+
+  <!-- FOUNDATIONS -->
+  <div class="card">
+    <h2>Foundations</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">Is 4D fundamental?</summary><div class="a core">No. In DREAM, 4D observables are push‑forwards of 10D fields on a compact Meta‑Manifold (MM) via a fixed, non‑invertible kernel at finite resolution. “Fundamental” structure lives on MM; 4D is a projection.</div></details>
+      <details class="cloud"><summary class="q">What is the projection kernel?</summary><div class="a core">A linear map \(K_{\lambda}(x;X)\) tying MM points \(X\) to 4D points \(x\) at resolution \(\lambda\) (our slice uses \(\lambda_q\)). Observables: <div class="math-block">\[O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).\]</div></div></details>
+      <details class="cloud"><summary class="q">Why not measure the kernel directly?</summary><div class="a core">Multiple kernels with the same <em>invariants</em> yield indistinguishable observables at our resolution. Data constrain the invariants: resolution \(\lambda_q\), locality radius, regularity/positivity, effective spectral exponent \(D_{\mathrm{eff}}\).</div></details>
+      <details class="cloud"><summary class="q">Is MM inside our spacetime?</summary><div class="a core">No embedding is assumed. There is a surjection \(\pi:\mathrm{MM}\to\mathbb{R}^{3,1}\); 4D points are images of whole high‑D fibers \(\pi^{-1}(x)\). Metrics and lightcones live in 4D after projection.</div></details>
+      <details class="cloud"><summary class="q">What does “atemporal MM” mean?</summary><div class="a core">4D time is not a fundamental MM coordinate. The only \(t\)-dependence enters via the 4D argument of the push‑forward; introducing an MM‑time adds an unidentifiable clock.</div></details>
+      <details class="cloud"><summary class="q">Do we require a split \(U_4\times K_6\)?</summary><div class="a core">No. Axiom A3 (“all‑to‑four”) avoids a global factorization; all ten coordinates compress directly into 4D observables.</div></details>
+    </div>
+  </div>
+
+  <!-- KERNEL & INVARIANTS -->
+  <div class="card">
+    <h2>Kernel &amp; invariants</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">Which quantities are invariant/empirical?</summary><div class="a core">Four: (i) resolution \(\lambda_q\); (ii) locality radius; (iii) regularity/positivity (PSD operator); (iv) effective spectral exponent \(D_{\mathrm{eff}}\).</div></details>
+      <details class="cloud"><summary class="q">How does fidelity depend on scale?</summary><div class="a core">Retention law <div class="math-block">\[\alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]\]</div> gives two regimes and a coherence cliff near \(\lambda\!\approx\!\lambda_q\).</div></details>
+      <details class="cloud"><summary class="q">What is \(D_{\mathrm{eff}}\)?</summary><div class="a core">An effective spectral exponent packaging mode counting on the internal sector. It governs non‑harmonic spacing in the axion‑like ladder and enters entropy/cosmology scalings.</div></details>
+      <details class="cloud"><summary class="q">Are “fractal” claims literal?</summary><div class="a core">No. “Fractal” is used as an <em>effective</em> spectral exponent; the working math stays on smooth surrogates.</div></details>
+      <details class="cloud"><summary class="q">Well‑posedness guardrails?</summary><div class="a core">Normalization, locality in projection, and monotone fidelity define a bounded PSD operator \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</div></details>
+    </div>
+  </div>
+
+  <!-- MATH & TOPOLOGY -->
+  <div class="card">
+    <h2>Math &amp; topology</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">How do topological classes become particles?</summary><div class="a core">Stable MM data (\(\pi_3\), \(H^1\), Chern/Pontryagin) label particle/gauge <em>classes</em>. 4D instances are projections of those classes; quantized charges survive coarse‑graining.</div></details>
+      <details class="cloud"><summary class="q">Why charge quantization?</summary><div class="a core">Charges descend from integer classes on MM: <div class="math-block">\[Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint A\in\mathbb{Z},\quad k=\frac{1}{8\pi^2}\int \mathrm{tr}(F\wedge F)\in\mathbb{Z}.\]</div></div></details>
+      <details class="cloud"><summary class="q">Do anomalies constrain projections?</summary><div class="a core">Yes—projected 4D content must be anomaly‑safe (including mixed gauge–gravitational). Integer indices (e.g., \(\mathrm{index}(\slashed{D})\)) act as consistency gates.</div></details>
+      <details class="cloud"><summary class="q">Selection rules?</summary><div class="a core">Class arithmetic (addition/subtraction) constrains allowed processes; forbidden decays stay forbidden.</div></details>
+    </div>
+  </div>
+
+  <!-- PREDICTIONS -->
+  <div class="card">
+    <h2>Predictions (tests)</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">ALP ladder?</summary><div class="a core">Non‑harmonic axion‑like tower with base \(m_1\!\approx\!65\,\mathrm{neV}\) (\(f_1\!\approx\!15.717\,\mathrm{MHz}\)) and ratios <div class="math-block">\[\tfrac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}\]</div>.</div></details>
+      <details class="cloud"><summary class="q">Coherence cliff?</summary><div class="a core">Step‑like change in interference/coherence as effective scale crosses \(\lambda_q\), governed by \(\alpha(\lambda)\).</div></details>
+      <details class="cloud"><summary class="q">Torsion/extra polarization?</summary><div class="a core">mHz‑band strains with template amplitude <div class="math-block">\[h_T\sim\epsilon_T\,\tfrac{G\,E}{c^4 r}\]</div> for large‑energy hubs.</div></details>
+      <details class="cloud"><summary class="q">Cosmology cross‑checks?</summary><div class="a core">Exponents from structure/entropy scaling should align with lab‑inferred \(D_{\mathrm{eff}}\); persistent mismatch weighs against the posture.</div></details>
+    </div>
+  </div>
+
+  <!-- FALSIFICATION -->
+  <div class="card">
+    <h2>Falsification</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">How is DREAM falsifiable?</summary><div class="a core">Exclude the ALP base window <em>and</em> ratios at forecast sensitivity; see no retention transition near \(\lambda_q\) across platforms; null torsion at modeled levels.</div></details>
+      <details class="cloud"><summary class="q">What would not falsify it?</summary><div class="a core">Changing instrument details or kernel parametrizations that preserve the same invariants.</div></details>
+      <details class="cloud"><summary class="q">Why pre‑register?</summary><div class="a core">Fixes windows, couplings, and fail gates ahead of time—avoids a posteriori drift; makes nulls decisive.</div></details>
+    </div>
+  </div>
+
+  <!-- SPECULATIVE: Life, Sentience, Free Will, Culture, Death -->
+  <div class="card speculative">
+    <h2>Speculative — Life, Sentience, Free Will, Culture, Death</h2>
+    <div class="clouds">
+      <details class="cloud"><summary class="q">What is “life” in DREAM?</summary><div class="a speculative">Long‑lived resonant attractors that recycle information efficiently within the fidelity window and maintain organization against decoherence.</div></details>
+      <details class="cloud"><summary class="q">How does sentience enter?</summary><div class="a speculative">Multi‑scale feedback loops whose internal models modulate their own projection conditions (attention/coherence budgets) within local bounds.</div></details>
+      <details class="cloud"><summary class="q">“Free will”?</summary><div class="a speculative">Path selection among pre‑encoded MM branches, constrained by kernel invariants and available coherence.</div></details>
+      <details class="cloud"><summary class="q">Death?</summary><div class="a speculative">Loss of a loop’s ability to maintain coherence budgets; the attractor dissolves, leaving only coarse invariants in the environment.</div></details>
+      <details class="cloud"><summary class="q">Cultures?</summary><div class="a speculative">Collective loops can bias local projection conditions (shared attention/synchrony), modestly shifting which structures retain.</div></details>
+      <details class="cloud"><summary class="q">Dreams (sleep)?</summary><div class="a speculative">Low‑input regime where internal models re‑weight fragments of MM structure; neuromodulators tweak retention thresholds.</div></details>
+      <details class="cloud"><summary class="q">Ethics?</summary><div class="a speculative">If selves are resonant loops, actions that preserve or expand others’ coherence budgets have moral weight.</div></details>
+      <details class="cloud"><summary class="q">Limits of speculation?</summary><div class="a speculative">Interpretive only; not required for tests. Science lives in invariant relations and falsification gates.</div></details>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Re-typeset math when a cloud opens
+document.querySelectorAll('details.cloud').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

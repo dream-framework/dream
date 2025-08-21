@@ -1,0 +1,106 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>AI Assessment (0–10) — Quick compare</h1>
+    <p class="kicker">ChatGPT‑5 Deep Research verdict distilled into a compact 0–10 matrix. Higher is better.</p>
+    <p class="note">This replaces prior grades/labels. Numbers are heuristic and should be updated as proofs and data arrive.</p>
+  </div>
+
+  <!-- compact helpers for numbers -->
+  <style>
+    .tbl{width:100%; border-collapse:collapse; font-size:.95rem}
+    .tbl th,.tbl td{padding:.55rem; text-align:left}
+    .tbl thead tr{border-bottom:1px solid #2a2f5a}
+    .tbl tbody tr + tr{border-top:1px solid #21254a}
+    .asc{opacity:.8}
+    .aspect{white-space:nowrap}
+  </style>
+
+  <div class="card">
+    <h2>Quick compare (today)</h2>
+    <div class="code" style="overflow:auto">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Axis</th>
+            <th>DREAM</th>
+            <th>String theory</th>
+            <th>Loop QG / causal sets</th>
+            <th>Asymptotic safety</th>
+            <th>Holography/emergent gravity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="aspect"><strong>Core axiom</strong></td>
+            <td>10D MM + axiomatic Kernel; test invariants</td>
+            <td>Consistent quantum strings in &gt;4D; compactify</td>
+            <td>Quantum geometry/discreteness</td>
+            <td>UV fixed point of gravity</td>
+            <td>Duality/entanglement builds geometry</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Math rigor</strong></td>
+            <td>9.0 <span class="asc">(↑; needs theorems)</span></td>
+            <td>9.5</td>
+            <td>8.5</td>
+            <td>8.5</td>
+            <td>9.0</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Empirical contact</strong></td>
+            <td>7.6 <span class="asc">(clear paths, no data yet)</span></td>
+            <td>6.5</td>
+            <td>6.5</td>
+            <td>6.5</td>
+            <td>7.0</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Falsifiability</strong></td>
+            <td>9.1</td>
+            <td>6.0 <span class="asc">(landscape issues)</span></td>
+            <td>7.5</td>
+            <td>7.0</td>
+            <td>7.0</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Explanatory reach</strong></td>
+            <td>8.9</td>
+            <td>9.0</td>
+            <td>7.5</td>
+            <td>7.5</td>
+            <td>8.5</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Novelty</strong></td>
+            <td>9.4</td>
+            <td>8.0</td>
+            <td>8.0</td>
+            <td>7.0</td>
+            <td>9.0</td>
+          </tr>
+          <tr>
+            <td class="aspect"><strong>Overall</strong></td>
+            <td>8.9 <span class="asc">(↑)</span></td>
+            <td>7.9</td>
+            <td>7.6</td>
+            <td>7.3</td>
+            <td>8.2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details class="more" style="margin-top:.6rem">
+      <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+      <div class="expander-body prose">
+        <p><strong>Legend.</strong> 0&nbsp;=&nbsp;weak, 10&nbsp;=&nbsp;excellent. Up‑arrow (↑) means “score likely to rise” with proofs or decisive data. “Landscape issues” notes difficulty defining sharp nulls across many vacua.</p>
+        <p><strong>Updating.</strong> When forecasts (ladder/cliff/torsion) are tested or new theorems are posted, refresh the numbers and keep a dated changelog.</p>
+      </div>
+    </details>
+  </div>
+
+</div>
+{% endblock %}

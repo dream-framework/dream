@@ -1,0 +1,271 @@
+﻿<div class="container">
+
+    <!-- HERO -->
+    <div class="card hero">
+        <span class="kicker">DREAM</span>
+        <h1>Dimensional Resonant Emergent Attractors in Manifold</h1>
+        <p>Our 4D world is a finite-resolution projection of a compact, atemporal 10D Meta-Manifold (MM). A single fixed kernel pushes 10D fields into 4D observables; fine detail is averaged out, projection invariants survive. Kernel parameters act as axioms of our slice.</p>
+        <p class="note">Use the page toggle below to switch between <em>General</em> and <em>Science</em>. Math is hidden unless you also turn on the global “Math” toggle in the header.</p>
+
+        <!-- Page-level MODE TOGGLE (General ↔ Science) -->
+        <div class="toggles" style="margin-top:.25rem">
+            <span class="badge">Mode</span>
+            <label class="switch" title="Switch to Science mode" style="cursor:pointer">
+                <input id="modeToggle" type="checkbox" aria-label="Science mode">
+                <span class="slider" aria-hidden="true"></span>
+                <span class="switch-label">Science</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- GENERAL MODE SECTIONS (no math) -->
+    <!-- ============================== -->
+    <div data-mode="public">
+
+        <!-- Plain-language abstract -->
+        <div class="grid two" style="margin-top:1rem">
+            <div class="card">
+                <h2>DREAM in plain words</h2>
+                <p class="core">
+                    Think of reality as rich high-dimensional structure seen through one fixed “lens.” Because the lens has limited resolution, only sturdy patterns get through into our 4D world. Those sturdy patterns—organization, conserved categories, stable spectra—are what experiments can actually check.
+                </p>
+                <details class="exp">
+                    <summary><strong>Read more</strong></summary>
+                    <p>
+                        Instead of guessing the exact lens, we focus on <em>what about the lens really matters for data</em>:
+                        a critical resolution scale (how fine we can see), how local the mapping is (nearby things stay related),
+                        a regularity condition (no pathological behavior), and an “effective spectral exponent” that summarizes how many patterns survive as we zoom.
+                    </p>
+                </details>
+            </div>
+
+            <div class="card">
+                <h2>What this means for physics</h2>
+                <ul>
+                    <li><strong>Why constants feel fundamental:</strong> they behave like stable “lens settings” for our slice of reality.</li>
+                    <li><strong>Two regimes:</strong> below the lens scale we keep delicate structure (quantum-grade); above it we only see coarse patterns (classical).</li>
+                    <li><strong>How we test it:</strong> make forecasts that depend only on those stable settings, not on hidden details of the lens.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Near-term signals in everyday terms -->
+        <div class="card">
+            <h2>What could show up soon</h2>
+            <div class="grid three">
+                <div class="card">
+                    <h3>S1 — Non-harmonic “rungs”</h3>
+                    <p>
+                        A set of axion-like frequencies with a specific first “rung” and then rungs that are <em>not</em> evenly spaced.
+                        Hitting the first rung and the spacing pattern would be a strong signature.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>S2 — Coherence “cliff”</h3>
+                    <p>
+                        When an experiment sweeps across the lens scale, interference/contrast should change abruptly—like stepping off a curb rather than walking down a ramp.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>S3 — Extra polarization</h3>
+                    <p>
+                        Space-based interferometers could see tiny strain patterns in the mHz band linked to very energetic sources—an extra polarization component beyond the usual.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Falsification for non-specialists -->
+        <div class="grid two" style="margin-top:1rem">
+            <div class="card">
+                <h2>How we’d know we’re wrong</h2>
+                <ul>
+                    <li>No first rung and no matching spacing pattern, despite sufficient sensitivity.</li>
+                    <li>No abrupt change in interference near the expected scale, across multiple kinds of experiments.</li>
+                    <li>No extra-polarization patterns at levels our models say would be visible.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Why this is still science</h2>
+                <p>
+                    The forecasts don’t rely on hidden details. They only use the stable parts of the lens that matter for data.
+                    That’s why a clear negative result really counts.
+                </p>
+            </div>
+        </div>
+
+    </div><!-- /data-mode="public" -->
+    <!-- ============================== -->
+    <!-- SCIENCE MODE SECTIONS (with math) -->
+    <!-- ============================== -->
+    <div data-mode="science" style="display:none">
+
+        <!-- ABSTRACT (kept from your file) -->
+        <div class="grid two" style="margin-top:1rem">
+            <div class="card">
+                <h2>Abstract — plain</h2>
+                <p class="core">
+                    DREAM treats 4D physics as a measurement of invariants of a 10→4 projection. Because the kernel has finite resolving power, much 10D structure is packed into each 4D locus. What survives are projection invariants (large-scale organization, conserved classes, robust spectra); sub-resolution detail averages out. Conventional “constants” are treated as kernel-fixed parameters of our slice.
+                </p>
+                <details class="exp">
+                    <summary><strong>Read more</strong></summary>
+                    <p>
+                        The program emphasizes testable statements that do not depend on picking a detailed kernel inside a well-posed class. Instead we assert only operational invariants of the kernel: resolution scale \(\lambda_q\), locality radius (peakedness near \(x\!\approx\!\pi(X)\)), regularity/positivity (PSD behavior), and the effective spectral exponent \(D_{\mathrm{eff}}\) that controls mode counting, masses and entropy.
+                    </p>
+                </details>
+            </div>
+
+            <div class="card">
+                <h2>Abstract — precise</h2>
+                <p>4D observables are modeled as push-forwards of MM fields by a fixed kernel \(K_\lambda\) (finite resolution \(\lambda\)):</p>
+                <div class="math-block">
+                    \[
+                    O(x)=\!\!\int_{\mathrm{MM}} K_\lambda(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
+                    \]
+                </div>
+                <p>Only invariants of \(K\) matter empirically; the detailed choice inside a well-posed class is not identified by data.</p>
+                <ul>
+                    <li><strong>K1 (normalization)</strong>: projected norms are finite.</li>
+                    <li><strong>K2 (locality-in-projection)</strong>: \(K_\lambda\) sharply peaks for \(x\approx\pi(X)\).</li>
+                    <li><strong>K3 (monotone fidelity)</strong>: retention \(\alpha(\lambda)\) decreases with \(\lambda\).</li>
+                </ul>
+                <div class="math-block">
+                    \[
+                    \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+                    \]
+                </div>
+            </div>
+        </div>
+
+        <!-- CAPSULE: AXIOMS -->
+        <div class="card" style="margin-top:1rem">
+            <h2>Key Axioms (capsule)</h2>
+            <ul>
+                <li><strong>A1 — Existence (MM).</strong> A compact, orientable, smooth 10D manifold with fields; atemporal in 4D terms.</li>
+                <li><strong>A2 — Projection (kernel).</strong> A fixed, non-invertible finite-resolution kernel; only its invariants/parameters are empirical.</li>
+                <li><strong>A3 — All-to-four.</strong> Mapping is 10→4; no global split \(U_4\times K_6\) required.</li>
+                <li><strong>A4 — Constants are projection-fixed.</strong> \(\{c,\hbar,G,\ldots\}\) are kernel parameters in our slice.</li>
+                <li><strong>A5 — Topology ↔ classes.</strong> Stable MM topological data label particle/gauge classes.</li>
+                <li><strong>A6 — Finite resolution ⇒ regimes.</strong> Below \(\lambda_q\): quantum-grade invariants; above: classical coarse-grain.</li>
+            </ul>
+        </div>
+
+        <!-- FIGURE -->
+        <div class="card">
+            <h2>Toy projection-kernel weave (\(\lambda_q\)-limited)</h2>
+            <div class="figure">
+                <img src="{{ url_for('static', filename='img/kernel0.png') }}" alt="Toy kernel weaving 10D structure into a 4D slice" style="max-width:30%;margin:auto;display:block;">
+                <div class="cap">Toy illustration: a finite-resolution kernel filters and “weaves” high-dimensional structure into a 4D projection; the grid hints at retained organization.</div>
+            </div>
+        </div>
+
+        <!-- NEAR-TERM BETS (technical) -->
+        <div class="card">
+            <h2>Near-term bets (crisp numbers)</h2>
+            <div class="grid three">
+                <div class="card">
+                    <h3>S1 — ALP ladder (DMRadio band)</h3>
+                    <p>Base mass \(m_1 \approx 65\,\mathrm{neV}\) (\(f_1 \approx 15.717\,\mathrm{MHz}\)); non-harmonic ratios</p>
+                    <div class="math-block">
+                        \[
+                        \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}.
+                        \]
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>S2 — Coherence cliff (pm scale)</h3>
+                    <p>Retention/fidelity law predicts a sharp transition near \(\lambda\!\approx\!\lambda_q\):</p>
+                    <div class="math-block">
+                        \[
+                        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+                        \]
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>S3 — LISA torsion / extra polarization</h3>
+                    <p>Low-frequency torsion/extra polarization templates in the mHz band from energetic hubs; order-of-magnitude guidance:</p>
+                    <div class="math-block">
+                        \[
+                        h_T \sim \epsilon_T\,\frac{GE}{c^4 r}.
+                        \]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /data-mode="science" -->
+    <!-- AT A GLANCE (shared) -->
+    <div class="grid two" style="margin-top:1rem">
+        <div class="card">
+            <h2>At a glance</h2>
+            <ul>
+                <li>Kernel invariants: resolution \(\lambda_q\), locality radius, regularity/PSD, effective spectral exponent \(D_{\mathrm{eff}}\).</li>
+                <li>Two regimes: below \(\lambda_q\) (quantum-grade invariants); above (classical coarse-grain).</li>
+                <li>Falsifiable forecasts: ALP mass ladder, coherence-vs-scale “cliff”, low-frequency torsion/extra polarization.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Why this version scores higher</h2>
+            <p>Projection-time axiom + kernel guardrails remove ill-posedness; constants remain axioms. Falsifiability is front-and-center with crisp numbers and clear fail gates.</p>
+        </div>
+    </div>
+
+    <!-- TOPICS GRID (shared) -->
+    <div class="card" style="margin-top:1rem">
+        <h2>Topics → read next</h2>
+        <div class="grid three">
+            <div class="card">
+                <h3><a href="{{ url_for('overview') }}">Overview</a></h3>
+                <p>Big picture and why the kernel-agnostic stance matters.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('axioms') }}">Axioms</a></h3>
+                <p>All six axioms on one page, with notes.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('math') }}">Math Frame</a></h3>
+                <p>Minimal action + push-forward; guardrails K1–K3.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('kernel') }}">Projection Kernel</a></h3>
+                <p>Resolution \(\lambda_q\), locality radius, regularity/PSD, \(D_{\mathrm{eff}}\).</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('topology') }}">Topology → Particle Classes</a></h3>
+                <p>How MM topology labels particle/gauge classes.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('spectrum') }}">Fractal Spectrum</a></h3>
+                <p>Why the KK ladder is non-linear in \(n\); effective spectral dimension.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('predictions') }}">Predictions</a></h3>
+                <p>What we expect in the lab and sky; parameter windows.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('falsification') }}">Falsification</a></h3>
+                <p>Clean fail gates and how we pre-register predictions.</p>
+            </div>
+            <div class="card">
+                <h3><a href="{{ url_for('faq') }}">FAQ Clouds</a></h3>
+                <p>Short answers; core science vs speculative clearly separated.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+(function(){
+  const chk = document.getElementById('modeToggle');
+  function setMode(scienceOn){
+    document.querySelectorAll('[data-mode="public"]').forEach(n=>n.style.display = scienceOn ? 'none' : '');
+    document.querySelectorAll('[data-mode="science"]').forEach(n=>n.style.display = scienceOn ? '' : 'none');
+    if (scienceOn && window.MathJax?.typeset) { MathJax.typeset(); }
+  }
+  setMode(false); // default = General
+  chk?.addEventListener('change', e=> setMode(e.target.checked));
+})();
+</script>

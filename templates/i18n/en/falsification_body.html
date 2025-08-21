@@ -1,0 +1,129 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Falsification</h1>
+    <p class="kicker">Clean fail gates phrased only in terms of kernel invariants and instrument‑level observables.</p>
+    <p class="note">This page defines what would decisively falsify each near‑term claim, how to pre‑register analyses, and how to interpret nulls. Math is hidden by default — toggle “Math” in the header.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- What falsification means here -->
+    <div class="card">
+      <h2>What “falsification” means in DREAM</h2>
+      <ul class="prose">
+        <li><strong>Invariant‑level claims.</strong> Tests are stated in terms of <em>kernel invariants</em> (resolution \(\lambda_q\), effective spectral exponent \(D_{\mathrm{eff}}\)) and directly measured quantities.</li>
+        <li><strong>No unconstrained rescues.</strong> We do not “save” a failed claim by changing the kernel form; only pre‑declared invariant ranges may be updated with new data.</li>
+        <li><strong>Multi‑platform bias check.</strong> Where feasible, confirm with orthogonal platforms (photonic, atom, NV, etc.) to rule out instrument‑specific artifacts.</li>
+      </ul>
+    </div>
+
+    <!-- Pre-registration -->
+    <div class="card">
+      <h2>Pre‑registration protocol</h2>
+      <ol class="prose">
+        <li><strong>Declare invariants:</strong> prior ranges for \(\lambda_q\) and \(D_{\mathrm{eff}}\), with rationale.</li>
+        <li><strong>Map instrument scale:</strong> how the platform’s baseline/wavelength/coherence maps to the effective \(\lambda\).</li>
+        <li><strong>Fix windows &amp; ladders:</strong> base window and next rungs using \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\).</li>
+        <li><strong>State fail gates ahead of time:</strong> thresholds for exclusion, visibility changes, and template upper bounds.</li>
+        <li><strong>Publish analysis:</strong> pipelines, injection campaigns, and data snippets sufficient for re‑analysis.</li>
+      </ol>
+    </div>
+
+    <!-- S1: Ladder fail gate -->
+    <div class="card">
+      <h2>Fail gate S1 — ALP non‑harmonic ladder</h2>
+      <p class="core">Claim: a light axion‑like tower with base \(m_1\approx 65\,\mathrm{neV}\) (\(f_1\approx 15.717\,\mathrm{MHz}\)) and ratios</p>
+      <div class="math-block">\[ \tfrac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}. \]</div>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Pre‑registered window.</strong> List the scanned span around \(f_1\) and planned rungs for assumed \(D_{\mathrm{eff}}\).</p>
+          <p><strong>Exposure reporting.</strong> Provide per‑mode exposure (couplings, quality factors, backgrounds).</p>
+        </div>
+      </details>
+      <p><strong>Decisive null:</strong> the base window and the non‑harmonic ratios are excluded at the forecasted sensitivity <em>(per mode)</em> → the ladder claim fails.</p>
+      <p class="note">Negative at the base alone is suggestive but not decisive unless the ratio pattern is also excluded for plausible \(D_{\mathrm{eff}}\).</p>
+    </div>
+
+    <!-- S2: Coherence cliff fail gate -->
+    <div class="card">
+      <h2>Fail gate S2 — Coherence cliff near \(\lambda_q\)</h2>
+      <p class="core">Claim: visibility/contrast follows the retention law and exhibits a transition as the effective probe crosses \(\lambda_q\):</p>
+      <div class="math-block">\[ \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]. \]</div>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Scan design.</strong> Sweep \(\lambda\) across the posited \(\lambda_q\) in at least two independent platforms; record visibility, phase noise, and control channels.</p>
+          <p><strong>Model comparison.</strong> Compare fits to the retention law vs. smooth‑no‑cliff baselines using pre‑declared criteria (e.g., Bayes factors, information metrics).</p>
+        </div>
+      </details>
+      <p><strong>Decisive null:</strong> repeated scans across the posited \(\lambda_q\) show no transition within uncertainties across platforms → the retention law fails as stated.</p>
+    </div>
+
+    <!-- S3: Torsion fail gate -->
+    <div class="card">
+      <h2>Fail gate S3 — Torsion / extra polarization</h2>
+      <p class="core">Claim: template families with strain amplitude</p>
+      <div class="math-block">\[ h_T\sim\epsilon_T\,\frac{G\,E}{c^4 r} \]</div>
+      <p>describe a detectable channel in the mHz band for large‑energy hubs.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Template set.</strong> Include polarization content, source energetics \(E\), and distances \(r\); pre‑register on/off‑source windows and vetoes.</p>
+          <p><strong>Calibration.</strong> Use injection campaigns and end‑to‑end recovery efficiency to set bounds.</p>
+        </div>
+      </details>
+      <p><strong>Decisive null:</strong> null at modeled levels across templates/epochs → this channel fails.</p>
+    </div>
+
+    <!-- Decision tree -->
+    <div class="card">
+      <h2>Decision tree (reading outcomes)</h2>
+      <ul class="prose">
+        <li><strong>S1 null + S2 null + S3 null</strong> → invariant posture fails globally (ladder + retention + torsion all unsupported).</li>
+        <li><strong>S1 null + S2 hit</strong> → ladder claim fails; retention law survives. Re‑estimate \(D_{\mathrm{eff}}\) from cliff; update ladder windows if warranted.</li>
+        <li><strong>S1 hit + S2 null</strong> → tension; revisit instrument mapping of \(\lambda\) and nuisance models. If robust, the retention law is in doubt.</li>
+        <li><strong>S1 hit + S2 hit</strong> → strongest support; use joint fit to tighten \(D_{\mathrm{eff}}\).</li>
+      </ul>
+    </div>
+
+    <!-- Reporting checklist -->
+    <div class="card">
+      <h2>Reporting checklist</h2>
+      <ul class="prose">
+        <li>State invariant priors and instrument mapping (\(\lambda\) vs. knobs).</li>
+        <li>Provide windows, per‑mode exposure, and explicit fail gates.</li>
+        <li>Release analysis code and injection studies; include null channels and sanity checks.</li>
+        <li>Document systematics and how they are treated (as nuisance, not absorbed into invariants).</li>
+      </ul>
+    </div>
+
+    <!-- Robustness / edge cases -->
+    <div class="card">
+      <h2>Robustness &amp; edge cases</h2>
+      <ul class="prose">
+        <li><strong>Partial coverage:</strong> if some rungs are unscanned, claims remain conditional; do not declare global null.</li>
+        <li><strong>Bandwidth/line shape:</strong> broadened or split lines should be modeled as nuisance; the <em>ratio law</em> remains the discriminator.</li>
+        <li><strong>Platform‑specific artifacts:</strong> use orthogonal platforms and blinded analyses to rule them out.</li>
+      </ul>
+    </div>
+
+    <!-- Speculative note -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>Even nulls can be informative about organizational limits of the projection kernel — e.g., upper bounds on \(\lambda_q\) or constraints on effective exponents that shape density‑of‑states. This framing is optional and not required for the scientific claims.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}
