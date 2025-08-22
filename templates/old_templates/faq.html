@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}{{ _('nav.faq') }} — DREAM{% endblock %}
-{% block content %}
-  {% if lang == 'ru' %}
-    {% include 'i18n/ru/faq_body.html' %}
-  {% else %}
-    {% include 'i18n/en/faq_body.html' %}
-  {% endif %}
-{% endblock %}

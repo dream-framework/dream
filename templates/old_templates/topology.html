@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}{{ _('nav.topology') }} — DREAM{% endblock %}
-{% block content %}
-  {% if lang == 'ru' %}
-    {% include 'i18n/ru/topology_body.html' %}
-  {% else %}
-    {% include 'i18n/en/topology_body.html' %}
-  {% endif %}
-{% endblock %}

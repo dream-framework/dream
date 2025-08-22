@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}{{ _('nav.spectrum') }} — DREAM{% endblock %}
-{% block content %}
-  {% if lang == 'ru' %}
-    {% include 'i18n/ru/spectrum_body.html' %}
-  {% else %}
-    {% include 'i18n/en/spectrum_body.html' %}
-  {% endif %}
-{% endblock %}
