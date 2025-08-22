@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="card hero">
+    <h1>Projection Kernel</h1>
+    <p class="kicker">Kernel‑agnostic stance: commit to invariants—resolution, locality, regularity, \(D_{\mathrm{eff}}\).</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>Diagram</h2>
+      <figure class="figure">
+        <img src="{{ url_for('static', filename='img/kernel.png') }}" alt="{{ _('fig.kernel.alt') }}" style="width:30%;max-width:300px;margin-inline:auto">
+        <figcaption class="cap">{{ _('fig.kernel.cap_short') }}</figcaption>
+      </figure>
+    </div>
+    <div class="card">
+      <h2>Invariants</h2>
+      <ul>
+        <li><strong>\(\lambda_q\):</strong> fidelity drop scale.</li>
+        <li><strong>Locality:</strong> decay with \(|x-\pi(X)|\).</li>
+        <li><strong>Regularity:</strong> positive, bounded operator \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</li>
+        <li><strong>\(D_{\mathrm{eff}}\):</strong> effective spectral exponent.</li>
+      </ul>
+    </div>
+  </div>
+</div>

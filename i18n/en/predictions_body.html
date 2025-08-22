@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="card hero">
+    <h1>Testable Predictions</h1>
+    <p class="kicker">Forecasts are phrased in terms of kernel invariants \(\lambda_q\) and \(D_{\mathrm{eff}}\) plus instrument dials.</p>
+    <p class="note">Each channel has a clear fail gate. Math is hidden by default—enable “Math”.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <div class="card">
+      <h2>Summary — three near‑term channels</h2>
+      <ul>
+        <li><strong>S1 — ALP ladder:</strong> base \(m_1\!\approx\!65\,\mathrm{neV}\) (\(f_1\!\approx\!15{.}717\,\mathrm{MHz}\)); ratios \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\).</li>
+        <li><strong>S2 — Coherence cliff:</strong> transition near \(\lambda\!\approx\!\lambda_q\) governed by \(\alpha(\lambda)\).</li>
+        <li><strong>S3 — Torsion/extra polarization:</strong> mHz band; templates \(h_T\sim \epsilon_T\,GE/(c^4 r)\).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>S1 — ALP ladder</h2>
+      <div class="math-block">\[
+        \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}},\qquad m_1\!\approx\!65\,\mathrm{neV}.
+      \]</div>
+      <details class="more"><summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Windows:</strong> center on \(f_1\) and subsequent rungs by \(n^{1/D_{\mathrm{eff}}}\).</p>
+          <p><strong>Fail gate:</strong> exclude base & ratios at stated sensitivity.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>S2 — Coherence cliff</h2>
+      <p>Retention law:</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <details class="more"><summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Scan:</strong> dial baseline/wavelength/coherence length to sweep across \(\lambda_q\).</p>
+          <p><strong>Fail gate:</strong> no transition across multiple platforms.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>S3 — Torsion/extra polarization</h2>
+      <div class="math-block">\[
+        h_T\sim \epsilon_T\,\frac{G\,E}{c^4 r}.
+      \]</div>
+      <details class="more"><summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Templates:</strong> polarization, energy \(E\), baselines \(r\); cross‑correlate with catalogs.</p>
+          <p><strong>Fail gate:</strong> nulls at modeled levels across template families.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
