@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ _('nav.predictions') }} — DREAM{% endblock %}
+{% block content %}
+  {% if lang == 'ru' %}
+    {% include 'i18n/ru/predictions_body.html' %}
+  {% else %}
+    {% include 'i18n/en/predictions_body.html' %}
+  {% endif %}
+{% endblock %}

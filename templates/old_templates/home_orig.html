@@ -1,0 +1,107 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <span class="kicker">DREAM</span>
+    <h1>{{ _('home.hero.title') }}</h1>
+    <p>{{ _('home.hero.subtitle') }}</p>
+    <div class="note">{{ _('home.hero.note') }}</div>
+</section>
+
+
+
+<div class="grid two" style="margin-top:1rem">
+    <div class="card">
+        <h3>{{ _('home.abstract.title') }}</h3>
+
+        <!-- Always visible -->
+        <h4 class="kicker">{{ _('home.abstract.plain_t') }}</h4>
+        <p class="core prose">{{ _('home.abstract.plain') | safe }}</p>
+
+        <!-- Arrow-only expander -->
+        <details class="more">
+            <!-- keep an accessible label, but don't show it visually -->
+            <summary aria-label="{{ _('ui.read_more') }}">
+                <span class="sr-only"></span>
+            </summary>
+
+            <h4 class="kicker">{{ _('home.abstract.precise_t') }}</h4>
+            <p class="prose">{{ _('home.abstract.precise') | safe }}</p>
+        </details>
+    </div>
+
+    <div class="card">
+        <h3>{{ _('home.capsule_axioms.title') }}</h3>
+        <ul>
+            <li>{{ _('home.capsule_axioms.a1') }}</li>
+            <li>{{ _('home.capsule_axioms.a2') }}</li>
+            <li>{{ _('home.capsule_axioms.a3') }}</li>
+            <li>{{ _('home.capsule_axioms.a4') }}</li>
+            <li>{{ _('home.capsule_axioms.a5') }}</li>
+            <li>{{ _('home.capsule_axioms.a6') }}</li>
+        </ul>
+
+        <!-- Expandable “Read more” -->
+        <details class="more">
+            <!-- only arrow; text is screen-reader only -->
+            <summary aria-label="{{ _('ui.read_more') }}">
+                <span class="sr-only"></span>
+            </summary>
+            <div class="expander-body prose">
+                {{ _('home.capsule_axioms.expand') | safe }}
+            </div>
+        </details>
+    </div>
+
+</div>
+
+
+
+<div class="card" style="margin-top:1rem">
+    <h3>{{ _('home.bets.title') }}</h3>
+    <div class="grid two">
+        <div>
+            <h4>{{ _('home.bets.s1_t') }}</h4>
+            <p>{{ _('home.bets.s1_d') }}</p>
+            <div class="math-block"><p>{{ _('home.bets.s1_formula') }}</p></div>
+        </div>
+        <div>
+            <h4>{{ _('home.bets.s2_t') }}</h4>
+            <p>{{ _('home.bets.s2_d') }}</p>
+            <div class="math-block"><p>{{ _('home.bets.s2_formula') }}</p></div>
+        </div>
+        <div>
+            <h4>{{ _('home.bets.s3_t') }}</h4>
+            <p>{{ _('home.bets.s3_d') }}</p>
+        </div>
+        <!-- Expandable “Read more” -->
+        <details class="more">
+            <!-- only arrow; text is screen-reader only -->
+            <summary aria-label="{{ _('ui.read_more') }}">
+                <span class="sr-only"></span>
+            </summary>
+            <div class="expander-body prose">
+                {{ _('home.bets.expand') | safe }}
+            </div>
+        </details>
+    </div>
+</div>
+
+<div class="card" style="margin-top:1rem">
+    <h3>{{ _('home.topics.title') }}</h3>
+    <div class="grid three">
+        <a class="card" href="{{ url_for('overview') }}"><strong>Overview</strong><br>{{ _('home.topics.overview') }}</a>
+        <a class="card" href="{{ url_for('axioms') }}"><strong>Axioms</strong><br>{{ _('home.topics.axioms') }}</a>
+        <a class="card" href="{{ url_for('math') }}"><strong>Math</strong><br>{{ _('home.topics.math') }}</a>
+        <a class="card" href="{{ url_for('kernel') }}"><strong>Kernel</strong><br>{{ _('home.topics.kernel') }}</a>
+        <a class="card" href="{{ url_for('topology') }}"><strong>Topology</strong><br>{{ _('home.topics.topology') }}</a>
+        <a class="card" href="{{ url_for('spectrum') }}"><strong>Spectrum</strong><br>{{ _('home.topics.spectrum') }}</a>
+        <a class="card" href="{{ url_for('predictions') }}"><strong>Predictions</strong><br>{{ _('home.topics.pred') }}</a>
+        <a class="card" href="{{ url_for('falsification') }}"><strong>Falsification</strong><br>{{ _('home.topics.fals') }}</a>
+    </div>
+</div>
+
+<div class="card" style="margin-top:1rem">
+    <h3>{{ _('home.why.title') }}</h3>
+    <p>{{ _('home.why.text') }}</p>
+</div>
+{% endblock %}

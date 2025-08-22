@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="grid two">
+  <div class="card core">
+    <h2>{{ _('math.title') }}</h2>
+    <p>{{ _('math.text') }}</p>
+    <div class="math-block">
+      <p>$$ S_{\mathrm{MM}} = \int_{\mathcal{M}_{10}} \!\sqrt{|G|}\,\big[ R_{10} + I + \mathcal{L}_{\Phi} \big] \, d^{10}X $$</p>
+    </div>
+    <ul>
+      <li><strong>K1</strong> {{ _('math.k1') }}</li>
+      <li><strong>K2</strong> {{ _('math.k2') }}</li>
+      <li><strong>K3</strong> {{ _('math.k3') }}</li>
+    </ul>
+  </div>
+  <div class="card speculative">
+    <h2>{{ _('math.notes.title') }}</h2>
+    <p>{{ _('math.notes.text') }}</p>
+  </div>
+</div>
+{% endblock %}

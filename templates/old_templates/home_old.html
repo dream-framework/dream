@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <span class="kicker">DREAM</span>
+  <h1>{{ _('home.hero.title') }}</h1>
+  <p>{{ _('home.hero.subtitle') }}</p>
+  <div class="note">{{ _('home.hero.note') }}</div>
+</section>
+<div class="grid two" style="margin-top:1rem">
+  <div class="card core">
+    <h3>{{ _('home.core.title') }}</h3>
+    <p>{{ _('home.core.text') }}</p>
+  </div>
+  <div class="card">
+    <h3>{{ _('home.glance.title') }}</h3>
+    <ul>
+      <li>{{ _('home.glance.item1') }}</li>
+      <li>{{ _('home.glance.item2') }}</li>
+      <li>{{ _('home.glance.item3') }}</li>
+    </ul>
+  </div>
+</div>
+        <div class="figure" style="margin-top:1rem">
+          <img src="{{ url_for('static', filename='img/kernel_weave.svg') }}" alt="{{ _('fig.kernel.alt') }}"/>
+          <div class="cap">{{ _('fig.kernel.cap_short') }}</div>
+        </div>
+<hr/>
+
+<div class="grid two">
+  <div class="card">
+    <h3>{{ _('home.retention.title') }} <span class="badge">invariants</span></h3>
+    <div class="math-block">
+      <p>$$ R(\lambda) \approx \exp\!\left[-\big(\tfrac{\lambda}{\lambda_q}\big)^{\alpha}\right] $$</p>
+    </div>
+    <p class="note">{{ _('home.retention.note') }}</p>
+  </div>
+  <div class="card">
+    <h3>{{ _('home.kernel.title') }}</h3>
+    <div class="math-block">
+      <p>$$ \phi(x) = \int_{\mathcal{M}_{10}} K_{\lambda}(x,X;\theta)\, \Phi(X)\, d^{10}X $$</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

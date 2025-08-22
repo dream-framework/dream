@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>{{ _('kernel.title') }}</h2>
+  <p>{{ _('kernel.text') }}</p>
+  <div class="math-block">
+    <p>$$ K_{\lambda}(x,X;\theta) = \mathcal{N}\,\exp\!\Big( -\tfrac{d^2(x,F(X))}{2\lambda^2} \Big)\, W(X) $$</p>
+  </div>
+  <ul>
+    <li><strong>{{ _('kernel.res') }}</strong> {{ _('kernel.res_text') }}</li>
+    <li><strong>{{ _('kernel.loc') }}</strong> {{ _('kernel.loc_text') }}</li>
+    <li><strong>{{ _('kernel.reg') }}</strong> {{ _('kernel.reg_text') }}</li>
+    <li><strong>{{ _('kernel.deff') }}</strong> {{ _('kernel.deff_text') }}</li>
+  </ul>
+        <div class="figure" style="margin-top:1rem">
+          <img src="{{ url_for('static', filename='img/kernel.png') }}" alt="{{ _('fig.kernel.alt') }}"/>
+          <div class="cap">{{ _('fig.kernel.cap') }}</div>
+        </div>
+</div>
+{% endblock %}
