@@ -1,8 +1,9 @@
+
 {% block content %}
 <div class="container">
 
   <div class="card hero">
-    <h1>FAQ — as "Clouds"</h1>
+    <h1>FAQ — as “Clouds”</h1>
     <p class="kicker">Tap a cloud to reveal an answer. Core science and speculative notes are clearly separated.</p>
     <p class="note">This version forces the Speculative section to show on this page while keeping answers collapsed until you open a cloud.</p>
   </div>
@@ -51,17 +52,12 @@
   <div class="card">
     <h2>Foundations</h2>
     <div class="clouds">
-      <details class="cloud"><summary class="q">Is 4D fundamental?</summary><div class="a core">No. In DREAM, 4D observables are push‑forwards of 10D fields on a compact Meta‑Manifold (MM) via a fixed, non‑invertible kernel at finite resolution. "Fundamental" structure lives on MM; 4D is a projection.</div></details>
-      <details class="cloud"><summary class="q">What is the projection kernel?</summary><div class="a core">A linear map \(K_{\lambda}(x;X)\) tying MM points \(X\) to 4D points \(x\) at resolution \(\lambda\) (our slice uses \(\lambda_q\)). Observables: <div class="math-block">\[
-\begin{aligned}
-O(x)=\int_{\mathrm{MM}} &K_{\lambda}(x;X)\,\\
-&\Phi(X)\,d\mu_{\mathrm{MM}}(X).
-\end{aligned}
-\]</div></div></details>
+      <details class="cloud"><summary class="q">Is 4D fundamental?</summary><div class="a core">No. In DREAM, 4D observables are push‑forwards of 10D fields on a compact Meta‑Manifold (MM) via a fixed, non‑invertible kernel at finite resolution. “Fundamental” structure lives on MM; 4D is a projection.</div></details>
+      <details class="cloud"><summary class="q">What is the projection kernel?</summary><div class="a core">A linear map \(K_{\lambda}(x;X)\) tying MM points \(X\) to 4D points \(x\) at resolution \(\lambda\) (our slice uses \(\lambda_q\)). Observables: <div class="math-block">\[O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).\]</div></div></details>
       <details class="cloud"><summary class="q">Why not measure the kernel directly?</summary><div class="a core">Multiple kernels with the same <em>invariants</em> yield indistinguishable observables at our resolution. Data constrain the invariants: resolution \(\lambda_q\), locality radius, regularity/positivity, effective spectral exponent \(D_{\mathrm{eff}}\).</div></details>
       <details class="cloud"><summary class="q">Is MM inside our spacetime?</summary><div class="a core">No embedding is assumed. There is a surjection \(\pi:\mathrm{MM}\to\mathbb{R}^{3,1}\); 4D points are images of whole high‑D fibers \(\pi^{-1}(x)\). Metrics and lightcones live in 4D after projection.</div></details>
-      <details class="cloud"><summary class="q">What does "atemporal MM" mean?</summary><div class="a core">4D time is not a fundamental MM coordinate. The only \(t\)-dependence enters via the 4D argument of the push‑forward; introducing an MM‑time adds an unidentifiable clock.</div></details>
-      <details class="cloud"><summary class="q">Do we require a split \(U_4\times K_6\)?</summary><div class="a core">No. Axiom A3 ("all‑to‑four") avoids a global factorization; all ten coordinates compress directly into 4D observables.</div></details>
+      <details class="cloud"><summary class="q">What does “atemporal MM” mean?</summary><div class="a core">4D time is not a fundamental MM coordinate. The only \(t\)-dependence enters via the 4D argument of the push‑forward; introducing an MM‑time adds an unidentifiable clock.</div></details>
+      <details class="cloud"><summary class="q">Do we require a split \(U_4\times K_6\)?</summary><div class="a core">No. Axiom A3 (“all‑to‑four”) avoids a global factorization; all ten coordinates compress directly into 4D observables.</div></details>
     </div>
   </div>
 
@@ -72,7 +68,7 @@ O(x)=\int_{\mathrm{MM}} &K_{\lambda}(x;X)\,\\
       <details class="cloud"><summary class="q">Which quantities are invariant/empirical?</summary><div class="a core">Four: (i) resolution \(\lambda_q\); (ii) locality radius; (iii) regularity/positivity (PSD operator); (iv) effective spectral exponent \(D_{\mathrm{eff}}\).</div></details>
       <details class="cloud"><summary class="q">How does fidelity depend on scale?</summary><div class="a core">Retention law <div class="math-block">\[\alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]\]</div> gives two regimes and a coherence cliff near \(\lambda\!\approx\!\lambda_q\).</div></details>
       <details class="cloud"><summary class="q">What is \(D_{\mathrm{eff}}\)?</summary><div class="a core">An effective spectral exponent packaging mode counting on the internal sector. It governs non‑harmonic spacing in the axion‑like ladder and enters entropy/cosmology scalings.</div></details>
-      <details class="cloud"><summary class="q">Are "fractal" claims literal?</summary><div class="a core">No. "Fractal" is used as an <em>effective</em> spectral exponent; the working math stays on smooth surrogates.</div></details>
+      <details class="cloud"><summary class="q">Are “fractal” claims literal?</summary><div class="a core">No. “Fractal” is used as an <em>effective</em> spectral exponent; the working math stays on smooth surrogates.</div></details>
       <details class="cloud"><summary class="q">Well‑posedness guardrails?</summary><div class="a core">Normalization, locality in projection, and monotone fidelity define a bounded PSD operator \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</div></details>
     </div>
   </div>
@@ -109,64 +105,17 @@ O(x)=\int_{\mathrm{MM}} &K_{\lambda}(x;X)\,\\
     </div>
   </div>
 
-  <!-- PHYSICAL PHENOMENA -->
-  <div class="card">
-    <h2>Physical Phenomena in DREAM</h2>
-    <div class="clouds">
-      <details class="cloud"><summary class="q">What is gravity in DREAM?</summary><div class="a core">Gravity emerges as the curvature of the 4D projection manifold, not as a fundamental force. The Einstein-Hilbert action is an effective description that arises from the projection of MM geometry. The gravitational constant G is a kernel parameter fixed by our particular projection.</div></details>
-      
-          <details class="cloud"><summary class="q">What is time in DREAM?</summary><div class="a core">In DREAM, time is not a fundamental dimension of the Meta-Manifold but emerges as a parameter of the projection. The MM itself is atemporal - all states coexist simultaneously. Our experience of temporal flow results from the sequential unfolding of these pre-encoded states through the kernel's projection process. Time is essentially path selection through the frozen landscape of MM states, with the apparent arrow of time emerging from the kernel's one-way compression from 10D to 4D.</div></details>
-    
-    <details class="cloud"><summary class="q">Are time machines or time travel possible in DREAM?</summary><div class="a core">No, time travel is fundamentally impossible in the DREAM framework. The projection from MM to 4D is non-invertible and operates at finite resolution, meaning the exact path through MM states cannot be reversed or retraced. The kernel's compression loses information (sub-λ detail is averaged out), making it impossible to reconstruct previous states with sufficient precision to "return" to them. This intrinsic irreversibility of the projection process ensures causality is preserved and prevents paradoxes.</div></details>
-      <details class="cloud"><summary class="q">How do stars form in DREAM?</summary><div class="a core">Stars form at "focusing hubs" where the projection Jacobian J<sub>F</sub> → 0, causing energy density to concentrate:
-        <div class="math-block">\[\mu(x) = \int_{F^{-1}(x)} \frac{e_{10}(X)}{J_F(X)} d\Sigma_6(X)\]</div>
-        These high-CPI regions naturally accumulate matter and ignite fusion through gravitational compression.
-      </div></details>
-
-      <details class="cloud"><summary class="q">What are wave function collapse and decoherence in DREAM?</summary><div class="a core">In DREAM, wave function "collapse" is not a physical process but the selection of one outcome from the many pre-encoded in the MM, made manifest through the finite-resolution projection. Decoherence occurs when a quantum system's details exceed the kernel's resolution scale λ<sub>q</sub>, causing the loss of phase information. This emerges naturally from the projection's retention law:
-<div class="math-block">\[
-\alpha(\lambda) = \exp\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\text{eff}}}\right]
-\]</div>
-When λ > λ<sub>q</sub>, quantum superpositions cannot be maintained, and the system appears to collapse to a classical state. There is no need for consciousness or observers—just the inevitable information loss of the 10→4 compression.</div></details>
-      
-      <details class="cloud"><summary class="q">What are galaxies in DREAM?</summary><div class="a core">Galaxies are large-scale focusing structures that form along persistent hubs and filaments in the projection. Their spiral arms, bulges, and dark matter halos reflect the underlying topological structure of the MM and the retention properties of the kernel at different scales.</div></details>
-      
-      <details class="cloud"><summary class="q">How do black holes form in DREAM?</summary><div class="a core">Black holes represent extreme focusing events where J<sub>F</sub> → 0 to such a degree that the local CPI approaches infinity. The event horizon marks the boundary beyond which the projection becomes so compressed that information cannot escape within the resolution limits of our kernel. Singularities are artifacts of the projection, not physical realities in the MM.</div></details>
-      
-      <details class="cloud"><summary class="q">What is dark matter in DREAM?</summary><div class="a core">Dark matter effects emerge from the non-uniform focusing of the projection. Regions with higher A(x) = ⟨1/J<sub>F</sub>⟩ values exhibit additional gravitational effects that appear as missing mass. This is not a particle but a manifestation of the uneven compression of higher-dimensional structure into 4D.</div></details>
-      
-      <details class="cloud"><summary class="q">What is dark energy in DREAM?</summary><div class="a core">Dark energy represents the residual energy density from the MM ground state after projection and phase cancellation. The small positive value (meV<sup>4</sup> scale) naturally emerges from the suppression factor M<sup>-1/2</sup> where M ∼ (λ/ε)<sup>D<sub>I</sub></sup> is the microstate multiplicity.</div></details>
-      
-      <details class="cloud"><summary class="q">How does the quantum-classical transition occur?</summary><div class="a core">The transition emerges naturally from the finite resolution λ<sub>q</sub> of the projection kernel. Below λ<sub>q</sub>, quantum-grade invariants are preserved, manifesting as quantum behavior. Above λ<sub>q</sub>, coarse-graining dominates, yielding classical behavior. This explains why quantum effects are fragile while classical structures are robust.</div></details>
-    
-        <details class="cloud"><summary class="q">Are other projections possible?</summary><div class="a core">Yes, other projections are not only possible but inevitable within the MM's structure. The MM contains infinite potential projection pathways that could manifest as entirely different realities with:
-    <br><br>
-    • Different dimensional compressions (not necessarily 10→4)<br>
-    • Completely different sets of fundamental constants<br>
-    • Alternative particle content and physical laws<br>
-    • Radically different cosmological histories<br>
-    <br>
-    However, traversal between these projections is fundamentally impossible because:<br>
-    • Each projection is defined by a unique, fixed kernel that cannot be altered from within the projection<br>
-    • The kernel parameters (constants like c, ℏ, G) are immutable for a given projection<br>
-    • There is no "meta-space" from which to access other projections - our entire reality is confined to our specific projection<br>
-    • Different projections would have completely incommensurate causality structures and time concepts<br>
-    • The MM itself provides no mechanism for cross-projection communication or transition
-    </div></details>
-    </div>
-  </div>
-
   <!-- SPECULATIVE: Life, Sentience, Free Will, Culture, Death -->
   <div class="card speculative">
     <h2>Speculative — Life, Sentience, Free Will, Culture, Death</h2>
     <div class="clouds">
-      <details class="cloud"><summary class="q">What is "life" in DREAM?</summary><div class="a speculative">Long‑lived resonant attractors that recycle information efficiently within the fidelity window and maintain organization against decoherence.</div></details>
+      <details class="cloud"><summary class="q">What is “life” in DREAM?</summary><div class="a speculative">Long‑lived resonant attractors that recycle information efficiently within the fidelity window and maintain organization against decoherence.</div></details>
       <details class="cloud"><summary class="q">How does sentience enter?</summary><div class="a speculative">Multi‑scale feedback loops whose internal models modulate their own projection conditions (attention/coherence budgets) within local bounds.</div></details>
-      <details class="cloud"><summary class="q">"Free will"?</summary><div class="a speculative">Path selection among pre‑encoded MM branches, constrained by kernel invariants and available coherence.</div></details>
-      <details class="cloud"><summary class="q">Death?</summary><div class="a speculative">Loss of a loop's ability to maintain coherence budgets; the attractor dissolves, leaving only coarse invariants in the environment.</div></details>
+      <details class="cloud"><summary class="q">“Free will”?</summary><div class="a speculative">Path selection among pre‑encoded MM branches, constrained by kernel invariants and available coherence.</div></details>
+      <details class="cloud"><summary class="q">Death?</summary><div class="a speculative">Loss of a loop’s ability to maintain coherence budgets; the attractor dissolves, leaving only coarse invariants in the environment.</div></details>
       <details class="cloud"><summary class="q">Cultures?</summary><div class="a speculative">Collective loops can bias local projection conditions (shared attention/synchrony), modestly shifting which structures retain.</div></details>
       <details class="cloud"><summary class="q">Dreams (sleep)?</summary><div class="a speculative">Low‑input regime where internal models re‑weight fragments of MM structure; neuromodulators tweak retention thresholds.</div></details>
-      <details class="cloud"><summary class="q">Ethics?</summary><div class="a speculative">If selves are resonant loops, actions that preserve or expand others' coherence budgets have moral weight.</div></details>
+      <details class="cloud"><summary class="q">Ethics?</summary><div class="a speculative">If selves are resonant loops, actions that preserve or expand others’ coherence budgets have moral weight.</div></details>
       <details class="cloud"><summary class="q">Limits of speculation?</summary><div class="a speculative">Interpretive only; not required for tests. Science lives in invariant relations and falsification gates.</div></details>
     </div>
   </div>

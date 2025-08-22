@@ -1,19 +1,15 @@
-
-{% block content %}
 <div class="container">
-
   <div class="card hero">
     <h1>AI Assessment (0–10) — Quick compare</h1>
     <p class="kicker">ChatGPT‑5 Deep Research verdict distilled into a compact 0–10 matrix. Higher is better.</p>
-    <p class="note">This replaces prior grades/labels. Numbers are heuristic and should be updated as proofs and data arrive.</p>
+    <p class="note">This replaces prior labels. Numbers are heuristic and should be updated as theorems and data arrive.</p>
   </div>
 
-  <!-- compact helpers for numbers -->
   <style>
-    .tbl{width:100%; border-collapse:collapse; font-size:.95rem}
-    .tbl th,.tbl td{padding:.55rem; text-align:left}
+    .tbl{width:100%;border-collapse:collapse;font-size:.95rem}
+    .tbl th,.tbl td{padding:.55rem;text-align:left}
     .tbl thead tr{border-bottom:1px solid #2a2f5a}
-    .tbl tbody tr + tr{border-top:1px solid #21254a}
+    .tbl tbody tr+tr{border-top:1px solid #21254a}
     .asc{opacity:.8}
     .aspect{white-space:nowrap}
   </style>
@@ -92,15 +88,5 @@
         </tbody>
       </table>
     </div>
-
-    <details class="more" style="margin-top:.6rem">
-      <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
-      <div class="expander-body prose">
-        <p><strong>Legend.</strong> 0&nbsp;=&nbsp;weak, 10&nbsp;=&nbsp;excellent. Up‑arrow (↑) means “score likely to rise” with proofs or decisive data. “Landscape issues” notes difficulty defining sharp nulls across many vacua.</p>
-        <p><strong>Updating.</strong> When forecasts (ladder/cliff/torsion) are tested or new theorems are posted, refresh the numbers and keep a dated changelog.</p>
-      </div>
-    </details>
   </div>
-
 </div>
-{% endblock %}
