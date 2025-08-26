@@ -1,0 +1,113 @@
+
+{% block content %}
+<div class="container">
+
+    <div class="card hero">
+        <h1>Проекционное ядро</h1>
+        <p class="kicker">«Ядро-агностичная» позиция с операциональными инвариантами: разрешение \(\lambda_q\), радиус локальности, регулярность/положительность и эффективный спектральный показатель \(D_{\mathrm{eff}}\).</p>
+        <p class="note">Математика скрыта по умолчанию. Используйте переключатель «Математика» в шапке, чтобы показать формулы.</p>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+
+        <!-- Definition -->
+        <div class="card">
+            <h2>Определение (проталкивание)</h2>
+            <p>4D-наблюдаемые — это проталкивания полей MM фиксированным, неинвертируемым ядром с конечным разрешением:</p>
+            <div class="math-block">
+                \[
+                O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
+                \]
+            </div>
+            <p class="note">Эмпиричны только <em>инварианты</em> класса ядер; детальные функциональные формы данными не идентифицируются.</p>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">Показать подробнее</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Линейность / ограниченность.</strong> Индуцированный оператор \(\mathcal{K}_\lambda: L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\) предполагается ограниченным.</p>
+                    <p><strong>Нормировка.</strong> Удобно выбирать \(\int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)=1\), чтобы константы отображались в константы.</p>
+                    <p><strong>Совместимость мер.</strong> Любые выборы объёмной формы эквивалентны при согласованном использовании \(K_{\lambda}\,d\mu_{\mathrm{MM}}\).</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Invariants -->
+        <div class="card">
+            <h2>Инварианты ядра (операциональные)</h2>
+            <ul>
+                <li><strong>Разрешение</strong> \(\lambda_q\): критический масштаб четкость для удержания.</li>
+                <li><strong>Радиус локальности</strong>: насколько резко точки MM привязаны к \(x\approx\pi(X)\).</li>
+                <li><strong>Регулярность / положительность</strong>: корректно поставленный PSD-оператор; конечные нормы.</li>
+                <li><strong>Эффективный спектральный показатель</strong> \(D_{\mathrm{eff}}\): управляет счётом мод и негармоническими «лестницами».</li>
+            </ul>
+            <details class="more">
+                <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">Показать подробнее</span></summary>
+                <div class="expander-body prose">
+                    <p><strong>Почему инварианты?</strong> Это величины, остающиеся идентифицируемыми среди допустимых ядер; именно они якорят прогнозы и фальсификацию.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Retention -->
+        <div class="card">
+            <h2>Удержание и когерентность</h2>
+            <p>Фиделити к тонкой структуре как функция эффективного масштаба зонда \(\lambda\):</p>
+            <div class="math-block">
+                \[
+                \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+                \]
+            </div>
+            <p>Это даёт два режима и <strong>«обрыв» когерентности</strong> около \(\lambda\approx\lambda_q\). Инструменты, сканирующие через границу, должны фиксировать ступенчатое изменение интерференционных/когерентных наблюдаемых.</p>
+        </div>
+
+        <!-- Gaussian proxy -->
+        <div class="card">
+            <h2>Дидактический суррогат (Гауссов)</h2>
+            <p>Удобный суррогат, удовлетворяющий локальности и положительности, — гауссово ядро в нормальных координатах:</p>
+            <div class="math-block">
+                \[
+                K_{\lambda}(x;X)\propto\exp\!\Big(-\tfrac{\mathrm{dist}(X,\pi^{-1}(x))^2}{2\sigma^2}\Big),\qquad \sigma\sim\lambda.
+                \]
+            </div>
+            <p>Тогда \(O=K_{\lambda}\star\Phi\) полосо-ограничено; высокочастотное содержимое экспоненциально подавлено с показателем, задаваемым \(\lambda/\lambda_q\), что воспроизводит закон четкость выше.</p>
+            <p class="note">D.R.E.A.M остаётся «ядро-агностичной»; этот суррогат — лишь дидактический.</p>
+        </div>
+
+        <!-- Spectral exponent -->
+        <div class="card">
+            <h2>Эффективный спектральный показатель \(D_{\mathrm{eff}}\)</h2>
+            <p>Кодирует счёт мод во внутреннем секторе и влечёт нелинейные «лестницы» масс/частот:</p>
+            <div class="math-block">
+                \[
+                \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\Rightarrow f_1\approx 15.717\,\mathrm{MHz}.
+                \]
+            </div>
+            <p>Также информирует энтропийные и космологические перекрёстные проверки масштабирования.</p>
+        </div>
+
+        <!-- Practical mapping -->
+        <div class="card">
+            <h2>Картирование на инструменты</h2>
+            <ul>
+                <li><strong>\(\lambda\)</strong> платформенно-зависим (база, длина волны, длина когерентности); прогнозы зависят от \(\lambda/\lambda_q\).</li>
+                <li>Окна поиска: десятки neV для гало-скопов (база ALP); пикометрные сканы для «обрыва» когерентности; mHz-шаблоны для торсиона/доп. поляризации.</li>
+            </ul>
+        </div>
+
+        <!-- Illustration -->
+        <div class="card">
+            <h2>Иллюстрация — «переплетение» ядра реальности (10D → 4D, моделирование в Python)</h2>
+            <img src="{{ url_for('static', filename='img/kernel.png') }}"
+                 alt="Игровое проекционное ядро переплетает высокоразмерную структуру в 4D-срез"
+                 style="width:90%; max-width:340px; height:auto; border-radius:14px; border:1px solid #2a2f5a; background:#10132b;">
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Повторно отрисовать математику после раскрытия «Показать подробнее»
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: dream-faq
+    env: python
+    plan: starter
+    region: oregon
+    rootDir: dream_physics
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -k gthread --threads 8 --timeout 120 app:app
+    healthCheckPath: /api/rag-status
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: FAQ_TRANS_MODE
+        value: "off"
+      - key: ADMIN_TOKEN
+        sync: false

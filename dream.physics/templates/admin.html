@@ -1,0 +1,362 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Layout */
+  .admin-wrap { display:grid; grid-template-rows:auto 1fr; gap:14px; }
+  .admin-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#f9fafb;
+  }
+  .admin-title { margin:0; font-size:18px; font-weight:700; }
+  .lang-toggle { display:inline-flex; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; background:#fff; }
+  .lang-toggle button { appearance:none; border:0; background:transparent; padding:8px 12px; cursor:pointer; font-weight:600; color:#374151; }
+  .lang-toggle button.active { background:#4f46e5; color:#fff; }
+
+  .admin-main { display:grid; grid-template-columns:minmax(260px, 360px) 1fr; gap:14px; min-height:60vh; }
+
+  /* Left list — high contrast */
+  .faq-list { border:1px solid #d1d5db; border-radius:10px; background:#ffffff; display:flex; flex-direction:column; min-height:0; }
+  .list-head { padding:10px; border-bottom:1px solid #e5e7eb; display:flex; gap:8px; align-items:center; }
+  .faq-search { flex:1; border:1px solid #d1d5db; border-radius:8px; padding:8px 10px; font-size:14px; }
+  .btn { appearance:none; border:1px solid #d1d5db; background:#fff; color:#111827; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; }
+  .btn:hover { background:#f3f4f6; }
+  .faq-items { overflow:auto; padding:8px; display:grid; gap:6px; min-height:0; }
+  .faq-item { border:1px solid #e5e7eb; border-radius:8px; padding:8px 10px; cursor:pointer; background:#fafafa; color:#111827; }
+  .faq-item:hover { background:#eef2ff; border-color:#c7d2fe; }
+  .faq-item.active { background:#e0e7ff; border-color:#818cf8; }
+  .faq-item .qid { font-weight:700; color:#1f2937; margin-right:6px; }
+  .list-foot { padding:8px; border-top:1px solid #e5e7eb; display:flex; align-items:center; justify-content:space-between; font-size:12px; color:#6b7280; background:#fafafa; border-bottom-left-radius:10px; border-bottom-right-radius:10px; }
+
+  /* Editor */
+  .editor { border:1px solid #d1d5db; border-radius:10px; background:#ffffff; display:grid; grid-template-rows:auto 1fr auto; min-height:0; }
+  .editor-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-bottom:1px solid #e5e7eb; background:#f9fafb; }
+  .editor-head .fields { display:grid; grid-template-columns:100px 1fr; gap:8px; align-items:center; }
+  .editor-head input[type="number"], .editor-head input[type="text"] { border:1px solid #d1d5db; border-radius:8px; padding:6px 8px; font-size:14px; }
+  .editor-body { padding:10px 12px; min-height:0; display:grid; grid-template-rows:1fr; }
+  .editor-body textarea { width:100%; height:100%; resize:none; border:1px solid #d1d5db; border-radius:8px; padding:10px 12px; font-size:14px; line-height:1.4; }
+  .editor-foot { padding:10px 12px; border-top:1px solid #e5e7eb; background:#fafafa; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .btn.primary { background:#4f46e5; color:#fff; border-color:#4f46e5; }
+  .btn.primary:hover { background:#4338ca; border-color:#4338ca; }
+  .btn.danger { background:#fee2e2; color:#991b1b; border-color:#fecaca; }
+  .btn.danger:hover { background:#fecaca; }
+  .muted { color:#6b7280; }
+  .status { font-size:12px; color:#6b7280; }
+
+    /* Bigger, multi-line title fields */
+  .title-input{
+    width: 150%;
+    min-height: 56px;           /* show ~2 lines by default */
+    padding: 10px 12px;
+    font-size: 12x;
+    line-height: 1.35;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;           /* allow manual grow if needed */
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 900px){ .admin-main { grid-template-columns:1fr; } }
+</style>
+
+<div class="admin-wrap">
+  <div class="admin-bar">
+    <h2 class="admin-title">FAQ Admin</h2>
+    <div class="lang-toggle" id="adminLangToggle" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ru">RU</button>
+    </div>
+  </div>
+
+  <section class="admin-main">
+    <!-- LEFT -->
+    <aside class="faq-list">
+      <div class="list-head">
+        <input id="searchBox" class="faq-search" type="search" placeholder="Search titles… (min 1 char)">
+        <button id="addBtn" class="btn">+ Add</button>
+      </div>
+      <div id="list" class="faq-items" aria-label="FAQ items"></div>
+      <div class="list-foot">
+        <span id="countLabel" class="muted">0 items</span>
+        <span id="langLabel" class="muted">lang: en</span>
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <div class="editor" id="editor">
+      <div class="editor-head">
+        <div class="fields">
+          <label for="numInput" class="muted">#</label>
+          <input id="numInput" type="number" min="1" step="1">
+          <label for="titleInput" class="muted">Title</label>
+          <!-- <input id="titleInput" type="text" placeholder="Question / Title…"> -->
+
+          <textarea id="titleInput" class="title-input" rows="2" width="250px" !important placeholder="Question / Title…"></textarea>
+
+        </div>
+        <div>
+          <button id="saveBtn" class="btn primary">Save</button>
+          <button id="delBtn" class="btn danger">Delete</button>
+        </div>
+      </div>
+      <div class="editor-body">
+        <textarea id="bodyInput" placeholder="Answer… supports MathJax ($x^2$)"></textarea>
+      </div>
+      <div class="editor-foot">
+        <span id="status" class="status">Ready.</span>
+        <span class="muted">Ctrl/Cmd+S to save</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  // 1) Pull token from URL (first load) or sessionStorage
+  const qs = new URLSearchParams(location.search);
+  let ADMIN_TOKEN = qs.get('token') || sessionStorage.getItem('ADMIN_TOKEN') || '';
+
+  if (qs.get('token')) {
+    // Store it and clean the URL bar (no token in history/address)
+    sessionStorage.setItem('ADMIN_TOKEN', ADMIN_TOKEN);
+    history.replaceState({}, '', location.pathname);
+  }
+
+  // 2) If still no token, bounce back to home (or show a message)
+  if (!ADMIN_TOKEN) {
+    // Option A: redirect to homepage where the gear/login is
+    window.location.replace('/');
+    return;
+    // Option B: render a message instead
+    // document.body.innerHTML = '<p style="padding:2rem">Unauthorized. Use the gear icon to log in.</p>';
+  }
+
+  // 3) Wrap fetch → always add X-Admin-Token header
+  window.authFetch = function(url, opts){
+    opts = opts || {};
+    opts.headers = Object.assign({}, opts.headers, { 'X-Admin-Token': ADMIN_TOKEN });
+    return fetch(url, opts);
+  };
+})();
+</script>
+
+<script>
+(function(){
+  /* ---------- STATE FIRST (fixes 'dirty before initialization') ---------- */
+  let items = [];       // current list for active lang
+  let selectedId = null;
+  let dirty = false;
+  let lang = (document.cookie.split('; ').find(r=>r.startsWith('lang='))?.split('=')[1] === 'ru') ? 'ru' : 'en';
+
+  /* ---------- DOM ---------- */
+  const $ = s => document.querySelector(s);
+  const listEl = $('#list');
+  const countEl = $('#countLabel');
+  const langBadge = $('#langLabel');
+  const searchBox = $('#searchBox');
+  const addBtn = $('#addBtn');
+  const saveBtn = $('#saveBtn');
+  const delBtn = $('#delBtn');
+  const numInput = $('#numInput');
+  const titleInput = $('#titleInput');
+  const bodyInput = $('#bodyInput');
+  const statusEl = $('#status');
+
+  const langToggle = $('#adminLangToggle');
+  const langBtns = langToggle.querySelectorAll('button');
+
+  /* ---------- HELPERS ---------- */
+  function setCookie(name,val){ document.cookie = `${name}=${val}; path=/; max-age=31536000`; }
+  function setStatus(msg, warn=false){ statusEl.textContent = msg; statusEl.style.color = warn ? '#b91c1c' : '#6b7280'; }
+  function esc(s){
+  var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+  return String(s || '').replace(/[&<>"']/g, function(ch){ return map[ch]; });
+}
+  async function loadJSON(url, opts){
+    const r = await authFetch(url, opts);
+    const ct = r.headers.get('content-type') || '';
+    if (!r.ok){ const txt = await r.text().catch(()=>'(no body)'); throw new Error(`HTTP ${r.status} ${r.statusText} — ${txt.slice(0,200)}`); }
+    if (!ct.includes('application/json')){ const txt = await r.text().catch(()=>'(no body)'); throw new Error(`Expected JSON, got ${ct} — ${txt.slice(0,200)}`); }
+    return r.json();
+  }
+
+  /* ---------- LANGUAGE ---------- */
+  function setLang(newLang, {promptIfDirty=true}={}){
+    const next = (newLang === 'ru') ? 'ru' : 'en';
+    if (promptIfDirty && dirty && !confirm('You have unsaved changes. Switch language and discard edits?')) return;
+    lang = next;
+    setCookie('lang', lang);
+    langBtns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    langBadge.textContent = `lang: ${lang}`;
+    dirty = false;
+    loadList();
+  }
+
+  // Local toggle
+  langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // Also listen to header language links to keep in sync (without full reload)
+  document.querySelectorAll('.lang a.lang-link').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const newLang = (a.getAttribute('href')||'').split('/').pop();
+      // Update header visual "on" state
+      document.querySelectorAll('.lang a.lang-link').forEach(x=>{
+        const code=(x.getAttribute('href')||'').split('/').pop();
+        x.classList.toggle('on', code===newLang);
+      });
+      setLang(newLang);
+    });
+  });
+
+  /* ---------- LIST + EDITOR ---------- */
+  function renderList(arr){
+    listEl.innerHTML = '';
+    if (!arr.length){ listEl.innerHTML = `<div class="muted">No FAQs in ${lang.toUpperCase()}.</div>`; countEl.textContent = '0 items'; return; }
+    arr.forEach(it => {
+      const div = document.createElement('div');
+      div.className = 'faq-item' + (it.number === selectedId ? ' active' : '');
+      div.tabIndex = 0;
+      div.innerHTML = `<span class="qid">${it.number}.</span> ${esc(it.question || '(untitled)')}`;
+      div.addEventListener('click', () => selectItem(it.number));
+      div.addEventListener('keydown', e => { if (e.key === 'Enter') selectItem(it.number); });
+      listEl.appendChild(div);
+    });
+    countEl.textContent = `${arr.length} item${arr.length===1?'':'s'}`;
+  }
+
+  async function loadList(){
+    try{
+      setStatus('Loading list…');
+      const j = await loadJSON(`/faq/list?lang=${lang}`);
+      items = (j.items || j.faqs || []).map(f => ({
+        number: Number(f.number) || 0,
+        question: f.question || '',
+        answer: f.answer || ''
+      })).sort((a,b)=>a.number-b.number);
+      renderList(items);
+      // auto-select first if nothing picked
+      if (items.length && !selectedId){ selectItem(items[0].number, {silent:true}); }
+      if (!items.length){ clearEditor(); }
+      setStatus('Ready.');
+    }catch(err){
+      setStatus('Failed to load list.', true);
+      console.error(err);
+    }
+  }
+
+  function clearEditor(){
+    selectedId = null;
+    numInput.value = '';
+    titleInput.value = '';
+    bodyInput.value = '';
+    dirty = false;
+  }
+
+  async function selectItem(id, {silent=false}={}){
+    if (dirty && !silent){
+      const ok = confirm('You have unsaved changes. Discard them?');
+      if (!ok) return;
+    }
+    try{
+      setStatus('Loading item…');
+      const j = await loadJSON(`/faq/item/${id}?lang=${lang}`);
+      const it = j.item || {};
+      selectedId = Number(it.number) || id;
+      numInput.value = it.number || '';
+      titleInput.value = it.question || '';
+      bodyInput.value = it.answer || '';
+      dirty = false;
+      renderList(items); // refresh active highlight
+      setStatus('Loaded.');
+      // Render MathJax preview in your site if needed (not necessary for editor inputs)
+    }catch(err){
+      setStatus('Failed to load item.', true);
+      console.error(err);
+    }
+  }
+
+  function nextNumber(){
+    const max = items.reduce((m, it)=>Math.max(m, Number(it.number)||0), 0);
+    return max + 1;
+  }
+
+  addBtn.addEventListener('click', ()=>{
+    if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+    const n = nextNumber();
+    selectedId = null; // new
+    numInput.value = n;
+    titleInput.value = '';
+    bodyInput.value = '';
+    dirty = true;
+    setStatus(`New FAQ #${n} (not saved)`);
+  });
+
+  async function save(){
+    const number = Number(numInput.value) || 0;
+    const question = titleInput.value.trim();
+    const answer = bodyInput.value.trim();
+    if (!question){ alert('Title/Question is required.'); return; }
+    try{
+      setStatus('Saving…');
+      const j = await loadJSON(`/faq/save`, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ lang, item:{ number, question, answer } })
+      });
+      const savedNum = j.number || number || nextNumber();
+      await loadList();
+      selectedId = savedNum;
+      // keep selection after refresh
+      const sel = items.find(x=>x.number===savedNum);
+      if (sel){ numInput.value = sel.number; titleInput.value = sel.question; bodyInput.value = sel.answer; }
+      dirty = false;
+      setStatus('Saved.');
+    }catch(err){
+      setStatus('Save failed.', true);
+      console.error(err);
+    }
+  }
+  saveBtn.addEventListener('click', save);
+  document.addEventListener('keydown', e=>{
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='s'){ e.preventDefault(); save(); }
+  });
+
+  async function del(){
+    if (!numInput.value) return;
+    const id = Number(numInput.value);
+    if (!confirm(`Delete FAQ #${id}? This cannot be undone.`)) return;
+    try{
+      setStatus('Deleting…');
+      await loadJSON(`/faq/delete/${id}?lang=${lang}`, { method:'DELETE' });
+      await loadList();
+      clearEditor();
+      setStatus('Deleted.');
+    }catch(err){
+      setStatus('Delete failed.', true);
+      console.error(err);
+    }
+  }
+  delBtn.addEventListener('click', del);
+
+  // client-side filter
+  let searchTimer = null;
+  searchBox.addEventListener('input', ()=>{
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(()=>{
+      const q = (searchBox.value||'').toLowerCase();
+      const filtered = !q ? items : items.filter(it => (it.question||'').toLowerCase().includes(q));
+      renderList(filtered);
+    }, 120);
+  });
+
+  // dirty tracking + leave guard
+  [numInput, titleInput, bodyInput].forEach(el => el.addEventListener('input', ()=>{ dirty = true; setStatus('Edited (unsaved).'); }));
+  window.addEventListener('beforeunload', (e)=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
+
+  // boot
+  langBtns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  langBadge.textContent = `lang: ${lang}`;
+  loadList();
+})();
+</script>
+{% endblock %}

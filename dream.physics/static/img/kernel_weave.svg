@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#8bd3ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#b388ff" stop-opacity="0.9"/>
+    </linearGradient>
+    <radialGradient id="gauss" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 10D "threads" (schematic) -->
+  <g opacity="0.9">
+    <!-- multiple sine/ribbon paths converging toward a projection plane -->
+    <!-- generate a family of parametric curves -->
+    <g stroke="url(#g1)" stroke-width="2" fill="none" opacity="0.8">
+      <!-- We'll draw paths manually for portability -->
+      <path d="M0,200 C150,120 250,280 400,200 S650,120 800,200 S1050,280 1200,200" />
+      <path d="M0,260 C150,180 250,340 400,260 S650,180 800,260 S1050,340 1200,260" opacity="0.8"/>
+      <path d="M0,140 C150,60 250,220 400,140 S650,60 800,140 S1050,220 1200,140" opacity="0.6"/>
+      <path d="M0,320 C150,240 250,400 400,320 S650,240 800,320 S1050,400 1200,320" opacity="0.6"/>
+      <path d="M0,380 C150,300 250,460 400,380 S650,300 800,380 S1050,460 1200,380" opacity="0.45"/>
+      <path d="M0,80  C150,0   250,160 400,80  S650,0   800,80  S1050,160 1200,80"  opacity="0.45"/>
+    </g>
+  </g>
+
+  <!-- Projection plane (4D slice metaphor) -->
+  <g>
+    <rect x="420" y="30" width="360" height="440" fill="#10132b" stroke="#2a2f5a" stroke-width="1.5"/>
+    <rect x="420" y="30" width="360" height="440" fill="url(#gauss)" />
+    <g opacity="0.25">
+      <!-- weave pattern lines inside the plane -->
+      <!-- vertical -->
+      <g stroke="#8bd3ff" stroke-opacity="0.6" stroke-width="1">
+        <path d="M450,50 v400" />
+        <path d="M500,50 v400" />
+        <path d="M550,50 v400" />
+        <path d="M600,50 v400" />
+        <path d="M650,50 v400" />
+        <path d="M700,50 v400" />
+        <path d="M750,50 v400" />
+      </g>
+      <!-- horizontal -->
+      <g stroke="#b388ff" stroke-opacity="0.6" stroke-width="1">
+        <path d="M440,90 h340" />
+        <path d="M440,140 h340" />
+        <path d="M440,190 h340" />
+        <path d="M440,240 h340" />
+        <path d="M440,290 h340" />
+        <path d="M440,340 h340" />
+        <path d="M440,390 h340" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Kernel "spot" showing finite resolution -->
+  <g filter="url(#softGlow)">
+    <circle cx="600" cy="250" r="70" fill="url(#gauss)" />
+    <circle cx="600" cy="250" r="70" fill="#8bd3ff" opacity="0.08"/>
+  </g>
+
+  <!-- Labels -->
+  <g font-family="Inter, Segoe UI, Arial" font-size="16" fill="#cfd4ff">
+    <text x="20"  y="30"  opacity="0.8">10D meta‑manifold (schematic threads)</text>
+    <text x="430" y="26"  opacity="0.8">4D projection slice</text>
+    <text x="520" y="250" opacity="0.85">Kernel resolution λq</text>
+  </g>
+</svg>

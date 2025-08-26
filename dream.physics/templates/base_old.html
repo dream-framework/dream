@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="{{ 'ru' if lang=='ru' else 'en' }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or _('meta.title') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+        };
+    </script>
+    <script id="mathjax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">
+            <a href="{{ url_for('home') }}">DREAM</a>
+        </div>
+        <nav class="nav">
+            {% for key,label_key,href in NAV %}
+            <a class="nav-link {% if request.path==href %}active{% endif %}" href="{{ href }}">{{ _(label_key) }}</a>
+            {% endfor %}
+        </nav>
+        <div class="controls">
+            <div class="toggles">
+                <label class="switch" title="{{ _('ui.math_toggle') }}">
+                    <input type="checkbox" id="mathToggle">
+                    <span class="slider"></span>
+                    <span class="switch-label">{{ _('ui.math') }}</span>
+                </label>
+                <label class="switch" title="{{ _('ui.spec_toggle') }}">
+                    <input type="checkbox" id="specToggle">
+                    <span class="slider"></span>
+                    <span class="switch-label">{{ _('ui.speculative') }}</span>
+                </label>
+            </div>
+            <div class="lang">
+                <a class="lang-link {% if lang=='en' %}on{% endif %}" href="{{ url_for('setlang', lang_code='en') }}">EN</a>
+                <span class="sep">·</span>
+                <a class="lang-link {% if lang=='ru' %}on{% endif %}" href="{{ url_for('setlang', lang_code='ru') }}">RU</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <small>© {{ 2025 }} DREAM — {{ _('meta.footer') }}</small>
+        </div>
+    </footer>
+
+    <!-- Keep your JS include -->
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=3"></script>
+
+    <!-- NEW: body-class toggles (overrides any inline styles other scripts might set) -->
+    <script>
+        (function () {
+            const $ = (s, all = false) => all ? Array.from(document.querySelectorAll(s)) : document.querySelector(s);
+            const body = document.body;
+            const mathCb = document.querySelector('#toggle-math') || document.querySelector('#mathToggle');
+            const specCb = document.querySelector('#toggle-spec') || document.querySelector('#specToggle');
+
+            if (mathCb) mathCb.checked = localStorage.getItem('showMath') === '1';
+            if (specCb) specCb.checked = localStorage.getItem('showSpec') === '1';
+
+            function applyToggles() {
+                body.classList.toggle('show-math', !!mathCb?.checked);
+                body.classList.toggle('show-spec', !!specCb?.checked);
+                if (mathCb?.checked && window.MathJax?.typesetPromise) MathJax.typesetPromise();
+            }
+            applyToggles();
+
+            mathCb?.addEventListener('change', e => {
+                localStorage.setItem('showMath', e.target.checked ? '1' : '0');
+                applyToggles();
+            });
+            specCb?.addEventListener('change', e => {
+                localStorage.setItem('showSpec', e.target.checked ? '1' : '0');
+                applyToggles();
+            });
+        })();
+    </script>
+
+</html>

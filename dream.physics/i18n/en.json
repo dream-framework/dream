@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "title": "DREAM — Dimensional Resonant Emergent Attractors in Manifold",
+    "footer": "prototype; core science and speculation are clearly separated."
+  },
+  "ui": {
+    "math_toggle": "Show/Hide mathematical content",
+    "spec_toggle": "Show speculative content",
+    "math": "Math",
+    "speculative": "Speculative",
+    "read_more": "Read more",
+    "read_less": "Read less"
+  },
+  "nav": {
+    "home": "Home",
+    "overview": "Overview",
+    "axioms": "Axioms",
+    "math": "Math Frame",
+    "kernel": "Projection Kernel",
+    "topology": "Topology → Particles",
+    "spectrum": "Fractal Spectrum",
+    "predictions": "Predictions",
+    "falsification": "Falsification",
+    "faq": "FAQ Clouds",
+    "about": "AI Analysis"
+  },
+  "home": {
+    "hero": {
+      "title": "Dimensional Resonant Emergent Attractors in Manifold",
+      "subtitle": "Our 4D world is a finite‑resolution projection of a compact, atemporal 10D reality. Physics measures invariant shadows; the projection kernel’s parameters are axioms.",
+      "note": "Toggle Math to reveal equations. Toggle Speculative to show interpretation-only sections."
+    },
+    "core": {
+      "title": "Core idea (plain)",
+      "text": "10→4 projection by a fixed kernel compresses structure; what survives are projection invariants (organization, conserved classes). Constants we measure are kernel‑fixed in our slice."
+    },
+    "glance": {
+      "title": "At a glance",
+      "item1": "Kernel invariants: resolution λq, locality radius, regularity class, spectral exponent.",
+      "item2": "Two regimes: below λq (quantum‑grade invariants); above (classical coarse‑grain).",
+      "item3": "Falsifiable forecasts: ALP mass ladder, coherence‑vs‑scale “cliff”, low‑freq torsion tones."
+    },
+    "retention": {
+      "title": "Retention law",
+      "note": "Retained structure decays rapidly once probe resolution exceeds the kernel scale."
+    },
+    "kernel": {
+      "title": "Kernel projection (schematic)"
+    },
+    "abstract": {
+      "title": "Abstract",
+      "plain_t": "Plain",
+      "plain": "DREAM treats our 4-dimensional world as a finite-resolution projection of a compact, atemporal 10-dimensional Meta-Manifold (MM). What we call “observables” in 4D are push-forwards through a fixed, non-invertible projection kernel. Because the kernel has finite resolution, microscopic detail is averaged out; what systematically survives in 4D are projection invariants (organization, conserved classes, robust spectra). In this posture, the usual constants of nature are not derived—they are kernel-fixed parameters of our particular slice.\n\nThe framework is anchored by a few axioms: (1) the MM exists and is smooth and compact; (2) a single, fixed projection kernel maps 10→4 at finite resolution; (3) there is no required U4×K6 split—all 10 coordinates contribute to 4D observables; (4) constants like c, ℏ, G are projection-fixed in our slice; (5) stable topological data of the MM label particle/gauge classes; and (6) finite resolution implies two operational regimes—below the kernel scale we observe “quantum-grade” invariants, above it we recover classical coarse-grain.\n\nSince the kernel is not observed directly, science attaches to kernel invariants—quantities that do not depend on the detailed choice of kernel within a consistent class. The key invariants used operationally are: a resolution scale λq, a locality radius (how sharply the kernel ties MM points to 4D points), regularity/positivity (well-posedness as an operator), and an effective spectral exponent D_eff that governs mode counting. These four control how structure in 10D is retained or erased when seen in 4D.\n\nA central consequence is a retention law: as the effective probe scale λ gets larger than λq, fidelity to fine structure falls off monotonically; below λq fine structure retains. This yields two regimes and a coherence “cliff” around λ≈λq: experiments that scan across that boundary should see a sharp change in interference/coherence observables. In practice, this puts the emphasis on where information survives rather than what microscopic details look like.\n\nFrom these invariants follow crisp, testable phenomenology. One repeated thread is a non-linear mass/frequency ladder for a light axion-like mode (ALP) with a base around ~65 neV (fundamental frequency ~15.7 MHz) and ratios controlled by D_eff. Another is possible low-frequency torsion/extra polarization content in the mHz band (e.g., LISA scale) tied to large energy hubs. On the lab side, the coherence vs scale transition near the pm regime is a direct probe of λq. Each of these is formulated so an instrument can aim at a concrete window rather than an open-ended search.\n\nFinally, the posture is explicitly falsifiable. If the ALP window at the stated sensitivity is decisively excluded, or if controlled platforms fail to see a retention transition near the posited λq, or if gravitational/torsion anomalies are null at the modeled levels, then the corresponding claims fail. The kernel-invariant stance prevents “saving” the idea by unconstrained kernel tuning: the point is to keep the invariants fixed and let the data decide.",
+      "precise_t": "Precise",
+      "precise": "Observables as push-forwards.\n4D observables are modeled as push-forwards of MM fields by a fixed kernel \\(K_\\lambda\\) (finite resolution \\(\\lambda\\)), i.e. a non-invertible map from MM fields \\(\\Phi\\) to 4D fields \\(O\\):\n<div class=\"math-block\">\\[\nO(x) = \\int_{\\mathrm{MM}} K_\\lambda\\big(x; X\\big) \\, \\Phi(X) \\, d\\mu_{\\mathrm{MM}}(X),\\quad \\lambda = \\lambda_q \\ \\text{(our slice)}.\n\\]</div>\nOnly invariants of \\(K_\\lambda\\) matter empirically; the detailed choice within a well-posed class is not identified by data.\n\nKernel guardrails (well-posedness).\nWe constrain the kernel by minimal conditions:\n<div class=\"math-block\">\\[\\textbf{K1 (normalization):}\\ \\int K_\\lambda(x;X)\\,d\\mu_{\\mathrm{MM}}(X) < \\infty.\\]</div>\n<div class=\"math-block\">\\[\\textbf{K2 (locality in projection):}\\ K_\\lambda(x;X) \\text{ is sharply peaked for } X\\approx \\pi^{-1}(x).\\]</div>\n<div class=\"math-block\">\\[\\textbf{K3 (monotone fidelity):}\\ \\alpha(\\lambda)\\ \\text{decreases with}\\ \\lambda,\\ \\ \\alpha(\\lambda_q)\\approx 1.\\]</div>\nHere \\(\\pi: \\mathrm{MM}\\to \\mathbb{R}^{3,1}\\) is the projection and \\(\\alpha(\\lambda)\\) quantifies retention.\n\nRetention / coherence law.\nA convenient invariant parametrization for fidelity is:\n<div class=\"math-block\">\\[\\alpha(\\lambda) = \\exp\\!\\Big[-\\big(\\tfrac{\\lambda}{\\lambda_q}\\big)^{D_{\\mathrm{eff}}}\\Big]\\]</div>\nwith \\(\\lambda_q\\) the kernel resolution and \\(D_{\\mathrm{eff}}\\) an effective spectral exponent (controls mode counting). This yields two regimes and a coherence cliff near \\(\\lambda\\approx\\lambda_q\\).\n\nSpectral ladder (lab handle).\nA light axion-like tower shows non-harmonic spacing governed by \\(D_{\\mathrm{eff}}\\):\n<div class=\"math-block\">\\[\\frac{m_n}{m_1} = n^{\\,1/D_{\\mathrm{eff}}},\\qquad m_1 \\approx 65\\,\\mathrm{neV}\\ \\Rightarrow\\ f_1 \\approx 15.717\\,\\mathrm{MHz}.\\]</div>\nThis fixes search windows for haloscopes (e.g., DMRadio family) and distinguishes DREAM’s ladder from linear KK spectra.\n\nTensor/torsion channel (space-based band).\nA torsion/extra-polarization strain in the mHz band can be sketched as\n<div class=\"math-block\">\\[ h_T \\sim \\epsilon_T \\, \\frac{G\\,E}{c^4\\,r} \\]</div>\nwith \\(\\epsilon_T\\) an effective coupling, \\(E\\) a source-scale energy, and \\(r\\) the distance. This motivates targeted templates for LISA-scale analysis.\n\nFalsification gates.\nEach claim comes with a clean fail: (i) exclude the ALP base window and non-harmonic ratios at forecast sensitivity → ladder claim fails; (ii) no coherence transition near pm scales across diverse controlled platforms → retention law as stated fails; (iii) null results for torsion/extra polarization at modeled levels → that channel fails. The invariants remain fixed; we do not rescue the framework by unconstrained kernel tweaks."
+    },
+    "capsule_axioms": {
+      "title": "Key Axioms (capsule)",
+      "a1": "Existence (MM): a compact, orientable, smooth 10D manifold with fields; atemporal in 4D terms.",
+      "a2": "Projection (Kernel): a fixed, non‑invertible finite‑resolution kernel; only its invariants/parameters are measurable.",
+      "a3": "All‑to‑four: mapping is 10→4 (no U4×K6 split required).",
+      "a4": "Constants are projection‑fixed: {c, ℏ, G, …} are kernel parameters in our slice.",
+      "a5": "Topology ↔ classes: particle/gauge classes correspond to MM topological data.",
+      "a6": "Finite resolution ⇒ regimes: below λq quantum‑grade invariants; above classical coarse‑grain.",
+      "expand_t": "Read more",
+      "expand": "**A1 — Existence (MM).** A compact, smooth 10D manifold with fields provides the ontic stage; “atemporal” means 4D time emerges under projection rather than being a fundamental MM coordinate.\n\n**A2 — Projection (Kernel).** A single fixed, non-invertible kernel effects 10→4 compression at finite resolution. Data constrain only invariants of this kernel class (resolution \\(\\lambda_q\\), locality radius, regularity, effective spectral exponent \\(D_{\\mathrm{eff}}\\)).\n\n**A3 — All-to-four.** The mapping does not require a U4×K6 split; all 10 coordinates contribute directly to 4D observables, reducing model-dependent internal factor choices.\n\n**A4 — Constants are projection-fixed.** {c, ℏ, G, …} are treated as kernel-fixed parameters in our slice; experiments measure them, not derive them from deeper dynamics.\n\n**A5 — Topology ↔ classes.** Stable MM topological data label particle/gauge classes. Individual 4D instances are particular projections of those classes under our kernel.\n\n**A6 — Finite resolution ⇒ regimes.** Below \\(\\lambda_q\\): quantum-grade invariants retain; above \\(\\lambda_q\\): classical coarse-grain dominates.\n\n<div class=\"math-block\">\\[\\alpha(\\lambda)=\\exp\\!\\Big[-\\big(\\tfrac{\\lambda}{\\lambda_q}\\big)^{D_{\\mathrm{eff}}}\\Big]\\quad\\text{(retention)}\\]</div>"
+    },
+    "bets": {
+      "title": "Near‑term bets (crisp numbers)",
+      "s1_t": "S1 — ALP ladder (DMRadio band)",
+      "s1_d": "Base mass m₁ ≈ 65 neV → f₁ ≈ 15.717 MHz; non‑harmonic ratios mₙ/m₁ = n^{1/D_eff} (D_eff ≈ 1.72).",
+      "s1_formula": "$$ f_1 \\\\approx 15.717\\\\,\\\\mathrm{MHz},\\\\quad \\\\frac{m_n}{m_1}=n^{1/D_{\\\\mathrm{eff}}} $$",
+      "s2_t": "S2 — Coherence cliff (pm scale)",
+      "s2_d": "Fidelity $\\\\alpha(\\\\lambda)=\\\\exp[-(\\\\lambda/\\\\lambda_q)^{D_{\\\\mathrm{eff}}}]$ with $\\\\lambda_q\\\\sim 10^{-12}$ m → step‑like loss as the effective probe crosses λ_q.",
+      "s2_formula": "$$ \\\\alpha(\\\\lambda)=e^{-(\\\\lambda/\\\\lambda_q)^{D_{\\\\mathrm{eff}}}},\\\\ \\\\ \\\\lambda_q\\\\sim 10^{-12}\\\\,\\\\mathrm{m} $$",
+      "s3_t": "S3 — LISA torsion/extra polarization",
+      "s3_d": "Strain $h_T\\\\sim \\\\epsilon_T\\\\,GE/(c^4 r)$ in the mHz band; optimistic Galactic sources around $\\\\sim 10^{-21}$.",
+      "expand_t": "Read more",
+      "expand": "**S1 — ALP ladder (lab handle).** A light axion-like tower with base mass \\(m_1\\approx 65\\,\\mathrm{neV}\\) (\\(f_1\\approx 15.717\\,\\mathrm{MHz}\\)) and non-harmonic spacing <div class=\"math-block\">\\[\\tfrac{m_n}{m_1}=n^{1/D_{\\mathrm{eff}}}\\]</div> distinguishes DREAM from linear KK ladders. Practical windows: tens-of-neV haloscope bands with mode-dependent couplings. **Fail** if the base window and ratios are decisively excluded at forecasted sensitivity.\n\n**S2 — Coherence cliff (pm scale).** The fidelity law predicts a sharp retention drop as effective probe scale crosses \\(\\lambda_q\\) (pm regime in several platforms). Interferometric and photonic setups should show a step-like change in contrast/visibility across that boundary. <div class=\"math-block\">\\[\\alpha(\\lambda)=\\exp[-(\\lambda/\\lambda_q)^{D_{\\mathrm{eff}}}]\\]</div> **Fail** if repeated, controlled scans across the boundary see no transition within error bars.\n\n**S3 — Torsion / extra polarization (mHz band).** Large-energy hubs could seed tensor/torsion content detectable by space-based interferometers. <div class=\"math-block\">\\[ h_T \\sim \\epsilon_T \\, \\tfrac{G\\,E}{c^4 r} \\]</div> Template families can be targeted; **fail** if null at modeled levels.\n\n**Cross-checks.** Cosmological and structural exponents should align with the effective spectral dimension inferred from laboratory windows (\\(D_{\\mathrm{eff}}\\)). Divergences provide leverage for falsification."
+    },
+    "topics": {
+      "title": "Topics → read next",
+      "overview": "Big‑picture overview and why the kernel‑agnostic stance matters.",
+      "axioms": "All six axioms on one page, with notes.",
+      "math": "Minimal action + push‑forward; guardrails K1–K3.",
+      "kernel": "Resolution λ_q, locality radius, regularity, effective spectral exponent.",
+      "topology": "How MM topology labels particle/gauge classes.",
+      "spectrum": "Why the KK ladder is non‑linear in n; effective spectral dimension.",
+      "pred": "What we expect in the lab and sky; parameter windows.",
+      "fals": "Clean fail gates and how we pre‑register predictions."
+    },
+    "why": {
+      "title": "Why this version scores higher",
+      "text": "Projection‑time axiom + kernel guardrails remove ill‑posedness; constants remain axioms. Falsifiability is front‑and‑center with crisp numbers and clear fail gates."
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "core": "DREAM treats the 4D universe as a projection (10→4) of an atemporal 10D Meta‑Manifold. Observables are push‑forwards of 10D fields through a fixed, finite‑resolution kernel. We emphasize testable invariants and a clear separation of science vs. speculation.",
+    "spec": {
+      "title": "Speculative perspective",
+      "text": "Time is a path through pre‑encoded MM states; free will is path selection. Cultural or sentience‑related feedback may influence local projection conditions (interpretive only)."
+    }
+  },
+  "axioms": {
+    "title": "Core Axioms",
+    "a1": {
+      "title": "Existence (MM).",
+      "text": "A compact, orientable, smooth 10D manifold with fields exists; it is atemporal in 4D terms."
+    },
+    "a2": {
+      "title": "Projection (Kernel).",
+      "text": "A fixed, non‑invertible kernel realizes 10→4 projection with finite resolution (parameters are axioms, not derived)."
+    },
+    "a3": {
+      "title": "All‑to‑four compression.",
+      "text": "No global split U4×K6 is required; all 10 coordinates contribute to 4D observables."
+    },
+    "a4": {
+      "title": "Constants are projection‑fixed.",
+      "text": "{c, ℏ, G, …} are kernel parameters within our slice; science measures them."
+    },
+    "a5": {
+      "title": "Topology ↔ classes.",
+      "text": "Particle/gauge classes correspond to MM topological data (e.g., π3, H1)."
+    },
+    "a6": {
+      "title": "Finite resolution ⇒ regimes.",
+      "text": "Below λq: quantum‑grade invariants; above: classical coarse‑grain."
+    },
+    "note": "Axioms intentionally separate what is assumed (kernel parameters) from what is tested (invariants/forecasts)."
+  },
+  "math": {
+    "title": "Mathematical Frame (minimal)",
+    "text": "The 10D action encodes curvature and fields; projection yields 4D observables. Mathematical guardrails enforce locality, integrability, and spectral well‑posedness.",
+    "k1": "(normalization): projected norms finite.",
+    "k2": "(locality-in-projection): kernel sharply peaked near x≈π(X).",
+    "k3": "(monotone fidelity): retention decreases with scale, critical λq.",
+    "notes": {
+      "title": "Notes",
+      "text": "“Fractal” is treated as an effective spectral exponent for mode counting (well‑posed surrogate), not a literal non‑integer manifold dimension."
+    }
+  },
+  "kernel": {
+    "title": "Projection Kernel",
+    "text": "Kernel‑agnostic stance: we only commit to invariants (resolution, locality, regularity, effective spectral exponent). A Gaussian is a didactic proxy.",
+    "res": "Resolution λq",
+    "res_text": "fidelity drop scale.",
+    "loc": "Locality radius",
+    "loc_text": "decay away from x≈π(X).",
+    "reg": "Regularity",
+    "reg_text": "positivity / PSD operator (well‑posed convolution).",
+    "deff": "Deff",
+    "deff_text": "effective spectral dimension enters masses & entropy."
+  },
+  "topology": {
+    "title": "Topology → Particle Classes",
+    "text": "Stable MM topological data label particle/gauge classes (e.g., π3↔integer charge classes; H1↔U(1) sectors). Individual 4D instances are projections of those classes under our kernel.",
+    "spec": {
+      "title": "Interpretive notes",
+      "text": "Index‑theorem links and anomaly safety are required for chiral matter; these are part of the mathematical consistency checklist rather than fixed by DREAM itself."
+    }
+  },
+  "spectrum": {
+    "title": "Fractal Spectrum & Mass Ladder",
+    "text1": "Effective spectral law on the internal sector yields a non‑linear KK ladder.",
+    "text2": "Thread values used in forecasts: a light ALP around ~65 neV and an exponent consistent with a Deff ≈ 1.7 ±.",
+    "imp": {
+      "title": "Implications",
+      "i1": "Search windows: haloscopes (DMRadio family) around tens of neV.",
+      "i2": "Couplings may be mode‑dependent; tower could have cut‑offs or suppressions."
+    }
+  },
+  "pred": {
+    "title": "Testable Predictions",
+    "p1": "ALP ladder near ~65 neV with non‑linear spacing.",
+    "p2": "Coherence vs scale: a sharp retention drop near λq (pm‑scale regime) in controlled platforms (e.g., NV interferometry, photonics).",
+    "p3": "Low‑frequency torsion / gravity tones (LISA band) associated with large energy hubs.",
+    "p4": "Cosmic structure exponent consistent with predicted spectral/fractal scaling.",
+    "how": {
+      "title": "How to falsify",
+      "h1": "Exclude the ALP window at forecasted sensitivity.",
+      "h2": "No coherence cliff near stated λq across platforms.",
+      "h3": "Null LISA/VIRGO/LIGO results against modeled amplitude.",
+      "h4": "Cosmic surveys inconsistent with the scaling."
+    }
+  },
+  "fals": {
+    "title": "Falsification Protocol",
+    "text": "Pre‑register forecasts; accept decisive nulls at the forecasted sensitivity. Keep the core kernel‑invariant posture; avoid rescuing hypotheses by unconstrained tweaks.",
+    "f1": "Mismatch between ALP ladder predictions and haloscope results (given exposure) falsifies the ladder claim.",
+    "f2": "Absence of a scale‑dependent retention transition falsifies the fidelity law as stated.",
+    "f3": "Gravitational/torsion anomalies excluded at modeled levels falsify the associated predictions."
+  },
+  "faq": {
+    "title": "FAQ — as “Clouds”",
+    "note": "Tap a cloud to reveal the answer. These entries clearly separate core statements from speculative interpretations.",
+    "q1": {
+      "q": "Is 4D fundamental?",
+      "a": "No. In DREAM, 4D observables are push‑forwards of 10D fields via a fixed kernel; constants are kernel‑fixed, not derived."
+    },
+    "q2": {
+      "q": "What is λq?",
+      "a": "The kernel’s resolution: below it, quantum‑grade invariants retain; above it, coarse‑graining yields classical behavior."
+    },
+    "q3": {
+      "q": "What should experiments see?",
+      "a": "A light ALP mode (tens of neV), a coherence‑vs‑scale cliff near pm scales, and possible low‑freq torsion tones (LISA)."
+    },
+    "q4": {
+      "q": "Are “fractal” claims literal?",
+      "a": "“Fractal” is implemented as an effective spectral exponent in mode counting; math stays on smooth surrogates."
+    },
+    "q5": {
+      "q": "Black holes / voids?",
+      "a": "Extreme MM wells may project as 4D black holes; depleted regions as voids. These interpretations are not required for testing kernel invariants."
+    },
+    "q6": {
+      "q": "Consciousness & free will?",
+      "a": "A “resonant loop” between complex observers and the kernel might exist; free will is framed as path selection among pre‑encoded MM branches."
+    },
+    "q7": {
+      "q": "Can the kernel be recovered?",
+      "a": "Only up to an equivalence class via observable correlators; we identify invariants (resolution, locality, regularity, spectral exponent)."
+    }
+  },
+  "about": {
+    "title": "About this site",
+    "text": "This is a free, Flask‑based multipage site for the DREAM framework. It mirrors the structure of the scientific write‑ups and keeps a clean line between core science and interpretive extensions.",
+    "run": "Run locally"
+  },
+  "fig": {
+    "kernel": {
+      "alt": "Illustration: toy projection kernel weaving 10D structure into a 4D slice",
+      "cap": "Toy illustration: a finite‑resolution kernel (λq) filters and “weaves” high‑dimensional structure into a 4D projection; grid suggests retained organization.",
+      "cap_short": "Toy kernel weave: λq‑limited projection into 4D."
+    }
+  },
+
+
+  "faqui": {
+    "title": "D.R.E.A.Mer the Bot at your Service",
+    "placeholder": "Type at least 3 characters to filter FAQ titles…",
+    "start_hint": "Start typing to see matching titles…",
+    "select_hint": "Select a title to view the full question and answer.",
+    "no_matches": "No matches.",
+    "loading": "Loading…",
+    "error": "Error loading answer.",
+    "search_failed": "Search failed.",
+    "matches": "matches",
+    "match": "match",
+    "tooltip": "Search FAQs"
+  }
+
+}
