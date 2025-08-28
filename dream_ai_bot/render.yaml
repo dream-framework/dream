@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: dream-groq-ai
+    runtime: python
+    plan: starter
+    rootDir: dream_groq_ai
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT app:app
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: FAQ_TRANS_MODE
+        value: off
+      - key: RU_GENERIC_FALLBACK
+        value: "1"
+      - key: DREAM_PDF_PATH
+        value: kb/dream_faqs.pdf
+      - key: GA_MEASUREMENT_ID
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false

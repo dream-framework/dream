@@ -1,0 +1,123 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Fractal Spectrum &amp; Mass Ladder</h1>
+    <p class="kicker">Effective spectral exponent \(D_{\mathrm{eff}}\) controls mode counting, density of states, and the non‑harmonic axion‑like ladder. Forecasts use only kernel invariants.</p>
+    <p class="note">Math blocks respect your Math toggle. Open the small expanders for derivations and side notes.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Intuition -->
+    <div class="card">
+      <h2>Intuition</h2>
+      <p class="core">D.R.E.A.M compresses a 10D Meta‑Manifold (MM) into 4D with a finite‑resolution kernel. The compression leaves a <em>spectral footprint</em> summarized by an effective exponent \(D_{\mathrm{eff}}\): it governs how many modes survive up to a scale and how nearby masses/frequencies are spaced.</p>
+      <p>Instead of postulating a literal fractal manifold, we package the observable consequences in \(D_{\mathrm{eff}}\), which enters lab spectra, entropy scaling, and cosmological cross‑checks.</p>
+    </div>
+
+    <!-- Effective spectral exponent -->
+    <div class="card">
+      <h2>Effective spectral exponent \(D_{\mathrm{eff}}\)</h2>
+      <p>The cumulative mode count below a cutoff \(\Omega\) scales as</p>
+      <div class="math-block">\[
+        N(\Omega)\;\propto\;\Omega^{\,D_{\mathrm{eff}}}\quad\Rightarrow\quad\rho(\Omega)=\tfrac{dN}{d\Omega}\propto\Omega^{\,D_{\mathrm{eff}}-1}.
+      \]</div>
+      <p>Here \(\rho\) is the density of states. The same exponent appears in band‑limited projections produced by the finite‑resolution kernel.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Why an “effective” exponent?</strong> We keep the working math on smooth surrogates, but observationally the retained modes behave <em>as if</em> they followed this exponent; it is the succinct lab handle.</p>
+          <p><strong>Interplay with fidelity.</strong> The retention law <span class="math-inline">\(\alpha(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\)</span> uses the same exponent; together, \(\alpha\) and \(N\) determine which structures survive at a given probe scale.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Ladder -->
+    <div class="card">
+      <h2>Non‑harmonic mass/frequency ladder</h2>
+      <p class="core">A light axion‑like tower exhibits <em>non‑harmonic</em> spacing governed by \(D_{\mathrm{eff}}\):</p>
+      <div class="math-block">\[
+        \frac{m_n}{m_1}=n^{\,1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\ \Rightarrow\ f_1\approx 15.717\,\mathrm{MHz}.
+      \]</div>
+      <p>These numbers fix concrete windows for haloscopes and distinguish D.R.E.A.M’s ladder from linear KK spectra.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Spacing behavior.</strong> For \(D_{\mathrm{eff}}>1\) the ratio \(m_{n+1}/m_n\) decreases with \(n\), producing a compressed ladder; for \(D_{\mathrm{eff}}<1\) it spreads faster than harmonic.</p>
+          <p><strong>Couplings.</strong> Mode‑dependent couplings can vary across the tower; forecasts should report exposure assumptions per mode rather than a single universal coupling.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Instrument mapping -->
+    <div class="card">
+      <h2>Instrument mapping</h2>
+      <ul>
+        <li><strong>Haloscopes:</strong> center searches around \(m_1\sim 65\,\mathrm{neV}\) (\(f_1\approx15.717\,\mathrm{MHz}\)); check ratios \(n^{1/D_{\mathrm{eff}}}\) for the next rungs.</li>
+        <li><strong>Interferometry/photonic platforms:</strong> use the retention cliff near \(\lambda_q\) to bracket \(D_{\mathrm{eff}}\) jointly with spectral fits.</li>
+        <li><strong>Space‑based interferometers:</strong> cross‑link torsion/extra‑polarization templates with the same exponent where relevant.</li>
+      </ul>
+      <p class="note">Report both base exposure (for the first rung) and per‑mode assumptions; D.R.E.A.M’s key discriminator is the <em>ratio law</em>, not just the base hit.</p>
+    </div>
+
+    <!-- Density of states & entropy -->
+    <div class="card">
+      <h2>Density of states &amp; entropy</h2>
+      <p>Asymptotically, the number of band‑limited degrees of freedom in a region of size \(R\) scales like</p>
+      <div class="math-block">\[
+        \mathcal{N}(R)\;\sim\;\big(\tfrac{R}{\lambda_q}\big)^{\!D_{\mathrm{eff}}},
+      \]</div>
+      <p>suggesting an effective entropy scaling at fixed bandwidth. This provides cosmological and structural cross‑checks against surveys and background spectra.</p>
+    </div>
+
+    <!-- Cosmology cross-checks -->
+    <div class="card">
+      <h2>Cosmology &amp; structure cross‑checks</h2>
+      <ul>
+        <li>Compare exponents inferred from large‑scale structure / background spectra to lab‑inferred \(D_{\mathrm{eff}}\).</li>
+        <li>Entropy and correlation‑length trends should be consistent with the \(\mathcal{N}(R)\) scaling.</li>
+        <li>Divergences between cosmology and lab fits provide leverage for falsification.</li>
+      </ul>
+    </div>
+
+    <!-- Worked capsule -->
+    <div class="card">
+      <h2>Worked capsule (didactic)</h2>
+      <p>Assume cumulative count \(N(\Omega)\propto \Omega^{\,D_{\mathrm{eff}}}\). If boundary conditions select discrete modes with monotone indices \(n\), then \(n\sim N(m_n)\Rightarrow m_n\propto n^{1/D_{\mathrm{eff}}}\), yielding the ladder law above.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Uncertainties.</strong> Real instruments see finite bandwidths, losses, and coupling form‑factors. Fit base and ratios jointly with nuisance parameters; the ratio‑law remains the sharp discriminator.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Falsification -->
+    <div class="card">
+      <h2>Falsification hooks</h2>
+      <ul>
+        <li>Exclude the base window \(m_1\approx 65\,\mathrm{neV}\) <em>and</em> the non‑harmonic ratios at forecast sensitivity → the ladder claim fails.</li>
+        <li>Instruments across platforms show no retention transition near the posited \(\lambda_q\) → the coherence law fails (and with it a key link to \(D_{\mathrm{eff}}\)).</li>
+        <li>Cosmological exponents remain stably inconsistent with lab‑inferred \(D_{\mathrm{eff}}\) after systematics → cross‑check fails.</li>
+      </ul>
+      <p class="note">These gates reference only invariants (\(\lambda_q, D_{\mathrm{eff}}\)), not a specific kernel formula.</p>
+    </div>
+
+    <!-- Speculative note (optional section; hidden by default in your site) -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>One may read \(D_{\mathrm{eff}}\) as the footprint of deeper organizational regularities on MM that survive projection. This is a lens, not a requirement for the lab forecasts.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

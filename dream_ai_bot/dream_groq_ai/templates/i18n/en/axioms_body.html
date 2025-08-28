@@ -1,0 +1,164 @@
+
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Core Axioms</h1>
+    <p class="kicker">Six assumptions define the posture; everything else is derived or tested at the level of <em>invariants</em>.</p>
+    <p class="note">This page states the axioms plainly, gives their operational meaning, and shows where the math enters. Math is hidden by default—use the “Math” toggle in the header.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Capsule list -->
+    <div class="card">
+      <h2>Capsule — the six axioms</h2>
+      <ol>
+        <li><strong>A1 — Existence (MM).</strong> A compact, orientable, smooth 10‑dimensional Meta‑Manifold with fields exists; it is atemporal in 4D terms.</li>
+        <li><strong>A2 — Projection (Kernel).</strong> A single, fixed, non‑invertible kernel realizes 10→4 projection at finite resolution.</li>
+        <li><strong>A3 — All‑to‑four.</strong> No global split \(U_4\times K_6\) is required; all 10 coordinates contribute to 4D observables.</li>
+        <li><strong>A4 — Constants are projection‑fixed.</strong> \(\{c,\,\hbar,\,G,\,\ldots\}\) are parameters of our slice of the kernel, not derived numbers.</li>
+        <li><strong>A5 — Topology ↔ classes.</strong> Stable MM topological data label particle/gauge classes that project to 4D content.</li>
+        <li><strong>A6 — Finite resolution ⇒ regimes.</strong> Below a critical scale \(\lambda_q\) “quantum‑grade” invariants retain; above it classical coarse‑grain dominates.</li>
+      </ol>
+      <p class="note">Axioms deliberately separate what is assumed (kernel parameters/invariants exist) from what is tested (relationships among invariants and forecasts).</p>
+    </div>
+
+    <!-- A1 -->
+    <div class="card">
+      <h2>A1 — Existence (MM)</h2>
+      <p class="core">There is a compact, orientable, smooth 10D manifold (MM) with fields. “Atemporal” means 4D time is not a fundamental MM coordinate; it appears only after projection.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Why compact &amp; smooth?</strong> Compactness ensures finite integrals; smoothness underwrites the differential operators used in push‑forwards and topological indices.</p>
+          <p><strong>Empirical footprint.</strong> A1 itself is not probed directly; it supplies the stage on which the other axioms make testable contact with data.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A2 -->
+    <div class="card">
+      <h2>A2 — Projection (Kernel)</h2>
+      <p class="core">A single, fixed, non‑invertible kernel \(K_{\lambda}\) maps MM fields to 4D observables at finite resolution \(\lambda\) (our slice takes \(\lambda=\lambda_q\)).</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).
+      \]</div>
+      <p>Science attaches to <em>invariants</em> of the kernel class (resolution \(\lambda_q\), locality radius, regularity/positivity, effective spectral exponent \(D_{\mathrm{eff}}\)).</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Guardrails.</strong> Normalization, locality in projection, and monotone fidelity ensure a well‑posed map \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</p>
+          <div class="math-block">\[\textbf{K1:}\ \int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)<\infty,\qquad
+          \textbf{K2:}\ K_{\lambda}(x;X)\text{ peaks for }X\approx\pi^{-1}(x),\qquad
+          \textbf{K3:}\ \partial_{\lambda}\alpha(\lambda)\le0.\]</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- A3 -->
+    <div class="card">
+      <h2>A3 — All‑to‑four</h2>
+      <p class="core">No required factorization \(U_4\times K_6\). All ten coordinates can affect 4D observables through the push‑forward; this avoids model‑dependent internal splits.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Operationally.</strong> Forecasts are phrased in terms of invariants only, so they remain agnostic to any particular internal factor choice.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A4 -->
+    <div class="card">
+      <h2>A4 — Constants are projection‑fixed</h2>
+      <p class="core">The constants \(\{c,\,\hbar,\,G,\,\ldots\}\) are parameters of our kernel slice. We <em>measure</em> them; we do not derive them inside D.R.E.A.M.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Implication.</strong> Varying‑constant scenarios would correspond to different projection conditions, not to dynamical evolution within a fixed kernel class.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A5 -->
+    <div class="card">
+      <h2>A5 — Topology ↔ classes</h2>
+      <p class="core">Stable MM topological data (homotopy/cohomology, characteristic classes) label particle/gauge <em>classes</em>. Individual 4D instances are projections of those classes.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Quantization.</strong> Integer‑valued integrals over cycles provide charge quantization that is robust to finite‑resolution averaging.</p>
+          <div class="math-block">\[Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint A\in\mathbb{Z},\qquad
+          k=\frac{1}{8\pi^2}\int\operatorname{tr}(F\wedge F)\in\mathbb{Z}.\]</div>
+          <p><strong>Selection rules.</strong> Class addition/subtraction constrains allowed processes; anomalies must cancel in the projected 4D content.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A6 -->
+    <div class="card">
+      <h2>A6 — Finite resolution ⇒ regimes</h2>
+      <p class="core">A fidelity law separates two regimes with a coherence “cliff” near \(\lambda\approx\lambda_q\):</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Below \(\lambda_q\) (“quantum‑grade”) fine structure retains; above it classical coarse‑grain dominates.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Experimental handle.</strong> Scan across \(\lambda_q\) in controlled platforms (interferometry, photonics, NV, etc.) and look for the step‑like change in coherence.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Assumed vs tested -->
+    <div class="card">
+      <h2>Assumed vs. tested</h2>
+      <div class="grid two">
+        <div>
+          <h3 class="kicker">Assumed</h3>
+          <ul>
+            <li>MM exists and is smooth &amp; compact (A1).</li>
+            <li>Single fixed kernel at finite resolution (A2).</li>
+            <li>All‑to‑four posture (A3).</li>
+            <li>Constants are kernel‑fixed (A4).</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="kicker">Tested (invariants)</h3>
+          <ul>
+            <li>Retention law near \(\lambda_q\) (A6): detect the transition.</li>
+            <li>Topological quantization/selection rules in 4D (A5).</li>
+            <li>Non‑harmonic ladder controlled by \(D_{\mathrm{eff}}\) (ALP base &amp; ratios).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Falsification -->
+    <div class="card">
+      <h2>Falsification hooks tied to axioms</h2>
+      <ul>
+        <li><strong>Against A6.</strong> No retention transition near the posited \(\lambda_q\) across platforms at forecasted sensitivity.</li>
+        <li><strong>Against A5.</strong> Violation of integer quantization or selection rules inconsistent with the class picture.</li>
+        <li><strong>Against the invariant posture.</strong> Exclusion of the ALP base window and non‑harmonic ratios \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) at forecasted sensitivity.</li>
+      </ul>
+      <p class="note">These are <em>clean</em> nulls: we do not rescue the framework by unconstrained kernel tweaks.</p>
+    </div>
+
+    <!-- Speculative -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>Constants feel “fundamental” only because they are kernel‑fixed parameters in our slice; alternative local projection conditions might shift some of them. This is interpretive and not required for empirical tests.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}
