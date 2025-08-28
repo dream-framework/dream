@@ -461,6 +461,50 @@
     .btn:hover{ background:#f3f4f6; }
     .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
     .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
+
+      /* ===== Center the tabs (desktop) ===== */
+  @media (min-width: 901px){
+    .site-header{
+      display: grid;
+      grid-template-columns: auto 1fr auto; /* brand | nav | controls */
+      align-items: center;
+      gap: 8px 12px;
+      position: relative;
+    }
+    .site-header .brand    { grid-column: 1; }
+    .site-header .nav      {
+      grid-column: 2;                 /* middle track */
+      justify-self: center;           /* center the whole nav block */
+      display: flex;
+      flex-wrap: wrap;                /* allow wrapping if needed */
+      gap: 8px;
+    }
+    .site-header .controls { grid-column: 3; }
+  }
+
+  /* ===== Mobile layout (keeps taps working) ===== */
+  @media (max-width: 900px){
+    .site-header{
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto;  /* put nav on its own row */
+      align-items: center;
+      gap: 8px 12px;
+      position: relative;
+      z-index: 5;
+    }
+    .site-header .brand    { grid-column: 1 / 2; grid-row: 1; }
+    .site-header .controls { grid-column: 3 / 4; grid-row: 1; }
+    .site-header .nav      {
+      grid-column: 1 / -1; grid-row: 2;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;        /* centered on mobile too */
+    }
+  }
+
+  /* Safety: ensure controls container doesn't swallow clicks */
+  .site-header .controls { pointer-events: none; }
+  .site-header .controls * { pointer-events: auto; }
   </style>
 
   <div id="adminLogin" class="admin-login-overlay" aria-hidden="true" role="dialog" aria-modal="true">
