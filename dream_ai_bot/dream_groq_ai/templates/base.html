@@ -67,75 +67,29 @@
       }
       .faq-body { display: flex; flex-direction: column; gap: 10px; padding: 12px; height: 100%; }
       .faq-search {
-        display: none; /* hidden in Groq chat mode */
+        display: flex; gap: 8px;
       }
-      #faqSearchInput { display: none; }
-
+      #faqSearchInput {
+        flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+      }
       .faq-main {
-        /* Replace the old two-pane with a single chat column */
-        display: flex; flex-direction: column; gap: 12px; min-height: 0; flex: 1;
-      }
-
-      /* Chat messages area (Groq) */
-      #llmMessages {
+        display: grid; grid-template-columns: 1fr 2fr; gap: 12px; min-height: 0; /* allow children to scroll */
         flex: 1;
-        border: 1px solid #eee; border-radius: 10px;
-        padding: 12px; overflow-y: auto; background: #fafafa;
-        display: flex; flex-direction: column; gap: 10px;
       }
-      .msg {
-        max-width: 85%;
-        padding: 10px 12px;
-        border-radius: 14px;
-        font-size: 14px;
-        white-space: pre-wrap;
-        line-height: 1.35;
-        animation: fadeIn .2s ease;
+      /* Left list */
+      #faqSearchResults {
+        border: 1px solid #eee; border-radius: 10px; overflow: auto; padding: 6px;
       }
-      .msg.user {
-        align-self: flex-end;
-        background: #4e54c8;
-        color: #fff;
-        border-bottom-right-radius: 6px;
+      .faq-item {
+        display: block; padding: 8px 10px; border-radius: 8px; text-decoration: none; cursor: pointer;
+        color: #2c2c2c;
       }
-      .msg.bot {
-        align-self: flex-start;
-        background: #ffffff;
-        color: #222;
-        border: 1px solid #eaeaea;
-        border-bottom-left-radius: 6px;
-      }
-      .typing {
-        display: inline-flex; gap: 4px; align-items: center;
-      }
-      .dot {
-        width: 6px; height: 6px; background: #bbb; border-radius: 50%;
-        animation: bounce 1.2s infinite ease-in-out;
-      }
-      .dot:nth-child(2) { animation-delay: .2s; }
-      .dot:nth-child(3) { animation-delay: .4s; }
-      @keyframes bounce {
-        0%, 80%, 100% { transform: translateY(0); opacity: .5; }
-        40% { transform: translateY(-5px); opacity: 1; }
-      }
+      .faq-item:hover { background: #f3f4ff; }
+      .faq-q { font-weight: 600; margin: 0 0 4px; font-size: 14px; }
+      .faq-prev { font-size: 12px; color: #666; margin: 0; }
 
-      .llm-input-row {
-        display: flex; gap: 8px; align-items: flex-end;
-      }
-      #llmInput {
-        flex: 1; min-height: 44px; max-height: 140px;
-        padding: 10px 12px; border: 1px solid #ddd; border-radius: 10px;
-        font-size: 14px; resize: vertical;
-      }
-      #llmSend {
-        background: #4e54c8; color: #fff; border: none; border-radius: 10px;
-        padding: 10px 14px; cursor: pointer; font-weight: 600;
-      }
-      #llmSend:hover { background: #3a3eb3; }
-
-      /* Right answer pane (legacy styles kept to preserve your overrides) */
+      /* Right answer pane */
       #faqAnswerPane {
-        display: none; /* not used in Groq chat mode */
         border: 1px solid #eee; border-radius: 10px; padding: 14px; overflow: auto; white-space: pre-wrap;
       }
       .faq-answer-title { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
@@ -146,231 +100,139 @@
       .muted { color: #888; }
 
       /* Force readable text in the answer pane (override any inherited opacity) */
-      #faqAnswerPane {
-        color: #222 !important;
-        opacity: 1 !important;
-        filter: none !important;
-        background: #fff;
-        white-space: pre-wrap;
-      }
-      #faqAnswerPane .muted { color: #666; }
-
-      /* Docked container (name kept) */
-      .faq-dock {
-        position: fixed;
-        right: 20px;
-        bottom: 88px;            /* sits above the bubble */
-        width: min(880px, calc(100vw - 40px));
-        height: min(560px, calc(100vh - 140px));
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0,0,0,.35);
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        z-index: 1100;
-        transform: translateY(16px);
-        opacity: 0;
-        transition: transform .18s ease, opacity .18s ease;
-      }
-      .faq-dock.show {
-        display: flex;
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .faq-footer small code {
-        background: #f3f4f6; padding: 2px 6px; border-radius: 6px;
-      }
-
-      .admin-btn{
-        margin-left:8px; width:36px; height:36px; background:transparent; border:none;
-        display:inline-flex; align-items:center; justify-content:center;
-        color:#fff; cursor:pointer; transition:transform .15s ease, opacity .15s ease;
-      }
-      .admin-btn .gear-emoji{
-        font-size:15px; line-height:1; display:inline-block;
-        font-family: "Segoe UI Symbol","Noto Sans Symbols 2","Apple Symbols",sans-serif;
-      }
-      .admin-btn:hover{ opacity:.85; transform:scale(1.05); }
-      .admin-btn:focus-visible{ outline:2px solid rgba(255,255,255,.85); outline-offset:2px; }
-
-      /* Works for both your old chat (#chat-window) and the Groq dock if you kept those IDs */
-      #chat-window { display:flex; flex-direction:column; }
-      #chat-messages { flex:1 1 auto; overflow-y:auto; min-height: 0; }
-
-      #chat-input-container {
-        position: sticky;  /* stays visible */
-        bottom: 0;
-        background: #fff;
-        border-top: 1px solid #eee;
-        z-index: 1;
-      }
-
-      /* If you’re using a docked panel for the Groq chat, mirror the same idea */
-      #llmDock, .faq-dock { display:flex; flex-direction:column; }
-      /* the messages pane is the ONLY scroller */
-      #llmMessages{
-        flex: 1 1 auto;
-        overflow-y: auto;
-        padding:12px;
-        background:#fafafa;
-        display:flex; flex-direction:column; gap:10px;
-        min-height:0;            /* critical */
-      }
-
-      /* FIX selector: was #llmInputRow (ID). It is a class. */
-      .llm-input-row{
-        position: sticky;        /* keeps input bar visible */
-        bottom: 0;
-        background:#fff;
-        border-top:1px solid #eee;
-        z-index:5;
-        display:flex; gap:8px; align-items:flex-end;
-      }
-
-            /* allow only the messages column to scroll and keep some space under it */
-      #llmMessages{
-        flex: 1 1 auto;
-        overflow-y: auto;
-        min-height: 0;
-        /* NEW: space for the sticky input bar so last line isn't hidden */
-        padding-bottom: 84px; /* will be corrected dynamically in JS below */
-      }
-
-      /* keep the input row fixed inside the dock (you already have this, just reiterating) */
-      .llm-input-row{
-        position: sticky;
-        bottom: 0;
-        background: #fff;
-        border-top: 1px solid #eee;
-        z-index: 5;
-      }
-
-      @media (max-width: 900px){
-        .faq-dock { width: calc(100vw - 40px); height: min(70vh, 560px); bottom: 80px; }
-      }
-
-      .footer-content { display: flex; align-items: center; }
-      .footer-content small { font-size: 0.9rem; }
-      .admin-btn { background: none; border: none; font-size: 0.85rem; cursor: pointer; filter: brightness(0.8) contrast(0.95) saturate(0.9); }
-
-      /* Make the chat container a vertical flex layout */
-      #chat-window,
-      #llmDock,
-      .faq-dock {                 /* if your Groq chat uses the same panel shell */
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-      }
-
-      /* The scrollable message area */
-      #chat-messages,
-      #llmMessages,
-      #faqAnswerPane {
-        flex: 1 1 auto;           /* fill remaining space */
-        min-height: 0;            /* critical for flex children to allow scrolling */
-        overflow-y: auto;
-        overscroll-behavior: contain;
-      }
-
-      /* Keep the input row always visible */
-      #chat-input-container,
-      #llmInputRow {
-        position: sticky;
-        bottom: 0;
-        background: #fff;
-        border-top: 1px solid #eee;
-        z-index: 5;               /* sit above content shadows */
-      }
-
-      /* Nice typing area behavior */
-      #llmInput, #chat-input {
-        max-height: 120px;        /* multiline but not infinite */
-        overflow-y: auto;
-      }
-
-/* leave the circle (launcher) blue; just a touch softer shadow */
-#chat-bubble{
-  box-shadow: 0 8px 22px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.18);
-}
-
-/* remove dark/grey borders from conversation bubbles */
-#llmMessages .msg.bot,
-#chat-messages .msg.bot{
-  border: none !important;
+#faqAnswerPane {
+  color: #222 !important;
+  opacity: 1 !important;
+  filter: none !important;
   background: #fff;
-  /* subtle elevation instead of borders */
-  box-shadow: 0 8px 20px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+  white-space: pre-wrap;
+}
+#faqAnswerPane .muted { color: #666; }
+
+/* Docked FAQ container (replaces full-screen overlay) */
+.faq-dock {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;            /* sits above the bubble */
+  width: min(880px, calc(100vw - 40px));
+  height: min(560px, calc(100vh - 140px));
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1100;
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.faq-dock.show {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
 }
 
-#llmMessages .msg.user,
-#chat-messages .msg.user{
-  border: none !important;
-  /* blue bubble already provides contrast; add a soft glow */
-  box-shadow: 0 8px 20px rgba(78,84,200,.25), 0 2px 6px rgba(78,84,200,.18);
+.faq-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; color: #fff;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+}
+.faq-title { margin: 0; font-size: 16px; font-weight: 700; }
+.faq-close { background: transparent; border: 0; color: #fff; font-size: 22px; cursor: pointer; }
+
+.faq-body { display: flex; flex-direction: column; gap: 10px; padding: 12px; height: 100%; }
+
+/* Search bar */
+.faq-search { display: flex; gap: 8px; }
+#faqSearchInput {
+  flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
 }
 
-/* slightly rounder corners for friendlier feel (optional) */
-#llmMessages .msg,
-#chat-messages .msg{
-  border-radius: 16px; /* was 14px */
+/* Two-pane layout */
+.faq-main {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 12px;
+  min-height: 0; flex: 1;
 }
+#faqSearchResults { border: 1px solid #eee; border-radius: 10px; overflow: auto; padding: 6px; }
+.faq-item {
+  display: block; padding: 8px 10px; border-radius: 8px; text-decoration: none; cursor: pointer;
+  color: #2c2c2c;
+}
+.faq-item:hover { background: #f3f4ff; }
+.faq-q    { font-weight: 600; margin: 0 0 4px; font-size: 14px; }
+.faq-prev { font-size: 12px; color: #666; margin: 0; }
 
-/* if any legacy rule is adding borders, neutralize it */
-#llmMessages .msg,
-#chat-messages .msg{
-  border-color: transparent !important;
+.faq-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border-top: 1px solid #eee; background: #fafafa; font-size: 12px; color: #666;
 }
+.muted { color: #888; }
 
-/* Replace the emoji with a flat white chat icon (no dark border) */
-#chat-bubble .chat-emoji{
-  width: 24px;
-  height: 24px;
-  display: block;
-  font-size: 0;        /* hide emoji glyph */
-  line-height: 0;
-  position: relative;
+.admin-btn{
+  margin-left:8px; width:36px; height:36px; background:transparent; border:none;
+  display:inline-flex; align-items:center; justify-content:center;
+  color:#fff; cursor:pointer; transition:transform .15s ease, opacity .15s ease;
 }
-#chat-bubble .chat-emoji::before{
-  content: "";
-  display: block;
-  width: 100%;
-  height: 120%;
-  transform: scaleY(1.2);   /* subtle vertical stretch */
-  background: #fff; /* icon color */
-  /* SVG mask = speech bubble with 3 dots, NO stroke */
-  --webkit-mask: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
-  <path d='M4 4h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'/>\
-  <circle cx='8' cy='10' r='1.5'/>\
-  <circle cx='12' cy='10' r="1.5"/>\
-  <circle cx='16' cy='10' r='1.5'/>\
-</svg>") no-repeat center / contain;
-          mask: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
-  <path d='M4 4h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'/>\
-  <circle cx='8' cy='10' r='1.5'/>\
-  <circle cx='12' cy='10' r='1.5'/>\
-  <circle cx='16' cy='10' r='1.5'/>\
-</svg>") no-repeat center / contain;
+.admin-btn .gear-emoji{
+  font-size:15px; line-height:1; display:inline-block;
+  /* ensure text-style glyph so color applies */
+  font-family: "Segoe UI Symbol","Noto Sans Symbols 2","Apple Symbols",sans-serif;
 }
-
-/* Softer shadow on the blue launcher (optional polish) */
-#chat-bubble{
-  box-shadow: 0 8px 22px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.18);
-}
+.admin-btn:hover{ opacity:.85; transform:scale(1.05); }
+.admin-btn:focus-visible{ outline:2px solid rgba(255,255,255,.85); outline-offset:2px; }
 
 @media (max-width: 900px){
-  .groq-dock{ width: calc(100vw - 40px); height: min(70vh, 560px); bottom: 80px; }
+  .faq-dock { width: calc(100vw - 40px); height: min(70vh, 560px); bottom: 80px; }
+  .faq-main { grid-template-columns: 1fr; }
 }
 
 
 
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
+.footer-content {
+  display: flex;
+  align-items: center;      /* vertical centering */
+
+}
+
+.footer-content small {
+  font-size: 0.9rem;
+}
+
+.admin-btn {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  filter: brightness(0.8) contrast(0.95) saturate(0.9);
+}
+
+/* ==== MOBILE NAV TAP FIX (added) ==== */
+.site-header{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;                 /* allow wrapping on narrow screens */
+}
+.site-header .brand{ flex:0 0 auto; }
+.site-header .nav{
+  position: relative;
+  z-index: 10;                     /* ensure nav sits above any spillover */
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.site-header .controls{
+  position: relative !important;   /* prevent absolute overlays from themes */
+  z-index: 1;
+  flex: 0 0 auto;
+}
+@media (min-width: 900px){
+  .site-header{ flex-wrap: nowrap; }
+}
     </style>
 
     <script>
@@ -381,94 +243,95 @@
       };
     </script>
     <script id="mathjax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-      {% include "_analytics.html" %}
-</head>
+  </head>
 
-  <!-- Admin login modal (unchanged) -->
-  <style>
-    .admin-login-overlay{
-      position: fixed; inset: 0; display:none; align-items:center; justify-content:center;
-      background: rgba(0,0,0,.45); z-index: 1500;
-    }
-    .admin-login-overlay.show{ display:flex; }
-    .admin-login-box{
-      width: min(360px, 92vw); background:#fff; border-radius:12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-      padding:16px 16px 12px;
-    }
-    .admin-login-box h3{ margin:0 0 8px; font-size:18px; font-weight:700; }
-    .admin-login-box p{ margin:0 0 12px; color:#555; font-size:14px; }
-    .admin-login-row{ display:flex; gap:8px; }
-    #adminTokenInput{
-      flex:1; border:1px solid #d1d5db; border-radius:8px; padding:10px 12px; font-size:14px;
-    }
-    .admin-login-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
-    .btn{ appearance:none; border:1px solid #d1d5db; background:#fff; color:#111827; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; }
-    .btn:hover{ background:#f3f4f6; }
-    .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
-    .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
-  </style>
+  <!-- Admin login modal -->
+<style>
+  .admin-login-overlay{
+    position: fixed; inset: 0; display:none; align-items:center; justify-content:center;
+    background: rgba(0,0,0,.45); z-index: 1500;
+  }
+  .admin-login-overlay.show{ display:flex; }
+  .admin-login-box{
+    width: min(360px, 92vw); background:#fff; border-radius:12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    padding:16px 16px 12px;
+  }
+  .admin-login-box h3{ margin:0 0 8px; font-size:18px; font-weight:700; }
+  .admin-login-box p{ margin:0 0 12px; color:#555; font-size:14px; }
+  .admin-login-row{ display:flex; gap:8px; }
+  #adminTokenInput{
+    flex:1; border:1px solid #d1d5db; border-radius:8px; padding:10px 12px; font-size:14px;
+  }
+  .admin-login-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
+  .btn{ appearance:none; border:1px solid #d1d5db; background:#fff; color:#111827; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; }
+  .btn:hover{ background:#f3f4f6; }
+  .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
+  .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
+</style>
 
-  <div id="adminLogin" class="admin-login-overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="admin-login-box">
-      <h3>Admin login</h3>
-      <p>Enter your admin token.</p>
-      <div class="admin-login-row">
-        <input id="adminTokenInput" type="password" placeholder="Admin token">
-        <button id="adminLoginGo" class="btn primary">Enter</button>
-      </div>
-      <div class="admin-login-actions">
-        <button id="adminLoginCancel" class="btn">Cancel</button>
-      </div>
+<div id="adminLogin" class="admin-login-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="admin-login-box">
+    <h3>Admin login</h3>
+    <p>Enter your admin token.</p>
+    <div class="admin-login-row">
+      <input id="adminTokenInput" type="password" placeholder="Admin token">
+      <button id="adminLoginGo" class="btn primary">Enter</button>
+    </div>
+    <div class="admin-login-actions">
+      <button id="adminLoginCancel" class="btn">Cancel</button>
     </div>
   </div>
+</div>
 
-  <script>
-  (function(){
-    const ADMIN_ROUTE = "/admin";  // your app.py exposes /admin
-    const btn = document.getElementById('adminBtn');
-    const overlay = document.getElementById('adminLogin');
-    const inp = document.getElementById('adminTokenInput');
-    const go = document.getElementById('adminLoginGo');
-    const cancel = document.getElementById('adminLoginCancel');
+<script>
+(function(){
+  const ADMIN_ROUTE = "/admin";  // your app.py exposes /admin
+  const btn = document.getElementById('adminBtn');
+  const overlay = document.getElementById('adminLogin');
+  const inp = document.getElementById('adminTokenInput');
+  const go = document.getElementById('adminLoginGo');
+  const cancel = document.getElementById('adminLoginCancel');
 
-    function openModal(){
-      overlay.classList.add('show');
-      overlay.setAttribute('aria-hidden','false');
-      setTimeout(()=>inp.focus(),0);
-    }
-    function closeModal(){
-      overlay.classList.remove('show');
-      overlay.setAttribute('aria-hidden','true');
-      inp.value = '';
-    }
+  function openModal(){
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+    setTimeout(()=>inp.focus(),0);
+  }
+  function closeModal(){
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden','true');
+    inp.value = '';
+  }
 
-    btn && btn.addEventListener('click', function(e){
-      e.preventDefault();
-      const tok = sessionStorage.getItem('ADMIN_TOKEN');
-      if (tok) {
-        window.location.href = `${ADMIN_ROUTE}?token=${encodeURIComponent(tok)}`;
-      } else {
-        openModal();
-      }
-    });
-
-    cancel && cancel.addEventListener('click', closeModal);
-
-    function submit(){
-      const tok = (inp.value || '').trim();
-      if (!tok) { inp.focus(); return; }
-      sessionStorage.setItem('ADMIN_TOKEN', tok);
+  // If token already in sessionStorage, go straight in
+  btn && btn.addEventListener('click', function(e){
+    e.preventDefault();
+    const tok = sessionStorage.getItem('ADMIN_TOKEN');
+    if (tok) {
+      // Pass token via query param for the initial HTML request so _check_admin() allows /admin
       window.location.href = `${ADMIN_ROUTE}?token=${encodeURIComponent(tok)}`;
+    } else {
+      openModal();
     }
-    go && go.addEventListener('click', submit);
-    inp && inp.addEventListener('keypress', e => { if (e.key === 'Enter') submit(); });
+  });
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
-    });
-  })();
-  </script>
+  cancel && cancel.addEventListener('click', closeModal);
+
+  function submit(){
+    const tok = (inp.value || '').trim();
+    if (!tok) { inp.focus(); return; }
+    sessionStorage.setItem('ADMIN_TOKEN', tok);
+    window.location.href = `${ADMIN_ROUTE}?token=${encodeURIComponent(tok)}`;
+  }
+  go && go.addEventListener('click', submit);
+  inp && inp.addEventListener('keypress', e => { if (e.key === 'Enter') submit(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
+  });
+})();
+</script>
 
   <body>
     <header class="site-header">
@@ -508,6 +371,8 @@
                  width="16" height="12" alt="United Kingdom" class="flag-icon">
           </a>
         </div>
+        
+
       </div>
     </header>
 
@@ -515,76 +380,72 @@
       {% block content %}{% endblock %}
     </main>
 
-    <footer class="site-footer">
-      <div class="footer-content">
-        <small>© 2024–2025 DREAM — {{ _('meta.footer') }}</small>
-        <button id="adminBtn" class="admin-btn" aria-label="Admin" title="Admin">
-          <span class="gear-emoji">⚙️</span>
-        </button>
-      </div>
-    </footer>
+<footer class="site-footer">
+  <div class="footer-content">
+    <small>© 2024–2025 DREAM — {{ _('meta.footer') }}</small>
+    <button id="adminBtn" class="admin-btn" aria-label="Admin" title="Admin">
+      <span class="gear-emoji">⚙️</span> <!-- U+2699 + FE0F -->
+    </button>
+  </div>
+</footer>
 
     <!-- Floating Chat Bubble -->
     <div id="chat-container">
-      <div id="chat-bubble" aria-label="Open Groq Chat" title="Open D.R.E.A.Mer the Bot">
+      <div id="chat-bubble" aria-label="Open FAQ Bot" title="Open FAQ Bot">
         <span class="chat-emoji">💬</span>
-        <span class="chat-tooltip">Ask D.R.E.A.M (Groq)</span>
+        <span class="chat-tooltip">Search FAQs</span>
       </div>
     </div>
 
-    <!-- Docked Groq Chat Panel (reusing .faq-dock shell) -->
-    <div id="faqDock" class="faq-dock" aria-hidden="true">
-      <div class="faq-header">
-        <h3 id="faqTitle" class="faq-title">D.R.E.A.M · Groq Chat</h3>
-        <button class="faq-close" id="faqCloseBtn" aria-label="Close">×</button>
+    <!-- FAQ Modal -->
+    <!-- FAQ Docked Panel -->
+  <div id="faqDock" class="faq-dock" aria-hidden="true">
+    <div class="faq-header">
+      <h3 id="faqTitle" class="faq-title">D.R.E.A.M FAQ Bot</h3>
+      <button class="faq-close" id="faqCloseBtn" aria-label="Close">×</button>
+    </div>
+
+    <div class="faq-body">
+      <div class="faq-search">
+        <input id="faqSearchInput" type="search"
+              placeholder="Type at least 3 characters to filter FAQ titles…"
+              autocomplete="off" />
       </div>
 
-      <div class="faq-body">
-        <div class="faq-main">
-          <div id="llmMessages" aria-live="polite">
-            <div class="msg bot">
-              Hello! Ask me about the DREAM framework or math in the PDF. I’ll cite pages and render formulas.
-            </div>
-          </div>
-
-          <div class="llm-input-row">
-            <textarea id="llmInput" placeholder="Type your question… (Shift+Enter = newline)"></textarea>
-            <button id="llmSend">Send</button>
-          </div>
+      <div class="faq-main">
+        <div id="faqSearchResults" aria-label="Search results">
+          <div class="muted" id="faqHint">Start typing to see matching titles…</div>
         </div>
-      </div>
 
-      <div class="faq-footer">
-        <small class="muted">Answers are grounded in your PDF. Endpoint: <code>/groq-chat</code></small>
-        <div></div>
+        <article id="faqAnswerPane" aria-live="polite">
+          <div class="muted">Select a title to view the full question and answer.</div>
+        </article>
       </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}?v=3"></script>
+    <div class="faq-footer">
+      <small id="faqCountHint"></small>
+      <div></div>
+    </div>
+</div>
 
 <script>
-
-
-// Align the *top* of target message to the *top* of the scroller
-function scrollToTop(targetEl) {
-  const m = document.getElementById('chat-messages') || document.getElementById('llmMessages');
-  if (!m || !targetEl) return;
-
-  // prevent scroll anchoring from fighting the jump
-  const prevAnchor = m.style.overflowAnchor;
-  m.style.overflowAnchor = 'none';
-
-  requestAnimationFrame(() => {
-    const mRect = m.getBoundingClientRect();
-    const tRect = targetEl.getBoundingClientRect();
-    const desiredTop = m.scrollTop + (tRect.top - mRect.top);
-    m.scrollTo({ top: desiredTop, behavior: 'auto' });
-    m.style.overflowAnchor = prevAnchor || '';
-  });
-}
+  window.FAQ_I18N = {
+    title: "{{ _('faqui.title') }}",
+    placeholder: "{{ _('faqui.placeholder') }}",
+    start_hint: "{{ _('faqui.start_hint') }}",
+    select_hint: "{{ _('faqui.select_hint') }}",
+    no_matches: "{{ _('faqui.no_matches') }}",
+    loading: "{{ _('faqui.loading') }}",
+    error: "{{ _('faqui.error') }}",
+    search_failed: "{{ _('faqui.search_failed') }}",
+    matches: "{{ _('faqui.matches') }}",
+    match: "{{ _('faqui.match') }}",
+    tooltip: "{{ _('faqui.tooltip') }}"
+  };
 </script>
 
-</script>
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=3"></script>
 
     <script>
       (function(){
@@ -602,210 +463,161 @@ function scrollToTop(targetEl) {
         mathCb && mathCb.addEventListener('change', e => { localStorage.setItem('showMath', e.target.checked ? '1':'0'); apply(); });
         specCb && specCb.addEventListener('change', e => { localStorage.setItem('showSpec', e.target.checked ? '1':'0'); apply(); });
       })();
+
     </script>
+    
+    <script> 
+    
 
-<script>
-(function(){
-  const bubble   = document.getElementById('chat-bubble');
-  const dock     = document.getElementById('faqDock');
-  const closeBtn = document.getElementById('faqCloseBtn');
-  const messages = document.getElementById('llmMessages');
-  const input    = document.getElementById('llmInput');
-  const sendBtn  = document.getElementById('llmSend');
-  const BUFFER_PX = 16;
+  /* === FAQ Dock Logic with i18n + live lang toggle === */
+  (function(){
+    const bubble   = document.getElementById('chat-bubble');
+    const dock     = document.getElementById('faqDock');
+    const closeBtn = document.getElementById('faqCloseBtn');
+    const input    = document.getElementById('faqSearchInput');
+    const list     = document.getElementById('faqSearchResults');
+    const pane     = document.getElementById('faqAnswerPane');
+    const countEl  = document.getElementById('faqCountHint');
+    const hintEl   = document.getElementById('faqHint');
 
-  // --- keep last line visible ---
-  function ensureBottomPadding(){
-    const bar = document.querySelector('.llm-input-row');
-    const h = (bar?.offsetHeight || 56);
-    messages.style.paddingBottom = (h + BUFFER_PX) + 'px';
-  }
-  function scrollBottom(){
-    messages.scrollTop = messages.scrollHeight;
-  }
+    const tooltipEl = document.querySelector('#chat-bubble .chat-tooltip');
+    if (tooltipEl && window.FAQ_I18N) tooltipEl.textContent = window.FAQ_I18N.tooltip;
 
-  // react to input bar size changes (textarea grows/shrinks)
-  const bar = document.querySelector('.llm-input-row');
-  if (window.ResizeObserver && bar){
-    const ro = new ResizeObserver(() => { ensureBottomPadding(); scrollBottom(); });
-    ro.observe(bar);
-  }
-  window.addEventListener('resize', () => { ensureBottomPadding(); });
+    let debounceTimer = null;
 
-  function openDock(){
-    dock.classList.add('show');
-    dock.setAttribute('aria-hidden','false');
-    // wait a tick so layout has correct heights
-    setTimeout(() => { ensureBottomPadding(); scrollToTop(); input.focus(); }, 0);
-  }
-  function closeDock(){
-    dock.classList.remove('show');
-    dock.setAttribute('aria-hidden','true');
-  }
+    function getCookie(name){
+      return document.cookie.split('; ').find(r => r.startsWith(name+'='))?.split('=')[1];
+    }
+    function setCookie(name, val){
+      document.cookie = `${name}=${val}; path=/; max-age=31536000`;
+    }
+    function currentLang(){
+      const lg = getCookie('lang') || 'en';
+      return (lg === 'ru') ? 'ru' : 'en';
+    }
 
-  bubble.addEventListener('click', openDock);
-  closeBtn.addEventListener('click', closeDock);
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && dock.classList.contains('show')) closeDock(); });
+    function applyI18N(){
+      if (!window.FAQ_I18N) return;
+      // These strings are already localized server-side via Jinja (_)
+      document.getElementById('faqTitle').textContent = window.FAQ_I18N.title;
+      input.placeholder = window.FAQ_I18N.placeholder;
+      if (hintEl) hintEl.textContent = window.FAQ_I18N.start_hint;
+      // If pane shows default hint, localize it
+      if (pane && pane.querySelector('.muted')) {
+        pane.innerHTML = `<div class="muted">${window.FAQ_I18N.select_hint}</div>`;
+      }
+      if (tooltipEl) tooltipEl.textContent = window.FAQ_I18N.tooltip;
+    }
+    applyI18N();
 
-  function appendMsg(text, who){
-  const el = document.createElement('div');
-  el.className = `msg ${who}`;
-  el.innerText = text;
-  messages.appendChild(el);
-  ensureBottomPadding();
-  return el; // <-- return it so callers can scroll to it
-}
+    function esc(s){ return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-  function typingOn(){
-    const t = document.createElement('div');
-    t.className = 'msg bot';
-    t.dataset.typing = '1';
-    t.innerHTML = `<span class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>`;
-    messages.appendChild(t);
-    ensureBottomPadding();
-    scrollBottom();
-  }
-  function typingOff(){
-    const t = messages.querySelector('.msg.bot[data-typing="1"]');
-    if (t) t.remove();
-    ensureBottomPadding();
-    scrollBottom();
-  }
+    function openDock(){
+      dock.classList.add('show');
+      dock.setAttribute('aria-hidden','false');
+      setTimeout(() => { input.focus(); input.select(); }, 0);
+    }
+    function closeDock(){
+      dock.classList.remove('show');
+      dock.setAttribute('aria-hidden','true');
+    }
 
-async function send(){
-  const q = (input.value || '').trim();
-  if (!q) { input.focus(); return; }
-  appendMsg(q, 'user');
-  input.value = '';
-  ensureBottomPadding();
-  typingOn();
+    bubble.addEventListener('click', openDock);
+    closeBtn.addEventListener('click', closeDock);
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && dock.classList.contains('show')) closeDock(); });
 
-  try{
-    const r = await fetch('/groq-chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: q })
+    function renderResults(items){
+      list.innerHTML = '';
+      if (!items.length){
+        list.innerHTML = `<div class="muted">${window.FAQ_I18N?.no_matches || 'No matches.'}</div>`;
+        countEl.textContent = '';
+        return;
+      }
+      items.forEach(it => {
+        const a = document.createElement('a');
+        a.className = 'faq-item';
+        a.href = '#';
+        a.dataset.id = it.id;
+        a.innerHTML = `<p class="faq-q">${esc(it.question)}</p>
+                       <p class="faq-prev">${esc(it.preview || '')}</p>`;
+        a.addEventListener('click', (ev) => { ev.preventDefault(); loadItem(a.dataset.id); });
+        list.appendChild(a);
+      });
+      const n = items.length;
+      countEl.textContent = `${n} ${n === 1 ? (window.FAQ_I18N?.match || 'match') : (window.FAQ_I18N?.matches || 'matches')}`;
+    }
+
+    function loadItem(id){
+      pane.style.opacity = '1';
+      pane.innerHTML = `<div class="muted">${window.FAQ_I18N?.loading || 'Loading…'}</div>`;
+      fetch(`/faq/item/${id}`)
+        .then(r => r.json())
+        .then(j => {
+          if (!j.ok){ pane.innerHTML = `<div class="muted">${window.FAQ_I18N?.error || 'Error loading answer.'}</div>`; return; }
+          const {question, answer} = j.item;
+          pane.innerHTML = `
+            <h4 class="faq-answer-title" style="color:#222;margin:0 0 8px;font-weight:700;">${esc(question)}</h4>
+            <div style="color:#222;">${esc(answer)}</div>
+          `;
+          if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([pane]);
+        })
+        .catch(() => pane.innerHTML = `<div class="muted">${window.FAQ_I18N?.error || 'Error loading answer.'}</div>`);
+    }
+
+    function search(q){
+      if ((q||'').trim().length < 3){
+        list.innerHTML = `<div class="muted">${window.FAQ_I18N?.start_hint || 'Type at least 3 characters to see matching titles…'}</div>`;
+        countEl.textContent = '';
+        pane.innerHTML = `<div class="muted">${window.FAQ_I18N?.select_hint || 'Select a title to view the full question and answer.'}</div>`;
+        return;
+      }
+      fetch(`/faq/search?q=${encodeURIComponent(q)}`)
+        .then(r => r.json())
+        .then(j => renderResults(j.results || []))
+        .catch(() => { list.innerHTML = `<div class="muted">${window.FAQ_I18N?.search_failed || 'Search failed.'}</div>`; });
+    }
+
+    input.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => search(input.value), 180);
     });
-    const j = await r.json();
-    typingOff();
 
-    if (j && j.reply){
-      // append the main bot answer and align its top to the viewport top
-      const botEl = appendMsg(j.reply, 'bot');
-      scrollToTop(botEl);                    // <-- key line
+    /* === Sync with header language toggles ===
+       If the dock is open, we switch cookie + bot UI immediately (no full reload).
+       Otherwise, let the normal /setlang/<lang> navigation reload the whole page (site + bot).
+    */
+    document.querySelectorAll('.lang a.lang-link').forEach(a => {
+      a.addEventListener('click', (e) => {
+        if (!dock.classList.contains('show')) return; // not open; let page reload
+        e.preventDefault();
+        const href = a.getAttribute('href') || '';
+        const lang = href.split('/').pop(); // '/setlang/ru' -> 'ru'
+        setCookie('lang', lang);
 
-      // if MathJax reflows, align again to the same element
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([botEl]).then(() => scrollToTop(botEl)).catch(() => scrollToTop(botEl));
-      }
+        // Update bot UI strings (already localized server-side for current page,
+        // but we can re-fetch strings on next render; for now, reuse current FAQ_I18N)
+        applyI18N();
 
-      // append sources *without changing the scroll anchor*
-      if (j.pages){
-        appendMsg(`Sources: ${j.pages}`, 'bot'); // no scroll here
-      }
-    } else {
-      const errEl = appendMsg('Sorry, I could not generate a reply.', 'bot');
-      scrollToTop(errEl);
-    }
-  } catch(e){
-    typingOff();
-    const netEl = appendMsg('Network error talking to /groq-chat.', 'bot');
-    scrollToTop(netEl);
-    console.error(e);
-  }
-}
-
-  sendBtn.addEventListener('click', send);
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      send();
-    }
-    // allow Shift+Enter to grow textarea; keep padding/scroll correct
-    setTimeout(() => { ensureBottomPadding(); scrollBottom(); }, 0);
-  });
-  input.addEventListener('input', () => { ensureBottomPadding(); });
-
-})();
-</script>
-
-
-<script>
-/* === Minimal bilingual strings for the bot UI === */
-window.BOT_I18N = {
-  en: {
-    title: "D.R.E.A.Mer the Bot",
-    tooltip: "Ask D.R.E.A.M",
-    placeholder: "Type your question… (Shift+Enter = newline)",
-    send: "Send"
-  },
-  ru: {
-    title: "D.R.E.A.M · ИИ Бот",
-    tooltip: "Спросить D.R.E.A.M",
-    placeholder: "Введите вопрос… (Shift+Enter = новая строка)",
-    send: "Отправить"
-  }
-};
-
-(function(){
-  const dock      = document.getElementById('faqDock');
-  const titleEl   = document.getElementById('faqTitle');
-  const tooltipEl = document.querySelector('#chat-bubble .chat-tooltip');
-  const input     = document.getElementById('llmInput');
-  const sendBtn   = document.getElementById('llmSend');
-
-  function getCookie(name){
-    return document.cookie.split('; ').find(r => r.startsWith(name+'='))?.split('=')[1];
-  }
-  function setCookie(name, val){
-    document.cookie = `${name}=${val}; path=/; max-age=31536000`;
-  }
-  function detectLangFromText(s){
-    return /[\u0400-\u04FF]/.test(s || "") ? "ru" : "en";
-  }
-  function switchBotLang(lang){
-    const pack = (window.BOT_I18N && window.BOT_I18N[lang]) || window.BOT_I18N.en;
-    if (titleEl)   titleEl.textContent = pack.title;
-    if (tooltipEl) tooltipEl.textContent = pack.tooltip;
-    if (input)     input.placeholder = pack.placeholder;
-    if (sendBtn)   sendBtn.textContent = pack.send;
-    setCookie('lang', lang);
-  }
-
-  // Initialize bot UI from cookie on open (or immediately if dock already open)
-  const initialLang = (getCookie('lang') === 'ru') ? 'ru' : 'en';
-  switchBotLang(initialLang);
-
-  // Hook into your existing send() by listening to the button & textarea:
-  // When the user is about to send, detect language and switch UI (and cookie).
-  function beforeSend(){
-    const q = (input?.value || "").trim();
-    if (!q) return;
-    const lg = detectLangFromText(q);
-    if (lg !== getCookie('lang')) switchBotLang(lg);
-  }
-
-  // If your code already has handlers, these listeners just run beforehand.
-  sendBtn?.addEventListener('mousedown', beforeSend);   // before click finishes
-  input?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) beforeSend();
-  });
-
-  // Also switch UI live while typing (nice touch, optional)
-  let langDebounce = 0;
-  input?.addEventListener('input', () => {
-    clearTimeout(langDebounce);
-    langDebounce = setTimeout(() => {
-      const lg = detectLangFromText(input.value);
-      if (lg !== getCookie('lang')) switchBotLang(lg);
-    }, 160);
-  });
-})();
+        // Re-run current search (if any) to pull RU/EN results from API
+        const q = input.value || '';
+        if (q.trim().length >= 3) {
+          search(q);
+        } else {
+          // Reset hints in the new language
+          list.innerHTML = `<div class="muted">${window.FAQ_I18N?.start_hint || ''}</div>`;
+          pane.innerHTML = `<div class="muted">${window.FAQ_I18N?.select_hint || ''}</div>`;
+          countEl.textContent = '';
+        }
+        // Optionally also refresh tooltip
+        if (tooltipEl && window.FAQ_I18N) tooltipEl.textContent = window.FAQ_I18N.tooltip;
+      });
+    });
+  })();
 </script>
 
     <script>
       (function(){
-        const ADMIN_URL = "/admin";
+        const ADMIN_URL = "/admin"; // change if your route is different
         const btn = document.getElementById('adminBtn');
         const overlay = document.getElementById('adminLogin');
         const inp = document.getElementById('adminTokenInput');
