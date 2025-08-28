@@ -1,4 +1,4 @@
-name: Visit Render App
+name: Visit Render AI App
 on:
  schedule:
    - cron: "*/5 * * * *"  # every 5 minutes
