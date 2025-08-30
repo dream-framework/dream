@@ -7,7 +7,7 @@
     <title>{{ title or _('meta.title') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-    <style>
+       <style>
       /* ===== Floating chat bubble ===== */
       #chat-container {
         position: fixed;
@@ -375,14 +375,12 @@
       }
       .site-header .brand{ flex: 0 0 auto; }
       .site-header .nav{
-        position: relative;
-        z-index: 10;                    /* keep links above neighbors */
-        flex: 1 1 auto;
-        min-width: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
+      flex: 0 0 auto;     /* stop stretching */
+      margin: 0 auto;     /* center the nav block in the header */
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
       .site-header .controls{
         position: relative !important;  /* prevent overlaying the nav */
         z-index: 1;
@@ -461,50 +459,6 @@
     .btn:hover{ background:#f3f4f6; }
     .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
     .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
-
-      /* ===== Center the tabs (desktop) ===== */
-  @media (min-width: 901px){
-    .site-header{
-      display: grid;
-      grid-template-columns: auto 1fr auto; /* brand | nav | controls */
-      align-items: center;
-      gap: 8px 12px;
-      position: relative;
-    }
-    .site-header .brand    { grid-column: 1; }
-    .site-header .nav      {
-      grid-column: 2;                 /* middle track */
-      justify-self: center;           /* center the whole nav block */
-      display: flex;
-      flex-wrap: wrap;                /* allow wrapping if needed */
-      gap: 8px;
-    }
-    .site-header .controls { grid-column: 3; }
-  }
-
-  /* ===== Mobile layout (keeps taps working) ===== */
-  @media (max-width: 900px){
-    .site-header{
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      grid-template-rows: auto auto;  /* put nav on its own row */
-      align-items: center;
-      gap: 8px 12px;
-      position: relative;
-      z-index: 5;
-    }
-    .site-header .brand    { grid-column: 1 / 2; grid-row: 1; }
-    .site-header .controls { grid-column: 3 / 4; grid-row: 1; }
-    .site-header .nav      {
-      grid-column: 1 / -1; grid-row: 2;
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: center;        /* centered on mobile too */
-    }
-  }
-
-  /* Safety: ensure controls container doesn't swallow clicks */
-  .site-header .controls { pointer-events: none; }
-  .site-header .controls * { pointer-events: auto; }
   </style>
 
   <div id="adminLogin" class="admin-login-overlay" aria-hidden="true" role="dialog" aria-modal="true">
@@ -640,9 +594,7 @@
       <div class="faq-body">
         <div class="faq-main">
           <div id="llmMessages" aria-live="polite">
-            <div class="msg bot">
-              Hello! Ask me about the DREAM framework or math in the PDF. I’ll cite pages and render formulas.
-            </div>
+             <div class="msg bot" data-i18n="botMsg"></div>
           </div>
 
           <div class="llm-input-row">
@@ -652,10 +604,13 @@
         </div>
       </div>
 
-      <div class="faq-footer">
-        <small class="muted">Answers are grounded in your PDF. Endpoint: <code>/groq-chat</code></small>
-        <div></div>
-      </div>
+    <div class="faq-footer">
+      <small class="muted noflash" data-i18n="footerNote">
+        Answers are grounded in the D.R.E.A.M theory.
+      </small>
+      <div></div>
+    </div>
+      
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}?v=3"></script>
@@ -829,74 +784,139 @@ async function send(){
 
 
 <script>
-/* === Minimal bilingual strings for the bot UI === */
-window.BOT_I18N = {
+"use strict";
+
+/* ===== Minimal bilingual strings for the bot UI ===== */
+window.BOT_I18N = window.BOT_I18N || {
   en: {
     title: "D.R.E.A.Mer the Bot",
     tooltip: "Ask D.R.E.A.M",
     placeholder: "Type your question… (Shift+Enter = newline)",
-    send: "Send"
+    send: "Send",
+    botMsg: "Hello! Ask me about the DREAM framework",
+    footerNote: "Answers are grounded in the D.R.E.A.M theory."
   },
   ru: {
     title: "D.R.E.A.M · ИИ Бот",
     tooltip: "Спросить D.R.E.A.M",
     placeholder: "Введите вопрос… (Shift+Enter = новая строка)",
-    send: "Отправить"
+    send: "Отправить",
+    botMsg: "Привет! Спроси меня о теории DREAM",
+    footerNote: "Ответы основаны на теории D.R.E.A.M."
   }
 };
 
-(function(){
-  const dock      = document.getElementById('faqDock');
-  const titleEl   = document.getElementById('faqTitle');
-  const tooltipEl = document.querySelector('#chat-bubble .chat-tooltip');
-  const input     = document.getElementById('llmInput');
-  const sendBtn   = document.getElementById('llmSend');
+(function () {
+  const titleEl   = document.getElementById("faqTitle");
+  const tooltipEl = document.querySelector("#chat-bubble .chat-tooltip");
+  const inputEl   = document.getElementById("llmInput");
+  const sendBtn   = document.getElementById("llmSend");
+  const botMsgEl  = document.querySelector(".msg.bot"); // optional
 
-  function getCookie(name){
-    return document.cookie.split('; ').find(r => r.startsWith(name+'='))?.split('=')[1];
+  // ---------- Cookies ----------
+  function getCookie(name) {
+    const m = document.cookie.match(new RegExp("(^|;)\\s*" + name + "=([^;]*)"));
+    return m ? decodeURIComponent(m[2]) : undefined;
   }
-  function setCookie(name, val){
-    document.cookie = `${name}=${val}; path=/; max-age=31536000`;
-  }
-  function detectLangFromText(s){
-    return /[\u0400-\u04FF]/.test(s || "") ? "ru" : "en";
-  }
-  function switchBotLang(lang){
-    const pack = (window.BOT_I18N && window.BOT_I18N[lang]) || window.BOT_I18N.en;
-    if (titleEl)   titleEl.textContent = pack.title;
-    if (tooltipEl) tooltipEl.textContent = pack.tooltip;
-    if (input)     input.placeholder = pack.placeholder;
-    if (sendBtn)   sendBtn.textContent = pack.send;
-    setCookie('lang', lang);
+  function setCookie(name, val) {
+    document.cookie = `${name}=${encodeURIComponent(val)}; path=/; max-age=31536000; samesite=lax`;
   }
 
-  // Initialize bot UI from cookie on open (or immediately if dock already open)
-  const initialLang = (getCookie('lang') === 'ru') ? 'ru' : 'en';
-  switchBotLang(initialLang);
+  // ---------- Language selection ----------
+  function pickInitialLang() {
+    const c = (getCookie("lang") || "").toLowerCase();
+    if (c === "ru" || c === "en") return c;
 
-  // Hook into your existing send() by listening to the button & textarea:
-  // When the user is about to send, detect language and switch UI (and cookie).
-  function beforeSend(){
-    const q = (input?.value || "").trim();
+    const app = (window.APP_LANG || "").toLowerCase();
+    if (app.startsWith("ru")) return "ru";
+    if (app.startsWith("en")) return "en";
+
+    const htmlLang = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+    if (htmlLang.startsWith("ru")) return "ru";
+    if (htmlLang.startsWith("en")) return "en";
+
+    const nav = (navigator.language || "").toLowerCase();
+    if (nav.startsWith("ru")) return "ru";
+    return "en";
+  }
+
+  function resolvePack(lang) {
+    return (window.BOT_I18N && window.BOT_I18N[lang]) || window.BOT_I18N.en;
+  }
+
+  // Update known elements + generic [data-i18n] hooks
+  function applyI18N(lang, persist = true) {
+    const t = resolvePack(lang);
+
+    // Set <html lang>
+    document.documentElement.setAttribute("lang", lang);
+
+    if (titleEl)   titleEl.textContent = t.title;
+    if (tooltipEl) tooltipEl.textContent = t.tooltip;
+    if (inputEl)   inputEl.placeholder = t.placeholder;
+    if (sendBtn)   sendBtn.textContent = t.send;
+    if (botMsgEl)  botMsgEl.textContent = t.botMsg;
+
+    // Generic: <anything data-i18n="title|tooltip|placeholder|send|botMsg|footerNote">
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (!key || !(key in t)) return;
+      if (key === "placeholder" && "placeholder" in el) el.placeholder = t.placeholder;
+      else el.textContent = t[key];
+    });
+
+    // Un-hide any SSR fallback elements
+    document.querySelectorAll(".noflash").forEach(el => el.classList.remove("noflash"));
+
+    if (persist) setCookie("lang", lang);
+  }
+
+  // ---------- Auto-detect while typing (robust) ----------
+  // Switch to RU only if there are >=3 Cyrillic chars and ratio >= 0.2
+  function detectLangFromText(s) {
+    if (!s) return getCookie("lang") || "en";
+    const cyr = (s.match(/[\u0400-\u04FF]/g) || []).length;
+    const len = s.length;
+    if (cyr >= 3 && cyr / Math.max(1, len) >= 0.2) return "ru";
+    return "en";
+  }
+
+  const initial = pickInitialLang();
+  applyI18N(initial, /*persist*/ false);
+
+  // Before send: switch based on current input contents
+  function beforeSend() {
+    const q = (inputEl && inputEl.value || "").trim();
     if (!q) return;
     const lg = detectLangFromText(q);
-    if (lg !== getCookie('lang')) switchBotLang(lg);
+    if (lg !== getCookie("lang")) applyI18N(lg, true);
   }
 
-  // If your code already has handlers, these listeners just run beforehand.
-  sendBtn?.addEventListener('mousedown', beforeSend);   // before click finishes
-  input?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) beforeSend();
+  sendBtn && sendBtn.addEventListener("mousedown", beforeSend);
+  inputEl && inputEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) beforeSend();
   });
 
-  // Also switch UI live while typing (nice touch, optional)
-  let langDebounce = 0;
-  input?.addEventListener('input', () => {
-    clearTimeout(langDebounce);
-    langDebounce = setTimeout(() => {
-      const lg = detectLangFromText(input.value);
-      if (lg !== getCookie('lang')) switchBotLang(lg);
+  // Live switch (debounced)
+  let tmr;
+  inputEl && inputEl.addEventListener("input", () => {
+    clearTimeout(tmr);
+    tmr = setTimeout(() => {
+      const lg = detectLangFromText(inputEl.value);
+      if (lg !== getCookie("lang")) applyI18N(lg, true);
     }, 160);
+  });
+
+  // Optional: client-side language toggles
+  // <a class="lang-link" data-lang="ru">RU</a> / data-lang="en"
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('.lang-link[data-lang]');
+    if (!a) return;
+    const lg = a.getAttribute('data-lang');
+    if (lg === "ru" || lg === "en") {
+      e.preventDefault();
+      applyI18N(lg, true);
+    }
   });
 })();
 </script>
