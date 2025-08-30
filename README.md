@@ -1,1 +1,1 @@
-# KB data branch
+# KB data branch (flattened to kb/)
