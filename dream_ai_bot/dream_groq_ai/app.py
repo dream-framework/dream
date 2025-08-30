@@ -468,7 +468,7 @@ def admin_page():
             reload_index(force=True)
     except Exception as _e:
         print("[kb] admin pull failed:", _e)
-    return render_template("admin.html", title="Admin · FAQs")
+    return render_template("admin.html", title="Admin FAQs")
 
 @app.get("/admin/api/faqs")
 def admin_list_faqs():
