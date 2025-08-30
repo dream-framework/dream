@@ -1,4 +1,4 @@
- # app.py — Render-ready: sync FAQs with GitHub kb-data + hot-reload Groq RAG
+# app.py — Render-ready: sync FAQs with GitHub kb-data + hot-reload Groq RAG
 import os, re, json, time, base64, urllib.request as _urlreq, urllib.error as _urlerr
 import threading, webbrowser
 from pathlib import Path
