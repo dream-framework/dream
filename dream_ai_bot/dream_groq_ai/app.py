@@ -251,6 +251,10 @@ def _kb_refresh_if_stale():
 
 @app.before_request
 def _before_request_hot_reload():
+    # Ensure boot happened (safe to call repeatedly)
+    if not _BOOT_DONE:
+        _boot_once()
+    # Then check for KB file changes on each request
     _kb_refresh_if_stale()
 
 # ====================================================================================
@@ -557,9 +561,7 @@ def _boot_once():
 # Trigger on module import (gunicorn) and again on first request (idempotent)
 _boot_once()
 
-@app.before_first_request
-def _boot_guard():
-    _boot_once()
+
 
 # For local dev convenience
 if __name__ == "__main__":
