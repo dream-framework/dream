@@ -32,6 +32,7 @@ from groq_bot import warm_index, groq_answer, reload_index
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
 app.config["GA_MEASUREMENT_ID"] = os.getenv("GA_MEASUREMENT_ID", "").strip()
+app.config["JSON_AS_ASCII"] = False  # ensure UTF-8 JSON responses
 
 @app.context_processor
 def _inject_ga():
@@ -69,7 +70,6 @@ def _gh_headers() -> Dict[str, str]:
     return h
 
 def _gh_headers_raw() -> Dict[str, str]:
-    # for blobs/raw fetch
     h = {"Accept": "application/vnd.github.raw", "User-Agent": "dream-app/1.0"}
     if GH_TOKEN:
         h["Authorization"] = f"token {GH_TOKEN}"
@@ -92,8 +92,8 @@ def _gh_get_file_bytes(path_in_repo: str) -> bytes:
     Return raw bytes for a file in repo/branch.
     Strategy:
       1) raw.githubusercontent.com
-      2) Contents API 'download_url' or inline base64 'content'
-      3) Git blob raw (by sha)
+      2) Contents API (inline base64 or download_url)
+      3) Git blob by sha
     """
     # 1) raw
     try:
@@ -103,21 +103,18 @@ def _gh_get_file_bytes(path_in_repo: str) -> bytes:
     except Exception:
         pass
 
-    # 2) contents API
+    # 2) contents
     try:
         req = _urlreq.Request(_gh_contents_url(path_in_repo, GH_BRANCH), headers=_gh_headers())
         with _urlreq.urlopen(req, timeout=25) as r:
             payload = json.loads(r.read().decode("utf-8", "ignore"))
         if isinstance(payload, dict):
-            # inline base64 content (small files)
             if payload.get("content"):
                 return base64.b64decode(payload["content"].encode("ascii"))
-            # download_url
             dl = payload.get("download_url")
             if dl:
                 with _urlreq.urlopen(_urlreq.Request(dl, headers=_gh_headers()), timeout=30) as rr:
                     return rr.read()
-            # 3) blob raw by sha
             sha = payload.get("sha")
             if sha:
                 req2 = _urlreq.Request(_gh_blob_url(sha), headers=_gh_headers_raw())
@@ -153,7 +150,7 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
     if sha:
         body["sha"] = sha
     put_url = _gh_contents_url(path_in_repo)
-    req = _urlreq.Request(put_url, data=json.dumps(body).encode("utf-8"),
+    req = _urlreq.Request(put_url, data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
                           method="PUT", headers=_gh_headers())
     try:
         with _urlreq.urlopen(req, timeout=25) as r:
@@ -165,25 +162,44 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
         return False
 
 # ---------------------------------------------------------------------
-# JSON normalize (robust) + GitHub load/save
+# JSON decode/normalize (robust) + GitHub load/save
 # ---------------------------------------------------------------------
-def _normalize_faq_json(raw_bytes: bytes) -> Dict[str, Any]:
-    # utf-8-sig removes BOM if present
-    txt = raw_bytes.decode("utf-8-sig", "strict")
-    obj: Any = json.loads(txt)
+_CTRL_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
 
-    # Find list of items
+def _decode_json_bytes(raw: bytes) -> Any:
+    # Try several encodings (RU files are sometimes saved oddly)
+    for enc in ("utf-8-sig", "utf-8", "utf-16", "utf-16-le", "utf-16-be", "cp1251", "latin-1"):
+        try:
+            txt = raw.decode(enc)  # first pass
+            # Remove stray control chars that break JSON
+            txt = _CTRL_RE.sub("", txt)
+            return json.loads(txt)
+        except Exception:
+            continue
+    # Last-ditch: treat as UTF-8 ignoring errors
+    try:
+        txt = raw.decode("utf-8", "ignore")
+        txt = _CTRL_RE.sub("", txt)
+        return json.loads(txt)
+    except Exception as e:
+        raise RuntimeError(f"Unable to decode JSON (encodings tried). Error: {e}")
+
+def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
+    # Find list of faqs
     if isinstance(obj, dict):
         faqs_src = obj.get("faqs")
         if not isinstance(faqs_src, list):
-            # try to locate a list of dicts under any key
-            faqs_src = None
-            for v in obj.values():
-                if isinstance(v, list) and (not v or all(isinstance(x, dict) for x in v)):
-                    faqs_src = v
+            # try common alternates
+            for key in ("items", "data", "list"):
+                if isinstance(obj.get(key), list):
+                    faqs_src = obj[key]
                     break
-            if faqs_src is None:
-                faqs_src = []
+            # or first list-of-dicts in values
+            if not isinstance(faqs_src, list):
+                for v in obj.values():
+                    if isinstance(v, list) and (not v or all(isinstance(x, dict) for x in v)):
+                        faqs_src = v
+                        break
         meta = dict(obj.get("metadata") or {})
     elif isinstance(obj, list):
         faqs_src, meta = obj, {}
@@ -191,44 +207,113 @@ def _normalize_faq_json(raw_bytes: bytes) -> Dict[str, Any]:
         faqs_src, meta = [], {}
 
     out: List[Dict[str, Any]] = []
-    for f in faqs_src:
+    for f in (faqs_src or []):
         if not isinstance(f, dict):
             continue
-        # number
+        # normalize fields
         try:
             n = int(f.get("number", 0))
         except Exception:
             n = 0
-        # prefer RU/EN fields gracefully
-        q = f.get("question") or f.get("title") or f.get("question_ru") or ""
-        a = f.get("answer")   or f.get("body")  or f.get("answer_ru")   or ""
+        q = f.get("question") or f.get("title") or f.get("question_ru") or f.get("question_en") or ""
+        a = f.get("answer")   or f.get("body")  or f.get("answer_ru")   or f.get("answer_en")   or ""
         out.append({"number": n, "question": q, "answer": a})
 
     out.sort(key=lambda x: x["number"])
-    meta["total_faqs"] = len(out)  # recompute, do not trust stale metadata
+    meta["total_faqs"] = len(out)  # recompute
     return {"metadata": meta, "faqs": out}
 
-def _lang_to_repo_path(lang: str) -> str:
-    return GH_JSON_RU if lang == "ru" else GH_JSON_EN
+def _lang_to_repo_path_candidates(lang: str) -> List[str]:
+    # Primary env-provided path first
+    primary = GH_JSON_RU if lang == "ru" else GH_JSON_EN
+    # Sensible alternates (GitHub-only; no local fallback)
+    if lang == "ru":
+        alts = [
+            primary,
+            "kb/ru/parsed_faqs_ru.json",
+            "ru/parsed_faqs_ru.json",
+            "parsed_faqs_ru.json",
+            "kb/parsed_faqs_ru.json",  # in case env was wrong
+        ]
+    else:
+        alts = [
+            primary,
+            "kb/en/parsed_faqs_en.json",
+            "en/parsed_faqs_en.json",
+            "parsed_faqs_en.json",
+            "kb/parsed_faqs_en.json",
+        ]
+    # Deduplicate while keeping order
+    seen, ordered = set(), []
+    for p in alts:
+        if p not in seen:
+            ordered.append(p); seen.add(p)
+    return ordered
+
+_GH_PATH_CACHE: Dict[str, str] = {}  # lang -> resolved path that worked
 
 def gh_load_lang_json(lang: str) -> Dict[str, Any]:
-    """ALWAYS read from GitHub; also updates local cache (best effort)."""
-    path = _lang_to_repo_path(lang)
-    raw = _gh_get_file_bytes(path)
-    data = _normalize_faq_json(raw)
+    """
+    ALWAYS read from GitHub; update local cache (best effort).
+    If a candidate path yields 0 FAQs but metadata claims >0, we try alternates.
+    If all attempts yield 0 but meta >0, raise to avoid silent '0 items'.
+    """
+    # Use cached working path first (if any)
+    cand_paths = [_GH_PATH_CACHE.get(lang)] if _GH_PATH_CACHE.get(lang) else []
+    cand_paths += [p for p in _lang_to_repo_path_candidates(lang) if p not in cand_paths]
+
+    last_err: Optional[str] = None
+    best_data: Optional[Dict[str, Any]] = None
+    best_path: Optional[str] = None
+
+    for path in cand_paths:
+        try:
+            raw = _gh_get_file_bytes(path)
+            obj = _decode_json_bytes(raw)
+            data = _normalize_faq_json_obj(obj)
+
+            faqs = data.get("faqs", [])
+            meta_total = int((data.get("metadata") or {}).get("total_faqs") or 0)
+            # If meta says there are FAQs but parse found 0, treat as mismatch (try next)
+            if len(faqs) == 0 and meta_total > 0:
+                last_err = f"Parsed 0 FAQs while metadata says {meta_total} at {path}"
+                continue
+
+            best_data, best_path = data, path
+            # Cache and stop on first *non-empty* success; otherwise keep looking to find a non-empty
+            if len(faqs) > 0:
+                break
+        except Exception as e:
+            last_err = f"{e}"
+            continue
+
+    if best_data is None:
+        raise RuntimeError(last_err or f"Unable to load {lang.upper()} FAQs from GitHub.")
+
+    # If we still ended with 0 items, surface as error (avoid silent 'No FAQs')
+    if len(best_data.get("faqs", [])) == 0:
+        raise RuntimeError(f"{lang.upper()} JSON parsed successfully but contains 0 FAQs (path: {best_path}).")
+
+    # Cache path that worked
+    if best_path:
+        _GH_PATH_CACHE[lang] = best_path
+
+    # Write local cache (for status page / debugging)
     try:
         os.makedirs(KB_DIR, exist_ok=True)
         cache_path = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
         with open(cache_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+            json.dump(best_data, f, ensure_ascii=False, indent=2)
     except Exception:
         pass
+
     app.logger.info("[kb] %s loaded %d FAQs from %s@%s",
-                    lang.upper(), len(data["faqs"]), GH_BRANCH, path)
-    return data
+                    lang.upper(), len(best_data["faqs"]), GH_BRANCH, best_path)
+    return best_data
 
 def gh_save_lang_json(lang: str, payload: Dict[str, Any], commit_msg: str) -> bool:
-    path = _lang_to_repo_path(lang)
+    # Save back to *the same* path that worked, or primary if none cached
+    path = _GH_PATH_CACHE.get(lang) or (GH_JSON_RU if lang == "ru" else GH_JSON_EN)
     raw = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
     ok = push_kb_to_github(path, raw, commit_msg)
     if ok:
@@ -390,7 +475,7 @@ def chat():
         return jsonify({"reply": f"Error while processing your request: {str(e)}"})
 
 # ---------------------------------------------------------------------
-# Status (counts read from GitHub directly)
+# Status (reads from GitHub directly and reports counts)
 # ---------------------------------------------------------------------
 @app.get("/api/rag-status")
 def rag_status():
@@ -408,6 +493,7 @@ def rag_status():
         "json_ru_repo": GH_JSON_RU,
         "branch": GH_BRANCH,
         "repo": f"{GH_OWNER}/{GH_REPO}",
+        "resolved_paths": dict(_GH_PATH_CACHE),
     })
 
 # ---------------------------------------------------------------------
@@ -443,6 +529,9 @@ def faq_list():
     try:
         data = gh_load_lang_json(lang)
         faqs = data.get("faqs", [])
+        if not faqs:
+            # if we reached here, it means GitHub said 0 items after all attempts — return 500-like JSON
+            return jsonify({"ok": False, "items": [], "error": f"No FAQs for {lang.upper()} on GitHub."})
         items = [{"number": int(f.get("number") or 0),
                   "question": f.get("question", ""),
                   "answer": f.get("answer", "")} for f in faqs]
@@ -535,11 +624,13 @@ def _pull_and_cache_from_github() -> bool:
     changed = False
     try:
         os.makedirs(KB_DIR, exist_ok=True)
-        for remote, local in [(GH_JSON_EN, LOCAL_JSON_EN), (GH_JSON_RU, LOCAL_JSON_RU)]:
+        for lang, remote in (("en", _GH_PATH_CACHE.get("en") or GH_JSON_EN),
+                             ("ru", _GH_PATH_CACHE.get("ru") or GH_JSON_RU)):
             try:
                 blob = _gh_get_file_bytes(remote)
             except Exception:
                 continue
+            local = LOCAL_JSON_EN if lang == "en" else LOCAL_JSON_RU
             old = open(local, "rb").read() if os.path.exists(local) else None
             if old != blob:
                 with open(local, "wb") as f:
@@ -584,7 +675,7 @@ def _boot_once():
         # Start poller
         start_kb_poll(interval_sec=60)
         _BOOT_DONE = True
-        app.logger.info("[boot] Ready (GitHub-first FAQs).")
+        app.logger.info("[boot] Ready (GitHub-first FAQs with robust RU loader).")
 
 # Trigger on import and again on first request (idempotent)
 _boot_once()
