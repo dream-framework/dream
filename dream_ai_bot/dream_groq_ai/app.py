@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-  
+
 
 import os
 import re
@@ -584,7 +585,7 @@ def groq_ask():
     return jsonify({"ok": True, "answer": ans})
 
 # ---------------------------------------------------------------------
-# /faq API — hits GitHub (with cache fallback via gh_load_lang_json)
+# /faq API Â— hits GitHub (with cache fallback via gh_load_lang_json)
 # ---------------------------------------------------------------------
 @app.get("/faq/list")
 def faq_list():
@@ -594,7 +595,7 @@ def faq_list():
         data = gh_load_lang_json(lang)
         faqs = data.get("faqs", [])
         if not faqs:
-            # if we reached here, it means GitHub said 0 items after all attempts — return 500-like JSON
+            # if we reached here, it means GitHub said 0 items after all attempts Â— return 500-like JSON
             return jsonify({"ok": False, "items": [], "error": f"No FAQs for {lang.upper()} on GitHub."})
         items = [{"number": int(f.get("number") or 0),
                   "question": f.get("question", ""),
