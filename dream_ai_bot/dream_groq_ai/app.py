@@ -246,38 +246,7 @@ def _dir_of(p: str) -> str:
 if not GH_JSON_RU or GH_JSON_RU.strip() in {"parsed_faqs_ru.json", "ru/parsed_faqs_ru.json"}:
     GH_JSON_RU = f"{_dir_of(GH_JSON_EN) or 'kb'}/parsed_faqs_ru.json"
 
-def _lang_to_repo_path_candidates(lang: str) -> List[str]:
-    """
-    Primary env-provided path first; sensible alternates next.
-    Intentionally avoid repo-root 'parsed_faqs_ru.json' to prevent drift.
-    """
-    en_dir = _dir_of(GH_JSON_EN) or "kb"
-    ru_dir = _dir_of(GH_JSON_RU) or en_dir
 
-    if lang == "ru":
-        alts = [
-            GH_JSON_RU,
-            f"{ru_dir}/parsed_faqs_ru.json",
-            f"{en_dir}/parsed_faqs_ru.json",
-            "kb/parsed_faqs_ru.json",
-            "kb/ru/parsed_faqs_ru.json",
-            "ru/parsed_faqs_ru.json",
-        ]
-    else:
-        alts = [
-            GH_JSON_EN,
-            f"{en_dir}/parsed_faqs_en.json",
-            "kb/parsed_faqs_en.json",
-            "kb/en/parsed_faqs_en.json",
-            "en/parsed_faqs_en.json",
-        ]
-
-    # Deduplicate while keeping order
-    seen, ordered = set(), []
-    for p in alts:
-        if p and p not in seen:
-            ordered.append(p); seen.add(p)
-    return ordered
 
 _GH_PATH_CACHE: Dict[str, str] = {}  # lang -> resolved path that worked
 # Seed cache so we don't start at repo root by accident
@@ -303,11 +272,10 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     attempts: List[str] = []
 
     # Use cached working path first (if any), then canonical candidates
-    cand_paths = []
+
     cached = _GH_PATH_CACHE.get(lang)
-    if cached:
-        cand_paths.append(cached)
-    cand_paths += [p for p in _lang_to_repo_path_candidates(lang) if p not in cand_paths]
+    
+    cand_paths = cached
 
     last_err: Optional[str] = None
     best_data: Optional[Dict[str, Any]] = None
