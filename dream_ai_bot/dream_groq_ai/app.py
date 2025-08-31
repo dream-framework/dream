@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import os
 import re
 import json
@@ -11,7 +10,7 @@ import webbrowser
 import urllib.request as _urlreq
 import urllib.error as _urlerr
 from pathlib import Path
-from typing import Optional, Tuple, Any, Dict, List
+from typing import Optional, Any, Dict, List
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_cors import CORS
@@ -63,6 +62,14 @@ GH_JSON_EN = os.getenv("GH_JSON_EN","kb/parsed_faqs_en.json")
 GH_JSON_RU = os.getenv("GH_JSON_RU","kb/parsed_faqs_ru.json")
 GH_TOKEN   = os.getenv("GH_TOKEN",  "")  # fine-grained PAT (contents: read+write)
 
+# Conservative timeouts + overall budget so requests never hang long enough to 502
+GITHUB_TIMEOUT_RAW   = int(os.getenv("GITHUB_TIMEOUT_RAW", "6"))   # per raw/download hop
+GITHUB_TIMEOUT_API   = int(os.getenv("GITHUB_TIMEOUT_API", "6"))   # per API hop
+GITHUB_TOTAL_BUDGET  = int(os.getenv("GITHUB_TOTAL_BUDGET", "12")) # overall per fetch
+
+def _time_left(deadline: float) -> float:
+    return max(0.5, deadline - time.monotonic())
+
 def _gh_headers() -> Dict[str, str]:
     h = {"Accept": "application/vnd.github+json", "User-Agent": "dream-app/1.0"}
     if GH_TOKEN:
@@ -87,38 +94,48 @@ def _gh_blob_url(sha: str) -> str:
 def _raw_github_url(path_in_repo: str) -> str:
     return f"https://raw.githubusercontent.com/{GH_OWNER}/{GH_REPO}/{GH_BRANCH}/{path_in_repo}"
 
-def _gh_get_file_bytes(path_in_repo: str) -> bytes:
+def _gh_get_file_bytes(path_in_repo: str, deadline: Optional[float] = None) -> bytes:
     """
     Return raw bytes for a file in repo/branch.
-    Strategy:
+    Fast-fail strategy with per-hop timeouts and an overall budget:
       1) raw.githubusercontent.com
       2) Contents API (inline base64 or download_url)
       3) Git blob by sha
+    Only treat 404 as path-tryable; other network errors don't cascade forever.
     """
+    if deadline is None:
+        deadline = time.monotonic() + GITHUB_TOTAL_BUDGET
+
     # 1) raw
     try:
         req = _urlreq.Request(_raw_github_url(path_in_repo), headers=_gh_headers())
-        with _urlreq.urlopen(req, timeout=30) as r:
+        with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as r:
             return r.read()
+    except _urlerr.HTTPError as e:
+        # non-404: proceed to contents quickly but don't burn time
+        if e.code != 404:
+            pass
     except Exception:
         pass
 
     # 2) contents
     try:
         req = _urlreq.Request(_gh_contents_url(path_in_repo, GH_BRANCH), headers=_gh_headers())
-        with _urlreq.urlopen(req, timeout=25) as r:
+        with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as r:
             payload = json.loads(r.read().decode("utf-8", "ignore"))
         if isinstance(payload, dict):
             if payload.get("content"):
                 return base64.b64decode(payload["content"].encode("ascii"))
             dl = payload.get("download_url")
             if dl:
-                with _urlreq.urlopen(_urlreq.Request(dl, headers=_gh_headers()), timeout=30) as rr:
+                with _urlreq.urlopen(_urlreq.Request(dl, headers=_gh_headers()),
+                                     timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as rr:
                     return rr.read()
             sha = payload.get("sha")
             if sha:
+                # 3) blob
                 req2 = _urlreq.Request(_gh_blob_url(sha), headers=_gh_headers_raw())
-                with _urlreq.urlopen(req2, timeout=30) as rr:
+                with _urlreq.urlopen(req2, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as rr:
                     return rr.read()
     except _urlerr.HTTPError as e:
         if e.code != 404:
@@ -126,7 +143,7 @@ def _gh_get_file_bytes(path_in_repo: str) -> bytes:
     except Exception as e:
         app.logger.warning("GitHub contents error (%s): %s", path_in_repo, e)
 
-    raise RuntimeError(f"Cannot fetch '{path_in_repo}' from GitHub (branch={GH_BRANCH})")
+    raise RuntimeError(f"Cannot fetch '{path_in_repo}' from GitHub (branch={GH_BRANCH}) within time budget")
 
 def _gh_current_sha(path_in_repo: str) -> Optional[str]:
     try:
@@ -177,12 +194,9 @@ def _decode_json_bytes(raw: bytes) -> Any:
         except Exception:
             continue
     # Last-ditch: treat as UTF-8 ignoring errors
-    try:
-        txt = raw.decode("utf-8", "ignore")
-        txt = _CTRL_RE.sub("", txt)
-        return json.loads(txt)
-    except Exception as e:
-        raise RuntimeError(f"Unable to decode JSON (encodings tried). Error: {e}")
+    txt = raw.decode("utf-8", "ignore")
+    txt = _CTRL_RE.sub("", txt)
+    return json.loads(txt)
 
 def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
     # Find list of faqs
@@ -223,52 +237,88 @@ def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
     meta["total_faqs"] = len(out)  # recompute
     return {"metadata": meta, "faqs": out}
 
+def _dir_of(p: str) -> str:
+    parts = (p or "").split("/")
+    return "/".join(parts[:-1]) if len(parts) > 1 else ""
+
+# If RU path is generic, coerce it to live next to EN
+if not GH_JSON_RU or GH_JSON_RU.strip() in {"parsed_faqs_ru.json", "ru/parsed_faqs_ru.json"}:
+    GH_JSON_RU = f"{_dir_of(GH_JSON_EN) or 'kb'}/parsed_faqs_ru.json"
+
 def _lang_to_repo_path_candidates(lang: str) -> List[str]:
-    # Primary env-provided path first
-    primary = GH_JSON_RU if lang == "ru" else GH_JSON_EN
-    # Sensible alternates (GitHub-only; no local fallback)
+    """
+    Primary env-provided path first; sensible alternates next.
+    Intentionally avoid repo-root 'parsed_faqs_ru.json' to prevent drift.
+    """
+    en_dir = _dir_of(GH_JSON_EN) or "kb"
+    ru_dir = _dir_of(GH_JSON_RU) or en_dir
+
     if lang == "ru":
         alts = [
-            primary,
+            GH_JSON_RU,
+            f"{ru_dir}/parsed_faqs_ru.json",
+            f"{en_dir}/parsed_faqs_ru.json",
+            "kb/parsed_faqs_ru.json",
             "kb/ru/parsed_faqs_ru.json",
             "ru/parsed_faqs_ru.json",
-            "parsed_faqs_ru.json",
-            "kb/parsed_faqs_ru.json",  # in case env was wrong
         ]
     else:
         alts = [
-            primary,
+            GH_JSON_EN,
+            f"{en_dir}/parsed_faqs_en.json",
+            "kb/parsed_faqs_en.json",
             "kb/en/parsed_faqs_en.json",
             "en/parsed_faqs_en.json",
-            "parsed_faqs_en.json",
-            "kb/parsed_faqs_en.json",
         ]
+
     # Deduplicate while keeping order
     seen, ordered = set(), []
     for p in alts:
-        if p not in seen:
+        if p and p not in seen:
             ordered.append(p); seen.add(p)
     return ordered
 
 _GH_PATH_CACHE: Dict[str, str] = {}  # lang -> resolved path that worked
+# Seed cache so we don't start at repo root by accident
+_GH_PATH_CACHE.setdefault("en", GH_JSON_EN)
+_GH_PATH_CACHE.setdefault("ru", GH_JSON_RU)
+
+def _read_local_cache(lang: str) -> Optional[Dict[str, Any]]:
+    try:
+        p = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return None
 
 def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     """
-    ALWAYS read from GitHub; update local cache (best effort).
-    If a candidate path yields 0 FAQs but metadata claims >0, we try alternates.
-    If all attempts yield 0 but meta >0, raise to avoid silent '0 items'.
+    Read from GitHub with a strict time budget; fall back to local cache if GitHub is slow/unavailable.
+    If a candidate path yields 0 FAQs while metadata claims >0, try alternates; don't silently return 0.
+    Evict a cached bad path immediately to avoid pinning to a wrong location.
     """
-    # Use cached working path first (if any)
-    cand_paths = [_GH_PATH_CACHE.get(lang)] if _GH_PATH_CACHE.get(lang) else []
+    attempts: List[str] = []
+
+    # Use cached working path first (if any), then canonical candidates
+    cand_paths = []
+    cached = _GH_PATH_CACHE.get(lang)
+    if cached:
+        cand_paths.append(cached)
     cand_paths += [p for p in _lang_to_repo_path_candidates(lang) if p not in cand_paths]
 
     last_err: Optional[str] = None
     best_data: Optional[Dict[str, Any]] = None
     best_path: Optional[str] = None
+    deadline = time.monotonic() + GITHUB_TOTAL_BUDGET
 
     for path in cand_paths:
+        if not path:
+            continue
+        attempts.append(path)
         try:
-            raw = _gh_get_file_bytes(path)
+            raw = _gh_get_file_bytes(path, deadline=deadline)
             obj = _decode_json_bytes(raw)
             data = _normalize_faq_json_obj(obj)
 
@@ -277,21 +327,35 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             # If meta says there are FAQs but parse found 0, treat as mismatch (try next)
             if len(faqs) == 0 and meta_total > 0:
                 last_err = f"Parsed 0 FAQs while metadata says {meta_total} at {path}"
+                if path == cached:
+                    _GH_PATH_CACHE.pop(lang, None)  # evict bad cached path
                 continue
 
             best_data, best_path = data, path
-            # Cache and stop on first *non-empty* success; otherwise keep looking to find a non-empty
-            if len(faqs) > 0:
-                break
+            break
         except Exception as e:
             last_err = f"{e}"
+            if path == cached:
+                _GH_PATH_CACHE.pop(lang, None)      # evict failing cached path
+            if _time_left(deadline) <= 0.6:
+                break
             continue
 
     if best_data is None:
+        # Serve local cache if possible (avoids 502s and keeps UI responsive)
+        cached_local = _read_local_cache(lang)
+        if cached_local and cached_local.get("faqs"):
+            app.logger.warning("[kb] %s serving local cache; GH attempts=%s; last_err=%s",
+                               lang.upper(), attempts, last_err)
+            return cached_local
+        app.logger.error("[kb] %s GH failed. attempts=%s last_err=%s", lang.upper(), attempts, last_err)
         raise RuntimeError(last_err or f"Unable to load {lang.upper()} FAQs from GitHub.")
 
-    # If we still ended with 0 items, surface as error (avoid silent 'No FAQs')
     if len(best_data.get("faqs", [])) == 0:
+        cached_local = _read_local_cache(lang)
+        if cached_local and cached_local.get("faqs"):
+            app.logger.warning("[kb] %s GitHub JSON contained 0 FAQs; serving cached copy.", lang.upper())
+            return cached_local
         raise RuntimeError(f"{lang.upper()} JSON parsed successfully but contains 0 FAQs (path: {best_path}).")
 
     # Cache path that worked
@@ -520,7 +584,7 @@ def groq_ask():
     return jsonify({"ok": True, "answer": ans})
 
 # ---------------------------------------------------------------------
-# /faq API — ALWAYS hits GitHub as the source of truth
+# /faq API — hits GitHub (with cache fallback via gh_load_lang_json)
 # ---------------------------------------------------------------------
 @app.get("/faq/list")
 def faq_list():
@@ -615,6 +679,25 @@ def faq_delete(number):
         return jsonify({"ok": True, "deleted": number})
     except Exception as e:
         return jsonify({"ok": False, "error": f"GH delete failed: {str(e)}"})
+
+# ---------------------------------------------------------------------
+# Debug helpers (optional but handy)
+# ---------------------------------------------------------------------
+@app.get("/api/debug/gh-ru-path")
+def dbg_ru_path():
+    return jsonify({
+        "GH_JSON_EN": GH_JSON_EN,
+        "GH_JSON_RU": GH_JSON_RU,
+        "cached_en": _GH_PATH_CACHE.get("en"),
+        "cached_ru": _GH_PATH_CACHE.get("ru"),
+        "branch": GH_BRANCH,
+        "repo": f"{GH_OWNER}/{GH_REPO}",
+    })
+
+@app.post("/api/debug/gh-evict-ru")
+def dbg_evict_ru():
+    _GH_PATH_CACHE.pop("ru", None)
+    return jsonify({"ok": True, "message": "evicted ru path cache"})
 
 # ---------------------------------------------------------------------
 # Background poller: keep a local cache fresh for status/RAG (optional)
