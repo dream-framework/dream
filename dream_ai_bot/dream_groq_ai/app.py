@@ -52,12 +52,12 @@ def _mtime(p: str) -> float:
 # ---------------------------------------------------------------------
 # GitHub kb-data integration (source of truth)
 # ---------------------------------------------------------------------
-GH_OWNER   = os.getenv("GH_OWNER",  "dream-framework")
-GH_REPO    = os.getenv("GH_REPO",   "dream")
-GH_BRANCH  = os.getenv("GH_BRANCH", "kb-data")
-GH_JSON_EN = os.getenv("GH_JSON_EN","kb/parsed_faqs_en.json")
-GH_JSON_RU = os.getenv("GH_JSON_RU","kb/parsed_faqs_ru.json")
-GH_TOKEN   = os.getenv("GH_TOKEN",  "")  # fine-grained PAT (contents: read+write)
+GH_OWNER   = (os.getenv("GH_OWNER",  "dream-framework") or "").strip()
+GH_REPO    = (os.getenv("GH_REPO",   "dream") or "").strip()
+GH_BRANCH  = (os.getenv("GH_BRANCH", "kb-data") or "").strip()
+GH_JSON_EN = (os.getenv("GH_JSON_EN","kb/parsed_faqs_en.json") or "").strip()
+GH_JSON_RU = (os.getenv("GH_JSON_RU","kb/parsed_faqs_ru.json") or "").strip()
+GH_TOKEN   = (os.getenv("GH_TOKEN",  "") or "").strip()  # fine-grained PAT (contents: read+write)
 
 # Conservative timeouts + overall budget so requests never hang long enough to 502
 GITHUB_TIMEOUT_RAW   = int(os.getenv("GITHUB_TIMEOUT_RAW", "6"))   # per raw/download hop
@@ -178,6 +178,7 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
 # ---------------------------------------------------------------------
 # JSON decode/normalize (robust) + GitHub load/save
 # ---------------------------------------------------------------------
+# Use a raw string so \x.. escapes are parsed by the regex engine, not Python's string literal parser.
 _CTRL_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
 
 def _decode_json_bytes(raw: bytes) -> Any:
@@ -237,7 +238,7 @@ def _dir_of(p: str) -> str:
 if not GH_JSON_RU or GH_JSON_RU.strip() in {"parsed_faqs_ru.json", "ru/parsed_faqs_ru.json"}:
     GH_JSON_RU = f"{_dir_of(GH_JSON_EN) or 'kb'}/parsed_faqs_ru.json"
 
-# Use lists for cached paths (was a bug: previously a string was iterated)
+# Use lists for cached paths so we never iterate a single character (fixes the 'r' path symptom).
 _GH_PATH_CACHE: Dict[str, List[str]] = {}
 _GH_PATH_CACHE.setdefault("en", [GH_JSON_EN])
 _GH_PATH_CACHE.setdefault("ru", [GH_JSON_RU])
@@ -258,12 +259,11 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     If a candidate path yields 0 FAQs while metadata claims >0, try alternates; don't silently return 0.
     Evict a cached bad path immediately to avoid pinning to a wrong location.
     """
-    # Build candidate path list: cached working paths first, then canonical candidates
+    # Build candidate path list: cached working paths first, then canonical candidate (env)
     attempts: List[str] = []
     cached_list = _GH_PATH_CACHE.get(lang, [])
     canonical = [GH_JSON_EN if lang == "en" else GH_JSON_RU]
-    # ensure we don't accidentally iterate characters (cached_list now a list)
-    cand_paths = list(dict.fromkeys((cached_list or []) + canonical))
+    cand_paths = list(dict.fromkeys((cached_list or []) + canonical))  # preserve order, de-dupe
 
     last_err: Optional[str] = None
     best_data: Optional[Dict[str, Any]] = None
@@ -281,10 +281,8 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
 
             faqs = data.get("faqs", [])
             meta_total = int((data.get("metadata") or {}).get("total_faqs") or 0)
-            # If meta says there are FAQs but parse found 0, treat as mismatch (try next)
             if len(faqs) == 0 and meta_total > 0:
                 last_err = f"Parsed 0 FAQs while metadata says {meta_total} at {path}"
-                # Evict this candidate if it was cached
                 if path in (_GH_PATH_CACHE.get(lang) or []):
                     _GH_PATH_CACHE[lang] = [p for p in _GH_PATH_CACHE.get(lang, []) if p != path]
                 continue
@@ -293,7 +291,6 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             break
         except Exception as e:
             last_err = f"{e}"
-            # Evict failing cached path
             if path in (_GH_PATH_CACHE.get(lang) or []):
                 _GH_PATH_CACHE[lang] = [p for p in _GH_PATH_CACHE.get(lang, []) if p != path]
             if _time_left(deadline) <= 0.6:
@@ -301,7 +298,6 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             continue
 
     if best_data is None:
-        # Serve local cache if possible (avoids 502s and keeps UI responsive)
         cached_local = _read_local_cache(lang)
         if cached_local and cached_local.get("faqs"):
             app.logger.warning("[kb] %s serving local cache; GH attempts=%s; last_err=%s",
@@ -475,15 +471,18 @@ def admin_page():
 # Groq bot bits: import lazily and degrade gracefully if unavailable
 # ---------------------------------------------------------------------
 try:
-    # Attempt import; if it raises (e.g. due to sentence-transformers/hf mismatch),
-    # provide safe fallbacks so the entire app doesn't crash.
     from groq_bot import warm_index, groq_answer, reload_index  # type: ignore
-except Exception as e:
-    app.logger.warning("groq_bot import failed; RAG functions disabled: %s", e)
-   
-    def groq_answer(*args, **kwargs):
+except Exception as _e:
+    app.logger.warning("groq_bot import failed; RAG functions disabled: %s", _e)
+
+    def groq_answer(*args, **kwargs):  # type: ignore
         return "RAG unavailable (groq_bot import failed)."
 
+    def warm_index(*args, **kwargs):  # type: ignore
+        return None
+
+    def reload_index(*args, **kwargs):  # type: ignore
+        return None
 
 # ---------------------------------------------------------------------
 # Simple FAQ search (GitHub JSON as the source of truth)
@@ -560,7 +559,7 @@ def groq_ask():
     return jsonify({"ok": True, "answer": ans})
 
 # ---------------------------------------------------------------------
-# /faq API  hits GitHub (with cache fallback via gh_load_lang_json)
+# /faq API - hits GitHub (with cache fallback via gh_load_lang_json)
 # ---------------------------------------------------------------------
 @app.get("/faq/list")
 def faq_list():
