@@ -109,7 +109,6 @@ def _gh_get_file_bytes(path_in_repo: str, deadline: Optional[float] = None) -> b
         with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as r:
             return r.read()
     except _urlerr.HTTPError as e:
-        # non-404: proceed to contents quickly but don't burn time
         if e.code != 404:
             pass
     except Exception:
@@ -130,7 +129,6 @@ def _gh_get_file_bytes(path_in_repo: str, deadline: Optional[float] = None) -> b
                     return rr.read()
             sha = payload.get("sha")
             if sha:
-                # 3) blob
                 req2 = _urlreq.Request(_gh_blob_url(sha), headers=_gh_headers_raw())
                 with _urlreq.urlopen(req2, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as rr:
                     return rr.read()
@@ -178,21 +176,37 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
 # ---------------------------------------------------------------------
 # JSON decode/normalize (robust) + GitHub load/save
 # ---------------------------------------------------------------------
-# Use a raw string so \x.. escapes are parsed by the regex engine, not Python's string literal parser.
+# Use raw string so \x escapes are interpreted by the regex engine, not by Python's string literal parser.
 _CTRL_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
+
+# Repair invalid JSON backslash escapes before json.loads
+# Valid JSON escapes: \" \\ \/ \b \f \n \r \t and \uXXXX
+_RE_INVALID_ESCAPE = re.compile(r'\\(?!["\\/bfnrtu])')
+_RE_BAD_U_ESCAPE   = re.compile(r'\\u(?![0-9a-fA-F]{4})')
+_RE_TRAILING_BS    = re.compile(r'\\(?=$)')  # stray backslash at end of string
+
+def _safe_json_loads(txt: str) -> Any:
+    try:
+        return json.loads(txt)
+    except json.JSONDecodeError:
+        # Attempt automatic repair for bad backslash escapes
+        txt2 = _RE_INVALID_ESCAPE.sub(r"\\\\", txt)
+        txt2 = _RE_BAD_U_ESCAPE.sub(r"\\\\u", txt2)
+        txt2 = _RE_TRAILING_BS.sub(r"\\\\", txt2)
+        return json.loads(txt2)
 
 def _decode_json_bytes(raw: bytes) -> Any:
     # Try several encodings (RU files are sometimes saved oddly)
     for enc in ("utf-8-sig", "utf-8", "utf-16", "utf-16-le", "utf-16-be", "cp1251", "latin-1"):
         try:
-            txt = raw.decode(enc)
+            txt = raw.decode(enc, errors="strict")
             txt = _CTRL_RE.sub("", txt)
-            return json.loads(txt)
+            return _safe_json_loads(txt)
         except Exception:
             continue
     txt = raw.decode("utf-8", "ignore")
     txt = _CTRL_RE.sub("", txt)
-    return json.loads(txt)
+    return _safe_json_loads(txt)
 
 def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
     # Find list of faqs
@@ -238,7 +252,7 @@ def _dir_of(p: str) -> str:
 if not GH_JSON_RU or GH_JSON_RU.strip() in {"parsed_faqs_ru.json", "ru/parsed_faqs_ru.json"}:
     GH_JSON_RU = f"{_dir_of(GH_JSON_EN) or 'kb'}/parsed_faqs_ru.json"
 
-# Use lists for cached paths so we never iterate a single character (fixes the 'r' path symptom).
+# Use lists for cached paths so we never iterate a single character (fixes 'r' path symptom).
 _GH_PATH_CACHE: Dict[str, List[str]] = {}
 _GH_PATH_CACHE.setdefault("en", [GH_JSON_EN])
 _GH_PATH_CACHE.setdefault("ru", [GH_JSON_RU])
@@ -259,7 +273,6 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     If a candidate path yields 0 FAQs while metadata claims >0, try alternates; don't silently return 0.
     Evict a cached bad path immediately to avoid pinning to a wrong location.
     """
-    # Build candidate path list: cached working paths first, then canonical candidate (env)
     attempts: List[str] = []
     cached_list = _GH_PATH_CACHE.get(lang, [])
     canonical = [GH_JSON_EN if lang == "en" else GH_JSON_RU]
@@ -313,11 +326,9 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             return cached_local
         raise RuntimeError(f"{lang.upper()} JSON parsed successfully but contains 0 FAQs (path: {best_path}).")
 
-    # Cache path that worked (store single-element list)
     if best_path:
         _GH_PATH_CACHE[lang] = [best_path]
 
-    # Write local cache (for status page / debugging)
     try:
         os.makedirs(KB_DIR, exist_ok=True)
         cache_path = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
@@ -331,7 +342,6 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     return best_data
 
 def gh_save_lang_json(lang: str, payload: Dict[str, Any], commit_msg: str) -> bool:
-    # Save back to *the same* path that worked, or primary if none cached
     path_list = _GH_PATH_CACHE.get(lang) or ([GH_JSON_RU] if lang == "ru" else [GH_JSON_EN])
     path = path_list[0]
     raw = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
