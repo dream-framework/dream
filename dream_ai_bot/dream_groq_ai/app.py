@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-  
-
+# -*- coding: utf-8 -*-
 
 import os
 import re
@@ -22,9 +21,6 @@ from dotenv import load_dotenv, find_dotenv
 # ---------------------------------------------------------------------
 load_dotenv(find_dotenv() or "")
 load_dotenv()
-
-# Groq bot bits
-from groq_bot import warm_index, groq_answer, reload_index
 
 # ---------------------------------------------------------------------
 # App + GA
@@ -188,13 +184,11 @@ def _decode_json_bytes(raw: bytes) -> Any:
     # Try several encodings (RU files are sometimes saved oddly)
     for enc in ("utf-8-sig", "utf-8", "utf-16", "utf-16-le", "utf-16-be", "cp1251", "latin-1"):
         try:
-            txt = raw.decode(enc)  # first pass
-            # Remove stray control chars that break JSON
+            txt = raw.decode(enc)
             txt = _CTRL_RE.sub("", txt)
             return json.loads(txt)
         except Exception:
             continue
-    # Last-ditch: treat as UTF-8 ignoring errors
     txt = raw.decode("utf-8", "ignore")
     txt = _CTRL_RE.sub("", txt)
     return json.loads(txt)
@@ -204,12 +198,10 @@ def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
     if isinstance(obj, dict):
         faqs_src = obj.get("faqs")
         if not isinstance(faqs_src, list):
-            # try common alternates
             for key in ("items", "data", "list"):
                 if isinstance(obj.get(key), list):
                     faqs_src = obj[key]
                     break
-            # or first list-of-dicts in values
             if not isinstance(faqs_src, list):
                 for v in obj.values():
                     if isinstance(v, list) and (not v or all(isinstance(x, dict) for x in v)):
@@ -225,7 +217,6 @@ def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
     for f in (faqs_src or []):
         if not isinstance(f, dict):
             continue
-        # normalize fields
         try:
             n = int(f.get("number", 0))
         except Exception:
@@ -235,7 +226,7 @@ def _normalize_faq_json_obj(obj: Any) -> Dict[str, Any]:
         out.append({"number": n, "question": q, "answer": a})
 
     out.sort(key=lambda x: x["number"])
-    meta["total_faqs"] = len(out)  # recompute
+    meta["total_faqs"] = len(out)
     return {"metadata": meta, "faqs": out}
 
 def _dir_of(p: str) -> str:
@@ -246,12 +237,10 @@ def _dir_of(p: str) -> str:
 if not GH_JSON_RU or GH_JSON_RU.strip() in {"parsed_faqs_ru.json", "ru/parsed_faqs_ru.json"}:
     GH_JSON_RU = f"{_dir_of(GH_JSON_EN) or 'kb'}/parsed_faqs_ru.json"
 
-
-
-_GH_PATH_CACHE: Dict[str, str] = {}  # lang -> resolved path that worked
-# Seed cache so we don't start at repo root by accident
-_GH_PATH_CACHE.setdefault("en", GH_JSON_EN)
-_GH_PATH_CACHE.setdefault("ru", GH_JSON_RU)
+# Use lists for cached paths (was a bug: previously a string was iterated)
+_GH_PATH_CACHE: Dict[str, List[str]] = {}
+_GH_PATH_CACHE.setdefault("en", [GH_JSON_EN])
+_GH_PATH_CACHE.setdefault("ru", [GH_JSON_RU])
 
 def _read_local_cache(lang: str) -> Optional[Dict[str, Any]]:
     try:
@@ -269,13 +258,12 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     If a candidate path yields 0 FAQs while metadata claims >0, try alternates; don't silently return 0.
     Evict a cached bad path immediately to avoid pinning to a wrong location.
     """
+    # Build candidate path list: cached working paths first, then canonical candidates
     attempts: List[str] = []
-
-    # Use cached working path first (if any), then canonical candidates
-
-    cached = _GH_PATH_CACHE.get(lang)
-    
-    cand_paths = cached
+    cached_list = _GH_PATH_CACHE.get(lang, [])
+    canonical = [GH_JSON_EN if lang == "en" else GH_JSON_RU]
+    # ensure we don't accidentally iterate characters (cached_list now a list)
+    cand_paths = list(dict.fromkeys((cached_list or []) + canonical))
 
     last_err: Optional[str] = None
     best_data: Optional[Dict[str, Any]] = None
@@ -296,16 +284,18 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             # If meta says there are FAQs but parse found 0, treat as mismatch (try next)
             if len(faqs) == 0 and meta_total > 0:
                 last_err = f"Parsed 0 FAQs while metadata says {meta_total} at {path}"
-                if path == cached:
-                    _GH_PATH_CACHE.pop(lang, None)  # evict bad cached path
+                # Evict this candidate if it was cached
+                if path in (_GH_PATH_CACHE.get(lang) or []):
+                    _GH_PATH_CACHE[lang] = [p for p in _GH_PATH_CACHE.get(lang, []) if p != path]
                 continue
 
             best_data, best_path = data, path
             break
         except Exception as e:
             last_err = f"{e}"
-            if path == cached:
-                _GH_PATH_CACHE.pop(lang, None)      # evict failing cached path
+            # Evict failing cached path
+            if path in (_GH_PATH_CACHE.get(lang) or []):
+                _GH_PATH_CACHE[lang] = [p for p in _GH_PATH_CACHE.get(lang, []) if p != path]
             if _time_left(deadline) <= 0.6:
                 break
             continue
@@ -327,9 +317,9 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             return cached_local
         raise RuntimeError(f"{lang.upper()} JSON parsed successfully but contains 0 FAQs (path: {best_path}).")
 
-    # Cache path that worked
+    # Cache path that worked (store single-element list)
     if best_path:
-        _GH_PATH_CACHE[lang] = best_path
+        _GH_PATH_CACHE[lang] = [best_path]
 
     # Write local cache (for status page / debugging)
     try:
@@ -346,7 +336,8 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
 
 def gh_save_lang_json(lang: str, payload: Dict[str, Any], commit_msg: str) -> bool:
     # Save back to *the same* path that worked, or primary if none cached
-    path = _GH_PATH_CACHE.get(lang) or (GH_JSON_RU if lang == "ru" else GH_JSON_EN)
+    path_list = _GH_PATH_CACHE.get(lang) or ([GH_JSON_RU] if lang == "ru" else [GH_JSON_EN])
+    path = path_list[0]
     raw = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
     ok = push_kb_to_github(path, raw, commit_msg)
     if ok:
@@ -481,6 +472,20 @@ def admin_page():
     return render_template("admin.html", title="Admin FAQs")
 
 # ---------------------------------------------------------------------
+# Groq bot bits: import lazily and degrade gracefully if unavailable
+# ---------------------------------------------------------------------
+try:
+    # Attempt import; if it raises (e.g. due to sentence-transformers/hf mismatch),
+    # provide safe fallbacks so the entire app doesn't crash.
+    from groq_bot import warm_index, groq_answer, reload_index  # type: ignore
+except Exception as e:
+    app.logger.warning("groq_bot import failed; RAG functions disabled: %s", e)
+   
+    def groq_answer(*args, **kwargs):
+        return "RAG unavailable (groq_bot import failed)."
+
+
+# ---------------------------------------------------------------------
 # Simple FAQ search (GitHub JSON as the source of truth)
 # ---------------------------------------------------------------------
 @app.post("/chat")
@@ -505,6 +510,7 @@ def chat():
             return jsonify({"reply": f"**{best['question']}**\n\n{best['answer']}", "source": f"faq-{lang}"})
         return jsonify({"reply": "I couldn't find that in the FAQs. Try the FAQ Bot or rephrase your question."})
     except Exception as e:
+        app.logger.exception("chat error")
         return jsonify({"reply": f"Error while processing your request: {str(e)}"})
 
 # ---------------------------------------------------------------------
@@ -542,6 +548,7 @@ def groq_chat():
         ans = groq_answer(q, top_k=6)
         return jsonify({"ok": True, "reply": ans})
     except Exception as e:
+        app.logger.exception("groq_chat error")
         return jsonify({"ok": False, "error": str(e)})
 
 @app.post("/groq/ask")
@@ -563,7 +570,6 @@ def faq_list():
         data = gh_load_lang_json(lang)
         faqs = data.get("faqs", [])
         if not faqs:
-            # if we reached here, it means GitHub said 0 items after all attempts  return 500-like JSON
             return jsonify({"ok": False, "items": [], "error": f"No FAQs for {lang.upper()} on GitHub."})
         items = [{"number": int(f.get("number") or 0),
                   "question": f.get("question", ""),
@@ -571,6 +577,7 @@ def faq_list():
         items.sort(key=lambda x: x["number"])
         return jsonify({"ok": True, "items": items})
     except Exception as e:
+        app.logger.exception("faq_list error")
         return jsonify({"ok": False, "items": [], "error": f"GH fetch failed: {str(e)}"})
 
 @app.get("/faq/item/<int:number>")
@@ -588,6 +595,7 @@ def faq_item(number):
                 }})
         return jsonify({"ok": False, "error": "Not found"})
     except Exception as e:
+        app.logger.exception("faq_item error")
         return jsonify({"ok": False, "error": f"GH fetch failed: {str(e)}"})
 
 @app.post("/faq/save")
@@ -621,9 +629,13 @@ def faq_save():
 
         ok = gh_save_lang_json(lang, data, f"admin: save {lang.upper()} FAQ #{n}")
         if ok:
-            reload_index(force=True)
+            try:
+                reload_index(force=True)
+            except Exception:
+                app.logger.warning("reload_index failed after save")
         return jsonify({"ok": True, "number": n})
     except Exception as e:
+        app.logger.exception("faq_save error")
         return jsonify({"ok": False, "error": f"GH save failed: {str(e)}"})
 
 @app.delete("/faq/delete/<int:number>")
@@ -644,9 +656,13 @@ def faq_delete(number):
         meta["parsed_date"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         ok = gh_save_lang_json(lang, data, f"admin: delete {lang.upper()} FAQ #{number}")
         if ok:
-            reload_index(force=True)
+            try:
+                reload_index(force=True)
+            except Exception:
+                app.logger.warning("reload_index failed after delete")
         return jsonify({"ok": True, "deleted": number})
     except Exception as e:
+        app.logger.exception("faq_delete error")
         return jsonify({"ok": False, "error": f"GH delete failed: {str(e)}"})
 
 # ---------------------------------------------------------------------
@@ -676,19 +692,20 @@ def _pull_and_cache_from_github() -> bool:
     changed = False
     try:
         os.makedirs(KB_DIR, exist_ok=True)
-        for lang, remote in (("en", _GH_PATH_CACHE.get("en") or GH_JSON_EN),
-                             ("ru", _GH_PATH_CACHE.get("ru") or GH_JSON_RU)):
-            try:
-                blob = _gh_get_file_bytes(remote)
-            except Exception:
-                continue
-            local = LOCAL_JSON_EN if lang == "en" else LOCAL_JSON_RU
-            old = open(local, "rb").read() if os.path.exists(local) else None
-            if old != blob:
-                with open(local, "wb") as f:
-                    f.write(blob)
-                changed = True
-                app.logger.info("[kb] cached %s from %s:%s", local, GH_BRANCH, remote)
+        for lang, remote_list in (("en", _GH_PATH_CACHE.get("en") or [GH_JSON_EN]),
+                                  ("ru", _GH_PATH_CACHE.get("ru") or [GH_JSON_RU])):
+            for remote in (remote_list if isinstance(remote_list, list) else [remote_list]):
+                try:
+                    blob = _gh_get_file_bytes(remote)
+                except Exception:
+                    continue
+                local = LOCAL_JSON_EN if lang == "en" else LOCAL_JSON_RU
+                old = open(local, "rb").read() if os.path.exists(local) else None
+                if old != blob:
+                    with open(local, "wb") as f:
+                        f.write(blob)
+                    changed = True
+                    app.logger.info("[kb] cached %s from %s:%s", local, GH_BRANCH, remote)
     except Exception as e:
         app.logger.warning("[kb] cache pull error: %s", e)
     return changed
@@ -698,7 +715,10 @@ def start_kb_poll(interval_sec: int = 60):
         while True:
             try:
                 if _pull_and_cache_from_github():
-                    reload_index(force=True)
+                    try:
+                        reload_index(force=True)
+                    except Exception:
+                        app.logger.warning("reload_index failed from poller")
             except Exception as e:
                 app.logger.warning("[kb] poll error: %s", e)
             time.sleep(max(30, interval_sec))
@@ -715,7 +735,7 @@ def _boot_once():
     with _BOOT_LOCK:
         if _BOOT_DONE:
             return
-        # Warm Groq retriever (if PDF exists)
+        # Warm Groq retriever (if PDF exists). This is safe: warm_index is a no-op fallback if import failed.
         try:
             if os.path.exists(PDF_PATH):
                 warm_index(PDF_PATH)
