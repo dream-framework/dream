@@ -1,4 +1,4 @@
-# app.py — GitHub-only FAQs + Groq RAG
+#app.py GitHub-only FAQs
 import os, re, json, time, base64, urllib.request as _urlreq, urllib.error as _urlerr
 import threading, webbrowser
 from pathlib import Path
