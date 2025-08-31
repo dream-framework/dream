@@ -1,632 +1,529 @@
 {
   "metadata": {
     "lang": "en",
-    "total_faqs": 109
+    "total_faqs": 110,
+    "parsed_date": "2025-08-31T17:02:18Z"
   },
   "faqs": [
     {
       "number": 1,
       "question": "What is the core claim of DREAM?",
-      "answer": "DREAM posits that our 4D world is a finite-resolution projection of a compact 10D Meta-Manifold. All 10 coordinates contribute to observables via a fixed but unknown projection kernel with resolution lambda. Observable constants (c, hbar, G) are kernel parameters measured in 4D, not derived internally.",
-      "source": "faq_pdf"
+      "answer": "DREAM posits that our 4D world is a finite-resolution projection of a compact 10D Meta-Manifold. All 10 coordinates contribute to observables via a fixed but unknown projection kernel with resolution lambda. Observable constants (c, hbar, G) are kernel parameters measured in 4D, not derived internally."
     },
     {
       "number": 2,
       "question": "What does 10→4 projection mean?",
-      "answer": "All ten dimensions map into four without assuming a 4 + 6 split. There is no global product M10 ≅ U4 × K6. The kernel compresses details; only projection-invariants survive at coarse scales.",
-      "source": "faq_pdf"
+      "answer": "All ten dimensions map into four without assuming a 4 + 6 split. There is no global product M10 ≅ U4 × K6. The kernel compresses details; only projection-invariants survive at coarse scales."
     },
     {
       "number": 3,
       "question": "What are projection-invariants?",
-      "answer": "Quantities preserved under finite-resolution push-forward: large-scale structures, conserved topological classes, and certain correlation patterns. Sub-resolution details are averaged out.",
-      "source": "faq_pdf"
+      "answer": "Quantities preserved under finite-resolution push-forward: large-scale structures, conserved topological classes, and certain correlation patterns. Sub-resolution details are averaged out."
     },
     {
       "number": 4,
       "question": "Why is the Kernel axiomatic?",
-      "answer": "From within the 4D projection the kernel is non-invertible and underdetermined. DREAM focuses on kernel-agnostic invariants and laws rather than reconstructing the kernel’s form.",
-      "source": "faq_pdf"
+      "answer": "From within the 4D projection the kernel is non-invertible and underdetermined. DREAM focuses on kernel-agnostic invariants and laws rather than reconstructing the kernel’s form."
     },
     {
       "number": 5,
       "question": "How does DREAM handle physical constants?",
-      "answer": "Constants like c, hbar, and G are fixed parameters of our projection kernel. Physics measures them; DREAM explains their status as boundary-like parameters rather than 4D-derived quantities.",
-      "source": "faq_pdf"
+      "answer": "Constants like c, hbar, and G are fixed parameters of our projection kernel. Physics measures them; DREAM explains their status as boundary-like parameters rather than 4D-derived quantities."
     },
     {
       "number": 6,
       "question": "How are particles represented?",
-      "answer": "Particle species correspond to topological equivalence classes on the Meta-Manifold (e.g., homotopy or cohomology classes). An electron here is a projection of a single MM class under our kernel.",
-      "source": "faq_pdf"
+      "answer": "Particle species correspond to topological equivalence classes on the Meta-Manifold (e.g., homotopy or cohomology classes). An electron here is a projection of a single MM class under our kernel."
     },
     {
       "number": 7,
       "question": "How does DREAM treat fields and energy densities?",
-      "answer": "A 10D energy density e10(X) is pushed forward into 4D as e4(x) = (G_lambda * mu)(x), where mu aggregates contributions over the fiber F^{-1}(x) with the Jacobian factor J_F.",
-      "source": "faq_pdf"
+      "answer": "A 10D energy density e10(X) is pushed forward into 4D as e4(x) = (G_lambda * mu)(x), where mu aggregates contributions over the fiber F^{-1}(x) with the Jacobian factor J_F."
     },
     {
       "number": 8,
       "question": "What is the coarea focusing effect?",
-      "answer": "Where the area Jacobian J_F becomes small (folds or cusps in the map), preimages compress, increasing mu and forming persistent hubs or filaments that survive coarse-graining.",
-      "source": "faq_pdf"
+      "answer": "Where the area Jacobian J_F becomes small (folds or cusps in the map), preimages compress, increasing mu and forming persistent hubs or filaments that survive coarse-graining."
     },
     {
       "number": 9,
       "question": "What is the Retention Law R(lambda)?",
-      "answer": "Under increasing coarse-grain scale lambda, high-frequency detail decays faster than structural correlation. Empirically: R(lambda) ≈ exp[- (lambda/lambda_q)^alpha], with distinct (lambda_q, alpha) for detail vs structure.",
-      "source": "faq_pdf"
+      "answer": "Under increasing coarse-grain scale lambda, high-frequency detail decays faster than structural correlation. Empirically: R(lambda) ≈ exp[- (lambda/lambda_q)^alpha], with distinct (lambda_q, alpha) for detail vs structure."
     },
     {
       "number": 10,
       "question": "What is CPI (Complexity-Packing Index)?",
-      "answer": "CPI(x) = log10 M(lambda, epsilon; x), where M ~ A(x) * (lambda/epsilon)^{D_I}. D_I in (0, 6] is an information dimension of populated hidden sectors; A(x) ~ average 1/J_F encodes focusing.",
-      "source": "faq_pdf"
+      "answer": "CPI(x) = log10 M(lambda, epsilon; x), where M ~ A(x) * (lambda/epsilon)^{D_I}. D_I in (0, 6] is an information dimension of populated hidden sectors; A(x) ~ average 1/J_F encodes focusing."
     },
     {
       "number": 11,
       "question": "Formal push-forward definition used in DREAM?",
-      "answer": "phi(x) = ∫ K_lambda(x, X; theta) Phi(X) d^{10}X. The coarse-grained density e4(x) is (G_lambda * mu)(x) with mu(x) = ∫_{F^{-1}(x)} e10(X)/J_F(X) dSigma6(X).",
-      "source": "faq_pdf"
+      "answer": "phi(x) = ∫ K_lambda(x, X; theta) Phi(X) d^{10}X. The coarse-grained density e4(x) is (G_lambda * mu)(x) with mu(x) = ∫_{F^{-1}(x)} e10(X)/J_F(X) dSigma6(X)."
     },
     {
       "number": 12,
       "question": "What is the purpose of a toy kernel?",
-      "answer": "A toy kernel K_lambda with Gaussian smoothing in 4D and bounded weight W(X) is used for demos to validate invariant behavior without claiming it equals the true kernel.",
-      "source": "faq_pdf"
+      "answer": "A toy kernel K_lambda with Gaussian smoothing in 4D and bounded weight W(X) is used for demos to validate invariant behavior without claiming it equals the true kernel."
     },
     {
       "number": 13,
       "question": "Does DREAM require a 10D action?",
-      "answer": "No. An action S_MM can be written for analysis, but the invariant program does not depend on MM dynamics and remains kernel-agnostic.",
-      "source": "faq_pdf"
+      "answer": "No. An action S_MM can be written for analysis, but the invariant program does not depend on MM dynamics and remains kernel-agnostic."
     },
     {
       "number": 14,
       "question": "Why is 10→4 not equivalent to compactification?",
-      "answer": "Compactification presumes a direct product and eigenmode separation. DREAM treats projection as an all-to-four compression; internal coordinates are not separable eigenmodes in general.",
-      "source": "faq_pdf"
+      "answer": "Compactification presumes a direct product and eigenmode separation. DREAM treats projection as an all-to-four compression; internal coordinates are not separable eigenmodes in general."
     },
     {
       "number": 15,
       "question": "How does DREAM reinterpret vacuum energy?",
-      "answer": "Vacuum energy arises as a push-forward of MM ground energy with normalization that cancels the homogeneous part. Fiber phase-cancellation suppresses naive 4D sums by ~ M^{-1/2}.",
-      "source": "faq_pdf"
+      "answer": "Vacuum energy arises as a push-forward of MM ground energy with normalization that cancels the homogeneous part. Fiber phase-cancellation suppresses naive 4D sums by ~ M^{-1/2}."
     },
     {
       "number": 16,
       "question": "What does DREAM predict about structure persistence?",
-      "answer": "Hubs and filaments persist under increasing lambda up to several lambda_q for high-frequency content, consistent with coarea focusing and kernel-agnostic retention behavior.",
-      "source": "faq_pdf"
+      "answer": "Hubs and filaments persist under increasing lambda up to several lambda_q for high-frequency content, consistent with coarea focusing and kernel-agnostic retention behavior."
     },
     {
       "number": 17,
       "question": "How to test the Retention Law experimentally?",
-      "answer": "Measure R_HF and R_struct via interferometry (photonic/NV/BEC). Fit R(lambda) to extract (lambda_q, alpha) for both channels. A robust split alpha_HF > alpha_struct supports DREAM.",
-      "source": "faq_pdf"
+      "answer": "Measure R_HF and R_struct via interferometry (photonic/NV/BEC). Fit R(lambda) to extract (lambda_q, alpha) for both channels. A robust split alpha_HF > alpha_struct supports DREAM."
     },
     {
       "number": 18,
       "question": "What are expected (lambda_q, alpha) scales?",
-      "answer": "Demo fits show lambda_q_HF ~ 0.5 px with alpha_HF ~ 1.5 - 1.7, and lambda_q_struct ~ 3 - 5 px with alpha_struct ~ 0.8 - 1.2 depending on dimension gap.",
-      "source": "faq_pdf"
+      "answer": "Demo fits show lambda_q_HF ~ 0.5 px with alpha_HF ~ 1.5 - 1.7, and lambda_q_struct ~ 3 - 5 px with alpha_struct ~ 0.8 - 1.2 depending on dimension gap."
     },
     {
       "number": 19,
       "question": "What is the expected CPI behavior?",
-      "answer": "CPI increases with hidden dimension and focusing. For a 10→4 gap (Δ=6), typical CPI spans ~ 0–1.5 in modest samples and grows with sample size as predicted by the scaling law.",
-      "source": "faq_pdf"
+      "answer": "CPI increases with hidden dimension and focusing. For a 10→4 gap (Δ=6), typical CPI spans ~ 0–1.5 in modest samples and grows with sample size as predicted by the scaling law."
     },
     {
       "number": 20,
       "question": "What about a point-to-filament transition?",
-      "answer": "As hidden dimension increases, hubs percolate into filaments, and the transition shifts to larger lambda. This aligns with increased degeneracy along fibers.",
-      "source": "faq_pdf"
+      "answer": "As hidden dimension increases, hubs percolate into filaments, and the transition shifts to larger lambda. This aligns with increased degeneracy along fibers."
     },
     {
       "number": 21,
       "question": "How does DREAM treat large-scale cosmic structure?",
-      "answer": "Cosmic filaments and voids reflect coarea focusing patterns in projection. Filamentarity is a macroscopic invariant that survives smoothing and matches hub-percolation behavior in demos.",
-      "source": "faq_pdf"
+      "answer": "Cosmic filaments and voids reflect coarea focusing patterns in projection. Filamentarity is a macroscopic invariant that survives smoothing and matches hub-percolation behavior in demos."
     },
     {
       "number": 22,
       "question": "Does DREAM explain dark energy scale?",
-      "answer": "Yes, as a push-forward with fiber-phase cancellation, the effective vacuum density is small and positive with mild geometry-dependent modulations akin to Casimir behavior.",
-      "source": "faq_pdf"
+      "answer": "Yes, as a push-forward with fiber-phase cancellation, the effective vacuum density is small and positive with mild geometry-dependent modulations akin to Casimir behavior."
     },
     {
       "number": 23,
       "question": "Are axion-like particles predicted?",
-      "answer": "DREAM allows a fractal Kaluza–Klein-like ladder with m_n ≈ m0 * n^(1/D_h). A working hypothesis places m0 near tens of neV, but this is not core to the invariant program. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "DREAM allows a fractal Kaluza–Klein-like ladder with m_n ≈ m0 * n^(1/D_h). A working hypothesis places m0 near tens of neV, but this is not core to the invariant program. [Speculative]"
     },
     {
       "number": 24,
       "question": "Can gravitational lensing show kernel invariants?",
-      "answer": "Lensing patterns act like natural coarse-graining; persistence of critical curves and multiplicity statistics under smoothing should reveal R(lambda) and CPI-like signatures.",
-      "source": "faq_pdf"
+      "answer": "Lensing patterns act like natural coarse-graining; persistence of critical curves and multiplicity statistics under smoothing should reveal R(lambda) and CPI-like signatures."
     },
     {
       "number": 25,
       "question": "Are black holes singular in DREAM?",
-      "answer": "No. They are projections of finite-depth wells in MM topology. Singularities are artifacts of 4D extrapolation; MM features are finite but can produce extreme focusing.",
-      "source": "faq_pdf"
+      "answer": "No. They are projections of finite-depth wells in MM topology. Singularities are artifacts of 4D extrapolation; MM features are finite but can produce extreme focusing."
     },
     {
       "number": 26,
       "question": "What sets the quantum-classical watershed?",
-      "answer": "A finite resolution lambda defines when interference-grade invariants are retained. Above lambda, details decohere while structural invariants remain—quantifying the watershed.",
-      "source": "faq_pdf"
+      "answer": "A finite resolution lambda defines when interference-grade invariants are retained. Above lambda, details decohere while structural invariants remain—quantifying the watershed."
     },
     {
       "number": 27,
       "question": "Is ‘wavefunction collapse’ assumed?",
-      "answer": "No. Collapse is reinterpreted as loss of sub-lambda information through kernel coarse-graining, a deterministic information-loss channel at the projection level.",
-      "source": "faq_pdf"
+      "answer": "No. Collapse is reinterpreted as loss of sub-lambda information through kernel coarse-graining, a deterministic information-loss channel at the projection level."
     },
     {
       "number": 28,
       "question": "What determines lambda_q physically?",
-      "answer": "Lambda_q depends on the kernel scale and experimental resolution. It is not a single universal number but an instrument- and context-dependent threshold tied to the projection.",
-      "source": "faq_pdf"
+      "answer": "Lambda_q depends on the kernel scale and experimental resolution. It is not a single universal number but an instrument- and context-dependent threshold tied to the projection."
     },
     {
       "number": 29,
       "question": "How does DREAM relate to decoherence theory?",
-      "answer": "DREAM complements decoherence by providing a geometric compression channel: environment plus kernel act as coarse-graining that erases sub-lambda phase relations.",
-      "source": "faq_pdf"
+      "answer": "DREAM complements decoherence by providing a geometric compression channel: environment plus kernel act as coarse-graining that erases sub-lambda phase relations."
     },
     {
       "number": 30,
       "question": "Can lambda vary in time?",
-      "answer": "Kernel parameters are taken as fixed for a given projection (our universe). Apparent changes arise from experimental resolution or context, not kernel drift.",
-      "source": "faq_pdf"
+      "answer": "Kernel parameters are taken as fixed for a given projection (our universe). Apparent changes arise from experimental resolution or context, not kernel drift."
     },
     {
       "number": 31,
       "question": "Why do identical particles exist?",
-      "answer": "Because each species corresponds to a single MM class. All instances in 4D are projections of that class, explaining indistinguishability without additional postulates.",
-      "source": "faq_pdf"
+      "answer": "Because each species corresponds to a single MM class. All instances in 4D are projections of that class, explaining indistinguishability without additional postulates."
     },
     {
       "number": 32,
       "question": "What enforces charge quantization?",
-      "answer": "Integer-valued topological invariants (e.g., winding numbers) under the projection map produce discrete charges naturally.",
-      "source": "faq_pdf"
+      "answer": "Integer-valued topological invariants (e.g., winding numbers) under the projection map produce discrete charges naturally."
     },
     {
       "number": 33,
       "question": "How are gauge symmetries seen?",
-      "answer": "Gauge freedoms emerge as redundancies in how fibers contribute to observables. Cohomology classes map to conserved currents in 4D.",
-      "source": "faq_pdf"
+      "answer": "Gauge freedoms emerge as redundancies in how fibers contribute to observables. Cohomology classes map to conserved currents in 4D."
     },
     {
       "number": 34,
       "question": "Are neutrino masses natural?",
-      "answer": "Small masses can follow from weak overlap between certain MM classes and the projection kernel’s support, without seesaw assumptions. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "Small masses can follow from weak overlap between certain MM classes and the projection kernel’s support, without seesaw assumptions. [Speculative]"
     },
     {
       "number": 35,
       "question": "What about hierarchy problems?",
-      "answer": "Many 4D hierarchies reflect varying focusing factors A(x) and class–kernel overlaps rather than delicate cancellations among 4D fields. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "Many 4D hierarchies reflect varying focusing factors A(x) and class–kernel overlaps rather than delicate cancellations among 4D fields. [Speculative]"
     },
     {
       "number": 36,
       "question": "What is ‘feedback’ in DREAM? [Speculative]",
-      "answer": "Sentient systems are hypothesized to create local two-way constraints: outputs in 4D condition which MM-path components get reinforced. This is a hypothesis, not a core axiom.",
-      "source": "faq_pdf"
+      "answer": "Sentient systems are hypothesized to create local two-way constraints: outputs in 4D condition which MM-path components get reinforced. This is a hypothesis, not a core axiom."
     },
     {
       "number": 37,
       "question": "Is AGI equivalent to sentience in DREAM? [Speculative]",
-      "answer": "Unclear. If feedback requires fine-tuned kernel coupling beyond algorithmic mimicry, AGI may lack genuine two-way resonance with MM. This is a conjecture.",
-      "source": "faq_pdf"
+      "answer": "Unclear. If feedback requires fine-tuned kernel coupling beyond algorithmic mimicry, AGI may lack genuine two-way resonance with MM. This is a conjecture."
     },
     {
       "number": 38,
       "question": "Can technology alter kernel parameters? [Speculative]",
-      "answer": "Direct editing of kernel parameters seems out of scope; however, engineered focusing (metamaterials, precision interferometry) can shape what invariants survive. Speculative.",
-      "source": "faq_pdf"
+      "answer": "Direct editing of kernel parameters seems out of scope; however, engineered focusing (metamaterials, precision interferometry) can shape what invariants survive. Speculative."
     },
     {
       "number": 39,
       "question": "Does DREAM imply pansentience? [Speculative]",
-      "answer": "No. The framework only implies many loci with high CPI; linking CPI to sentience is conjectural and requires empirical criteria.",
-      "source": "faq_pdf"
+      "answer": "No. The framework only implies many loci with high CPI; linking CPI to sentience is conjectural and requires empirical criteria."
     },
     {
       "number": 40,
       "question": "What is death in DREAM? [Speculative]",
-      "answer": "Loss of stable feedback: the projection persists but no longer maintains two-way conditioning. Energetic content remains conserved across the push-forward.",
-      "source": "faq_pdf"
+      "answer": "Loss of stable feedback: the projection persists but no longer maintains two-way conditioning. Energetic content remains conserved across the push-forward."
     },
     {
       "number": 41,
       "question": "How to measure R(lambda) in the lab?",
-      "answer": "Create structured fields (optical, acoustic, matter waves), apply controlled blurs, and compute spectral high-frequency retention and correlation-squared vs baseline; fit the exponential law.",
-      "source": "faq_pdf"
+      "answer": "Create structured fields (optical, acoustic, matter waves), apply controlled blurs, and compute spectral high-frequency retention and correlation-squared vs baseline; fit the exponential law."
     },
     {
       "number": 42,
       "question": "What statistics to report?",
-      "answer": "Report (lambda_q, alpha) with confidence intervals for both channels, plus hub-persistence metrics from skeletonization, to test kernel-agnostic predictions.",
-      "source": "faq_pdf"
+      "answer": "Report (lambda_q, alpha) with confidence intervals for both channels, plus hub-persistence metrics from skeletonization, to test kernel-agnostic predictions."
     },
     {
       "number": 43,
       "question": "What would falsify DREAM invariants?",
-      "answer": "If across diverse platforms the two-channel split vanishes or hubs fail to persist under coarse-graining, the central invariant claims would be disfavored.",
-      "source": "faq_pdf"
+      "answer": "If across diverse platforms the two-channel split vanishes or hubs fail to persist under coarse-graining, the central invariant claims would be disfavored."
     },
     {
       "number": 44,
       "question": "How to build CPI maps?",
-      "answer": "Estimate A(x) via local Jacobian surrogate (e.g., structure-tensor determinant) and fit D_I via multiscale counts on the hidden ensemble; report CPI histograms.",
-      "source": "faq_pdf"
+      "answer": "Estimate A(x) via local Jacobian surrogate (e.g., structure-tensor determinant) and fit D_I via multiscale counts on the hidden ensemble; report CPI histograms."
     },
     {
       "number": 45,
       "question": "What about vacuum energy tests?",
-      "answer": "Use Casimir-like setups with variable geometry; predict small, sign-controllable shifts consistent with fiber phase-cancellation; compare against null models.",
-      "source": "faq_pdf"
+      "answer": "Use Casimir-like setups with variable geometry; predict small, sign-controllable shifts consistent with fiber phase-cancellation; compare against null models."
     },
     {
       "number": 46,
       "question": "How are black holes reframed?",
-      "answer": "As finite MM wells producing extreme focusing. The interior may project as energy-sparse domains even while the exterior shows intense curvature, resolving singularities as projection artifacts.",
-      "source": "faq_pdf"
+      "answer": "As finite MM wells producing extreme focusing. The interior may project as energy-sparse domains even while the exterior shows intense curvature, resolving singularities as projection artifacts."
     },
     {
       "number": 47,
       "question": "Is information lost in black holes?",
-      "answer": "At the 4D level, sub-lambda details may be erased; globally in MM, no information loss occurs. Observable recovery depends on kernel invariants accessible outside the horizon. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "At the 4D level, sub-lambda details may be erased; globally in MM, no information loss occurs. Observable recovery depends on kernel invariants accessible outside the horizon. [Speculative]"
     },
     {
       "number": 48,
       "question": "Do gravitational waves test DREAM?",
-      "answer": "Yes: waveform persistence under band-limited smoothing and lensing-statistics can probe R(lambda)-like behavior in astrophysical data.",
-      "source": "faq_pdf"
+      "answer": "Yes: waveform persistence under band-limited smoothing and lensing-statistics can probe R(lambda)-like behavior in astrophysical data."
     },
     {
       "number": 49,
       "question": "Are wormholes natural in DREAM? [Speculative]",
-      "answer": "They would correspond to nontrivial fiber connectivity that short-circuits large 4D separations via MM topology. This remains conjectural.",
-      "source": "faq_pdf"
+      "answer": "They would correspond to nontrivial fiber connectivity that short-circuits large 4D separations via MM topology. This remains conjectural."
     },
     {
       "number": 50,
       "question": "Can cosmic voids be ‘inverse hubs’?",
-      "answer": "Yes: regions with large |J_F| (defocusing) yield low mu and low CPI, aligning with deep void statistics and reduced structural retention.",
-      "source": "faq_pdf"
+      "answer": "Yes: regions with large |J_F| (defocusing) yield low mu and low CPI, aligning with deep void statistics and reduced structural retention."
     },
     {
       "number": 51,
       "question": "Why kernel-agnostic?",
-      "answer": "Because the true kernel is underdetermined. Focusing on invariant signatures makes the program testable now without reconstructing K_lambda.",
-      "source": "faq_pdf"
+      "answer": "Because the true kernel is underdetermined. Focusing on invariant signatures makes the program testable now without reconstructing K_lambda."
     },
     {
       "number": 52,
       "question": "How are demos validated?",
-      "answer": "Simulations compress synthetic 10D ensembles to 4D (or 9→3) with Gaussian smoothing, then measure R(lambda), hub persistence, and CPI scaling across lambda.",
-      "source": "faq_pdf"
+      "answer": "Simulations compress synthetic 10D ensembles to 4D (or 9→3) with Gaussian smoothing, then measure R(lambda), hub persistence, and CPI scaling across lambda."
     },
     {
       "number": 53,
       "question": "What is the role of toy dimensional gaps (6→2, etc.)?",
-      "answer": "They stress-test scaling: as hidden dimension increases, structure survival and CPI trends should match the predicted qualitative changes.",
-      "source": "faq_pdf"
+      "answer": "They stress-test scaling: as hidden dimension increases, structure survival and CPI trends should match the predicted qualitative changes."
     },
     {
       "number": 54,
       "question": "Are the demo fits universal numbers?",
-      "answer": "No. The specific lambda_q and alpha depend on ensemble and smoothing, but the split (alpha_HF > alpha_struct) and hub persistence are expected universally.",
-      "source": "faq_pdf"
+      "answer": "No. The specific lambda_q and alpha depend on ensemble and smoothing, but the split (alpha_HF > alpha_struct) and hub persistence are expected universally."
     },
     {
       "number": 55,
       "question": "Does DREAM require new mathematics?",
-      "answer": "It uses standard push-forward/coarea tools, persistence from TDA, and information measures. Rigor tasks include stability theorems and CPI measure formalization.",
-      "source": "faq_pdf"
+      "answer": "It uses standard push-forward/coarea tools, persistence from TDA, and information measures. Rigor tasks include stability theorems and CPI measure formalization."
     },
     {
       "number": 56,
       "question": "How should documents be chunked for RAG?",
-      "answer": "Use semantic chunks of 120–200 tokens with per-chunk headings, preserve equations in plaintext approximations, and include cross-linked glossaries to stabilize retrieval.",
-      "source": "faq_pdf"
+      "answer": "Use semantic chunks of 120–200 tokens with per-chunk headings, preserve equations in plaintext approximations, and include cross-linked glossaries to stabilize retrieval."
     },
     {
       "number": 57,
       "question": "What metadata helps retrieval?",
-      "answer": "Include fields: section number, title, keywords (e.g., ‘CPI’, ‘retention law’), tags (core/speculative), and equation markers to aid reranking.",
-      "source": "faq_pdf"
+      "answer": "Include fields: section number, title, keywords (e.g., ‘CPI’, ‘retention law’), tags (core/speculative), and equation markers to aid reranking."
     },
     {
       "number": 58,
       "question": "How to answer ‘What is time in DREAM?’",
-      "answer": "MM is atemporal; time emerges as path-selection in the 4D projection. Observers trace conditionally selected paths among pre-encoded MM states. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "MM is atemporal; time emerges as path-selection in the 4D projection. Observers trace conditionally selected paths among pre-encoded MM states. [Speculative]"
     },
     {
       "number": 59,
       "question": "How to answer ‘What is the speed of light in DREAM?’",
-      "answer": "c is a kernel parameter in our projection. Superluminal travel is not allowed within the 4D metric, though topology may mimic shortcuts without violating local c. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "c is a kernel parameter in our projection. Superluminal travel is not allowed within the 4D metric, though topology may mimic shortcuts without violating local c. [Speculative]"
     },
     {
       "number": 60,
       "question": "How to answer ‘What is measurement?’",
-      "answer": "Measurement is coarse-grained interaction that erases sub-lambda phases while preserving invariants. Outcomes are the kernel-robust features of the system.",
-      "source": "faq_pdf"
+      "answer": "Measurement is coarse-grained interaction that erases sub-lambda phases while preserving invariants. Outcomes are the kernel-robust features of the system."
     },
     {
       "number": 61,
       "question": "What distinguishes R_HF from R_struct?",
-      "answer": "R_HF tracks spectral power above a high-frequency threshold; R_struct uses correlation-squared to the unblurred baseline. They have distinct lambda_q and alpha.",
-      "source": "faq_pdf"
+      "answer": "R_HF tracks spectral power above a high-frequency threshold; R_struct uses correlation-squared to the unblurred baseline. They have distinct lambda_q and alpha."
     },
     {
       "number": 62,
       "question": "Why an exponential-of-power fit?",
-      "answer": "It models multi-scale averaging where independent sub-structures are erased with a stretched-exponential law; robust across ensembles and kernels.",
-      "source": "faq_pdf"
+      "answer": "It models multi-scale averaging where independent sub-structures are erased with a stretched-exponential law; robust across ensembles and kernels."
     },
     {
       "number": 63,
       "question": "Can we tie CPI to entropy?",
-      "answer": "CPI correlates with microstate multiplicity but is not a thermodynamic entropy; it depends on fiber cardinalities and focusing, not only on 4D state counts.",
-      "source": "faq_pdf"
+      "answer": "CPI correlates with microstate multiplicity but is not a thermodynamic entropy; it depends on fiber cardinalities and focusing, not only on 4D state counts."
     },
     {
       "number": 64,
       "question": "How do constants vary across projections?",
-      "answer": "Different projections (with different kernels) would have different parameter sets; within one projection, constants are fixed.",
-      "source": "faq_pdf"
+      "answer": "Different projections (with different kernels) would have different parameter sets; within one projection, constants are fixed."
     },
     {
       "number": 65,
       "question": "Are there observable cross-projection effects?",
-      "answer": "No evidence. Projections are disjoint observationally; cross-talk would violate kernel isolation assumptions. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "No evidence. Projections are disjoint observationally; cross-talk would violate kernel isolation assumptions. [Speculative]"
     },
     {
       "number": 66,
       "question": "What about locality and causality?",
-      "answer": "Locality holds in the 4D projection. The push-forward integrates over fibers, but 4D causal structure is preserved in observables.",
-      "source": "faq_pdf"
+      "answer": "Locality holds in the 4D projection. The push-forward integrates over fibers, but 4D causal structure is preserved in observables."
     },
     {
       "number": 67,
       "question": "Can DREAM recover GR and QFT?",
-      "answer": "Yes, as effective theories describing invariants. DREAM explains why their parameters are measured rather than derived internally.",
-      "source": "faq_pdf"
+      "answer": "Yes, as effective theories describing invariants. DREAM explains why their parameters are measured rather than derived internally."
     },
     {
       "number": 68,
       "question": "Is there a DREAM Lagrangian in 4D?",
-      "answer": "Effective 4D Lagrangians can be derived by pushing forward S_MM, but invariant tests do not depend on an explicit 4D Lagrangian.",
-      "source": "faq_pdf"
+      "answer": "Effective 4D Lagrangians can be derived by pushing forward S_MM, but invariant tests do not depend on an explicit 4D Lagrangian."
     },
     {
       "number": 69,
       "question": "Does DREAM prefer particular topologies?",
-      "answer": "No specific MM topology is mandated. Different choices alter class structure and focusing statistics; invariants remain testable.",
-      "source": "faq_pdf"
+      "answer": "No specific MM topology is mandated. Different choices alter class structure and focusing statistics; invariants remain testable."
     },
     {
       "number": 70,
       "question": "Are singular values of J_F observable?",
-      "answer": "Only indirectly via hub density and persistence metrics; direct access to J_F is blocked by kernel non-invertibility.",
-      "source": "faq_pdf"
+      "answer": "Only indirectly via hub density and persistence metrics; direct access to J_F is blocked by kernel non-invertibility."
     },
     {
       "number": 71,
       "question": "Can DREAM guide experiment design?",
-      "answer": "Yes: design instruments to operate near lambda_q for the phenomenon of interest, maximizing invariant retention while suppressing irrelevant detail.",
-      "source": "faq_pdf"
+      "answer": "Yes: design instruments to operate near lambda_q for the phenomenon of interest, maximizing invariant retention while suppressing irrelevant detail."
     },
     {
       "number": 72,
       "question": "Is DREAM compatible with inflation?",
-      "answer": "DREAM is agnostic; inflation parameters appear as kernel parameters or MM initial conditions projected into 4D. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "DREAM is agnostic; inflation parameters appear as kernel parameters or MM initial conditions projected into 4D. [Speculative]"
     },
     {
       "number": 73,
       "question": "How to teach DREAM succinctly?",
-      "answer": "‘The universe you measure is a blurred shadow of a 10D sculpture; physics studies what the blur never deletes.’ This captures projection and invariant focus.",
-      "source": "faq_pdf"
+      "answer": "‘The universe you measure is a blurred shadow of a 10D sculpture; physics studies what the blur never deletes.’ This captures projection and invariant focus."
     },
     {
       "number": 74,
       "question": "Does DREAM handle symmetry breaking?",
-      "answer": "Symmetry breaking corresponds to topology-induced class selection under changing focusing factors, not necessarily a fundamental 4D potential landscape. [Speculative]",
-      "source": "faq_pdf"
+      "answer": "Symmetry breaking corresponds to topology-induced class selection under changing focusing factors, not necessarily a fundamental 4D potential landscape. [Speculative]"
     },
     {
       "number": 75,
       "question": "Are there DREAM-specific numeric targets?",
-      "answer": "Report fitted (lambda_q, alpha) pairs, CPI histograms, and hub persistence fractions across synthetic and experimental data, enabling cross-lab comparison.",
-      "source": "faq_pdf"
+      "answer": "Report fitted (lambda_q, alpha) pairs, CPI histograms, and hub persistence fractions across synthetic and experimental data, enabling cross-lab comparison."
     },
     {
       "number": 76,
       "question": "Are event horizons special in MM?",
-      "answer": "They correspond to extreme focusing boundaries where small changes in MM coordinates make large differences in 4D geodesics.",
-      "source": "faq_pdf"
+      "answer": "They correspond to extreme focusing boundaries where small changes in MM coordinates make large differences in 4D geodesics."
     },
     {
       "number": 77,
       "question": "Can EHT images test DREAM?",
-      "answer": "Edge sharpness vs smoothing scale and multi-ring persistence could be compared to R(lambda) models to check for invariant survival.",
-      "source": "faq_pdf"
+      "answer": "Edge sharpness vs smoothing scale and multi-ring persistence could be compared to R(lambda) models to check for invariant survival."
     },
     {
       "number": 78,
       "question": "Information paradox in DREAM? [Speculative]",
-      "answer": "Information is conserved in MM but projected sub-lambda info may be irrecoverable in 4D, reframing ‘loss’ as projection-level erasure.",
-      "source": "faq_pdf"
+      "answer": "Information is conserved in MM but projected sub-lambda info may be irrecoverable in 4D, reframing ‘loss’ as projection-level erasure."
     },
     {
       "number": 79,
       "question": "Are cosmic void alignments meaningful?",
-      "answer": "They may reflect extended regions of large J_F with coherent orientation; testable via void shape statistics and CPI surrogates.",
-      "source": "faq_pdf"
+      "answer": "They may reflect extended regions of large J_F with coherent orientation; testable via void shape statistics and CPI surrogates."
     },
     {
       "number": 80,
       "question": "Do we expect preferred directions?",
-      "answer": "DREAM does not require global anisotropy; apparent alignments can arise from local focusing variations.",
-      "source": "faq_pdf"
+      "answer": "DREAM does not require global anisotropy; apparent alignments can arise from local focusing variations."
     },
     {
       "number": 81,
       "question": "How to chunk formulas for parsing?",
-      "answer": "Duplicate math in plain text (e.g., ‘R(lambda) ~= exp[-(lambda/lambda_q)^alpha]’) and avoid LaTeX-only notation to improve OCR and embedding quality.",
-      "source": "faq_pdf"
+      "answer": "Duplicate math in plain text (e.g., ‘R(lambda) ~= exp[-(lambda/lambda_q)^alpha]’) and avoid LaTeX-only notation to improve OCR and embedding quality."
     },
     {
       "number": 82,
       "question": "Which metadata fields per chunk?",
-      "answer": "section_id, title, summary (1–2 lines), text, tags=[core|speculative], keywords=[up to 5], equations=[inline text forms].",
-      "source": "faq_pdf"
+      "answer": "section_id, title, summary (1–2 lines), text, tags=[core|speculative], keywords=[up to 5], equations=[inline text forms]."
     },
     {
       "number": 83,
       "question": "What retrieval strategy works best?",
-      "answer": "Hybrid: BM25 or TF-IDF lexical retrieval + dense embeddings (MiniLM or better) + optional cross-encoder reranker for top-20 candidates.",
-      "source": "faq_pdf"
+      "answer": "Hybrid: BM25 or TF-IDF lexical retrieval + dense embeddings (MiniLM or better) + optional cross-encoder reranker for top-20 candidates."
     },
     {
       "number": 84,
       "question": "How to answer questions beyond the PDF?",
-      "answer": "Use a system prompt that privileges PDF content for definitions, then allows ‘reasoned extrapolation consistent with DREAM axioms’ with explicit uncertainty markers.",
-      "source": "faq_pdf"
+      "answer": "Use a system prompt that privileges PDF content for definitions, then allows ‘reasoned extrapolation consistent with DREAM axioms’ with explicit uncertainty markers."
     },
     {
       "number": 85,
       "question": "How to prevent quote-spam answers?",
-      "answer": "Enforce a synthesis template: cite up to three chunks, summarizing each in 1–2 sentences; then produce a clean answer with definitions upfront.",
-      "source": "faq_pdf"
+      "answer": "Enforce a synthesis template: cite up to three chunks, summarizing each in 1–2 sentences; then produce a clean answer with definitions upfront."
     },
     {
       "number": 86,
       "question": "What is the role of epsilon in CPI?",
-      "answer": "Epsilon is an effective hidden cutoff; M grows like (lambda/epsilon)^{D_I}. Only ratios appear in CPI, making it robust to unknown absolute scales.",
-      "source": "faq_pdf"
+      "answer": "Epsilon is an effective hidden cutoff; M grows like (lambda/epsilon)^{D_I}. Only ratios appear in CPI, making it robust to unknown absolute scales."
     },
     {
       "number": 87,
       "question": "Why is reconstruction of K_lambda out of scope?",
-      "answer": "Non-invertibility and underdetermination: multiple kernels can produce identical 4D invariant statistics. Invariants are the scientifically accessible layer.",
-      "source": "faq_pdf"
+      "answer": "Non-invertibility and underdetermination: multiple kernels can produce identical 4D invariant statistics. Invariants are the scientifically accessible layer."
     },
     {
       "number": 88,
       "question": "Can constants drift across space?",
-      "answer": "Not in core DREAM. Apparent drifts reflect environmental differences or calibration, not kernel variation.",
-      "source": "faq_pdf"
+      "answer": "Not in core DREAM. Apparent drifts reflect environmental differences or calibration, not kernel variation."
     },
     {
       "number": 89,
       "question": "Is there a preferred coordinate chart on MM?",
-      "answer": "No. Only topological classes and integral invariants matter for particle identities and conserved quantities.",
-      "source": "faq_pdf"
+      "answer": "No. Only topological classes and integral invariants matter for particle identities and conserved quantities."
     },
     {
       "number": 90,
       "question": "Are there DREAM cosmological parameters?",
-      "answer": "Yes: kernel parameter set (including c, hbar, G in our 4D), and statistical properties of focusing (distributions of J_F and D_I surrogates).",
-      "source": "faq_pdf"
+      "answer": "Yes: kernel parameter set (including c, hbar, G in our 4D), and statistical properties of focusing (distributions of J_F and D_I surrogates)."
     },
     {
       "number": 91,
       "question": "How to explain DREAM to lay audiences?",
-      "answer": "Use the ‘shadow of a 10D sculpture’ metaphor and illustrate hub persistence under blur with images or animations to show invariant survival.",
-      "source": "faq_pdf"
+      "answer": "Use the ‘shadow of a 10D sculpture’ metaphor and illustrate hub persistence under blur with images or animations to show invariant survival."
     },
     {
       "number": 92,
       "question": "How to distinguish DREAM from Neoplatonism?",
-      "answer": "DREAM is operational and falsifiable: it commits to measurable laws (R(lambda), CPI scaling, hub persistence) independent of metaphysics.",
-      "source": "faq_pdf"
+      "answer": "DREAM is operational and falsifiable: it commits to measurable laws (R(lambda), CPI scaling, hub persistence) independent of metaphysics."
     },
     {
       "number": 93,
       "question": "Why is DREAM not just another compactification?",
-      "answer": "Because it rejects 4 + 6 factorization and focuses on push-forward invariants; it does not posit specific shapes for an internal space that must be guessed.",
-      "source": "faq_pdf"
+      "answer": "Because it rejects 4 + 6 factorization and focuses on push-forward invariants; it does not posit specific shapes for an internal space that must be guessed."
     },
     {
       "number": 94,
       "question": "What skills are needed to work on DREAM?",
-      "answer": "Geometric measure theory (coarea/push-forward), topological data analysis, information theory, and experimental interferometry.",
-      "source": "faq_pdf"
+      "answer": "Geometric measure theory (coarea/push-forward), topological data analysis, information theory, and experimental interferometry."
     },
     {
       "number": 95,
       "question": "What near-term milestone matters most?",
-      "answer": "A lab-quality R(lambda) split reproduced across two independent experimental platforms, with public code and uncertainty quantification.",
-      "source": "faq_pdf"
+      "answer": "A lab-quality R(lambda) split reproduced across two independent experimental platforms, with public code and uncertainty quantification."
     },
     {
       "number": 96,
       "question": "Could DREAM enable FTL? [Speculative]",
-      "answer": "No direct violation of 4D speed limit is expected. Topological shortcuts may mimic FTL without breaking local c, but evidence is lacking.",
-      "source": "faq_pdf"
+      "answer": "No direct violation of 4D speed limit is expected. Topological shortcuts may mimic FTL without breaking local c, but evidence is lacking."
     },
     {
       "number": 97,
       "question": "Does DREAM predict multiverse contacts? [Speculative]",
-      "answer": "Projections are isolated by design; cross-projection contact would contradict kernel isolation. No mechanism is proposed.",
-      "source": "faq_pdf"
+      "answer": "Projections are isolated by design; cross-projection contact would contradict kernel isolation. No mechanism is proposed."
     },
     {
       "number": 98,
       "question": "Are ‘gods’ attractors? [Speculative]",
-      "answer": "One can model durable cultural constructs as high-CPI feedback patterns, but this is sociology, not core physics.",
-      "source": "faq_pdf"
+      "answer": "One can model durable cultural constructs as high-CPI feedback patterns, but this is sociology, not core physics."
     },
     {
       "number": 99,
       "question": "What is the role of aesthetics?",
-      "answer": "Aesthetics help design informative visualizations that reveal invariants, but they are not evidence; measurements and fits are.",
-      "source": "faq_pdf"
+      "answer": "Aesthetics help design informative visualizations that reveal invariants, but they are not evidence; measurements and fits are."
     },
     {
       "number": 100,
       "question": "What is the minimum viable DREAM test?",
-      "answer": "Simulate 9→3 and 10→4 compressions, measure R_HF and R_struct vs lambda, compute CPI maps, and publish the split and scaling with full reproducibility.",
-      "source": "faq_pdf"
+      "answer": "Simulate 9→3 and 10→4 compressions, measure R_HF and R_struct vs lambda, compute CPI maps, and publish the split and scaling with full reproducibility."
     },
     {
       "number": 101,
       "question": "Where to look for hubs in data?",
-      "answer": "In gravitational lensing maps, cosmic web skeletons, and structured-field interferometry outputs after controlled blurring.",
-      "source": "faq_pdf"
+      "answer": "In gravitational lensing maps, cosmic web skeletons, and structured-field interferometry outputs after controlled blurring."
     },
     {
       "number": 102,
       "question": "How to extend CPI to time series?",
-      "answer": "Define temporal CPI via sliding-window fiber counts; expect plateau regions where structures persist under temporal coarse-graining.",
-      "source": "faq_pdf"
+      "answer": "Define temporal CPI via sliding-window fiber counts; expect plateau regions where structures persist under temporal coarse-graining."
     },
     {
       "number": 103,
       "question": "Does DREAM offer parameter priors to other theories?",
-      "answer": "Yes: treat constants as fixed kernel parameters; use DREAM to justify why fitting is fundamental rather than a failure to derive.",
-      "source": "faq_pdf"
+      "answer": "Yes: treat constants as fixed kernel parameters; use DREAM to justify why fitting is fundamental rather than a failure to derive."
     },
     {
       "number": 104,
       "question": "Can DREAM align with effective field theory?",
-      "answer": "Yes: EFT parameters capture invariant behavior at scales >> lambda; DREAM justifies why high-energy microdetails need not be reconstructible. Appendix: Key Equations (Plaintext for RAG)  Projection: phi(x) = ∫ K_lambda(x, X; theta) * Phi(X) d^{10}X  Push-forward density: e4(x) = (G_lambda * mu)(x), mu(x) = ∫_{F^{-1}(x)} e10(X)/J_F(X) dSigma6(X)  Retention law: R(lambda) ≈ exp[- (lambda / lambda_q)^alpha] with separate (lambda_q, alpha) for detail vs structure  CPI: M(lambda, epsilon; x) ~ A(x) * (lambda/epsilon)^{D_I}, CPI = log10 M  Vacuum energy (effective 4D): rho_vac^(4)(x; lambda) = ∫ K_lambda(x,X) rho_0(X) d^{10}X − N_lambda; suppression ~ M^{-1/2} Notes: ‘[Speculative]’ labels non-core hypotheses. This document is organized with retrieval in mind: short sections, consistent terms, and plaintext equations.",
-      "source": "faq_pdf"
+      "answer": "Yes: EFT parameters capture invariant behavior at scales >> lambda; DREAM justifies why high-energy microdetails need not be reconstructible. Appendix: Key Equations (Plaintext for RAG)  Projection: phi(x) = ∫ K_lambda(x, X; theta) * Phi(X) d^{10}X  Push-forward density: e4(x) = (G_lambda * mu)(x), mu(x) = ∫_{F^{-1}(x)} e10(X)/J_F(X) dSigma6(X)  Retention law: R(lambda) ≈ exp[- (lambda / lambda_q)^alpha] with separate (lambda_q, alpha) for detail vs structure  CPI: M(lambda, epsilon; x) ~ A(x) * (lambda/epsilon)^{D_I}, CPI = log10 M  Vacuum energy (effective 4D): rho_vac^(4)(x; lambda) = ∫ K_lambda(x,X) rho_0(X) d^{10}X − N_lambda; suppression ~ M^{-1/2} Notes: ‘[Speculative]’ labels non-core hypotheses. This document is organized with retrieval in mind: short sections, consistent terms, and plaintext equations."
     },
     {
       "number": 105,
@@ -652,6 +549,12 @@
       "number": 109,
       "question": "Does life change the Meta-Manifold or the universal kernel? (Speculative)",
       "answer": "No. MM is atemporal and fixed; the kernel is axiomatic. Living systems only choose how they sample the projection—tuning their own \n𝐻 (attention, sensing, memory, control) to reduce loss."
+    },
+    {
+      "number": 110,
+      "question": "What is relativistic time dilation?",
+      "answer": "In D.R.E.A.M, relativistic time dilation appears because the observable 4D metric \ngμνeff\ng\nμν\neff\n\t​\n\n is a projection–coarse-grained imprint of the 10D geometry via a kernel \nKλ\nK\nλ\n\t​\n\n and a map \nπ:M10 ⁣→ ⁣M4\nπ:M\n10\n\t​\n\n→M\n4\n\t​\n\n. Proper time along a worldline \nxμ(τ)\nx\nμ\n(τ) is\n\ndτ=1c− gμνeff dxμdxν,\ndτ=\nc\n1\n\t​\n\n−g\nμν\neff\n\t​\n\ndx\nμ\ndx\nν",
+      "source": "admin_en"
     }
   ]
 }
