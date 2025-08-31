@@ -13,11 +13,12 @@
   },
   "nav": {
     "home": "Home",
+    "case": "Case for D.R.E.A.M",
     "overview": "Overview",
     "axioms": "Axioms",
     "math": "Math Frame",
     "kernel": "Projection Kernel",
-    "topology": "Topology → Particles",
+    "topology": "Topology",
     "spectrum": "Fractal Spectrum",
     "predictions": "Predictions",
     "falsification": "Falsification",

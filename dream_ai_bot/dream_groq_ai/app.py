@@ -429,6 +429,7 @@ def t(key: str):
 # ---------------------------------------------------------------------
 NAV = [
     ("home","nav.home","/"),
+    ("case","nav.case","/case"),
     ("overview","nav.overview","/overview"),
     ("axioms","nav.axioms","/axioms"),
     ("math","nav.math","/math"),
@@ -484,6 +485,13 @@ def faq(): return render_template("faq.html", title=t("nav.faq"))
 
 @app.route("/about")
 def about(): return render_template("about.html", title=t("nav.about"))
+
+@app.route("/case")
+def case(): return render_template("case.html", title=t("nav.case"))
+
+
+
+
 
 app.url_map.strict_slashes = False
 
