@@ -32,8 +32,10 @@
   .editor-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-bottom:1px solid #e5e7eb; background:#f9fafb; }
   .editor-head .fields { display:grid; grid-template-columns:100px 1fr; gap:8px; align-items:center; }
   .editor-head input[type="number"], .editor-head input[type="text"] { border:1px solid #d1d5db; border-radius:8px; padding:6px 8px; font-size:14px; }
+
   .editor-body { padding:10px 12px; min-height:0; display:grid; grid-template-rows:1fr; }
   .editor-body textarea { width:100%; height:100%; resize:none; border:1px solid #d1d5db; border-radius:8px; padding:10px 12px; font-size:14px; line-height:1.4; }
+
   .editor-foot { padding:10px 12px; border-top:1px solid #e5e7eb; background:#fafafa; display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .btn.primary { background:#4f46e5; color:#fff; border-color:#4f46e5; }
   .btn.primary:hover { background:#4338ca; border-color:#4338ca; }
@@ -42,16 +44,16 @@
   .muted { color:#6b7280; }
   .status { font-size:12px; color:#6b7280; }
 
-    /* Bigger, multi-line title fields */
+  /* Bigger, multi-line title field */
   .title-input{
-    width: 150%;
-    min-height: 56px;           /* show ~2 lines by default */
+    width: 100%;
+    min-height: 56px;
     padding: 10px 12px;
-    font-size: 12x;
+    font-size: 14px;        /* fixed typo (12x -> 14px) */
     line-height: 1.35;
     border: 1px solid #d1d5db;
     border-radius: 8px;
-    resize: vertical;           /* allow manual grow if needed */
+    resize: vertical;
     box-sizing: border-box;
   }
 
@@ -87,20 +89,20 @@
         <div class="fields">
           <label for="numInput" class="muted">#</label>
           <input id="numInput" type="number" min="1" step="1">
+
           <label for="titleInput" class="muted">Title</label>
-          <!-- <input id="titleInput" type="text" placeholder="Question / Title…"> -->
-
-          <textarea id="titleInput" class="title-input" rows="2" width="250px" !important placeholder="Question / Title…"></textarea>
-
+          <textarea id="titleInput" class="title-input" rows="2" placeholder="Question / Title…"></textarea>
         </div>
         <div>
           <button id="saveBtn" class="btn primary">Save</button>
           <button id="delBtn" class="btn danger">Delete</button>
         </div>
       </div>
+
       <div class="editor-body">
         <textarea id="bodyInput" placeholder="Answer… supports MathJax ($x^2$)"></textarea>
       </div>
+
       <div class="editor-foot">
         <span id="status" class="status">Ready.</span>
         <span class="muted">Ctrl/Cmd+S to save</span>
@@ -110,27 +112,22 @@
 </div>
 
 <script>
+/* ---------- Admin token boot (URL ?token=... -> header on all requests) ---------- */
 (function(){
-  // 1) Pull token from URL (first load) or sessionStorage
   const qs = new URLSearchParams(location.search);
   let ADMIN_TOKEN = qs.get('token') || sessionStorage.getItem('ADMIN_TOKEN') || '';
 
   if (qs.get('token')) {
-    // Store it and clean the URL bar (no token in history/address)
     sessionStorage.setItem('ADMIN_TOKEN', ADMIN_TOKEN);
     history.replaceState({}, '', location.pathname);
   }
 
-  // 2) If still no token, bounce back to home (or show a message)
   if (!ADMIN_TOKEN) {
-    // Option A: redirect to homepage where the gear/login is
+    // No token → bounce to home where the gear/login lives
     window.location.replace('/');
     return;
-    // Option B: render a message instead
-    // document.body.innerHTML = '<p style="padding:2rem">Unauthorized. Use the gear icon to log in.</p>';
   }
 
-  // 3) Wrap fetch → always add X-Admin-Token header
   window.authFetch = function(url, opts){
     opts = opts || {};
     opts.headers = Object.assign({}, opts.headers, { 'X-Admin-Token': ADMIN_TOKEN });
@@ -141,7 +138,7 @@
 
 <script>
 (function(){
-  /* ---------- STATE FIRST (fixes 'dirty before initialization') ---------- */
+  /* ---------- STATE FIRST (so nothing references before init) ---------- */
   let items = [];       // current list for active lang
   let selectedId = null;
   let dirty = false;
@@ -149,33 +146,39 @@
 
   /* ---------- DOM ---------- */
   const $ = s => document.querySelector(s);
-  const listEl = $('#list');
-  const countEl = $('#countLabel');
-  const langBadge = $('#langLabel');
-  const searchBox = $('#searchBox');
-  const addBtn = $('#addBtn');
-  const saveBtn = $('#saveBtn');
-  const delBtn = $('#delBtn');
+  const listEl   = $('#list');
+  const countEl  = $('#countLabel');
+  const langBadge= $('#langLabel');
+  const searchBox= $('#searchBox');
+  const addBtn   = $('#addBtn');
+  const saveBtn  = $('#saveBtn');
+  const delBtn   = $('#delBtn');
   const numInput = $('#numInput');
   const titleInput = $('#titleInput');
-  const bodyInput = $('#bodyInput');
-  const statusEl = $('#status');
+  const bodyInput  = $('#bodyInput');
+  const statusEl   = $('#status');
 
   const langToggle = $('#adminLangToggle');
-  const langBtns = langToggle.querySelectorAll('button');
+  const langBtns   = langToggle.querySelectorAll('button');
 
   /* ---------- HELPERS ---------- */
   function setCookie(name,val){ document.cookie = `${name}=${val}; path=/; max-age=31536000`; }
   function setStatus(msg, warn=false){ statusEl.textContent = msg; statusEl.style.color = warn ? '#b91c1c' : '#6b7280'; }
   function esc(s){
-  var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
-  return String(s || '').replace(/[&<>"']/g, function(ch){ return map[ch]; });
-}
+    var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}; 
+    return String(s || '').replace(/[&<>"']/g, function(ch){ return map[ch]; });
+  }
   async function loadJSON(url, opts){
     const r = await authFetch(url, opts);
-    const ct = r.headers.get('content-type') || '';
-    if (!r.ok){ const txt = await r.text().catch(()=>'(no body)'); throw new Error(`HTTP ${r.status} ${r.statusText} — ${txt.slice(0,200)}`); }
-    if (!ct.includes('application/json')){ const txt = await r.text().catch(()=>'(no body)'); throw new Error(`Expected JSON, got ${ct} — ${txt.slice(0,200)}`); }
+    const ct = (r.headers.get('content-type') || '').toLowerCase();
+    if (!r.ok){
+      const txt = await r.text().catch(()=>'(no body)');
+      throw new Error(`HTTP ${r.status} ${r.statusText} — ${txt.slice(0,200)}`);
+    }
+    if (!(ct.includes('application/json') || ct.includes('json'))){
+      const txt = await r.text().catch(()=>'(no body)');
+      throw new Error(`Expected JSON, got ${ct} — ${txt.slice(0,200)}`);
+    }
     return r.json();
   }
 
@@ -191,15 +194,14 @@
     loadList();
   }
 
-  // Local toggle
+  // Local toggle (EN/RU) inside the admin bar
   langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
-  // Also listen to header language links to keep in sync (without full reload)
+  // Also sync with header language links (without full reload)
   document.querySelectorAll('.lang a.lang-link').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
       const newLang = (a.getAttribute('href')||'').split('/').pop();
-      // Update header visual "on" state
       document.querySelectorAll('.lang a.lang-link').forEach(x=>{
         const code=(x.getAttribute('href')||'').split('/').pop();
         x.classList.toggle('on', code===newLang);
@@ -211,7 +213,11 @@
   /* ---------- LIST + EDITOR ---------- */
   function renderList(arr){
     listEl.innerHTML = '';
-    if (!arr.length){ listEl.innerHTML = `<div class="muted">No FAQs in ${lang.toUpperCase()}.</div>`; countEl.textContent = '0 items'; return; }
+    if (!arr.length){
+      listEl.innerHTML = `<div class="muted">No FAQs in ${lang.toUpperCase()}.</div>`;
+      countEl.textContent = '0 items';
+      return;
+    }
     arr.forEach(it => {
       const div = document.createElement('div');
       div.className = 'faq-item' + (it.number === selectedId ? ' active' : '');
@@ -234,7 +240,6 @@
         answer: f.answer || ''
       })).sort((a,b)=>a.number-b.number);
       renderList(items);
-      // auto-select first if nothing picked
       if (items.length && !selectedId){ selectItem(items[0].number, {silent:true}); }
       if (!items.length){ clearEditor(); }
       setStatus('Ready.');
@@ -266,9 +271,8 @@
       titleInput.value = it.question || '';
       bodyInput.value = it.answer || '';
       dirty = false;
-      renderList(items); // refresh active highlight
+      renderList(items);
       setStatus('Loaded.');
-      // Render MathJax preview in your site if needed (not necessary for editor inputs)
     }catch(err){
       setStatus('Failed to load item.', true);
       console.error(err);
@@ -283,7 +287,7 @@
   addBtn.addEventListener('click', ()=>{
     if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
     const n = nextNumber();
-    selectedId = null; // new
+    selectedId = null;
     numInput.value = n;
     titleInput.value = '';
     bodyInput.value = '';
@@ -306,7 +310,6 @@
       const savedNum = j.number || number || nextNumber();
       await loadList();
       selectedId = savedNum;
-      // keep selection after refresh
       const sel = items.find(x=>x.number===savedNum);
       if (sel){ numInput.value = sel.number; titleInput.value = sel.question; bodyInput.value = sel.answer; }
       dirty = false;
@@ -338,7 +341,7 @@
   }
   delBtn.addEventListener('click', del);
 
-  // client-side filter
+  // Client-side filter
   let searchTimer = null;
   searchBox.addEventListener('input', ()=>{
     clearTimeout(searchTimer);
@@ -349,11 +352,13 @@
     }, 120);
   });
 
-  // dirty tracking + leave guard
-  [numInput, titleInput, bodyInput].forEach(el => el.addEventListener('input', ()=>{ dirty = true; setStatus('Edited (unsaved).'); }));
+  // Dirty tracking + leave guard
+  [numInput, titleInput, bodyInput].forEach(el => el.addEventListener('input', ()=>{
+    dirty = true; setStatus('Edited (unsaved).');
+  }));
   window.addEventListener('beforeunload', (e)=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
 
-  // boot
+  // Boot
   langBtns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   langBadge.textContent = `lang: ${lang}`;
   loadList();

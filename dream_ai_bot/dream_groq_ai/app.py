@@ -1,20 +1,19 @@
-# app.py — Render-ready: sync FAQs with GitHub kb-data + hot-reload Groq RAG
+# app.py — GitHub-first FAQs + hot-reload Groq RAG
 import os, re, json, time, base64, urllib.request as _urlreq, urllib.error as _urlerr
 import threading, webbrowser
 from pathlib import Path
-from copy import deepcopy
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_cors import CORS
 from dotenv import load_dotenv, find_dotenv
+from typing import Optional, Tuple
 
 # ----- env -----
 load_dotenv(find_dotenv() or "")
 load_dotenv()  # harmless 2nd call
 
-# ----- KB / Groq -----
-from faq_api import faq_bp
-from faq_parser import build_bilingual_jsons, load_faqs
+# ----- Groq bot bits -----
 from groq_bot import warm_index, groq_answer, reload_index
+from faq_parser import build_bilingual_jsons, load_faqs  # kept for status page / fallback PDF parse
 
 # ====================================================================================
 # App + GA
@@ -28,13 +27,13 @@ def _inject_ga():
     return {"GA_MEASUREMENT_ID": app.config.get("GA_MEASUREMENT_ID", "")}
 
 # ====================================================================================
-# Paths
+# Paths (PDF only used by RAG; JSONs are sourced from GitHub)
 # ====================================================================================
 PROJECT_ROOT = Path(__file__).resolve().parent
 KB_DIR       = PROJECT_ROOT / "kb"
 PDF_PATH     = str(KB_DIR / "dream_faqs.pdf")
-JSON_EN_PATH = str(KB_DIR / "parsed_faqs_en.json")
-JSON_RU_PATH = str(KB_DIR / "parsed_faqs_ru.json")
+LOCAL_JSON_EN = str(KB_DIR / "parsed_faqs_en.json")  # local cache (optional)
+LOCAL_JSON_RU = str(KB_DIR / "parsed_faqs_ru.json")  # local cache (optional)
 
 def _mtime(p: str) -> float:
     try:
@@ -42,97 +41,49 @@ def _mtime(p: str) -> float:
     except Exception:
         return 0.0
 
-def _ensure_json_files_exist():
-    os.makedirs(KB_DIR, exist_ok=True)
-    for path, lang in [(JSON_EN_PATH, "en"), (JSON_RU_PATH, "ru")]:
-        if not os.path.exists(path):
-            with open(path, "w", encoding="utf-8") as f:
-                json.dump({"metadata": {"lang": lang, "total_faqs": 0}, "faqs": []},
-                          f, ensure_ascii=False, indent=2)
-
 # ====================================================================================
-# Build from PDF (fallback only)
-# ====================================================================================
-def ensure_bilingual_cache():
-    """
-    Fallback builder: used only if GH pull isn't available or JSONs are missing,
-    or when the PDF is newer than either JSON.
-    """
-    _ensure_json_files_exist()
-    pdf_m, en_m, ru_m = _mtime(PDF_PATH), _mtime(JSON_EN_PATH), _mtime(JSON_RU_PATH)
-    needs = (not os.path.exists(JSON_EN_PATH) or
-             not os.path.exists(JSON_RU_PATH) or
-             (pdf_m and (pdf_m > en_m or pdf_m > ru_m)))
-    if not os.path.exists(PDF_PATH):
-        return
-    if needs:
-        try:
-            build_bilingual_jsons(PDF_PATH, JSON_EN_PATH, JSON_RU_PATH)
-        except Exception:
-            # fallback: copy EN to RU so the UI remains usable
-            from faq_parser import parse_faq_pdf, save_faqs_to_json_lang
-            faqs = parse_faq_pdf(PDF_PATH)
-            save_faqs_to_json_lang(faqs, "en", JSON_EN_PATH)
-            save_faqs_to_json_lang(faqs, "ru", JSON_RU_PATH)
-
-# ====================================================================================
-# GitHub kb-data integration (pull/push via stdlib)
+# GitHub kb-data integration (source of truth)
 # ====================================================================================
 GH_OWNER   = os.getenv("GH_OWNER",  "dream-framework")
 GH_REPO    = os.getenv("GH_REPO",   "dream")
 GH_BRANCH  = os.getenv("GH_BRANCH", "kb-data")
 GH_JSON_EN = os.getenv("GH_JSON_EN","kb/parsed_faqs_en.json")
 GH_JSON_RU = os.getenv("GH_JSON_RU","kb/parsed_faqs_ru.json")
-GH_TOKEN   = os.getenv("GH_TOKEN",  "")  # fine-grained PAT, repo Contents: read+write
+GH_TOKEN   = os.getenv("GH_TOKEN",  "")  # fine-grained PAT (contents read+write on repo)
 
 def _gh_headers():
     h = {"Accept": "application/vnd.github+json"}
     if GH_TOKEN:
-        # REST v3 prefers 'token' scheme for PATs
-        h["Authorization"] = f"token {GH_TOKEN}"
+        h["Authorization"] = f"token {GH_TOKEN}"  # REST v3 expects 'token'
     return h
 
-def _gh_contents_url(path_in_repo: str, ref: str | None = None) -> str:
+def _gh_contents_url(path_in_repo: str, ref: Optional[str] = None) -> str:
     url = f"https://api.github.com/repos/{GH_OWNER}/{GH_REPO}/contents/{path_in_repo}"
     if ref:
         url += f"?ref={ref}"
     return url
 
-def _gh_get_file_and_sha(path_in_repo: str):
-    """Return (bytes_or_None, sha_or_None)."""
+def _gh_get_file_and_sha(path_in_repo: str) -> Tuple[Optional[bytes], Optional[str]]:
+    """Return (raw_bytes_or_None, sha_or_None) from GitHub contents API."""
     req = _urlreq.Request(_gh_contents_url(path_in_repo, GH_BRANCH), headers=_gh_headers())
     try:
         with _urlreq.urlopen(req, timeout=20) as r:
             payload = json.loads(r.read().decode("utf-8", "ignore"))
             content_b64 = payload.get("content")
-            data = base64.b64decode(content_b64) if content_b64 else None
+            if content_b64 is None:
+                return None, payload.get("sha")
+            # base64 may contain newlines
+            data = base64.b64decode(content_b64.encode("ascii"))
             return data, payload.get("sha")
     except _urlerr.HTTPError as e:
+        # 404 is fine (treat as missing)
         if e.code != 404:
             print(f"[kb] GET {path_in_repo} -> {e.code}")
     except Exception as e:
         print(f"[kb] GET {path_in_repo} error:", e)
     return None, None
 
-def pull_kb_from_github() -> bool:
-    """
-    Pull EN/RU JSONs from kb-data into local kb/. Returns True if any changed.
-    """
-    os.makedirs(KB_DIR, exist_ok=True)
-    changed = False
-    for remote, local in [(GH_JSON_EN, JSON_EN_PATH), (GH_JSON_RU, JSON_RU_PATH)]:
-        blob, _sha = _gh_get_file_and_sha(remote)
-        if blob is None:
-            continue
-        old = open(local, "rb").read() if os.path.exists(local) else None
-        if old != blob:
-            with open(local, "wb") as f:
-                f.write(blob)
-            changed = True
-            print(f"[kb] updated {local} from {GH_BRANCH}:{remote}")
-    return changed
-
-def _gh_current_sha(path_in_repo: str) -> str | None:
+def _gh_current_sha(path_in_repo: str) -> Optional[str]:
     try:
         _, sha = _gh_get_file_and_sha(path_in_repo)
         return sha
@@ -163,26 +114,52 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
         print(f"[kb] push error ({path_in_repo}):", e)
         return False
 
-def start_kb_poll(interval_sec: int = 60):
-    """Background poller: pulls from kb-data and reloads retriever when changed."""
-    def _loop():
-        while True:
-            try:
-                if pull_kb_from_github():
-                    reload_index(force=True)
-            except Exception as e:
-                print("[kb] poll error:", e)
-            time.sleep(max(30, interval_sec))
-    threading.Thread(target=_loop, daemon=True).start()
+def _lang_to_repo_path(lang: str) -> str:
+    return GH_JSON_RU if lang == "ru" else GH_JSON_EN
+
+def _safe_json_parse(raw_bytes: Optional[bytes]) -> dict:
+    if not raw_bytes:
+        return {"metadata": {"lang":"en","total_faqs":0}, "faqs":[]}
+    try:
+        return json.loads(raw_bytes.decode("utf-8", "ignore"))
+    except Exception:
+        return {"metadata": {"lang":"en","total_faqs":0}, "faqs":[]}
+
+def gh_load_lang_json(lang: str) -> dict:
+    """ALWAYS load the lang JSON from GitHub; never from local on the /faq API."""
+    path = _lang_to_repo_path(lang)
+    raw, _sha = _gh_get_file_and_sha(path)
+    data = _safe_json_parse(raw)
+    # Keep a local cache for other features/status (optional)
+    try:
+        os.makedirs(KB_DIR, exist_ok=True)
+        cache_path = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+    return data
+
+def gh_save_lang_json(lang: str, payload: dict, commit_msg: str) -> bool:
+    path = _lang_to_repo_path(lang)
+    ok = push_kb_to_github(path, json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8"), commit_msg)
+    # update local cache too (best effort)
+    try:
+        cache_path = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+    return ok
 
 # ====================================================================================
-# i18n
+# i18n helpers
 # ====================================================================================
 LANGS = ["en", "ru"]
 I18N_DIR = PROJECT_ROOT / "i18n"
 TX, MT = {l: {} for l in LANGS}, {l: 0 for l in LANGS}
 
-def _load(lang: str):
+def _load_i18n(lang: str):
     p = I18N_DIR / f"{lang}.json"
     if p.exists():
         TX[lang] = json.loads(p.read_text(encoding="utf-8"))
@@ -191,13 +168,13 @@ def _load(lang: str):
         TX[lang], MT[lang] = {}, 0
 
 for _l in LANGS:
-    _load(_l)
+    _load_i18n(_l)
 
 def _refresh_i18n():
     for l in LANGS:
         p = I18N_DIR / f"{l}.json"
         if p.exists() and p.stat().st_mtime != MT.get(l, 0):
-            _load(l)
+            _load_i18n(l)
 
 def get_lang():
     lang = request.cookies.get("lang", "en")
@@ -216,49 +193,8 @@ def t(key: str):
     v = lookup(get_lang())
     return v if v is not None else (lookup("en") or key)
 
-def _json_for_lang(lang: str) -> str:
-    return JSON_RU_PATH if lang == "ru" else JSON_EN_PATH
-
 # ====================================================================================
-# Hot reload of local KB files
-# ====================================================================================
-_KB_SIG = None
-_KB_LOCK = threading.Lock()
-
-def _sig_tuple() -> tuple:
-    return (_mtime(PDF_PATH), _mtime(JSON_EN_PATH), _mtime(JSON_RU_PATH))
-
-def _kb_refresh_if_stale():
-    global _KB_SIG
-    with _KB_LOCK:
-        new_sig = _sig_tuple()
-        if _KB_SIG is None:
-            _KB_SIG = new_sig
-            return
-        pdf_m_new, en_m_new, ru_m_new = new_sig
-        pdf_m_old, en_m_old, ru_m_old = _KB_SIG
-
-        json_changed = (en_m_new != en_m_old) or (ru_m_new != ru_m_old)
-        pdf_newer    = pdf_m_new and (pdf_m_new > en_m_new or pdf_m_new > ru_m_new)
-
-        if pdf_newer:
-            ensure_bilingual_cache()
-            reload_index(force=True)
-            _KB_SIG = _sig_tuple()
-        elif json_changed:
-            reload_index(force=True)
-            _KB_SIG = new_sig
-
-@app.before_request
-def _before_request_hot_reload():
-    # Ensure boot happened (safe to call repeatedly)
-    if not _BOOT_DONE:
-        _boot_once()
-    # Then check for KB file changes on each request
-    _kb_refresh_if_stale()
-
-# ====================================================================================
-# Navigation
+# Navigation + pages
 # ====================================================================================
 NAV = [
     ("home","nav.home","/"),
@@ -278,9 +214,6 @@ NAV = [
 def inject():
     return dict(_=t, NAV=NAV, LANGS=LANGS, lang=get_lang())
 
-# ====================================================================================
-# Routes (pages)
-# ====================================================================================
 @app.get("/setlang/<lang_code>")
 def setlang(lang_code):
     resp = redirect(request.referrer or url_for("home"))
@@ -322,7 +255,7 @@ def faq(): return render_template("faq.html", title=t("nav.faq"))
 def about(): return render_template("about.html", title=t("nav.about"))
 
 # ====================================================================================
-# Simple FAQ search (bilingual JSONs)
+# Simple FAQ search (uses GitHub JSON as the source of truth)
 # ====================================================================================
 @app.post("/chat")
 def chat():
@@ -331,7 +264,8 @@ def chat():
         return jsonify({"reply": "Please enter a message."})
     try:
         lang = get_lang()
-        faqs = load_faqs(_json_for_lang(lang)) if os.path.exists(_json_for_lang(lang)) else []
+        data = gh_load_lang_json(lang)
+        faqs = data.get("faqs", [])
         qlower = user_message.lower()
         tokens = [t for t in re.findall(r"\w+", qlower) if len(t) > 2]
         best, score = None, 0
@@ -344,28 +278,33 @@ def chat():
         if best and score > 0:
             return jsonify({"reply": f"**{best['question']}**\n\n{best['answer']}", "source": f"faq-{lang}"})
         return jsonify({"reply": "I couldn't find that in the FAQs. Try the FAQ Bot or rephrase your question."})
-    except Exception:
-        return jsonify({"reply": "Sorry, I encountered an error while processing your request."})
+    except Exception as e:
+        # Always return JSON, never HTML errors (prevents admin loader crash)
+        return jsonify({"reply": f"Error while processing your request: {str(e)}"})
 
 # ====================================================================================
-# Status
+# RAG status (will read local cache counts if present)
 # ====================================================================================
 @app.get("/api/rag-status")
 def rag_status():
-    def count(p):
+    def count(local_path):
         try:
-            return len(load_faqs(p)) if os.path.exists(p) else 0
+            if os.path.exists(local_path):
+                return len(load_faqs(local_path))
         except Exception:
-            return 0
+            pass
+        return 0
     return jsonify({
         "pdf_exists": os.path.exists(PDF_PATH),
         "pdf_mtime": _mtime(PDF_PATH),
-        "en_json_exists": os.path.exists(JSON_EN_PATH),
-        "ru_json_exists": os.path.exists(JSON_RU_PATH),
-        "en_count": count(JSON_EN_PATH),
-        "ru_count": count(JSON_RU_PATH),
-        "json_en_path": JSON_EN_PATH,
-        "json_ru_path": JSON_RU_PATH,
+        "en_cache_exists": os.path.exists(LOCAL_JSON_EN),
+        "ru_cache_exists": os.path.exists(LOCAL_JSON_RU),
+        "en_count": count(LOCAL_JSON_EN),
+        "ru_count": count(LOCAL_JSON_RU),
+        "json_en_repo": GH_JSON_EN,
+        "json_ru_repo": GH_JSON_RU,
+        "branch": GH_BRANCH,
+        "repo": f"{GH_OWNER}/{GH_REPO}",
     })
 
 # ====================================================================================
@@ -376,12 +315,13 @@ def groq_chat():
     payload = request.get_json(force=True, silent=True) or {}
     q = (payload.get("message") or "").strip()
     if not q:
-        return jsonify({"ok": False, "error": "Empty message."}), 400
+        return jsonify({"ok": False, "error": "Empty message."}), 200
     try:
         ans = groq_answer(q, top_k=6)
         return jsonify({"ok": True, "reply": ans})
     except Exception as e:
-        return jsonify({"ok": False, "error": str(e)}), 500
+        # Return JSON 200 to keep the dock UI stable
+        return jsonify({"ok": False, "error": str(e)})
 
 @app.post("/groq/ask")
 def groq_ask():
@@ -392,11 +332,9 @@ def groq_ask():
     return jsonify({"ok": True, "answer": ans})
 
 # ====================================================================================
-# Admin (CRUD) — also pushes KB changes back to kb-data
+# Admin security
 # ====================================================================================
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "January@1")
-SAVE_LOCK = threading.Lock()
-
 def _check_admin():
     if not ADMIN_TOKEN:
         return
@@ -404,164 +342,163 @@ def _check_admin():
     if token != ADMIN_TOKEN:
         abort(401)
 
-def _write_json_atomic(path: str, payload: dict):
-    tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-    os.replace(tmp, path)
-
-def _load_en_ru():
-    en = load_faqs(JSON_EN_PATH) if os.path.exists(JSON_EN_PATH) else []
-    ru = load_faqs(JSON_RU_PATH) if os.path.exists(JSON_RU_PATH) else []
-    return en, ru
-
-def load_bilingual_flat():
-    en, ru = _load_en_ru()
-    by = {}
-    for f in en:
-        by[f["number"]] = {"number": f["number"], "question_en": f.get("question",""),
-                           "answer_en": f.get("answer",""), "question_ru":"", "answer_ru":""}
-    for f in ru:
-        slot = by.setdefault(f["number"], {"number": f["number"], "question_en":"", "answer_en":"",
-                                           "question_ru":"", "answer_ru":""})
-        slot["question_ru"] = f.get("question",""); slot["answer_ru"] = f.get("answer","")
-    return sorted(by.values(), key=lambda x: x["number"])
-
-def save_bilingual_flat(items):
-    """Write EN/RU JSONs locally, push to GitHub, and refresh retriever."""
-    with SAVE_LOCK:
-        faqs_en, faqs_ru = [], []
-        for it in items:
-            n = int(it["number"])
-            faqs_en.append({"number": n, "question": it.get("question_en","") or "",
-                            "answer": it.get("answer_en","") or "", "source": "admin_en"})
-            faqs_ru.append({"number": n, "question": it.get("question_ru","") or "",
-                            "answer": it.get("answer_ru","") or "", "source": "admin_ru"})
-        meta_en = {"metadata": {"source": "Admin-edited", "lang": "en",
-                                "total_faqs": len(faqs_en),
-                                "parsed_date": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
-                   "faqs": sorted(faqs_en, key=lambda x: x["number"])}
-        meta_ru = json.loads(json.dumps(meta_en, ensure_ascii=False))
-        meta_ru["metadata"]["lang"] = "ru"
-        meta_ru["faqs"] = sorted(faqs_ru, key=lambda x: x["number"])
-
-        os.makedirs(KB_DIR, exist_ok=True)
-        _write_json_atomic(JSON_EN_PATH, meta_en)
-        _write_json_atomic(JSON_RU_PATH, meta_ru)
-
-        # push to kb-data (best-effort)
-        try:
-            push_kb_to_github(GH_JSON_EN, json.dumps(meta_en, ensure_ascii=False, indent=2).encode("utf-8"),
-                              "admin: update EN FAQs")
-            push_kb_to_github(GH_JSON_RU, json.dumps(meta_ru, ensure_ascii=False, indent=2).encode("utf-8"),
-                              "admin: update RU FAQs")
-        except Exception as e:
-            print("[kb] push skipped:", e)
-
-    # retriever sees changes immediately
-    global _KB_SIG
-    _KB_SIG = _sig_tuple()
-    reload_index(force=True)
-
-@app.get("/admin")
-def admin_page():
-    _check_admin()
-    # ensure admin sees GitHub branch state right away
+# ====================================================================================
+# /faq API — ALWAYS hits GitHub as the source of truth
+# ====================================================================================
+@app.get("/faq/list")
+def faq_list():
+    # public read is fine; used by admin UI too
+    lang = request.args.get("lang", "en").lower()
+    lang = "ru" if lang == "ru" else "en"
     try:
-        if pull_kb_from_github():
+        data = gh_load_lang_json(lang)
+        faqs = data.get("faqs", [])
+        items = [{"number": int(f.get("number") or 0),
+                  "question": f.get("question",""),
+                  "answer": f.get("answer","")} for f in faqs]
+        items.sort(key=lambda x: x["number"])
+        return jsonify({"ok": True, "items": items})
+    except Exception as e:
+        # Keep admin page happy: still return JSON 200
+        return jsonify({"ok": False, "items": [], "error": f"GH fetch failed: {str(e)}"})
+
+@app.get("/faq/item/<int:number>")
+def faq_item(number):
+    lang = request.args.get("lang", "en").lower()
+    lang = "ru" if lang == "ru" else "en"
+    try:
+        data = gh_load_lang_json(lang)
+        for f in data.get("faqs", []):
+            if int(f.get("number") or 0) == number:
+                return jsonify({"ok": True, "item": {
+                    "number": int(f.get("number") or 0),
+                    "question": f.get("question",""),
+                    "answer": f.get("answer",""),
+                }})
+        return jsonify({"ok": False, "error": "Not found"})
+    except Exception as e:
+        return jsonify({"ok": False, "error": f"GH fetch failed: {str(e)}"})
+
+@app.post("/faq/save")
+def faq_save():
+    _check_admin()
+    body = request.get_json(force=True) or {}
+    lang = (body.get("lang") or "en").lower()
+    lang = "ru" if lang == "ru" else "en"
+    item = body.get("item") or {}
+    try:
+        data = gh_load_lang_json(lang)
+        faqs = data.get("faqs", [])
+        n = int(item.get("number") or 0)
+        q = item.get("question","")
+        a = item.get("answer","")
+        updated = False
+        for f in faqs:
+            if int(f.get("number") or 0) == n:
+                f["question"] = q; f["answer"] = a
+                updated = True
+                break
+        if not updated:
+            faqs.append({"number": n, "question": q, "answer": a, "source": f"admin_{lang}"})
+        faqs.sort(key=lambda x: int(x.get("number") or 0))
+        data["faqs"] = faqs
+        # maintain metadata
+        meta = data.setdefault("metadata", {})
+        meta["lang"] = lang
+        meta["total_faqs"] = len(faqs)
+        meta["parsed_date"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+        ok = gh_save_lang_json(lang, data, f"admin: save {lang.upper()} FAQ #{n}")
+        if ok:
+            # make the retriever aware quickly (if you later blend JSON + PDF)
             reload_index(force=True)
-    except Exception as _e:
-        print("[kb] admin pull failed:", _e)
-    return render_template("admin.html", title="Admin FAQs")
+        return jsonify({"ok": True, "number": n})
+    except Exception as e:
+        return jsonify({"ok": False, "error": f"GH save failed: {str(e)}"})
 
-@app.get("/admin/api/faqs")
-def admin_list_faqs():
+@app.delete("/faq/delete/<int:number>")
+def faq_delete(number):
     _check_admin()
-    return jsonify({"ok": True, "items": load_bilingual_flat()})
-
-@app.get("/admin/api/faqs/<int:number>")
-def admin_get_faq(number):
-    _check_admin()
-    for it in load_bilingual_flat():
-        if it["number"] == number:
-            return jsonify({"ok": True, "item": it})
-    return jsonify({"ok": False, "error": "Not found"}), 404
-
-@app.post("/admin/api/faqs")
-def admin_create_faq():
-    _check_admin()
-    data = request.get_json(force=True) or {}
-    items = load_bilingual_flat()
-    used = {it["number"] for it in items}
-    number = int(data.get("number") or (max(used) + 1 if used else 1))
-    if number in used:
-        return jsonify({"ok": False, "error": "Number already exists"}), 400
-    items.append({"number": number,
-                  "question_en": data.get("question_en",""), "answer_en": data.get("answer_en",""),
-                  "question_ru": data.get("question_ru",""), "answer_ru": data.get("answer_ru","")})
-    save_bilingual_flat(items)
-    return jsonify({"ok": True, "item": items[-1]})
-
-@app.put("/admin/api/faqs/<int:number>")
-def admin_update_faq(number):
-    _check_admin()
-    data = request.get_json(force=True) or {}
-    items = load_bilingual_flat()
-    for it in items:
-        if it["number"] == number:
-            it["question_en"] = data.get("question_en", it["question_en"])
-            it["answer_en"]   = data.get("answer_en",   it["answer_en"])
-            it["question_ru"] = data.get("question_ru", it["question_ru"])
-            it["answer_ru"]   = data.get("answer_ru",   it["answer_ru"])
-            save_bilingual_flat(items)
-            return jsonify({"ok": True, "item": it})
-    return jsonify({"ok": False, "error": "Not found"}), 404
-
-@app.delete("/admin/api/faqs/<int:number>")
-def admin_delete_faq(number):
-    _check_admin()
-    items = [it for it in load_bilingual_flat() if it["number"] != number]
-    if len(items) == len(load_bilingual_flat()):
-        return jsonify({"ok": False, "error": "Not found"}), 404
-    save_bilingual_flat(items)
-    return jsonify({"ok": True, "deleted": number})
-
-# Mount FAQ API blueprint
-app.register_blueprint(faq_bp, url_prefix="/faq")
+    lang = request.args.get("lang", "en").lower()
+    lang = "ru" if lang == "ru" else "en"
+    try:
+        data = gh_load_lang_json(lang)
+        before = list(data.get("faqs", []))
+        after = [f for f in before if int(f.get("number") or 0) != number]
+        if len(after) == len(before):
+            return jsonify({"ok": False, "error": "Not found"})
+        data["faqs"] = sorted(after, key=lambda x: int(x.get("number") or 0))
+        meta = data.setdefault("metadata", {})
+        meta["lang"] = lang
+        meta["total_faqs"] = len(data["faqs"])
+        meta["parsed_date"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        ok = gh_save_lang_json(lang, data, f"admin: delete {lang.upper()} FAQ #{number}")
+        if ok:
+            reload_index(force=True)
+        return jsonify({"ok": True, "deleted": number})
+    except Exception as e:
+        return jsonify({"ok": False, "error": f"GH delete failed: {str(e)}"})
 
 # ====================================================================================
-# Boot (works for both gunicorn on Render and local dev)
+# Background poller: keep a local cache fresh for status/RAG (optional)
+# ====================================================================================
+def _pull_and_cache_from_github() -> bool:
+    """Pull EN/RU JSONs from GitHub into local cache; returns True if changed."""
+    changed = False
+    try:
+        os.makedirs(KB_DIR, exist_ok=True)
+        for remote, local in [(GH_JSON_EN, LOCAL_JSON_EN), (GH_JSON_RU, LOCAL_JSON_RU)]:
+            blob, _sha = _gh_get_file_and_sha(remote)
+            if blob is None:
+                continue
+            old = open(local, "rb").read() if os.path.exists(local) else None
+            if old != blob:
+                with open(local, "wb") as f:
+                    f.write(blob)
+                changed = True
+                print(f"[kb] cached {local} from {GH_BRANCH}:{remote}")
+    except Exception as e:
+        print("[kb] cache pull error:", e)
+    return changed
+
+def start_kb_poll(interval_sec: int = 60):
+    def _loop():
+        while True:
+            try:
+                if _pull_and_cache_from_github():
+                    reload_index(force=True)
+            except Exception as e:
+                print("[kb] poll error:", e)
+            time.sleep(max(30, interval_sec))
+    threading.Thread(target=_loop, daemon=True).start()
+
+# ====================================================================================
+# Boot
 # ====================================================================================
 _BOOT_DONE = False
 _BOOT_LOCK = threading.Lock()
 
 def _boot_once():
-    global _BOOT_DONE, _KB_SIG
+    global _BOOT_DONE
     with _BOOT_LOCK:
         if _BOOT_DONE:
             return
-        # 1) Pull from kb-data (preferred), else build from PDF
-        pulled = False
+        # Warm Groq retriever (guard if PDF missing)
         try:
-            pulled = pull_kb_from_github()
+            if os.path.exists(PDF_PATH):
+                warm_index(PDF_PATH)
+            else:
+                warm_index()
         except Exception as e:
-            print("[kb] initial pull failed:", e)
-        if not pulled:
-            ensure_bilingual_cache()
+            print("[rag] warm_index failed:", e)
 
-        # 2) Warm Groq retriever
-        warm_index(PDF_PATH)
-
-        # 3) Init signature and start KB poller
-        _KB_SIG = _sig_tuple()
+        # Start GitHub cache poller (optional)
         start_kb_poll(interval_sec=60)
         _BOOT_DONE = True
-        print("[boot] KB ready; poller started.")
+        print("[boot] Ready (GitHub-first FAQs).")
 
-# Trigger on module import (gunicorn) and again on first request (idempotent)
+# Trigger on import and again on first request (idempotent)
 _boot_once()
-
-
 
 # For local dev convenience
 if __name__ == "__main__":
