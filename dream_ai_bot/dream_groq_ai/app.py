@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# app.py — GitHub-first FAQs with robust RU loader, cache-first UI, fast-fail GitHub fetch, and hot-reload Groq RAG
 
 import os
 import re
