@@ -64,6 +64,11 @@ GITHUB_TIMEOUT_RAW   = int(os.getenv("GITHUB_TIMEOUT_RAW", "6"))   # per raw/dow
 GITHUB_TIMEOUT_API   = int(os.getenv("GITHUB_TIMEOUT_API", "6"))   # per API hop
 GITHUB_TOTAL_BUDGET  = int(os.getenv("GITHUB_TOTAL_BUDGET", "12")) # overall per fetch
 
+# Freshness window to ensure immediate consistency after mutations
+MUTATION_FRESH_TTL = int(os.getenv("FAQ_MUTATION_FRESH_TTL", "45"))
+_API_FIRST_UNTIL: Dict[str, float] = {"en": 0.0, "ru": 0.0}
+_LAST_PAYLOAD: Dict[str, Optional[Dict[str, Any]]] = {"en": None, "ru": None}
+
 def _time_left(deadline: float) -> float:
     return max(0.5, deadline - time.monotonic())
 
@@ -91,52 +96,63 @@ def _gh_blob_url(sha: str) -> str:
 def _raw_github_url(path_in_repo: str) -> str:
     return f"https://raw.githubusercontent.com/{GH_OWNER}/{GH_REPO}/{GH_BRANCH}/{path_in_repo}"
 
-def _gh_get_file_bytes(path_in_repo: str, deadline: Optional[float] = None) -> bytes:
+def _gh_get_file_bytes(path_in_repo: str, deadline: Optional[float] = None, *, api_first: bool = False) -> bytes:
     """
     Return raw bytes for a file in repo/branch.
     Fast-fail strategy with per-hop timeouts and an overall budget:
       1) raw.githubusercontent.com
       2) Contents API (inline base64 or download_url)
       3) Git blob by sha
-    Only treat 404 as path-tryable; other network errors don't cascade forever.
+    The 'api_first' flag tries the Contents API first to avoid raw CDN staleness.
     """
     if deadline is None:
         deadline = time.monotonic() + GITHUB_TOTAL_BUDGET
 
-    # 1) raw
-    try:
-        req = _urlreq.Request(_raw_github_url(path_in_repo), headers=_gh_headers())
-        with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as r:
-            return r.read()
-    except _urlerr.HTTPError as e:
-        if e.code != 404:
+    def _try_raw():
+        try:
+            req = _urlreq.Request(_raw_github_url(path_in_repo), headers=_gh_headers())
+            with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as r:
+                return r.read()
+        except _urlerr.HTTPError as e:
+            if e.code != 404:
+                pass
+        except Exception:
             pass
-    except Exception:
-        pass
+        return None
 
-    # 2) contents
-    try:
-        req = _urlreq.Request(_gh_contents_url(path_in_repo, GH_BRANCH), headers=_gh_headers())
-        with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as r:
-            payload = json.loads(r.read().decode("utf-8", "ignore"))
-        if isinstance(payload, dict):
-            if payload.get("content"):
-                return base64.b64decode(payload["content"].encode("ascii"))
-            dl = payload.get("download_url")
-            if dl:
-                with _urlreq.urlopen(_urlreq.Request(dl, headers=_gh_headers()),
-                                     timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as rr:
-                    return rr.read()
-            sha = payload.get("sha")
-            if sha:
-                req2 = _urlreq.Request(_gh_blob_url(sha), headers=_gh_headers_raw())
-                with _urlreq.urlopen(req2, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as rr:
-                    return rr.read()
-    except _urlerr.HTTPError as e:
-        if e.code != 404:
-            app.logger.warning("GitHub contents fetch (%s) -> %s", path_in_repo, e)
-    except Exception as e:
-        app.logger.warning("GitHub contents error (%s): %s", path_in_repo, e)
+    def _try_contents_then_blob():
+        try:
+            req = _urlreq.Request(_gh_contents_url(path_in_repo, GH_BRANCH), headers=_gh_headers())
+            with _urlreq.urlopen(req, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as r:
+                payload = json.loads(r.read().decode("utf-8", "ignore"))
+            if isinstance(payload, dict):
+                if payload.get("content"):
+                    return base64.b64decode(payload["content"].encode("ascii"))
+                dl = payload.get("download_url")
+                if dl:
+                    with _urlreq.urlopen(_urlreq.Request(dl, headers=_gh_headers()),
+                                         timeout=min(GITHUB_TIMEOUT_RAW, _time_left(deadline))) as rr:
+                        return rr.read()
+                sha = payload.get("sha")
+                if sha:
+                    req2 = _urlreq.Request(_gh_blob_url(sha), headers=_gh_headers_raw())
+                    with _urlreq.urlopen(req2, timeout=min(GITHUB_TIMEOUT_API, _time_left(deadline))) as rr:
+                        return rr.read()
+        except _urlerr.HTTPError as e:
+            if e.code != 404:
+                app.logger.warning("GitHub contents fetch (%s) -> %s", path_in_repo, e)
+        except Exception as e:
+            app.logger.warning("GitHub contents error (%s): %s", path_in_repo, e)
+        return None
+
+    data = None
+    if api_first:
+        data = _try_contents_then_blob() or _try_raw()
+    else:
+        data = _try_raw() or _try_contents_then_blob()
+
+    if data is not None:
+        return data
 
     raise RuntimeError(f"Cannot fetch '{path_in_repo}' from GitHub (branch={GH_BRANCH}) within time budget")
 
@@ -176,7 +192,7 @@ def push_kb_to_github(path_in_repo: str, raw_bytes: bytes, message: str) -> bool
 # ---------------------------------------------------------------------
 # JSON decode/normalize (robust) + GitHub load/save
 # ---------------------------------------------------------------------
-# Use raw string so \x escapes are interpreted by the regex engine, not by Python's string literal parser.
+# Raw string so \x escapes are handled by the regex engine, not Python string literal parsing.
 _CTRL_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
 
 # Repair invalid JSON backslash escapes before json.loads
@@ -189,7 +205,6 @@ def _safe_json_loads(txt: str) -> Any:
     try:
         return json.loads(txt)
     except json.JSONDecodeError:
-        # Attempt automatic repair for bad backslash escapes
         txt2 = _RE_INVALID_ESCAPE.sub(r"\\\\", txt)
         txt2 = _RE_BAD_U_ESCAPE.sub(r"\\\\u", txt2)
         txt2 = _RE_TRAILING_BS.sub(r"\\\\", txt2)
@@ -270,9 +285,19 @@ def _read_local_cache(lang: str) -> Optional[Dict[str, Any]]:
 def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     """
     Read from GitHub with a strict time budget; fall back to local cache if GitHub is slow/unavailable.
-    If a candidate path yields 0 FAQs while metadata claims >0, try alternates; don't silently return 0.
+    If a candidate path yields 0 FAQs while metadata claims >0, keep trying; do not silently return 0.
     Evict a cached bad path immediately to avoid pinning to a wrong location.
+    During a freshness window after mutations, serve the in-memory payload and fetch API-first.
     """
+    now = time.monotonic()
+    api_first = now < _API_FIRST_UNTIL.get(lang, 0.0)
+
+    # If we just mutated, serve the in-memory payload immediately
+    if api_first:
+        mem = _LAST_PAYLOAD.get(lang)
+        if mem and mem.get("faqs"):
+            return mem
+
     attempts: List[str] = []
     cached_list = _GH_PATH_CACHE.get(lang, [])
     canonical = [GH_JSON_EN if lang == "en" else GH_JSON_RU]
@@ -288,7 +313,7 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             continue
         attempts.append(path)
         try:
-            raw = _gh_get_file_bytes(path, deadline=deadline)
+            raw = _gh_get_file_bytes(path, deadline=deadline, api_first=api_first)
             obj = _decode_json_bytes(raw)
             data = _normalize_faq_json_obj(obj)
 
@@ -326,9 +351,11 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
             return cached_local
         raise RuntimeError(f"{lang.upper()} JSON parsed successfully but contains 0 FAQs (path: {best_path}).")
 
+    # Cache path that worked (store single-element list)
     if best_path:
         _GH_PATH_CACHE[lang] = [best_path]
 
+    # Write local cache (for status page / debugging)
     try:
         os.makedirs(KB_DIR, exist_ok=True)
         cache_path = LOCAL_JSON_RU if lang == "ru" else LOCAL_JSON_EN
@@ -342,6 +369,7 @@ def gh_load_lang_json(lang: str) -> Dict[str, Any]:
     return best_data
 
 def gh_save_lang_json(lang: str, payload: Dict[str, Any], commit_msg: str) -> bool:
+    # Save back to the same path that worked, or primary if none cached
     path_list = _GH_PATH_CACHE.get(lang) or ([GH_JSON_RU] if lang == "ru" else [GH_JSON_EN])
     path = path_list[0]
     raw = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
@@ -459,6 +487,18 @@ def about(): return render_template("about.html", title=t("nav.about"))
 
 app.url_map.strict_slashes = False
 
+# Prevent browser caching of /faq/* responses (ensure instant UI updates)
+@app.after_request
+def _no_store_for_faq(resp):
+    try:
+        if request.path.startswith("/faq/"):
+            resp.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+            resp.headers["Pragma"] = "no-cache"
+            resp.headers["Expires"] = "0"
+    except Exception:
+        pass
+    return resp
+
 # ---------------------------------------------------------------------
 # Admin page (view)
 # ---------------------------------------------------------------------
@@ -569,7 +609,7 @@ def groq_ask():
     return jsonify({"ok": True, "answer": ans})
 
 # ---------------------------------------------------------------------
-# /faq API - hits GitHub (with cache fallback via gh_load_lang_json)
+# /faq API - hits GitHub (with cache/freshness via gh_load_lang_json)
 # ---------------------------------------------------------------------
 @app.get("/faq/list")
 def faq_list():
@@ -638,6 +678,9 @@ def faq_save():
 
         ok = gh_save_lang_json(lang, data, f"admin: save {lang.upper()} FAQ #{n}")
         if ok:
+            # Immediate consistency for this language
+            _LAST_PAYLOAD[lang] = data
+            _API_FIRST_UNTIL[lang] = time.monotonic() + MUTATION_FRESH_TTL
             try:
                 reload_index(force=True)
             except Exception:
@@ -665,6 +708,8 @@ def faq_delete(number):
         meta["parsed_date"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         ok = gh_save_lang_json(lang, data, f"admin: delete {lang.upper()} FAQ #{number}")
         if ok:
+            _LAST_PAYLOAD[lang] = data
+            _API_FIRST_UNTIL[lang] = time.monotonic() + MUTATION_FRESH_TTL
             try:
                 reload_index(force=True)
             except Exception:
@@ -686,6 +731,8 @@ def dbg_ru_path():
         "cached_ru": _GH_PATH_CACHE.get("ru"),
         "branch": GH_BRANCH,
         "repo": f"{GH_OWNER}/{GH_REPO}",
+        "fresh_until_en": _API_FIRST_UNTIL.get("en", 0.0),
+        "fresh_until_ru": _API_FIRST_UNTIL.get("ru", 0.0),
     })
 
 @app.post("/api/debug/gh-evict-ru")
@@ -756,7 +803,7 @@ def _boot_once():
         # Start poller
         start_kb_poll(interval_sec=60)
         _BOOT_DONE = True
-        app.logger.info("[boot] Ready (GitHub-first FAQs with robust RU loader).")
+        app.logger.info("[boot] Ready (GitHub-first FAQs with robust RU loader and instant post-mutation freshness).")
 
 # Trigger on import and again on first request (idempotent)
 _boot_once()
