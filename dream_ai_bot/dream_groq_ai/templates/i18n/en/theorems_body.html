@@ -1,0 +1,101 @@
+{% block content %}
+<div class="container">
+
+  <div class="card hero">
+    <h1>Main Theorems</h1>
+    <p class="kicker">The principal results derived from the core axioms, expressed as testable relationships among <em>invariants</em>.</p>
+    <p class="note">This page presents each theorem along with a brief derivation or proof sketch. Math is hidden by default&mdash;use the “Math” toggle in the header to reveal formulas and derivations.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Capsule list of theorems -->
+    <div class="card">
+      <h2>Capsule &mdash; the main theorems</h2>
+      <ol>
+        <li><strong>T1 &mdash; Topological Quantization.</strong> Integer-valued topological invariants (winding numbers, Chern classes) on the 10D Meta‑Manifold enforce quantized charges and discrete field classes in 4D.</li>
+        <li><strong>T2 &mdash; Symmetry Projection.</strong> Continuous symmetries of Meta‑Manifold fields lead to conserved quantities in 4D (Noether currents), as the fixed kernel preserves these symmetries upon projection.</li>
+        <li><strong>T3 &mdash; Coherence Threshold.</strong> A sharp transition separates quantum vs. classical behavior: below a critical resolution \(\lambda_q\) fine structure (coherence) persists, above it coherence decays exponentially fast.</li>
+        <li><strong>T4 &mdash; Axion‑like Ladder.</strong> A series of Axion‑like particle modes is predicted, with masses following a non‑harmonic progression \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\), rather than integer multiples.</li>
+      </ol>
+      <p class="note">Each theorem follows from the core D.R.E.A.M. assumptions (A1–A6) and yields distinct empirical signatures, from quantized charges to specific spectral patterns.</p>
+    </div>
+
+    <!-- T1 -->
+    <div class="card">
+      <h2>T1 &mdash; Topological Quantization</h2>
+      <p class="core">Stable integer invariants of the compact Meta‑Manifold (like winding numbers or Chern classes) ensure that certain 4D quantities are quantized. In particular, charges (for U(1) gauge fields) and topological indices (for non-abelian fields) emerge as integer values after projection.</p>
+      <div class="math-block">\[
+        Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint A\in\mathbb{Z},\qquad 
+        k=\frac{1}{8\pi^2}\int \operatorname{tr}(F\wedge F)\in\mathbb{Z}\,. 
+      \]</div>
+      <p>This reflects the fact that 4D particles and gauge fields come in discrete classes labeled by Meta‑Manifold topology: e.g. an integer monopole charge or an instanton number.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Proof.</strong> Because the Meta‑Manifold (MM) is compact and smooth (A1), any gauge field configuration on it must satisfy global consistency conditions. For a U(1) field \(A\), the flux through a closed loop (or equivalently the field strength through a 2D surface) can only change by multiples of \(2\pi\) (Dirac quantization condition). Thus the loop integral \(\oint A\) is \(2\pi\) times an integer, yielding \(Q_{\mathrm{U(1)}}\in\mathbb{Z}\) above. Similarly, non-abelian gauge fields on a compact manifold have topological winding numbers (second Chern classes) that are integer-valued (\(k\) above). These integers are invariant under continuous deformations and survive the projection (A5 ensures projection doesn’t “average out” topological information). Consequently, any charge or topological quantity observed in 4D must appear in quantized units, and any process changing these numbers is topologically forbidden (selection rules) unless it taps into a global topology change. Anomalies in 4D correspond to inconsistencies in these topological counts; thus anomaly cancellation is naturally required for a consistent 10D configuration (no net violation of an integer invariant).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- T2 -->
+    <div class="card">
+      <h2>T2 &mdash; Symmetry Projection</h2>
+      <p class="core">Every continuous symmetry of the Meta‑Manifold fields yields a corresponding conserved quantity in 4D upon projection. In essence, Noether’s theorem “commutes” with the 10D→4D projection: if the 10D action has a symmetry, the 4D projected observables obey a conservation law.</p>
+      <p>Because the kernel \(K_{\lambda}\) is fixed and non-dynamical (A2), it does not introduce symmetry breaking on its own; thus a 10D translation, rotation, or gauge symmetry implies the same symmetry in our 4D slice (provided the kernel respects that symmetry). Energy, momentum, and charge conservation in 4D can be traced back to underlying isometries or gauge invariances in 10D.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Proof.</strong> Let \(X\) be a continuous symmetry generator on the Meta‑Manifold (for example, a Killing vector field representing a spacetime translation or a generator of an internal gauge symmetry). If the 10D fields \(\Phi(X)\) are invariant under this symmetry (i.e. \(\mathcal{L}_{X}\Phi=0\) where \(\mathcal{L}\) is the Lie derivative or gauge variation), then consider the projected observable \(O(x)=\int_{\mathrm{MM}}K_{\lambda}(x;X)\Phi(X)d\mu_{\mathrm{MM}}(X)\) as in A2. The change of \(O(x)\) under the symmetry is given by inserting the symmetric variation of \(\Phi\) into this integral. Because \(\Phi\) does not change (symmetry) and the kernel \(K_{\lambda}\) is fixed (and presumably chosen to respect fundamental symmetries like Poincaré or gauge invariance), the projected \(O(x)\) is invariant. By Noether’s theorem in 4D, an invariant observable corresponds to a conserved current. For example, if the Meta‑Manifold has a time-translation symmetry (despite “time” being emergent, a symmetry in the 4D dynamics appears), then the 4D projection has a conserved energy. The key point is that no momentum or charge can “leak” into unseen dimensions, since all dimensions contribute to the 4D observables (A3) rather than forming separate hidden sectors. Therefore, a symmetry that holds on the unified 10D stage manifests as a strict conservation law in 4D.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- T3 -->
+    <div class="card">
+      <h2>T3 &mdash; Coherence Threshold</h2>
+      <p class="core">There is a critical resolution scale \(\lambda_q\) at which the character of physical invariants changes abruptly. For observation scales \(\lambda\) smaller than \(\lambda_q\) (finer resolution), quantum-coherent details of fields are retained; for \(\lambda\) larger than \(\lambda_q\) (coarser), these details are washed out, yielding classical behavior. This crossover is governed by a fidelity function:</p>
+      <div class="math-block">\[
+        \alpha(\lambda)\;=\;\exp\!\Big[-\Big(\frac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big]\,,
+      \]</div>
+      <p>which drops from near 1 to near 0 as \(\lambda\) passes through \(\lambda_q\). Here \(D_{\mathrm{eff}}\) is an effective dimensional exponent that characterizes how rapidly information is lost with scale. The steep drop in \(\alpha(\lambda)\) near \(\lambda_q\) marks a “coherence cliff” separating the quantum and classical regimes.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Derivation.</strong> Because the projection kernel has finite resolution \(\lambda\) (A2) and the Meta‑Manifold has effective dimensionality \(D_{\mathrm{eff}}\), one can estimate the number of independent degrees of freedom (or “cells”) in the Meta‑Manifold that get averaged together when observing at scale \(\lambda\). Roughly, that number grows as \((\lambda/\lambda_q)^{D_{\mathrm{eff}}}\). If each such cell contributes a complex amplitude, the overall coherence (think of a sum of phasors) will decay as the number of incoherent contributions increases. A simple model is exponential decay of coherence with the number of cells: \(\alpha \sim e^{-\text{(\# of cells)}}\). Substituting \(\text{\# of cells} \propto (\lambda/\lambda_q)^{D_{\mathrm{eff}}}\) yields the fidelity law above. At \(\lambda \ll \lambda_q\), essentially one cell dominates (\(\alpha \approx 1\), full quantum fidelity). At \(\lambda \gg \lambda_q\), many contributions average out (\(\alpha \to 0\), classical limit). The “cliff” at \(\lambda \approx \lambda_q\) is the transition region where partial coherence suddenly drops; detecting this transition in experiments (e.g. by varying effective measurement resolution in photonic or interferometric setups) would confirm the finite-resolution projection (A6). Crucially, no matter how much we refine our instruments, we cannot observe the Meta‑Manifold’s infinite detail&mdash;beyond \(\lambda_q\) the additional details simply do not translate into 4D differences, enforcing a fundamental classicality at large scales.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- T4 -->
+    <div class="card">
+      <h2>T4 &mdash; Axion‑like Ladder</h2>
+      <p class="core">The D.R.E.A.M. framework predicts a family of new particle states (e.g. axion-like modes or resonances) whose masses are not harmonically related but instead follow a characteristic scaling law set by the effective projection dimension \(D_{\mathrm{eff}}\). If \(m_1\) is the mass of the lightest mode, the \(n\)th mode’s mass is</p>
+      <div class="math-block">\[
+        m_n \;=\; m_1 \, n^{\,1/D_{\mathrm{eff}}}\,,
+      \]</div>
+      <p>implying that \(m_2/m_1 = 2^{1/D_{\mathrm{eff}}}\), \(m_3/m_1 = 3^{1/D_{\mathrm{eff}}}\), etc. This is a “non‑harmonic” ladder: for example, with \(D_{\mathrm{eff}}=3\) one finds \(m_8/m_1 = 8^{1/3} \approx 2\) (not 8), a much more compressed spectrum than a simple integer multiple pattern. The value of \(D_{\mathrm{eff}}\) governs the spacing, and its determination (e.g. \(D_{\mathrm{eff}} \approx 6\) or \(3\) or another value) is part of the experimental fingerprint of the theory.</p>
+      <details class="more">
+        <summary aria-label="{{ _('ui.read_more') }}"><span class="sr-only">{{ _('ui.read_more') }}</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Derivation.</strong> This result follows from considering how modes (eigenstates of fields on the Meta‑Manifold) are distributed in frequency or mass. In a \(d\)-dimensional space, the number of modes \(N(\nu)\) below a certain frequency \(\nu\) typically grows as \(N(\nu)\propto \nu^d\) for large \(\nu\) (this is analogous to the density of states in a \(d\)-dimensional “box”). Here \(D_{\mathrm{eff}}\) plays the role of an effective dimensionality for the eigenmode spectrum of the 10D configuration as seen by our 4D slice. Thus, if the \(n\)th mode corresponds to some high-frequency cutoff such that \(N(\nu_n)\approx n\), we can invert \(n \propto \nu_n^{D_{\mathrm{eff}}}\) to get \(\nu_n \propto n^{1/D_{\mathrm{eff}}}\). Assuming mass \(m_n\) of mode \(n\) is proportional to such a characteristic frequency (as is often the case, e.g., via \(E=\hbar \omega\) or Kaluza-Klein mass quantization analogies), we get \(m_n \propto n^{1/D_{\mathrm{eff}}}\). The constant of proportionality sets \(m_1\). While the base mass \(m_1\) is not determined by this scaling alone (it depends on details like the size of topological cycles or field stiffness in the 10D geometry), the ratio of higher masses to \(m_1\) is fixed once \(D_{\mathrm{eff}}\) is known. The “ALP base window” refers to the expected range of \(m_1\) given other constraints (for instance, it might lie in a range suggested by solving certain astrophysical or cosmological puzzles). Discovering an ALP in that mass window, with additional heavier partners following the \(n^{1/D_{\mathrm{eff}}}\) pattern, would strongly support D.R.E.A.M. Conversely, the absence of any such states in the predicted range (or finding them with a different mass relation) would challenge the framework (see falsification notes in Axioms page).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Interpretive note -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>These theorems hint at a deeper picture: the Meta‑Manifold’s physics can be thought of as a higher-dimensional “engine” where our 4D laws are shadows of 10D realities. For instance, T4’s mass ladder invites the analogy of a musical instrument: the 10D structure supports resonant modes (notes) which we perceive as particles, but unlike a simple string (1D) which yields a harmonic series, the 10D instrument yields a non-harmonic spectrum that encodes its dimensional signature \(D_{\mathrm{eff}}\). Likewise, T3 suggests that the classical world emerges when our view blurs beyond a certain fineness&mdash;reminiscent of how a detailed painting looks smooth from afar. While these analogies are not needed to apply or test D.R.E.A.M., they provide intuition: our “reality” is an emergent approximation of a richer, higher-dimensional tapestry. It is a reminder that what we call fundamental (particles, constants, even time) might be mere facets of something deeper, with the axioms and theorems of D.R.E.A.M. charting the first steps of that revelation.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+{% endblock %}

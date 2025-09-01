@@ -432,6 +432,7 @@ NAV = [
     ("case","nav.case","/case"),
     ("overview","nav.overview","/overview"),
     ("axioms","nav.axioms","/axioms"),
+    ("theorems","nav.theorems","/theorems"),
     ("math","nav.math","/math"),
     ("kernel","nav.kernel","/kernel"),
     ("topology","nav.topology","/topology"),
@@ -488,6 +489,9 @@ def about(): return render_template("about.html", title=t("nav.about"))
 
 @app.route("/case")
 def case(): return render_template("case.html", title=t("nav.case"))
+
+@app.route("/theorems")
+def theorems(): return render_template("theorems.html", title=t("nav.theorems"))
 
 
 
