@@ -135,16 +135,16 @@
       .site-header .controls { pointer-events:none; } .site-header .controls * { pointer-events:auto; }
 
       /* Language flags – small rectangulars */
-      .lang{ display:flex; flex-direction:column; gap:6px; align-items:center; margin-left:10px; }
+      .lang{ display:flex; flex-direction:column; gap:8px; align-items:center; margin-left:10px; }
       .lang-link{
-        width:26px; height:18px; display:inline-flex; align-items:center; justify-content:center;
+        width:18px; height:12px; display:inline-flex; align-items:center; justify-content:center;
         border-radius:2px; background:rgba(255,255,255,.10);
         border:1px solid rgba(255,255,255,.35); transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
         padding:0;
       }
       .lang-link.on{ box-shadow:0 0 0 2px rgba(255,255,255,.55) inset; border-color:rgba(255,255,255,.75); }
       .lang-link:hover{ transform:scale(1.06); }
-      .flag-icon{ width:24px; height:16px; display:block; object-fit:cover; border-radius:2px; }
+      .flag-icon{ width:18px; height:12px; display:block; object-fit:cover; border-radius:2px; }
 
       @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 
@@ -431,7 +431,7 @@
         const SCALE_BASE = 1.35;                   // initial half-height of view
         const MAX_ITER = 180;                      // quality
         const CHANGE_INTERVAL = 60000;             // 60s between locations
-        const TRANSITION_DUR  = 6000;              // 6s pan between locations
+        const TRANSITION_DUR  = 12000;              // 6s pan between locations
         const HUE = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bg-hue')) || 230;
 
         // Named interesting centers (extra variants added)
