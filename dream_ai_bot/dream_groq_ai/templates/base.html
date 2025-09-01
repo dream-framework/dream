@@ -162,6 +162,32 @@
       .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
       .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
 
+      /* Footer admin button: gear only, no background */
+.admin-btn{
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  color: inherit;
+}
+.admin-btn:focus-visible{
+  outline: 2px solid rgba(255,255,255,.6);
+  outline-offset: 2px;
+  border-radius: 6px; /* focus ring shape */
+}
+.gear-emoji{
+  display: inline-block;
+  font-size: 18px;        /* tweak size if you want bigger/smaller */
+  vertical-align: middle;
+  transition: transform .15s ease;
+}
+.admin-btn:hover .gear-emoji{ transform: rotate(20deg); } /* optional */
+
       /* ===== Fractal controls (hidden; params hardcoded below) ===== */
       #mb-controls{ display:none !important; }
     </style>
