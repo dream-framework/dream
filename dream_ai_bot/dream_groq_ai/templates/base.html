@@ -162,32 +162,6 @@
       .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
       .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
 
-      /* Footer admin button: gear only, no background */
-.admin-btn{
-  appearance: none;
-  -webkit-appearance: none;
-  background: transparent !important;
-  border: 0 !important;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: none;
-  color: inherit;
-}
-.admin-btn:focus-visible{
-  outline: 2px solid rgba(255,255,255,.6);
-  outline-offset: 2px;
-  border-radius: 6px; /* focus ring shape */
-}
-.gear-emoji{
-  display: inline-block;
-  font-size: 18px;        /* tweak size if you want bigger/smaller */
-  vertical-align: middle;
-  transition: transform .15s ease;
-}
-.admin-btn:hover .gear-emoji{ transform: rotate(20deg); } /* optional */
-
       /* ===== Fractal controls (hidden; params hardcoded below) ===== */
       #mb-controls{ display:none !important; }
     </style>
@@ -307,44 +281,24 @@
     </div>
 
     <!-- ===== Admin modal JS ===== -->
-   <script>
-  (function(){
-    const ADMIN_ROUTE="/admin";
-    const btn=document.getElementById('adminBtn');
-    const overlay=document.getElementById('adminLogin');
-    const inp=document.getElementById('adminTokenInput');
-    const go=document.getElementById('adminLoginGo');
-    const cancel=document.getElementById('adminLoginCancel');
-
-    function openModal(){ overlay.classList.add('show'); overlay.setAttribute('aria-hidden','false'); setTimeout(()=>inp&&inp.focus(),0); }
-    function closeModal(){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); inp.value=''; }
-
-    function submit(){
-      const tok=(inp.value||'').trim(); if(!tok){inp.focus();return;}
-      // Put secret into the POST body, not the URL
-      const hf=document.getElementById('adminHiddenToken');
-      hf.value = tok;
-      document.getElementById('adminLoginForm').submit();
-    }
-
-    // UI bindings
-    btn && btn.addEventListener('click', e => { e.preventDefault(); openModal(); });
-    cancel && cancel.addEventListener('click', closeModal);
-    go && go.addEventListener('click', submit);
-    inp && inp.addEventListener('keypress', e=>{ if(e.key==='Enter') submit(); });
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('show')) closeModal(); });
-
-    // IMPORTANT: remove any previous code that used sessionStorage or
-    // window.location.href = `${ADMIN_ROUTE}?token=...`
-  })();
-</script>
-
-<form id="adminLoginForm" method="POST" action="/admin" style="display:none">
-  <input type="hidden" name="token" id="adminHiddenToken">
-  {% if csrf_token is defined %}
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  {% endif %}
-</form>
+    <script>
+      (function(){
+        const ADMIN_ROUTE="/admin";
+        const btn=document.getElementById('adminBtn');
+        const overlay=document.getElementById('adminLogin');
+        const inp=document.getElementById('adminTokenInput');
+        const go=document.getElementById('adminLoginGo');
+        const cancel=document.getElementById('adminLoginCancel');
+        function openModal(){ overlay.classList.add('show'); overlay.setAttribute('aria-hidden','false'); setTimeout(()=>inp&&inp.focus(),0); }
+        function closeModal(){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); inp.value=''; }
+        function submit(){ const tok=(inp.value||'').trim(); if(!tok){inp.focus();return;} sessionStorage.setItem('ADMIN_TOKEN',tok); window.location.href=`${ADMIN_ROUTE}?token=${encodeURIComponent(tok)}`; }
+        btn && btn.addEventListener('click',e=>{ e.preventDefault(); const tok=sessionStorage.getItem('ADMIN_TOKEN'); if(tok){ window.location.href=`${ADMIN_ROUTE}?token=${encodeURIComponent(tok)}`; } else { openModal(); }});
+        cancel && cancel.addEventListener('click', closeModal);
+        go && go.addEventListener('click', submit);
+        inp && inp.addEventListener('keypress', e=>{ if(e.key==='Enter') submit(); });
+        document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('show')) closeModal(); });
+      })();
+    </script>
 
     <!-- ===== Chat UX helpers ===== -->
     <script>
