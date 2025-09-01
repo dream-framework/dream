@@ -111,26 +111,28 @@
   </section>
 </div>
 
-<!-- ===== Admin auth check (cookie-based). Opens modal if not authenticated. ===== -->
 <script>
+/* ---------- Admin token boot (URL ?token=... -> header on all requests) ---------- */
 (function(){
-  async function ensureAdmin(){
-    try{
-      const r = await fetch('/api/admin/state', {cache:'no-store'});
-      const j = await r.json();
-      if (!j.is_admin){
-        const overlay=document.getElementById('adminLogin');
-        const inp=document.getElementById('adminTokenInput');
-        if (overlay){
-          overlay.classList.add('show');
-          overlay.setAttribute('aria-hidden','false');
-          setTimeout(()=>inp && inp.focus(),0);
-        }
-      }
-    }catch(_e){ /* ignore */ }
+  const qs = new URLSearchParams(location.search);
+  let ADMIN_TOKEN = qs.get('token') || sessionStorage.getItem('ADMIN_TOKEN') || '';
+
+  if (qs.get('token')) {
+    sessionStorage.setItem('ADMIN_TOKEN', ADMIN_TOKEN);
+    history.replaceState({}, '', location.pathname);
   }
-  // Run once we land on /admin
-  document.addEventListener('DOMContentLoaded', ensureAdmin);
+
+  if (!ADMIN_TOKEN) {
+    // No token → bounce to home where the gear/login lives
+    window.location.replace('/');
+    return;
+  }
+
+  window.authFetch = function(url, opts){
+    opts = opts || {};
+    opts.headers = Object.assign({}, opts.headers, { 'X-Admin-Token': ADMIN_TOKEN });
+    return fetch(url, opts);
+  };
 })();
 </script>
 
@@ -167,21 +169,8 @@
     return String(s || '').replace(/[&<>"']/g, function(ch){ return map[ch]; });
   }
   async function loadJSON(url, opts){
-    const r = await fetch(url, opts || {});
+    const r = await authFetch(url, opts);
     const ct = (r.headers.get('content-type') || '').toLowerCase();
-
-    // If unauthorized (no admin cookie), open modal and throw.
-    if (r.status === 401){
-      const overlay=document.getElementById('adminLogin');
-      const inp=document.getElementById('adminTokenInput');
-      if (overlay){
-        overlay.classList.add('show');
-        overlay.setAttribute('aria-hidden','false');
-        setTimeout(()=>inp && inp.focus(),0);
-      }
-      throw new Error('Unauthorized (401)');
-    }
-
     if (!r.ok){
       const txt = await r.text().catch(()=>'(no body)');
       throw new Error(`HTTP ${r.status} ${r.statusText} — ${txt.slice(0,200)}`);
