@@ -49,7 +49,7 @@
     width: 100%;
     min-height: 56px;
     padding: 10px 12px;
-    font-size: 14px;        /* fixed typo (12x -> 14px) */
+    font-size: 14px;
     line-height: 1.35;
     border: 1px solid #d1d5db;
     border-radius: 8px;
@@ -111,35 +111,31 @@
   </section>
 </div>
 
+<!-- If not authenticated, just open the modal (does not block list loading). -->
 <script>
-/* ---------- Admin token boot (URL ?token=... -> header on all requests) ---------- */
 (function(){
-  const qs = new URLSearchParams(location.search);
-  let ADMIN_TOKEN = qs.get('token') || sessionStorage.getItem('ADMIN_TOKEN') || '';
-
-  if (qs.get('token')) {
-    sessionStorage.setItem('ADMIN_TOKEN', ADMIN_TOKEN);
-    history.replaceState({}, '', location.pathname);
-  }
-
-  if (!ADMIN_TOKEN) {
-    // No token → bounce to home where the gear/login lives
-    window.location.replace('/');
-    return;
-  }
-
-  window.authFetch = function(url, opts){
-    opts = opts || {};
-    opts.headers = Object.assign({}, opts.headers, { 'X-Admin-Token': ADMIN_TOKEN });
-    return fetch(url, opts);
-  };
+  document.addEventListener('DOMContentLoaded', async () => {
+    try{
+      const r = await fetch('/api/admin/state', {cache:'no-store'});
+      const j = await r.json();
+      if (!j.is_admin){
+        const overlay=document.getElementById('adminLogin');
+        const inp=document.getElementById('adminTokenInput');
+        if (overlay){
+          overlay.classList.add('show');
+          overlay.setAttribute('aria-hidden','false');
+          setTimeout(()=>inp && inp.focus(),0);
+        }
+      }
+    }catch(_){}
+  });
 })();
 </script>
 
 <script>
 (function(){
-  /* ---------- STATE FIRST (so nothing references before init) ---------- */
-  let items = [];       // current list for active lang
+  /* ---------- STATE ---------- */
+  let items = [];
   let selectedId = null;
   let dirty = false;
   let lang = (document.cookie.split('; ').find(r=>r.startsWith('lang='))?.split('=')[1] === 'ru') ? 'ru' : 'en';
@@ -168,18 +164,28 @@
     var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}; 
     return String(s || '').replace(/[&<>"']/g, function(ch){ return map[ch]; });
   }
+
+  // Robust JSON loader: tolerate non-JSON content-type and surface backend error text
   async function loadJSON(url, opts){
-    const r = await authFetch(url, opts);
-    const ct = (r.headers.get('content-type') || '').toLowerCase();
-    if (!r.ok){
-      const txt = await r.text().catch(()=>'(no body)');
-      throw new Error(`HTTP ${r.status} ${r.statusText} — ${txt.slice(0,200)}`);
+    const r = await fetch(url, opts || {});
+    if (r.status === 401){
+      const overlay=document.getElementById('adminLogin');
+      const inp=document.getElementById('adminTokenInput');
+      if (overlay){
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden','false');
+        setTimeout(()=>inp && inp.focus(),0);
+      }
+      throw new Error('Unauthorized (401)');
     }
-    if (!(ct.includes('application/json') || ct.includes('json'))){
-      const txt = await r.text().catch(()=>'(no body)');
-      throw new Error(`Expected JSON, got ${ct} — ${txt.slice(0,200)}`);
+    const text = await r.text();
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      // Show first part of the response so we know what went wrong
+      console.error('Non-JSON response from', url, '→', text.slice(0,400));
+      throw new Error('Server returned non-JSON (see console).');
     }
-    return r.json();
   }
 
   /* ---------- LANGUAGE ---------- */
@@ -194,10 +200,8 @@
     loadList();
   }
 
-  // Local toggle (EN/RU) inside the admin bar
   langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
-  // Also sync with header language links (without full reload)
   document.querySelectorAll('.lang a.lang-link').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -234,7 +238,11 @@
     try{
       setStatus('Loading list…');
       const j = await loadJSON(`/faq/list?lang=${lang}`);
-      items = (j.items || j.faqs || []).map(f => ({
+      if (j && j.ok === false && j.error){
+        setStatus(`Failed to load list: ${j.error}`, true);
+        console.error('FAQ list error:', j.error);
+      }
+      items = ((j && (j.items || j.faqs)) || []).map(f => ({
         number: Number(f.number) || 0,
         question: f.question || '',
         answer: f.answer || ''
@@ -242,9 +250,10 @@
       renderList(items);
       if (items.length && !selectedId){ selectItem(items[0].number, {silent:true}); }
       if (!items.length){ clearEditor(); }
+      if (!j || j.ok === false) return; // status already set above
       setStatus('Ready.');
     }catch(err){
-      setStatus('Failed to load list.', true);
+      setStatus('Failed to load list (network/parse).', true);
       console.error(err);
     }
   }
@@ -265,6 +274,11 @@
     try{
       setStatus('Loading item…');
       const j = await loadJSON(`/faq/item/${id}?lang=${lang}`);
+      if (j && j.ok === false && j.error){
+        setStatus(`Failed to load item: ${j.error}`, true);
+        console.error('FAQ item error:', j.error);
+        return;
+      }
       const it = j.item || {};
       selectedId = Number(it.number) || id;
       numInput.value = it.number || '';
@@ -274,7 +288,7 @@
       renderList(items);
       setStatus('Loaded.');
     }catch(err){
-      setStatus('Failed to load item.', true);
+      setStatus('Failed to load item (network/parse).', true);
       console.error(err);
     }
   }
@@ -307,6 +321,11 @@
         headers:{ 'Content-Type':'application/json' },
         body: JSON.stringify({ lang, item:{ number, question, answer } })
       });
+      if (j && j.ok === false && j.error){
+        setStatus(`Save failed: ${j.error}`, true);
+        console.error('Save error:', j.error);
+        return;
+      }
       const savedNum = j.number || number || nextNumber();
       await loadList();
       selectedId = savedNum;
@@ -315,7 +334,7 @@
       dirty = false;
       setStatus('Saved.');
     }catch(err){
-      setStatus('Save failed.', true);
+      setStatus('Save failed (network/parse).', true);
       console.error(err);
     }
   }
@@ -330,12 +349,17 @@
     if (!confirm(`Delete FAQ #${id}? This cannot be undone.`)) return;
     try{
       setStatus('Deleting…');
-      await loadJSON(`/faq/delete/${id}?lang=${lang}`, { method:'DELETE' });
+      const j = await loadJSON(`/faq/delete/${id}?lang=${lang}`, { method:'DELETE' });
+      if (j && j.ok === false && j.error){
+        setStatus(`Delete failed: ${j.error}`, true);
+        console.error('Delete error:', j.error);
+        return;
+      }
       await loadList();
       clearEditor();
       setStatus('Deleted.');
     }catch(err){
-      setStatus('Delete failed.', true);
+      setStatus('Delete failed (network/parse).', true);
       console.error(err);
     }
   }
