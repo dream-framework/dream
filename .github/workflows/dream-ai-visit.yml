@@ -1,24 +1,28 @@
 name: Visit Render AI App
+
 on:
- schedule:
-   - cron: "*/5 * * * *"  # every 5 minutes
- workflow_dispatch:        # lets you run it manually too
+  schedule:
+    - cron: "*/5 * * * *"  # every 5 minutes
+  workflow_dispatch:        # lets you run it manually too
+
 jobs:
- visit:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/setup-node@v4
-       with:
-         node-version: 18
-     - run: npm install puppeteer
-     - run: |
-         node -e "
-         const puppeteer = require('puppeteer');
-         (async () => {
-           const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-           const page = await browser.newPage();
-           await page.goto('https://dream-groq-ai.onrender.com', { waitUntil: 'networkidle2', timeout: 60000 });
-           console.log('Visited site at', new Date().toISOString());
-           await browser.close();
-         })();
+  visit:
+    if: ${{ false }}        # ⛔ job disabled; never runs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm install puppeteer
+      - run: |
+          node -e "
+          const puppeteer = require('puppeteer');
+          (async () => {
+            const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+            const page = await browser.newPage();
+            await page.goto('https://dream-groq-ai.onrender.com', { waitUntil: 'networkidle2', timeout: 60000 });
+            console.log('Visited site at', new Date().toISOString());
+            await browser.close();
+          })();
+          "
          "
