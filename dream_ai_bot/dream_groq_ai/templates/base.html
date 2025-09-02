@@ -162,6 +162,31 @@
       .btn.primary{ background:#4f46e5; color:#fff; border-color:#4f46e5; }
       .btn.primary:hover{ background:#4338ca; border-color:#4338ca; }
 
+.admin-btn{ background: transparent; border: 0; padding: 6px; line-height: 1; cursor: pointer; }
+.gear-svg{ width: 14px; height: 20px; display: block; }
+
+.footer-content{
+  display:flex;
+  align-items:center;   /* vertical align */
+  gap:10px;             /* space between text and icon */
+}
+
+.admin-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:0;
+  background:transparent;
+  line-height:1;
+}
+
+.gear-svg{
+  width:1.1em;   /* size tracks text */
+  height:1.1em;
+  display:block; /* removes baseline gap */
+}
+
       /* ===== Fractal controls (hidden; params hardcoded below) ===== */
       #mb-controls{ display:none !important; }
     </style>
@@ -248,14 +273,14 @@
     </main>
 
     <!-- ====== FOOTER ====== -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <small>© 2024–2025 DREAM — {{ _('meta.footer') }}</small>
-        <button id="adminBtn" class="admin-btn" aria-label="Admin" title="Admin">
-          <span class="gear-emoji">⚙️</span>
-        </button>
-      </div>
-    </footer>
+<footer class="site-footer">
+  <div class="footer-content">
+    <small>© 2024–2025 DREAM — {{ _('meta.footer') }}</small>
+    <button id="adminBtn" class="admin-btn" aria-label="Admin" title="Admin">
+      <img class="gear-svg" src="https://twemoji.maxcdn.com/v/latest/svg/2699.svg" alt="⚙️">
+    </button>
+  </div>
+</footer>
 
     <!-- ===== Floating Chat Bubble ===== -->
     <div id="chat-container">
