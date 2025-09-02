@@ -203,11 +203,19 @@
     <!-- ====== HEADER ====== -->
     <header class="site-header">
       <div class="brand"><a href="{{ url_for('home') }}">D.R.E.A.M</a></div>
-      <nav class="nav">
-        {% for key,label_key,href in NAV %}
-          <a class="nav-link {% if request.path==href %}active{% endif %}" href="{{ href }}">{{ _(label_key) }}</a>
-        {% endfor %}
-      </nav>
+<nav class="nav">
+  {% for key, label_key, href in NAV %}
+    <a
+      class="nav-link {% if request.path == href %}active{% endif %}"
+      href="{{ href }}"
+      {% if key == 'predictions' %}
+      style="display:inline-block; padding-bottom:3px; border-bottom:3px solid #2f855a; text-decoration:none;"
+      {% endif %}
+    >
+      {{ _(label_key) }}
+    </a>
+  {% endfor %}
+</nav>
       <div class="controls">
         <div class="toggles">
           <label class="switch" title="{{ _('ui.math_toggle') }}">
