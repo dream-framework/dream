@@ -1,6 +1,0 @@
-Flask==3.0.3
-flask-cors==4.0.1
-gunicorn==21.2.0
-pypdf==4.3.1
-deep-translator==1.11.4   # optional at runtime (used when FAQ_TRANS_MODE=google)
-python-dotenv==1.0.1      # optional, handy locally

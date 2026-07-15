@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Axioms · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link active" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Core Axioms</h1>
+    <p class="kicker">Six assumptions define the posture; everything else is derived or tested at the level of <em>invariants</em>.</p>
+    <p class="note">This page states the axioms plainly, gives their operational meaning, and shows where the math enters. Math is hidden by default—use the “Math” toggle in the header.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Capsule list -->
+    <div class="card">
+      <h2>Capsule — the six axioms</h2>
+      <ol>
+        <li><strong>A1 — Existence (MM).</strong> A compact, orientable, smooth 10-dimensional Meta-Manifold with fields exists; “atemporal” in 4D terms.</li>
+        <li><strong>A2 — Projection (Kernel).</strong> A single, fixed, non-invertible kernel realizes 10→4 projection at finite resolution.</li>
+        <li><strong>A3 — Retention Law (S2).</strong> Information/contrast decays with probe scale as a stretched exponential \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\); this is the foundation.</li>
+        <li><strong>A4 — Constants are kernel-fixed.</strong> \( \{c,\,\hbar,\,G,\,\ldots\} \) are parameters of our kernel slice; they are measured, not derived, inside D.R.E.A.M.</li>
+        <li><strong>A5 — Topology ↔ classes.</strong> Stable MM topological data label particle/gauge classes that project to 4D content.</li>
+        <li><strong>A6 — Finite resolution ⇒ regimes.</strong> A coherence scale \( \lambda_q \) separates quantum-grade retention (below) from classical coarse-grain (above).</li>
+      </ol>
+      <p class="note">Only S2 is elevated to foundation. “S3” (structure focusing via coarea/CPI) provides strong support to S2; “S1” (ALP/dust) is relegated and assumed null below the cliff.</p>
+    </div>
+
+    <!-- A1 -->
+    <div class="card">
+      <h2>A1 — Existence (MM)</h2>
+      <p class="core">There is a compact, orientable, smooth 10D manifold (MM) with fields. “Atemporal” means 4D time is not fundamental in MM; it appears only after projection.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Why compact &amp; smooth?</strong> Compactness ensures finite integrals; smoothness supports differential operators/topological indices used by projection.</p>
+          <p><strong>Empirical footprint.</strong> A1 sets the stage; data touch A2–A6.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A2 -->
+    <div class="card">
+      <h2>A2 — Projection (Kernel)</h2>
+      <p class="core">A single, fixed, non-invertible kernel \(K_{\lambda}\) maps MM fields to 4D observables at finite resolution \( \lambda \) (our slice uses \( \lambda=\lambda_q \)).</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).
+      \]</div>
+      <p>Science attaches to <em>invariants</em> of the kernel class: \( \lambda_q \) (coherence), locality radius, regularity/positivity, and effective spectral exponent \( D_{\mathrm{eff}} \).</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Guardrails.</strong> Normalization, locality in projection, and monotone fidelity ensure a well-posed map \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</p>
+          <div class="math-block">\[
+            \textbf{K1:}\ \int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)<\infty,\quad
+            \textbf{K2:}\ K_{\lambda}(x;X)\text{ peaks for }X\approx\pi^{-1}(x),\quad
+            \textbf{K3:}\ \partial_{\lambda}\,\alpha(\lambda)\le0.
+          \]</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- A3 -->
+    <div class="card">
+      <h2>A3 — Retention Law (S2)</h2>
+      <p class="core">Information fades with probe scale as a stretched exponential:</p>
+      <div class="math-block">\[
+        R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Two readouts track the same law with their own \(\lambda_q, D_{\mathrm{eff}}\): high-frequency power \(R_{\mathrm{HF}}(\lambda)\) and structural correlation \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},\,e_4|_{\lambda})\). Fractal-like signatures live only <em>below</em> \(\lambda_q\); homogeneity emerges above.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Operationally.</strong> Fit log-linear \( \ln(-\ln R) = D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q \) across platforms.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A4 -->
+    <div class="card">
+      <h2>A4 — Constants are projection-fixed</h2>
+      <p class="core">The constants \( \{c,\,\hbar,\,G,\,\ldots\} \) are kernel parameters of our slice. We <em>measure</em> them; we do not derive them inside D.R.E.A.M.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Implication.</strong> Apparent “drifts” are instrument/scale effects within one projection, not kernel drift.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A5 -->
+    <div class="card">
+      <h2>A5 — Topology ↔ classes</h2>
+      <p class="core">Stable MM topological classes (homotopy/cohomology, characteristic classes) label particle/gauge <em>classes</em>. Individual 4D species and quantized charges are their projections.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Quantization.</strong> Integer-valued integrals over cycles give charge quantization robust to finite-resolution averaging.</p>
+          <div class="math-block">\[
+            Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint A\in\mathbb{Z},\qquad
+            k=\frac{1}{8\pi^2}\int\operatorname{tr}(F\wedge F)\in\mathbb{Z}.
+          \]</div>
+          <p><strong>Selection rules.</strong> Class arithmetic constrains allowed processes; anomalies must cancel in the 4D projection.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A6 -->
+    <div class="card">
+      <h2>A6 — Finite resolution ⇒ regimes</h2>
+      <p class="core">A coherence “cliff” near \( \lambda\approx\lambda_q \) separates two regimes: below it interference-grade invariants retain; above it classical coarse-grain dominates.</p>
+      <div class="math-block">\[
+        \text{coherence}(\lambda)\ \propto\ R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p><strong>S3 (support):</strong> Coarea focusing and CPI explain why hubs/filaments persist under smoothing, reinforcing S2’s predictions about structure retention and its fading.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Experimental handle.</strong> Scan across \( \lambda_q \) (interferometry, photonics, NV/spins, matter-wave) and look for the step-like change in retention readouts.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Assumed vs tested -->
+    <div class="card">
+      <h2>Assumed vs. tested</h2>
+      <div class="grid two">
+        <div>
+          <h3 class="kicker">Assumed</h3>
+          <ul>
+            <li>MM exists and is smooth &amp; compact (A1).</li>
+            <li>Single fixed kernel at finite resolution (A2).</li>
+            <li>Constants are kernel-fixed (A4).</li>
+          </ul>
+          <p class="note"><strong>De-emphasized.</strong> S1 (ALP/dust) is relegated and assumed null below \( \lambda_q \); not used to support the framework.</p>
+        </div>
+        <div>
+          <h3 class="kicker">Tested (invariants)</h3>
+          <ul>
+            <li><strong>S2 foundation:</strong> retention law \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\); detect the transition across platforms (A3/A6).</li>
+            <li><strong>S3 support:</strong> coarea focusing + CPI (hubs/filaments persist, then fade as predicted by S2).</li>
+            <li>Topological quantization/selection rules in 4D (A5).</li>
+            <li>Ranked-spectrum ratio law \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) as a cross-domain consequence of \(D_{\mathrm{eff}}\) (supporting test).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Falsification -->
+    <div class="card">
+      <h2>Falsification hooks tied to axioms</h2>
+      <ul>
+        <li><strong>Against S2 (A3/A6):</strong> No retention transition near the posited \( \lambda_q \) across platforms at forecasted sensitivity.</li>
+        <li><strong>Against A5:</strong> Violation of integer quantization or selection rules inconsistent with the class picture.</li>
+        <li><strong>Against invariant posture:</strong> Failure of the ranked-spectrum ratio law \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) where applicable.</li>
+      </ul>
+      <p class="note">These are <em>clean</em> nulls: we do not rescue the framework by unconstrained kernel tweaks.</p>
+    </div>
+
+    <!-- Speculative -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive note (speculative)</h2>
+      <p>Constants feel “fundamental” only because they are kernel-fixed parameters in our slice; alternative local projection conditions might shift some of them. This is interpretive and not required for empirical tests.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

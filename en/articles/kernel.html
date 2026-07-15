@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Projection Kernel · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+    body.is-article .site-header{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0; }
+    
+  </style>
+</head>
+<body data-lang="en" class="is-article">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="../retention.html">Retention Law</a>
+      <a class="nav-link" href="../axioms.html">Axioms</a>
+      <a class="nav-link" href="../theorems.html">Theorems</a>
+      <a class="nav-link" href="../math.html">Math Frame</a>
+      <a class="nav-link" href="../kernel.html">Kernel</a>
+      <a class="nav-link" href="../topology.html">Topology</a>
+      <a class="nav-link" href="../spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="../predictions.html">Predictions</a>
+      <a class="nav-link" href="../falsification.html">Falsification</a>
+      <a class="nav-link" href="../tests.html">Tests</a>
+      <a class="nav-link" href="../faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="../about.html">AI Analysis</a>
+      <a class="nav-link" href="../time.html">Time</a>
+      <a class="nav-link" href="../memory.html">Memory</a>
+      <a class="nav-link active" href="../articles.html">Articles</a>
+      <a class="nav-link" href="../../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  html {
+    /* Fill the body margins so nothing shows through */
+
+    min-height: 100%;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 2% 8%;            /* keep your existing spacing */
+    color: #111;
+
+    min-height: 100%;
+    min-height: 100svh;       /* mobile-safe full viewport */
+  }
+
+  h1, h2, h3 {
+    color: black;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  pre, .equation {
+    
+    padding: 6px 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  blockquote {
+    border-left: 4px solid #96a31d;
+    padding-left: 15px;
+    color: black;
+    font-style: italic;
+    margin: 1em 0;
+    background: #fff;
+  }
+  .infobox {
+
+    border: 1px solid #dbe3f0;
+    border-left: 4px solid white;
+    padding: 12px 16px;
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.95em;
+    color: #444;
+  }
+
+
+
+  /* --- keep fractals visible behind everything --- */
+
+#fractal-canvas, #fractals, canvas#fractal {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* --- nuke the full-width wash coming from the shell/overlays --- */
+.article-shell,
+.article-shell > *:not(main):not(.article):not(.page-content):not(.content),
+#content-wrap, .content-wrap, .page-wrap, #page, .page, .site, #site,
+.container-fluid {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.article-shell::before, .article-shell::after,
+#content-wrap::before, #content-wrap::after,
+.page::before, .page::after,
+.site::before, .site::after {
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+}
+
+/* --- the article “card” (kept) --- */
+:root{
+  --text-max: 68ch;
+  --text-pad: clamp(14px, 2.2vw, 24px);
+  --card-bg: rgba(255,255,255,0.97); /* near-solid white */
+}
+
+:where(main, .article){
+  max-width: var(--text-max);
+  margin-inline: auto;
+  padding: var(--text-pad);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  min-height: calc(100svh - 4%);
+}
+</style>
+<section class="content-section article-shell">
+  <div class="section-header">
+    <h1 class="section-title">The Projection Kernel</h1>
+    <p class="muted">Basics first: push-forward, fibers, constants-as-settings, retention, and invariants</p>
+  </div>
+
+
+
+  <hr>
+
+  <!-- 1) WHAT THE KERNEL IS -->
+  <section id="kernel-def">
+    <details class="pro">
+      <summary><h2>1) What the kernel is (formal)</h2></summary>
+      <p>
+        DREAM models what we can observe in 4D as a <em>push-forward</em> through a finite-resolution
+        projection kernel \(K_\lambda\). Let \(X\in\mathcal{M}_{10}\) be coordinates on the Meta-Manifold (MM),
+        \(x\in\mathbb{R}^{1,3}\) the 4D coordinates, and \(\Phi(X)\) an MM field or density. Then
+      </p>
+      <p class="equation">
+        \[
+        \phi(x)\;=\;\int_{\mathcal{M}_{10}} K_\lambda(x,X)\,\Phi(X)\,d^{10}X,
+        \]
+      </p>
+      <p>
+        where \(K_\lambda\) has finite bandwidth/support and respects causal structure and positivity.
+        The parameter \(\lambda\) summarizes the effective resolution at which MM content becomes visible
+        in the 4D projection.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Think of reality as a rich scene passing through a consistent rendering rule. That rule is the
+        <em>kernel</em>. It doesn’t invent features; it determines which parts of the underlying scene are
+        clear at our resolution and which parts blur together.
+      </p>
+      <p>
+        The kernel is why physics looks orderly. Wherever you go, the same rendering rule operates, so the
+        same patterns show up again and again. We don’t need to see every microscopic wrinkle to trust the
+        big shapes—those big shapes are exactly what the kernel preserves.
+      </p>
+      <p>
+        In short: the kernel is the translator from “how reality is encoded” to “what we actually observe.”
+      </p>
+    </div>
+  </section>
+
+  <!-- 2) PROJECTION MAP & FIBERS -->
+  <section id="fibers">
+    <details class="pro">
+      <summary><h2>2) Projection map &amp; fibers (formal)</h2></summary>
+      <p>
+        If \(F:\mathcal{M}_{10}\!\to\!\mathbb{R}^{1,3}\) is the projection, then the <em>fiber</em> over
+        \(x\) is \(F^{-1}(x)\). For densities \(\rho_{10}\) on MM, one convenient notation is
+      </p>
+      <p class="equation">
+        \[
+        \rho_4(x)\;=\;\int_{F^{-1}(x)} K_\lambda(x,X)\,\rho_{10}(X)\,\frac{d\Sigma_6(X)}{J_F(X)},
+        \]
+      </p>
+      <p>
+        where \(d\Sigma_6\) is the induced 6D measure on the fiber and \(J_F\) the Jacobian of \(F\).
+        The fiber viewpoint makes clear that multiple MM states can map to the same 4D event, with
+        finite resolution deciding how they combine.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Picture looking down at a city from a plane: many different rooftop details end up in the same
+        tiny patch from far away. A <em>fiber</em> is like “everything in the city that lines up with that
+        one patch.” When we project reality into 4D, many MM details can land on the same spot we see.
+      </p>
+      <p>
+        The kernel says how to combine those details. If they agree in the large, you get a clear signal.
+        If they fight in tiny ways, those tiny disagreements cancel or blur. That is why a single 4D
+        observation can summarize a lot of hidden structure without exposing every sub-detail.
+      </p>
+      <p>
+        Fibers highlight why measurement is about <em>selection and averaging</em>, not simply “reading off”
+        a hidden value: several MM contributions are funneled into what we can actually register.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3) CONSTANTS AS SETTINGS -->
+  <section id="constants">
+    <details class="pro">
+      <summary><h2>3) Constants as kernel settings (formal)</h2></summary>
+      <p>
+        In DREAM, familiar constants are treated as part of the kernel’s specification:
+        \(\boldsymbol{\theta}_K=\{c,\hbar,G,\ldots\}\). From inside the projection they are
+        <em>measured</em> settings of \(K_\lambda\), not derived quantities. Modifying
+        \(\boldsymbol{\theta}_K\) changes admissible invariants, spectra, and causal cones of the resulting
+        4D description.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        The kernel has fixed parameters. The numbers we call “constants”—like the speed of light—are the
+        values of those parameters as determined by experiment. They are not solved from within the 4D
+        description itself.
+      </p>
+      <p>
+        Changing parameters would change which structures can remain stable and repeatable. The universal
+        patterns we observe are precisely the ones compatible with the same parameter values.
+      </p>
+      <p>
+        In this view, “constants” belong to the translation rule that makes our universe look consistent,
+        from lab measurements to cosmic scales.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4) RETENTION -->
+  <section id="retention">
+    <details class="pro">
+      <summary><h2>4) Retention &amp; classical emergence (formal)</h2></summary>
+      <p>
+        Finite resolution induces <em>retention</em> of some information and loss of other information.
+        A convenient family is
+      </p>
+      <p class="equation">
+        \[
+        \mathcal{R}(\lambda)\;\approx\;\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{\alpha}\Big],
+        \qquad \alpha\in(1,2],
+        \]
+      </p>
+      <p>
+        where \(\lambda\) is the effective smoothing scale and \(\lambda_q\) a characteristic quantum
+        resolution. Low-order structure and topological labels typically survive better than high-frequency
+        phase. The classical limit is then a retention story: as effective \(\lambda\) grows, fine detail
+        falls away while robust structure persists.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Not everything survives the trip through the kernel equally well. Big, organized features last;
+        tiny wiggles fade. That is what we mean by “retention”: what the world keeps versus what it lets go.
+      </p>
+      <p>
+        This naturally explains how the everyday “classical” world appears. At larger scales and over longer
+        times, the blur is stronger on fine detail, so you experience stable objects, reliable cause-and-effect,
+        and repeatable measurements.
+      </p>
+      <p>
+        No extra postulate is needed: classical behavior is the look of patterns that are robust under the
+        same kernel that also reveals quantum behavior at finer scales.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5) INVARIANTS -->
+  <section id="invariants">
+    <details class="pro">
+      <summary><h2>5) What survives: invariants (formal)</h2></summary>
+      <p>
+        The most reliable observables are those tied to <em>invariants</em> under \(K_\lambda\): conserved
+        charges, topological classes, low-order correlation structures, and other features that remain stable
+        under the finite-resolution push-forward.
+      </p>
+      <p>
+        Operationally, if a quantity is reproducible across observers and instruments that realize the same
+        effective \(\lambda\), it is a strong candidate for a kernel-level invariant in the 4D description.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Invariants are the “keepsakes” of reality—the parts of the story that don’t change when you
+        re-measure or look with a different (but equally sharp) tool. They are the backbone of laws.
+      </p>
+      <p>
+        That’s why science trusts repeating patterns: if a pattern survives different ways of looking, it’s
+        likely tied to how the world is rendered, not to the quirks of a single experiment.
+      </p>
+      <p>
+        In DREAM, invariants are the core of what the kernel preserves, which is why they define so much of physics.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6) MEASUREMENT BANDWIDTH -->
+  <section id="measurement">
+    <details class="pro">
+      <summary><h2>6) Measurement bandwidth (formal)</h2></summary>
+      <p>
+        Instruments set an <em>effective</em> \(\lambda\): bandwidth, integration time, geometry, and noise all
+        influence which MM features pass the kernel’s finite-resolution gate. Changing \(\lambda\) changes the
+        balance of what is retained versus suppressed, without altering MM itself.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Tools matter. A microscope and a telescope both show the same world, but each has its own reach.
+        In DREAM language, each tool sets a different effective resolution \(\lambda\).
+      </p>
+      <p>
+        When you switch tools, you don’t change reality—you change what gets through the kernel. Some features
+        light up; others fade into the background. That’s expected, and it’s why careful experiments report
+        their bandwidths and settings.
+      </p>
+      <p>
+        The consistent part across tools—the invariants—is what we promote to “laws.” The rest is context.
+      </p>
+    </div>
+  </section>
+
+
+
+<!-- Optional: re-typeset when switching to Science mode -->
+<script>
+(function(){
+  // If your header already wires the Science/General toggle, this is harmless.
+  // It just re-typesets math whenever science mode becomes visible.
+  const obs = new MutationObserver(() => {
+    const sciVisible = [...document.querySelectorAll('[data-mode="science"]')]
+      .some(n => n.offsetParent !== null);
+    if (sciVisible && window.MathJax?.typeset) MathJax.typeset();
+  });
+  obs.observe(document.body, {subtree:true, attributes:true, attributeFilter:['style','class']});
+})();
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../../js/fs-toggle.js"></script>
+</body>
+</html>

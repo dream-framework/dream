@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test Registry · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M Test Registry — every S2 retention test performed across cognitive, financial, cosmological, physical, quantum, ecological, intervention, scouting, live-feed and confirmed-domain registries, with D, R², verdict and narrative." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link active" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link tools" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link tools" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link tools" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero">
+    <span class="kicker">S2 Retention · Cross-Domain Catalog</span>
+    <h1>Test Registry</h1>
+    <p>
+      Every S2 retention test performed to date, across cognitive, financial, cosmological,
+      physical, quantum, ecological, intervention, scouting, live-feed and confirmed-domain
+      registries. Each entry reports the effective exponent
+      \(D_{\mathrm{eff}}\), the goodness-of-fit \(R^{2}\), a verdict, and a one-line narrative.
+    </p>
+    <p class="note">
+      The retention law is \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\).
+      <strong>D&nbsp;&lt;&nbsp;1</strong> marks a <em>natural</em> regime; <strong>D&nbsp;&gt;&nbsp;1</strong>
+      marks an <em>extraction</em> regime (information is being drained faster than the natural cliff).
+      Threshold cases (\(D\approx1\)) are flagged amber.
+    </p>
+  </div>
+
+  <!-- SUMMARY PILLS -->
+  <div class="registry-summary" id="summaryPills"></div>
+
+  <!-- CONTROLS -->
+  <div class="card" style="padding:1rem 1.25rem">
+    <div class="registry-controls">
+      <label for="catFilter">Category</label>
+      <select id="catFilter" aria-label="Filter tests by category">
+        <option value="all">All categories</option>
+        <option value="cognitive">Cognitive</option>
+        <option value="financial">Financial</option>
+        <option value="cosmological">Cosmological</option>
+        <option value="physical">Physical (incl. Ising)</option>
+        <option value="quantum">Quantum (magic / circuits)</option>
+        <option value="ecological">Ecological</option>
+        <option value="interventions">Interventions</option>
+        <option value="scouting">Scouting</option>
+        <option value="live">Live Feeds</option>
+        <option value="confirmed">Confirmed Domains</option>
+      </select>
+      <span class="registry-count" id="count">—</span>
+    </div>
+  </div>
+
+  <!-- TEST GRID -->
+  <div class="test-grid" id="testGrid" aria-live="polite"></div>
+
+  <!-- SUMMARY TABLE -->
+  <div class="card" style="padding:1.1rem 1.25rem">
+    <h2 style="margin:0 0 .6rem">Full Test Table</h2>
+    <div class="registry-table-wrap">
+      <table class="registry-table" id="testTable">
+        <thead>
+          <tr>
+            <th>Test</th>
+            <th>Domain</th>
+            <th>D</th>
+            <th>R²</th>
+            <th>Verdict</th>
+            <th>Significance</th>
+          </tr>
+        </thead>
+        <tbody id="testTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How to read this registry</h2>
+    <p>
+      Each card reports the stretched-exponential exponent \(D_{\mathrm{eff}}\) from fitting
+      \(R(\lambda)\) on a retention curve. <strong>Green</strong> values (\(D&lt;1\)) mean the
+      system is on the natural side of the coherence cliff; <strong>coral</strong> values
+      (\(D&gt;1\)) mean extraction — the channel is being drained faster than natural decay.
+      <strong>Amber</strong> marks threshold cases (\(D\approx1\)), <em>weak</em> fits (where the
+      S2 exponent hit a parameter bound) and <em>partial</em> confirmations.
+    </p>
+    <p>
+      Verdict legend: <strong>CONFIRMED</strong> — quantitative S2 win on AIC/BIC;
+      <strong>CONSISTENT</strong> — qualitative literature match, no D extracted;
+      <strong>NATURAL</strong> — \(D&lt;1\); <strong>EXTRACTION</strong> — \(D&gt;1\);
+      <strong>PARTIAL</strong> — pipeline-compatible but awaiting data;
+      <strong>INCONCLUSIVE</strong> — poor fit; <strong>WEAK</strong> — fit hit a parameter bound;
+      <strong>PENDING</strong> — data not yet fit.
+    </p>
+    <p class="note">
+      Intervention tests (Sweden FTT, China gaming ban, Montréal Protocol, Volcker Rule) report
+      \(D\) <em>before</em> and <em>after</em> the policy change. A confirmed intervention is one
+      where \(D\) crossed from extraction to natural (or back) as predicted. To add a new test,
+      append an object to the <code>TESTS</code> array in this page’s source.
+    </p>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================================
+   D.R.E.A.M — Test Registry data
+   ----------------------------------------------------------------------------
+   To add a new test: push another object to TESTS. Fields:
+     id        : short unique slug
+     name      : display title
+     domain    : cognitive | financial | cosmological | physical | quantum |
+                 ecological | interventions | scouting | live | confirmed
+     groups    : optional array of extra categories this test belongs to
+                 (defaults to [domain])
+     D         : effective exponent (number) or null if not yet fit
+     r2        : goodness-of-fit (number) or null
+     verdict   : CONFIRMED | EXTRACTION | NATURAL | INCONCLUSIVE | PENDING |
+                 PARTIAL | CONSISTENT | WEAK
+     kind      : natural | extraction | threshold | inconclusive |
+                 intervention | pending | consistent  (drives the D colour)
+     narrative : 1-2 sentence significance
+     image     : filename in /img/tests/ (or null)
+     source    : provenance string (JSON / PDF / KB)
+     phases    : optional [{label, D, kind}] for before/during/after tests
+   ============================================================================ */
+const IMG = "../img/tests/";
+const TESTS = [
+  /* ============ COGNITIVE (4) ============ */
+  {
+    id:"ebb-1885",
+    name:"Ebbinghaus memory (1885)",
+    domain:"cognitive", groups:["cognitive","confirmed"],
+    D:0.153, r2:0.976,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process.",
+    image:"dream_memory_s2_test.png",
+    source:"dream_memory_s2_results.json"
+  },
+  {
+    id:"murre-2015",
+    name:"Murre & Dros memory (2015)",
+    domain:"cognitive", groups:["cognitive","confirmed"],
+    D:0.219, r2:0.976,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"A 130-year replication of Ebbinghaus. S2 wins on AIC versus the power law (ΔAIC≈−28; AIC 17 vs 45). D=0.219 — the retention law is reproducible.",
+    image:"dream_memory_s2_test.png",
+    source:"dream_memory_s2_results.json"
+  },
+  {
+    id:"mark-2004-12",
+    name:"Gloria Mark attention (2004–12)",
+    domain:"cognitive",
+    D:1.232, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Attention-span decline across 2004–2012 crosses the D=1 threshold (D=1.232), indicating algorithmic extraction rather than natural decay.",
+    image:"npa_chart3_timeline_en.png",
+    source:"npa_attention_s2_results.json"
+  },
+  {
+    id:"mark-2012-22",
+    name:"Gloria Mark attention (2012–22)",
+    domain:"cognitive",
+    D:4.28, r2:null,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"From the NPA manifesto: attention collapse accelerates after 2012 (D≈4.28) — a deep-extraction regime as short-form feeds dominate.",
+    image:"npa_chart1_d_extraction_en.png",
+    source:"NPA-Manifesto-2.0.pdf"
+  },
+
+  /* ============ FINANCIAL (7) ============ */
+  {
+    id:"eth-hourly",
+    name:"ETH hourly (crypto HFT)",
+    domain:"financial",
+    D:0.591, r2:0.537,
+    verdict:"INCONCLUSIVE", kind:"inconclusive",
+    narrative:"Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"spy-daily",
+    name:"SPY daily (equity index)",
+    domain:"financial",
+    D:0.711, r2:0.732,
+    verdict:"NATURAL", kind:"natural",
+    narrative:"Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"qqq-daily",
+    name:"QQQ daily (tech ETF)",
+    domain:"financial",
+    D:1.016, r2:0.749,
+    verdict:"EXTRACTION", kind:"threshold",
+    narrative:"Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"hold-1940-80",
+    name:"Stock holding period (1940–80)",
+    domain:"financial",
+    D:1.559, r2:0.993,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Pre-digital holding-period decay already shows D>1 (1.559) — extraction is not purely an HFT phenomenon; it predates electronic trading.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"hold-1980-2023",
+    name:"Stock holding period (1980–2023)",
+    domain:"financial",
+    D:1.005, r2:0.999,
+    verdict:"EXTRACTION", kind:"threshold",
+    narrative:"Modern era sits on the threshold (D=1.005) with a near-perfect fit (R²=0.999). The entire post-1980 regime is at the extraction boundary.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"trade-1980-2000",
+    name:"Trade duration (1980–2000)",
+    domain:"financial",
+    D:1.781, r2:1.000,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Trade-duration retention decays with D=1.781 — extraction. The perfect fit (R²=1.000) reflects the regularising effect of electronic matching.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"trade-2000-23",
+    name:"Trade duration (2000–2023)",
+    domain:"financial",
+    D:2.454, r2:1.000,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"HFT era: D=2.454 — deep extraction. The doubling of D versus the prior era quantifies the acceleration of fictitious-capital turnover.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+
+  /* ============ COSMOLOGICAL (3) ============ */
+  {
+    id:"sfr-z2-0",
+    name:"SFR density decline (z=2→0)",
+    domain:"cosmological",
+    D:3.458, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Star-formation-rate density declines with D=3.458 — the cosmos is in an extraction regime as dark energy suppresses structure formation.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+  {
+    id:"bound-z15-0",
+    name:"Bound structure growth decline (z=1.5→0)",
+    domain:"cosmological",
+    D:2.571, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Bound-structure growth decays with D=2.571 — extraction. Hierarchical clustering is being starved by accelerated expansion.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+  {
+    id:"cluster-z1-0",
+    name:"Cluster growth decline (z=1→0)",
+    domain:"cosmological",
+    D:2.608, r2:0.999,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Cluster-growth retention: D=2.608, R²=0.999. Same family as SFR — the universe is losing its capacity to build bound objects.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+
+  /* ============ PHYSICAL · NV CENTER (5) ============ */
+  {
+    id:"nv-40nm-rt",
+    name:"NV nanodiamond 40nm, room temp",
+    domain:"physical", groups:["physical","confirmed"],
+    D:0.654, r2:0.973,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"T₁ relaxation in 40nm nanodiamonds: S2 is the best model (lowest AIC), D=0.654 — natural decoherence, well below the cliff.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-3um-rt",
+    name:"NV nanodiamond 3μm, room temp",
+    domain:"physical", groups:["physical","confirmed"],
+    D:0.644, r2:0.949,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-40nm-6k",
+    name:"NV nanodiamond 40nm, ~6K",
+    domain:"physical", groups:["physical","confirmed"],
+    D:0.526, r2:0.982,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Cryogenic 6K: D=0.526, R²=0.982. Cooling reduces the effective exponent further — natural retention is robust across temperature.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-ens-1ppm",
+    name:"NV ensemble, 1ppm N impurity",
+    domain:"physical", groups:["physical","confirmed"],
+    D:0.889, r2:0.960,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-ens-100ppm",
+    name:"NV ensemble, 100ppm N impurity",
+    domain:"physical", groups:["physical","confirmed"],
+    D:0.527, r2:0.935,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+
+  /* ============ PHYSICAL · ISING (2) ============ */
+  {
+    id:"ising-spatial-t1-5",
+    name:"Ising spatial T=1.5",
+    domain:"physical",
+    D:0.653, r2:0.972,
+    verdict:"NATURAL", kind:"natural",
+    narrative:"Below-Tc spatial Ising retention: D=0.653 (R²=0.972). Power law marginally wins on AIC, but S2 is consistent — both fall on the natural side.",
+    image:"dream_ising_spatial_retention.png",
+    source:"dream_ising_spatial_retention_results.json"
+  },
+  {
+    id:"ising-crossover-t2-269",
+    name:"Ising crossover T=2.269 (critical)",
+    domain:"physical",
+    D:1.088, r2:0.838,
+    verdict:"EXTRACTION", kind:"threshold",
+    narrative:"At the critical temperature Tc≈2.269, simple exponential wins on AIC; S2 sits exactly on the D=1 cliff (D=1.088). A falsification boundary for the law.",
+    image:"dream_ising_crossover_plot.png",
+    source:"dream_ising_crossover_results.json"
+  },
+
+  /* ============ QUANTUM (magic / circuits, 4) ============ */
+  {
+    id:"quantum-magic-accum",
+    name:"Quantum magic accumulation (random circuits)",
+    domain:"quantum", groups:["quantum","confirmed"],
+    D:null, r2:0.996,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Random-circuit magic-state accumulation tracks S2 retention with R²=0.996, ΔBIC>15 — the law reproduces across the qubit-count sweep.",
+    image:null,
+    source:"KB §27 (quantum magic scripts)"
+  },
+  {
+    id:"magic-filament",
+    name:"Magic filament ridges (random circuits)",
+    domain:"quantum", groups:["quantum","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Filament ridges in the magic-vs-depth surface are recoverable across replicates with AUC 0.70 — the S2 scaffolding is statistically visible.",
+    image:null,
+    source:"KB §27 (quantum magic scripts)"
+  },
+  {
+    id:"deff-qubit-scaling",
+    name:"D_eff scales with qubit count",
+    domain:"quantum", groups:["quantum","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Effective exponent scales 1.04 (q=2) → 1.37 (q=6) — a qubit-count signature, confirming S2 sees quantum-volume growth as a coherent cliff shift.",
+    image:null,
+    source:"KB §27 (quantum magic scripts)"
+  },
+  {
+    id:"transpilation",
+    name:"Transpilation preserves S2",
+    domain:"quantum", groups:["quantum","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"After Qiskit transpilation, the S2 fit is preserved with ΔBIC>47 — the law is invariant under gate-set rewrites.",
+    image:null,
+    source:"KB §27 (quantum magic scripts)"
+  },
+
+  /* ============ INTERVENTIONS (4) ============ */
+  {
+    id:"sweden-ftt",
+    name:"Sweden FTT (1984–91)",
+    domain:"interventions", groups:["interventions","ecological","financial","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"A financial-transactions tax suppressed turnover and pushed D below the extraction threshold during the tax, then snapped back to deep extraction (4.74) after repeal — fully reversible, as predicted.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"Before", D:1.50, kind:"extraction"},
+      {label:"During", D:0.72, kind:"natural"},
+      {label:"After",  D:4.74, kind:"extraction"}
+    ]
+  },
+  {
+    id:"china-gaming",
+    name:"China minor gaming ban (2021)",
+    domain:"interventions", groups:["interventions","cognitive","ecological","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Banning algorithmic feeds for minors collapsed attention extraction from D=4.15 to D=0.12 — the largest single intervention effect on record.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"Before", D:4.15, kind:"extraction"},
+      {label:"After",  D:0.12, kind:"natural"}
+    ]
+  },
+  {
+    id:"montreal",
+    name:"Montréal Protocol (1987)",
+    domain:"interventions", groups:["interventions","ecological","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"The CFC ban slowed ozone decline; ecological retention crossed from extraction (1.27) back to natural (0.58). The retention law responds to policy, not just to markets.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"Before", D:1.27, kind:"extraction"},
+      {label:"After",  D:0.58, kind:"natural"}
+    ]
+  },
+  {
+    id:"volcker",
+    name:"Volcker Rule (2012)",
+    domain:"interventions", groups:["interventions","financial","confirmed"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Prop-trading restriction reduced D from 1.50 to 0.97 — just below the threshold. A policy lever on fictitious-capital extraction.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"Before", D:1.50, kind:"extraction"},
+      {label:"After",  D:0.97, kind:"natural"}
+    ]
+  },
+
+  /* ============ LIVE FEEDS (5) ============ */
+  {
+    id:"usgs-quakes",
+    name:"USGS Earthquakes (30d)",
+    domain:"live",
+    D:5.0, r2:1.0,
+    verdict:"WEAK", kind:"inconclusive",
+    narrative:"Hourly quake counts fit S2 with R²≈1.0 but D hit the upper parameter bound (5.0) — the law is consistent but the exponent is unbounded. A weak signal, not a confirmation.",
+    image:null,
+    source:"s2_scout_results.json"
+  },
+  {
+    id:"noaa-solar-wind",
+    name:"NOAA Solar Wind Speed",
+    domain:"live",
+    D:5.0, r2:0.998,
+    verdict:"WEAK", kind:"inconclusive",
+    narrative:"Solar-wind speed series hits the D=5.0 boundary with R²=0.998. S2 is consistent but the upper-bound hit means no quantitative exponent can be claimed.",
+    image:null,
+    source:"s2_scout_results.json"
+  },
+  {
+    id:"wb-usa-gdp",
+    name:"World Bank USA GDP",
+    domain:"live",
+    D:5.0, r2:0.994,
+    verdict:"WEAK", kind:"inconclusive",
+    narrative:"Annual US GDP series hits D=5.0 (R²=0.994). Macro time-aggregated series saturate the upper bound — flagged weak pending finer-grain data.",
+    image:null,
+    source:"s2_scout_results.json"
+  },
+  {
+    id:"wb-usa-cpi",
+    name:"World Bank USA CPI",
+    domain:"live",
+    D:5.0, r2:0.999,
+    verdict:"WEAK", kind:"inconclusive",
+    narrative:"CPI series: D=5.0 boundary, R²=0.999. Inflation retention is consistent with S2 but the exponent is unbounded at this sampling rate.",
+    image:null,
+    source:"s2_scout_results.json"
+  },
+  {
+    id:"wb-usa-unemp",
+    name:"World Bank USA Unemployment",
+    domain:"live",
+    D:2.284, r2:0.947,
+    verdict:"WEAK", kind:"inconclusive",
+    narrative:"Unemployment retention: D=2.284, R²=0.947 — extraction regime, but the fit quality is marginal so the verdict is weak.",
+    image:null,
+    source:"s2_scout_results.json"
+  },
+
+  /* ============ CONFIRMED DOMAINS (13) ============ */
+  {
+    id:"solar-wind-plasma",
+    name:"Solar wind / plasma",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Solar-wind plasma streams exhibit the S2 cross-domain collapse — the standard-transform plot linearises with the predicted cliff, in-band with the OMNIweb dataset.",
+    image:"dream_s2_cross_domain_collapse.png",
+    source:"KB §27"
+  },
+  {
+    id:"river-flow",
+    name:"River flow (Potomac / gauges)",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Daily river-discharge series fit S2 retention — water flow displays the same stretched-exponential decay as cognition and capital.",
+    image:null,
+    source:"KB §27"
+  },
+  {
+    id:"crypto-markets",
+    name:"Cryptocurrency markets (cross-coin)",
+    domain:"confirmed", groups:["confirmed","financial"],
+    D:0.30, r2:null,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Aggregated crypto-return retention: D=0.30 — S2 fits and beats the power law across the cross-coin panel.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"KB §27"
+  },
+  {
+    id:"wikimedia",
+    name:"Wikimedia / information streams",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Edit/event streams on Wikimedia fit S2 retention — information flow behaves as a stretched-exponential channel, not a power law.",
+    image:null,
+    source:"KB §27"
+  },
+  {
+    id:"earthquakes",
+    name:"Earthquakes (global catalogue)",
+    domain:"confirmed", groups:["confirmed","ecological"],
+    D:0.12, r2:null,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"After dust decomposition, the seismic-event retention exponent collapses to D=0.12 — extremely natural; the long tail is a dust artefact, not extraction.",
+    image:"dream_s2_dust_decomposition.png",
+    source:"KB §27"
+  },
+  {
+    id:"football-events",
+    name:"Football event networks",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Event-scale (pass/shot) networks fit S2 and beat clock-scale binning — the law picks the natural event resolution over wall-clock aggregation.",
+    image:null,
+    source:"KB §27"
+  },
+  {
+    id:"transformer-aging",
+    name:"Transformer aging forecasts",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Per-day dedust on transformer thermal-aging data drives forecast WAPE down to 38% — S2 retention is operationally useful for grid asset forecasting.",
+    image:null,
+    source:"KB §27"
+  },
+  {
+    id:"omni-cliff",
+    name:"OMNI λ-cliff stratification",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"OMNIweb solar-wind data stratifies cleanly along the λ-cliff — the framework-specific cliff pattern is observable in operational space-weather data.",
+    image:"dream_s2_standard_transform.png",
+    source:"KB §27"
+  },
+  {
+    id:"gw-speed-c",
+    name:"Gravitational wave speed = c",
+    domain:"confirmed", groups:["confirmed","scouting"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"GW170817/GRB 170817A: |v_gw − c|/c ≤ 10⁻¹⁵ — the retention law’s prediction of a universal propagation speed holds to fifteen decimals.",
+    image:null,
+    source:"KB §27 (scouting cross-ref)"
+  },
+  {
+    id:"topological-quant",
+    name:"Topological quantization (T1)",
+    domain:"confirmed", groups:["confirmed","quantum"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Topological T1 charge quantization is reproduced — the S2 scaffolding is consistent with discrete topological charge sectors.",
+    image:null,
+    source:"KB §27"
+  },
+  {
+    id:"cms-top-magic",
+    name:"CMS top magic (smoke test)",
+    domain:"confirmed", groups:["confirmed","quantum"],
+    D:null, r2:null,
+    verdict:"PARTIAL", kind:"consistent",
+    narrative:"CMS top-quark event shapes are S2-compatible, but a quantitative D extraction still requires HEPData harmonisation. Marked partial, not confirmed.",
+    image:null,
+    source:"KB §27 (HEPData pending)"
+  },
+  {
+    id:"social-network-control",
+    name:"Social/network identifiers (control)",
+    domain:"confirmed",
+    D:null, r2:0.996,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Control test on social-network identifier retention: R²=0.996, no D extracted. The control arm holds, validating the fit pipeline.",
+    image:null,
+    source:"KB §27 (control)"
+  },
+  {
+    id:"tim-structured",
+    name:"TIM structured dynamics (control)",
+    domain:"confirmed",
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"consistent",
+    narrative:"Negative control: TIM structured dynamics do NOT favour S2 — confirms the law has a scope, not a universal fit. A successful falsification boundary.",
+    image:null,
+    source:"KB §27 (scope control)"
+  },
+
+  /* ============ SCOUTING (10) ============ */
+  {
+    id:"rhic-star",
+    name:"RHIC / STAR Λ-Λ̄ spin correlation",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Identified as a candidate retention channel. Data not yet fit — awaiting pipeline harmonisation with the S2 standard transform.",
+    image:null,
+    source:"SCOUTING_REPORT_PASS1"
+  },
+  {
+    id:"stretched-prl",
+    name:"Stretched exp. in artificial spin systems (PRL)",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"Published stretched-exponential behaviour in artificial spin ice is consistent with S2. No quantitative D extracted yet.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"euclid-web",
+    name:"Euclid cosmic-web fractal dimension",
+    domain:"scouting", groups:["scouting","cosmological"],
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Euclid’s cosmic-web mapping will provide the cleanest large-scale fractal retention test. Awaiting data release.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"casimir-geom",
+    name:"Casimir force geometry dependence",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"Casimir-force geometry scalings are consistent with the S2 cliff — literature confirms stretched-exponential form across plate/sphere geometries.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"q-to-classical",
+    name:"Quantum-to-classical transition / decoherence",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"Decoherence literature shows stretched-exponential crossover at the quantum-classical boundary — consistent with the S2 framework.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"charge-quant-anom",
+    name:"Charge quantization via anomaly cancellation",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"Anomaly-cancellation constraints on charge quantization are consistent with the topological T1 sector of the S2 framework.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"dark-matter-dd",
+    name:"Dark matter direct detection",
+    domain:"scouting", groups:["scouting","cosmological"],
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Direct-detection event-rate curves are a candidate retention channel; pipeline fit pending once exposure normalisation is harmonised.",
+    image:null,
+    source:"SCOUTING_REPORT_PASS2"
+  },
+  {
+    id:"inflation-perturb",
+    name:"Inflation perturbation spectrum",
+    domain:"scouting", groups:["scouting","cosmological"],
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Primordial perturbation power spectrum is a candidate retention channel; pending CMB-mode harmonisation.",
+    image:null,
+    source:"SCOUTING_REPORT_PASS2"
+  },
+  {
+    id:"hal-entangle-dist",
+    name:"Distance-dependent suppression of entanglement (HAL)",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"HAL collaboration's distance-dependent entanglement suppression is consistent with an S2 retention envelope — literature match, no quantitative D yet.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"nv-wiley",
+    name:"Stretched exp. in NV decoherence (Wiley)",
+    domain:"scouting", groups:["scouting","quantum"],
+    D:null, r2:null,
+    verdict:"CONSISTENT", kind:"consistent",
+    narrative:"Wiley-published NV-center decoherence curves display the canonical stretched-exponential form — independent literature confirmation of the S2 fit family.",
+    image:null,
+    source:"scouting KB"
+  }
+];
+
+/* ---- helpers ---- */
+const CAT_LABELS = {
+  all:"All", cognitive:"Cognitive", financial:"Financial",
+  cosmological:"Cosmological", physical:"Physical", ecological:"Ecological",
+  interventions:"Interventions", scouting:"Scouting",
+  quantum:"Quantum", live:"Live Feeds", confirmed:"Confirmed Domains"
+};
+
+function groupsOf(t){ return t.groups || [t.domain]; }
+
+function dText(t){
+  if (t.D === null || t.D === undefined) return "—";
+  return Number(t.D).toFixed(3);
+}
+function r2Text(t){
+  if (t.r2 === null || t.r2 === undefined) return "—";
+  return Number(t.r2).toFixed(3);
+}
+function dClass(t){
+  if (t.verdict === "PENDING") return "d-pending";
+  if (t.kind === "inconclusive") return "d-inconclusive";
+  if (t.kind === "consistent") return "d-consistent";
+  if (t.D === null || t.D === undefined) return "d-pending";
+  if (t.kind === "threshold") return "d-threshold";
+  if (t.D > 1) return "d-extraction";
+  if (t.D < 1) return "d-natural";
+  return "d-threshold";
+}
+function phaseClass(p){
+  if (p.D === null) return "";
+  if (p.kind === "natural" || p.D < 1) return "phase-natural";
+  return "phase-extraction";
+}
+function phaseText(p){ return p.D === null || p.D === undefined ? "—" : Number(p.D).toFixed(2); }
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function cardHTML(t){
+  const verdictCls = "verdict-" + (t.verdict || "PENDING");
+  const dCls = dClass(t);
+
+  let dBlock = '';
+  if (t.phases && t.phases.length){
+    const phases = t.phases.map(p =>
+      `<div class="test-phase ${phaseClass(p)}">
+         <span class="ph-lbl">${esc(p.label)}</span>
+         <span class="ph-d">${phaseText(p)}</span>
+       </div>`).join('');
+    dBlock = `
+      <div class="test-d-row">
+        <span class="test-d-lbl">D before → after</span>
+      </div>
+      <div class="test-phases">${phases}</div>`;
+  } else {
+    dBlock = `
+      <div class="test-d-row">
+        <span class="test-d ${dCls}">${dText(t)}</span>
+        <span class="test-d-lbl">D<sub>eff</sub></span>
+        <span class="test-r2">R² = ${r2Text(t)}</span>
+      </div>`;
+  }
+
+  let figHTML = '';
+  if (t.image){
+    figHTML = `
+      <div class="test-figure" data-fullscreen>
+        <img src="${IMG}${esc(t.image)}" alt="${esc(t.name)} chart" loading="lazy">
+      </div>`;
+  }
+
+  return `
+    <div class="test-head">
+      <h3 class="test-name">${esc(t.name)}</h3>
+      <div class="test-badges">
+        <span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span>
+        <span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span>
+      </div>
+    </div>
+    ${dBlock}
+    <p class="test-narr">${esc(t.narrative)}</p>
+    ${figHTML}
+    <div class="test-source">src: ${esc(t.source || '—')}</div>`;
+}
+
+function summaryPills(){
+  const total = TESTS.length;
+  const confirmed = TESTS.filter(t => t.verdict === "CONFIRMED").length;
+  const extraction = TESTS.filter(t => t.verdict === "EXTRACTION").length;
+  const inconclusive = TESTS.filter(t => t.verdict === "INCONCLUSIVE").length;
+  const pending = TESTS.filter(t => t.verdict === "PENDING").length;
+  const natural = TESTS.filter(t => t.verdict === "NATURAL").length;
+  const partial = TESTS.filter(t => t.verdict === "PARTIAL").length;
+  const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
+  const weak = TESTS.filter(t => t.verdict === "WEAK").length;
+  return `
+    <div class="summary-pill mut"><div class="n">${total}</div><div class="l">Total</div></div>
+    <div class="summary-pill good"><div class="n">${confirmed}</div><div class="l">Confirmed</div></div>
+    <div class="summary-pill good"><div class="n">${natural}</div><div class="l">Natural</div></div>
+    <div class="summary-pill good"><div class="n">${consistent}</div><div class="l">Consistent</div></div>
+    <div class="summary-pill bad"><div class="n">${extraction}</div><div class="l">Extraction</div></div>
+    <div class="summary-pill warn"><div class="n">${inconclusive}</div><div class="l">Inconclusive</div></div>
+    <div class="summary-pill warn"><div class="n">${weak}</div><div class="l">Weak</div></div>
+    <div class="summary-pill warn"><div class="n">${partial}</div><div class="l">Partial</div></div>
+    <div class="summary-pill mut"><div class="n">${pending}</div><div class="l">Pending</div></div>`;
+}
+
+function tableRowHTML(t){
+  const dCls = dClass(t);
+  const verdictCls = "verdict-" + (t.verdict || "PENDING");
+  const dCell = t.phases && t.phases.length
+    ? t.phases.map(p => `${esc(p.label)}: <span class="${phaseClass(p)}" style="color:inherit">${phaseText(p)}</span>`).join(' → ')
+    : `<span class="${dCls}">${dText(t)}</span>`;
+  return `
+    <tr class="${t.verdict === 'PENDING' ? 'pending' : ''}">
+      <td><strong>${esc(t.name)}</strong></td>
+      <td><span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span></td>
+      <td class="d-cell ${dCls}">${dCell}</td>
+      <td class="d-cell">${r2Text(t)}</td>
+      <td><span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span></td>
+      <td class="narr-cell">${esc(t.narrative)}</td>
+    </tr>`;
+}
+
+function render(filter){
+  const grid = document.getElementById('testGrid');
+  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter));
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  list.forEach(t => {
+    const el = document.createElement('article');
+    el.className = 'card test-card';
+    el.innerHTML = cardHTML(t);
+    frag.appendChild(el);
+  });
+  grid.appendChild(frag);
+  // init fullscreen toggles on any dynamically-created figures
+  grid.querySelectorAll('[data-fullscreen]').forEach(fig => {
+    if (window.ChartFullscreen && window.ChartFullscreen.init) window.ChartFullscreen.init(fig);
+  });
+  document.getElementById('count').textContent = `${list.length} / ${TESTS.length} tests shown`;
+
+  const tbody = document.getElementById('testTableBody');
+  tbody.innerHTML = list.map(tableRowHTML).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('summaryPills').innerHTML = summaryPills();
+  const sel = document.getElementById('catFilter');
+  const saved = new URLSearchParams(location.search).get('cat');
+  if (saved && CAT_LABELS[saved]) sel.value = saved;
+  render(sel.value);
+  sel.addEventListener('change', () => render(sel.value));
+});
+</script>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    const parts = rest.split('/');
+    const depth = parts.length - 1;
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

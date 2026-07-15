@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сила D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link active" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero" style="margin-bottom: 1rem;">
+    <h1>Сила D.R.E.A.M.</h1>
+    <p class="kicker">Единая проекция и единый закон сохранения информации — онтология, парсимония и ближнесрочные тесты.</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="card">
+    <p>
+      <strong>D.R.E.A.M.</strong> моделирует нашу 4-D Вселенную как проекцию конечного разрешения (10 → 4) компактного мета-многообразия
+      через фиксированное ядро \(K_{\lambda}\). Наблюдаемые — это образы под действием отображения; эмпирическое содержание несут
+      инварианты ядра — масштаб когерентности \(\lambda_q\), эффективный показатель \(D_{\mathrm{eff}}\) и локальность.
+      При подтверждённом S2 (законе удержания) информация закономерно гаснет с ростом масштаба зонда; S1 («пыль»/ALP) отодвинут, так как любая
+      суб-\(\lambda_q\) «пыль» в принципе невосстановима.
+    </p>
+  </div>
+
+  <!-- GRID: Ontology + Epistemology -->
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Ontology -->
+    <div class="card">
+      <h2>1 — Онтология: один источник — много лиц</h2>
+      <p class="core">
+        Пространство-время, материйные сектора и «константы» — не аксиомы; это устойчивые выходы одного и того же push-forward.
+        Константы (напр., \(c,\hbar,G\)) — параметры ядра, измеримые в 4-D; устойчивые классы ММ переходят в виды/заряды.
+      </p>
+      <div class="math-block">
+        \[
+          \phi(x)\;=\;\int K_{\lambda}(x;X)\,\Phi(X)\,d^{10}\!X
+        \]
+      </div>
+      <p><strong>Выигрыш в парсимонии:</strong> одно ядро, конечное разрешение и несколько инвариантов организуют всю иерархию.</p>
+    </div>
+
+    <!-- Epistemology -->
+    <div class="card">
+      <h2>2 — Эпистемология: от подгонки параметров к инвариантам ядра</h2>
+      <p class="core">
+        Вместо подгонки множества свободных констант D.R.E.A.M нацеливается на инварианты ядра, устойчивые поперёк платформ и масштабов —
+        прежде всего \(\lambda_q\) и \(D_{\mathrm{eff}}\).
+      </p>
+      <div class="math-block">
+        \[
+          R(\lambda)\;=\;\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]
+        \]
+      </div>
+      <p>
+        Один и тот же закон описывает затухание ВЧ-мощности и структурной корреляции по мере роста масштаба.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- GRID: Methodology + Predictive Edge -->
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Methodology -->
+    <div class="card">
+      <h2>3 — Методология: разрешение как регулятор</h2>
+      <p>
+        Измерение — это взаимодействие с укрупнением (coarse-graining): оно стирает суб-\(\lambda\) фазы, сохраняя инварианты проекции;
+        исходы — это то, что переживает этот фильтр. Наблюдатель — это многомасштабная политика выбора полос и слияния сводок.
+      </p>
+      <details class="more">
+        <summary>Два канала удержания (единый закон)</summary>
+        <div class="math-block">
+          \[
+            R_{\mathrm{HF}}(\lambda),\; R_{\mathrm{struct}}(\lambda)
+            \;\sim\; \exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]
+          \]
+        </div>
+        <p>И ВЧ-мощность, и структурная корреляция следуют той же форме, со своими \((\lambda_q, D_{\mathrm{eff}})\).</p>
+      </details>
+    </div>
+
+    <!-- Predictive Edge -->
+    <div class="card">
+      <h2>4 — Предсказательная сила (цели Сохранение-first)</h2>
+      <ul>
+        <li><strong>«Утёс» когерентности:</strong> резкий спад видимости при переходе \(\lambda/\lambda_q\) через 1 на разных платформах (NV/спины, материальные волны, фотоника).</li>
+        <li><strong>Поток «фрактал → однородность»:</strong> эффективная размерность \(D_{\mathrm{eff}}\) стремится к 3 на больших масштабах; фрактальные признаки ограничены зонами суб-\(\lambda_q\).</li>
+        <li><strong>Сохранность узлов и филаментов:</strong> фокусировка coarea создаёт структуры, переживающие сглаживание; квантифицировать через CPI.</li>
+        <li><strong>Вакуумные остатки:</strong> push-forward с фазовыми компенсациями оставляет малую эффективную плотность в 4-D.</li>
+      </ul>
+      <p class="note">S1 (ступенчатый ALP/«пыль») отодвинут в рамках S2 и больше не задаёт ближнесрочные тесты.</p>
+    </div>
+
+  </div>
+
+  <!-- COMPARISON MATRIX -->
+  <div class="grid one" style="margin-top:1rem">
+    <div class="card">
+      <h2>5 — Плечом к плечу: D.R.E.A.M. vs. статус-кво</h2>
+      <div class="code" style="overflow:auto">
+        <table style="width:100%; border-collapse:collapse">
+          <thead>
+            <tr style="border-bottom:1px solid #2a2f5a">
+              <th style="text-align:left">Измерение</th>
+              <th style="text-align:left">Мейнстрим (SM + ΛCDM + strings)</th>
+              <th style="text-align:left">D.R.E.A.M.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Онтология</strong></td>
+              <td>Пространство-время и константы предполагаются; сектора постулируются.</td>
+              <td>4-D = push-forward 10-D; константы — параметры ядра; сектора из классов ММ.</td>
+            </tr>
+            <tr>
+              <td><strong>Эпистемология</strong></td>
+              <td>Подгонка параметров под данные.</td>
+              <td>Чтение инвариантов ядра \((\lambda_q, D_{\mathrm{eff}})\), универсальных поперёк платформ.</td>
+            </tr>
+            <tr>
+              <td><strong>Квантовое↔Классическое</strong></td>
+              <td>Коллапс/декогеренция как постулаты.</td>
+              <td>Порог разрешения \(\lambda_q\) управляет когерентностью; тот же закон сохранения информации.</td>
+            </tr>
+            <tr>
+              <td><strong>Предсказания</strong></td>
+              <td>Часто высокоэнергетичные/косвенные.</td>
+              <td>Низкоэнергетичные, кросс-доменные тесты (утёс, поток размерности, CPI, вакуумные остатки).</td>
+            </tr>
+            <tr>
+              <td><strong>Парсимония</strong></td>
+              <td>Большие наборы параметров; «ландшафт».</td>
+              <td>Одно ядро + конечное разрешение + несколько инвариантов управляют феноменологией.</td>
+            </tr>
+            <tr>
+              <td><strong>Фальсифицируемость</strong></td>
+              <td>Часто медленная/астрационная.</td>
+              <td>Жёсткие нули при \(\lambda/\lambda_q \approx 1\); многоканальные метрики удержания.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTIONS 6–9: four-up grid -->
+  <div class="grid four" style="margin-top:1rem">
+    <div class="card">
+      <h2>6 — Одна операция, единые инварианты</h2>
+      <p class="core">
+        Все 4-D наблюдаемые — результат одной операции push-forward с конечным разрешением; измерять нужно инварианты ядра, а не вручную
+        вставленные «константы».
+      </p>
+      <div class="math-block">
+        \[
+          \mathcal{O}_{4\mathrm{D}}(x)\;=\;\big(\Pi_{10\to4}\!\circ\!K_{\lambda}\big)\!\left[\mathcal{F}_{10\mathrm{D}}\right](x)
+        \]
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>7 — Микро↔Макро через один закон сохранения информации</h2>
+      <p class="core">
+        Растянутая экспонента удержания описывает и ВЧ-мощность, и структурные корреляции по мере роста масштаба.
+      </p>
+      <div class="math-block">
+        \[
+          R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big]
+        \]
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>8 — Фокусировка coarea: почему «паутинный скелет» устойчив</h2>
+      <p class="core">
+        Малый якобиан по волокну усиливает push-forward-массу, формируя узлы/филаменты, переживающие сглаживание; CPI измеряет локальные
+        бюджеты микросостояний на масштабе.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>9 — Чёрные дыры без «разрыва»</h2>
+      <p class="core">
+        Чёрные дыры — крайние события фокусировки (\(J_{\pi}\!\to\!0\)); сингулярности — артефакты 4-D-экстраполяции, тогда как «колодцы»
+        ММ остаются конечными.
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTIONS 10–11: two-up grid -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>10 — Измерение = многомасштабная фильтрация</h2>
+      <p class="core">
+        Исходы — это устойчивые к ядру признаки, пережившие выбор полос и слияние; наблюдатели — политики по \(\lambda\).
+      </p>
+      <div class="math-block">
+        \[
+          \text{Outcome}\;=\;\mathcal{A}\!\left(\{\Delta_{\lambda}\!\ast\!\mathcal{O}_{4\mathrm{D}}\}_{\lambda\in\mathcal{B}_{\Theta}}\right)
+        \]
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>11 — «Ремонт швов» (GR–QFT, сознание–материя, макро–микро)</h2>
+      <p class="core">
+        GR и QFT — эффективные грани одного push-forward; кажущаяся потеря информации — 4-D-усреднение, а не уничтожение.
+      </p>
+    </div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="grid one" style="margin-top:1rem">
+    <div class="card">
+      <h2>12 — Коротко</h2>
+      <p class="core">
+        Наблюдаемая Вселенная — размытая тень 10-D-скульптуры. D.R.E.A.M изучает то, что размытие не стирает никогда —
+        инварианты ядра — и тестирует их в разных доменах.
+      </p>
+    </div>
+  </div>
+
+
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+
+  <!-- Re-typeset after toggles open -->
+  <script>
+    document.querySelectorAll('details.more').forEach(d => {
+      d.addEventListener('toggle', () => d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+    });
+  </script>
+</div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

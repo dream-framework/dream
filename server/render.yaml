@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: dream-groq
+    env: node
+    plan: free
+    numInstances: 1
+    autoDeploy: true
+    pullRequestPreviewsEnabled: false
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false   # set value in Render dashboard after first deploy
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile

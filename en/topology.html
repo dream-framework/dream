@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topology · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link active" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Topology → Particle &amp; Gauge Classes</h1>
+    <p class="kicker">Stable topological data on the 10D Meta‑Manifold (MM) label particle/gauge <em>classes</em>; individual 4D instances are projections under a finite‑resolution kernel.</p>
+    <p class="note">Core statements are below. Math details are tucked into small expanders and respect the Math toggle.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- What topology encodes -->
+    <div class="card">
+      <h2>What topology encodes</h2>
+      <ul>
+        <li><strong>Class labels:</strong> Integer‑valued or finite invariants (homotopy/cohomology, characteristic classes) that survive projection.</li>
+        <li><strong>Quantization:</strong> Charges appear as push‑forwards of integer classes; quantization is robust to kernel details.</li>
+        <li><strong>Selection rules:</strong> Class constraints forbid certain decays/mergers; allowed processes respect addition of classes.</li>
+      </ul>
+      <p class="note">D.R.E.A.M’s stance is kernel‑agnostic: only <em>invariants</em> are empirical. The detailed micro‑geometry of MM is not reconstructed.</p>
+    </div>
+
+    <!-- Classes ↔ particles -->
+    <div class="card">
+      <h2>Classes ↔ particles/gauge sectors</h2>
+      <ul>
+        <li><strong>π<sub>3</sub>(G) ≅ ℤ</strong> (for many compact Lie groups): labels winding/instanton number → integer charge/family classes.</li>
+        <li><strong>H¹(MM, ℤ)</strong>: U(1) sectors / flux lines; first cohomology controls abelian holonomies.</li>
+        <li><strong>Characteristic classes</strong> (c₁, c₂, p₁,…): integrals over cycles fix quantized charges and anomaly counters.</li>
+      </ul>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Examples.</strong></p>
+          <div class="math-block">\[\deg(g)=\frac{1}{24\pi^2}\int_{S^3}\operatorname{tr}\big((g^{-1}\mathrm{d}g)^3\big)\in\mathbb{Z}\qquad (g:S^3\to SU(2)).\]</div>
+          <div class="math-block">\[Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint_\gamma A\in\mathbb{Z},\qquad c_1(E)=\big[\tfrac{F}{2\pi}\big]\in H^2(MM,\mathbb{Z}).\]</div>
+          <div class="math-block">\[k=\frac{1}{8\pi^2}\int_{\Sigma^4}\operatorname{tr}(F\wedge F)\in\mathbb{Z}\qquad (\text{second Chern / Pontryagin}).\]</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Projection of classes -->
+    <div class="card">
+      <h2>How classes project to 4D</h2>
+      <p>Classes on MM push‑forward to 4D via the kernel. Intuitively, we integrate an integer density over the preimage fiber of a 4D locus, weighted by the kernel.</p>
+      <div class="math-block">\[
+      Q_{\mathrm{4D}}(\Sigma)=\int_{\pi^{-1}(\Sigma)} K_{\lambda}(x;X)\,\mathcal{I}(X)\,\mathrm{d}\mu_{\mathrm{MM}}(X),
+      \]</div>
+      <p>where \(\mathcal{I}\) is a representative density (e.g., \(\tfrac{1}{8\pi^2}\operatorname{tr}F\wedge F\)). Integer‑valuedness is stable as long as the kernel respects locality/positivity and the fiber intersections are regular at our resolution.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Fiber picture.</strong> 4D regions correspond to “tubes” in MM via \(\pi^{-1}\). The kernel localizes contributions near the tube; coarse features survive, micro‑oscillations average out.</p>
+          <p><strong>Why quantization persists.</strong> Integer classes integrated over compact cycles remain integers under small deformations; finite‑resolution averaging preserves the integer as long as cycles are not torn or merged at the chosen \(\lambda\).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Consistency: index + anomalies -->
+    <div class="card">
+      <h2>Consistency: index &amp; anomalies</h2>
+      <p>Chiral matter and gauge sectors must satisfy index‑theorem and anomaly constraints; these live naturally at the topological level.</p>
+      <div class="math-block">\[
+      \mathrm{index}(\slashed{D})\;=\;\int_{\mathrm{MM}}\!\widehat{A}(T\,\mathrm{MM})\,\wedge\,\mathrm{ch}(E)\;\in\;\mathbb{Z}.
+      \]</div>
+      <p>Projected 4D content must reflect an integer index and anomaly cancellation (e.g., mixed gauge‑gravitational). These serve as <em>consistency gates</em> for any concrete particle assignment.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Anomaly language.</strong> Descents of characteristic classes (e.g., \(\operatorname{tr}F\wedge F\)) yield Chern–Simons terms on boundaries. Projection must not introduce uncancelled anomalies in the 4D effective theory.</p>
+          <p><strong>Empirical handle.</strong> Quantized charges and selection rules are the observable footprint of the underlying index/arithmetic.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Worked capsules -->
+    <div class="card">
+      <h2>Worked capsules</h2>
+      <p><strong>U(1) flux sector.</strong> Non‑trivial \(H^1(MM,\mathbb{Z})\) gives families of holonomies; 4D Wilson loops measure the class.</p>
+      <div class="math-block">\[W(\gamma)=\exp\!\Big(i\oint_\gamma A\Big),\qquad \frac{1}{2\pi}\oint_\gamma A\in\mathbb{Z}.\]</div>
+      <p><strong>Non‑abelian winding.</strong> Maps \(S^3\to G\) contribute integer classes; defects or instanton‑like sectors in 4D inherit that integer via projection.</p>
+      <div class="math-block">\[Q=\frac{1}{24\pi^2}\int_{S^3}\operatorname{tr}\big((g^{-1}\mathrm{d}g)^3\big)\in\mathbb{Z}.\]</div>
+    </div>
+
+    <!-- Falsification & observations -->
+    <div class="card">
+      <h2>Falsification &amp; observations</h2>
+      <ul>
+        <li><strong>Quantization tests:</strong> charges tied to \(H^k\) integrals must appear as integers to instrument precision.</li>
+        <li><strong>Selection rules:</strong> forbidden decays remain forbidden; allowed channels respect class addition.</li>
+        <li><strong>Anomaly safety:</strong> no uncancelled anomalies in the 4D effective content induced by projection.</li>
+      </ul>
+      <p class="note">These gates depend only on class data, not on a detailed parameterization of the kernel.</p>
+    </div>
+
+    <!-- Speculative -->
+    <div class="card speculative">
+      <h2 class="kicker">Interpretive notes (speculative)</h2>
+      <p>The “identity” of a particle is read as membership in a topological class; apparent family structure may trace to different lifts of the same class across local projection conditions. Such readings are interpretive and not required for testing the kernel invariants.</p>
+    </div>
+
+  </div>
+
+<!-- TopoZoo — Compact Two-Pane Card (collapsed by default) -->
+<div class="card tz-acc-card" data-single="true">
+  <div class="tz-acc-head">
+    <div>
+      <h2 style="margin:0">Particles as topology - interactive plotters</h2>
+      <p class="muted" style="margin:.35rem 0 0">
+        Two ways to see how <b>twists in a field</b> act like particles:
+        <b>π₁ vortices</b> (make/annihilate ±1 pairs; vary the probe scale λ)
+        and the <b>Wilson loop</b> (wrap the core to read the class N).
+      </p>
+    </div>
+
+    <!-- Collapsed buttons -->
+    <div class="tz-acc-tabs" role="tablist" aria-label="Topology views">
+      <button class="tz-acc-toggle" role="tab" aria-controls="tz-pane-vort" aria-expanded="false">
+        π₁ Vortices <span class="tz-acc-chev" aria-hidden="true">▾</span>
+      </button>
+      <button class="tz-acc-toggle" role="tab" aria-controls="tz-pane-wilson" aria-expanded="false">
+        Wilson Loop <span class="tz-acc-chev" aria-hidden="true">▾</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pane: VORTICES (kept in DOM; starts collapsed) -->
+  <section id="tz-pane-vort" class="tz-acc-panel" role="tabpanel" aria-labelledby="tz-tab-vort" hidden>
+    <!-- TopoZoo — π1 vortices (emergent + manual) — Hybrid renderer (Plotly first, Canvas fallback) -->
+
+<style>
+  /* Keep your emerald accent on the + button */
+  #tz-add-plus.tz-btn{ background:#10b981; color:#fff; border:1px solid transparent; }
+  #tz-add-plus.tz-btn:hover{ background:#059669; }
+  #tz-add-plus.tz-btn:focus-visible{ outline:2px solid #34d399; outline-offset:2px; }
+  #tz-add-plus.tz-btn:active{ transform:translateY(0); }
+  #tz-add-plus.tz-btn[disabled]{ background:#14532d; color:#cbd5e1; cursor:not-allowed; opacity:.85; }
+
+  /* Local scope tokens (inherit if site defines them) */
+  .topo-scope{
+    --fg:      var(--fg, #e5e7eb);
+    --muted:   var(--muted, #94a3b8);
+    --accent:  var(--accent, #2dd4bf);
+    --minus:   #f59e0b;                 /* orange for antivortex */
+    --card:    var(--card, #0f172a);
+    --border:  var(--border, #334155);
+    --grid:    var(--grid, rgba(255,255,255,0.12));
+    --gridHi:  var(--grid-strong, rgba(255,255,255,0.20));
+  }
+  .topo-scope .tz-btn{ background:var(--accent); color:#0b0f14; border:1px solid transparent; border-radius:10px; padding:8px 12px; font-weight:600; cursor:pointer; }
+  .topo-scope .tz-btn.minus{ background:var(--minus); color:#0b0f14; }
+  .topo-scope .tz-btn.ghost{ background:rgba(255,255,255,.04); color:var(--fg); border:1px solid var(--border); }
+  .topo-scope .tz-slider-wrap input[type="range"]{ display:block; appearance:none; height:2px; background:var(--border); border-radius:2px; }
+.topo-scope .tz-slider-wrap input[type="range"]::-webkit-slider-thumb{ appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent); border:1px solid #0b0f14; margin-top:-5px; }
+.topo-scope .tz-slider-wrap input[type="range"]::-moz-range-thumb{ width:12px; height:12px; border-radius:50%; background:var(--accent); border:1px solid #0b0f14; }
+.topo-scope .tz-slider-wrap input[type="range"]::-moz-range-track{ height:2px; background:var(--border); border:none; border-radius:2px; }
+  .topo-scope .tz-cliff{ position:absolute; top:50%; transform:translate(-50%,-50%); width:0; height:18px; border-left:2px dashed var(--minus); pointer-events:none; opacity:.9; }
+  .topo-scope .cardish{ margin-top:10px; border:1px solid var(--border); border-radius:12px; padding:10px; background:var(--card); color:var(--fg); }
+  .topo-scope .cardish h4{ margin:0 0 .4rem 0; font-weight:600; }
+  .tz-row{ display:grid; grid-template-columns: 1fr; gap:12px; align-items:start; }
+  .tz-aside{ display:grid; grid-template-columns: minmax(260px, 420px) 1fr; gap:12px; align-items:start; margin-top:12px; }
+  .tz-pill{ display:inline-flex; align-items:center; gap:.4rem; background:rgba(255,255,255,.06); color:var(--fg); border:1px solid var(--border); border-radius:999px; padding:.2rem .55rem; font-size:.82rem; }
+  #tz-plot .plot-container, #tz-plot .svg-container{ background:transparent !important; }
+  #tz-plot g.legend .legendpoints path, #tz-plot g.legend .legendpoints rect, #tz-plot g.legend .legendlines path{ transform:scale(1.6); transform-box:fill-box; transform-origin:50% 50%; }
+  .tz-meter{ width:100%; height:60px; border-radius:10px; border:1px solid var(--border); background:linear-gradient(90deg, rgba(45,212,191,.18), rgba(245,158,11,.18)); overflow:hidden; position:relative; }
+  .tz-meter .bar{ position:absolute; left:0; top:0; bottom:0; width:0%; background:linear-gradient(90deg, rgba(45,212,191,.55), rgba(245,158,11,.55)); }
+  .tz-meter .tick{ position:absolute; top:0; bottom:0; width:2px; background:var(--gridHi); }
+
+  /* Canvas fallback */
+  #tz-canvas-wrap{ position:relative; height:560px; width:100%; display:none; }
+  #tz-canvas{ width:100%; height:100%; border-radius:12px; border:1px solid var(--border); background:#0f172a; display:block; }
+  .tz-boom{position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(45,212,191,.85) 30%, rgba(45,212,191,0) 70%);
+    pointer-events:none;mix-blend-mode:screen;animation:tzBoom 600ms ease-out forwards;}
+  .tz-boom::after{content:'';position:absolute;left:50%;top:50%;width:2px;height:2px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);} 
+  @keyframes tzBoom{0%{transform:translate(-50%,-50%) scale(.2);opacity:.9}70%{transform:translate(-50%,-50%) scale(2.5);opacity:.6}100%{transform:translate(-50%,-50%) scale(3.2);opacity:0}}
+</style>
+
+<div id="tz-scope" class="topo-scope">
+  <!-- Controls -->
+  <div class="tz-controls" style="margin-bottom:10px;">
+    <label for="tz-lam" style="display:block;margin-bottom:6px;">λ (blur / probe scale)</label>
+
+    <div class="tz-slider-wrap" style="position:relative;">
+      <input id="tz-lam" type="range" min="0" max="0.50" step="0.005" value="0.12" style="width:100%;">
+      <div id="tz-cliff" class="tz-cliff" title="pair-cliff ≈ ½ × min(+/− separation)"></div>
+    </div>
+
+    <div style="font-size:13px;color:var(--muted);margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+      <span>λ = <span id="tz-lam-val">0.12</span></span>
+      <span>total Q = <strong id="tz-q">0</strong></span>
+      <span>resolved Q(λ) ≈ <strong id="tz-qres">0</strong></span>
+      <span class="tz-pill" title="count of +/−">+<span id="tz-nplus">0</span> / −<span id="tz-nminus">0</span></span>
+      <span id="tz-cliff-readout" style="margin-left:auto;"></span>
+    </div>
+
+    <!-- Mode row -->
+    <div class="tz-grid" style="display:grid;grid-template-columns:auto auto auto auto auto 1fr;gap:10px;align-items:center;margin-top:10px;">
+      <label style="display:inline-flex;align-items:center;gap:8px;">
+        Mode
+        <select id="tz-mode">
+          <option value="emergent" selected>Emergent</option>
+          <option value="manual">Manual</option>
+        </select>
+      </label>
+
+      <label id="tz-tau-wrap" style="display:inline-flex;align-items:center;gap:8px;">
+        Quench τ<sub>Q</sub>
+        <input id="tz-tau" type="range" min="0.05" max="1.00" step="0.01" value="0.30" style="width:120px;">
+        <span id="tz-tau-val" class="muted">0.30</span>
+      </label>
+
+      <label id="tz-noise-wrap" style="display:inline-flex;align-items:center;gap:8px;">
+        Noise ε
+        <input id="tz-noise" type="range" min="0" max="0.6" step="0.02" value="0.20" style="width:100px;">
+        <span id="tz-noise-val" class="muted">0.20</span>
+      </label>
+
+      <label id="tz-seed-wrap" style="display:inline-flex;align-items:center;gap:6px;">
+        Seed
+        <input id="tz-seed" type="number" value="1337" style="width:88px;">
+      </label>
+
+      <label style="display:inline-flex;align-items:center;gap:6px;">
+        <input id="tz-showpairs" type="checkbox" checked> Show pair links
+      </label>
+
+      <div style="justify-self:end;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <button id="tz-regen" class="btn tz-btn ghost" title="Re-generate emergent field">Re-generate</button>
+        <label class="tz-pill" style="gap:6px;cursor:pointer;user-select:none;">
+          <input id="tz-autolam" type="checkbox"> Auto λ sweep
+        </label>
+      </div>
+    </div>
+
+    <!-- Manual row -->
+    <div class="tz-grid" id="tz-manual-row" style="display:grid;grid-template-columns:auto auto auto auto 1fr;gap:10px;align-items:center;margin-top:10px;">
+      <div><button id="tz-add-plus" class="btn tz-btn">+ add vortex</button></div>
+      <div><button id="tz-add-minus" class="btn tz-btn minus">– add anti‑vortex</button></div>
+      <div><button id="tz-add-pair" class="btn tz-btn ghost">± add close pair</button></div>
+      <div><button id="tz-clear" class="btn tz-btn ghost">Clear</button></div>
+      <div class="tz-help" style="justify-self:end;font-size:12px;color:var(--muted);">
+        Click canvas to add +1, <kbd>Shift</kbd>+click for −1. <kbd>Alt</kbd>+click deletes.
+        Drag near a marker to move it.
+      </div>
+    </div>
+  </div>
+
+  <!-- Two-column: plot + aside -->
+  <div class="tz-row">
+    <div id="tz-plot" style="height:560px;width:100%;position:relative;"></div>
+    <div id="tz-canvas-wrap"><canvas id="tz-canvas"></canvas></div>
+
+    <aside class="tz-aside">
+      <div class="cardish">
+        <h4>Resolved charge vs λ</h4>
+        <div class="tz-meter" title="Q(λ) from pair‑cancellation model; plateau ⇒ all pairs resolved or all cancelled">
+          <div class="bar" id="tz-qbar"></div>
+          <div class="tick" id="tz-clifftick" style="left:60%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;">
+          <span>0</span><span>Q(λ)</span><span id="tz-qmax">max</span>
+        </div>
+      </div>
+      <div class="cardish" id="tz-narrative" style="font-size:13px;line-height:1.35">
+        <h4>How topology makes particles</h4>
+        <p id="tz-text">Particles here are <b>topological twists</b> of a field. Cooling makes the field pick directions in patches; where patches disagree, a full twist gets trapped: <span style="color:#2dd4bf">+1</span> or <span style="color:#f59e0b">−1</span>. Twists are <b>quantized</b> (whole turns), so you can’t smooth them away — only cancel a + with a −. The scale knob λ is your microscope: if a + and − sit closer than about <b>2λ</b>, the probe can’t separate them and they <i>cancel in the reading</i> Q(λ). Pull them apart or shrink λ to reveal the hidden pair; push them together to <b>annihilate</b>.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- Plotly (optional) -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+
+<script>
+(function boot(){
+  function start(){
+    // Wait for Plotly to be ready
+    if (!window.Plotly) { requestAnimationFrame(start); return; }
+
+    // ---- DOM ----
+    const elScope = document.getElementById('tz-scope');
+    const elPlot  = document.getElementById('tz-plot');
+    const elLam   = document.getElementById('tz-lam');
+    const elLamV  = document.getElementById('tz-lam-val');
+    const elQ     = document.getElementById('tz-q');
+    const elQR    = document.getElementById('tz-qres');
+    const elNP    = document.getElementById('tz-nplus');
+    const elNM    = document.getElementById('tz-nminus');
+    const elCliff = document.getElementById('tz-cliff');
+    const elCliffTxt = document.getElementById('tz-cliff-readout');
+
+    const elMode  = document.getElementById('tz-mode');
+    const elTau   = document.getElementById('tz-tau');
+    const elTauV  = document.getElementById('tz-tau-val');
+    const elNoise = document.getElementById('tz-noise');
+    const elNoiseV= document.getElementById('tz-noise-val');
+    const elSeed  = document.getElementById('tz-seed');
+
+    const elRegen = document.getElementById('tz-regen');
+    const cbPairs = document.getElementById('tz-showpairs');
+    const cbAuto  = document.getElementById('tz-autolam');
+
+    const rowManual = document.getElementById('tz-manual-row');
+    const BTNp  = document.getElementById('tz-add-plus');
+    const BTNm  = document.getElementById('tz-add-minus');
+    const BTNp2 = document.getElementById('tz-add-pair');
+    const BTNc  = document.getElementById('tz-clear');
+
+    const barQ  = document.getElementById('tz-qbar');
+    const tickC = document.getElementById('tz-clifftick');
+    const qMaxL = document.getElementById('tz-qmax');
+    const txt   = document.getElementById('tz-text');
+
+    // ---- Theme ----
+    const css = getComputedStyle(elScope);
+    const FG   = (css.getPropertyValue('--fg')    || '#e5e7eb').trim();
+    const MUT  = (css.getPropertyValue('--muted') || '#94a3b8').trim();
+    const ACC  = (css.getPropertyValue('--accent')|| '#2dd4bf').trim();
+    const MINC = (css.getPropertyValue('--minus') || '#f59e0b').trim();
+    const GRID = (css.getPropertyValue('--grid')||'rgba(255,255,255,0.12)').trim();
+    const GRIDH= (css.getPropertyValue('--gridHi')||'rgba(255,255,255,0.20)').trim();
+
+    // ---- Grid & state ----
+    const N = 220; const xs=[...Array(N)].map((_,i)=> -1 + 2*i/(N-1)); const ys=xs.slice();
+    const PI=Math.PI, TAU=Math.PI*2;
+    let charges=[{x:-0.35,y:0.0,q:+1},{x:+0.35,y:0.0,q:-1}];
+
+    // ---- RNG ----
+    let __seed = 1337; const setSeed=s=>{__seed=(s|0)||1337};
+    const rnd=()=>{ let x=__seed|=0; x^=x<<13; x^=x>>>17; x^=x<<5; __seed=x|0; return (x>>>0)/4294967296; };
+
+    // ---- Kernels & blur ----
+    function makeKernel(sigma_px){ const rad=Math.max(1,Math.ceil(3*sigma_px)); const w=new Float32Array(rad*2+1); const s2=2*sigma_px*sigma_px; let sum=0; for(let k=-rad;k<=rad;k++){ const v=Math.exp(-(k*k)/s2); w[k+rad]=v; sum+=v; } for(let i=0;i<w.length;i++) w[i]/=sum; return {w,rad}; }
+    function blurPhase(theta, sigma_px){ if(sigma_px<=0.1) return theta; const {w,rad}=makeKernel(sigma_px); const cos=theta.map(r=>r.map(Math.cos)); const sin=theta.map(r=>r.map(Math.sin)); const tmpR=cos.map(r=>r.slice()); const tmpI=sin.map(r=>r.slice()); for(let j=0;j<N;j++) for(let i=0;i<N;i++){ let ar=0,ai=0; for(let k=-rad;k<=rad;k++){ const ii=Math.min(N-1,Math.max(0,i+k)); const wk=w[k+rad]; ar+=wk*cos[j][ii]; ai+=wk*sin[j][ii]; } tmpR[j][i]=ar; tmpI[j][i]=ai; } const out=Array.from({length:N},()=>new Float32Array(N)); for(let j=0;j<N;j++) for(let i=0;i<N;i++){ let ar=0,ai=0; for(let k=-rad;k<=rad;k++){ const jj=Math.min(N-1,Math.max(0,j+k)); const wk=w[k+rad]; ar+=wk*tmpR[jj][i]; ai+=wk*tmpI[jj][i]; } out[j][i]=Math.atan2(ai,ar); } return out; }
+
+    // ---- Field from point vortices ----
+    function angleSumAt(x,y){ let th=0; for(const c of charges){ th += c.q * Math.atan2(y-c.y, x-c.x); } if(th>PI) th-=TAU; if(th<-PI) th+=TAU; return th; }
+    function computePhaseGrid(lambda){ const theta=Array.from({length:N},(_,j)=>{ const y=ys[j]; const row=new Float32Array(N); for(let i=0;i<N;i++){ const x=xs[i]; row[i]=angleSumAt(x,y); } return row; }); const sigma_px=lambda*(N/2); return blurPhase(theta,sigma_px); }
+
+    // ---- Emergent U(1) texture → detect vortices ----
+    function correlatedPhase(N,sigma_px,noiseAmp){ const nx=Array.from({length:N},()=>new Float32Array(N)); const ny=Array.from({length:N},()=>new Float32Array(N)); for(let j=0;j<N;j++) for(let i=0;i<N;i++){ nx[j][i]=(rnd()*2-1)*(1+noiseAmp); ny[j][i]=(rnd()*2-1)*(1+noiseAmp); } const {w,rad}=makeKernel(sigma_px); const bx=Array.from({length:N},()=>new Float32Array(N)); const by=Array.from({length:N},()=>new Float32Array(N)); for(let j=0;j<N;j++) for(let i=0;i<N;i++){ let sx=0,sy=0; for(let k=-rad;k<=rad;k++){ const ii=Math.min(N-1,Math.max(0,i+k)); const wk=w[k+rad]; sx+=wk*nx[j][ii]; sy+=wk*ny[j][ii]; } bx[j][i]=sx; by[j][i]=sy; } const out=Array.from({length:N},()=>new Float32Array(N)); for(let j=0;j<N;j++) for(let i=0;i<N;i++){ let sx=0,sy=0; for(let k=-rad;k<=rad;k++){ const jj=Math.min(N-1,Math.max(0,j+k)); const wk=w[k+rad]; sx+=wk*bx[jj][i]; sy+=wk*by[jj][i]; } out[j][i]=Math.atan2(sy,sx); } return out; }
+    function detectVortices(theta){ const out=[]; const wrap=d=>{ while(d>PI) d-=TAU; while(d<-PI) d+=TAU; return d; }; for(let j=0;j<N-1;j++){ for(let i=0;i<N-1;i++){ const a=theta[j][i], b=theta[j][i+1], c=theta[j+1][i+1], d=theta[j+1][i]; const sum=wrap(b-a)+wrap(c-b)+wrap(d-c)+wrap(a-d); const q=Math.round(sum/TAU); if(q===1||q===-1){ const x=xs[i]+(xs[i+1]-xs[i])/2; const y=ys[j]+(ys[j+1]-ys[j])/2; out.push({x,y,q}); } } } return out; }
+    function generateVortexUniverse(){ setSeed(+elSeed.value||1337); const xi_px=(N/2)*(0.06+0.7*(+elTau.value)); const theta=correlatedPhase(N,xi_px,+elNoise.value); charges=detectVortices(theta); }
+
+    // ---- Utilities ----
+    const normalizeTo01=theta=>theta.map(row=>{ const out=new Float32Array(row.length); for(let i=0;i<row.length;i++){ out[i]=(row[i]+PI)/TAU; } return out; });
+    const totalCharge=()=>charges.reduce((s,c)=>s+c.q,0);
+    function greedyPairs(lambda){ const plus=charges.map((c,i)=>({...c,i})).filter(c=>c.q>0); const minus=charges.map((c,i)=>({...c,i})).filter(c=>c.q<0); const usedM=new Set(); const links=[]; const thr=2*lambda; let Q = plus.length - minus.length; for(const p of plus){ let best=1e9, bi=-1; minus.forEach((m,mi)=>{ if(usedM.has(mi)) return; const d=Math.hypot(p.x-m.x,p.y-m.y); if(d<best){ best=d; bi=mi; } }); if(bi>=0 && best<thr){ usedM.add(bi); links.push({x0:p.x,y0:p.y,x1:minus[bi].x,y1:minus[bi].y}); Q -= 2; } } return {Q,links,thr}; }
+    function placeCliffTick(){ const plus=charges.filter(c=>c.q>0), minus=charges.filter(c=>c.q<0); let minD=Infinity; for(const p of plus) for(const m of minus){ const d=Math.hypot(p.x-m.x,p.y-m.y); if(d<minD) minD=d; } const lamStar=Number.isFinite(minD)? minD*0.5 : NaN; const rect=elLam.getBoundingClientRect(); const lamMin=+elLam.min, lamMax=+elLam.max; if(Number.isFinite(lamStar)){ const frac=Math.max(0,Math.min(1,(lamStar-lamMin)/(lamMax-lamMin))); elCliff.style.left=(frac*rect.width)+'px'; elCliff.style.display='block'; elCliffTxt.textContent=`pair‑cliff λ*≈${lamStar.toFixed(3)}`; tickC.style.left=(frac*100)+'%'; } else { elCliff.style.display='none'; elCliffTxt.textContent=''; } }
+
+    // ---- Plotly renderer (SVG markers; no WebGL needed) ----
+    const TYPE_SCAT = 'scatter';
+    const phaseColorscale=()=>[[0.00,'#0f172a'],[0.20,'#223046'],[0.40,'#34475b'],[0.60,'#44586d'],[0.80,'#56697e'],[1.00,'#0f172a']];
+    const baseLayout=()=>({ paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)', margin:{l:40,r:10,t:24,b:36}, xaxis:{ range:[-1,1], gridcolor:GRID, zerolinecolor:GRIDH, color:MUT, tickfont:{color:MUT}, fixedrange:true, scaleanchor:'y', scaleratio:1, title:'x' }, yaxis:{ range:[-1,1], gridcolor:GRID, zerolinecolor:GRIDH, color:MUT, tickfont:{color:MUT}, fixedrange:true, title:'y' }, showlegend:false, title:{ text:'Vortex phase (hue = angle)', x:0.02, font:{size:13,color:MUT} } });
+    function chargeTraces(pairLinks){ const plus=charges.filter(c=>c.q>0), minus=charges.filter(c=>c.q<0); const traces=[ {type:TYPE_SCAT,mode:'markers',name:'+ vortices',x:plus.map(c=>c.x),y:plus.map(c=>c.y),marker:{size:12,color:ACC,line:{width:1,color:'#0b0f14'},symbol:'triangle-up'},hovertemplate:'particle (+1)<br>x=%{x:.2f}, y=%{y:.2f}<extra></extra>'}, {type:TYPE_SCAT,mode:'markers',name:'− vortices',x:minus.map(c=>c.x),y:minus.map(c=>c.y),marker:{size:12,color:MINC,line:{width:1,color:'#0b0f14'},symbol:'triangle-down'},hovertemplate:'antiparticle (−1)<br>x=%{x:.2f}, y=%{y:.2f}<extra></extra>'} ]; if(cbPairs.checked && pairLinks && pairLinks.length){ traces.push({type:TYPE_SCAT, mode:'lines', x: pairLinks.flatMap(l=>[l.x0,l.x1,null]), y: pairLinks.flatMap(l=>[l.y0,l.y1,null]), line:{width:1.5,color:MINC}, hoverinfo:'skip'}); } return traces; }
+
+    // ---- Draw ----
+    let raf=null, lastDraw=0; const DRAW_MIN_DT=50;
+    function draw(){
+      // guard for container still measuring 0 width (preview/grid)
+      if (!elPlot || elPlot.clientWidth < 40) { setTimeout(draw, 60); return; }
+      const now=performance.now(); if(now-lastDraw<DRAW_MIN_DT){ cancelAnimationFrame(raf); raf=requestAnimationFrame(draw); return; } lastDraw=now;
+      const lam=+elLam.value; elLamV.textContent=lam.toFixed(3);
+      const emergent = elMode.value==='emergent';
+      rowManual.style.display = emergent ? 'none' : 'grid';
+      document.getElementById('tz-tau-wrap').style.display   = emergent ? 'inline-flex' : 'none';
+      document.getElementById('tz-noise-wrap').style.display = emergent ? 'inline-flex' : 'none';
+      document.getElementById('tz-seed-wrap').style.display  = emergent ? 'inline-flex' : 'none';
+      elRegen.style.display = emergent ? '' : 'none';
+      if(emergent && charges.length===0) generateVortexUniverse();
+
+      const {Q,links} = greedyPairs(lam);
+      elQ.textContent= totalCharge();
+      elQR.textContent= Q;
+      elNP.textContent= charges.filter(c=>c.q>0).length;
+      elNM.textContent= charges.filter(c=>c.q<0).length;
+      placeCliffTick();
+
+      const theta=computePhaseGrid(lam); const z=normalizeTo01(theta);
+      const heat={ type:'heatmap', x:xs, y:ys, z:z, colorscale:phaseColorscale(), zmin:0, zmax:1, showscale:false, opacity:0.95 };
+      const data=[heat, ...chargeTraces(links)]; const lay=baseLayout();
+      try{
+        if(!elPlot._plotted){ Plotly.newPlot(elPlot,data,lay,{responsive:true}); elPlot._plotted=true; }
+        else { Plotly.react(elPlot,data,lay,{responsive:true}); }
+      } catch(e){ console.warn && console.warn('Plotly render error', e); }
+
+      const qAbsMax = Math.max(1, Math.abs(totalCharge())); qMaxL.textContent = String(qAbsMax); const frac = Math.max(0, Math.min(1, Math.abs(Q)/qAbsMax)); barQ.style.width = (frac*100)+'%';
+      if (Q === totalCharge()) { txt.innerHTML = 'All twists are resolved: the number you see equals the <b>true topological count</b>. Smoothing alone cannot erase a twist—only colliding with an opposite twist can.'; }
+      else if (Math.abs(Q) < Math.abs(totalCharge())) { txt.innerHTML = 'Some opposite twists sit within one blur patch (≈2λ), so they <i>cancel in this measurement</i>. Shrink λ or separate them to reveal the hidden pair.'; }
+      else { txt.innerHTML = 'Big blur: only the <b>net</b> number of twists is visible; close ± pairs are invisible to this probe.'; }
+    }
+
+    // ---- Interactions ----
+    const clampXY=(x,y)=>({x:Math.max(-0.98,Math.min(0.98,x)), y:Math.max(-0.98,Math.min(0.98,y))});
+    const addCharge=(x,y,q)=>{ const c=clampXY(x,y); charges.push({x:c.x,y:c.y,q}); draw(); };
+    const addPair=()=>{ const a=rnd()*TAU; const sep=0.08+0.12*rnd(); const cx=0.6*Math.cos(a), cy=0.6*Math.sin(a); const dx=sep*Math.cos(a+Math.PI/2), dy=sep*Math.sin(a+Math.PI/2); addCharge(cx-dx, cy-dy, +1); addCharge(cx+dx, cy+dy, -1); };
+    const removeNearest=(x,y)=>{ if(!charges.length) return; let best=0,dBest=1e9; charges.forEach((c,i)=>{ const d=Math.hypot(x-c.x,y-c.y); if(d<dBest){dBest=d; best=i;} }); charges.splice(best,1); draw(); };
+
+    BTNp.addEventListener('click', ()=> addCharge((Math.random()*1.6-0.8),(Math.random()*1.6-0.8), +1));
+    BTNm.addEventListener('click', ()=> addCharge((Math.random()*1.6-0.8),(Math.random()*1.6-0.8), -1));
+    BTNp2.addEventListener('click', addPair);
+    BTNc.addEventListener('click', ()=>{ charges.length=0; draw(); });
+
+    elLam.addEventListener('input', draw);
+    window.addEventListener('resize', placeCliffTick);
+    elMode.addEventListener('change', ()=>{ charges.length=0; draw(); });
+    elTau .addEventListener('input', ()=>{ elTauV.textContent=(+elTau.value).toFixed(2); });
+    elNoise.addEventListener('input',()=>{ elNoiseV.textContent=(+elNoise.value).toFixed(2); });
+    elRegen.addEventListener('click', ()=>{ charges.length=0; generateVortexUniverse(); draw(); });
+    elSeed .addEventListener('change', ()=>{/* next regen */});
+    cbPairs.addEventListener('change', draw);
+
+    let dragging=-1;
+    elPlot.addEventListener('mousedown', ev=>{
+      const xa = elPlot._fullLayout?.xaxis, ya = elPlot._fullLayout?.yaxis; if(!xa||!ya) return;
+      const bb=elPlot.getBoundingClientRect(); const px=ev.clientX-bb.left, py=ev.clientY-bb.top;
+      const x = xa.c2l(xa.p2c(px)); const y = ya.c2l(ya.p2c(py));
+      if(ev.altKey) { removeNearest(x,y); return; }
+      let hit=-1, best=1e9; charges.forEach((c,i)=>{ const d=Math.hypot(x-c.x,y-c.y); if(d<0.06 && d<best){ best=d; hit=i; } });
+      if(hit>=0){ dragging=hit; return; }
+      if(elMode.value==='manual'){ const q = ev.shiftKey? -1 : +1; addCharge(x,y,q); }
+    });
+    window.addEventListener('mousemove', ev=>{ if(dragging<0) return; const xa = elPlot._fullLayout?.xaxis, ya = elPlot._fullLayout?.yaxis; if(!xa||!ya) return; const bb=elPlot.getBoundingClientRect(); const px=ev.clientX-bb.left, py=ev.clientY-bb.top; const x = xa.c2l(xa.p2c(px)); const y = ya.c2l(ya.p2c(py)); const c=clampXY(x,y); charges[dragging].x=c.x; charges[dragging].y=c.y; draw(); });
+    window.addEventListener('mouseup', ()=>{ dragging=-1; });
+
+    // ---- Auto λ sweep (30% speed) ----
+    let lastT=performance.now(); function autoFrame(t){ const dt=Math.min(0.06,(t-lastT)/1000); lastT=t; if(cbAuto.checked){ const MIN=+elLam.min, MAX=+elLam.max; const v=0.045; let val=+elLam.value + v*dt*(boot._dir||1); if(val>MAX){ val=MAX; boot._dir=-1; } if(val<MIN){ val=MIN; boot._dir=+1; } elLam.value=String(val); draw(); } requestAnimationFrame(autoFrame); }
+
+    // ---- Boot ----
+    draw(); placeCliffTick(); requestAnimationFrame(autoFrame);
+  }
+
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start, {once:true}); } else { start(); }
+})();
+</script>
+
+  </section>
+
+  <!-- Pane: WILSON (your existing markup moved here; starts collapsed) -->
+  <section id="tz-pane-wilson" class="tz-acc-panel" role="tabpanel" aria-labelledby="tz-tab-wilson" hidden>
+    <div class="row" style="align-items:center;gap:1rem">
+      <div class="col">
+        <h3 style="margin:0">Wilson Loop & Topological Class</h3>
+        <p class="muted" style="margin:.25rem 0 0">
+          Drag the loop. Slide the flux Φ/(2π). If (and only if) the loop <b>encloses</b> the core and Φ/(2π) is a
+          <b>whole number of turns</b>, a <b>CLASS&nbsp;N</b> emerges.
+        </p>
+      </div>
+      <div class="col" style="display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap">
+        <button id="wlp-auto" class="pill" style="cursor:pointer">Auto</button>
+        <button id="wlp-reset" class="pill" style="cursor:pointer;background:#eef6f6;border-color:#cce7e4;color:#0b5250">Reset</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="row" style="align-items:center;gap:1rem;margin-top:.75rem">
+      <label>Flux Φ (in units of 2π)
+        <input id="wlp-flux" type="range" min="-3" max="3" step="0.01" value="0.80">
+      </label>
+      <span class="pill">Φ / 2π = <b id="wlp-flux-label">0.80</b></span>
+      <label>Loop radius
+        <input id="wlp-radius" type="range" min="30" max="220" step="1" value="140">
+      </label>
+      <label><input id="wlp-quant" type="checkbox"> Quantize (snap to integers)</label>
+      <label><input id="wlp-field" type="checkbox" checked> Show background field</label>
+    </div>
+
+    <!-- Viz -->
+    <div id="wlp-viz" style="position:relative;height:48vh;min-height:360px;border-radius:12px;overflow:hidden;background:var(--card)">
+      <canvas id="wlp-canvas" style="width:100%;height:100%;display:block;border-radius:12px"></canvas>
+
+      <!-- CLASS badge -->
+      <div id="wlp-class" style="position:absolute;top:8px;right:8px;background:rgba(15,118,110,.92);color:#fff;
+           padding:.3rem .55rem;border-radius:999px;font-size:.85rem;display:none">CLASS N=0</div>
+
+      <!-- Coach -->
+      <div id="wlp-coach" style="position:absolute;left:8px;top:8px;background:rgba(255,255,255,.92);
+           color:var(--fg,#0b0f0b);border:1px solid #e5e7eb;padding:.45rem .6rem;border-radius:10px;
+           max-width:min(560px,75%);font-size:.92rem">
+        <b>Idea:</b> If the loop <i>wraps</i> the flux core, ∮A·dl = Φ (independent of radius).
+        The Wilson loop is W = e<sup>iΦ</sup>. When Φ/(2π) is an integer, W = 1 and <b>N</b> equals that integer.
+      </div>
+
+      <!-- HUD -->
+      <div id="wlp-hud" style="position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.45);color:#fff;
+           padding:.35rem .55rem;border-radius:10px;font-size:.9rem">
+        encloses=<b id="wlp-encl">no</b> · N=<b id="wlp-N">—</b> · ∮A·dl=<b id="wlp-int">0.000</b> · θ=<b id="wlp-ang">0.0°</b> · W=<b id="wlp-W">e^{iθ}</b>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .tz-acc-card{ overflow:hidden; }
+  .tz-acc-head{ display:flex; gap:1rem; align-items:flex-end; justify-content:space-between; margin-bottom:.5rem; }
+  .tz-acc-tabs{ display:flex; gap:.4rem; padding:4px; border-radius:12px;
+                background:rgba(255,255,255,.04); border:1px solid var(--border,#334155); }
+  .tz-acc-toggle{
+    appearance:none; border:0; background:transparent; color:var(--fg,#e5e7eb);
+    padding:.38rem .75rem; border-radius:10px; font-weight:700; cursor:pointer;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .tz-acc-toggle[aria-expanded="true"]{
+    background:var(--card,#0f172a);
+    box-shadow: inset 0 0 0 1px var(--border,#334155);
+  }
+  .tz-acc-chev{ transition:transform .18s ease; }
+  .tz-acc-toggle[aria-expanded="true"] .tz-acc-chev{ transform:rotate(180deg); }
+
+  /* Collapsed panels: keep width in layout off; reveal cleanly */
+  .tz-acc-panel[hidden]{ display:none !important; }
+
+  /* Vortices pane keeps your wide plot & tight controls once opened */
+  #tz-pane-vort .tz-row{ grid-template-columns: 1fr !important; }
+  #tz-pane-vort .tz-aside{ display:grid; grid-template-columns:minmax(280px,420px) 1fr; gap:12px; align-items:start; margin-top:12px; }
+  @media (max-width:860px){ #tz-pane-vort .tz-aside{ grid-template-columns:1fr; } }
+
+  /* Quieter sliders inside this card only */
+  .tz-acc-card input[type="range"]{ appearance:none; height:2px; background:var(--border,#334155); border-radius:2px; }
+  .tz-acc-card input[type="range"]::-webkit-slider-thumb{ appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent,#2dd4bf); border:1px solid #0b0f14; margin-top:-5px; }
+  .tz-acc-card input[type="range"]::-moz-range-thumb{ width:12px; height:12px; border-radius:50%; background:var(--accent,#2dd4bf); border:1px solid #0b0f14; }
+</style>
+
+<script>
+  // Accordion behavior: both start collapsed; open on click; close the other if data-single
+  (function(){
+    const CARD = document.currentScript.closest('.tz-acc-card') || document.querySelector('.tz-acc-card');
+    const single = CARD?.dataset?.single === 'true';
+    const toggles = Array.from(CARD.querySelectorAll('.tz-acc-toggle'));
+
+    function openPanel(btn){
+      const id = btn.getAttribute('aria-controls');
+      const panel = document.getElementById(id);
+      const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+
+      if (single){
+        toggles.forEach(b => {
+          const pid = b.getAttribute('aria-controls');
+          const p = document.getElementById(pid);
+          b.setAttribute('aria-expanded','false');
+          p.hidden = true;
+        });
+      }
+
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      panel.hidden = !willOpen;
+
+      // Give charts/canvas a chance to measure and render
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new Event('resize'));
+        // If you define a scoped initializer for Wilson, call it:
+        if (panel.id === 'tz-pane-wilson' && typeof window.initWilson === 'function') {
+          try { window.initWilson(panel); } catch(e){ console.warn('initWilson error:', e); }
+        }
+      });
+    }
+
+    toggles.forEach(b => b.addEventListener('click', () => openPanel(b)));
+    // Note: both remain collapsed on load by design.
+  })();
+</script>
+<script>
+(() => {
+  // ===== Palette (sync to site) =====
+  function cssVar(name){ const v=getComputedStyle(document.documentElement).getPropertyValue(name); return v && v.trim()? v.trim(): null; }
+  function pickAccentFromDOM() {
+    const probes = [
+      document.querySelector('nav a[href="/kernel"]'),
+      document.querySelector('nav a[href="/retention"]'),
+      document.querySelector('header a, nav a'),
+      document.querySelector('button, .btn, .pill'),
+      document.querySelector('a')
+    ].filter(Boolean);
+    for (const el of probes) {
+      const c = getComputedStyle(el).color;
+      if (c && c !== 'rgb(0, 0, 0)' && c !== 'rgb(255, 255, 255)') return c;
+    }
+    return '#0f766e';
+  }
+  const CLR_BG  = cssVar('--bg')        || cssVar('--background') || getComputedStyle(document.body).backgroundColor || '#ffffff';
+  const CLR_ACC = cssVar('--accent')    || cssVar('--brand') || cssVar('--primary') || pickAccentFromDOM();
+  const CLR_ACC2= cssVar('--accent-2')  || cssVar('--brand-2') || cssVar('--secondary') || CLR_ACC;
+
+  // ===== DOM =====
+  const canvas = document.getElementById('wlp-canvas');
+  const ctx    = canvas.getContext('2d');
+  const DPR    = Math.max(1, window.devicePixelRatio || 1);
+
+  const fluxS  = document.getElementById('wlp-flux');
+  const fluxL  = document.getElementById('wlp-flux-label');
+  const radS   = document.getElementById('wlp-radius');
+  const quantC = document.getElementById('wlp-quant');
+  const fieldC = document.getElementById('wlp-field');
+  const autoB  = document.getElementById('wlp-auto');
+  const resetB = document.getElementById('wlp-reset');
+
+  const badge  = document.getElementById('wlp-class');
+  const coach  = document.getElementById('wlp-coach');
+
+  const enclEl = document.getElementById('wlp-encl');
+  const N_el   = document.getElementById('wlp-N');
+  const Int_el = document.getElementById('wlp-int');
+  const Ang_el = document.getElementById('wlp-ang');
+  const W_el   = document.getElementById('wlp-W');
+
+  function resize(){ const r=canvas.getBoundingClientRect(); canvas.width=Math.floor(r.width*DPR); canvas.height=Math.floor(r.height*DPR); }
+  resize(); window.addEventListener('resize', resize);
+
+  // ===== Model =====
+  const TAU = Math.PI*2;
+  let auto = false, tPrev = performance.now(), phase = 0;
+
+  autoB.addEventListener('click', () => { auto = !auto; autoB.textContent = auto ? 'Stop' : 'Auto'; });
+  resetB.addEventListener('click', () => { fluxS.value='0.80'; radS.value='140'; center.x=cx; center.y=cy; });
+
+  // Draggable loop center
+  const center = {x: 0, y: 0}, drag = {on:false, dx:0, dy:0};
+  let cx=0, cy=0;
+  canvas.addEventListener('mousedown', (e) => {
+    const r = canvas.getBoundingClientRect();
+    const mx = (e.clientX - r.left)*DPR, my = (e.clientY - r.top)*DPR;
+    const d = Math.hypot(mx - center.x, my - center.y);
+    if (d < 24*DPR) { drag.on=true; drag.dx = center.x - mx; drag.dy = center.y - my; }
+  });
+  window.addEventListener('mouseup', ()=> drag.on=false);
+  window.addEventListener('mousemove', (e) => {
+    if (!drag.on) return;
+    const r = canvas.getBoundingClientRect();
+    center.x = (e.clientX - r.left)*DPR + drag.dx;
+    center.y = (e.clientY - r.top)*DPR + drag.dy;
+  });
+
+  function updateHUD(encloses, classN, phiEff){
+    enclEl.textContent = encloses ? 'yes' : 'no';
+    N_el.textContent   = classN !== null ? classN : '—';
+    Int_el.textContent = phiEff.toFixed(3);
+    const deg = (phiEff * 180/Math.PI).toFixed(1);
+    Ang_el.textContent = `${deg}°`;
+    W_el.textContent   = `e^{iθ}, θ=${deg}°`;
+  }
+
+  function drawField(){
+    if (!fieldC.checked) return;
+    const w=canvas.width, h=canvas.height; const step=28*DPR;
+    ctx.globalAlpha = 0.08; ctx.strokeStyle = CLR_ACC2; ctx.lineWidth = 1*DPR;
+    for (let y=step/2; y<h; y+=step){
+      for (let x=step/2; x<w; x+=step){
+        const dx = x - w/2, dy = y - h/2; const r = Math.hypot(dx,dy)+1e-6;
+        const ux = -dy/r, uy = dx/r; // e_theta
+        const len = 10*DPR;
+        ctx.beginPath(); ctx.moveTo(x-ux*len, y-uy*len); ctx.lineTo(x+ux*len, y+uy*len); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function frame(now){
+    const dt = Math.min(0.06, (now - tPrev)/1000); tPrev = now;
+
+    // Read controls
+    let u = parseFloat(fluxS.value);           // Φ / 2π  (turns)
+    if (auto) { u += 0.25*dt * Math.sin(now*0.0008); fluxS.value = String(u); }
+    if (quantC.checked) u = Math.round(u);     // optional integer lock (pedagogical)
+
+    const R = parseFloat(radS.value)*DPR;      // loop radius in px
+    fluxL.textContent = (parseFloat(fluxS.value)).toFixed(2);
+
+    // Canvas prep
+    const w=canvas.width, h=canvas.height; cx = w/2; cy = h/2;
+    if (center.x===0 && center.y===0){ center.x=cx; center.y=cy; }
+
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.fillStyle = CLR_BG; ctx.fillRect(0,0,w,h);
+
+    // Background field + core
+    drawField();
+    ctx.fillStyle = CLR_ACC; ctx.globalAlpha = 0.95;
+    ctx.beginPath(); ctx.arc(cx, cy, 8*DPR, 0, TAU); ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Geometry & topology
+    const Lx = center.x, Ly = center.y;
+    const encloses = Math.hypot(Lx - cx, Ly - cy) < R;
+
+    // Effective phase only if loop encloses the core
+    const phi    = u * TAU;
+    const phiEff = encloses ? phi : 0;
+
+    // Class logic: only whole turns while enclosing
+    const CLASS_EPS = 0.02;                    // ±2% of a turn
+    const nearest   = Math.round(u);
+    const isClass   = encloses && Math.abs(u - nearest) < CLASS_EPS;
+    const classN    = isClass ? nearest : null;
+
+    // Wilson loop marker and loop ring
+    ctx.lineWidth = 2*DPR; ctx.globalAlpha = 0.9;
+    // pulse when class is “on”
+    const pulse = isClass ? (0.85 + 0.15*Math.sin(now*0.01)) : 1.0;
+    ctx.strokeStyle = encloses ? CLR_ACC : 'rgba(0,0,0,0.28)';
+    ctx.beginPath(); ctx.arc(Lx, Ly, R*pulse, 0, TAU); ctx.stroke();
+
+    // Moving marker around loop (phase accumulation)
+    phase += dt * 0.9; const theta = (phase % 1)*TAU;
+    const mx = Lx + R*Math.cos(theta), my = Ly + R*Math.sin(theta);
+    ctx.fillStyle = CLR_ACC; ctx.beginPath(); ctx.arc(mx, my, 4.5*DPR, 0, TAU); ctx.fill();
+
+    // Phase arrow (visualize θ on a small gauge near loop)
+    const ax = Lx + (R + 24*DPR), ay = Ly;
+    ctx.strokeStyle = CLR_ACC2; ctx.lineWidth = 2*DPR;
+    ctx.beginPath(); ctx.moveTo(ax, ay);
+    ctx.lineTo(ax + 36*DPR*Math.cos(phiEff), ay - 36*DPR*Math.sin(phiEff));
+    ctx.stroke();
+
+    // HUD + badge
+    updateHUD(encloses, classN, phiEff);
+    if (isClass) { badge.style.display='inline-flex'; badge.textContent=`CLASS N=${classN}`; }
+    else { badge.style.display='none'; }
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

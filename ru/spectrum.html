@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Фрактальность · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link active" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="grid two" style="margin-top:1rem">
+    <!-- HERO в сетке (без сдвигов макета) -->
+    <div class="card hero">
+      <h1>Фрактальный спектр и D<sub>eff</sub></h1>
+      <p class="kicker">Эффективный спектральный показатель \(D_{\mathrm{eff}}\) задаёт счёт мод и плотность состояний. Прогнозы опираются только на инварианты ядра.</p>
+      <p class="note">Блоки формул уважают переключатель «Math». Разворачивайте мини-капсулы для выводов и ремарок.</p>
+    </div> 
+
+    <!-- Интуиция -->
+    <div class="card">
+      <h2>Интуиция</h2>
+      <p class="core">Мы сжимаем 10-мерный Meta-Manifold (MM) в 4D конечным по разрешению ядром. Сжатие оставляет <em>спектральный отпечаток</em>, который кратко кодируется показателем \(D_{\mathrm{eff}}\): он управляет тем, сколько мод «доживает» до заданной шкалы и как располагаются соседние массы/частоты.</p>
+      <p>Вместо буквального «фрактального многообразия» мы используем эффективный параметр \(D_{\mathrm{eff}}\), который появляется в лабораторных спектрах, энтропийном масштабировании и космологических кросс-проверках.</p>
+    </div>
+
+    <!-- Эффективный показатель -->
+    <div class="card">
+      <h2>Эффективный спектральный показатель \(D_{\mathrm{eff}}\)</h2>
+      <p>Кумулятивный счёт мод ниже отсечки \(\Omega\) ведёт себя как</p>
+      <div class="math-block">
+        \[
+        N(\Omega)\;\propto\;\Omega^{\,D_{\mathrm{eff}}}
+        \quad\Rightarrow\quad
+        \rho(\Omega)=\tfrac{dN}{d\Omega}\propto\Omega^{\,D_{\mathrm{eff}}-1}.
+        \]
+      </div>
+      <p>Тот же показатель естественно возникает в ограниченных по полосе проекциях, создаваемых ядром конечного разрешения.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Почему «эффективный»?</strong> Формально мы работаем на гладких суррогатах, но наблюдаемые моды ведут себя <em>как если бы</em> их счёт задавался этим показателем; это удобная лабораторная ручка.</p>
+          <p><strong>Связь с удержанием.</strong> Закон сохранения информации <span class="math-inline">\(\alpha(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\)</span> использует тот же показатель; вместе \(\alpha\) и \(N\) говорят, какие структуры переживают наблюдательную шкалу.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Ранжированные спектры (инвариантная форма) -->
+    <div class="card">
+      <h2>Ранжированные спектры (инвариантная форма)</h2>
+      <p class="core">Из \(N(\Omega)\!\propto\!\Omega^{D_{\mathrm{eff}}}\) следует <em>закон отношений</em> для ранжированного набора шкал \(\{\Omega_n\}\):</p>
+      <div class="math-block">
+        \[
+        \frac{\Omega_n}{\Omega_1}\;=\;n^{\,1/D_{\mathrm{eff}}}.
+        \]
+      </div>
+      <p>Закон относится к <em>отношениям</em>, а не к базовой шкале \(\Omega_1\): это и есть переносимый «отпечаток» \(D_{\mathrm{eff}}\) между площадками.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Сжатие/растяжение ступеней.</strong> При \(D_{\mathrm{eff}}>1\) отношение \(\Omega_{n+1}/\Omega_n\) убывает с \(n\) (лестница сжимается); при \(D_{\mathrm{eff}}<1\) — наоборот.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Картирование на приборы -->
+    <div class="card">
+      <h2>Картирование на приборы</h2>
+      <ul>
+        <li><strong>Интерферометрия/фотоника:</strong> скан по «обрыву согласованности» около \(\lambda_q\) даёт пару \((\lambda_q, D_{\mathrm{eff}})\) совместно со спектральной подгонкой.</li>
+        <li><strong>Космос/гравио/крутильные каналы:</strong> при необходимости увязывайте шаблоны с тем же \(D_{\mathrm{eff}}\).</li>
+        <li><strong>Отчётность:</strong> помимо базовой чувствительности сообщайте допущения по модам — дискриминатором остаётся <em>закон отношений</em>.</li>
+      </ul>
+    </div>
+
+    <!-- Плотность состояний и «энтропия» -->
+    <div class="card">
+      <h2>Плотность состояний и «энтропия»</h2>
+      <p>Асимптотически число ограниченных по полосе степеней свободы в области размера \(R\) масштабируется как</p>
+      <div class="math-block">
+        \[
+        \mathcal{N}(R)\;\sim\;\Big(\tfrac{R}{\lambda_q}\Big)^{\!D_{\mathrm{eff}}}.
+        \]
+      </div>
+      <p>Это даёт энтропийные и корреляционные тренды, пригодные для кросс-проверок по крупномасштабной структуре и фоновой спектроскопии.</p>
+    </div>
+
+    <!-- Космологические кросс-чеки -->
+    <div class="card">
+      <h2>Космологические кросс-проверки</h2>
+      <ul>
+        <li>Сопоставьте \(D_{\mathrm{eff}}\) из LSS/фоновых спектров с лабораторными подгонками.</li>
+        <li>Тренды энтропии и длины корреляции должны быть согласованы со шкалированием \(\mathcal{N}(R)\).</li>
+        <li>Стойкие расхождения после учёта систематик — рычаг для опровержения.</li>
+      </ul>
+    </div>
+
+    <!-- Рабочая капсула -->
+    <div class="card">
+      <h2>Рабочая капсула (дидактика)</h2>
+      <p>Если \(N(\Omega)\propto \Omega^{D_{\mathrm{eff}}}\), а граничные условия выбирают дискретные моды с индексом \(n\), то \(n\sim N(m_n)\Rightarrow m_n\propto n^{1/D_{\mathrm{eff}}}\), что и даёт закон отношений выше.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Практика.</strong> Реальные спектры — с конечной полосой, потерями и форм-факторами связи. Фитируйте базу и отношения совместно; именно соотношения дают наилучший тест.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Крючки для опровержения -->
+    <div class="card">
+      <h2>Крючки для опровержения</h2>
+      <ul>
+        <li>Отсутствие перехода удержания около заявленной \(\lambda_q\) на разных платформах рушит закон согласованности и связку с \(D_{\mathrm{eff}}\).</li>
+        <li>Устойчивая несовместимость космологических и лабораторных оценок \(D_{\mathrm{eff}}\) после систематик — отказ.</li>
+      </ul>
+      <p class="note">Эти проверки используют только инварианты (\(\lambda_q, D_{\mathrm{eff}}\)), а не конкретную форму ядра.</p>
+    </div>
+
+    <!-- Спекулятивно: ALP-лестница с базой -->
+    <div class="card speculative">
+      <h2 class="kicker">ALP-«лестница» (спекулятивно)</h2>
+      <p>Если читать \(\Omega\) как массу/частоту аксионоподобной башни, то</p>
+      <div class="math-block">
+        \[
+        \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}},\qquad
+        \text{база } m_1 \text{ задаётся контекстом поиска.}
+        \]
+      </div>
+      <p class="note">Используйте <em>отношения</em> как инвариант; выбор базового окна — предмет конкретного эксперимента.</p>
+    </div>
+  </div>
+</div>
+
+<!-- S2-флайт: от «фрактального» к однородному -->
+<div class="card" style="overflow:hidden">
+  <div class="row" style="align-items:center; gap:1rem">
+    <div class="col">
+      <h2 style="margin:0">От «фрактального» к однородному (реальный пролёт)</h2>
+      <p class="muted" style="margin:.25rem 0 0">
+        Двигайте <strong>шкалу зонда</strong>: мелкая структура гаснет по закону сохранения информации. Старт с
+        <em>меньших расстояний</em> (пк/кпк) и выход к Мпк/Гпк. Вы «летите» сквозь поле.
+      </p>
+    </div>
+    <div class="col" style="display:flex; gap:.5rem; justify-content:flex-end; flex-wrap:wrap">
+      <button id="fsx-tour" class="pill" style="cursor:pointer">Запустить авто-тур</button>
+      <button id="fsx-reset" class="pill" style="cursor:pointer; background:#eef6f6; border-color:#cce7e4; color:#0b5250">Сброс</button>
+    </div>
+  </div>
+
+  <!-- Пульт -->
+  <div class="row" style="align-items:center; gap:1rem; margin-top:.75rem">
+    <label>Шкала зонда λ
+      <input id="fsx-lambda" type="range" min="-2" max="6" step="0.01" value="-0.5"
+             title="log10-шкала: −2 → 6 (0.01 кпк → 1 Гпк)">
+    </label>
+    <span class="pill">λ = <b id="fsx-lam-label">0.32 кпк</b></span>
+    <label>Скорость полёта
+      <input id="fsx-speed" type="range" min="0" max="1" step="0.01" value="0.35">
+    </label>
+    <label><input id="fsx-showR" type="checkbox" checked> Показать затухание удержания</label>
+  </div>
+
+  <div class="muted" style="display:flex; justify-content:space-between; font-size:.82rem; margin:.25rem 0 .25rem">
+    <span>0.01 кпк</span><span>0.1 кпк</span><span>1 кпк</span><span>10 кпк</span><span>100 кпк</span><span>1 Мпк</span><span>10 Мпк</span><span>100 Мпк</span><span>1 Гпк</span>
+  </div>
+
+  <!-- Визуализация -->
+  <div id="fsx-viz" style="position:relative; height:56vh; min-height:420px; border-radius:12px; overflow:hidden; background:var(--card)">
+    <canvas id="fsx-canvas" style="width:100%; height:100%; display:block; border-radius:12px"></canvas>
+
+    <!-- подсказывающий блок -->
+    <div id="fsx-coach" style="position:absolute; left:8px; top:8px; background:rgba(255,255,255,.92);
+         color:var(--fg,#0b0b0c); border:1px solid #e5e7eb; padding:.45rem .6rem; border-radius:10px;
+         max-width:min(520px,70%); font-size:.92rem"></div>
+
+    <!-- бейдж горизонта -->
+    <div id="fsx-badge" style="position:absolute; top:8px; right:8px; background:rgba(15,118,110,.92); color:#fff;
+         padding:.3rem .55rem; border-radius:999px; font-size:.85rem">
+      Горизонт размытия λ<sub>q</sub> = <span id="fsx-lq">100 Мпк</span>
+    </div>
+
+    <!-- HUD -->
+    <div id="fsx-hud" style="position:absolute; left:8px; bottom:8px; background:rgba(0,0,0,.45); color:#fff;
+         padding:.35rem .55rem; border-radius:10px; font-size:.9rem">
+      λ=<b id="fsx-hud-lam">0.32 кпк</b> · D<sub>eff</sub>(λ)=<b id="fsx-hud-de">2.00</b> · R(λ)=<b id="fsx-hud-r">0.98000</b>
+    </div>
+  </div>
+
+  <p class="muted" style="margin:.6rem 0 0">
+    Учебная мысль: наблюдаемая Вселенная — размытая проекция; закон сохранения информации управляет тем, как исчезают контраст и корреляции при росте масштаба.
+  </p>
+</div>
+
+<style>
+  /* Минимум стилей для предсказуемости */
+  .grid.two > .card.hero { grid-column: 1 / -1; }
+
+  /* Спекулятивное: ВЫКЛ по умолчанию; ВКЛ через body.spec-on */
+  .speculative { display: none; }
+  body.spec-on .card.speculative { display: block; }
+  body.spec-on .speculative:not(.card) { display: inline; }
+</style>
+
+<script>
+  // Уважать глобальный переключатель «Speculative»
+  document.addEventListener('DOMContentLoaded', () => {
+    const t = document.getElementById('speculativeToggle');
+    const apply = () => document.body.classList.toggle('spec-on', !!(t && t.checked));
+    apply();
+    t && t.addEventListener('change', apply);
+  });
+</script>
+
+<script>
+(() => {
+  // ===== Палитра (авто-синхрон с сайтом) =====
+  function cssVar(name){ const v=getComputedStyle(document.documentElement).getPropertyValue(name); return v && v.trim()? v.trim(): null; }
+  function pickAccentFromDOM() {
+    const probes = [
+      document.querySelector('nav a[href="/kernel"]'),
+      document.querySelector('nav a[href="/retention"]'),
+      document.querySelector('header a, nav a'),
+      document.querySelector('button, .btn, .pill'),
+      document.querySelector('a')
+    ].filter(Boolean);
+    for (const el of probes) {
+      const c = getComputedStyle(el).color;
+      if (c && c !== 'rgb(0, 0, 0)' && c !== 'rgb(255, 255, 255)') return c;
+    }
+    return '#0f766e';
+  }
+  const CLR_BG  = cssVar('--bg')        || cssVar('--background') || getComputedStyle(document.body).backgroundColor || '#ffffff';
+  const CLR_ACC = cssVar('--accent')    || cssVar('--brand') || cssVar('--primary') || pickAccentFromDOM();
+  const CLR_ACC2= cssVar('--accent-2')  || cssVar('--brand-2') || cssVar('--secondary') || CLR_ACC;
+
+  // ===== DOM =====
+  const canvas = document.getElementById('fsx-canvas');
+  const viz    = document.getElementById('fsx-viz');
+  const ctx    = canvas.getContext('2d');
+  const DPR    = Math.max(1, window.devicePixelRatio || 1);
+
+  const sLambda = document.getElementById('fsx-lambda');
+  const sSpeed  = document.getElementById('fsx-speed');
+  const showR   = document.getElementById('fsx-showR');
+  const lamLbl  = document.getElementById('fsx-lam-label');
+  const hudLam  = document.getElementById('fsx-hud-lam');
+  const hudDe   = document.getElementById('fsx-hud-de');
+  const hudR    = document.getElementById('fsx-hud-r');
+  const coach   = document.getElementById('fsx-coach');
+  const btnTour = document.getElementById('fsx-tour');
+  const btnReset= document.getElementById('fsx-reset');
+  document.getElementById('fsx-lq').textContent = '100 Мпк';
+
+  function resize(){ const r = canvas.getBoundingClientRect(); canvas.width = Math.floor(r.width*DPR); canvas.height = Math.floor(r.height*DPR); }
+  resize(); window.addEventListener('resize', resize);
+
+  // ===== Модель (S2) =====
+  const LAMBDA_Q = 100; // Мпк
+  function Deff(lamMpc){ // 1.75 -> 3.0 по масштабу
+    const D0=1.75, Dmax=3.0, a=1.35;
+    const x = Math.max(lamMpc,0)/(LAMBDA_Q||1);
+    return D0 + (Dmax-D0)*(1 - Math.exp(-Math.pow(x,a)));
+  }
+  function R(lamMpc, De){
+    const x = Math.max(lamMpc,0)/(LAMBDA_Q||1);
+    return Math.exp(-Math.pow(x,De)); // чистая S2
+  }
+  function prettyLoss(Rv){
+    const loss = 1 - Rv;
+    if (loss <= 0) return '0%';
+    if (loss < 1e-4) return (loss*1e6).toFixed(1)+' ppm';
+    if (loss < 1e-2) return (loss*100).toFixed(2)+'%';
+    return (loss*100).toFixed(1)+'%';
+  }
+  function lamFromSlider(log10kpc){ return Math.pow(10, log10kpc)/1000; } // Мпк
+
+  // ===== RNG & поле =====
+  function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t^=t+Math.imul(t^t>>>7,61|t); return ((t^t>>>14)>>>0)/4294967296; }; }
+  const rand=rng(0xD1EA_D5);
+
+  const Z_NEAR=5, Z_FAR=2000, R_MAX=650;
+  const POINTS=[], N_POINTS=11000;
+  for(let i=0;i<N_POINTS;i++){
+    const z=Z_NEAR + rand()*(Z_FAR-Z_NEAR);
+    const band=rand(); // 0..1 fine->coarse
+    const De_local = 1.85 + 1.0*band;
+    const r = Math.pow(rand(), 1/De_local) * R_MAX * (0.8 + 0.2*rand());
+    const th = 2*Math.PI*rand();
+    POINTS.push({x:r*Math.cos(th), y:r*Math.sin(th), z, band});
+  }
+  const STREAKS = Array.from({length:140},()=>({
+    x:(rand()*2-1)*R_MAX*1.2, y:(rand()*2-1)*R_MAX*1.2, z: Z_NEAR + rand()*(Z_FAR-Z_NEAR)
+  }));
+  const ridges = Array.from({length:5},()=>({
+    r:120+140*rand(), th0:2*Math.PI*rand(), w:30+30*rand(), speed:0.12+0.35*rand(), amp:0.6+0.6*rand()
+  }));
+  function ridgeBoost(x,y,t){ let s=0; for(const rd of ridges){ const th=rd.th0 + t*rd.speed*0.15; const cx=rd.r*Math.cos(th), cy=rd.r*Math.sin(th); const dx=x-cx, dy=y-cy; const d2=(dx*dx+dy*dy)/(rd.w*rd.w); s += rd.amp*Math.exp(-d2);} return s/ridges.length; }
+
+  // ===== Полёт и UI =====
+  let camZ=Z_NEAR, tPrev=performance.now(), tAnim=0, auto=false, autoDir=+1;
+  btnTour.addEventListener('click', ()=>{ auto=!auto; btnTour.textContent = auto? 'Остановить авто-тур' : 'Запустить авто-тур'; });
+  btnReset.addEventListener('click', ()=>{ camZ=Z_NEAR; sLambda.value = -0.5; });
+  sLambda.addEventListener('input', ()=> updateHUD());
+
+  function updateHUD(){
+    const logLam = parseFloat(sLambda.value);
+    const lamMpc = lamFromSlider(logLam);
+    const lamKpc = lamMpc*1000;
+    const De     = Deff(lamMpc);
+    const Ret    = R(lamMpc, De);
+
+    const label  = lamMpc>=1 ? `${lamMpc.toFixed(2)} Мпк` : `${lamKpc.toFixed(2)} кпк`;
+    lamLbl.textContent = label; hudLam.textContent = label;
+    hudDe.textContent  = De.toFixed(2);
+    hudR.textContent   = showR.checked ? Ret.toFixed(5) : '—';
+
+    // Текст-подсказка
+    const lossTxt = prettyLoss(Ret);
+    let msg = '';
+    if (lamMpc < 0.001)       msg = `Внутри суб-кпк. Мелкая «зернистость» яркая. R≈<b>${Ret.toFixed(5)}</b> (потеря ${lossTxt}).`;
+    else if (lamMpc < 0.05)   msg = `Шкалы кпк: нитевидные структуры проявлены; пыль уходит первой. R≈<b>${Ret.toFixed(4)}</b> (потеря ${lossTxt}).`;
+    else if (lamMpc < 0.5)    msg = `10–500 кпк: «паутинка» держится, растёт дымка. R≈<b>${Ret.toFixed(4)}</b> (потеря ${lossTxt}).`;
+    else if (lamMpc < 5)      msg = `Кластерный режим: хребет ещё виден. R≈<b>${Ret.toFixed(3)}</b> (потеря ${lossTxt}).`;
+    else if (lamMpc < 50)     msg = `Сверхскопления (паутинно, D≈${De.toFixed(2)}). R≈<b>${Ret.toFixed(3)}</b> (потеря ${lossTxt}).`;
+    else if (lamMpc < 150)    msg = `У горизонта размытия: корреляции почти ушли. R≈<b>${Ret.toFixed(3)}</b> (потеря ${lossTxt}).`;
+    else                      msg = `За горизонтом: однородность (D→3). R≈<b>${Ret.toFixed(3)}</b> (потеря ${lossTxt}).`;
+    coach.innerHTML = msg;
+  }
+
+  // ===== Рендер-цикл =====
+  function frame(now){
+    const dt = Math.min(0.06, (now - tPrev)/1000); tPrev=now; tAnim += dt;
+
+    // Авто-тур: sweep по log-λ
+    if (auto){
+      let v=0.15; let val=parseFloat(sLambda.value);
+      val += autoDir*v*dt; if (val>6){ val=6; autoDir=-1; } if (val<-2){ val=-2; autoDir=+1; }
+      sLambda.value = val.toFixed(3);
+    }
+    updateHUD();
+
+    // Камера
+    const speed = 12 + 520*parseFloat(sSpeed.value);
+    camZ += speed*dt; if (camZ > Z_FAR) camZ = Z_NEAR;
+
+    // Очистка
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.fillStyle = CLR_BG; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const w=canvas.width, h=canvas.height, cx=w/2, cy=h/2, fov=640;
+
+    // Локальные
+    const logLam = parseFloat(sLambda.value);
+    const lamMpc = lamFromSlider(logLam);
+    const De     = Deff(lamMpc);
+    const Ret    = R(lamMpc, De);
+
+    // Шлейфы движения
+    ctx.globalAlpha = 0.18 + 0.55*parseFloat(sSpeed.value);
+    ctx.strokeStyle = CLR_ACC2; ctx.lineWidth = 1.5*DPR;
+    for(const s of STREAKS){
+      let z=s.z - camZ; if(z<1){ z += (Z_FAR-Z_NEAR); s.z=z+camZ; }
+      const zp=z+1, px=cx+(s.x*fov/zp), py=cy+(s.y*fov/zp);
+      const len = Math.min(18, 220/(zp+40))*(0.4+0.6*parseFloat(sSpeed.value));
+      ctx.beginPath(); ctx.moveTo(px*DPR,(py+len)*DPR); ctx.lineTo(px*DPR,(py-len)*DPR); ctx.stroke();
+    }
+
+    // Точки с затуханием S2
+    for(const p of POINTS){
+      let z=p.z - camZ; if(z<1){ z += (Z_FAR-Z_NEAR); p.z=z+camZ; }
+      const zp=z+1, px=cx+(p.x*fov/zp), py=cy+(p.y*fov/zp);
+      if (px<-50||px>w+50||py<-50||py>h+50) continue;
+
+      const bandScale = p.band<0.33? 2.2 : p.band<0.66? 1.0 : 0.6;
+      const De_local  = Deff(lamMpc*0.9);
+      const baseAlpha = showR.checked ? Math.exp(-Math.pow((lamMpc*bandScale)/LAMBDA_Q, De_local)) : 1.0;
+      if (baseAlpha < 0.03) continue;
+
+      const ridge = ridgeBoost(p.x,p.y,tAnim)*0.35;
+      const alpha = Math.min(1, 0.06 + 0.68*baseAlpha + ridge);
+
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle   = CLR_ACC;
+      const size = Math.min(5, 120/(zp+20));
+      ctx.beginPath(); ctx.arc(px*DPR, py*DPR, size*DPR*(0.85+0.35*alpha), 0, Math.PI*2); ctx.fill();
+    }
+
+    // «Туман» → однородность
+    const fog = Math.min(0.6, (lamMpc/LAMBDA_Q)*0.8);
+    if (fog>0){ ctx.globalAlpha = fog; ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h); }
+
+    requestAnimationFrame(frame);
+  }
+  (function boot(){ updateHUD(); requestAnimationFrame(frame); })();
+})();
+</script>
+
+<script>
+  // MathJax: типографика только при раскрытии капсул
+  document.querySelectorAll('details.more').forEach(d=>{
+    d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+  });
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

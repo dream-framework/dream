@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проекция · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link active" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Проекционное ядро</h1>
+    <p class="kicker">Постановка, независимая от конкретного ядра (S2 — центрально, S3 — поддерживает): инварианты — разрешение \(\lambda_q\), радиус локальности, регулярность/положительность, эффективный спектральный показатель \(D_{\mathrm{eff}}\).</p>
+    <p class="note">Математика скрыта по умолчанию. Используйте переключатель «Math» в шапке, чтобы показать формулы.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Определение -->
+    <div class="card">
+      <h2>Определение (проталкивание)</h2>
+      <p>4D-наблюдаемые — это проталкивания полей MM фиксированным, неинвертируемым ядром конечного разрешения:</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
+      \]</div>
+      <p class="note">Эмпиричны только <em>инварианты</em> класса ядер; детальные функциональные формы данными не идентифицируются.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Линейность / ограниченность.</strong> Индуцированный оператор \(\mathcal{K}_\lambda: L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\) предполагается ограниченным.</p>
+          <p><strong>Нормировка.</strong> Удобно полагать \(\int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)=1\), чтобы константы проталкивались в константы.</p>
+          <p><strong>PSD / совместимость.</strong> Используем положительно полуопределённые ядра; утверждения инвариантны при эквивалентных мерах при последовательном использовании \(K_{\lambda}\,d\mu_{\mathrm{MM}}\).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Инварианты -->
+    <div class="card">
+      <h2>Инварианты ядра (операционные)</h2>
+      <ul>
+        <li><strong>Разрешение</strong> \(\lambda_q\): критическая шкала фиделити, разделяющая квантовый и грубый режимы (S2).</li>
+        <li><strong>Радиус локальности</strong>: насколько резко точки MM вносят вклад при \(X\!\approx\!\pi^{-1}(x)\).</li>
+        <li><strong>Регулярность / положительность</strong>: корректный PSD-оператор; конечные нормы и устойчивые квадратичные формы.</li>
+        <li><strong>Эффективный спектральный показатель</strong> \(D_{\mathrm{eff}}\): управляет счётом сохраняемых мод и ранжированными спектрами.</li>
+      </ul>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Почему инварианты?</strong> Это идентифицируемые величины для множества допустимых ядер; именно они «якорят» прогнозы и фальсификацию.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S2: Удержание -->
+    <div class="card">
+      <h2>S2 — Удержание и когерентность (универсальный закон)</h2>
+      <p>Фиделити к тонкой структуре как функция эффективного масштаба зондирования \(\lambda\):</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Два режима и <strong>«обрыв» когерентности</strong> около \(\lambda\!\approx\!\lambda_q\). Межплатформенные сканы должны показывать скачкообразное изменение интерференционных/когерентных метрик. Считывания включают ВЧ-мощность \(R_{\mathrm{HF}}(\lambda)\) и структурную корреляцию \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},e_4|_\lambda)\).</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Лог-наклон.</strong> \(\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q.\)</p>
+          <p><strong>Отображение на платформу.</strong> \(\lambda\) зависит от модальности (база, длина волны, длина когерентности); инвариантны отношения к \(\lambda_q\).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S3: Фокусировка -->
+    <div class="card">
+      <h2>S3 — Фокусировка структуры и CPI (поддерживает S2)</h2>
+      <p>Малый якобиан проекции стабилизирует «скелет» из узлов и нитей, переживающий ВЧ-деталь; \(\mathrm{CPI}\) количествует локальные бюджеты микросостояний.</p>
+      <div class="math-block">\[
+        A(x)\ \sim\ \big\langle J_\pi^{-1}\big\rangle,\qquad
+        M(\lambda,\varepsilon;x)\ \sim\ A(x)\,\big(\tfrac{\lambda}{\varepsilon}\big)^{D_I},\qquad
+        \mathrm{CPI}(x)=\log_{10} M.
+      \]</div>
+      <p>Операционно области с большим \(A(x)\) показывают более медленное затухание \(R_{\mathrm{struct}}\) относительно \(R_{\mathrm{HF}}\), что согласуется с S2.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Связь с коареа-формулой.</strong> Фокусировка следует из коареа; \(\mathrm{CPI}\) упаковывает уплотнение мод по масштабу и локальности.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Эффективный спектральный показатель -->
+    <div class="card">
+      <h2>Эффективный спектральный показатель \(D_{\mathrm{eff}}\)</h2>
+      <p>Кодирует рост числа сохраняемых мод и ранжированные спектры (база вне контекста):</p>
+      <div class="math-block">\[
+        N(\Omega)\sim\Omega^{D_{\mathrm{eff}}},\qquad
+        \rho(\Omega)\sim\Omega^{D_{\mathrm{eff}}-1},\qquad
+        \frac{\Omega_n}{\Omega_1}=n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+      <p>Здесь \(N\) — кумулятивный счёт, \(\rho\) — плотность сохраняемых мод; закон ранговых отношений инвариантен к базовому масштабу. Используйте как междоменный «отпечаток» там, где применимо; не трактуйте конкретную базу как опору.</p>
+    </div>
+
+    <!-- Гауссов суррогат -->
+    <div class="card">
+      <h2>Учебный суррогат (Gaussian)</h2>
+      <p>Удобный суррогат, удовлетворяющий локальности и положительности, — ядро гауссова типа в нормальных координатах:</p>
+      <div class="math-block">\[
+        K_{\lambda}(x;X)\propto\exp\!\Big(-\tfrac{\mathrm{dist}(X,\pi^{-1}(x))^2}{2\sigma^2}\Big),\qquad \sigma\sim\lambda.
+      \]</div>
+      <p>Тогда \(O=K_{\lambda}\star\Phi\) — полосо-ограниченная величина; ВЧ-контент экспоненциально подавляется с индексом \(\lambda/\lambda_q\), что воспроизводит закон фиделити выше.</p>
+      <p class="note">D.R.E.A.M остаётся независимой от конкретного ядра; данный суррогат — дидактический.</p>
+    </div>
+
+    
+
+
+  </div>
+  <!-- Приборное отображение -->
+
+      <div class="card" style="margin-top:1rem">
+      <h2>Приборное отображение</h2>
+      <ul>
+        <li>\(\lambda\) зависит от платформы (база, длина волны, длина когерентности); прогнозы выражаются через \(\lambda/\lambda_q\).</li>
+        <li>Скан «через обрыв»: интерферометрия/фотонные решётки, NV-центры, атомная интерферометрия, сверхпроводниковые контуры.</li>
+        <li>Снимайте оба канала: \(R_{\mathrm{HF}}(\lambda)\) и \(R_{\mathrm{struct}}(\lambda)\) при <em>одних и тех же</em> \((\lambda_q,D_{\mathrm{eff}})\).</li>
+        <li>Картируйте метрики фокусировки \(A(x)\), \(M(\lambda,\varepsilon;x)\), \(\mathrm{CPI}(x)\) и проверяйте предсказанное расхождение скоростей затухания.</li>
+        <li>Проверки симметрий/ограничителей: эквивариантность ядра и PSD-поведение (корректная постановка).</li>
+      </ul>
+    </div>
+
+  <!-- Иллюстрация -->
+  <div class="card" style="margin-top:1rem">
+    <h2>Иллюстрация — модель ядра проекции ткет реальность (моделирование 10D → 4D на Python)</h2>
+    
+<div id="kw-scope" class="weave-scope">
+  <!-- Абсолютная конечная точка, чтобы работать под любым префиксом/blueprint -->
+
+  <!-- Управление -->
+  <div class="kw-controls" style="margin-bottom:10px;">
+    <label for="kw-lam" style="display:block;margin-bottom:6px;">λ (масштаб зондирования)</label>
+
+    <div class="kw-slider-wrap" style="position:relative;">
+      <input id="kw-lam" type="range" min="0" max="2.0" step="0.02" value="0.30" style="width:100%;">
+      <!-- Маркеры «обрыва» -->
+      <div id="kw-cliff50" class="kw-cliff" title="R(λ)=0.5"></div>
+      <div id="kw-cliff10" class="kw-cliff kw-cliff-weak" title="R(λ)=0.1"></div>
+    </div>
+
+    <div style="font-size:13px;color:var(--muted);margin-top:6px;">
+      λ = <span id="kw-lam-val">0.30</span> · R(λ)=exp[−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>] → <strong id="kw-r-val">…</strong>
+      <span id="kw-cliff-readout" style="margin-left:.75rem;"></span>
+    </div>
+
+    <div class="kw-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:10px;">
+      <div>
+        <label for="kw-deff" style="display:block;margin-bottom:4px;">D<sub>eff</sub></label>
+        <select id="kw-deff" style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+          <option value="2.0">2.0 (филаментарность)</option>
+          <option value="2.2" selected>2.2 (по умолчанию)</option>
+          <option value="2.5">2.5</option>
+          <option value="3.0">3.0 (гомогенизация)</option>
+        </select>
+      </div>
+      <div>
+        <label for="kw-lq" style="display:block;margin-bottom:4px;">λ<sub>q</sub> (когерентность)</label>
+        <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0"
+               style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+      </div>
+      <div>
+        <label for="kw-seed" style="display:block;margin-bottom:4px;">Зерно</label>
+        <input id="kw-seed" type="number" value="42"
+               style="width:120px;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button id="kw-regen" class="btn"
+                style="background:var(--accent);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:600;cursor:pointer;">
+          Перегенерировать
+        </button>
+        <label style="font-size:.95rem;color:var(--muted);"><input id="kw-autos" type="checkbox" checked> Авто</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- График -->
+  <div id="kw-plot" style="height:560px;width:100%;"></div>
+  <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
+</div>
+
+<!-- Подключите Plotly один раз глобально; удалите, если уже загружен -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+
+<style>
+  /* Палитра по сериям */
+  .weave-scope{
+    --kw-filament: #2dd4bf; /* teal 400  */
+    --kw-facet:    #f59e0b; /* amber 500 */
+    --kw-hub:      #a78bfa; /* violet 400*/
+    --kw-dust:     #94a3b8; /* slate 400 */
+  }
+  /* Прозрачный фон графика */
+  #kw-plot .plot-container, #kw-plot .svg-container { background: transparent !important; }
+
+  /* Маркеры «обрыва» на слайдере */
+  .kw-slider-wrap input[type="range"] { display:block; }
+  .kw-cliff{
+    position:absolute; top:50%; transform:translate(-50%,-50%);
+    width:0; height:18px; border-left:2px dashed var(--accent);
+    pointer-events:none; opacity:0.9;
+  }
+  .kw-cliff-weak{ border-left-style:solid; border-left-color: rgba(255,255,255,0.35); opacity:0.6; }
+
+  /* Крупнее точки легенды */
+  #kw-plot .legend .legendpoints path,
+  #kw-plot .legend .legendpoints rect,
+  #kw-plot .legend .legendlines path {
+    transform: scale(1.6);
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  @media (max-width: 900px){ .kw-grid { grid-template-columns: 1fr 1fr !important; } }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета серий
+  const root  = getComputedStyle(document.documentElement);
+  const scope = getComputedStyle(document.getElementById('kw-scope'));
+  const FG      = (root.getPropertyValue('--fg')||'#e5e7eb').trim();
+  const MUTED   = (root.getPropertyValue('--muted')||'#9aa4b2').trim();
+  const COL_FI  = (scope.getPropertyValue('--kw-filament')||'#2dd4bf').trim();
+  const COL_FA  = (scope.getPropertyValue('--kw-facet')   ||'#f59e0b').trim();
+  const COL_HU  = (scope.getPropertyValue('--kw-hub')     ||'#a78bfa').trim();
+  const COL_DU  = (scope.getPropertyValue('--kw-dust')    ||'#94a3b8').trim();
+
+  const elPlot=document.getElementById('kw-plot'), elMsg=document.getElementById('kw-msg');
+  const elLam=document.getElementById('kw-lam'), elLamV=document.getElementById('kw-lam-val');
+  const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
+  const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
+  const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
+  const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
+  const elCliffReadout=document.getElementById('kw-cliff-readout');
+
+  const fmt = x => (+x).toFixed(2);
+  const say = s => { elMsg.textContent=s; elMsg.style.display = s ? 'block' : 'none'; };
+
+  // Удержание
+  function R(lam, lq, deff){ return Math.exp( - Math.pow(lam / lq, deff) ); }
+
+  // Где R(λ)=τ -> λ_τ = λ_q * (-ln τ)^(1/Deff)
+  function lambdaAtTau(tau, lq, deff){ return lq * Math.pow(-Math.log(tau), 1.0/deff); }
+
+  function placeCliffs(){
+    const lq = parseFloat(elLq.value), deff = parseFloat(elDeff.value);
+    const lamMin = parseFloat(elLam.min), lamMax = parseFloat(elLam.max);
+    const rect = elLam.getBoundingClientRect();
+    const x0 = rect.left, w = rect.width;
+
+    function setMarker(el, tau){
+      let lamTau = lambdaAtTau(tau, lq, deff);
+      lamTau = Math.max(lamMin, Math.min(lamMax, lamTau));
+      const frac = (lamTau - lamMin) / (lamMax - lamMin);
+      el.style.left = (frac * w) + 'px';
+      return lamTau;
+    }
+    const lam50 = setMarker(elCliff50, 0.5);
+    const lam10 = setMarker(elCliff10, 0.1);
+    elCliffReadout.textContent = `пороги: R=0.5 при λ≈${fmt(lam50)}, R=0.1 при λ≈${fmt(lam10)}`;
+  }
+
+  // Загрузка
+  async function fetchData(){
+    const params = { lam: parseFloat(elLam.value), lam_q: parseFloat(elLq.value), deff: parseFloat(elDeff.value), seed: parseInt(elSeed.value) || 42, n: 3500 };
+    return window.DreamWeave ? window.DreamWeave.generate(params) : { traces: { filament:{x:[],y:[],z:[],count:0}, facet:{x:[],y:[],z:[],count:0}, hub:{x:[],y:[],z:[],count:0}, dust:{x:[],y:[],z:[],count:0} } };
+  }
+
+  // Трейсы с масштабированием прозрачности: пыль гаснет быстрее
+  function makeTraces(data){
+    // Прозрачности как степени R: филаменты гаснут медленнее, пыль — быстрее
+    const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+    const alphaFil = 0.85 * Math.max(0.25, Math.pow(r, 0.4));
+    const alphaFac = 0.85 * Math.pow(r, 0.9);
+    const alphaHub = 0.85 * Math.pow(r, 1.2);
+    const alphaDus = 0.85 * Math.pow(r, 2.2);
+
+    // Дополнительно: уменьшаем точки «пыли» при больших λ
+    const sizeDust = 2 * Math.max(0.35, Math.pow(r, 1.5));
+    const sizeRest = 2;
+
+    const N = k => data.traces[k].count;
+    const series = [
+      {k:'filament', name:`Филаменты (${N('filament')})`, color:COL_FI, alpha:alphaFil, size:sizeRest},
+      {k:'facet',    name:`Грани (${N('facet')})`,        color:COL_FA, alpha:alphaFac, size:sizeRest},
+      {k:'hub',      name:`Узлы (${N('hub')})`,           color:COL_HU, alpha:alphaHub, size:sizeRest},
+      {k:'dust',     name:`Пыль (${N('dust')})`,          color:COL_DU, alpha:alphaDus, size:sizeDust}
+    ];
+
+    return series.map(({k,name,color,alpha,size})=>{
+      const t = data.traces[k];
+      return { type:'scatter3d', mode:'markers', name,
+               x:t.x, y:t.y, z:t.z,
+               marker:{ size, opacity:alpha, color } };
+    });
+  }
+
+  function layout(){
+    const grid='rgba(255,255,255,0.12)', zero='rgba(255,255,255,0.2)';
+    return {
+      paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+      font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
+      scene:{
+        xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        aspectmode:'cube'
+      },
+      margin:{ l:0, r:0, t:20, b:0 },
+      showlegend:true,
+      legend:{ orientation:'v', x:0.82, y:0.98, font:{ size:11, color:MUTED } },
+      title:{ text:'Проекция 10D→4D: главный 3D-вид (грани + филаменты)', x:0.02, font:{ size:13, color:MUTED } }
+    };
+  }
+
+  function bumpLegendDots(scale=1.6){
+    ['.legend .legendpoints path','.legend .legendpoints rect','.legend .legendlines path']
+      .forEach(s => document.querySelectorAll(`#kw-plot ${s}`).forEach(el => {
+        el.style.transform = `scale(${scale})`;
+        el.style.transformBox = 'fill-box';
+        el.style.transformOrigin = '50% 50%';
+      }));
+  }
+
+  async function update(){
+    try{
+      const data = await fetchData();
+      const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+      elLamV.textContent = fmt(elLam.value);
+      elR.textContent = r.toFixed(3);
+
+      const tr = makeTraces(data);
+      const ly = layout();
+
+      if(!elPlot._plotted){ Plotly.newPlot(elPlot, tr, ly, {responsive:true}).then(()=>bumpLegendDots()); elPlot._plotted=true; }
+      else { Plotly.react(elPlot, tr, ly, {responsive:true}).then(()=>bumpLegendDots()); }
+    }catch(e){ say(`Не удалось загрузить данные (${e.message}). Проверьте ${DATA_URL}.`); }
+  }
+
+  // События
+  function onParamsChanged(){
+    placeCliffs();
+    if(document.getElementById('kw-autos').checked) update();
+    else {
+      // даже без «Авто» поддерживаем корректные считывания
+      const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+      elLamV.textContent = fmt(elLam.value); elR.textContent = r.toFixed(3);
+    }
+  }
+  elLam.addEventListener('input', onParamsChanged);
+  elLam.addEventListener('change', onParamsChanged);
+  elDeff.addEventListener('change', onParamsChanged);
+  elLq.addEventListener('change', onParamsChanged);
+  elRegen.addEventListener('click', ()=>{ elSeed.value=(Math.random()*1e6)|0; update(); });
+  window.addEventListener('resize', placeCliffs);
+
+  // Первый рендер
+  update().then(placeCliffs);
+});
+</script>
+    <div class="card" style="margin-top:10px;">
+  <h3 style="margin:0 0 .6rem 0;font-weight:600;">Смотрите «переплетение» как по телевизору</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div>
+      <p class="small" style="color:var(--muted);margin:.2rem 0 .6rem 0;">
+        Ядро проекции 10D→4D можно представить как камеру, подающую сигнал на телевизор. Вы не видите 10D-сцену напрямую —
+        вы видите обработанную картинку. Ползунки — как регуляторы ТВ:
+      </p>
+      <ul style="margin:0 0 .6rem 1.1rem;color:var(--fg);line-height:1.35;">
+        <li><strong>λ — «Размер пикселя / размытие»</strong><br>
+          Больше λ ≙ крупнее пиксели / мягче фокус. Сначала тает мелкая «зернистость», крупные структуры держатся.
+          В математике это радиус блюра; в оптике — <strong>MTF</strong> (модуляционная передаточная функция) отсечка.
+        </li>
+        <li><strong>λ<sub>q</sub> — «Нативный фокус / sweet spot»</strong><br>
+          Задает масштаб, при котором сигнал естественно когерентен (<em>родное разрешение</em> панели).
+          При λ ≪ λ<sub>q</sub> виден шумный «спекл»; при λ ≫ λ<sub>q</sub> вы пере-размазываете.
+        </li>
+        <li><strong>D<sub>eff</sub> — «Кривая шумоподавления»</strong><br>
+          Насколько агрессивно уходит детализация при увеличении пикселя. Ниже ≙ мягко, с сохранением граней;
+          выше ≙ сильный де-шум, который быстрее смазывает контуры.
+        </li>
+        <li><strong>Зерно — «Канал / сцена»</strong><br>
+          Тот же ТВ, другая программа. Меняет конкретную реализацию «переплетения», не меняя способ его обработки.
+        </li>
+      </ul>
+      <p class="small" style="color:var(--muted);margin:.2rem 0;">
+        <strong>Маркеры обрыва:</strong> пунктирные риски на слайдере λ — это «пороги разрешения».
+        Левая риска (R=0.5) ≙ детали наполовину сохраняются; правая (R=0.1) ≙ деталей почти нет — как если
+        отойти настолько, что мелкий текст превращается в кашу.
+      </p>
+    </div>
+    <div>
+      <h4 style="margin:.2rem 0 .4rem 0;font-weight:600;">Что означают цвета (содержимое кадра)</h4>
+      <ul style="margin:0 0 .6rem 1.1rem;line-height:1.35;">
+        <li><span style="color:#2dd4bf;font-weight:700;">Filaments</span> = <em>грани/нити</em> (резкие линии). Держатся лучше при росте пикселя.</li>
+        <li><span style="color:#f59e0b;font-weight:700;">Facets</span> = <em>поверхности</em> (широкие формы). Гаснут медленнее, чем спекл.</li>
+        <li><span style="color:#a78bfa;font-weight:700;">Hubs</span> = <em>акценты</em> (яркие узлы). Сохраняются, если они достаточно крупные.</li>
+        <li><span style="color:#94a3b8;font-weight:700;">Dust</span> = <em>статик/зерно</em>. Исчезает первым, когда пиксели становятся большими.</li>
+      </ul>
+      <p class="small" style="color:var(--muted);margin:.2rem 0;">
+        Под капотом действует закон удержания
+        <code>R(λ)=exp(−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>)</code> — ТВ-подобная кривая «сколько
+        деталей осталось после блюра». Мы смещаем картинку так, чтобы <span style="color:#94a3b8;">dust</span>
+        гас «самым быстрым», а <span style="color:#2dd4bf;">filaments</span> — «самым медленным» образом — как умное шумоподавление.
+      </p>
+    </div>
+  </div>
+  <div class="sep" style="height:1px;background:var(--border);margin:10px 0;"></div>
+  <p class="small" style="color:var(--muted);margin:0;">
+    TL;DR — <strong>λ</strong> это ваш размер пикселя / дистанция просмотра; <strong>λ<sub>q</sub></strong>
+    задает «родной фокус» сцены; <strong>D<sub>eff</sub></strong> — насколько сильно ТВ-шумоподавление
+    давит мелкую детализацию. Двигайте λ и наблюдайте, как исчезает статик, выживают края и картинка
+    сводится к крупномасштабным формам.
+  </p>
+</div>
+  </div>
+</div>
+
+<style>
+/* Keep selected value readable at all times */
+#dataset{
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff;
+  color-scheme: dark;
+}
+/* Options in the popup */
+#dataset option{
+  color:#e5e7eb;
+  background:#0b1220;
+}
+/* The currently selected (highlighted) option */
+#dataset option:checked,
+#dataset option:focus,
+#dataset option:hover:checked{
+  color:#ffffff !important;
+  background:#1.2937 !important;
+}
+/* Legacy Edge/IE */
+#dataset::-ms-value{ color:#ffffff; background:#0f172a; }
+
+/* --- Kernel toy selects: make popup readable --- */
+#kw-deff{
+  background:#0f172a;
+  color:#ffffff;
+  -webkit-text-fill-color:#ffffff;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:8px 10px;
+  color-scheme: light;
+}
+#kw-deff option{
+  background:#ffffff;
+  color:#0b0f14;
+}
+#kw-deff option:checked,
+#kw-deff option:hover:checked,
+#kw-deff option:focus:checked{
+  background:#2563eb !important;
+  color:#ffffff !important;
+}
+#kw-deff:focus-visible{
+  outline:2px solid #22d3ee;
+  outline-offset:2px;
+}
+</style>
+
+<script>
+// Повторная отрисовка формул при раскрытии экспандера
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

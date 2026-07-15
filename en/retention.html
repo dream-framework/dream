@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retention Law · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link active" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero" style="margin-bottom:1rem;">
+    <h1>Retention Law (S2)</h1>
+    <p class="kicker">Universal, confirmed: the same stretched-exponential loss of contrast and correlation with probe scale across disparate domains.</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SCIENCE-FIRST CORE (with math)
+       Uses grids with multiple cards
+       and expandable details sections -->
+  <!-- ============================ -->
+
+  <!-- Formal statement & linearization -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>Formal statement</h2>
+      <p>Retention quantifies how much information or structure survives coarse-graining to probe scale <code>λ</code> (native units).</p>
+      <div class="math-block math-only">
+        \[
+          R(\lambda)\;=\;\exp\!\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\mathrm{eff}}}\right]
+        \]
+      </div>
+      <details class="exp">
+        <summary><strong>Semigroup → Weibull (gist)</strong></summary>
+        <p>If instrument blurs compose approximately by scale addition, \(K_\lambda\circ K_\mu\!\approx\!K_{\lambda+\mu}\), and survival of features multiplies under composition, then \(R(\lambda+\mu)\!\approx\!R(\lambda)R(\mu)\). Log-convex, scale-stable decay with a finite cliff uniquely selects the stretched-exponential (Weibull) family.</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Linearization & kernel invariants</h2>
+      <p>Plotting the standard transform exposes slope and intercept that are invariant for a given kernel class.</p>
+      <div class="math-block math-only">
+        \[
+          y(\lambda):=\ln\!\big(-\ln R(\lambda)\big)
+          \;=\;D_{\mathrm{eff}}\ln\lambda\;-\;D_{\mathrm{eff}}\ln\lambda_q
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          \widehat D_{\mathrm{eff}}=\frac{d\,y}{d\ln\lambda},\qquad
+          \widehat\lambda_q=\exp\!\Big(-\tfrac{\text{intercept}}{\widehat D_{\mathrm{eff}}}\Big)
+        \]
+      </div>
+      <p class="small">After rescaling \( \lambda\to\lambda/\widehat\lambda_q \), disparate domains collapse to a common master curve.</p>
+    </div>
+  </div>
+
+  <!-- Operational observables -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>Operational observables</h2>
+      <p>Any admissible low-pass <code>smooth<sub>λ</sub></code> tied to instrument resolution is acceptable; bandwidth must grow monotonically with <code>λ</code>.</p>
+      <div class="math-block math-only">
+        \[
+          R_{\mathrm{corr}^2}(\lambda)
+          \;=\;
+          \mathrm{corr}^2\!\big(\,\text{data}\big|_{\lambda\to0},\;\text{data}\big|_{\lambda}\big)
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          R_{\mathrm{HF}}(\lambda)
+          \;=\;
+          1-\frac{\mathrm{Var}\!\big(\text{data}-\mathrm{smooth}_\lambda(\text{data})\big)}{\mathrm{Var}(\text{data})}
+        \]
+      </div>
+      <details class="exp">
+        <summary><strong>Spectral calibration</strong></summary>
+        <div class="math-block math-only">
+          \[
+            \mathrm{smooth}_\lambda = K_\lambda * \text{data},\qquad
+            H_\lambda(f)=\mathcal{F}\{K_\lambda\}
+          \]
+        </div>
+        <div class="math-block math-only">
+          \[
+            R_{\mathrm{HF}}(\lambda)=
+            \frac{\int |H_\lambda(f)|^2 S(f)\,df}{\int S(f)\,df},
+            \quad
+            \sigma_{\text{gauss}}=\frac{\mathrm{FWHM}}{2\sqrt{2\ln2}},
+            \quad
+            \sigma_{\text{box,eq}}=\frac{w}{\sqrt{12}}
+          \]
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Scale-hazard & diagnostics</h2>
+      <p>The “hazard” of information loss per unit scale is power-law under S2.</p>
+      <div class="math-block math-only">
+        \[
+          h(\lambda):=-\frac{d\ln R}{d\lambda}
+          \;=\;
+          \frac{D_{\mathrm{eff}}}{\lambda_q^{D_{\mathrm{eff}}}}\,
+          \lambda^{D_{\mathrm{eff}}-1}
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          \beta(\lambda)=\frac{d}{d\ln\lambda}\,y(\lambda),\quad
+          b(\lambda)=y(\lambda)-\beta(\lambda)\ln\lambda,\quad
+          \lambda_q(\lambda)=\exp\!\big(-b(\lambda)/\beta(\lambda)\big)
+        \]
+      </div>
+      <p class="small">S2 window: flat \( \beta(\lambda) \) and stable implied \( \lambda_q(\lambda) \); curvature flags regime changes or artifacts.</p>
+    </div>
+  </div>
+
+  <!-- Estimation, universality, falsification -->
+  <div class="grid three" style="margin-top:1rem">
+    <div class="card">
+      <h2>Estimation recipes</h2>
+      <ul>
+        <li>Log-spaced grid for <code>λ</code> in native units.</li>
+        <li>Compute \(R_{\mathrm{HF}}\) and/or \(R_{\mathrm{corr}^2}\).</li>
+        <li>Robust fit of \(y=\ln(-\ln R)\) vs \(\ln\lambda\).</li>
+      </ul>
+      <details class="exp">
+        <summary><strong>Percentile-pair (no regression)</strong></summary>
+        <div class="math-block math-only">
+          \[
+            R(\lambda_1)=e^{-1},\; R(\lambda_2)=e^{-\alpha}
+            \Rightarrow
+            \widehat D_{\mathrm{eff}}=\frac{\ln(1/\alpha)}{\ln(\lambda_1/\lambda_2)},\quad
+            \widehat\lambda_q=\lambda_1
+          \]
+        </div>
+      </details>
+      <p class="small">Report \( \widehat D_{\mathrm{eff}}, \widehat\lambda_q \), CIs, λ-window, and smoother family.</p>
+    </div>
+
+    <div class="card">
+      <h2>Universality clause</h2>
+      <p>After rescaling \( \lambda\to\lambda/\lambda_q \), curves from disparate domains align without re-fit. The law is insensitive to the low-pass family (box/gauss/PSF) once bandwidth is calibrated.</p>
+    </div>
+
+    <div class="card">
+      <h2>Falsification (technical)</h2>
+      <ul>
+        <li>Persistent curvature of \(y(\lambda)\) after unit/smoother calibration.</li>
+        <li>Irreconcilable \(D_{\mathrm{eff}}\) from \(R_{\mathrm{HF}}\) vs \(R_{\mathrm{corr}^2}\) within the same context.</li>
+        <li>Failure of collapse under \( \lambda/\lambda_q \) across platforms.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Live plotter embedded (UNCHANGED) -->
+   <div class="grid three" style="margin-top:1rem"></div>
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem 1rem 0.5rem 1rem;">
+      <h2 style="margin:0 0 0.25rem 0;">Universality demo (official live datasets)</h2>
+      <p class="small">Fit S(W) ≈ exp(−(W/λ)<sup>β</sup>). Toggle x → x/λ to align cliffs at x=1 (λ always reported in native units).</p>
+    </div>
+     <!-- What was tested (multi-card grid) -->
+  <div class="card" style="margin-top:1rem">
+    <h2>What was tested</h2>
+    <div class="grid three" style="margin-top:.5rem">
+      <div class="card">
+        <h3>Sun & Space Weather</h3>
+        <p>GOES X-rays, magnetometer, electrons ≥2&nbsp;MeV, protons ≥10&nbsp;MeV.</p>
+      </div>
+      <div class="card">
+        <h3>Earth Systems</h3>
+        <p>USGS Potomac flow (IV), earthquakes (all_week hourly).</p>
+      </div>
+      <div class="card">
+        <h3>Society & Economy</h3>
+        <p>Wikimedia enwiki “Earth”, World Bank GDP/CPI/Unemployment, CoinGecko BTC daily, iNaturalist observations.</p>
+      </div>
+    </div>
+    <details class="exp" style="margin-top:.5rem">
+      <summary><strong>Cross-domain collapse procedure</strong></summary>
+      <ol>
+        <li>Express <code>λ</code> in native units (pixel, cadence, bin size, PSF FWHM).</li>
+        <li>Fit \(y=\ln(-\ln R)\) vs \(\ln\lambda\); extract \(\widehat D_{\mathrm{eff}}, \widehat\lambda_q\).</li>
+        <li>Replot all \(R\) curves vs \( \lambda/\widehat\lambda_q \) and verify alignment.</li>
+      </ol>
+    </details>
+  </div>
+
+    <iframe src="../plotter.html" title="Retention Toy Plotter" style="width:100%; min-height:760px; border:0; display:block; border-radius:12px;"></iframe>
+    <div style="padding:0.5rem 1rem 1rem 1rem;" class="small">
+      If the widget fails to load, open it directly from <a href="../plotter.html" target="_blank" rel="noopener">this link</a>.
+    </div>
+  </div>
+
+ 
+<div>
+
+  <!-- Projection model & coarea focusing -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+  <h2>Projection model (10→4)</h2>
+
+  <p>
+    4D observables are <em>push-forwards</em> of Meta-Manifold fields through a single, fixed, non-invertible
+    projection kernel with finite resolution. The kernel compresses hidden 10D structure into our 4D data,
+    averaging sub-resolution detail; only its <em>invariants</em> are measurable from within 4D.
+  </p>
+
+  <div class="math-block math-only">
+    \[
+      \phi(x)\;=\;\int_{\mathcal{M}_{10}} K_{\lambda}(x;X)\,\Phi(X)\,d^{10}X,
+      \qquad
+      K_{\lambda}\!\circ\! K_{\mu}\;\approx\;K_{\lambda+\mu}\;.
+    \]
+  </div>
+
+  <p>
+    Because blur scales compose approximately by addition and survival under composition multiplies,
+    fine structure decays in a universal, stretched-exponential manner (S2). In practice the standard transform
+    of retention, \(y=\ln(-\ln R)\) vs \(\ln \lambda\), exposes a slope and intercept that act as kernel
+    invariants across observables and datasets.
+  </p>
+
+  <details class="exp" style="margin-top:.5rem">
+    <summary><strong>What to report &amp; how to calibrate</strong></summary>
+    <ul class="small" style="margin-top:.25rem">
+      <li><strong>Invariants (operational):</strong> coherence scale \( \lambda_q \) (“cliff”), effective exponent \( D_{\mathrm{eff}} \), and the native-unit locality radius set by your instrument/analysis.</li>
+      <li><strong>Units:</strong> always express \( \lambda \) in native instrument units (pixel, cadence, bin size, PSF). Typical bandwidth conversions:
+        <div class="math-block math-only" style="margin:.35rem 0 0 0">
+          \[
+            \sigma_{\text{gauss}}=\frac{\mathrm{FWHM}}{2\sqrt{2\ln 2}},
+            \qquad
+            \sigma_{\text{box,eq}}=\frac{w}{\sqrt{12}}.
+          \]
+        </div>
+      </li>
+      <li><strong>Pointer:</strong> full derivation and geometry live on the <a href="/kernel">Kernel</a> page.</li>
+    </ul>
+  </details>
+
+  <p class="small" style="margin-top:.35rem;">
+    Only invariants of the kernel class are empirical; the detailed microstructure of \(K\) is not recoverable from 4D data.
+  </p>
+</div>
+
+    <!-- <div class="card speculative">
+      <h2>Interpretive lane (non-foundational)</h2>
+      <p>Microstate measure concentrates where the area-Jacobian of the center map dips, producing ridges/filaments/hubs that persist below the cliff.</p>
+      <div class="math-block math-only">
+        \[
+          \mu(x)=\!\!\int_{F^{-1}(x)}\!\!\frac{\rho(X)}{J_F(X)}\,d\Sigma_6(X),
+          \qquad e_4(x)=(G_\lambda * \mu)(x)
+        \]
+      </div>
+      <details class="exp">
+        <summary><strong>Finite-range fractality</strong></summary>
+        <div class="math-block math-only">
+          \[
+            D_{\mathrm{eff}}(\lambda)\approx 2\ \text{for}\ \lambda\ll\lambda_q,
+            \qquad D_{\mathrm{eff}}(\lambda)\to 3\ \text{as}\ \lambda\to\infty
+          \]
+        </div>
+      </details>
+    </div> -->
+
+        <div class="card">
+      <h2>Key consequences (summary)</h2>
+      <div class="core">
+      <ul>
+        <li><strong>Objective cliff:</strong> a measurable coherence scale <code>λ<sub>q</sub></code> exists across observables; it separates persistence from rapid erasure.</li>
+        <li><strong>Universal decay law:</strong> the same stretched–exponential form governs <em>both</em> HF detail and structural correlation after unit calibration.</li>
+        <li><strong>Bounded fractality:</strong> self-similar structure is a sub-<code>λ<sub>q</sub></code> phenomenon; large scales homogenize.</li>
+        <li><strong>Irrecoverability:</strong> information strictly below <code>λ<sub>q</sub></code> cannot be restored by any algorithmic post-processing (physics, not software).</li>
+        <li><strong>Cross-observable constraints:</strong> slopes <code>D<sub>eff</sub></code> from <code>R<sub>HF</sub></code> and <code>R<sub>corr²</sub></code> must agree within a calibrated context.</li>
+        <li><strong>Design guidance:</strong> sampling/PSF should target <code>λ \lesssim λ<sub>q</sub></code> to preserve science yield; analysis should report the standard transform and λ-units.</li>
+        <li><strong>Anomaly detection:</strong> failure of collapse under <code>λ/λ<sub>q</sub></code> flags pipeline/instrument issues or genuinely new physics.</li>
+      </ul>
+      </div>
+      <details class="exp">
+        <summary><strong>Replication checklist</strong></summary>
+        <ul class="small">
+          <li>Declare native units and smoother family (with bandwidth calibration).</li>
+          <li>Show \(y=\ln(-\ln R)\) vs \(\ln\lambda\) with a flat-slope window and implied <code>λ<sub>q</sub>(λ)</code> stability.</li>
+          <li>Provide collapse plot after rescaling by <code>λ̂<sub>q</sub></code>.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <style>
+
+    /* Keep the closed control (on dark card) as you like */
+#dataset{
+  background:#0f172a;
+  color:#fff;                      /* closed label stays white */
+  -webkit-text-fill-color:#fff;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:8px 12px;
+  font-weight:500;
+  appearance:none;
+
+  /* KEY: tell the UA to render the popup in a LIGHT scheme */
+  color-scheme: light;
+}
+
+/* ----- WILDCARD: force black text inside dropdown popups site-wide ----- */
+select option,
+select optgroup{
+  color:#0b0f14 !important;        /* black text in the popup */
+  background:#ffffff !important;   /* light menu background */
+}
+
+/* (Optional) keep the highlighted row black-on-light too */
+select option:checked,
+select option:hover:checked,
+select option:focus:checked{
+  background:#e5e7eb !important;   /* light gray highlight */
+  color:#0b0f14 !important;        /* still black text */
+}
+  </style>
+
+</div>
+
+<script>
+(function flattenOptgroups(id){
+  const sel = document.getElementById(id);
+  if(!sel) return;
+  const val = sel.value, frag = document.createDocumentFragment();
+
+  Array.from(sel.children).forEach(node=>{
+    if(node.tagName === 'OPTGROUP'){
+      const head = document.createElement('option');
+      head.textContent = node.label || '';
+      head.disabled = true;
+      head.className = 'group-label';      // style hook
+      frag.appendChild(head);
+      Array.from(node.children).forEach(opt => frag.appendChild(opt));
+    } else {
+      frag.appendChild(node);
+    }
+  });
+
+  sel.innerHTML = '';
+  sel.appendChild(frag);
+  if (val) sel.value = val;
+})('dataset');
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

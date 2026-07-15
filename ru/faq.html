@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Вопрос-Ответ · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link active" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Вопросы и ответы — «облака»</h1>
+    <p class="kicker">Нажмите на облако, чтобы увидеть ответ. Базовая наука и спекулятивные заметки чётко разделены.</p>
+    <p class="note">Контент автоматически подбирается из базы знаний; спекулятивные пункты остаются свернутыми, пока вы их не откроете.</p>
+  </div>
+
+  <style>
+    /* --- База --- */
+    .cloud .a{display:none}
+    .cloud[open] .a{display:block}
+    .cloud > summary{list-style:none; cursor:pointer; display:block}
+    .cloud > summary::-webkit-details-marker{display:none}
+    .cloud > summary::after{
+      content:"▾"; float:right; transform:rotate(0);
+      transition:transform .15s ease; color:var(--muted); font-size:.9rem;
+    }
+    .cloud[open] > summary::after{ transform:rotate(180deg) }
+    .clouds{
+      display:grid; gap:.9rem;
+      grid-template-columns: 1fr;      /* фиксируем контейнер */
+      width:100%;
+    }
+    .cloud{
+      background:transparent!important;
+      border:1px solid rgba(42,47,90,.55)!important;
+      box-shadow:none!important;
+      border-radius:12px!important;
+      padding:.7rem .9rem!important;
+      transition:background .15s, border-color .15s;
+      min-width:0;                     /* важно для гридов */
+      box-sizing:border-box;
+    }
+    .cloud:hover{ background:rgba(26,31,69,.28); border-color:rgba(42,47,90,.9) }
+    .cloud .q{ font-weight:600; font-size:.96rem; color:var(--text); overflow-wrap:anywhere }
+    .cloud .a{ font-size:.93rem; color:#cfd4ff }
+
+    .card.speculative{ display:block!important }
+    .cloud[open] .a.speculative{ display:block!important }
+
+    /* Код-блоки */
+    .cloud .a pre{
+      margin:.5rem 0; padding:.6rem .75rem;
+      border:1px solid rgba(42,47,90,.45);
+      border-radius:10px; overflow:auto; font-size:.9rem;
+      background:rgba(15,18,40,.35)
+    }
+    .cloud .a code, .cloud > summary code{
+      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+      font-size:.9em;
+    }
+
+    /* ======== 2 строки по 4 карточки (всего 8 «в шапке») ======== */
+    .duo-grids{ display:grid; gap:.9rem; margin-bottom:.25rem; width:100%; max-width:100% }
+    .row4{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)); /* не распираем контейнер */
+      gap:.75rem; align-items:start; width:100%; max-width:100%;
+    }
+    @media (max-width: 1200px){ .row4{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+    @media (max-width: 900px){  .row4{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 640px){  .row4{ grid-template-columns: 1fr; } }
+
+    .row4 .cloud{
+      margin:0; border:1px solid rgba(42,47,90,.55)!important;
+      border-radius:12px!important; padding:.6rem .8rem!important; background:transparent!important;
+      min-width:0;
+    }
+    .row4 .cloud:hover{ background: rgba(26,31,69,.28); border-color: rgba(42,47,90,.9); }
+
+    /* ======== «Ещё» — постраничный ряд 1×4 ======== */
+    .cloud .a.more-pager{ padding-top:.25rem; display:block }
+    .more-nav{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:.5rem; margin:.15rem 0 .55rem 0; user-select:none;
+    }
+    .more-nav .btn{
+      appearance:none; border:1px solid rgba(42,47,90,.55);
+      background:transparent; color:var(--text);
+      border-radius:10px; padding:.3rem .55rem; font-size:.85rem; line-height:1;
+      cursor:pointer; transition:background .15s, border-color .15s, opacity .15s;
+    }
+    .more-nav .btn:hover{ background:rgba(26,31,69,.28); border-color:rgba(42,47,90,.9) }
+    .more-nav .btn[disabled]{ opacity:.45; cursor:not-allowed }
+    .more-nav .count{ font-size:.85rem; color:var(--muted) }
+  </style>
+
+  <!-- Разделы (заголовки RU; ключи data-section — канонические) -->
+  <div class="card"><h2>Основы</h2>                        <div class="clouds" data-section="Foundations"></div></div>
+  <div class="card"><h2>Ядро и инварианты</h2>             <div class="clouds" data-section="Kernel & Invariants"></div></div>
+  <div class="card"><h2>Математика и топология</h2>        <div class="clouds" data-section="Math & Topology"></div></div>
+  <div class="card"><h2>Предсказания (тесты)</h2>          <div class="clouds" data-section="Predictions"></div></div>
+  <div class="card"><h2>Фальсификация</h2>                 <div class="clouds" data-section="Falsification"></div></div>
+  <div class="card speculative"><h2>Спекулятивное</h2>     <div class="clouds" data-section="Speculative"></div></div>
+
+</div>
+
+<script>
+(function(){
+  /* MathJax (подгружаем, если нет) */
+  if (!window.MathJax) {
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'],['\\(','\\)']],
+        displayMath: [['$$','$$'],['\\[','\\]']],
+        processEscapes: true, processEnvironments: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+    const s=document.createElement('script'); s.async=true; s.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'; document.head.appendChild(s);
+  }
+
+  /* Конфиг */
+  const DEFAULT_URL = "../kb/parsed_faqs_ru.json";   // RU JSON по умолчанию
+  const KB_URL = window.FAQ_JSON_URL || DEFAULT_URL;
+
+  const CANON_SECTIONS = ["Foundations","Kernel & Invariants","Math & Topology","Predictions","Falsification","Speculative"];
+  const HEAD_COUNT = 8;   // 2 строки × 4
+  const PAGE_SIZE  = 4;   // в «Ещё» по 4 за страницу
+
+  /* RU → канон алиасы на всякий случай */
+  const RU_ALIAS = {
+    "основы":"Foundations","базовые положения":"Foundations",
+    "ядро и инварианты":"Kernel & Invariants","ядро":"Kernel & Invariants",
+    "математика и топология":"Math & Topology","математика":"Math & Topology","топология":"Math & Topology",
+    "предсказания":"Predictions","предсказания (тесты)":"Predictions","тесты":"Predictions",
+    "фальсификация":"Falsification",
+    "спекулятивное":"Speculative","гипотезы":"Speculative"
+  };
+  const toCanon = (c) => CANON_SECTIONS.includes(c) ? c : (RU_ALIAS[String(c||'').toLowerCase().trim()] || "Foundations");
+
+  /* Хелперы отрисовки (математика/код) */
+  const byNumberAsc = (a,b) => (a.number||0)-(b.number||0);
+  const escapeHTML = s => String(s==null?"":s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  function tokenizeCodeFences(src){
+    const out=[]; const re=/```([\s\S]*?)```/g; let last=0,m;
+    while((m=re.exec(src))){ if(m.index>last) out.push({type:'text',text:src.slice(last,m.index)}); out.push({type:'code',text:m[1]}); last=re.lastIndex; }
+    if(last<src.length) out.push({type:'text',text:src.slice(last)}); return out;
+  }
+  function splitDisplayMath(src){
+    const out=[]; const re=/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\])/g; let last=0,m;
+    while((m=re.exec(src))){ if(m.index>last) out.push({type:'text',text:src.slice(last,m.index)}); out.push({type:'math',text:m[1]}); last=re.lastIndex; }
+    if(last<src.length) out.push({type:'text',text:src.slice(last)}); return out;
+  }
+  function displayToInlineForSummary(q){
+    return String(q||'').replace(/\$\$([\s\S]*?)\$\$/g,'\\($1\\)').replace(/\\\[([\s\S]*?)\\\]/g,'\\($1\\)');
+  }
+  function toAnswerHTML(src){
+    const tokens=tokenizeCodeFences(String(src||'')); return tokens.map(t=>{
+      if(t.type==='code') return `<pre><code>${escapeHTML(t.text)}</code></pre>`;
+      return splitDisplayMath(t.text).map(seg=> seg.type==='math' ? escapeHTML(seg.text) : escapeHTML(seg.text).replace(/\n/g,'<br>')).join('');
+    }).join('');
+  }
+  function toQuestionHTML(src){
+    const inlineQ=displayToInlineForSummary(src);
+    const tokens=tokenizeCodeFences(inlineQ); return tokens.map(t=>{
+      if(t.type==='code') return `<code>${escapeHTML(t.text.replace(/\n+/g,' '))}</code>`;
+      return splitDisplayMath(t.text).map(seg=> escapeHTML(seg.text).replace(/\n+/g,' ')).join('');
+    }).join('');
+  }
+  function renderCloud(q,aRaw,status){
+    const det=document.createElement('details'); det.className='cloud';
+    const sum=document.createElement('summary'); sum.className='q'; sum.innerHTML=toQuestionHTML(q);
+    const body=document.createElement('div'); body.className='a '+(status==='spec'?'speculative':'core'); body.innerHTML=toAnswerHTML(aRaw);
+    det.append(sum,body);
+    det.addEventListener('toggle',()=>{ if(det.open && window.MathJax?.typeset) MathJax.typeset([det]); });
+    return det;
+  }
+
+  function inferStatusFromText(q,a){
+    return /\b(спекулятив|умозрител|speculative)\b/i.test(`${q} ${a}`) ? 'spec' : 'core';
+  }
+
+  function bucketize(items){
+    const b={}; CANON_SECTIONS.forEach(s=>b[s]=[]);
+    items.forEach(it=> (b[toCanon(it.category)].push(it)));
+    return b;
+  }
+
+  function renderHeadEight(mount, items){
+    const duo=document.createElement('div'); duo.className='duo-grids';
+    const r1=document.createElement('div'); r1.className='row4';
+    items.slice(0,4).forEach(it=> r1.appendChild(renderCloud(it.question,it.answer,it._status)));
+    duo.appendChild(r1);
+    if(items.length>4){
+      const r2=document.createElement('div'); r2.className='row4';
+      items.slice(4,8).forEach(it=> r2.appendChild(renderCloud(it.question,it.answer,it._status)));
+      duo.appendChild(r2);
+    }
+    mount.appendChild(duo);
+  }
+
+  function renderMorePager(mount, tail){
+    if(!tail.length) return;
+    const wrap=document.createElement('details'); wrap.className='cloud';
+    const sum=document.createElement('summary'); sum.className='q';
+    const body=document.createElement('div'); body.className='a more-pager';
+    const nav=document.createElement('div'); nav.className='more-nav';
+    const btnPrev=Object.assign(document.createElement('button'),{type:'button',className:'btn prev'}); btnPrev.textContent='‹ Назад';
+    const count=Object.assign(document.createElement('span'),{className:'count'});
+    const btnNext=Object.assign(document.createElement('button'),{type:'button',className:'btn next'}); btnNext.textContent='Вперёд ›';
+    nav.append(btnPrev,count,btnNext);
+    const grid=document.createElement('div'); grid.className='row4';
+    body.append(nav,grid); wrap.append(sum,body); mount.appendChild(wrap);
+
+    let page=0; const total=tail.length; const totalPages=Math.ceil(total/4);
+    function renderPage(){
+      const start=page*4, end=Math.min(start+4,total);
+      sum.textContent=`Ещё (${start+1}–${end} из ${total})`;
+      grid.innerHTML=''; tail.slice(start,end).forEach(it=> grid.appendChild(renderCloud(it.question,it.answer,it._status)));
+      btnPrev.disabled=(page===0); btnNext.disabled=(page===totalPages-1);
+      if(window.MathJax?.typeset) window.MathJax.typeset([grid]);
+    }
+    btnPrev.addEventListener('click',()=>{ if(page>0){ page--; renderPage(); }});
+    btnNext.addEventListener('click',()=>{ if(page<totalPages-1){ page++; renderPage(); }});
+    wrap.addEventListener('toggle',()=>{ if(wrap.open) renderPage(); });
+  }
+
+  /* Загрузка */
+  fetch(KB_URL,{credentials:"same-origin"})
+    .then(r=>{ if(!r.ok) throw new Error(r.statusText); return r.json(); })
+    .then(payload=>{
+      const list=Array.isArray(payload)?payload:(Array.isArray(payload.faqs)?payload.faqs:[]);
+      const items=list.map(row=>({
+        number: row.number,
+        question: String(row.question ?? ""),
+        answer: String(row.answer ?? ""),
+        category: row.category || "Foundations",
+        _status: inferStatusFromText(row.question,row.answer)
+      }));
+
+      const buckets=bucketize(items);
+      CANON_SECTIONS.forEach(sec=>{
+        const mount=document.querySelector(`.clouds[data-section="${sec}"]`);
+        if(!mount) return;
+
+        const sorted=(buckets[sec]||[]).sort(byNumberAsc);
+        const head=sorted.slice(0, Math.min(HEAD_COUNT, sorted.length));
+        const tail=sorted.slice(head.length);
+        const headForRender = tail.length>0 ? sorted.slice(0, Math.min(HEAD_COUNT, sorted.length)) : head;
+
+        renderHeadEight(mount, headForRender);
+        renderMorePager(mount, tail);
+      });
+
+      if(window.MathJax?.typeset) MathJax.typeset();
+    })
+    .catch(err=>{
+      console.error(err);
+      const heroNote=document.querySelector(".card.hero .note");
+      if(heroNote){
+        const m=document.createElement("span");
+        m.style.display="block"; m.style.marginTop=".25rem";
+        m.textContent="Не удалось загрузить базу знаний; показывается статическая версия.";
+        heroNote.appendChild(m);
+      }
+    });
+})();
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

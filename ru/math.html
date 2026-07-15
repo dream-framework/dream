@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Матмодель · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link active" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Математическая рамка</h1>
+    <p class="kicker">Минимальная, но достаточная формализация, используемая во всей D.R.E.A.M.</p>
+    <p class="note">Здесь собраны определения, допущения и рабочие формулы. Математика сгруппирована в небольшие капсулы — используйте стрелки-экспандеры для деталей. Все уравнения уважают переключатель «Math».</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Обозначения -->
+    <div class="card">
+      <h2>Обозначения и объекты</h2>
+      <ul>
+        <li><strong>Метамногообразие (MM):</strong> компактное, ориентируемое, гладкое 10-мерное многообразие с метрикой \(g_{\mathrm{MM}}\) и мерой \(d\mu_{\mathrm{MM}}\).</li>
+        <li><strong>Проекционная сюръекция:</strong> \(\pi:\;\mathrm{MM}\to \mathbb{R}^{3,1}\).</li>
+        <li><strong>Ядро:</strong> \(K_{\lambda}(x;X)\ge 0\) с параметром разрешения \(\lambda\) (в нашем срезе \(\lambda=\lambda_q\)).</li>
+        <li><strong>Поля:</strong> поля на MM \(\Phi\) (расслоения опущены); 4D-наблюдаемые \(O\).</li>
+        <li><strong>Инварианты (эмпиричны):</strong> \(\lambda_q\) (разрешение), радиус локальности, регулярность/положительность (PSD), эффективный спектральный показатель \(D_{\mathrm{eff}}\).</li>
+        <li><strong>Показатели фокусировки:</strong> усреднение якобиана проекции \(A(x)\!\sim\!\langle J_\pi^{-1}\rangle\); множественность микросостояний \(M(\lambda,\varepsilon;x)\); <em>Complexity/Projection Index</em> \(\mathrm{CPI}(x)=\log_{10}M\).</li>
+      </ul>
+    </div>
+
+    <!-- Проталкивание -->
+    <div class="card">
+      <h2>Определение проталкивания</h2>
+      <p>4D-наблюдаемые — это <em>проталкивания</em> полей MM через ядро конечного разрешения:</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
+      \]</div>
+      <p>Эмпирическими являются только <em>инварианты</em> класса ядер; конкретная форма \(K\) данными не идентифицируется.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Линейность и ограниченность.</strong> \(\mathcal{K}_{\lambda}\!: L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\) — ограниченный линейный оператор.</p>
+          <p><strong>Нормировка.</strong> Удобно полагать \(\int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)=1\), чтобы константы переходили в константы.</p>
+          <p><strong>Положительная полуопределённость.</strong> Рассматриваются PSD-ядра, обеспечивающие неотрицательные квадратичные формы и устойчивые вычисления.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Ограничители корректной постановки -->
+    <div class="card">
+      <h2>Ограничители ядра (корректная постановка)</h2>
+      <div class="math-block">\[\textbf{K1 (нормировка)}:\quad \int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X) < \infty.\]</div>
+      <div class="math-block">\[\textbf{K2 (локальность)}:\quad K_{\lambda}(x;X)\text{ резко пиково при }X\approx \pi^{-1}(x).\]</div>
+      <div class="math-block">\[\textbf{K3 (монотонная «чёткость»)}:\quad \partial_{\lambda}\alpha(\lambda)\le 0,\ \alpha(\lambda_q)\approx 1.\]</div>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Примеры.</strong> Гауссовы аналоги в нормальных координатах — учебные суррогаты; прогнозы формулируются в терминах инвариантов.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S2 — универсальный закон сохранения информации -->
+    <div class="card">
+      <h2>S2 — Фиделити и закон сохранения информации (универсальный)</h2>
+      <p>Фиделити \(\alpha(\lambda)\in[0,1]\) измеряет долю сохраняемой тонкой структуры при эффективном масштабе \(\lambda\). Инвариантная форма:</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Возникают два режима и <em>«обрыв» когерентности</em> около \(\lambda\!\approx\!\lambda_q\): ниже — удерживаются интерференционные инварианты; выше — доминирует крупнозернистость. Экспериментальные считывания: \(R_{\mathrm{HF}}(\lambda)\) и \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},e_4|_\lambda)\).</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Лог-линейка.</strong> \(\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q.\)</p>
+          <p><strong>Отображение приборов.</strong> \(\lambda\) зависит от платформы (база, длина волны, длина когерентности); инвариантны только отношения к \(\lambda_q\).</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S3 — фокусировка и CPI -->
+    <div class="card">
+      <h2>S3 — Фокусировка структуры и CPI (поддерживает S2)</h2>
+      <p>Малый якобиан проекционного волокна усиливает меру и стабилизирует «скелет» из узлов/нитей, переживающий ВЧ-деталь; CPI количествует локальные бюджеты микросостояний.</p>
+      <div class="math-block">\[
+        A(x)\ \sim\ \big\langle J_\pi^{-1}\big\rangle,\qquad
+        M(\lambda,\varepsilon;x)\ \sim\ A(x)\,\big(\tfrac{\lambda}{\varepsilon}\big)^{D_I},\qquad
+        \mathrm{CPI}(x)=\log_{10} M.
+      \]</div>
+      <p>Операционно: области с большим \(A(x)\) показывают более медленное затухание \(R_{\mathrm{struct}}\) по сравнению с \(R_{\mathrm{HF}}\), согласуясь с законом сохранения информации.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Связь с коареа-формулой.</strong> Фокусировка вытекает из коареа; CPI упаковывает уплотнение мод с масштабом и локальностью.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Эффективный спектральный показатель -->
+    <div class="card">
+      <h2>Эффективный спектральный показатель \(D_{\mathrm{eff}}\)</h2>
+      <p>\(D_{\mathrm{eff}}\) описывает асимптотику счёта мод без апелляции к буквальной «фрактальности». Он управляет плотностями и ранговыми отношениями между доменами.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Плотность/счёт.</strong> Кумулятивный счёт сохраняемых мод: \(N(\Omega)\!\sim\!\Omega^{D_{\mathrm{eff}}}\), плотность \(\rho(\Omega)\!\sim\!\Omega^{D_{\mathrm{eff}}-1}\).</p>
+          <p><strong>Закон ранговых отношений (база контекстна).</strong> Для упорядоченных масштабов \(\{\Omega_n\}\): \(\Omega_n/\Omega_1=n^{1/D_{\mathrm{eff}}}\). Инвариант — <em>отношение</em>; база \(\Omega_1\) задаётся контекстом.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Уровень действия -->
+    <div class="card">
+      <h2>На уровне действия (эскиз)</h2>
+      <p>Пусть \(S_{\mathrm{MM}}[\Phi, g_{\mathrm{MM}}]\) кодирует кривизну и поля на MM. Проекция индуцирует эффективное 4D-действие через проталкивания \(O\) и инварианты ядра.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Подробнее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Вариация.</strong> Стационарность на MM, затем проталкивание дают уравнения Эйлера—Лагранжа для \(O\). Инварианты — параметры, а не динамические поля.</p>
+          <p class="note">Прогнозы формулируются языком инвариантов и не зависят от конкретной формы ядра.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Чек-лист согласованности -->
+    <div class="card">
+      <h2>Чек-лист согласованности</h2>
+      <ul>
+        <li><strong>Локальность проекции:</strong> \(K_{\lambda}(x;X)\) концентрируется при \(X\approx\pi^{-1}(x)\).</li>
+        <li><strong>Интегрируемость/PSD:</strong> ограниченный оператор с неотрицательной квадратичной формой.</li>
+        <li><strong>Нормировка:</strong> константы переходят в константы.</li>
+        <li><strong>Монотонная «чёткость»:</strong> \(\alpha(\lambda)\) невозрастающая; критический масштаб \(\lambda_q\).</li>
+        <li><strong>Интерфейс с топологией:</strong> устойчивые топологические данные на MM маркируют 4D-классы при проекции.</li>
+        <li><strong>Метрики фокусировки:</strong> \(A(x)\), \(M(\lambda,\varepsilon;x)\), \(\mathrm{CPI}(x)\) согласуются с считываниями удержания.</li>
+      </ul>
+    </div>
+
+    <!-- Учебный микро-пример -->
+    <div class="card">
+      <h2>Учебный микро-пример</h2>
+      <p>Возьмём скаляр \(\Phi\) на MM и гауссов суррогат ядра с радиусом локальности \(\sigma\):</p>
+      <div class="math-block">\[
+        K_{\lambda}(x;X)\propto\exp\!\Big(-\tfrac{\mathrm{dist}(X,\pi^{-1}(x))^2}{2\sigma^2}\Big),\quad \sigma\sim\lambda.
+      \]</div>
+      <p>Тогда \(O=K_{\lambda}\star\Phi\) — полосо-ограниченная величина; ВЧ-контент подавляется экспоненциально с индексом, задаваемым \(\lambda/\lambda_q\), что и приводит к закону сохранения информации.</p>
+    </div>
+
+    <!-- Ворота фальсификации -->
+    <div class="card">
+      <h2>Ворота фальсификации (мат. форма)</h2>
+      <ul>
+        <li><strong>S2 — удержание:</strong> повторяющийся нуль перехода в \(\partial_{\lambda}\alpha\) около ожидаемого \(\lambda_q\) на независимых платформах.</li>
+        <li><strong>Структура vs ВЧ:</strong> отсутствие предсказанного разделения \(R_{\mathrm{struct}}\) и \(R_{\mathrm{HF}}\) при одних и тех же \((\lambda_q,D_{\mathrm{eff}})\).</li>
+        <li><strong>Эквивариантность:</strong> артефакты нарушения симметрий, приписываемые \(K_{\lambda}\) (противоречат ограничителям ядра).</li>
+      </ul>
+      <p class="note">Проверки по ранговым отношениям могут поддерживать картину там, где применимы; <em>база ALP</em> переведена в спекулятивное (см. ниже).</p>
+    </div>
+
+    <!-- Заметки -->
+    <div class="card">
+      <h2>Заметки</h2>
+      <p class="note">«Фрактальность» используется как <em>эффективный</em> спектральный показатель для счёта мод (хорошо-поставленный суррогат), а не как буквальная нецелая размерность.</p>
+      <p class="note">S1 (ALP-база) не используется в качестве опоры; S2 — универсальный закон, S3 существенно поддерживает S2.</p>
+    </div>
+
+    <!-- Спекулятивно: ALP-лестница -->
+    <div class="card speculative">
+      <h2>Спекулятивно — ALP / негармоническая «лестница» (переведено)</h2>
+      <p>Сохранено для полноты; не используется для поддержки каркаса. При применимости выполняется соотношение</p>
+      <div class="math-block">\[
+        m_n = m_1\, n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+      <p class="note">Скрывается, когда переключатель «Спекулятивно» выключен.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Повторная отрисовка формул при раскрытии экспандера (локально, без зацикливания)
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if (d.open && window.MathJax && MathJax.typeset) MathJax.typeset([d]);
+  });
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>
