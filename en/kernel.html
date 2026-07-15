@@ -374,10 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
   function layout(){
     const grid='rgba(255,255,255,0.12)', zero='rgba(255,255,255,0.2)';
     return {
-      paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(15,23,42,0.5)', plot_bgcolor:'rgba(15,23,42,0.5)',
       font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
-      xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
-      yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
+      xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+      yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
       _scene_unused:{
         xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
