@@ -205,42 +205,24 @@
   <!-- Absolute endpoint to work under any prefix/blueprint -->
 
   <!-- Controls -->
-  <div class="kw-controls" style="margin-bottom:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px;">
-    <label for="kw-lam" style="display:inline-block;font-size:11px;margin-right:6px;">λ</label>
-
-    <div class="kw-slider-wrap" style="position:relative;flex:1;min-width:120px;max-width:200px;">
-      <input id="kw-lam" type="range" min="0" max="2.0" step="0.02" value="0.30" style="width:100%;">
-      <!-- Cliff markers -->
-      <div id="kw-cliff50" class="kw-cliff" title="R(λ)=0.5"></div>
-      <div id="kw-cliff10" class="kw-cliff kw-cliff-weak" title="R(λ)=0.1"></div>
-    </div>
-
-    <div style="font-size:11px;color:var(--muted);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;">
-      λ = <span id="kw-lam-val">0.30</span> · R(λ)=exp[−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>] → <strong id="kw-r-val">…</strong>
-      <span id="kw-cliff-readout" style="margin-left:.75rem;"></span>
-    </div>
-
-    <div class="kw-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:10px;">
-      <div style="display:flex;align-items:center;gap:4px;">
-        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">D<sub>eff</sub></label>
-        <select id="kw-deff" style="padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
-          <option value="2.0">2.0</option><option value="2.2" selected>2.2</option><option value="2.5">2.5</option><option value="3.0">3.0</option>
-        </select>
-      </div>
-      <div style="display:flex;align-items:center;gap:4px;">
-        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">λ<sub>q</sub></label>
-        <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0" style="width:50px;padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
-      </div>
-      <div style="display:flex;align-items:center;gap:4px;">
-        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">Seed</label>
-        <input id="kw-seed" type="number" value="42" style="width:60px;padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
-      </div>
-      <button id="kw-regen" title="Re-generate" 
-              style="background:rgba(142,197,232,.15);border:1px solid rgba(142,197,232,.4);color:var(--accent);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:13px;line-height:1;">&#x21bb;</button>
-      <button id="kw-autos-btn" title="Auto ON — click to pause" 
-              style="background:rgba(125,211,168,.12);border:1px solid rgba(125,211,168,.35);color:#7dd3a8;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:13px;line-height:1;">&#x23F8;</button>
-      <input id="kw-autos" type="checkbox" checked style="display:none;">
-    </div>
+  <div class="kw-controls" style="margin-bottom:6px;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;font-size:11px;overflow-x:auto;scrollbar-width:none;">
+    <label for="kw-lam" style="white-space:nowrap;">λ</label>
+    <input id="kw-lam" type="range" min="0" max="2.0" step="0.02" value="0.30" style="width:100px;flex-shrink:0;">
+    <span style="white-space:nowrap;color:var(--muted);">λ=<span id="kw-lam-val">0.30</span> · R=<strong id="kw-r-val">…</strong></span>
+    <span id="kw-cliff-readout" style="white-space:nowrap;color:var(--muted-2);font-size:10px;"></span>
+    <label style="white-space:nowrap;color:var(--muted);">D<sub>eff</sub></label>
+    <select id="kw-deff" style="padding:3px 4px;border:1px solid #334155;border-radius:5px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;flex-shrink:0;">
+      <option value="2.0">2.0</option><option value="2.2" selected>2.2</option><option value="2.5">2.5</option><option value="3.0">3.0</option>
+    </select>
+    <label style="white-space:nowrap;color:var(--muted);">λ<sub>q</sub></label>
+    <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0" style="width:45px;padding:3px 4px;border:1px solid #334155;border-radius:5px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;flex-shrink:0;">
+    <label style="white-space:nowrap;color:var(--muted);">Seed</label>
+    <input id="kw-seed" type="number" value="42" style="width:50px;padding:3px 4px;border:1px solid #334155;border-radius:5px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;flex-shrink:0;">
+    <button id="kw-regen" title="Re-generate" style="background:rgba(142,197,232,.15);border:1px solid rgba(142,197,232,.4);color:var(--accent);border-radius:5px;padding:3px 7px;cursor:pointer;font-size:12px;flex-shrink:0;">&#x21bb;</button>
+    <button id="kw-play" title="Play: slide λ to show S2 in action" style="background:rgba(125,211,168,.15);border:1px solid rgba(125,211,168,.4);color:#7dd3a8;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:12px;flex-shrink:0;">&#x25B6;</button>
+    <input id="kw-autos" type="checkbox" checked style="display:none;">
+    <div id="kw-cliff50" style="display:none;"></div>
+    <div id="kw-cliff10" style="display:none;"></div>
   </div>
 
   <!-- Plot -->
