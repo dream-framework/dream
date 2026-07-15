@@ -68,16 +68,8 @@
         </label>
       </div>
         <div class="lang">
-          <a class="lang-link on" href="../ru/" title="Русский">
-            <img src="https://flagcdn.com/18x13/ru.png"
-                 srcset="https://flagcdn.com/36x24/ru.png 2x, https://flagcdn.com/54x36/ru.png 3x"
-                 width="18" height="12" alt="Россия" class="flag-icon">
-          </a>
-          <a class="lang-link " href="../en/" title="English">
-            <img src="https://flagcdn.com/18x13/gb.png"
-                 srcset="https://flagcdn.com/36x24/gb.png 2x, https://flagcdn.com/54x36/gb.png 3x"
-                 width="18" height="12" alt="Великобритания" class="flag-icon">
-          </a>
+          <a class="lang-link on" href="../ru/" title="Русский">RU</a>
+          <a class="lang-link " href="../en/" title="English">EN</a>
         </div>
     </div>
   </header>
@@ -906,7 +898,7 @@ function summaryPills(){
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
   return `
-    <div class="summary-pill mut"><div class="n">${total}</div><div class="l">Всего</div></div>
+    <div class="summary-pill mut"><span class="n">${total}</span> <span class="l">Всего</span></div>
     <div class="summary-pill good"><div class="n">${confirmed}</div><div class="l">Подтверждено</div></div>
     <div class="summary-pill good"><div class="n">${natural}</div><div class="l">Естественные</div></div>
     <div class="summary-pill good"><div class="n">${consistent}</div><div class="l">Совместимо</div></div>

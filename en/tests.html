@@ -68,16 +68,8 @@
         </label>
       </div>
         <div class="lang">
-          <a class="lang-link " href="../ru/" title="Русский">
-            <img src="https://flagcdn.com/18x13/ru.png"
-                 srcset="https://flagcdn.com/36x24/ru.png 2x, https://flagcdn.com/54x36/ru.png 3x"
-                 width="18" height="12" alt="Russia" class="flag-icon">
-          </a>
-          <a class="lang-link on" href="../en/" title="English">
-            <img src="https://flagcdn.com/18x13/gb.png"
-                 srcset="https://flagcdn.com/36x24/gb.png 2x, https://flagcdn.com/54x36/gb.png 3x"
-                 width="18" height="12" alt="United Kingdom" class="flag-icon">
-          </a>
+          <a class="lang-link " href="../ru/" title="Русский">RU</a>
+          <a class="lang-link on" href="../en/" title="English">EN</a>
         </div>
     </div>
   </header>
@@ -906,15 +898,15 @@ function summaryPills(){
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
   return `
-    <div class="summary-pill mut"><div class="n">${total}</div><div class="l">Total</div></div>
-    <div class="summary-pill good"><div class="n">${confirmed}</div><div class="l">Confirmed</div></div>
-    <div class="summary-pill good"><div class="n">${natural}</div><div class="l">Natural</div></div>
-    <div class="summary-pill good"><div class="n">${consistent}</div><div class="l">Consistent</div></div>
-    <div class="summary-pill bad"><div class="n">${extraction}</div><div class="l">Extraction</div></div>
-    <div class="summary-pill warn"><div class="n">${inconclusive}</div><div class="l">Inconclusive</div></div>
-    <div class="summary-pill warn"><div class="n">${weak}</div><div class="l">Weak</div></div>
-    <div class="summary-pill warn"><div class="n">${partial}</div><div class="l">Partial</div></div>
-    <div class="summary-pill mut"><div class="n">${pending}</div><div class="l">Pending</div></div>`;
+    <div class="summary-pill mut"><span class="n">${total}</span> <span class="l">Total</span></div>
+    <div class="summary-pill good"><span class="n">${confirmed}</span> <span class="l">Confirmed</span></div>
+    <div class="summary-pill good"><span class="n">${natural}</span> <span class="l">Natural</span></div>
+    <div class="summary-pill good"><span class="n">${consistent}</span> <span class="l">Consistent</span></div>
+    <div class="summary-pill bad"><span class="n">${extraction}</span> <span class="l">Extraction</span></div>
+    <div class="summary-pill warn"><span class="n">${inconclusive}</span> <span class="l">Inconclusive</span></div>
+    <div class="summary-pill warn"><span class="n">${weak}</span> <span class="l">Weak</span></div>
+    <div class="summary-pill warn"><span class="n">${partial}</span> <span class="l">Partial</span></div>
+    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Pending</span></div>`;
 }
 
 function tableRowHTML(t){
