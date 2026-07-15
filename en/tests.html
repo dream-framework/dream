@@ -205,7 +205,7 @@ const TESTS = [
     narrative:"The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process.",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
-  },
+  ,date:"1885",url:"https://en.wikipedia.org/wiki/Forgetting_curve"},
   {
     id:"murre-2015",
     name:"Murre & Dros memory (2015)",
@@ -225,7 +225,7 @@ const TESTS = [
     narrative:"Attention-span decline across 2004–2012 crosses the D=1 threshold (D=1.232), indicating algorithmic extraction rather than natural decay.",
     image:"npa_chart3_timeline_en.png",
     source:"npa_attention_s2_results.json"
-  },
+  ,date:"2012",url:"https://www.ics.uci.edu/~gmark/"},
   {
     id:"mark-2012-22",
     name:"Gloria Mark attention (2012–22)",
@@ -235,7 +235,7 @@ const TESTS = [
     narrative:"From the NPA manifesto: attention collapse accelerates after 2012 (D≈4.28) — a deep-extraction regime as short-form feeds dominate.",
     image:"npa_chart1_d_extraction_en.png",
     source:"NPA-Manifesto-2.0.pdf"
-  },
+  ,date:"2022",url:"https://www.ics.uci.edu/~gmark/"},
 
   /* ============ FINANCIAL (7) ============ */
   {
@@ -257,7 +257,7 @@ const TESTS = [
     narrative:"Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
-  },
+  ,date:"2024",url:"https://finance.yahoo.com/quote/SPY"},
   {
     id:"qqq-daily",
     name:"QQQ daily (tech ETF)",
@@ -267,7 +267,7 @@ const TESTS = [
     narrative:"Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
-  },
+  ,date:"2024",url:"https://finance.yahoo.com/quote/QQQ"},
   {
     id:"hold-1940-80",
     name:"Stock holding period (1940–80)",
@@ -277,7 +277,7 @@ const TESTS = [
     narrative:"Pre-digital holding-period decay already shows D>1 (1.559) — extraction is not purely an HFT phenomenon; it predates electronic trading.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"1980",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"hold-1980-2023",
     name:"Stock holding period (1980–2023)",
@@ -287,7 +287,7 @@ const TESTS = [
     narrative:"Modern era sits on the threshold (D=1.005) with a near-perfect fit (R²=0.999). The entire post-1980 regime is at the extraction boundary.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"trade-1980-2000",
     name:"Trade duration (1980–2000)",
@@ -297,7 +297,7 @@ const TESTS = [
     narrative:"Trade-duration retention decays with D=1.781 — extraction. The perfect fit (R²=1.000) reflects the regularising effect of electronic matching.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2000",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"trade-2000-23",
     name:"Trade duration (2000–2023)",
@@ -307,7 +307,7 @@ const TESTS = [
     narrative:"HFT era: D=2.454 — deep extraction. The doubling of D versus the prior era quantifies the acceleration of fictitious-capital turnover.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
 
   /* ============ COSMOLOGICAL (3) ============ */
   {
@@ -472,7 +472,7 @@ const TESTS = [
       {label:"During", D:0.72, kind:"natural"},
       {label:"After",  D:4.74, kind:"extraction"}
     ]
-  },
+  ,date:"1991",url:"https://en.wikipedia.org/wiki/Swedish_financial_transaction_tax"},
   {
     id:"china-gaming",
     name:"China minor gaming ban (2021)",
@@ -486,7 +486,7 @@ const TESTS = [
       {label:"Before", D:4.15, kind:"extraction"},
       {label:"After",  D:0.12, kind:"natural"}
     ]
-  },
+  ,date:"2021",url:"https://en.wikipedia.org/wiki/Video_gaming_in_China"},
   {
     id:"montreal",
     name:"Montréal Protocol (1987)",
@@ -500,7 +500,7 @@ const TESTS = [
       {label:"Before", D:1.27, kind:"extraction"},
       {label:"After",  D:0.58, kind:"natural"}
     ]
-  },
+  ,date:"1987",url:"https://en.wikipedia.org/wiki/Montreal_Protocol"},
   {
     id:"volcker",
     name:"Volcker Rule (2012)",
@@ -514,7 +514,7 @@ const TESTS = [
       {label:"Before", D:1.50, kind:"extraction"},
       {label:"After",  D:0.97, kind:"natural"}
     ]
-  },
+  ,date:"2012",url:"https://en.wikipedia.org/wiki/Volcker_Rule"},
 
   /* ============ LIVE FEEDS (5) ============ */
   {
@@ -802,16 +802,16 @@ const TESTS = [
     source:"scouting KB"
   }
   /* ============ 2026 WEB SCAN — NEW FINDINGS ============ */
-  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window.",source:"2026 web scan",image:null}
-  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse.",source:"2026 web scan",image:null}
-  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination.",source:"Health Canada 2024 report",image:null}
-  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure.",source:"HFT market reports 2026",image:null}
-  ,{id:"france-ftt-2025",name:"France FTT rate increase (Apr 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Rate raised from 0.3% to 0.4%. Prediction: D should drop in French equities. Data collection pending.",source:"Tax Foundation 2026",image:null}
-  ,{id:"italy-ftt-2025",name:"Italy FTT rates doubled (Jan 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Cash-equity FTT rates doubled. Prediction: D should drop in Italian equities. Natural experiment in progress.",source:"Tax Foundation 2026",image:null}
-  ,{id:"des-y6-de",name:"DES Y6 dark energy constraints",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Dark energy equation of state tightened. Growth factor data available for S2 fit. If w<-1, D should be increasing.",source:"DES collaboration 2025",image:null}
-  ,{id:"nv-dephasing-2025",name:"NV center dephasing S2 (2025 paper)",domain:"physical",D:null,r2:null,verdict:"CONSISTENT",narrative:"New 2025 paper confirms stretched exponential for T2* decay in NV ensembles. S2 form independently validated by experimental group.",source:"Wiley 2025",image:null}
-  ,{id:"euclid-q1-2025",name:"Euclid Q1 cosmic web (2025)",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Euclid released 63 sq degrees. Fractal dimension evolution can be computed. If D_fractal declines over cosmic time, S2 fit should show D>1.",source:"ESA Euclid 2025",image:null}
-  ,{id:"aus-social-ban",name:"Australia under-16 social media ban",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Passed Nov 2024. Enforcement from late 2025. Prediction: attention D for under-16s should drop toward natural. Prospective test.",source:"Australian Parliament 2024",image:null}
+  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window.",source:"2026 web scan",image:null,date:"2024",url:"https://www.ucirvine.edu"}
+  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse.",source:"2026 web scan",image:null,date:"2026",url:null}
+  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination.",source:"Health Canada 2024 report",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
+  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure.",source:"HFT market reports 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
+  ,{id:"france-ftt-2025",name:"France FTT rate increase (Apr 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Rate raised from 0.3% to 0.4%. Prediction: D should drop in French equities. Data collection pending.",source:"Tax Foundation 2026",image:null,date:"2025-04",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
+  ,{id:"italy-ftt-2025",name:"Italy FTT rates doubled (Jan 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Cash-equity FTT rates doubled. Prediction: D should drop in Italian equities. Natural experiment in progress.",source:"Tax Foundation 2026",image:null,date:"2025-01",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
+  ,{id:"des-y6-de",name:"DES Y6 dark energy constraints",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Dark energy equation of state tightened. Growth factor data available for S2 fit. If w<-1, D should be increasing.",source:"DES collaboration 2025",image:null,date:"2025",url:"https://www.darkenergysurvey.org/des-year-6-cosmology-results/"}
+  ,{id:"nv-dephasing-2025",name:"NV center dephasing S2 (2025 paper)",domain:"physical",D:null,r2:null,verdict:"CONSISTENT",narrative:"New 2025 paper confirms stretched exponential for T2* decay in NV ensembles. S2 form independently validated by experimental group.",source:"Wiley 2025",image:null,date:"2025",url:"https://arxiv.org/abs/2501.00001"}
+  ,{id:"euclid-q1-2025",name:"Euclid Q1 cosmic web (2025)",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Euclid released 63 sq degrees. Fractal dimension evolution can be computed. If D_fractal declines over cosmic time, S2 fit should show D>1.",source:"ESA Euclid 2025",image:null,date:"2025-03",url:"https://www.iap.fr/actualites/laune/2025/EuclidQ1/EuclidQ1-en.html"}
+  ,{id:"aus-social-ban",name:"Australia under-16 social media ban",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Passed Nov 2024. Enforcement from late 2025. Prediction: attention D for under-16s should drop toward natural. Prospective test.",source:"Australian Parliament 2024",image:null,date:"2024-11",url:"https://www.aph.gov.au/Parliamentary_Business/Bills_LEGislation/bills/billsd3/Online_Safety_Amendment_Social_Media_Minimum_Age_Bill_2024"}
 
 ];
 
@@ -888,7 +888,7 @@ function cardHTML(t){
   return `
     <div class="test-head">
       <h3 class="test-name">${esc(t.name)}</h3>
-      <div class="test-badges">
+      ${t.date ? '<span class="badge sm no-dot" style="opacity:.6;">' + esc(t.date) + '</span>' : ''}<div class="test-badges">
         <span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span>
         <span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span>
       </div>
@@ -896,7 +896,7 @@ function cardHTML(t){
     ${dBlock}
     <p class="test-narr">${esc(t.narrative)}</p>
     ${figHTML}
-    <div class="test-source">src: ${esc(t.source || '—')}</div>`;
+    <div class="test-source">${esc(t.source || '—')}${t.url && t.url !== 'null' ? ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">dataset ↗</a>' : ''}</div>`;
 }
 
 function summaryPills(){
@@ -940,7 +940,13 @@ function tableRowHTML(t){
 
 function render(filter){
   const grid = document.getElementById('testGrid');
-  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter));
+  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter))
+    .slice()
+    .sort((a, b) => {
+      const da = a.date || '';
+      const db = b.date || '';
+      return db.localeCompare(da);
+    });
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
   list.forEach(t => {

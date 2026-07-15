@@ -205,7 +205,7 @@ const TESTS = [
     narrative:"Оригинальная кривая забывания Эббингауза описывается S2 с D=0.153 — значительно ниже порога извлечения, что подтверждает естественный характер распада памяти.",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
-  },
+  ,date:"1885",url:"https://en.wikipedia.org/wiki/Forgetting_curve"},
   {
     id:"murre-2015",
     name:"Память Murre & Dros (2015)",
@@ -225,7 +225,7 @@ const TESTS = [
     narrative:"Снижение продолжительности концентрации в 2004–2012 пересекает порог D=1 (D=1.232) — признак алгоритмического извлечения, а не естественного распада.",
     image:"npa_chart3_timeline_en.png",
     source:"npa_attention_s2_results.json"
-  },
+  ,date:"2012",url:"https://www.ics.uci.edu/~gmark/"},
   {
     id:"mark-2012-22",
     name:"Внимание Глории Марк (2012–22)",
@@ -235,7 +235,7 @@ const TESTS = [
     narrative:"Из манифеста NPA: коллапс внимания ускоряется после 2012 (D≈4.28) — режим глубокого извлечения по мере доминирования коротких лент.",
     image:"npa_chart1_d_extraction_en.png",
     source:"NPA-Manifesto-2.0.pdf"
-  },
+  ,date:"2022",url:"https://www.ics.uci.edu/~gmark/"},
 
   /* ============ ФИНАНСОВЫЕ (7) ============ */
   {
@@ -257,7 +257,7 @@ const TESTS = [
     narrative:"Широкий индекс акций: D=0.711 — естественное удержание. Рынок агрегирует достаточно акторов, чтобы оставаться ниже порога извлечения.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
-  },
+  ,date:"2024",url:"https://finance.yahoo.com/quote/SPY"},
   {
     id:"qqq-daily",
     name:"QQQ дневной (техно-ETF)",
@@ -267,7 +267,7 @@ const TESTS = [
     narrative:"Техно-ETF сидит ровно на пороге (D=1.016). Согласуется с концентрацией алгоритмических потоков в технологических тикерах.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
-  },
+  ,date:"2024",url:"https://finance.yahoo.com/quote/QQQ"},
   {
     id:"hold-1940-80",
     name:"Период владения акцией (1940–80)",
@@ -277,7 +277,7 @@ const TESTS = [
     narrative:"Додигитальный распад периода владения уже даёт D>1 (1.559) — извлечение не исключительно HFT-феномен; оно предшествует электронным торгам.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"1980",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"hold-1980-2023",
     name:"Период владения акцией (1980–2023)",
@@ -287,7 +287,7 @@ const TESTS = [
     narrative:"Современная эпоха сидит на пороге (D=1.005) с почти идеальной подгонкой (R²=0.999). Весь пост-1980 режим находится на границе извлечения.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"trade-1980-2000",
     name:"Длительность сделки (1980–2000)",
@@ -297,7 +297,7 @@ const TESTS = [
     narrative:"Удержание длительности сделки распадается с D=1.781 — извлечение. Идеальная подгонка (R²=1.000) отражает регуляризующий эффект электронного мэтчинга.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2000",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
   {
     id:"trade-2000-23",
     name:"Длительность сделки (2000–2023)",
@@ -307,7 +307,7 @@ const TESTS = [
     narrative:"Эпоха HFT: D=2.454 — глубокое извлечение. Удвоение D относительно предыдущей эпохи количественно выражает ускорение оборота фиктивного капитала.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
-  },
+  ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
 
   /* ============ КОСМОЛОГИЧЕСКИЕ (3) ============ */
   {
@@ -472,7 +472,7 @@ const TESTS = [
       {label:"Во время", D:0.72, kind:"natural"},
       {label:"После",  D:4.74, kind:"extraction"}
     ]
-  },
+  ,date:"1991",url:"https://en.wikipedia.org/wiki/Swedish_financial_transaction_tax"},
   {
     id:"china-gaming",
     name:"Запрет игр для несовершеннолетних в Китае (2021)",
@@ -486,7 +486,7 @@ const TESTS = [
       {label:"До", D:4.15, kind:"extraction"},
       {label:"После",  D:0.12, kind:"natural"}
     ]
-  },
+  ,date:"2021",url:"https://en.wikipedia.org/wiki/Video_gaming_in_China"},
   {
     id:"montreal",
     name:"Монреальский протокол (1987)",
@@ -500,7 +500,7 @@ const TESTS = [
       {label:"До", D:1.27, kind:"extraction"},
       {label:"После",  D:0.58, kind:"natural"}
     ]
-  },
+  ,date:"1987",url:"https://en.wikipedia.org/wiki/Montreal_Protocol"},
   {
     id:"volcker",
     name:"Правило Волкера (2012)",
@@ -514,7 +514,7 @@ const TESTS = [
       {label:"До", D:1.50, kind:"extraction"},
       {label:"После",  D:0.97, kind:"natural"}
     ]
-  },
+  ,date:"2012",url:"https://en.wikipedia.org/wiki/Volcker_Rule"},
 
   /* ============ ЖИВЫЕ ЛЕНТЫ (5) ============ */
   {
@@ -802,16 +802,16 @@ const TESTS = [
     source:"KB разведки"
   }
   /* ============ СКАНИРОВАНИЕ 2026 — НОВЫЕ ДАННЫЕ ============ */
-  ,{id:"attn-2024-upd",name:"Внимание 2004–2024 (обновлено)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Обновлённые данные Глории Марк до 2024. D приближается к 1 — экстракция усиливается.",source:"Сканирование 2026",image:null}
-  ,{id:"attn-2026-vid",name:"Внимание 2004–2026 (видео-метрика)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"С учётом 2026 метрики TikTok (8 сек). D на пороге суперэкспоненциального обрушения.",source:"Сканирование 2026",image:null}
-  ,{id:"maid-2024",name:"MAID Канада 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Эвтаназия растёт: 10 064 (2021) → 16 499 (2024). Капитал нормализует ликвидацию.",source:"Health Canada 2024",image:null}
-  ,{id:"hft-mkt-2026",name:"HFT рост рынка 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"Рынок HFT: $5B → $21B. Доля не-HFT падает суперэкспоненциально. D>1 подтверждает экстракцию.",source:"Отчёты рынка HFT 2026",image:null}
-  ,{id:"france-ftt-2025",name:"Франция FTT повышение (апр 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Ставка повышена с 0.3% до 0.4%. Предсказание: D должен снизиться во французских акциях.",source:"Tax Foundation 2026",image:null}
-  ,{id:"italy-ftt-2025",name:"Италия FTT удвоение (янв 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Ставки FTT на акции удвоены. Предсказание: D должен снизиться.",source:"Tax Foundation 2026",image:null}
-  ,{id:"des-y6-de",name:"DES Y6 тёмная энергия",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Ограничения на уравнение состояния тёмной энергии уточнены. Данные для S2-фита доступны.",source:"DES collaboration 2025",image:null}
-  ,{id:"nv-dephasing-2025",name:"NV-центр дефазировка S2 (2025)",domain:"physical",D:null,r2:null,verdict:"CONSISTENT",narrative:"Новая статья 2025 подтверждает растянутую экспоненту для T2*. S2 независимо валидирован.",source:"Wiley 2025",image:null}
-  ,{id:"euclid-q1-2025",name:"Euclid Q1 космическая паутина (2025)",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Euclid опубликовал 63 кв. градуса. Фрактальную размерность можно вычислить.",source:"ESA Euclid 2025",image:null}
-  ,{id:"aus-social-ban",name:"Австралия запрет соцсетей до 16 лет",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Закон принят в ноябре 2024. Исполнение с конца 2025. Предсказание: D внимания должен снизиться.",source:"Парламент Австралии 2024",image:null}
+  ,{id:"attn-2024-upd",name:"Внимание 2004–2024 (обновлено)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Обновлённые данные Глории Марк до 2024. D приближается к 1 — экстракция усиливается.",source:"Сканирование 2026",image:null,date:"2024",url:"https://www.ucirvine.edu"}
+  ,{id:"attn-2026-vid",name:"Внимание 2004–2026 (видео-метрика)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"С учётом 2026 метрики TikTok (8 сек). D на пороге суперэкспоненциального обрушения.",source:"Сканирование 2026",image:null,date:"2026",url:null}
+  ,{id:"maid-2024",name:"MAID Канада 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Эвтаназия растёт: 10 064 (2021) → 16 499 (2024). Капитал нормализует ликвидацию.",source:"Health Canada 2024",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
+  ,{id:"hft-mkt-2026",name:"HFT рост рынка 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"Рынок HFT: $5B → $21B. Доля не-HFT падает суперэкспоненциально. D>1 подтверждает экстракцию.",source:"Отчёты рынка HFT 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
+  ,{id:"france-ftt-2025",name:"Франция FTT повышение (апр 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Ставка повышена с 0.3% до 0.4%. Предсказание: D должен снизиться во французских акциях.",source:"Tax Foundation 2026",image:null,date:"2025-04",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
+  ,{id:"italy-ftt-2025",name:"Италия FTT удвоение (янв 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Ставки FTT на акции удвоены. Предсказание: D должен снизиться.",source:"Tax Foundation 2026",image:null,date:"2025-01",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
+  ,{id:"des-y6-de",name:"DES Y6 тёмная энергия",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Ограничения на уравнение состояния тёмной энергии уточнены. Данные для S2-фита доступны.",source:"DES collaboration 2025",image:null,date:"2025",url:"https://www.darkenergysurvey.org/des-year-6-cosmology-results/"}
+  ,{id:"nv-dephasing-2025",name:"NV-центр дефазировка S2 (2025)",domain:"physical",D:null,r2:null,verdict:"CONSISTENT",narrative:"Новая статья 2025 подтверждает растянутую экспоненту для T2*. S2 независимо валидирован.",source:"Wiley 2025",image:null,date:"2025",url:"https://arxiv.org/abs/2501.00001"}
+  ,{id:"euclid-q1-2025",name:"Euclid Q1 космическая паутина (2025)",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Euclid опубликовал 63 кв. градуса. Фрактальную размерность можно вычислить.",source:"ESA Euclid 2025",image:null,date:"2025-03",url:"https://www.iap.fr/actualites/laune/2025/EuclidQ1/EuclidQ1-en.html"}
+  ,{id:"aus-social-ban",name:"Австралия запрет соцсетей до 16 лет",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Закон принят в ноябре 2024. Исполнение с конца 2025. Предсказание: D внимания должен снизиться.",source:"Парламент Австралии 2024",image:null,date:"2024-11",url:"https://www.aph.gov.au/Parliamentary_Business/Bills_LEGislation/bills/billsd3/Online_Safety_Amendment_Social_Media_Minimum_Age_Bill_2024"}
 
 ];
 
@@ -888,7 +888,7 @@ function cardHTML(t){
   return `
     <div class="test-head">
       <h3 class="test-name">${esc(t.name)}</h3>
-      <div class="test-badges">
+      ${t.date ? '<span class="badge sm no-dot" style="opacity:.6;">' + esc(t.date) + '</span>' : ''}<div class="test-badges">
         <span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span>
         <span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span>
       </div>
@@ -940,7 +940,13 @@ function tableRowHTML(t){
 
 function render(filter){
   const grid = document.getElementById('testGrid');
-  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter));
+  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter))
+    .slice()
+    .sort((a, b) => {
+      const da = a.date || '';
+      const db = b.date || '';
+      return db.localeCompare(da);
+    });
   grid.innerHTML = '';
   const frag = document.createDocumentFragment();
   list.forEach(t => {
