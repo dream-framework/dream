@@ -295,12 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
     elPlay.title='Пауза';
     function step(){
       if(!playing) return;
-      let v=parseFloat(elLam.value)+0.02*playDir;
+      let v=parseFloat(elLam.value)+0.01*playDir;
       if(v>=2.0){v=2.0;playDir=-1;}
       if(v<=0){v=0;playDir=1;}
       elLam.value=v;
       onParamsChanged();
-      playTimer=setTimeout(step, 150);
+      playTimer=setTimeout(step, 300);
     }
     step();
   }
