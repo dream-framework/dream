@@ -254,7 +254,7 @@
   </div>
 
   <!-- График -->
-  <div id="kw-plot" style="height:440px;width:100%;border-radius:10px;"></div>
+  <div id="kw-plot" style="height:560px;width:100%;border-radius:10px;"></div>
   <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
 </div>
 
@@ -375,16 +375,16 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
   }
 
   function layout(){
-    const grid='rgba(255,255,255,0.12)', zero='rgba(255,255,255,0.2)';
+    const grid='rgba(45,212,191,0.06)', zero='rgba(45,212,191,0.10)';
     return {
-      paper_bgcolor:'rgba(15,23,42,0.5)', plot_bgcolor:'rgba(15,23,42,0.5)',
+      paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
       font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
-      xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
-      yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+      xaxis:{ title:'PC1', color:'rgba(148,163,184,0.4)', gridcolor:grid, zerolinecolor:zero, gridwidth:0.5, zerolinewidth:0.5, showbackground:true, backgroundcolor:'rgba(15,23,42,0.0)' },
+      yaxis:{ title:'PC2', color:'rgba(148,163,184,0.4)', gridcolor:grid, zerolinecolor:zero, gridwidth:0.5, zerolinewidth:0.5, showbackground:true, backgroundcolor:'rgba(15,23,42,0.0)' },
       _scene_unused:{
-        xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
-        yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
-        zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        xaxis:{ title:'PC1', color:'rgba(148,163,184,0.4)', gridcolor:grid, zerolinecolor:zero, gridwidth:0.5, zerolinewidth:0.5, showbackground:true, backgroundcolor:'rgba(15,23,42,0.0)' },
+        yaxis:{ title:'PC2', color:'rgba(148,163,184,0.4)', gridcolor:grid, zerolinecolor:zero, gridwidth:0.5, zerolinewidth:0.5, showbackground:true, backgroundcolor:'rgba(15,23,42,0.0)' },
+        zaxis:{ title:'PC3', color:'rgba(148,163,184,0.4)', gridcolor:grid, zerolinecolor:zero, gridwidth:0.5, zerolinewidth:0.5, showbackground:true, backgroundcolor:'rgba(15,23,42,0.0)' },
         aspectmode:'cube',
         bgcolor:'rgba(15,23,42,0.8)',
         camera:{eye:{x:1.5,y:-1.5,z:0.8}}
