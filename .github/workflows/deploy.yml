@@ -1,0 +1,57 @@
+name: Deploy DREAM static site to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        # The site is already static HTML — no build step needed.
+        # We just copy everything into the artifact directory.
+        run: |
+          mkdir -p _site
+          # Copy everything except server/ (the Render backend) and build scripts
+          rsync -a --exclude='server/' --exclude='build_static.py' \
+                   --exclude='.github/' --exclude='.git/' \
+                   --exclude='node_modules/' --exclude='_site/' \
+                   ./ _site/
+          # List contents for debugging
+          ls -la _site/
+          echo "---"
+          find _site -type f | sort | head -50
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
