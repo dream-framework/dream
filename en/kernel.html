@@ -226,7 +226,8 @@
   </div>
 
   <!-- Plot -->
-  <div id="kw-plot" style="height:560px;width:100%;border-radius:10px;"></div>
+  <div id="kw-narrative" style="padding:6px 10px;margin-bottom:4px;font-size:12px;color:var(--muted);background:rgba(142,197,232,.04);border:1px solid rgba(142,197,232,.12);border-radius:8px;line-height:1.4;min-height:20px;"></div>
+  <div id="kw-plot" style="height:520px;width:100%;border-radius:10px;"></div>
   <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
 </div>
 
@@ -315,6 +316,25 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
 
   // Retention
   function R(lam, lq, deff){ return Math.exp( - Math.pow(lam / lq, deff) ); }
+
+  // Dynamic narrative for non-tech audience
+  function updateNarrative(lam, r, deff, lq) {
+    const el = document.getElementById('kw-narrative');
+    if (!el) return;
+    let msg = '';
+    if (r > 0.95) {
+      msg = '🔍 You are seeing the fine structure of the universe up close. Everything is sharp and detailed — filaments, facets, and hubs are clearly visible. R = ' + r.toFixed(3) + ': almost nothing is lost.';
+    } else if (r > 0.7) {
+      msg = '🌫️ Resolution is dropping. Fine details blur, but large structures are still visible. Filaments dim, dust spreads. R = ' + r.toFixed(3) + ': losing ~' + ((1-r)*100).toFixed(0) + '% of contrast.';
+    } else if (r > 0.4) {
+      msg = '☁️ Structure is melting. Filaments barely distinguishable, facets dissolving. Only dense hubs and diffuse dust remain. R = ' + r.toFixed(3) + ': ' + ((1-r)*100).toFixed(0) + '% of information lost.';
+    } else if (r > 0.1) {
+      msg = '🌀 Almost homogeneous. Only hubs glimmer through the haze. The universe looks smooth — this is how it appears at Mpc scales. R = ' + r.toFixed(3) + ': ' + ((1-r)*100).toFixed(0) + '% lost.';
+    } else {
+      msg = '⬛ Complete blur. Structure has vanished. The universe is homogeneous — the S2 retention law predicted this. R = ' + r.toFixed(3) + ': ' + ((1-r)*100).toFixed(0) + '% lost. D = ' + deff + ' controls the fade rate.';
+    }
+    el.textContent = msg;
+  }
 
   // Where R(λ)=τ -> λ_τ = λ_q * (-ln τ)^(1/Deff)
   function lambdaAtTau(tau, lq, deff){ return lq * Math.pow(-Math.log(tau), 1.0/deff); }
@@ -410,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
       const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
       elLamV.textContent = fmt(elLam.value);
       elR.textContent = r.toFixed(3);
+      updateNarrative(parseFloat(elLam.value), r, parseFloat(elDeff.value), parseFloat(elLq.value));
 
       const tr = makeTraces(data);
       const ly = layout();
@@ -427,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
       // even without autos, keep readouts correct
       const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
       elLamV.textContent = fmt(elLam.value); elR.textContent = r.toFixed(3);
+      updateNarrative(parseFloat(elLam.value), r, parseFloat(elDeff.value), parseFloat(elLq.value));
     }
   }
   elLam.addEventListener('input', onParamsChanged);
