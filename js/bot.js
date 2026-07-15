@@ -13,7 +13,7 @@
   // Example: 'https://dream-groq.onrender.com'
   // Leave empty ('') to keep the chat hidden until the backend is deployed.
   // ─────────────────────────────────────────────────────────────────────────
-  const BACKEND_URL = (typeof window !== 'undefined' && window.DREAM_GROQ_BACKEND) || '';
+  const BACKEND_URL = (typeof window !== 'undefined' && window.DREAM_GROQ_BACKEND) || 'https://dream-groq.onrender.com';
 
   const lang = (document.body.getAttribute('data-lang') || document.documentElement.lang || 'en').startsWith('ru') ? 'ru' : 'en';
 
