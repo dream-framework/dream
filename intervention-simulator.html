@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intervention Simulator · D.R.E.A.M</title>
+  <meta name="description" content="Interactive simulator: drag the intervention slider and watch the order parameter D respond in real time — the same dynamic four natural experiments (Sweden FTT, China gaming ban, Montréal Protocol, Volcker Rule) confirmed." />
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    svg: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body data-lang="en">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="en/index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="en/index.html">Home</a>
+      <a class="nav-link" href="en/case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="en/retention.html">Retention Law</a>
+      <a class="nav-link" href="en/axioms.html">Axioms</a>
+      <a class="nav-link" href="en/theorems.html">Theorems</a>
+      <a class="nav-link" href="en/math.html">Math Frame</a>
+      <a class="nav-link" href="en/kernel.html">Kernel</a>
+      <a class="nav-link" href="en/topology.html">Topology</a>
+      <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="en/predictions.html">Predictions</a>
+      <a class="nav-link" href="en/falsification.html">Falsification</a>
+      <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="en/about.html">AI Analysis</a>
+      <a class="nav-link" href="en/time.html">Time</a>
+      <a class="nav-link" href="en/memory.html">Memory</a>
+      <a class="nav-link" href="en/articles.html">Articles</a>
+      <a class="nav-link" href="plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="npa-calculator.html">NPA Toy</a>
+      <a class="nav-link active" href="intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+      <div class="lang">
+        <a class="lang-link" href="ru/index.html" title="Русский">
+          <img src="https://flagcdn.com/24x18/ru.png" width="24" height="16" alt="Russia" class="flag-icon">
+        </a>
+        <a class="lang-link on" href="en/index.html" title="English">
+          <img src="https://flagcdn.com/24x18/gb.png" width="24" height="16" alt="United Kingdom" class="flag-icon">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+    <div class="card hero" style="margin-bottom:1rem">
+      <span class="kicker">Falsifiability · Interactive</span>
+      <h1>Intervention Simulator</h1>
+      <p>
+        DREAM makes a directional prediction: interventions that reduce extraction should lower the
+        order parameter \(D\). Drag the slider below to see \(D\) respond in real time — the same
+        dynamic four natural experiments confirmed.
+      </p>
+      <p class="note">
+        The retention law \(R(t)=\exp[-(t/\lambda_q)^{D}]\) governs everything from Ebbinghaus memory
+        curves to HFT order books. \(D\) behaves as an <strong>order parameter</strong> for extraction:
+        \(D&lt;1\) natural, \(D&gt;1\) extracted.
+      </p>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+      <!-- LEFT: the simulator -->
+      <section class="card" data-fullscreen style="grid-column: span 2;">
+        <h2>Live simulator</h2>
+        <p class="small" style="margin-bottom:12px;color:var(--muted-2);">
+          Drag the intervention slider. Watch the retention curve steepen or flatten as \(D\) responds.
+        </p>
+        <div id="interv-sim" style="display:grid; grid-template-columns: 1fr 280px; gap:12px; min-height:420px;">
+          <div style="position:relative; background:var(--bg2); border:1px solid var(--border); border-radius:12px; overflow:hidden; min-height:420px;">
+            <canvas id="interv-canvas" style="width:100%; height:100%; display:block;"></canvas>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div>
+              <label style="font-size:12px; color:var(--muted-2);">Intervention strength: <span id="interv-val" style="color:var(--fg); font-weight:700;">0%</span></label>
+              <input id="interv-slider" type="range" min="0" max="100" step="1" value="0" style="width:100%;">
+            </div>
+            <div style="padding:10px; border-radius:8px; background:rgba(142,197,232,.06); border:1px solid rgba(142,197,232,.15);">
+              <div style="font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Order Parameter</div>
+              <div id="interv-D" style="font-size:28px; font-weight:900; font-family:ui-monospace,monospace; color:var(--bad);">2.45</div>
+              <div id="interv-verdict" style="font-size:11px; font-weight:700; color:var(--bad); margin-top:2px;">EXTRACTION</div>
+            </div>
+            <div style="padding:10px; border-radius:8px; background:rgba(240,160,160,.06); border:1px solid rgba(240,160,160,.20);">
+              <div style="font-size:11px; color:var(--muted-2); margin-bottom:4px;">Prediction</div>
+              <div id="interv-pred" style="font-size:12px; color:var(--fg); line-height:1.4;">System in extraction regime. Intervene to lower D.</div>
+            </div>
+            <div style="font-size:11px; color:var(--muted-2); line-height:1.4;">
+              <p style="margin:0 0 4px;"><b>0–30%:</b> Weak intervention, D stays &gt; 1</p>
+              <p style="margin:0 0 4px;"><b>30–60%:</b> Moderate, D approaches threshold</p>
+              <p style="margin:0;"><b>60–100%:</b> Strong, D drops below 1 (natural)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT (top): the four natural experiments -->
+      <section class="card" style="grid-column: span 2;">
+        <h2>Four natural experiments</h2>
+        <p>The simulator above models the dynamic confirmed by these four real-world cases:</p>
+
+        <h3 style="color:var(--bad);">★ Sweden FTT (1984–1991): the reversal test</h3>
+        <p>Sweden imposed a financial transaction tax in 1984. Equity turnover dropped ~40%. The tax was repealed in 1991. Turnover returned.</p>
+        <p><b>During tax:</b> D = 0.72 (below extraction threshold — turnover decayed slowly, extraction suppressed)<br>
+           <b>After repeal:</b> D = 4.74 (deep into extraction — turnover shot back, re-extraction accelerated)</p>
+        <p class="small">This is the strongest evidence: a reversible prediction — intervention lowers D, removal raises it — is much harder to dismiss than a one-way correlation.</p>
+
+        <hr>
+
+        <h3>China minor gaming ban (2021)</h3>
+        <p>China capped minors' gaming at 3 hours/week. Excessive gaming prevalence dropped from 28% to 4%.</p>
+        <p><b>Before ban:</b> D = 4.15 (severe extraction)<br>
+           <b>After ban:</b> D = 0.12 (natural regime)</p>
+
+        <hr>
+
+        <h3>Montréal Protocol (1987)</h3>
+        <p>CFCs banned globally. Stratospheric ozone decline slowed, then stabilized.</p>
+        <p><b>Before ban:</b> D = 1.27 (extraction — ozone declining super-exponentially)<br>
+           <b>After ban:</b> D = 0.58 (natural — decline slowed to sub-exponential)</p>
+
+        <hr>
+
+        <h3>Volcker Rule (2012)</h3>
+        <p>US banks banned from proprietary trading. Prop trading volume decayed over the following years.</p>
+        <p><b>Baseline financial D:</b> ~1.5<br>
+           <b>Post-Volcker prop trading decay:</b> D = 0.97 (at threshold — extraction suppressed)</p>
+
+        <hr>
+
+        <p style="font-weight:700;">
+          Result: in all four cases, the estimated D moved downward during the intervention.
+          In the Sweden case, D increased again after repeal.
+        </p>
+      </section>
+
+      <section class="card" style="grid-column: span 2;">
+        <h2>Universality table</h2>
+        <p>The stretched-exponential retention law \(R(t) = \exp[-(t/\lambda_q)^{D}]\) is confirmed across 40+ domains. The stretch exponent \(D\) is the single parameter that separates natural from extracted.</p>
+        <table>
+          <tr><th>Domain</th><th style="text-align:right">D</th><th>Interpretation</th></tr>
+          <tr><td>Memory (Ebbinghaus 1885)</td><td style="text-align:right;font-family:monospace;">0.15</td><td style="color:var(--good);">Natural</td></tr>
+          <tr><td>Earthquakes</td><td style="text-align:right;font-family:monospace;">0.12</td><td style="color:var(--good);">Natural</td></tr>
+          <tr><td>Solar wind</td><td style="text-align:right;font-family:monospace;">0.22</td><td style="color:var(--good);">Natural</td></tr>
+          <tr><td>Bitcoin price</td><td style="text-align:right;font-family:monospace;">0.30</td><td style="color:var(--good);">Natural</td></tr>
+          <tr><td>GDP / CPI</td><td style="text-align:right;font-family:monospace;">0.76–0.89</td><td style="color:var(--warn);">Approaching threshold</td></tr>
+          <tr><td>Stock holding period (1940–80)</td><td style="text-align:right;font-family:monospace;">1.56</td><td style="color:var(--bad);">Extraction</td></tr>
+          <tr><td>Trade duration (2000–23)</td><td style="text-align:right;font-family:monospace;">2.45</td><td style="color:var(--bad);">Extraction</td></tr>
+          <tr><td>Attention span (2004–12)</td><td style="text-align:right;font-family:monospace;">1.45</td><td style="color:var(--bad);">Extraction</td></tr>
+          <tr><td>Attention span (2012–22)</td><td style="text-align:right;font-family:monospace;">4.28</td><td style="color:var(--bad); font-weight:700;">Severe extraction</td></tr>
+        </table>
+        <p class="small">D &lt; 1: sub-exponential decay — heavy tail, natural regime. D &gt; 1: super-exponential — compressed, accelerating collapse.</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <script defer src="js/fractal.js"></script>
+  <script defer src="js/bot.js"></script>
+  <script defer src="js/fs-toggle.js"></script>
+
+  <script>
+  // ═══ Intervention Simulator ═══
+  (function(){
+    const canvas = document.getElementById('interv-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('interv-slider');
+    const valEl = document.getElementById('interv-val');
+    const dEl = document.getElementById('interv-D');
+    const verdictEl = document.getElementById('interv-verdict');
+    const predEl = document.getElementById('interv-pred');
+
+    function resize(){
+      const wrap = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = wrap.clientWidth * dpr;
+      canvas.height = wrap.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', () => { resize(); draw(); });
+    resize();
+
+    function retention(t, lambdaQ, D) {
+      return Math.exp(-Math.pow(Math.max(t, 0.001) / lambdaQ, D));
+    }
+
+    function draw() {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      const pad = 50;
+      ctx.clearRect(0, 0, w, h);
+
+      const interv = parseFloat(slider.value);
+      valEl.textContent = interv + '%';
+
+      const t = interv / 100;
+      const D = 2.45 * Math.exp(-3.5 * t * t) + 0.15 * t;
+      const lambdaQ = 5 + interv * 0.5;
+
+      dEl.textContent = D.toFixed(2);
+      if (D > 1) {
+        dEl.style.color = '#f0a0a0';
+        verdictEl.textContent = 'EXTRACTION';
+        verdictEl.style.color = '#f0a0a0';
+        predEl.textContent = 'System in extraction regime. Increase intervention to lower D below 1.';
+      } else if (D > 0.5) {
+        dEl.style.color = '#f0c878';
+        verdictEl.textContent = 'THRESHOLD';
+        verdictEl.style.color = '#f0c878';
+        predEl.textContent = 'D approaching natural regime. Intervention is working.';
+      } else {
+        dEl.style.color = '#7dd3a8';
+        verdictEl.textContent = 'NATURAL';
+        verdictEl.style.color = '#7dd3a8';
+        predEl.textContent = 'D below 1. Extraction suppressed. System in natural retention regime.';
+      }
+
+      // Background
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, 'rgba(51,65,85,0.6)');
+      bg.addColorStop(1, 'rgba(30,41,59,0.9)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(pad, pad, w - 2*pad, h - 2*pad);
+
+      // Axes
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad, pad);
+      ctx.lineTo(pad, h - pad);
+      ctx.lineTo(w - pad, h - pad);
+      ctx.stroke();
+
+      // Grid
+      ctx.strokeStyle = 'rgba(71,85,105,.15)';
+      ctx.font = '11px system-ui';
+      ctx.fillStyle = '#94a3b8';
+      for (let i = 0; i <= 80; i += 20) {
+        const px = pad + (i / 80) * (w - 2*pad);
+        ctx.beginPath(); ctx.moveTo(px, pad); ctx.lineTo(px, h - pad); ctx.stroke();
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        ctx.fillText(i, px, h - pad + 6);
+      }
+      for (let v = 0; v <= 1.0; v += 0.2) {
+        const py = h - pad - v * (h - 2*pad);
+        ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(w - pad, py); ctx.stroke();
+        ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+        ctx.fillText(v.toFixed(1), pad - 8, py);
+      }
+
+      // Axis labels
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '600 11px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText('Time (years)', pad + (w - 2*pad)/2, h - 8);
+      ctx.save();
+      ctx.translate(14, pad + (h - 2*pad)/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.fillText('R(t) — retention', 0, 0);
+      ctx.restore();
+
+      // Natural baseline curve (D=0.15, dashed reference)
+      ctx.strokeStyle = '#7dd3a8';
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      for (let t = 0; t <= 80; t += 0.5) {
+        const r = retention(t, 60, 0.15);
+        const px = pad + (t / 80) * (w - 2*pad);
+        const py = h - pad - r * (h - 2*pad);
+        if (t === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Current curve (responds to intervention)
+      const color = D > 1 ? '#f0a0a0' : D > 0.5 ? '#f0c878' : '#7dd3a8';
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 14;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let t = 0; t <= 80; t += 0.3) {
+        const r = retention(t, lambdaQ, D);
+        const px = pad + (t / 80) * (w - 2*pad);
+        const py = h - pad - r * (h - 2*pad);
+        if (t === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Fill under curve
+      const grad = ctx.createLinearGradient(0, pad, 0, h - pad);
+      grad.addColorStop(0, color + '30');
+      grad.addColorStop(1, color + '05');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      for (let t = 0; t <= 80; t += 0.3) {
+        const r = retention(t, lambdaQ, D);
+        const px = pad + (t / 80) * (w - 2*pad);
+        const py = h - pad - r * (h - 2*pad);
+        if (t === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.lineTo(w - pad, h - pad);
+      ctx.lineTo(pad, h - pad);
+      ctx.closePath();
+      ctx.fill();
+
+      // Status annotation
+      ctx.fillStyle = '#f0a0a0';
+      ctx.font = '600 11px system-ui';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      const statusText = D > 1 ? `D=${D.toFixed(2)} > 1 → extraction` : `D=${D.toFixed(2)} < 1 → natural`;
+      ctx.fillText(statusText, pad + 10, pad + 10);
+
+      // Legend
+      ctx.font = '11px system-ui';
+      ctx.fillStyle = '#7dd3a8';
+      ctx.textAlign = 'left';
+      ctx.fillText('— — Natural baseline (D≈0.15)', pad + 10, h - pad - 30);
+      ctx.fillStyle = color;
+      ctx.fillText('● Current system (D=' + D.toFixed(2) + ')', pad + 10, h - pad - 15);
+    }
+
+    slider.addEventListener('input', draw);
+    draw();
+  })();
+  </script>
+
+  <script>
+  // Math toggle + speculative toggle (matches rest of site)
+  document.addEventListener('DOMContentLoaded', () => {
+    const cb = document.getElementById('specToggle');
+    const KEY = 'spec:on';
+    const saved = localStorage.getItem(KEY);
+    if (saved !== null) {
+      const on = saved === '1';
+      document.body.classList.toggle('show-spec', on);
+      if (cb) cb.checked = on;
+    }
+    cb?.addEventListener('change', e => {
+      const on = e.target.checked;
+      document.body.classList.toggle('show-spec', on);
+      localStorage.setItem(KEY, on ? '1' : '0');
+    });
+  });
+  </script>
+</body>
+</html>

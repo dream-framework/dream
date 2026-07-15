@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold</title>
+  <meta http-equiv="refresh" content="0;url=en/index.html">
+  <meta name="description" content="D.R.E.A.M — a 10→4 projection-first physics framework with the Retention Law as foundation. Static GitHub Pages build.">
+  <style>
+    /* minimal pre-CSS fallback so the redirect page isn't a blank white screen */
+    html, body { margin: 0; padding: 0; height: 100%; background: #1e293b; color: #f1f5f9; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #8ec5e8, #7dd3a8); box-shadow: 0 0 16px rgba(142,197,232,.6); display: inline-block; }
+    h1 { font-size: 1.4rem; font-weight: 900; margin: 0; letter-spacing: .04em; }
+    p { color: #94a3b8; margin: 0; }
+    a { color: #8ec5e8; text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    .links { display: flex; gap: 18px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+    .spinner { width: 22px; height: 22px; border: 2px solid #54637a; border-top-color: #8ec5e8; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <span class="dot" aria-hidden="true"></span>
+  <h1>D.R.E.A.M</h1>
+  <p>Dimensional Resonant Emergent Attractors in Manifold</p>
+  <div class="spinner" aria-hidden="true"></div>
+  <p>Redirecting…</p>
+  <div class="links">
+    <a href="en/index.html">English</a>
+    <a href="ru/index.html">Русский</a>
+  </div>
+  <script>
+    // Auto-pick based on browser language, falling back to English.
+    (function () {
+      var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      var target = nav.indexOf('ru') === 0 ? 'ru/index.html' : 'en/index.html';
+      // honor hash if user explicitly clicked a lang link
+      if (!location.hash) location.replace(target);
+    })();
+  </script>
+</body>
+</html>

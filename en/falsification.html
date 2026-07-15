@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Falsification · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link active" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero">
+    <h1>Falsification</h1>
+    <p class="kicker">Fail gates are expressed strictly in terms of kernel invariants (\(\lambda_q, D_{\mathrm{eff}}\)) and instrument-level observables.</p>
+    <p class="note">This page defines what would decisively falsify each claim, how to pre-register analyses, and how to interpret nulls. Math is hidden by default — use the global “Math” toggle in the header.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- What falsification means -->
+    <div class="card">
+      <h2>What falsification means in DREAM</h2>
+      <ul class="prose">
+        <li><strong>Invariant-based.</strong> Claims are phrased in terms of \(\lambda_q\), \(D_{\mathrm{eff}}\), and directly measured quantities.</li>
+        <li><strong>No post-hoc rescue.</strong> Kernel forms are not adjusted to save a failed claim; only pre-declared ranges may be updated.</li>
+        <li><strong>Cross-platform checks.</strong> Where feasible, confirm with independent instruments (photonics, atoms, imaging, radio) to rule out artifacts.</li>
+      </ul>
+    </div>
+
+    <!-- Pre-registration -->
+    <div class="card">
+      <h2>Pre-registration protocol</h2>
+      <ol class="prose">
+        <li><strong>Declare invariants:</strong> prior ranges for \(\lambda_q\), \(D_{\mathrm{eff}}\), with rationale.</li>
+        <li><strong>Map instrument scale:</strong> specify how baselines, wavelengths, or coherence times map to \(\lambda\).</li>
+        <li><strong>Fix analysis windows:</strong> linear windows in the transform \(y=\ln(-\ln R)\) vs. \(\ln\lambda\); survey bins for cosmology; λ-grids for lensing.</li>
+        <li><strong>State fail gates:</strong> thresholds for exclusion (CIs, Bayes factors, or equivalent).</li>
+        <li><strong>Publish pipelines:</strong> code, injections, and minimal data for re-analysis.</li>
+      </ol>
+    </div>
+
+    <!-- S2: Retention -->
+    <div class="card">
+      <h2>S2 — Retention law <span class="badge ok sm">Foundation</span></h2>
+      <p class="core">Claim: contrast and correlation follow the stretched-exponential law and exhibit a transition at \(\lambda_q\).</p>
+      <div class="math-block">\[
+        R(\lambda)=\exp[-(\tfrac{\lambda}{\lambda_q})^{D_{\mathrm{eff}}}],\quad
+        y(\lambda)=\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q.
+      \]</div>
+      <p><strong>Decisive null:</strong> multiple platforms show no linear window in \(y\) and no shared \(\lambda_q\) within error bars → the retention law fails.</p>
+    </div>
+
+    <!-- S5: Lensing -->
+    <div class="card">
+      <h2>S5 — Strong lensing invariants <span class="badge warn sm">Early</span></h2>
+      <p class="core">Claim: under angular smoothing, two retention channels share \(\lambda_q\); CPI ridge skeleton persists as HF texture collapses.</p>
+      <p><strong>Decisive null:</strong> inconsistent \(\widehat{\lambda}_q\) across bands, lack of channel split, or no CPI persistence → claim fails.</p>
+    </div>
+
+    <!-- S3: Cosmology -->
+    <div class="card">
+      <h2>S3 — Cosmology & fractal spectrum <span class="badge warn sm">Partial</span></h2>
+      <p class="core">Claim: below the cliff, bounded fractality; above, flow to homogeneity with \(D_{\mathrm{eff}}\!\to\!3\).</p>
+      <p><strong>Decisive null:</strong> persistent mismatch between cosmology-inferred and lab-inferred \(D_{\mathrm{eff}}\), or no homogeneity flow → claim fails.</p>
+    </div>
+
+    <!-- S4: Vacuum energy -->
+    <div class="card">
+      <h2>S4 — Vacuum-energy modulation <span class="badge warn sm">Open</span></h2>
+      <p class="core">Claim: geometry-dependent shifts at \(\sim10^{-8}\,\mathrm{eV}^4\).</p>
+      <p><strong>Decisive null:</strong> no modulation above \(\sim10^{-10}\,\mathrm{eV}^4\) in ≥3 independent setups → claim fails.</p>
+    </div>
+
+    <!-- S1: Ladder -->
+    <div class="card speculative">
+      <h2>S1 — ALP non-harmonic ladder <span class="badge spec sm">Relegated / Null</span></h2>
+      <p class="core">Under retention (S2), any axion-like “dust” lies <em>below the coherence cliff</em> and is unrecoverable in principle. S1 is therefore null, kept only for completeness.</p>
+      <div class="math-block">\[
+        \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+      <p><strong>Decisive null:</strong> moot — the hypothesis is assumed false under S2; any claimed detection must be independently replicated with invariant ratios.</p>
+    </div>
+
+    <!-- Decision tree -->
+    <div class="card">
+      <h2>Decision tree</h2>
+      <ul class="prose">
+        <li><strong>S2 null:</strong> framework fails → treat S3–S5 as phenomenology only.</li>
+        <li><strong>S2 confirmed + S3/S5 support:</strong> strongest case; retain \(\widehat{D}_{\mathrm{eff}},\widehat{\lambda}_q\) across domains.</li>
+        <li><strong>S2 confirmed + S4 null:</strong> retention intact; set upper bounds on vacuum-energy modulation.</li>
+      </ul>
+    </div>
+
+    <!-- Checklist -->
+    <div class="card">
+      <h2>Reporting checklist</h2>
+      <ul class="prose">
+        <li>State invariant priors and instrument mapping clearly.</li>
+        <li>Publish analysis windows and explicit fail gates.</li>
+        <li>Release code, injections, null channels, and sanity checks.</li>
+        <li>Treat systematics as nuisance, not as invariant shifts.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if(d.open && window.MathJax && MathJax.typeset) MathJax.typeset([d]);
+  });
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

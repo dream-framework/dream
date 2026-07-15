@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Принцип Сохранения · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link active" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- ГЕРОЙ-БЛОК -->
+  <div class="card hero" style="margin-bottom:1rem;">
+    <h1>Принцип сохранения информации (S2)</h1>
+    <p class="kicker">Универсален, подтверждён: один и тот же стретч-экспоненциальный спад контраста и корреляции с ростом масштаба зондирования в различных доменах.</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- НАУЧНОЕ ЯДРО (с математикой)
+       Сетки с несколькими карточками
+       и секциями раскрытия (details) -->
+  <!-- ============================ -->
+
+  <!-- Формулировка и линеаризация -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>Формулировка</h2>
+      <p>Сохранение количественно описывает, какая доля информации или структуры сохраняется при укрупнении до масштаба зондирования <code>λ</code> (в родных единицах).</p>
+      <div class="math-block math-only">
+        \[
+          R(\lambda)\;=\;\exp\!\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\mathrm{eff}}}\right]
+        \]
+      </div>
+      <details class="exp">
+        <summary><strong>Полугруппа → Вейбулл (суть)</strong></summary>
+        <p>Если размывания прибора складываются по масштабу, \(K_\lambda\circ K_\mu\!\approx\!K_{\lambda+\mu}\), а выживаемость признаков при композиции перемножается, то \(R(\lambda+\mu)\!\approx\!R(\lambda)R(\mu)\). Лог-выпуклый, масштабно-стабильный спад с конечным «обрывом» однозначно приводит к семейству стретч-экспонент (Weibull).</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Линеаризация и инварианты ядра</h2>
+      <p>Стандартное преобразование выявляет наклон и свободный член, инвариантные для данного класса ядра.</p>
+      <div class="math-block math-only">
+        \[
+          y(\lambda):=\ln\!\big(-\ln R(\lambda)\big)
+          \;=\;D_{\mathrm{eff}}\ln\lambda\;-\;D_{\mathrm{eff}}\ln\lambda_q
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          \widehat D_{\mathrm{eff}}=\frac{d\,y}{d\ln\lambda},\qquad
+          \widehat\lambda_q=\exp\!\Big(-\tfrac{\text{intercept}}{\widehat D_{\mathrm{eff}}}\Big)
+        \]
+      </div>
+      <p class="small">После пересчёта \( \lambda\to\lambda/\widehat\lambda_q \) разнородные домены коллапсируют к общей мастер-кривой.</p>
+    </div>
+  </div>
+
+  <!-- Операционные наблюдаемые -->
+  <div class="grid two" style="margin-top:1rem">
+    <div class="card">
+      <h2>Операционные наблюдаемые</h2>
+      <p>Допустим любой НЧ-фильтр <code>smooth<sub>λ</sub></code>, связанный с разрешением инструмента; его полоса должна монотонно расти с <code>λ</code>.</p>
+      <div class="math-block math-only">
+        \[
+          R_{\mathrm{corr}^2}(\lambda)
+          \;=\;
+          \mathrm{corr}^2\!\big(\,\text{data}\big|_{\lambda\to0},\;\text{data}\big|_{\lambda}\big)
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          R_{\mathrm{HF}}(\lambda)
+          \;=\;
+          1-\frac{\mathrm{Var}\!\big(\text{data}-\mathrm{smooth}_\lambda(\text{data})\big)}{\mathrm{Var}(\text{data})}
+        \]
+      </div>
+      <details class="exp">
+        <summary><strong>Спектральная калибровка</strong></summary>
+        <div class="math-block math-only">
+          \[
+            \mathrm{smooth}_\lambda = K_\lambda * \text{data},\qquad
+            H_\lambda(f)=\mathcal{F}\{K_\lambda\}
+          \]
+        </div>
+        <div class="math-block math-only">
+          \[
+            R_{\mathrm{HF}}(\lambda)=
+            \frac{\int |H_\lambda(f)|^2 S(f)\,df}{\int S(f)\,df},
+            \quad
+            \sigma_{\text{gauss}}=\frac{\mathrm{FWHM}}{2\sqrt{2\ln2}},
+            \quad
+            \sigma_{\text{box,eq}}=\frac{w}{\sqrt{12}}
+          \]
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Масштабная «интенсивность потерь» и диагностика</h2>
+      <p>«Hazard» потери информации на единицу масштаба имеет степенной вид при S2.</p>
+      <div class="math-block math-only">
+        \[
+          h(\lambda):=-\frac{d\ln R}{d\lambda}
+          \;=\;
+          \frac{D_{\mathrm{eff}}}{\lambda_q^{D_{\mathrm{eff}}}}\,
+          \lambda^{D_{\mathrm{eff}}-1}
+        \]
+      </div>
+      <div class="math-block math-only">
+        \[
+          \beta(\lambda)=\frac{d}{d\ln\lambda}\,y(\lambda),\quad
+          b(\lambda)=y(\lambda)-\beta(\lambda)\ln\lambda,\quad
+          \lambda_q(\lambda)=\exp\!\big(-b(\lambda)/\beta(\lambda)\big)
+        \]
+      </div>
+      <p class="small">Окно S2: плоская \( \beta(\lambda) \) и стабильная подразумеваемая \( \lambda_q(\lambda) \); кривизна указывает на смену режима или артефакты.</p>
+    </div>
+  </div>
+
+  <!-- Оценка, универсальность, фальсификация -->
+  <div class="grid three" style="margin-top:1rem">
+    <div class="card">
+      <h2>Методики оценки</h2>
+      <ul>
+        <li>Лог-равномерная сетка по <code>λ</code> в родных единицах.</li>
+        <li>Вычислить \(R_{\mathrm{HF}}\) и/или \(R_{\mathrm{corr}^2}\).</li>
+        <li>Робастная регрессия \(y=\ln(-\ln R)\) на \(\ln\lambda\).</li>
+      </ul>
+      <details class="exp">
+        <summary><strong>Парные перцентили (без регрессии)</strong></summary>
+        <div class="math-block math-only">
+          \[
+            R(\lambda_1)=e^{-1},\; R(\lambda_2)=e^{-\alpha}
+            \Rightarrow
+            \widehat D_{\mathrm{eff}}=\frac{\ln(1/\alpha)}{\ln(\lambda_1/\lambda_2)},\quad
+            \widehat\lambda_q=\lambda_1
+          \]
+        </div>
+      </details>
+      <p class="small">Отчитывайте \( \widehat D_{\mathrm{eff}}, \widehat\lambda_q \), ДИ, окно λ и семейство сглаживания.</p>
+    </div>
+
+    <div class="card">
+      <h2>Принцип универсальности</h2>
+      <p>После пересчёта \( \lambda\to\lambda/\lambda_q \) кривые из разных доменов совпадают без повторной подгонки. Закон слабо чувствителен к семейству НЧ-фильтра (box/gauss/PSF) при корректной калибровке полосы.</p>
+    </div>
+
+    <div class="card">
+      <h2>Фальсификация (техническая)</h2>
+      <ul>
+        <li>Устойчивая кривизна \(y(\lambda)\) после калибровки единиц/сглаживания.</li>
+        <li>Несовместимые \(D_{\mathrm{eff}}\) из \(R_{\mathrm{HF}}\) и \(R_{\mathrm{corr}^2}\) в одном контексте инструмента.</li>
+        <li>Отсутствие коллапса при пересчёте \( \lambda/\lambda_q \) между платформами.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Встроенный живой плоттер (БЕЗ ИЗМЕНЕНИЙ) -->
+  <div class="grid three" style="margin-top:1rem"></div>
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem 1rem 0.5rem 1rem;">
+      <h2 style="margin:0 0 0.25rem 0;">Демонстрация универсальности (официальные публичные наборы)</h2>
+      <p class="small">Модель S(W) ≈ exp(−(W/λ)<sup>β</sup>). Переключите x → x/λ, чтобы совместить «обрывы» при x=1 (λ всегда в родных единицах).</p>
+    </div>
+    <!-- Что проверено (сетка карточек) -->
+    <div class="card" style="margin-top:1rem">
+      <h2>Что проверено</h2>
+      <div class="grid three" style="margin-top:.5rem">
+        <div class="card">
+          <h3>Солнце и космическая погода</h3>
+          <p>GOES: рентген, магнитометр, электроны ≥2&nbsp;MeV, протоны ≥10&nbsp;MeV.</p>
+        </div>
+        <div class="card">
+          <h3>Системы Земли</h3>
+          <p>USGS Potomac (IV), землетрясения (all_week, почасовые).</p>
+        </div>
+        <div class="card">
+          <h3>Общество и экономика</h3>
+          <p>Wikimedia enwiki «Earth», World Bank GDP/CPI/Unemployment, CoinGecko BTC (дневные), iNaturalist наблюдения.</p>
+        </div>
+      </div>
+      <details class="exp" style="margin-top:.5rem">
+        <summary><strong>Процедура междоменного коллапса</strong></summary>
+        <ol>
+          <li>Выразить <code>λ</code> в родных единицах (пиксель, каденс, размер бина, PSF FWHM).</li>
+          <li>Подогнать \(y=\ln(-\ln R)\) vs \(\ln\lambda\); получить \(\widehat D_{\mathrm{eff}}, \widehat\lambda_q\).</li>
+          <li>Перестроить все \(R\)-кривые по \( \lambda/\widehat\lambda_q \) и проверить совпадение.</li>
+        </ol>
+      </details>
+    </div>
+
+    <iframe src="../plotter_ru.html" title="Сохранение Toy Plotter" style="width:100%; min-height:760px; border:0; display:block; border-radius:12px;"></iframe>
+    <div style="padding:0.5rem 1rem 1rem 1rem;" class="small">
+      Если виджет не загрузился, откройте его напрямую по <a href="../plotter_ru.html" target="_blank" rel="noopener">ссылке</a>.
+    </div>
+  </div>
+
+  <div>
+
+    <!-- Модель проекции и коареа-фокусировка -->
+    <div class="grid two" style="margin-top:1rem">
+      <div class="card">
+        <h2>Механизм проекции (10→4)</h2>
+
+        <p>
+          4D-наблюдаемые являются <em>push-forward</em> полей Мета-многообразия через единственное, фиксированное,
+          неинвертируемое проекционное ядро с конечным разрешением. Ядро сжимает скрытую 10D-структуру в наши 4D-данные,
+          усредняя субразрешающие детали; из 4D доступны только его <em>инварианты</em>.
+        </p>
+
+        <div class="math-block math-only">
+          \[
+            \phi(x)\;=\;\int_{\mathcal{M}_{10}} K_{\lambda}(x;X)\,\Phi(X)\,d^{10}X,
+            \qquad
+            K_{\lambda}\!\circ\! K_{\mu}\;\approx\;K_{\lambda+\mu}\;.
+          \]
+        </div>
+
+        <p>
+          Поскольку масштаб размывания приблизительно аддитивен, а выживаемость признаков при композиции перемножается,
+          тонкая структура затухает по универсальному стретч-экспоненциальному закону (S2). На практике стандартное преобразование
+          закона сохранения информации, \(y=\ln(-\ln R)\) vs \(\ln \lambda\), даёт наклон и интерсепт — операционные инварианты ядра
+          для разнообразных наблюдаемых и датасетов.
+        </p>
+
+        <details class="exp" style="margin-top:.5rem">
+          <summary><strong>Что отчётно и как калибровать</strong></summary>
+          <ul class="small" style="margin-top:.25rem">
+            <li><strong>Инварианты:</strong> масштаб когерентности \( \lambda_q \) («обрыв»), эффективный показатель \( D_{\mathrm{eff}} \), и локальный радиус в родных единицах инструмента/анализа.</li>
+            <li><strong>Единицы:</strong> всегда выражайте \( \lambda \) в родных единицах (пиксель, каденс, бин, PSF). Типовые связи полосы:
+              <div class="math-block math-only" style="margin:.35rem 0 0 0">
+                \[
+                  \sigma_{\text{gauss}}=\frac{\mathrm{FWHM}}{2\sqrt{2\ln 2}},
+                  \qquad
+                  \sigma_{\text{box,eq}}=\frac{w}{\sqrt{12}}.
+                \]
+              </div>
+            </li>
+            <li><strong>Справка:</strong> полная геометрия и вывод — на странице <a href="/kernel">Kernel</a>.</li>
+          </ul>
+        </details>
+
+        <p class="small" style="margin-top:.35rem;">
+          Эмпирически доступны только инварианты класса ядра; детальная микроструктура \(K\) из 4D-данных не восстанавливается.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Ключевые следствия (сводка)</h2>
+        <div class="core">
+          <ul>
+            <li><strong>Объективный «обрыв»:</strong> измеримый масштаб когерентности <code>λ<sub>q</sub></code> разделяет область устойчивости и быстрой потери.</li>
+            <li><strong>Универсальный закон спада:</strong> один и тот же стретч-экспонент управляет <em>и</em> ВЧ-деталью, и структурной корреляцией (после калибровки единиц).</li>
+            <li><strong>Ограниченная фрактальность:</strong> самоподобие — феномен ниже <code>λ<sub>q</sub></code>; на больших масштабах — гомогенизация.</li>
+            <li><strong>Невосстановимость:</strong> информация строго ниже <code>λ<sub>q</sub></code> принципиально не восстанавливается алгоритмами.</li>
+            <li><strong>Согласование наблюдаемых:</strong> наклоны <code>D<sub>eff</sub></code> из <code>R<sub>HF</sub></code> и <code>R<sub>corr²</sub></code> должны сходиться в одном контексте.</li>
+            <li><strong>Проектирование эксперимента:</strong> дискретизация/PSF целесообразны при <code>λ \lesssim λ<sub>q</sub></code>; в отчёте — стандартное преобразование и единицы λ.</li>
+            <li><strong>Детектор аномалий:</strong> отсутствие коллапса при <code>λ/λ<sub>q</sub></code> указывает на сбой тракта/калибровки либо на новую физику.</li>
+          </ul>
+        </div>
+        <details class="exp">
+          <summary><strong>Чек-лист воспроизводимости</strong></summary>
+          <ul class="small">
+            <li>Задекларируйте родные единицы и семейство сглаживания (с калибровкой полосы).</li>
+            <li>Покажите \(y=\ln(-\ln R)\) vs \(\ln\lambda\) с окном плоского наклона и стабильной \(λ<sub>q</sub>(λ)\).</li>
+            <li>Представьте график коллапса после пересчёта по <code>λ̂<sub>q</sub></code>.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

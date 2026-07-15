@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Теоремы · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link active" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  .grid.two > .card.hero { grid-column: 1 / -1; }
+  .speculative { display: none; }
+  body.spec-on .card.speculative { display: block; }
+  body.spec-on .speculative:not(.card) { display: inline; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const t = document.getElementById('speculativeToggle');
+  const apply = () => document.body.classList.toggle('spec-on', !!(t && t.checked));
+  apply();
+  t && t.addEventListener('change', apply);
+});
+</script>
+
+<div class="container">
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- HERO -->
+    <div class="card hero">
+      <h1>Основные теоремы</h1>
+      <p class="kicker">Главные результаты, выведенные из аксиом, выражены как проверяемые соотношения между <em>инвариантами</em>.</p>
+      <p class="note">
+        Формулы скрыты по умолчанию — включите глобальный тумблер «Math» в шапке. Статусы:
+        <span class="badge ok sm">Подтверждено</span>
+        <span class="badge warn sm">Частично</span>
+        <span class="badge spec sm">Спекулятивно</span>.
+      </p>
+    </div>
+
+    <!-- Capsule -->
+    <div class="card">
+      <h2>Капсула — основные теоремы</h2>
+      <ol>
+        <li><strong>T1 — Топологическая квантизация</strong> <span class="badge ok sm">Подтверждено</span></li>
+        <li><strong>T2 — Проекция симметрий (Нётер под push-forward)</strong> <span class="badge warn sm">Частично</span></li>
+        <li><strong>T3 — Порог когерентности (Закон сохранения информации)</strong> <span class="badge ok sm">Подтверждено</span></li>
+        <li><strong>T4 — Фокусировка структуры и CPI</strong> <span class="badge warn sm">Частично</span></li>
+        <li><strong>T5 — Поток размерности к однородности</strong> <span class="badge warn sm">Частично</span></li>
+        <li><strong>T6 — Междоменный закон ранжированных спектров</strong> <span class="badge warn sm">Частично</span></li>
+      </ol>
+      <p class="note">
+        S2 (Закон сохранения информации) — фундамент <span class="badge ok sm">Подтверждено</span>.
+        S1 (лестница/пыль) <span class="badge spec sm">Релегировано</span> и оставлено ниже лишь для полноты.
+      </p>
+    </div>
+
+    <!-- T1 -->
+    <div class="card">
+      <h2>T1 — Топологическая квантизация <span class="badge ok sm">Подтверждено</span></h2>
+      <p class="core">Целые топологические инварианты на компактном MM маркируют дискретные 4D-классы; заряды и индексы остаются квантизованными после проекции.</p>
+      <div class="math-block">\[
+        Q_{\mathrm{U(1)}}=\tfrac{1}{2\pi}\oint A\in\mathbb{Z},\qquad 
+        k=\tfrac{1}{8\pi^2}\int \operatorname{tr}(F\wedge F)\in\mathbb{Z}.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Целочисленные заряды и инстантонные числа; правила отбора; согласование аномалий.</p>
+    </div>
+
+    <!-- T2 -->
+    <div class="card">
+      <h2>T2 — Проекция симметрий (Нётер) <span class="badge warn sm">Частично</span></h2>
+      <p class="core">При эквивариантности ядра токи Нётера коммутируют с проекцией: непрерывные 10D-симметрии → сохраняемые 4D-величины.</p>
+      <div class="math-block">\[
+        K_\lambda(gx;gX)=K_\lambda(x;X)\ \Rightarrow\ \partial_\mu J^\mu=0.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Проверка сохранения до машинной точности; поиск нарушений эквивариантности ядра.</p>
+    </div>
+
+    <!-- T3 -->
+    <div class="card">
+      <h2>T3 — Порог когерентности (Закон сохранения информации) <span class="badge ok sm">Подтверждено</span></h2>
+      <p class="core">Существует масштаб когерентности \(\lambda_q\), ниже которого интерференционные инварианты сохраняются, а выше доминирует усреднение.</p>
+      <div class="math-block">\[
+        R(\lambda)=\exp[-(\tfrac{\lambda}{\lambda_q})^{D_{\mathrm{eff}}}],\qquad
+        y=\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Два канала (HF и corr²) подчиняются одной форме закона с общим \(\lambda_q\), но разными наклонами.</p>
+    </div>
+
+    <!-- T4 -->
+    <div class="card">
+      <h2>T4 — Фокусировка структуры и CPI <span class="badge warn sm">Частично</span></h2>
+      <p class="core">Малые якобианы порождают хабы/филаменты, устойчивые к сглаживанию; CPI оценивает локальный бюджет микросостояний.</p>
+      <div class="math-block">\[
+        A(x)\sim\langle J_F^{-1}\rangle,\quad
+        M(\lambda,\varepsilon;x)\sim A(x)(\tfrac{\lambda}{\varepsilon})^{D_I},\quad
+        \mathrm{CPI}=\log_{10} M.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Повышенное удержание в областях с высоким A(x); более медленное затухание структурных корреляций.</p>
+    </div>
+
+    <!-- T5 -->
+    <div class="card">
+      <h2>T5 — Поток размерности к однородности <span class="badge warn sm">Частично</span></h2>
+      <p class="core">Под действием S2 эффективная размерность стремится к 3 на больших масштабах; фрактальные признаки ограничены под-\(\lambda_q\) диапазоном.</p>
+      <div class="math-block">\[
+        D_{\mathrm{eff}}(\lambda)\nearrow 3 \quad \text{при }\lambda\to\infty.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Подсчёты → кубическая зависимость за пределом «обрыва»; корреляции исчезают.</p>
+    </div>
+
+    <!-- T6 -->
+    <div class="card">
+      <h2>T6 — Междоменный закон спектров <span class="badge warn sm">Частично</span></h2>
+      <p class="core">Число сохраняемых мод растёт как \(N(\Omega)\!\sim\!\Omega^{D_{\mathrm{eff}}}\); для дискретных рядов действует закон отношений (база контекстна). Отдельно от S1.</p>
+      <div class="math-block">\[
+        N(\Omega)\propto\Omega^{D_{\mathrm{eff}}},\quad
+        \rho(\Omega)\propto\Omega^{D_{\mathrm{eff}}-1},\quad
+        \tfrac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+      <p><strong>Операционные выводы.</strong> Подгонка \(D_{\mathrm{eff}}\) по подсчётам/наклонам; проверка закона отношений там, где применим.</p>
+    </div>
+
+    <!-- S1 (relegated) -->
+    <div class="card speculative">
+      <h2>ALP / негармоническая лестница <span class="badge spec sm">Спекулятивно</span></h2>
+      <p class="core">
+        В текущей позиции S1 считается нулевым: пыль/лестница не восстанавливаются ниже \(\lambda_q\).
+        Соотношение приведено только как дополнение.
+      </p>
+      <div class="math-block">\[
+        \tfrac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+    </div>
+
+    <!-- Interpretive note -->
+    <div class="card speculative">
+      <h2 class="kicker">Интерпретационная заметка (спекулятивно)</h2>
+      <p>T3–T5 образуют «трилогию о том, как размывание съедает детали»: закон сохранения информации задаёт форму, фокусировка объясняет скелет, а поток размерности объясняет выход к однородности.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  const patterns = [
+    /【\d+†source】/g,                     // chat-style file cites
+    /contentReference\|oaicite:\d+\s*\{[^}]*\}/g, // oaicite blocks
+    /\{index=\d+\}/g                      // stray index braces
+  ];
+  function clean(node){
+    node.childNodes.forEach(n=>{
+      if(n.nodeType===3){                 // text node
+        let t = n.nodeValue;
+        patterns.forEach(rx => t = t.replace(rx,''));
+        if(t !== n.nodeValue) n.nodeValue = t;
+      } else if(n.nodeType===1){          // element
+        clean(n);
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', ()=> clean(document.body));
+})();
+</script>
+
+<script>
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if (d.open && window.MathJax && MathJax.typeset) MathJax.typeset([d]);
+  });
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

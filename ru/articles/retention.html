@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Скала удержания · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+    body.is-article .site-header{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0; }
+    
+  </style>
+</head>
+<body data-lang="ru" class="is-article">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="../index.html">Главная</a>
+      <a class="nav-link" href="../case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="../retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="../axioms.html">Аксиомы</a>
+      <a class="nav-link" href="../theorems.html">Теоремы</a>
+      <a class="nav-link" href="../math.html">Матмодель</a>
+      <a class="nav-link" href="../kernel.html">Проекция</a>
+      <a class="nav-link" href="../topology.html">Топология</a>
+      <a class="nav-link" href="../spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="../predictions.html">Предсказания</a>
+      <a class="nav-link" href="../falsification.html">Фальсификация</a>
+      <a class="nav-link" href="../tests.html">Тесты</a>
+      <a class="nav-link" href="../faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="../about.html">Оценка ИИ</a>
+      <a class="nav-link" href="../time.html">Время</a>
+      <a class="nav-link" href="../memory.html">Память</a>
+      <a class="nav-link active" href="../articles.html">Статьи</a>
+      <a class="nav-link" href="../../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  html {
+    /* Fill the body margins so nothing shows through */
+
+    min-height: 100%;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 2% 8%;            /* keep your existing spacing */
+    color: #111;
+
+    min-height: 100%;
+    min-height: 100svh;       /* mobile-safe full viewport */
+  }
+
+  h1, h2, h3 {
+    color: black;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  pre, .equation {
+    
+    padding: 6px 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  blockquote {
+    border-left: 4px solid #96a31d;
+    padding-left: 15px;
+    color: black;
+    font-style: italic;
+    margin: 1em 0;
+    background: #fff;
+  }
+  .infobox {
+
+    border: 1px solid #dbe3f0;
+    border-left: 4px solid white;
+    padding: 12px 16px;
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.95em;
+    color: #444;
+  }
+
+
+
+  /* --- keep fractals visible behind everything --- */
+
+#fractal-canvas, #fractals, canvas#fractal {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* --- nuke the full-width wash coming from the shell/overlays --- */
+.article-shell,
+.article-shell > *:not(main):not(.article):not(.page-content):not(.content),
+#content-wrap, .content-wrap, .page-wrap, #page, .page, .site, #site,
+.container-fluid {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.article-shell::before, .article-shell::after,
+#content-wrap::before, #content-wrap::after,
+.page::before, .page::after,
+.site::before, .site::after {
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+}
+
+/* --- the article “card” (kept) --- */
+:root{
+  --text-max: 68ch;
+  --text-pad: clamp(14px, 2.2vw, 24px);
+  --card-bg: rgba(255,255,255,0.97); /* near-solid white */
+}
+
+:where(main, .article){
+  max-width: var(--text-max);
+  margin-inline: auto;
+  padding: var(--text-pad);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  min-height: calc(100svh - 4%);
+}
+</style>
+<div class="container">
+
+    <!-- ВСТУПЛЕНИЕ -->
+    <div class="card">
+      <span class="kicker">D.R.E.A.M — Удержание</span>
+      <h1>Скала удержания: как конечное разрешение формирует реальность</h1>
+
+      <div data-mode="science">
+        <p>
+          В подходе D.R.E.A.M наблюдаемые четырёхмерные поля понимаются как проталкивание структур десяти-мерного мета-многообразия через единое, фиксированное, конечного разрешения ядро \(K_\lambda\).
+          Центральный рабочий объект — <em>функция удержания</em> \( \alpha(\lambda)\in[0,1] \), инвариант допустимого класса ядер:
+        </p>
+        <div class="math-block">\[
+          \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big],
+        \]</div>
+        <p>
+          где \( \lambda_q \) — масштаб когерентности (граница «скалы»), а \( D_{\mathrm{eff}} \) — эффективный спектральный показатель, задающий скорость потерь информации при укрупнении масштаба.
+          Ниже — вывод этой формы из механики проталкивания, связь с геометрией фокусировки и организация спектра сохраняемых мод.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Представьте, что мир — это грандиозная фреска на скрытой десяти-мерной стене. Мы не видим стену напрямую: проектор бросает её образ на наш четырёхмерный экран. Чем сильнее размываем проекцию, тем раньше исчезают крошечные искры, а крупные формы держатся дольше. <strong>Скала удержания</strong> — это настройка, при которой тонкая «искристость» резко пропадает. Эта страница — экскурсия по «инженерному мануалу» проектора: как устроено размытие, почему контуры упрямы, и какие отпечатки оставляет скрытая стена в привычной реальности.
+        </p>
+      </div>
+
+      <p class="note">Формулы скрываются в режиме «Общее». Переключитесь в режим «Наука», чтобы видеть математику.</p>
+    </div>
+
+    <hr>
+
+    <!-- 1. МЕХАНИКА ПРОТАЛКИВАНИЯ -->
+    <div class="card">
+      <h2>1. Механика проталкивания: из 10 измерений в 4</h2>
+
+      <div data-mode="science">
+        <p>
+          Пусть \( \Phi(X) \) — поле на компактном десяти-мерном мета-многообразии (ММ). Наблюдаемые в 4-мерии — это ядровые средние по волокнам:
+        </p>
+        <div class="math-block">\[
+          O(x)=\int_{\mathrm{MM}} K_\lambda(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).
+        \]</div>
+        <p>
+          Допустимые ядра подчиняются «ограждениям» (нормировка, локальность в проекции, монотонность удержания).
+          Используя коареа-формализм для сюръекции \( \pi:\mathrm{MM}\to\mathbb{R}^{3,1} \), получаем разложение по волокнам:
+        </p>
+        <div class="math-block">\[
+          O(x)=\int_{\pi^{-1}(x)}\!\frac{\Phi(X)}{J_\pi(X)}\,
+          \underbrace{\Big(\int K_\lambda(x;X)\,d\lambda_{\text{loc}}\Big)}_{\text{оконная функция прибора}}\,
+          d\Sigma_{6}(X).
+        \]</div>
+        <p>
+          Следовательно, удержание определяется двумя факторами: (i) <em>фокусировкой</em> через множитель \(1/J_\pi\) на волокне и (ii) <em>спектральным прореживанием</em> из-за конечного разрешения.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Каждая видимая точка — это «сбор шёпотов» множества скрытых точек за ней. Сколько шёпотов дойдёт, решают два механизма: <em>фокусировка</em> (сколько скрытых дорожек сходится в этом месте) и <em>разрешение</em> (насколько тонко мы слушаем). Там, где фокусировка сильна, проступают <strong>узлы</strong> и <strong>нити</strong> — «каркас» структуры, который переживает размытие.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 2. ЗАКОН УДЕРЖАНИЯ -->
+    <div class="card">
+      <h2>2. Закон сохранения информации: растянутая экспонента</h2>
+
+      <div data-mode="science">
+        <p>
+          Пусть при увеличении масштаба на \( d\lambda \) теряется доля содержания, пропорциональная плотности разрешаемых мод на текущем масштабе. Если накопительное число сохраняемых мод до отсечки подчиняется
+          \( N(\Omega)\propto \Omega^{D_{\mathrm{eff}}} \), то при \( \lambda\mapsto \lambda+d\lambda \) возникает дифференциальный закон истощения
+        </p>
+        <div class="math-block">\[
+          \frac{d}{d\lambda}\big(-\ln \alpha(\lambda)\big)=
+          \frac{D_{\mathrm{eff}}}{\lambda_q^{D_{\mathrm{eff}}}}\;\lambda^{D_{\mathrm{eff}}-1},
+        \]</div>
+        <p>
+          интегрирование которого даёт инвариантную форму
+        </p>
+        <div class="math-block">\[
+          \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big].
+        \]</div>
+        <p>
+          В двойном логарифмическом масштабе получаем линейную зависимость:
+        </p>
+        <div class="math-block">\[
+          \ln\!\big(-\ln \alpha(\lambda)\big)=D_{\mathrm{eff}}\ln \lambda - D_{\mathrm{eff}}\ln \lambda_q,
+        \]</div>
+        <p>
+          где \( D_{\mathrm{eff}} \) — наклон, а \( \lambda_q \) — «точка настройки».
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          У скалы есть отпечаток. Если на особой диаграмме откладывать «сколько осталось» после каждого шага размытия, точки ложатся почти по прямой. Угол наклона — это <strong>число «шероховатости»</strong> мира \(D_{\mathrm{eff}}\), а место пересечения с осью указывает настройку скалы \( \lambda_q \). Разные явления говорят на одном и том же «языке», но с разными акцентами.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 3. ДВА ИНФОРМАЦИОННЫХ КАНАЛА -->
+    <div class="card">
+      <h2>3. Два канала информации: форма и «искристость»</h2>
+
+      <div data-mode="science">
+        <p>
+          На практике полезны две функционали удержания:
+        </p>
+        <div class="math-block">\[
+          R_{\mathrm{corr}^2}(\lambda)=\mathrm{corr}^2\!\big(e_4\!\mid_{\lambda\!\to\!0},\,e_4\!\mid_{\lambda}\big),
+          \qquad
+          R_{\mathrm{HF}}(\lambda)=\frac{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid\lambda)|^2\,d\Omega}{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid 0)|^2\,d\Omega}.
+        \]</div>
+        <p>
+          При одинаковых инвариантах ядра высокочастотное содержание убывает быстрее, чем корреляционная структура, то есть
+          \( R_{\mathrm{HF}}(\lambda)\prec R_{\mathrm{corr}^2}(\lambda) \), однако обе кривые подчиняются одной растянутой экспоненте с канал-специфическими парами параметров \((\lambda_q,D_{\mathrm{eff}})\).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Глаз знает этот приём: мельчайшие блики исчезают первыми, а контуры держатся. D.R.E.A.M оформляет интуицию в две кривые — для «искр» и для «форм» — и показывает, что ими правит один и тот же закон, только «искры» сдаются раньше.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 4. ФОКУСИРОВКА И УЗЛЫ -->
+    <div class="card">
+      <h2>4. Фокусировка и узлы: почему одни места не блекнут</h2>
+
+      <div data-mode="science">
+        <p>
+          По коареа-формуле локальная «мощность» волоконного вклада модифицируется фактором фокусировки
+          \( A(x)=\langle 1/J_\pi\rangle_{\pi^{-1}(x)} \).
+          Введём масштабно-осмысленный бюджет микросостояний \( M(\lambda,\varepsilon;x)\sim A(x)\,(\lambda/\varepsilon)^{D_I} \), где \( D_I\in(0,6] \) — прокси информационной размерности вдоль волокна.
+          Тогда <em>индекс плотности сложности</em> (ИПК) задаётся
+        </p>
+        <div class="math-block">\[
+          \mathrm{CPI}(x)=\log_{10} M(\lambda,\varepsilon;x)=\log_{10}A(x)+D_I\log_{10}\!\Big(\tfrac{\lambda}{\varepsilon}\Big).
+        \]</div>
+        <p>
+          Области с большим \(A(x)\) и насыщенным \(D_I\) ведут себя как <em>узлы</em> и <em>нити</em>, видимые даже при существенном укрупнении масштаба.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Вообразите горный хребет в поднимающемся тумане. Долины тонут первыми, а гребни ещё долго торчат из серой пелены. Узлы — это такие гребни: множество скрытых троп сходится в один жирный штрих на экране. Поэтому у нас появляются космические сети, вихри, «решётки» городов: гребни упрямо не исчезают.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 5. СПЕКТРАЛЬНАЯ КАРТИНА -->
+    <div class="card">
+      <h2>5. Спектральная картина: счёт того, что выживает</h2>
+
+      <div data-mode="science">
+        <p>
+          Пусть \(N(\Omega)\) — накопительное число сохраняемых мод ниже спектрального масштаба \(\Omega\).
+          При самоподобии сохраняемой части одним показателем описывается асимптика:
+        </p>
+        <div class="math-block">\[
+          N(\Omega)\propto \Omega^{D_{\mathrm{eff}}}, \qquad \rho(\Omega)=\frac{dN}{d\Omega}\propto \Omega^{D_{\mathrm{eff}}-1}.
+        \]</div>
+        <p>
+          Тот же \(D_{\mathrm{eff}}\) управляет и растянутой экспонентой для \( \alpha(\lambda) \), связывая геометрию фокусировки со спектральным прореживанием:
+          меньше эффективных мод — быстрее убывают тонкие детали; сильнее фокусировка — больше локальный вклад до убывания.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Здесь математика улыбается. Число, которое говорит, сколько «нот» ещё слышно по мере приглушения высоких частот, — то же самое число рассказывает, как быстро исчезает «искристость» при размытии. Один регулятор — два прозрения.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 6. ГЕОМЕТРИЯ СКАЛЫ -->
+    <div class="card">
+      <h2>6. Геометрия скалы: где ускоряется потеря</h2>
+
+      <div data-mode="science">
+        <p>
+          В окрестности \( \lambda\approx\lambda_q \) максимум достигает вторая производная \(-\ln\alpha\) по \( \ln\lambda \):
+        </p>
+        <div class="math-block">\[
+          \frac{d^2}{d(\ln\lambda)^2}\big(-\ln\alpha(\lambda)\big)
+          = D_{\mathrm{eff}}(D_{\mathrm{eff}}-1)\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\!,
+        \]</div>
+        <p>
+          фиксируя <em>ускорение</em> потерь по масштабам. Этот «излом» отделяет область интерференционных деталей (ниже \( \lambda_q \)) от классических сводок (выше \( \lambda_q \)).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Как прилив у кромки моря: сперва стираются острые края башенки, а потом за минуту оседает весь шпиль. Скала — это такой момент перелома, записанный в геометрию того, как держатся узоры.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 7. НАБЛЮДАТЕЛИ И ВРЕМЯ -->
+    <div class="card">
+      <h2>7. Наблюдатели и время: выбор масштаба</h2>
+
+      <div data-mode="science">
+        <p>
+          Наблюдатель с внутренними параметрами \( \Theta \) реализует отображение \( \mathcal{R}_\Theta[O] \), фактически выбирающее рабочий масштаб \( \lambda(\Theta) \).
+          Устойчивость сводок требует \( \partial_\lambda \alpha(\lambda;\Theta)\le 0 \) в рабочей полосе.
+          Многошкальные наблюдатели используют семейство \( \{\lambda_k\} \) с полосовой «сливкой» \( \bigoplus_k \mathcal{R}_{\Theta_k} \).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Мы не только смотрим кино — мы выбираем zoom. Микроскоп, бинокль или взгляд невооружённого глаза — это разные настройки размытия для нас. Поэтому разные приборы (и разные умы) могут быть правы одновременно, видя разные стороны одной и той же глубинной сцены.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 8. ГЛОССАРИЙ -->
+    <div class="card">
+      <h2>8. Краткий глоссарий</h2>
+
+      <div data-mode="science">
+        <ul>
+          <li><strong>\(K_\lambda\)</strong>: ядро конечного разрешения для проталкивания из ММ в 4-мерие.</li>
+          <li><strong>\(\alpha(\lambda)\)</strong>: удержание на масштабе \( \lambda \); инвариантная форма \( \exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}] \).</li>
+          <li><strong>\(\lambda_q\)</strong>: масштаб когерентности — граница скалы между квантовой и классической сводками.</li>
+          <li><strong>\(D_{\mathrm{eff}}\)</strong>: эффективный спектральный показатель, одновременно задающий счёт мод и наклон в двойном логарифмическом масштабе.</li>
+          <li><strong>Фокусировка \(A(x)\)</strong>: среднее по волокну \( \langle 1/J_\pi\rangle \), определяющее выраженность узлов и нитей.</li>
+          <li><strong>ИПК (\(\mathrm{CPI}\))</strong>: \( \log_{10}M(\lambda,\varepsilon;x) \) при \(M\sim A(x)(\lambda/\varepsilon)^{D_I}\); локальный «бюджет» микросостояний при заданном масштабе.</li>
+        </ul>
+      </div>
+
+      <div data-mode="public">
+        <ul>
+          <li><strong>Ядро:</strong> «линза» проектора мира.</li>
+          <li><strong>Удержание:</strong> сколько картинки остаётся при выбранном размытии.</li>
+          <li><strong>\(\lambda_q\):</strong> настройка скалы — уровень размытия, на котором исчезает тонкая «искристость».</li>
+          <li><strong>\(D_{\mathrm{eff}}\):</strong> число «шероховатости» — скорость исчезновения деталей при размытии.</li>
+          <li><strong>Фокусировка:</strong> скрытые тропы, сходящиеся в одну упрямую «гребёнку».</li>
+          <li><strong>ИПК:</strong> способность области «вмещать» организованную сложность на данном масштабе.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Перетипографика при переключении режимов -->
+  <script>
+  (function(){
+    const obs = new MutationObserver(() => {
+      const sciVisible = [...document.querySelectorAll('[data-mode="science"]')]
+        .some(n => n.offsetParent !== null);
+      if (sciVisible && window.MathJax?.typeset) MathJax.typeset();
+    });
+    obs.observe(document.body, {subtree:true, attributes:true, attributeFilter:['style','class']});
+  })();
+  </script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../../js/fs-toggle.js"></script>
+</body>
+</html>

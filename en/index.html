@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DREAM — Dimensional Resonant Emergent Attractors in Manifold</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+﻿
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero">
+    <span class="kicker">Projection-First Physics</span>
+    <h1>D.R.E.A.M — Dimensional Resonant Emergent Atemporal Model</h1>
+    <p>
+      Our 4D spacetime is a finite-resolution projection of a compact 10D Meta-Manifold (MM) via a fixed, non-invertible kernel \(K_{\lambda}\).
+      Sub-resolution detail blurs while organizational invariants persist; what appear as “fundamental constants”
+      \((c,\hbar,G,\ldots)\) are kernel parameters of this projection slice.
+    </p>
+    <p>
+      With the <strong>Retention Law</strong> as foundation <span class="badge ok sm">Confirmed</span>, D.R.E.A.M. offers
+      testable predictions for coherence loss, spectral/structural statistics, and cross-domain collapse under scale transforms.
+      Finite-range fractality below a coherence cliff transitions toward homogeneity at large \(\lambda\).
+    </p>
+    <p class="note">Use the toggle below to switch between <em>General</em> and <em>Science</em>. Math is hidden unless the global “Math” toggle (header) is also on.</p>
+
+    <!-- Page-level MODE TOGGLE (General ↔ Science) -->
+    <div class="toggles" style="margin-top:.25rem">
+      <span class="badge sm">Mode</span>
+      <label class="switch" title="Switch to Science mode" style="cursor:pointer">
+        <input id="modeToggle" type="checkbox" aria-label="Science mode">
+        <span class="slider" aria-hidden="true"></span>
+        <span class="switch-label">Science</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- GENERAL MODE (no math) -->
+  <!-- ============================== -->
+  <div data-mode="public">
+
+    <!-- FOUNDATION STATUS (General) -->
+    <div class="card" style="margin-top:1rem">
+      <h2>Foundation Status</h2>
+      <p class="core">
+        <strong>S2 — Retention Law</strong> <span class="badge ok sm">Confirmed</span> and elevated to <strong>foundation</strong>.
+        It quantifies how interference-grade information fades with probe scale and predicts a shared coherence “cliff” at \(\lambda_q\).
+        The former “particle ladder / dust” track (<strong>S1</strong>) is <span class="badge spec sm">Relegated</span>
+        and non-foundational unless directly observed above visibility thresholds.
+      </p>
+      <ul>
+        <li><strong>Now:</strong> Cross-domain collapse after scale-normalization; linear windows in standard transforms.</li>
+        <li><strong>Next:</strong> Broaden catalog; pre-registered replications; harmonized pipelines.</li>
+      </ul>
+      <p class="note">See <a href="/retention">Retention</a> for the live demo and <a href="/predictions">Predictions</a>/<a href="/falsification">Falsification</a> for gates and timelines.</p>
+    </div>
+
+    <!-- Plain-language abstract -->
+    <div class="grid two" style="margin-top:1rem">
+      <div class="card">
+        <h2>The Big Idea</h2>
+        <p class="core">
+          Our 4D world is a compressed, finite-resolution projection of a richer 10D reality. Kernel invariants
+          \((\lambda_q, D_{\mathrm{eff}}, \text{locality})\) govern what survives into observation; everything else blurs.
+        </p>
+        <p class="note">
+          Analogies are scaffolding only: useful for intuition, not literal reconstructions of an atemporal 10D source.
+        </p>
+        <details class="exp">
+          <summary><strong>Unpacking the Analogy</strong></summary>
+          <p>
+            Think of a headset rendering an immersive world from complex source data. The world is real to you, but its fidelity is capped by the headset’s resolution and settings. Here, those “settings” are kernel parameters; physics constants are their 4D signatures.
+          </p>
+        </details>
+      </div>
+
+      <div class="card">
+        <h2>Why D.R.E.A.M. Is Different</h2>
+        <ul>
+          <li><strong>No ad-hoc collapses:</strong> The 10D source encodes states; finite resolution explains quantum→classical behavior without extra metaphysics.</li>
+          <li><strong>One law, many domains:</strong> The same retention law governs loss of HF detail and structural correlations across disparate datasets.</li>
+          <li><strong>Constants as inputs:</strong> \(\{c,\hbar,G,\ldots\}\) are kernel parameters—hence not derivable from within 4D alone.</li>
+          <li><strong>Skeletons from focusing:</strong> Coarea focusing + retention yield hubs/filaments within a finite fractal range; homogeneity emerges at large \(\lambda\).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- What D.R.E.A.M Explains -->
+    <div class="card">
+      <h2>Problems That Melt Away</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3>The Quantum–Classical Split</h3>
+          <p>Finite resolution blurs quantum-scale detail; macro-invariants persist—no “mystery collapse” needed.</p>
+        </div>
+        <div class="card">
+          <h3>The Nature of Time</h3>
+          <p>The MM is atemporal; perceived time is a path through a fixed projection (page-by-page traversal of a pre-written book).</p>
+        </div>
+        <div class="card">
+          <h3>The “Fine-Tuning” Illusion</h3>
+          <p>Apparent fine-tuning reflects fixed kernel parameters of our projection slice rather than freely choosable dials.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Near-term signals (plain terms) -->
+    <div class="card">
+      <h2>How We Test: Footprints of Projection</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3>The Resolution Cliff (Retention) <span class="badge ok sm">Foundation</span></h3>
+          <p>Coherence and fine detail plunge near a shared \(\lambda_q\). Cross-domain curves collapse after \(\lambda\)-normalization.</p>
+        </div>
+        <div class="card speculative">
+          <h3>The Particle Ladder <span class="badge spec sm">Speculative</span></h3>
+          <p>A non-harmonic ultra-light ladder remains outside the foundation and only matters if observed above the retention threshold.</p>
+        </div>
+        <div class="card speculative">
+          <h3>Gravity’s Extra Echo <span class="badge spec sm">Speculative</span></h3>
+          <p>Possible subtle signatures in strain require careful separation from systematics before any claim.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Falsification (General) -->
+    <div class="grid two" style="margin-top:1rem">
+      <div class="card">
+        <h2>How We’d Know We’re Wrong</h2>
+        <ul>
+          <li><strong>Retention:</strong> no shared \(\lambda_q\) across channels or no straight-line transform after controls/replication.</li>
+          <li><strong>Cross-domain:</strong> systematic-cleaned disagreements that break collapse across platforms.</li>
+          <li class="speculative"><strong>S1 / Modulations:</strong> decisive nulls in preregistered windows (does not affect the foundation).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>This Is Testable</h2>
+        <p>Predictions depend on projection invariants, not on reconstructing the 10D source—making D.R.E.A.M. empirically falsifiable.</p>
+      </div>
+    </div>
+
+    <!-- Evidence snapshot -->
+    <div class="card">
+      <h2>Evidence Snapshot</h2>
+      <ul>
+        <li><strong>Dual-channel fits:</strong> HF-power vs. corr² decay with a shared \(\lambda_q\), distinct slopes, and linear windows in standard transforms.</li>
+        <li><strong>Finite-range fractality:</strong> Bounded fractal behavior below the cliff with flow toward homogeneity at large \(\lambda\).</li>
+        <li><strong>Cross-context collapse:</strong> After rescaling by \(\widehat{\lambda}_q\), disparate datasets align in retained-information coordinates.</li>
+      </ul>
+    </div>
+
+  </div><!-- /public -->
+
+  <!-- ============================== -->
+  <!-- SCIENCE MODE (with math) -->
+  <!-- ============================== -->
+  <div data-mode="science" style="display:none">
+
+    <!-- FOUNDATION STATUS (Science) -->
+    <div class="card" style="margin-top:1rem">
+      <h2>Foundation Status</h2>
+      <p><strong>S2 — Retention Law</strong> <span class="badge ok sm">Confirmed</span>. “Ladder / dust” (<strong>S1</strong>) <span class="badge spec sm">Relegated</span>.</p>
+      <h3>What Was Tested</h3>
+      <ul>
+        <li>Dual-channel retention (HF vs. corr²) with a <strong>shared</strong> \(\lambda_q\) and distinct slopes.</li>
+        <li>Linear windows in the transform \(y=\ln(-\ln R)\) vs. \(\ln\lambda\) across platforms.</li>
+        <li>Cross-domain consistency after mapping instrument controls \(\rightarrow \lambda\).</li>
+      </ul>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+
+      <div class="card">
+        <h2>Foundational Principles</h2>
+        <p class="core">
+          10→4 compression via \(K_{\lambda}\); constants are kernel parameters; retention governs information loss and the finite fractal range that flows to homogeneity.
+        </p>
+
+        <h3>Projection Mapping</h3>
+        <div class="math-block">\[
+          \phi(x)=\int_{\mathcal M_{10}} K_{\lambda}(x;X)\,\Phi(X)\,d^{10}X
+        \]</div>
+        <p class="note">All 10D coordinates contribute; no global split \(M_{10}\cong U^4\times K^6\) is assumed.</p>
+
+        <h3>Retention Law (empirical)</h3>
+        <div class="math-block">\[
+          R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big],\qquad
+          y(\lambda)=\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q
+        \]</div>
+        <p>Estimate \(\widehat{D}_{\mathrm{eff}}\), \(\widehat{\lambda}_q\); report CI and the linear window in \(\ln\lambda\).</p>
+      </div>
+
+      <div class="card">
+        <h2>Coarea Focusing & CPI</h2>
+        <p>Small Jacobian fibers focus structure that persists under smoothing; skeletons remain as HF texture collapses.</p>
+        <div class="math-block">\[
+          e_4(x)=(G_{\lambda}\!\ast\!\mu)(x),\quad
+          \mu(x)=\int_{F^{-1}(x)}\frac{e_{10}(X)}{J_F(X)}\,d\Sigma_6(X)
+        \]</div>
+        <p class="note">
+          Finite fractal range below the cliff; \(D_{\mathrm{eff}}(\lambda)\nearrow 3\) at large \(\lambda\) (homogeneity).
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Experimental Predictions (Indicative, 2025→)</h2>
+      <ul>
+        <li><strong>Retention dichotomy</strong> <span class="badge ok sm">Foundation</span>:
+          \(R_{\mathrm{HF}}\) vs. \(R_{\mathrm{corr}^2}\) share \(\lambda_q\) but differ in slope; curves collapse after \(\lambda\)-rescaling.</li>
+        <li><strong>Strong lensing invariants</strong> <span class="badge warn sm">Early</span>:
+          CPI-ridge topology persists as HF texture collapses; log-linear fingerprints with a common \(\lambda_q\).</li>
+        <li><strong>Vacuum-energy modulation</strong> <span class="badge warn sm">Open</span>:
+          geometry-dependent micro-shifts; needs stringent controls and cross-platform replication.</li>
+        <li><strong>ALP non-harmonic ladder</strong> <span class="badge spec sm">Speculative</span>:
+          ratio-law fingerprint only; non-foundational.</li>
+      </ul>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+      <div class="card">
+        <h2>How to Test (Any Instrument)</h2>
+        <ol>
+          <li>Pick a monotone smoother tied to resolution; compute \(R_{\mathrm{HF}}(\lambda)\) and/or \(R_{\mathrm{corr}^2}(\lambda)\).</li>
+          <li>Fit \(y=\ln(-\ln R)\) vs. \(\ln\lambda\); extract \(\widehat{D}_{\mathrm{eff}}\), \(\widehat{\lambda}_q\); report CI + \(\lambda\)-window.</li>
+          <li>Demonstrate collapse across contexts after rescaling by \(\widehat{\lambda}_q\).</li>
+        </ol>
+        <p><strong>Falsification:</strong> persistent curvature in the transform; irreconcilable \(D_{\mathrm{eff}}\) across channels; failure of collapse.</p>
+      </div>
+      <div class="card">
+        <h2>Scope & Non-Goals</h2>
+        <ul>
+          <li><strong>Scope:</strong> Projection invariants, retention fits, CPI-linked structure, scale-normalized comparisons.</li>
+          <li><strong>Non-Goals:</strong> Reconstructing the 10D source; deriving kernel form from 4D; attaching metaphysical claims.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /science -->
+
+</div>
+
+<script>
+(function(){
+  const chk = document.getElementById('modeToggle');
+  document.querySelectorAll('[data-mode="science"]').forEach(n => n.style.display = 'none');
+
+  if (window.MathJax && MathJax.typeset) { MathJax.typeset(); }
+
+  function setMode(on){
+    document.querySelectorAll('[data-mode="public"]').forEach(n => n.style.display = on ? 'none' : '');
+    document.querySelectorAll('[data-mode="science"]').forEach(n => n.style.display = on ? '' : 'none');
+  }
+  setMode(false);
+  chk?.addEventListener('change', e => setMode(e.target.checked));
+})();
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Аксиомы · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link active" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Базовые аксиомы</h1>
+    <p class="kicker">Шесть допущений задают постановку; всё остальное выводится или проверяется на уровне <em>инвариантов</em>.</p>
+    <p class="note">Здесь аксиомы сформулированы прямо, даны их операционные смыслы и точки входа математики. Математика скрыта по умолчанию — используйте переключатель «Math» в шапке.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Capsule list -->
+    <div class="card">
+      <h2>Капсула — шесть аксиом</h2>
+      <ol>
+        <li><strong>A1 — Существование (MM).</strong> Существует компактное, ориентируемое, гладкое 10-мерное Метамногообразие (MM) с полями; оно «вневременно» в 4D терминах.</li>
+        <li><strong>A2 — Проекция (Ядро).</strong> Единственное, фиксированное, неинвертируемое ядро реализует проекцию 10→4 при конечном разрешении.</li>
+        <li><strong>A3 — Закон сохранения информации (S2).</strong> Информация/контраст убывают с масштабом зонда по растянутой экспоненте \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\); это основание.</li>
+        <li><strong>A4 — Константы фиксируются ядром.</strong> \( \{c,\,\hbar,\,G,\,\ldots\} \) — параметры нашего среза ядра; в D.R.E.A.M мы их измеряем, а не выводим.</li>
+        <li><strong>A5 — Топология ↔ классы.</strong> Устойчивые топологические данные MM маркируют классы частиц/калибровок, которые проецируются в 4D содержимое.</li>
+        <li><strong>A6 — Конечное разрешение ⇒ режимы.</strong> Когерентностная шкала \( \lambda_q \) разделяет «квантовый» режим удержания ниже неё и классическое грубое усреднение выше.</li>
+      </ol>
+      <p class="note">Только S2 возводится в основание. «S3» (коареа-фокусировка + CPI) даёт <em>сильную поддержку</em> S2; «S1» (ALP/«пыль») <em>сведена на второй план</em> и считается нулевой ниже обрыва.</p>
+    </div>
+
+    <!-- A1 -->
+    <div class="card">
+      <h2>A1 — Существование (MM)</h2>
+      <p class="core">Есть компактное, ориентируемое, гладкое 10D многообразие (MM) с полями. «Вневременно» означает: 4D-время не фундаментально в MM и появляется лишь после проекции.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Почему компактность и гладкость?</strong> Компактность гарантирует конечность интегралов; гладкость поддерживает дифференциальные операторы и топологические индексы, используемые в проталкивании (push-forward).</p>
+          <p><strong>Эмпирический след.</strong> A1 задаёт «сцену»; данные касаются A2–A6.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A2 -->
+    <div class="card">
+      <h2>A2 — Проекция (Ядро)</h2>
+      <p class="core">Единственное фиксированное неинвертируемое ядро \(K_{\lambda}\) отображает поля MM в 4D наблюдаемые при конечном разрешении \( \lambda \) (наш срез берёт \( \lambda=\lambda_q \)).</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X).
+      \]</div>
+      <p>Наука «пришпиливает» себя к <em>инвариантам</em> класса ядра: \( \lambda_q \) (когерентность), радиус локальности, регулярность/положительность, эффективный спектральный показатель \( D_{\mathrm{eff}} \).</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Ограничители.</strong> Нормировка, локальность проекции и монотонная «верность» обеспечивают корректное отображение \(L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\).</p>
+          <div class="math-block">\[
+            \textbf{K1:}\ \int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)<\infty,\quad
+            \textbf{K2:}\ K_{\lambda}(x;X)\ \text{пиково для}\ X\approx\pi^{-1}(x),\quad
+            \textbf{K3:}\ \partial_{\lambda}\,\alpha(\lambda)\le0.
+          \]</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- A3 -->
+    <div class="card">
+      <h2>A3 — Закон сохранения информации (S2)</h2>
+      <p class="core">Информация убывает с масштабом по унифицированной растянутой экспоненте:</p>
+      <div class="math-block">\[
+        R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Две «читалки» следуют тому же закону со своими \(\lambda_q, D_{\mathrm{eff}}\): ВЧ-мощность \(R_{\mathrm{HF}}(\lambda)\) и структурная корреляция \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},\,e_4|_{\lambda})\). Фрактальноподобные признаки живут лишь <em>ниже</em> \( \lambda_q \); выше возникает однородность.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Практика.</strong> Линейризуем \( \ln(-\ln R) = D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q \) и подбираем на разных платформах.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A4 -->
+    <div class="card">
+      <h2>A4 — Константы фиксируются ядром</h2>
+      <p class="core">Константы \( \{c,\,\hbar,\,G,\,\ldots\} \) — параметры ядра нашего среза. В D.R.E.A.M мы их <em>измеряем</em>, а не выводим.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Следствие.</strong> Видимые «дрейфы» — контекст/масштаб инструмента в рамках одной проекции, а не дрейф ядра.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A5 -->
+    <div class="card">
+      <h2>A5 — Топология ↔ классы</h2>
+      <p class="core">Устойчивые топологические классы MM (гомотопии/когомологии, характеристические классы) маркируют классы частиц/калибровок. Индивидуальные 4D виды и квантованные заряды — их проекции.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Квантование.</strong> Целочисленные интегралы по циклам дают квантование зарядов, устойчивое к конечному усреднению.</p>
+          <div class="math-block">\[
+            Q_{\mathrm{U(1)}}=\frac{1}{2\pi}\oint A\in\mathbb{Z},\qquad
+            k=\frac{1}{8\pi^2}\int\operatorname{tr}(F\wedge F)\in\mathbb{Z}.
+          \]</div>
+          <p><strong>Правила отбора.</strong> Арифметика классов ограничивает допустимые процессы; аномалии должны компенсироваться в 4D проекции.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- A6 -->
+    <div class="card">
+      <h2>A6 — Конечное разрешение ⇒ режимы</h2>
+      <p class="core">Когерентностный «обрыв» около \( \lambda\approx\lambda_q \) разделяет два режима: ниже сохраняются интерференционные инварианты, выше доминирует классическое грубое усреднение.</p>
+      <div class="math-block">\[
+        \text{coherence}(\lambda)\ \propto\ R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p><strong>S3 (поддержка):</strong> Коареа-фокусировка и CPI объясняют стойкость «узлов»/филаментов при сглаживании и их последующее затухание в точности по предсказаниям S2.</p>
+      <details class="more">
+        <summary aria-label="Читать далее"><span class="sr-only">Читать далее</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Эксперимент.</strong> Сканируйте \( \lambda \) через \( \lambda_q \) (интерферометрия, фотоника, NV/спины, маттер-вейв) и ищите скачкообразную смену метрик удержания.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Assumed vs tested -->
+    <div class="card">
+      <h2>Что предполагается, а что тестируется</h2>
+      <div class="grid two">
+        <div>
+          <h3 class="kicker">Предполагается</h3>
+          <ul>
+            <li>MM существует и гладко-компактно (A1).</li>
+            <li>Единственное фиксированное ядро при конечном разрешении (A2).</li>
+            <li>Константы — параметры ядра (A4).</li>
+          </ul>
+          <p class="note"><strong>Де-эмфаза.</strong> S1 (ALP/«пыль») сведена и считается нулевой ниже \( \lambda_q \); не используется для поддержки каркаса.</p>
+        </div>
+        <div>
+          <h3 class="kicker">Тестируется (инварианты)</h3>
+          <ul>
+            <li><strong>Основание S2:</strong> закон сохранения информации \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\); фиксируем переход на разных платформах (A3/A6).</li>
+            <li><strong>Поддержка S3:</strong> коареа-фокусировка + CPI (стойкость/затухание «узлов» и филаментов по S2).</li>
+            <li>Топологическое квантование/правила отбора в 4D (A5).</li>
+            <li>Закон ранжированного спектра \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) как междоменное следствие \(D_{\mathrm{eff}}\) (поддерживающий тест).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Falsification -->
+    <div class="card">
+      <h2>Крючки фальсификации, привязанные к аксиомам</h2>
+      <ul>
+        <li><strong>Против S2 (A3/A6):</strong> отсутствие перехода удержания вблизи \( \lambda_q \) на заявленной чувствительности на нескольких платформах.</li>
+        <li><strong>Против A5:</strong> нарушение целочисленного квантования или правил отбора, несовместимое с картиной классов.</li>
+        <li><strong>Против инвариантной постановки:</strong> провал закона рангов \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) там, где применим.</li>
+      </ul>
+      <p class="note">Это <em>чистые</em> нули: мы не «спасаем» каркас произвольными твиками ядра.</p>
+    </div>
+
+    <!-- Speculative -->
+    <div class="card speculative">
+      <h2 class="kicker">Интерпретационная заметка (спекулятивно)</h2>
+      <p>Константы кажутся «фундаментальными» лишь потому, что являются параметрами ядра в нашем срезе; иные локальные условия проекции могли бы их смещать. Это интерпретация, она не нужна для эмпирических тестов.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Повторная верстка формул после открытия экспандера
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

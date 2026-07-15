@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Реестр тестов · D.R.E.A.M</title>
+  <meta name="description" content="Реестр тестов D.R.E.A.M — все тесты удержания S2 по когнитивному, финансовому, космологическому, физическому, экологическому доменам и вмешательствам: D, R², вердикт и описание." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Фрактальный фон ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Шапка / Навигация ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link active" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link tools" href="../plotter.html">График Удержания</a>
+      <a class="nav-link tools" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link tools" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Основное ===== -->
+  <main class="container">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="card hero">
+    <span class="kicker">Удержание S2 · Кросс-доменный каталог</span>
+    <h1>Реестр тестов</h1>
+    <p>
+      Все выполненные на сегодня тесты удержания S2 по когнитивному, финансовому, космологическому,
+      физическому, экологическому доменам и вмешательствам. Каждая запись содержит эффективный
+      показатель \(D_{\mathrm{eff}}\), качество подгонки \(R^{2}\), вердикт и краткое описание.
+    </p>
+    <p class="note">
+      Закон удержания: \(R(\lambda)=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\).
+      <strong>D&nbsp;&lt;&nbsp;1</strong> — <em>естественный</em> режим; <strong>D&nbsp;&gt;&nbsp;1</strong>
+      — режим <em>извлечения</em> (информация убывает быстрее естественного порога).
+      Пороговые случаи (\(D\approx1\)) отмечены янтарным.
+    </p>
+  </div>
+
+  <!-- СВОДНЫЕ ПИЛЮЛИ -->
+  <div class="registry-summary" id="summaryPills"></div>
+
+  <!-- УПРАВЛЕНИЕ -->
+  <div class="card" style="padding:1rem 1.25rem">
+    <div class="registry-controls">
+      <label for="catFilter">Категория</label>
+      <select id="catFilter" aria-label="Фильтр тестов по категории">
+        <option value="all">Все категории</option>
+        <option value="cognitive">Когнитивный</option>
+        <option value="financial">Финансовый</option>
+        <option value="cosmological">Космологический</option>
+        <option value="physical">Физический (квантовый)</option>
+        <option value="ecological">Экологический</option>
+        <option value="interventions">Вмешательства</option>
+        <option value="scouting">Разведка</option>
+      </select>
+      <span class="registry-count" id="count">—</span>
+    </div>
+  </div>
+
+  <!-- СЕТКА ТЕСТОВ -->
+  <div class="test-grid" id="testGrid" aria-live="polite"></div>
+
+  <!-- СВОДНАЯ ТАБЛИЦА -->
+  <div class="card" style="padding:1.1rem 1.25rem">
+    <h2 style="margin:0 0 .6rem">Полная таблица тестов</h2>
+    <div class="registry-table-wrap">
+      <table class="registry-table" id="testTable">
+        <thead>
+          <tr>
+            <th>Тест</th>
+            <th>Домен</th>
+            <th>D</th>
+            <th>R²</th>
+            <th>Вердикт</th>
+            <th>Значимость</th>
+          </tr>
+        </thead>
+        <tbody id="testTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Как читать реестр</h2>
+    <p>
+      Каждая карточка сообщает показатель растянутой экспоненты \(D_{\mathrm{eff}}\) из подгонки
+      \(R(\lambda)\) на кривой удержания. <strong>Зелёные</strong> значения (\(D&lt;1\)) означают,
+      что система находится на естественной стороне порога когерентности; <strong>коралловые</strong>
+      значения (\(D&gt;1\)) означают извлечение — канал убывает быстрее естественного распада.
+      <strong>Янтарный</strong> отмечает пороговые случаи (\(D\approx1\)) или неоднозначные подгонки.
+    </p>
+    <p class="note">
+      Тесты вмешательств (налог Sweden FTT, запрет игр для несовершеннолетних в Китае, Монреальский
+      протокол, правило Волкера) сообщают \(D\) <em>до</em> и <em>после</em> изменения политики.
+      Подтверждённое вмешательство — то, где \(D\) пересёк границу извлечения в естественный режим
+      (или обратно), как и предсказано. Чтобы добавить новый тест, допишите объект в массив
+      <code>TESTS</code> в исходнике этой страницы.
+    </p>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================================
+   D.R.E.A.M — Данные реестра тестов
+   ----------------------------------------------------------------------------
+   Чтобы добавить тест: допишите объект в TESTS. Поля:
+     id        : короткий уникальный слаг
+     name      : заголовок
+     domain    : cognitive | financial | cosmological | physical |
+                 ecological | interventions | scouting
+     groups    : необязательный массив доп. категорий (по умолчанию [domain])
+     D         : эффективный показатель (число) или null
+     r2        : качество подгонки (число) или null
+     verdict   : CONFIRMED | EXTRACTION | NATURAL | INCONCLUSIVE | PENDING
+     kind      : natural | extraction | threshold | inconclusive |
+                 intervention | pending | consistent  (задаёт цвет D)
+     narrative : 1-2 предложения значимости
+     image     : имя файла в /img/tests/ (или null)
+     source    : источник (JSON / PDF / KB)
+     phases    : необяз. [{label, D, kind}] для тестов до/во время/после
+   ============================================================================ */
+const IMG = "../img/tests/";
+const TESTS = [
+  /* ---------------- Когнитивный ---------------- */
+  {
+    id:"ebb-1885",
+    name:"Память Эббингауза (1885)",
+    domain:"cognitive",
+    D:0.153, r2:0.976,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Исходная кривая забывания подгоняется под S2 с D=0.153 — далеко ниже порога извлечения, что подтверждает естественный характер распада памяти.",
+    image:"dream_memory_s2_test.png",
+    source:"dream_memory_s2_results.json"
+  },
+  {
+    id:"murre-2015",
+    name:"Память Murre & Dros (2015)",
+    domain:"cognitive",
+    D:0.219, r2:0.976,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"130-летняя репликация Эббингауза. S2 побеждает по AIC степенной закон (ΔAIC≈−28). D=0.219 — закон удержания воспроизводим.",
+    image:"dream_memory_s2_test.png",
+    source:"dream_memory_s2_results.json"
+  },
+  {
+    id:"mark-2004-12",
+    name:"Внимание Глории Марк (2004–12)",
+    domain:"cognitive",
+    D:1.232, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Снижение продолжительности внимания в 2004–2012 пересекает порог D=1 (D=1.232), что указывает на алгоритмическое извлечение, а не естественный распад.",
+    image:"npa_chart3_timeline_ru.png",
+    source:"npa_attention_s2_results.json"
+  },
+  {
+    id:"mark-2012-22",
+    name:"Внимание Глории Марк (2012–22)",
+    domain:"cognitive",
+    D:4.28, r2:null,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Из манифеста NPA: коллапс внимания ускоряется после 2012 (D≈4.28) — режим глубокого извлечения по мере доминирования коротких лент.",
+    image:"npa_chart1_d_extraction_ru.png",
+    source:"NPA-Manifesto-2.0.pdf"
+  },
+
+  /* ---------------- Финансовый ---------------- */
+  {
+    id:"eth-hourly",
+    name:"ETH часовой (крипто HFT)",
+    domain:"financial",
+    D:0.591, r2:0.537,
+    verdict:"INCONCLUSIVE", kind:"inconclusive",
+    narrative:"Часовая автокорреляция крипты зашумлена (R²=0.537). D=0.591 указывает на естественный режим, но из-за слабой подгонки точного вердикта нет.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"spy-daily",
+    name:"SPY дневной (индекс акций)",
+    domain:"financial",
+    D:0.711, r2:0.732,
+    verdict:"NATURAL", kind:"natural",
+    narrative:"Широкий индекс акций даёт D=0.711 — естественное удержание. Рынок агрегирует достаточно участников, чтобы оставаться ниже порога извлечения.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"qqq-daily",
+    name:"QQQ дневной (тех-ETF)",
+    domain:"financial",
+    D:1.016, r2:0.749,
+    verdict:"EXTRACTION", kind:"threshold",
+    narrative:"Технологичный ETF сидит ровно на пороге (D=1.016). Согласуется с концентрацией алгоритмического потока в тех-именах.",
+    image:"fictitious_capital_s2_analysis.png",
+    source:"fictitious_capital_s2_results.json"
+  },
+  {
+    id:"hold-1940-80",
+    name:"Период владения акцией (1940–80)",
+    domain:"financial",
+    D:1.559, r2:0.993,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"До цифрового распад периода владения уже даёт D>1 (1.559) — извлечение не исключительно HFT-феномен; оно предшествует электронной торговле.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"hold-1980-2023",
+    name:"Период владения акцией (1980–2023)",
+    domain:"financial",
+    D:1.005, r2:0.999,
+    verdict:"EXTRACTION", kind:"threshold",
+    narrative:"Современная эпоха на пороге (D=1.005) с почти идеальной подгонкой (R²=0.999). Весь пост-1980 режим — на границе извлечения.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"trade-1980-2000",
+    name:"Длительность сделки (1980–2000)",
+    domain:"financial",
+    D:1.781, r2:1.000,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Удержание длительности сделок распадается с D=1.781 — извлечение. Идеальная подгонка (R²=1.000) отражает регуляризующий эффект электронного матчинга.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+  {
+    id:"trade-2000-23",
+    name:"Длительность сделки (2000–2023)",
+    domain:"financial",
+    D:2.454, r2:1.000,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Эпоха HFT: D=2.454 — глубокое извлечение. Удвоение D относительно предыдущей эпохи количественно описывает ускорение оборота фиктивного капитала.",
+    image:"financial_vs_cognitive_s2_retention.png",
+    source:"financial_vs_cognitive_s2_results.json"
+  },
+
+  /* ---------------- Космологический ---------------- */
+  {
+    id:"sfr-z2-0",
+    name:"Падение плотности SFR (z=2→0)",
+    domain:"cosmological",
+    D:3.458, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Плотность скорости звёздообразования падает с D=3.458 — космос в режиме извлечения, поскольку тёмная энергия подавляет формирование структур.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+  {
+    id:"bound-z15-0",
+    name:"Спад роста связанных структур (z=1.5→0)",
+    domain:"cosmological",
+    D:2.571, r2:0.992,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Рост связанных структур распадается с D=2.571 — извлечение. Иерархическая кластеризация голодает из-за ускоренного расширения.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+  {
+    id:"cluster-z1-0",
+    name:"Спад роста скоплений (z=1→0)",
+    domain:"cosmological",
+    D:2.608, r2:0.999,
+    verdict:"EXTRACTION", kind:"extraction",
+    narrative:"Удержание роста скоплений: D=2.608, R²=0.999. То же семейство, что SFR — Вселенная теряет способность строить связанные объекты.",
+    image:"cosmological_s2_retention.png",
+    source:"cosmological_s2_results.json"
+  },
+
+  /* ---------------- Физический (квантовый) ---------------- */
+  {
+    id:"nv-40nm-rt",
+    name:"NV наноалмаз 40нм, комнатная температура",
+    domain:"physical",
+    D:0.654, r2:0.973,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"T₁-релаксация в 40нм наноалмазах: S2 — лучшая модель (минимальный AIC), D=0.654 — естественная декогеренция, далеко ниже порога.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-3um-rt",
+    name:"NV наноалмаз 3мкм, комнатная температура",
+    domain:"physical",
+    D:0.644, r2:0.949,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Более крупные 3мкм алмазы сохраняют тот же естественный режим (D=0.644). Масштаб размера не выталкивает NV-центры за порог извлечения.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-40nm-6k",
+    name:"NV наноалмаз 40нм, ~6K",
+    domain:"physical",
+    D:0.526, r2:0.982,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Криогенный 6K: D=0.526, R²=0.982. Охлаждение ещё сильнее снижает эффективный показатель — естественное удержание устойчиво по температуре.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-ens-1ppm",
+    name:"NV ансамбль, 1ppm примеси N",
+    domain:"physical",
+    D:0.889, r2:0.960,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Разреженный ансамбль (1ppm): D=0.889 — ближайший к порогу, но всё ещё естественный. S2 побеждает степенной и экспоненциальный по AIC.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+  {
+    id:"nv-ens-100ppm",
+    name:"NV ансамбль, 100ppm примеси N",
+    domain:"physical",
+    D:0.527, r2:0.935,
+    verdict:"CONFIRMED", kind:"natural",
+    narrative:"Плотный 100ppm ансамбль: D=0.527. Более высокая примесь не индуцирует извлечение — закон удержания единообразно управляет распадом T₂-эха.",
+    image:"dream_nv_center_s2_test.png",
+    source:"dream_nv_center_s2_results.json"
+  },
+
+  /* ---------------- Вмешательства (фальсифицируемость) ---------------- */
+  {
+    id:"sweden-ftt",
+    name:"Налог Sweden FTT (1984–91)",
+    domain:"interventions", groups:["interventions","ecological","financial"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Налог на финансовые сделки подавил оборот и опустил D ниже порога извлечения во время действия, затем вернулся к глубокому извлечению (4.74) после отмены — полностью обратимо, как предсказано.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"До",    D:1.50, kind:"extraction"},
+      {label:"Во время", D:0.72, kind:"natural"},
+      {label:"После", D:4.74, kind:"extraction"}
+    ]
+  },
+  {
+    id:"china-gaming",
+    name:"Запрет игр для несовершеннолетних (Китай, 2021)",
+    domain:"interventions", groups:["interventions","cognitive","ecological"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Запрет алгоритмических лент для несовершеннолетних обрушил извлечение внимания с D=4.15 до D=0.12 — крупнейший одиночный эффект вмешательства из зарегистрированных.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"До",    D:4.15, kind:"extraction"},
+      {label:"После", D:0.12, kind:"natural"}
+    ]
+  },
+  {
+    id:"montreal",
+    name:"Монреальский протокол (1987)",
+    domain:"interventions", groups:["interventions","ecological"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Запрет ХФУ замедлил падение озона; экологическое удержание перешло из извлечения (1.27) обратно в естественный режим (0.58). Закон удержания реагирует на политику, а не только на рынки.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"До",    D:1.27, kind:"extraction"},
+      {label:"После", D:0.58, kind:"natural"}
+    ]
+  },
+  {
+    id:"volcker",
+    name:"Правило Волкера (2012)",
+    domain:"interventions", groups:["interventions","financial"],
+    D:null, r2:null,
+    verdict:"CONFIRMED", kind:"intervention",
+    narrative:"Ограничение проп-трейдинга снизило D с 1.50 до 0.97 — чуть ниже порога. Политический рычаг против извлечения фиктивного капитала.",
+    image:"intervention_falsifiability_test.png",
+    source:"intervention_falsifiability_results.json",
+    phases:[
+      {label:"До",    D:1.50, kind:"extraction"},
+      {label:"После", D:0.97, kind:"natural"}
+    ]
+  },
+
+  /* ---------------- Разведка (кросс-доменные пробы) ---------------- */
+  {
+    id:"rhic-star",
+    name:"Спин-корреляция RHIC / STAR",
+    domain:"scouting",
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Идентифицирован как кандидат на канал удержания. Данные ещё не подгонялись — ожидается гармонизация пайплайна со стандартным S2-преобразованием.",
+    image:null,
+    source:"s2_scout_results.json (KB)"
+  },
+  {
+    id:"stretched-prl",
+    name:"Растянутая экспонента в искусственных спиновых системах (PRL)",
+    domain:"scouting",
+    D:null, r2:null,
+    verdict:"NATURAL", kind:"consistent",
+    narrative:"Опубликованное поведение растянутой экспоненты в искусственном спиновом льде согласуется с S2. Количественный D ещё не извлечён.",
+    image:null,
+    source:"scouting KB"
+  },
+  {
+    id:"euclid-web",
+    name:"Фрактал космической паутины Euclid",
+    domain:"scouting",
+    D:null, r2:null,
+    verdict:"PENDING", kind:"pending",
+    narrative:"Картографирование космической паутины телескопом Euclid даст чистейший крупномасштабный тест фрактального удержания. Ожидается релиз данных.",
+    image:null,
+    source:"scouting KB"
+  }
+];
+
+/* ---- вспомогательные функции ---- */
+const CAT_LABELS = {
+  all:"Все", cognitive:"Когнитивный", financial:"Финансовый",
+  cosmological:"Космологический", physical:"Физический", ecological:"Экологический",
+  interventions:"Вмешательства", scouting:"Разведка"
+};
+
+function groupsOf(t){ return t.groups || [t.domain]; }
+
+function dText(t){
+  if (t.D === null || t.D === undefined) return "—";
+  return Number(t.D).toFixed(3);
+}
+function r2Text(t){
+  if (t.r2 === null || t.r2 === undefined) return "—";
+  return Number(t.r2).toFixed(3);
+}
+function dClass(t){
+  if (t.verdict === "PENDING") return "d-pending";
+  if (t.kind === "inconclusive") return "d-inconclusive";
+  if (t.kind === "consistent") return "d-consistent";
+  if (t.D === null || t.D === undefined) return "d-pending";
+  if (t.kind === "threshold") return "d-threshold";
+  if (t.D > 1) return "d-extraction";
+  if (t.D < 1) return "d-natural";
+  return "d-threshold";
+}
+function phaseClass(p){
+  if (p.D === null) return "";
+  if (p.kind === "natural" || p.D < 1) return "phase-natural";
+  return "phase-extraction";
+}
+function phaseText(p){ return p.D === null || p.D === undefined ? "—" : Number(p.D).toFixed(2); }
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function cardHTML(t){
+  const verdictCls = "verdict-" + (t.verdict || "PENDING");
+  const dCls = dClass(t);
+
+  let dBlock = '';
+  if (t.phases && t.phases.length){
+    const phases = t.phases.map(p =>
+      `<div class="test-phase ${phaseClass(p)}">
+         <span class="ph-lbl">${esc(p.label)}</span>
+         <span class="ph-d">${phaseText(p)}</span>
+       </div>`).join('');
+    dBlock = `
+      <div class="test-d-row">
+        <span class="test-d-lbl">D до → после</span>
+      </div>
+      <div class="test-phases">${phases}</div>`;
+  } else {
+    dBlock = `
+      <div class="test-d-row">
+        <span class="test-d ${dCls}">${dText(t)}</span>
+        <span class="test-d-lbl">D<sub>eff</sub></span>
+        <span class="test-r2">R² = ${r2Text(t)}</span>
+      </div>`;
+  }
+
+  let figHTML = '';
+  if (t.image){
+    figHTML = `
+      <div class="test-figure" data-fullscreen>
+        <img src="${IMG}${esc(t.image)}" alt="График: ${esc(t.name)}" loading="lazy">
+      </div>`;
+  }
+
+  return `
+    <div class="test-head">
+      <h3 class="test-name">${esc(t.name)}</h3>
+      <div class="test-badges">
+        <span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span>
+        <span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span>
+      </div>
+    </div>
+    ${dBlock}
+    <p class="test-narr">${esc(t.narrative)}</p>
+    ${figHTML}
+    <div class="test-source">источник: ${esc(t.source || '—')}</div>`;
+}
+
+function summaryPills(){
+  const total = TESTS.length;
+  const confirmed = TESTS.filter(t => t.verdict === "CONFIRMED").length;
+  const extraction = TESTS.filter(t => t.verdict === "EXTRACTION").length;
+  const inconclusive = TESTS.filter(t => t.verdict === "INCONCLUSIVE").length;
+  const pending = TESTS.filter(t => t.verdict === "PENDING").length;
+  const natural = TESTS.filter(t => t.verdict === "NATURAL").length;
+  return `
+    <div class="summary-pill mut"><div class="n">${total}</div><div class="l">Всего</div></div>
+    <div class="summary-pill good"><div class="n">${confirmed}</div><div class="l">Подтверждено</div></div>
+    <div class="summary-pill good"><div class="n">${natural}</div><div class="l">Естественные</div></div>
+    <div class="summary-pill bad"><div class="n">${extraction}</div><div class="l">Извлечение</div></div>
+    <div class="summary-pill warn"><div class="n">${inconclusive}</div><div class="l">Неоднозначно</div></div>
+    <div class="summary-pill mut"><div class="n">${pending}</div><div class="l">Ожидают</div></div>`;
+}
+
+function tableRowHTML(t){
+  const dCls = dClass(t);
+  const verdictCls = "verdict-" + (t.verdict || "PENDING");
+  const dCell = t.phases && t.phases.length
+    ? t.phases.map(p => `${esc(p.label)}: <span class="${phaseClass(p)}" style="color:inherit">${phaseText(p)}</span>`).join(' → ')
+    : `<span class="${dCls}">${dText(t)}</span>`;
+  return `
+    <tr class="${t.verdict === 'PENDING' ? 'pending' : ''}">
+      <td><strong>${esc(t.name)}</strong></td>
+      <td><span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span></td>
+      <td class="d-cell ${dCls}">${dCell}</td>
+      <td class="d-cell">${r2Text(t)}</td>
+      <td><span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span></td>
+      <td class="narr-cell">${esc(t.narrative)}</td>
+    </tr>`;
+}
+
+function render(filter){
+  const grid = document.getElementById('testGrid');
+  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter));
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  list.forEach(t => {
+    const el = document.createElement('article');
+    el.className = 'card test-card';
+    el.innerHTML = cardHTML(t);
+    frag.appendChild(el);
+  });
+  grid.appendChild(frag);
+  // инициализация полноэкранного переключателя для динамически созданных фигур
+  grid.querySelectorAll('[data-fullscreen]').forEach(fig => {
+    if (window.ChartFullscreen && window.ChartFullscreen.init) window.ChartFullscreen.init(fig);
+  });
+  document.getElementById('count').textContent = `показано ${list.length} / ${TESTS.length} тестов`;
+
+  const tbody = document.getElementById('testTableBody');
+  tbody.innerHTML = list.map(tableRowHTML).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('summaryPills').innerHTML = summaryPills();
+  const sel = document.getElementById('catFilter');
+  const saved = new URLSearchParams(location.search).get('cat');
+  if (saved && CAT_LABELS[saved]) sel.value = saved;
+  render(sel.value);
+  sel.addEventListener('change', () => render(sel.value));
+});
+</script>
+
+  </main>
+
+  <!-- ===== Подвал ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; основная наука и спекуляции чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Чат-пузырь + док (строится js/bot.js) ===== -->
+
+  <!-- ===== Переключатели математики / спекуляций / типографика ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Переписывание переключателя языка (должно выполняться до bot.js,
+        чтобы бот выбрал нужный языковой пакет из data-lang) ===== -->
+
+<script>
+(function(){
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    const parts = rest.split('/');
+    const depth = parts.length - 1;
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Фрактальный фон ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Генератор плетения ядра (только на странице kernel, но безвреден везде) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Бот (чат-пузырь) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Полноэкранный переключатель для игрушек ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

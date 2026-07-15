@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projection Kernel · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="en" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link active" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="topology.html">Topology</a>
+      <a class="nav-link" href="spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="time.html">Time</a>
+      <a class="nav-link" href="memory.html">Memory</a>
+      <a class="nav-link" href="articles.html">Articles</a>
+      <a class="nav-link" href="../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>Projection Kernel</h1>
+    <p class="kicker">Kernel-agnostic posture with operational invariants (S2 central, S3 supportive): resolution \(\lambda_q\), locality radius, regularity/positivity, effective spectral exponent \(D_{\mathrm{eff}}\).</p>
+    <p class="note">Math is hidden by default. Use the “Math” toggle in the header to reveal formulas.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- Definition -->
+    <div class="card">
+      <h2>Definition (push-forward)</h2>
+      <p>4D observables are push-forwards of MM fields by a fixed, non-invertible kernel with finite resolution:</p>
+      <div class="math-block">\[
+        O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
+      \]</div>
+      <p class="note">Only <em>invariants</em> of the kernel class are empirical; detailed functional forms are not identified by data.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Linearity / boundedness.</strong> The induced operator \(\mathcal{K}_\lambda: L^2(\mathrm{MM})\to L^2(\mathbb{R}^{3,1})\) is assumed bounded.</p>
+          <p><strong>Normalization.</strong> Choose \(\int K_{\lambda}(x;X)\,d\mu_{\mathrm{MM}}(X)=1\) so constants push-forward to constants.</p>
+          <p><strong>PSD / compatibility.</strong> We use positive-semidefinite kernels; statements are invariant under equivalent measures if \(K_{\lambda}\,d\mu_{\mathrm{MM}}\) is used consistently.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Invariants -->
+    <div class="card">
+      <h2>Kernel invariants (operational)</h2>
+      <ul>
+        <li><strong>Resolution</strong> \(\lambda_q\): the critical fidelity scale separating quantum-grade vs. coarse regimes (S2).</li>
+        <li><strong>Locality radius</strong>: how sharply MM points contribute for \(X\!\approx\!\pi^{-1}(x)\).</li>
+        <li><strong>Regularity / positivity</strong>: well-posed PSD operator; finite norms and stable quadratics.</li>
+        <li><strong>Effective spectral exponent</strong> \(D_{\mathrm{eff}}\): controls retained-mode counting and ranked spectra.</li>
+      </ul>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Why invariants?</strong> They remain identifiable across admissible kernels and therefore anchor forecasts and falsification.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S2: Retention -->
+    <div class="card">
+      <h2>S2 — Retention &amp; coherence (universal law)</h2>
+      <p>Fidelity to fine structure as a function of effective probe scale \(\lambda\):</p>
+      <div class="math-block">\[
+        \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
+      \]</div>
+      <p>Two regimes with a <strong>coherence cliff</strong> near \(\lambda\!\approx\!\lambda_q\). Cross-platform scans should show a step-like change in interference/coherence. Readouts include HF-power \(R_{\mathrm{HF}}(\lambda)\) and structural correlation \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},e_4|_\lambda)\).</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Log slope.</strong> \(\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q.\)</p>
+          <p><strong>Platform mapping.</strong> \(\lambda\) depends on modality (baseline, wavelength, coherence length); ratios to \(\lambda_q\) are invariant.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- S3: Focusing & CPI -->
+    <div class="card">
+      <h2>S3 — Structure focusing &amp; CPI (supports S2)</h2>
+      <p>Small projection-Jacobian stabilizes a web-like skeleton that outlives high-frequency detail; CPI quantifies local microstate budgets.</p>
+      <div class="math-block">\[
+        A(x)\ \sim\ \big\langle J_\pi^{-1}\big\rangle,\qquad
+        M(\lambda,\varepsilon;x)\ \sim\ A(x)\,\big(\tfrac{\lambda}{\varepsilon}\big)^{D_I},\qquad
+        \mathrm{CPI}(x)=\log_{10} M.
+      \]</div>
+      <p>Operationally, regions with higher \(A(x)\) show slower decay of \(R_{\mathrm{struct}}\) relative to \(R_{\mathrm{HF}}\), consistent with S2.</p>
+      <details class="more">
+        <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
+        <div class="expander-body prose">
+          <p><strong>Coarea link.</strong> Focusing follows from the coarea formula; CPI packages mode-packing with scale and locality.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Spectral exponent (ranked spectra) -->
+    <div class="card">
+      <h2>Effective spectral exponent \(D_{\mathrm{eff}}\)</h2>
+      <p>Encodes retained-mode growth and ranked spectra (context-free base):</p>
+      <div class="math-block">\[
+        N(\Omega)\sim\Omega^{D_{\mathrm{eff}}},\qquad
+        \rho(\Omega)\sim\Omega^{D_{\mathrm{eff}}-1},\qquad
+        \frac{\Omega_n}{\Omega_1}=n^{1/D_{\mathrm{eff}}}.
+      \]</div>
+      <p>Here \(N\) is cumulative count, \(\rho\) the density of retained modes, and the ranked-ratio law is invariant to the base scale. Use where applicable as a cross-domain fingerprint; do not treat a specific base as support.</p>
+    </div>
+
+    <!-- Gaussian proxy -->
+    <div class="card">
+      <h2>Didactic proxy (Gaussian)</h2>
+      <p>A convenient proxy satisfying locality and positivity is a Gaussian-type kernel in normal coordinates:</p>
+      <div class="math-block">\[
+        K_{\lambda}(x;X)\propto\exp\!\Big(-\tfrac{\mathrm{dist}(X,\pi^{-1}(x))^2}{2\sigma^2}\Big),\qquad \sigma\sim\lambda.
+      \]</div>
+      <p>Then \(O=K_{\lambda}\star\Phi\) is band-limited; high-frequency content is exponentially suppressed with index governed by \(\lambda/\lambda_q\), reproducing the fidelity law above.</p>
+      <p class="note">D.R.E.A.M remains kernel-agnostic; this proxy is didactic only.</p>
+    </div>
+
+    <!-- Practical mapping -->
+    <div class="card">
+      <h2>Instrument mapping</h2>
+      <ul>
+        <li>\(\lambda\) is platform-dependent (baseline, wavelength, coherence length); forecasts depend on \(\lambda/\lambda_q\).</li>
+        <li>Scan across the cliff: interferometry/photonic lattices, NV centers, atom interferometers, superconducting circuits.</li>
+        <li>Read out both channels: \(R_{\mathrm{HF}}(\lambda)\) and \(R_{\mathrm{struct}}(\lambda)\) under the <em>same</em> \((\lambda_q,D_{\mathrm{eff}})\).</li>
+        <li>Map focusing metrics \(A(x)\), \(M(\lambda,\varepsilon;x)\), \(\mathrm{CPI}(x)\) and check the predicted separation of decay rates.</li>
+        <li>Symmetry/guardrail checks for kernel equivariance and PSD behavior (well-posedness).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Illustration -->
+  <div class="card">
+    <h2>Illustration — toy kernel weave reality (10D → 4D modeling in Python)</h2>
+    
+<div id="kw-scope" class="weave-scope">
+  <!-- Absolute endpoint to work under any prefix/blueprint -->
+
+  <!-- Controls -->
+  <div class="kw-controls" style="margin-bottom:10px;">
+    <label for="kw-lam" style="display:block;margin-bottom:6px;">λ (probe scale)</label>
+
+    <div class="kw-slider-wrap" style="position:relative;">
+      <input id="kw-lam" type="range" min="0" max="2.0" step="0.02" value="0.30" style="width:100%;">
+      <!-- Cliff markers -->
+      <div id="kw-cliff50" class="kw-cliff" title="R(λ)=0.5"></div>
+      <div id="kw-cliff10" class="kw-cliff kw-cliff-weak" title="R(λ)=0.1"></div>
+    </div>
+
+    <div style="font-size:13px;color:var(--muted);margin-top:6px;">
+      λ = <span id="kw-lam-val">0.30</span> · R(λ)=exp[−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>] → <strong id="kw-r-val">…</strong>
+      <span id="kw-cliff-readout" style="margin-left:.75rem;"></span>
+    </div>
+
+    <div class="kw-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:10px;">
+      <div>
+        <label for="kw-deff" style="display:block;margin-bottom:4px;">D<sub>eff</sub></label>
+        <select id="kw-deff" style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+          <option value="2.0">2.0 (filamentary)</option>
+          <option value="2.2" selected>2.2 (default)</option>
+          <option value="2.5">2.5</option>
+          <option value="3.0">3.0 (homogenizing)</option>
+        </select>
+      </div>
+      <div>
+        <label for="kw-lq" style="display:block;margin-bottom:4px;">λ<sub>q</sub> (coherence)</label>
+        <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0"
+               style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+      </div>
+      <div>
+        <label for="kw-seed" style="display:block;margin-bottom:4px;">Seed</label>
+        <input id="kw-seed" type="number" value="42"
+               style="width:120px;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:var(--fg);">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button id="kw-regen" class="btn"
+                style="background:var(--accent);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:600;cursor:pointer;">
+          Re-generate
+        </button>
+        <label style="font-size:.95rem;color:var(--muted);"><input id="kw-autos" type="checkbox" checked> Auto</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plot -->
+  <div id="kw-plot" style="height:560px;width:100%;"></div>
+  <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
+</div>
+
+<!-- Load Plotly once globally; remove if already loaded -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+
+<style>
+  /* Palette per series */
+  .weave-scope{
+    --kw-filament: #2dd4bf; /* teal 400  */
+    --kw-facet:    #f59e0b; /* amber 500 */
+    --kw-hub:      #a78bfa; /* violet 400*/
+    --kw-dust:     #94a3b8; /* slate 400 */
+  }
+  /* Transparent plot background */
+  #kw-plot .plot-container, #kw-plot .svg-container { background: transparent !important; }
+
+  /* Cliff markers on the slider */
+  .kw-slider-wrap input[type="range"] { display:block; }
+  .kw-cliff{
+    position:absolute; top:50%; transform:translate(-50%,-50%);
+    width:0; height:18px; border-left:2px dashed var(--accent);
+    pointer-events:none; opacity:0.9;
+  }
+  .kw-cliff-weak{ border-left-style:solid; border-left-color: rgba(255,255,255,0.35); opacity:0.6; }
+
+  /* Bigger legend dots */
+  #kw-plot .legend .legendpoints path,
+  #kw-plot .legend .legendpoints rect,
+  #kw-plot .legend .legendlines path {
+    transform: scale(1.6);
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  @media (max-width: 900px){ .kw-grid { grid-template-columns: 1fr 1fr !important; } }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
+  const root  = getComputedStyle(document.documentElement);
+  const scope = getComputedStyle(document.getElementById('kw-scope'));
+  const FG      = (root.getPropertyValue('--fg')||'#e5e7eb').trim();
+  const MUTED   = (root.getPropertyValue('--muted')||'#9aa4b2').trim();
+  const COL_FI  = (scope.getPropertyValue('--kw-filament')||'#2dd4bf').trim();
+  const COL_FA  = (scope.getPropertyValue('--kw-facet')   ||'#f59e0b').trim();
+  const COL_HU  = (scope.getPropertyValue('--kw-hub')     ||'#a78bfa').trim();
+  const COL_DU  = (scope.getPropertyValue('--kw-dust')    ||'#94a3b8').trim();
+
+  const elPlot=document.getElementById('kw-plot'), elMsg=document.getElementById('kw-msg');
+  const elLam=document.getElementById('kw-lam'), elLamV=document.getElementById('kw-lam-val');
+  const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
+  const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
+  const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
+  const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
+  const elCliffReadout=document.getElementById('kw-cliff-readout');
+
+  const fmt = x => (+x).toFixed(2);
+  const say = s => { elMsg.textContent=s; elMsg.style.display = s ? 'block' : 'none'; };
+
+  // Retention
+  function R(lam, lq, deff){ return Math.exp( - Math.pow(lam / lq, deff) ); }
+
+  // Where R(λ)=τ -> λ_τ = λ_q * (-ln τ)^(1/Deff)
+  function lambdaAtTau(tau, lq, deff){ return lq * Math.pow(-Math.log(tau), 1.0/deff); }
+
+  function placeCliffs(){
+    const lq = parseFloat(elLq.value), deff = parseFloat(elDeff.value);
+    const lamMin = parseFloat(elLam.min), lamMax = parseFloat(elLam.max);
+    const rect = elLam.getBoundingClientRect();
+    const x0 = rect.left, w = rect.width;
+
+    function setMarker(el, tau){
+      let lamTau = lambdaAtTau(tau, lq, deff);
+      lamTau = Math.max(lamMin, Math.min(lamMax, lamTau));
+      const frac = (lamTau - lamMin) / (lamMax - lamMin);
+      el.style.left = (frac * w) + 'px';
+      return lamTau;
+    }
+    const lam50 = setMarker(elCliff50, 0.5);
+    const lam10 = setMarker(elCliff10, 0.1);
+    elCliffReadout.textContent = `cliffs: R=0.5 at λ≈${fmt(lam50)}, R=0.1 at λ≈${fmt(lam10)}`;
+  }
+
+  // Fetch
+  async function fetchData(){
+    const params = { lam: parseFloat(elLam.value), lam_q: parseFloat(elLq.value), deff: parseFloat(elDeff.value), seed: parseInt(elSeed.value) || 42, n: 3500 };
+    return window.DreamWeave ? window.DreamWeave.generate(params) : { traces: { filament:{x:[],y:[],z:[],count:0}, facet:{x:[],y:[],z:[],count:0}, hub:{x:[],y:[],z:[],count:0}, dust:{x:[],y:[],z:[],count:0} } };
+  }
+
+  // Traces with opacity scaling so dust fades fast
+  function makeTraces(data){
+    // series opacities as powers of R: filaments fade slowest, dust fastest
+    const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+    const alphaFil = 0.85 * Math.max(0.25, Math.pow(r, 0.4));
+    const alphaFac = 0.85 * Math.pow(r, 0.9);
+    const alphaHub = 0.85 * Math.pow(r, 1.2);
+    const alphaDus = 0.85 * Math.pow(r, 2.2);
+
+    // optional: shrink dust points at high λ
+    const sizeDust = 2 * Math.max(0.35, Math.pow(r, 1.5));
+    const sizeRest = 2;
+
+    const N = k => data.traces[k].count;
+    const series = [
+      {k:'filament', name:`Filaments (${N('filament')})`, color:COL_FI, alpha:alphaFil, size:sizeRest},
+      {k:'facet',    name:`Facets (${N('facet')})`,       color:COL_FA, alpha:alphaFac, size:sizeRest},
+      {k:'hub',      name:`Hubs (${N('hub')})`,           color:COL_HU, alpha:alphaHub, size:sizeRest},
+      {k:'dust',     name:`Dust (${N('dust')})`,          color:COL_DU, alpha:alphaDus, size:sizeDust}
+    ];
+
+    return series.map(({k,name,color,alpha,size})=>{
+      const t = data.traces[k];
+      return { type:'scatter3d', mode:'markers', name,
+               x:t.x, y:t.y, z:t.z,
+               marker:{ size, opacity:alpha, color } };
+    });
+  }
+
+  function layout(){
+    const grid='rgba(255,255,255,0.12)', zero='rgba(255,255,255,0.2)';
+    return {
+      paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+      font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
+      scene:{
+        xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },
+        aspectmode:'cube'
+      },
+      margin:{ l:0, r:0, t:20, b:0 },
+      showlegend:true,
+      legend:{ orientation:'v', x:0.82, y:0.98, font:{ size:11, color:MUTED } },
+      title:{ text:'10D→4D Projection: principal 3D view (facets + filaments)', x:0.02, font:{ size:13, color:MUTED } }
+    };
+  }
+
+  function bumpLegendDots(scale=1.6){
+    ['.legend .legendpoints path','.legend .legendpoints rect','.legend .legendlines path']
+      .forEach(s => document.querySelectorAll(`#kw-plot ${s}`).forEach(el => {
+        el.style.transform = `scale(${scale})`;
+        el.style.transformBox = 'fill-box';
+        el.style.transformOrigin = '50% 50%';
+      }));
+  }
+
+  async function update(){
+    try{
+      const data = await fetchData();
+      const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+      elLamV.textContent = fmt(elLam.value);
+      elR.textContent = r.toFixed(3);
+
+      const tr = makeTraces(data);
+      const ly = layout();
+
+      if(!elPlot._plotted){ Plotly.newPlot(elPlot, tr, ly, {responsive:true}).then(()=>bumpLegendDots()); elPlot._plotted=true; }
+      else { Plotly.react(elPlot, tr, ly, {responsive:true}).then(()=>bumpLegendDots()); }
+    }catch(e){ say(`Could not generate weave data (${e.message}). Make sure js/weave.js is loaded.`); }
+  }
+
+  // Events
+  function onParamsChanged(){
+    placeCliffs();
+    if(document.getElementById('kw-autos').checked) update();
+    else {
+      // even without autos, keep readouts correct
+      const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
+      elLamV.textContent = fmt(elLam.value); elR.textContent = r.toFixed(3);
+    }
+  }
+  elLam.addEventListener('input', onParamsChanged);
+  elLam.addEventListener('change', onParamsChanged);
+  elDeff.addEventListener('change', onParamsChanged);
+  elLq.addEventListener('change', onParamsChanged);
+  elRegen.addEventListener('click', ()=>{ elSeed.value=(Math.random()*1e6)|0; update(); });
+  window.addEventListener('resize', placeCliffs);
+
+  // First render
+  update().then(placeCliffs);
+});
+</script>
+    <div class="card" style="margin-top:10px;">
+<h3 style="margin:0 0 .6rem 0;font-weight:600;">Watch the weave like a TV</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<p class="small" style="color:var(--muted);margin:.2rem 0 .6rem 0;">
+       Think of the 10D→4D kernel as a camera feeding a TV. You don’t see the 10D scene directly—you
+       see a processed picture. The sliders are like TV controls:
+</p>
+<ul style="margin:0 0 .6rem 1.1rem;color:var(--fg);line-height:1.35;">
+<li><strong>λ — “Pixel size / blur”</strong><br>
+           Bigger λ ≙ bigger pixels / softer focus. Fine “static” melts first, bold structures survive.
+           In math this is the blur radius; in optics it’s the **MTF** cutoff.</li>
+<li><strong>λ<sub>q</sub> — “Native focus / sweet spot”</strong><br>
+           Sets the scale where the signal is naturally coherent (the panel’s <em>native resolution</em>).
+           When λ ≪ λ<sub>q</sub> you see noisy speckle; when λ ≫ λ<sub>q</sub> you over-blur.</li>
+<li><strong>D<sub>eff</sub> — “Noise-reduction curve”</strong><br>
+           How aggressively detail fades as you increase pixel size. Lower ≙ gentle, edge-preserving.
+           Higher ≙ strong de-noise that smears edges faster.</li>
+<li><strong>Seed — “Channel / scene”</strong><br>
+           Same TV, different program. Changes the particular weave realization without changing how
+           the TV processes it.</li>
+</ul>
+<p class="small" style="color:var(--muted);margin:.2rem 0;">
+<strong>Cliff markers:</strong> the dashed ticks on the λ slider are the “resolution cliffs.”
+       Left tick (R=0.5) ≙ detail is half-retained; right tick (R=0.1) ≙ detail is mostly gone—like
+       stepping back until fine text turns to mush.
+</p>
+</div>
+<div>
+<h4 style="margin:.2rem 0 .4rem 0;font-weight:600;">What the colors mean (picture content)</h4>
+<ul style="margin:0 0 .6rem 1.1rem;line-height:1.35;">
+<li><span style="color:#2dd4bf;font-weight:700;">Filaments</span> = <em>edges/strings</em> (sharp lines). These hold up well as pixel size grows.</li>
+<li><span style="color:#f59e0b;font-weight:700;">Facets</span> = <em>surfaces</em> (broad shapes). Fade slower than speckle.</li>
+<li><span style="color:#a78bfa;font-weight:700;">Hubs</span> = <em>highlights</em> (bright knots). Persist if they’re big enough.</li>
+<li><span style="color:#94a3b8;font-weight:700;">Dust</span> = <em>static/grain</em>. First to disappear when pixels get big.</li>
+</ul>
+<p class="small" style="color:var(--muted);margin:.2rem 0;">
+       The retention law under the hood is
+<code>R(λ)=exp(−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>)</code>—a TV-style “detail left
+       after blur” curve. We bias the picture so <span style="color:#94a3b8;">dust</span> fades fastest,
+<span style="color:#2dd4bf;">filaments</span> slowest—like smart noise reduction.
+</p>
+</div>
+</div>
+<div class="sep" style="height:1px;background:var(--border);margin:10px 0;"></div>
+<p class="small" style="color:var(--muted);margin:0;">
+   TL;DR — <strong>λ</strong> is your pixel size / viewing distance; <strong>λ<sub>q</sub></strong> sets
+   the scene’s native focus; <strong>D<sub>eff</sub></strong> is how hard the TV’s noise-reduction
+   leans on fine detail. Slide λ and watch static vanish, edges survive, and the picture settle into its
+   large-scale shapes.
+</p>
+</div>
+  </div>
+</div>
+
+<style>
+/* Keep selected value readable at all times */
+#dataset{
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff;
+  color-scheme: dark;
+}
+/* Options in the popup */
+#dataset option{
+  color:#e5e7eb;
+  background:#0b1220;
+}
+/* The currently selected (highlighted) option */
+#dataset option:checked,
+#dataset option:focus,
+#dataset option:hover:checked{
+  color:#ffffff !important;
+  background:#1f2937 !important;
+}
+/* Legacy Edge/IE */
+#dataset::-ms-value{ color:#ffffff; background:#0f172a; }
+
+/* --- Kernel toy selects: make popup readable --- */
+#kw-deff{
+  background:#0f172a;
+  color:#ffffff;
+  -webkit-text-fill-color:#ffffff;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:8px 10px;
+  color-scheme: light;
+}
+#kw-deff option{
+  background:#ffffff;
+  color:#0b0f14;
+}
+#kw-deff option:checked,
+#kw-deff option:hover:checked,
+#kw-deff option:focus:checked{
+  background:#2563eb !important;
+  color:#ffffff !important;
+}
+#kw-deff:focus-visible{
+  outline:2px solid #22d3ee;
+  outline-offset:2px;
+}
+</style>
+
+<script>
+// Re-typeset math after an expander is opened
+document.querySelectorAll('details.more').forEach(d=>{
+  d.addEventListener('toggle', ()=> d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+});
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

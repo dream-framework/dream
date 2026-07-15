@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Предсказания · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link active foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<div class="container">
+
+  <div class="card hero">
+    <h1>D.R.E.A.M. — Проверяемые предсказания</h1>
+    <p class="kicker">Статус в соответствии со страницами сайта: S2 (Закон сохранения информации) подтверждён; S3 сильно поддерживает S2 (частично); S1 отнесён к спекулятивным.</p>
+  </div>
+
+  <div class="grid two" style="margin-top:1rem">
+
+    <!-- S2 -->
+    <div class="card">
+      <h2>S2 — Закон сохранения информации <span class="badge ok">Подтверждён</span></h2>
+      <p class="core"><strong>Утверждение.</strong> Интерференционная информация затухает с ростом масштаба как растянутая экспонента с инвариантами ядра \(\lambda_q\) и \(D_{\mathrm{eff}}\):</p>
+      <div class="math-block">\[
+        \begin{aligned}
+        R(\lambda) &= \exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big],\\
+        y(\lambda) &:= \ln(-\ln R) = D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q.
+        \end{aligned}\]
+      </div>
+      <p><strong>Почему такой статус.</strong> Онлайн-демонстратор междисциплинарных данных показывает коллапс кривых после нормировки на \(\lambda_q\); стандартное преобразование линейно на стабильном окне, выявляя общий \(\lambda_q\) и согласованные наклоны \(D_{\mathrm{eff}}\) для каналов ВЧ-мощности и структурной корреляции. (См. страницу «Удержание».)</p>
+
+      <h3 style="margin-top:.6rem;">Как тестировать (любой инструмент)</h3>
+      <ul>
+        <li>Определить монотонный сглаживатель, связанный с разрешением; вычислить \(R_{\mathrm{HF}}(\lambda)\) и/или \(R_{\mathrm{corr}^2}(\lambda)\).</li>
+        <li>Построить график \(y=\ln(-\ln R)\) против \(\ln\lambda\); извлечь \(\widehat{D}_{\mathrm{eff}},\,\widehat{\lambda}_q\). Указать доверительные интервалы и диапазон λ.</li>
+        <li>Показать коллапс кривых в разных контекстах после нормировки на \(\widehat{\lambda}_q\).</li>
+      </ul>
+
+      <p><strong>Фальсификация.</strong> Устойчивая кривизна в \(y(\lambda)\) после калибровки; несогласуемые значения \(D_{\mathrm{eff}}\) для двух каналов в одном контексте; отсутствие коллапса при \(\lambda/\lambda_q\).</p>
+    </div>
+
+    <!-- S3 -->
+    <div class="card" id="s3-cosmo">
+      <h2>S3 — Космология и фрактальный спектр <span class="badge warn">Частично подтверждено (сильная поддержка S2)</span></h2>
+      <p class="core"><strong>Утверждение.</strong> Эффективный спектральный показатель \(D_{\mathrm{eff}}\) управляет числом сохраняемых мод и плотностью состояний; структура проявляет ограниченную фрактальность ниже порога когерентности и стремится к однородности выше него.</p>
+        <div class="math-block">\[
+          \begin{aligned}
+          N(\Omega) &\propto \Omega^{D_{\mathrm{eff}}},\\
+          \rho(\Omega) &= \frac{dN}{d\Omega} \propto \Omega^{D_{\mathrm{eff}}-1},\\
+          D_{\mathrm{eff}}(\lambda) &\nearrow 3 \quad \text{при } \lambda \to \infty.
+          \end{aligned}
+          \]
+        </div>
+      <p><strong>Почему такой статус.</strong> Наблюдаемые тренды (многомасштабные анализы, переход от сетевой структуры к однородности) и спектральные диагностики согласуются с предсказаниями S2 об ограниченной фрактальности и выходе на \(D\!\to\!3\) на больших масштабах. Мы трактуем это как сильную поддержку S2, но оставляем статус «частично» до появления гармонизированных, заранее зарегистрированных пайплайнов (DESI/Euclid/LSST).</p>
+
+      <h3 style="margin-top:.6rem;">Программа</h3>
+      <ul>
+        <li><strong>Показатели:</strong> оценка \(D_{\mathrm{eff}}\) по подсчёту мод/спектральным наклонам в ограниченных полосах.</li>
+        <li><strong>Поток:</strong> проверка выхода на однородность (подсчёты \(\sim r^3\), затухание корреляций) выше порога.</li>
+        <li><strong>Сравнения:</strong> сопоставление космологических и лабораторных значений \(D_{\mathrm{eff}}\) (одно преобразование).</li>
+      </ul>
+
+      <p><strong>Фальсификация.</strong> Устойчивая несовместимость космологических и лабораторных \(D_{\mathrm{eff}}\); отсутствие выхода на однородность на больших масштабах после учёта систематики.</p>
+    </div>
+
+    <!-- S5 -->
+    <div class="card" id="s5-lensing">
+      <h2>S5 — Инварианты сильного гравитационного линзирования <span class="badge warn">Частично подтверждено (ранний этап)</span></h2>
+      <p class="core"><strong>Утверждение.</strong> При угловом сглаживании \( \lambda \) два канала удержания ведут себя, как предсказывает S2, с общим \(\lambda_q\): быстрая потеря ВЧ-мощности против более медленного затухания структурной корреляции; скелет колец/дуг сохраняется на гребнях CPI, пока ВЧ-текстура разрушается.</p>
+      <div class="math-block">\[
+        \ln(-\ln R(\lambda))=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q,\quad
+        R_{\mathrm{HF}}(\lambda)\prec R_{\mathrm{corr}^2}(\lambda).
+      \]</div>
+      <p><strong>Статус.</strong> Первые анализы показывают двухканальное разделение и приближённые лог-линейные отпечатки с общим \(\lambda_q\); готовятся более широкие согласованные редукции.</p>
+
+      <h3 style="margin-top:.6rem;">Программа</h3>
+      <ul>
+        <li>VIS/NIR/mm λ-сетка; аппроксимация обоих каналов; показать общий \(\widehat{\lambda}_q\) и наклоны.</li>
+        <li>Суммировать топологию критических множеств в зависимости от \(\lambda\); картировать гребни CPI и их устойчивость.</li>
+      </ul>
+
+      <p><strong>Фальсификация.</strong> Расхождение \(\widehat{\lambda}_q\) между диапазонами для одной линзы; отсутствие двухканального разделения; нет признака устойчивости CPI.</p>
+    </div>
+
+    <!-- S4 -->
+    <div class="card">
+      <h2>S4 — Модуляция вакуумной энергии <span class="badge warn">Открыто</span></h2>
+      <p class="core"><strong>Утверждение.</strong> Геометрически-зависимые вариации вакуумной энергии масштаба \(\sim 10^{-8}\,\mathrm{eV}^4\).</p>
+      <h3 style="margin-top:.6rem;">Программа</h3>
+      <ul>
+        <li>Быстро переключаемые касимировские геометрии; дифференциальное считывание.</li>
+        <li>Точная атомная спектроскопия против инженерных модовых плотностей.</li>
+        <li>Оптомеханика в специально созданных кавитях.</li>
+      </ul>
+      <p><strong>Фальсификация.</strong> Отсутствие модуляции \(\lesssim 10^{-10}\,\mathrm{eV}^4\) в ≥3 различных установках.</p>
+    </div>
+
+    <!-- S1 -->
+    <div class="card speculative">
+      <h2>S1 — ALP негармоническая лестница <span class="badge spec">Спекулятивно / Релегировано</span></h2>
+      <p class="core"><strong>Заявление.</strong> Лёгкая аксионоподобная башня с негармоническими соотношениями \(m_n/m_1 = n^{1/D_{\mathrm{eff}}}\) сохраняется для полноты, но не используется для поддержки каркаса в текущей позиции.</p>
+      <div class="math-block">\[
+        \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}}\quad(\text{только закон отношений; база задаётся контекстом}).
+      \]</div>
+      <p class="note">Рассматривать экспозиции и связи по каждому модусу; инвариант — только соотношение, а не база.</p>
+    </div>
+
+  </div>
+
+  <!-- Timeline -->
+  <div class="card">
+    <h2>Хронология верификации (примерная)</h2>
+    <div class="code" style="overflow:auto">
+      <table style="width:100%; border-collapse:collapse">
+        <thead>
+          <tr style="border-bottom:2px solid #2a2f5a">
+            <th style="text-align:left">Пункт</th>
+            <th style="text-align:center">Сейчас</th>
+            <th style="text-align:center">След. 12–24 мес</th>
+            <th style="text-align:center">Далее</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S2: Удержание</td>
+            <td style="text-align:center"><span class="badge ok">Подтверждён</span></td>
+            <td style="text-align:center">Расширение междоменного каталога; заранее зарегистрированные репликации</td>
+            <td style="text-align:center">—</td>
+          </tr>
+          <tr>
+            <td>S3: Космология/Фракталы</td>
+            <td style="text-align:center"><span class="badge warn">Частично</span></td>
+            <td style="text-align:center">Гармонизированные пайплайны DESI/Euclid/LSST</td>
+            <td style="text-align:center">Сравнения с лабораторными \(\widehat{D}_{\mathrm{eff}}\)</td>
+          </tr>
+          <tr>
+            <td>S5: Линзирование</td>
+            <td style="text-align:center"><span class="badge warn">Ранний</span></td>
+            <td style="text-align:center">Мультидиапазонные подгонки; устойчивость CPI</td>
+            <td style="text-align:center">—</td>
+          </tr>
+          <tr>
+            <td>S4: Вакуумная энергия</td>
+            <td style="text-align:center"><span class="badge warn">Открыто</span></td>
+            <td style="text-align:center">Касимир / спектроскопия / оптомеханика</td>
+            <td style="text-align:center">—</td>
+          </tr>
+          <tr>
+            <td>S1: Лестница ALP</td>
+            <td style="text-align:center"><span class="badge spec">Релегировано</span></td>
+            <td style="text-align:center">—</td>
+            <td style="text-align:center">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && window.MathJax?.typeset && MathJax.typeset([d]));
+  });
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

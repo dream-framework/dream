@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проекционное ядро · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+    body.is-article .site-header{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0; }
+    
+  </style>
+</head>
+<body data-lang="ru" class="is-article">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="../index.html">Главная</a>
+      <a class="nav-link" href="../case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="../retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="../axioms.html">Аксиомы</a>
+      <a class="nav-link" href="../theorems.html">Теоремы</a>
+      <a class="nav-link" href="../math.html">Матмодель</a>
+      <a class="nav-link" href="../kernel.html">Проекция</a>
+      <a class="nav-link" href="../topology.html">Топология</a>
+      <a class="nav-link" href="../spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="../predictions.html">Предсказания</a>
+      <a class="nav-link" href="../falsification.html">Фальсификация</a>
+      <a class="nav-link" href="../tests.html">Тесты</a>
+      <a class="nav-link" href="../faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="../about.html">Оценка ИИ</a>
+      <a class="nav-link" href="../time.html">Время</a>
+      <a class="nav-link" href="../memory.html">Память</a>
+      <a class="nav-link active" href="../articles.html">Статьи</a>
+      <a class="nav-link" href="../../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  html {
+    /* Fill the body margins so nothing shows through */
+
+    min-height: 100%;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 2% 8%;            /* keep your existing spacing */
+    color: #111;
+
+    min-height: 100%;
+    min-height: 100svh;       /* mobile-safe full viewport */
+  }
+
+  h1, h2, h3 {
+    color: black;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  pre, .equation {
+    
+    padding: 6px 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  blockquote {
+    border-left: 4px solid #96a31d;
+    padding-left: 15px;
+    color: black;
+    font-style: italic;
+    margin: 1em 0;
+    background: #fff;
+  }
+  .infobox {
+
+    border: 1px solid #dbe3f0;
+    border-left: 4px solid white;
+    padding: 12px 16px;
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.95em;
+    color: #444;
+  }
+
+
+
+  /* --- keep fractals visible behind everything --- */
+
+#fractal-canvas, #fractals, canvas#fractal {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* --- nuke the full-width wash coming from the shell/overlays --- */
+.article-shell,
+.article-shell > *:not(main):not(.article):not(.page-content):not(.content),
+#content-wrap, .content-wrap, .page-wrap, #page, .page, .site, #site,
+.container-fluid {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.article-shell::before, .article-shell::after,
+#content-wrap::before, #content-wrap::after,
+.page::before, .page::after,
+.site::before, .site::after {
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+}
+
+/* --- the article “card” (kept) --- */
+:root{
+  --text-max: 68ch;
+  --text-pad: clamp(14px, 2.2vw, 24px);
+  --card-bg: rgba(255,255,255,0.97); /* near-solid white */
+}
+
+:where(main, .article){
+  max-width: var(--text-max);
+  margin-inline: auto;
+  padding: var(--text-pad);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  min-height: calc(100svh - 4%);
+}
+</style>
+<section class="content-section article-shell">
+  <div class="section-header">
+    <h1 class="section-title">Проекционное ядро</h1>
+    <p class="muted">Базовые понятия: проталкивание (push-forward), слои (fibers), константы-как-настройки, ретенция (retention) и инварианты</p>
+  </div>
+
+
+  <!-- 1) ЧТО ТАКОЕ ЯДРО -->
+  <section id="kernel-def">
+    <details class="pro">
+      <summary><h2>1) Что такое ядро (формально)</h2></summary>
+      <p>
+        В D.R.E.A.M наблюдаемое в 4D описывается как <em>проталкивание</em> через конечноразрешённое
+        проекционное ядро \(K_\lambda\). Пусть \(X\in\mathcal{M}_{10}\) — координаты на Мета-многообразии (MM),
+        \(x\in\mathbb{R}^{1,3}\) — 4D-координаты, \(\Phi(X)\) — MM-поле или плотность. Тогда
+      </p>
+      <p class="equation">
+        \[
+        \phi(x)\;=\;\int_{\mathcal{M}_{10}} K_\lambda(x,X)\,\Phi(X)\,d^{10}X,
+        \]
+      </p>
+      <p>
+        где \(K_\lambda\) имеет конечную полосу/поддержку, уважает причинность и положительность.
+        Параметр \(\lambda\) суммирует эффективное разрешение, при котором MM-содержимое становится
+        видимым в 4D-проекции.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Представьте богатую сцену, проходящую через устойчивое правило отрисовки. Это правило — <em>ядро</em>.
+        Оно ничего не выдумывает; оно решает, какие части скрытой сцены будут ясны при нашем разрешении,
+        а какие сольются.
+      </p>
+      <p>
+        Ядро делает физику упорядоченной. Где бы вы ни были, действует одно и то же правило отрисовки,
+        поэтому одни и те же узоры появляются снова и снова. Нам не нужно видеть каждую микроволну,
+        чтобы доверять крупным формам — как раз их ядро и сохраняет.
+      </p>
+      <p>
+        Коротко: ядро — переводчик из «как устроена реальность в кодировке MM» в «что мы реально наблюдаем».
+      </p>
+    </div>
+  </section>
+
+  <!-- 2) ОТОБРАЖЕНИЕ И СЛОИ -->
+  <section id="fibers">
+    <details class="pro">
+      <summary><h2>2) Отображение и слои (формально)</h2></summary>
+      <p>
+        Если \(F:\mathcal{M}_{10}\!\to\!\mathbb{R}^{1,3}\) — проекция, то <em>слоем</em> (fiber) над точкой \(x\)
+        является \(F^{-1}(x)\). Для плотностей \(\rho_{10}\) на MM удобно записать
+      </p>
+      <p class="equation">
+        \[
+        \rho_4(x)\;=\;\int_{F^{-1}(x)} K_\lambda(x,X)\,\rho_{10}(X)\,\frac{d\Sigma_6(X)}{J_F(X)},
+        \]
+      </p>
+      <p>
+        где \(d\Sigma_6\) — наведённая 6D-мера на слое, а \(J_F\) — якобиан \(F\).
+        Видно, что нескольким MM-состояниям может соответствовать одно 4D-событие, причём конечное
+        разрешение определяет, как они складываются.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Как будто вы смотрите на город с высоты: множество разных крыш попадает в один крошечный пиксель.
+        <em>Слой</em> — это «всё в городе, что выстраивается под этот пиксель». При проекции в 4D много
+        деталей MM попадают в одну наблюдаемую точку.
+      </p>
+      <p>
+        Ядро говорит, как их объединять. Если они согласуются на крупном уровне — сигнал чёткий. Если спорят
+        в мелочах — микроспоры взаимно гасятся. Поэтому одно наблюдение в 4D может суммировать большую
+        скрытую структуру, не показывая каждый под-штрих.
+      </p>
+      <p>
+        Слои показывают, что измерение — это <em>выбор и усреднение</em>, а не простое «считывание» скрытого числа:
+        несколько MM-вкладов собираются в то, что мы фиксируем.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3) КОНСТАНТЫ КАК НАСТРОЙКИ -->
+  <section id="constants">
+    <details class="pro">
+      <summary><h2>3) Константы как настройки ядра (формально)</h2></summary>
+      <p>
+        В D.R.E.A.M привычные константы рассматриваются как часть спецификации ядра:
+        \(\boldsymbol{\theta}_K=\{c,\hbar,G,\ldots\}\). Изнутри проекции это <em>измеряемые</em>
+        настройки \(K_\lambda\), а не выводимые величины. Изменение \(\boldsymbol{\theta}_K\) меняет
+        допустимые инварианты, спектры и каузальные конусы 4D-описания.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        У ядра есть фиксированные параметры. Числа, которые мы называем «константами» — например, скорость
+        света — это значения этих параметров, определённые экспериментом. Они не «выводятся» из самого
+        4D-описания.
+      </p>
+      <p>
+        Изменение параметров привело бы к смене того, какие структуры могут быть устойчивыми и повторяемыми.
+        Универсальные узоры, которые мы наблюдаем, — именно те, что согласуются с одними и теми же значениями параметров.
+      </p>
+      <p>
+        В этом взгляде «константы» принадлежат правилу перевода, которое делает нашу Вселенную согласованной —
+        от лабораторных измерений до космических масштабов.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4) РЕТЕНЦИЯ -->
+  <section id="retention">
+    <details class="pro">
+      <summary><h2>4) Ретенция и классический предел (формально)</h2></summary>
+      <p>
+        Конечное разрешение ведёт к <em>ретенции</em> одних сведений и утрате других. Удобное семейство:
+      </p>
+      <p class="equation">
+        \[
+        \mathcal{R}(\lambda)\;\approx\;\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{\alpha}\Big],
+        \qquad \alpha\in(1,2],
+        \]
+      </p>
+      <p>
+        где \(\lambda\) — эффективный масштаб сглаживания, \(\lambda_q\) — характерное «квантовое»
+        разрешение. Низкоуровневая структура и топологические ярлыки обычно сохраняются лучше, чем
+        высокочастотная фаза. Классический предел — это история ретенции: при росте \(\lambda\)
+        мелочь отваливается, устойчивая структура остаётся.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Не всё одинаково переживает прохождение через ядро. Крупные организованные черты держатся,
+        мелкая «рябь» уходит. Это и есть «ретенция»: что мир сохраняет, а что отпускает.
+      </p>
+      <p>
+        Отсюда естественно возникает «классический» мир. На больших масштабах и за долгие времена
+        размывание сильнее бьёт по мелочи, поэтому мы видим устойчивые предметы, надёжную причинность
+        и воспроизводимые измерения.
+      </p>
+      <p>
+        Никаких дополнительных постулатов: классика — это облик узоров, устойчивых при том же ядре,
+        которое проявляет квантовые явления на более тонких уровнях.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5) ИНВАРИАНТЫ -->
+  <section id="invariants">
+    <details class="pro">
+      <summary><h2>5) Что сохраняется: инварианты (формально)</h2></summary>
+      <p>
+        Самые надёжные наблюдаемые величины связаны с <em>инвариантами</em> относительно \(K_\lambda\):
+        сохраняемыми зарядами, топологическими классами, низкоуровневыми корреляционными структурами и
+        другими признаками, стабильными при проталкивании с конечным разрешением.
+      </p>
+      <p>
+        Практически: если величина воспроизводится у наблюдателей и приборов с одинаковым эффективным
+        \(\lambda\), это сильный кандидат на ядровой инвариант в 4D-описании.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Инварианты — это «сувениры» реальности: то, что не меняется при переизмерении и при смене инструмента
+        на столь же «острый». Они — каркас законов.
+      </p>
+      <p>
+        Поэтому наука доверяет повторяемым узорам: если узор переживает разные способы взгляда, он, скорее всего,
+        связан с тем, как мир «отрисовывается», а не с особенностями одного опыта.
+      </p>
+      <p>
+        В D.R.E.A.M инварианты — ядро того, что сохраняется; именно поэтому они определяют большую часть физики.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6) ПОЛОСА ИЗМЕРЕНИЯ -->
+  <section id="measurement">
+    <details class="pro">
+      <summary><h2>6) Полоса измерения (формально)</h2></summary>
+      <p>
+        Приборы задают <em>эффективное</em> \(\lambda\): полоса, время интегрирования, геометрия и шум
+        определяют, какие MM-черты проходят через «затвор» конечного разрешения. Меняя \(\lambda\),
+        мы меняем баланс сохраняемого и подавляемого, не трогая саму MM.
+      </p>
+    </details>
+    <div class="public">
+      <p>
+        Инструменты важны. Микроскоп и телескоп показывают один и тот же мир, но с разной досягаемостью.
+        На языке D.R.E.A.M каждый инструмент задаёт своё эффективное \(\lambda\).
+      </p>
+      <p>
+        Меняя инструмент, вы не меняете реальность — вы меняете то, что пройдёт через ядро. Одни черты
+        вспыхнут, другие уйдут в фон. Это ожидаемо, поэтому аккуратные эксперименты всегда указывают
+        полосу и настройки.
+      </p>
+      <p>
+        Последовательная часть между инструментами — инварианты — и становится «законами». Остальное — контекст.
+      </p>
+    </div>
+  </section>
+
+  
+
+</section>
+
+<script>
+(function(){
+  // If your header already wires the Science/General toggle, this is harmless.
+  // It just re-typesets math whenever science mode becomes visible.
+  const obs = new MutationObserver(() => {
+    const sciVisible = [...document.querySelectorAll('[data-mode="science"]')]
+      .some(n => n.offsetParent !== null);
+    if (sciVisible && window.MathJax?.typeset) MathJax.typeset();
+  });
+  obs.observe(document.body, {subtree:true, attributes:true, attributeFilter:['style','class']});
+})();
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../../js/fs-toggle.js"></script>
+</body>
+</html>

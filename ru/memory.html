@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Память · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+  </style>
+</head>
+<body data-lang="ru" class="">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Матмодель</a>
+      <a class="nav-link" href="kernel.html">Проекция</a>
+      <a class="nav-link" href="topology.html">Топология</a>
+      <a class="nav-link" href="spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="about.html">Оценка ИИ</a>
+      <a class="nav-link" href="time.html">Время</a>
+      <a class="nav-link active" href="memory.html">Память</a>
+      <a class="nav-link" href="articles.html">Статьи</a>
+      <a class="nav-link" href="../plotter.html">График Удержания</a>
+      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Математика</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерпретации</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link on" href="../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link " href="../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  :root {
+    --ui-text:#e9f1ff; --ui-sub:#b6c3d6; --ui-border:rgba(200,210,225,.25);
+  }
+  .plotter-wrap{max-width:1200px;margin:4px 4px;}
+  .transparent-card,.transparent-card .card-body{background:transparent!important;border:none!important;box-shadow:none!important;}
+  .section-title{color:var(--ui-text);font-weight:600;letter-spacing:.2px;}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .form-text{color:var(--ui-sub)!important;}
+  .card.slate{border:1px solid var(--ui-border);background:rgba(6,14,24,.35)}
+  .card.slate .card-header{border-bottom:1px solid var(--ui-border);color:var(--ui-text);font-weight:600}
+  .card.slate .card-body{color:var(--ui-text)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:end;margin-bottom:.5rem}
+  .toolbar .group{display:flex;gap:.5rem;align-items:center}
+  .toolbar label{color:var(--ui-text);margin-bottom:0;font-size:.9rem}
+  .toolbar .form-select,.toolbar .form-control,.toolbar .form-range{min-width:140px}
+  .insight{color:var(--ui-sub);font-size:.92rem;border-top:1px dashed var(--ui-border);padding-top:.5rem;margin-top:.25rem}
+  details.adv > summary{cursor:pointer;color:var(--ui-sub)}
+  details.adv{margin-left:auto}
+  .bullets-tight li{margin-bottom:.25rem}
+</style>
+
+<div class="container my-4 plotter-wrap">
+  <h2 class="text-center section-title mb-2">D.R.E.A.M. — Срез памяти</h2>
+
+  <!-- ===== Memory-first cards (no theory) ===== -->
+  <div class="row g-3 mb-3">
+    <!-- 1) Memory Playbook for 9–5 -->
+    <!-- REPLACE the existing "Память: быстрый план (9–5)" card with this -->
+<div class="col-lg-6">
+  <div class="card slate">
+    <div class="card-header">Память: практические советы</div>
+    <div class="card-body">
+      <ul class="mb-2 bullets-tight">
+        <li><strong>Фиксируйте сразу:</strong> запишите мысль/деталь без промедления.</li>
+        <li><strong>Пробный повтор через 10–20 мин:</strong> короткий взгляд, чтобы «сцепить» детали.</li>
+        <li><strong>Ещё один повтор сегодня:</strong> быстрый проход во второй половине дня.</li>
+        <li><strong>Дальше — растяжение:</strong> 1д → 3д → 7д, затем раз в неделю/две.</li>
+        <li><strong>Микроповторы 30–90 с:</strong> достаточно освежить, не переучивайте с нуля.</li>
+        <li><strong>Гигиена рабочего дня:</strong> группируйте мелкие задачи; 3–5 коротких сессий в день.</li>
+      </ul>
+      <div class="form-text">Совет: включите <em>Нормировать x по λ</em> — «обрывы» совпадают при x/λ≈1 и элементы проще сравнивать.</div>
+      <div class="form-text mt-2 mono" id="narrate95">—</div>
+    </div>
+  </div>
+</div>
+
+    <!-- 2) Memory Math (cliff-based scheduling) -->
+    <div class="col-lg-3">
+      <div class="card slate">
+        <div class="card-header">Математика памяти (когда повторять)</div>
+        <div class="card-body">
+          <div class="mono" style="font-size:.95rem">
+            \( R(t)=\exp\!\big[-(\lambda t)^{\beta}\big] \)
+          </div>
+          <div class="form-text mb-2">Выберите целевой уровень \(R^\*\) и запланируйте момент, когда R опустится до него:</div>
+          <div class="mono" style="font-size:.95rem">
+            \( t^\*=\dfrac{[-\ln R^\*]^{1/\beta}}{\lambda} \)
+          </div>
+          <hr class="my-2" style="border-color:var(--ui-border)">
+          <div class="form-text">
+            При включённой <span class="mono">Нормировке</span>:
+            \( x/\lambda=t\lambda=[-\ln R^\*]^{1/\beta} \).
+            Для β≈1: R*=0.60 → x/λ≈0.51; R*=1/e → x/λ=1; R*=0.20 → x/λ≈1.61.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3) How to read this plot -->
+    <div class="col-lg-3">
+      <div class="card slate">
+        <div class="card-header">Как читать этот график</div>
+        <div class="card-body">
+          <ul class="mb-2 bullets-tight">
+            <li><strong>Кривая:</strong> каждый срез — удержание для одного элемента/возраста.</li>
+            <li><strong>β (форма):</strong> низкая β = резкий стартовый спад; высокая β = мягкий старт.</li>
+            <li><strong>λ (обрыв):</strong> больше λ → обрыв раньше (повтор раньше).</li>
+            <li><strong>Линия обрыва:</strong> R=1/e ≈ 0.37 — заметная потеря деталей.</li>
+          </ul>
+          <div class="form-text">Используйте ползунок, чтобы увидеть, как возраст (или сложность) сдвигает β и λ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Single card: controls + plot + fused insight ===== -->
+  <div class="card transparent-card mt-1">
+    <div class="card-body">
+      <div class="toolbar">
+        <div class="group">
+          <label class="form-label">Набор данных</label>
+          <select class="form-select form-select-sm" id="datasetSelect" style="max-width:260px">
+            <option selected>Демо — 3D срез по возрасту (локально)</option>
+          </select>
+          <button class="btn btn-outline-primary btn-sm" id="fetchBtn" type="button">Обновить</button>
+        </div>
+
+        <div class="group">
+          
+          <div class="form-check" style="margin-left:1.25rem">
+              <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
+              <label class="form-check-label" for="autoLifeSwitch">Авто-анимация</label>
+            </div>
+        </div>
+
+        <div class="group" style="min-width:240px; margin-left:.75rem">
+  <label for="ageSlider" class="form-label">Возраст <span id="ageValue" class="mono">25</span></label>
+  <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25">
+</div>
+
+        <details class="adv">
+          <summary>Расширенные настройки</summary>
+          <div class="group" style="margin-top:.5rem">
+            <label for="lambda0Slider" class="form-label">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
+            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:150px">
+          </div>
+          <div class="group" style="margin-top:.5rem">
+            <label for="tiltSlider" class="form-label">Наклон z <span id="tiltValue" class="mono">0.14</span></label>
+            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:150px" />
+          </div>
+          <div class="group" style="margin-top:.5rem">
+            <label for="lifeStep" class="form-label">Шаг (лет/тик)</label>
+            <input type="number" class="form-control form-control-sm" id="lifeStep" value="3" min="1" max="10" step="1" style="width:90px">
+            <label for="lifeTick" class="form-label" style="margin-left:.5rem">Тик (мс)</label>
+            <input type="number" class="form-control form-control-sm" id="lifeTick" value="800" min="300" max="4000" step="100" style="width:90px">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="normalizeSwitch">
+            <label class="form-check-label" for="normalizeSwitch">Нормировать x по λ</label>
+          </div>
+          </div>
+        </details>
+      </div>
+
+      <div id="retention3D" style="width:100%; height:720px;"></div>
+      <div id="insightLine" class="insight mono">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script defer src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+<script>
+(function(){
+  const E = Math.E, T_MAX = 18, A_MIN = 5, A_MAX = 90; // shorter x (time window)
+
+  // Age effects (proxy for difficulty/biological drift)
+  function lambdaOfAge(lambda0, a){ const k=2.6, p=1.35; return lambda0*(1+k*Math.pow(a/90,p)); }
+  function betaOfAge(a){ const bY=1.60, bO=0.40, r=1.05, u=Math.min(Math.max((a-A_MIN)/(A_MAX-A_MIN),0),1); return bY+(bO-bY)*Math.pow(u,r); }
+
+  function buildSlice(lambda0, age, normalize){
+    const dt=0.10, t=[]; for(let x=0;x<=T_MAX;x+=dt) t.push(x);
+    const lam=lambdaOfAge(lambda0, age), bet=betaOfAge(age);
+    const xDisp = normalize ? t.map(v=> v*lam) : t.slice();    // x/λ = t*λ (display-only)
+    const z=t.map(tt=> Math.exp(-Math.pow(lam*tt, bet)));
+    const y=t.map(()=> age);
+    const tCliff = 1/lam;
+    const xEarly = 0.2;                         // 20% of axis
+    const tEarly = normalize ? xEarly/lam : xEarly*T_MAX;
+    const rEarly = Math.exp(-(Math.pow(lam*tEarly, bet)));
+    return {xDisp, y, z, lam, bet, tCliff, xEarly, rEarly};
+  }
+
+  function rightWall(normalize){
+    const y=[], z=[]; for(let a=A_MIN;a<=A_MAX;a+=5) y.push(a); for(let r=0;r<=1;r+=0.05) z.push(r);
+    const X=y.map(()=> z.map(()=> normalize? 1 : T_MAX)), Y=y.map(a=> z.map(()=> a)), Z=y.map(()=> z.slice());
+    return {type:'surface',x:X,y:Y,z:Z,showscale:false,opacity:0.10,colorscale:[[0,'#9fb3cc'],[1,'#9fb3cc']],hoverinfo:'skip',name:'right wall'};
+  }
+  function floorGrid(normalize){
+    const traces=[], yRows=[10,30,50,70,90], xCols = normalize? [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0] : Array.from({length:T_MAX+1},(_,i)=>i);
+    yRows.forEach(a=>traces.push({type:'scatter3d',mode:'lines',x:xCols,y:Array(xCols.length).fill(a),z:Array(xCols.length).fill(0),
+                                  line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+    const ages=[10,30,50,70,90];
+    xCols.forEach(tx=>traces.push({type:'scatter3d',mode:'lines',x:Array(ages.length).fill(tx),y:ages,z:Array(ages.length).fill(0),
+                                   line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+    return traces;
+  }
+
+  // UPDATED: accept 'normalize' and label the marker with live value
+  function colorDotsTrace(s, normalize){
+    const label = normalize
+      ? `► R@x/λ=0.2≈${s.rEarly.toFixed(2)}`
+      : `► R@t=${(0.2*T_MAX).toFixed(1)}≈${s.rEarly.toFixed(2)}`;
+    return {
+      type:'scatter3d', mode:'markers',
+      x:s.xDisp, y:s.y, z:s.z,
+      marker:{
+        size:2.2, opacity:0.65,
+        color:s.z, cmin:0, cmax:1,
+        colorscale:'RdBu', reversescale:true,
+        colorbar:{
+          title:'R', titleside:'right',
+          x: 0.96, xanchor: 'left',   // wider scene → park bar in slim gutter
+          y:0.5, yanchor:'middle',
+          len:0.35, thickness:16,
+          outlinecolor:'rgba(230,240,255,0.25)',
+          tickcolor:'rgba(230,240,255,0.5)',
+          tickfont:{color:'#e6f0ff'},
+          bgcolor:'rgba(0,0,0,0)',
+          tickmode:'array',
+          tickvals:[0,0.2,0.4,0.6,0.8,1, s.rEarly],
+          ticktext:['0','0.2','0.4','0.6','0.8','1', label]
+        }
+      },
+      showlegend:false, hoverinfo:'skip'
+    };
+  }
+
+  function cameraFacade(tiltZ){ return { eye:{ x:0.10, y:-2.6, z:tiltZ }, up:{ x:0, y:0, z:1 } }; }
+
+  function figureData(lambda0, age, normalize){
+    const s = buildSlice(lambda0, age, normalize);
+
+    const line = {
+      type:'scatter3d', mode:'lines',
+      x:s.xDisp, y:s.y, z:s.z,
+      line:{ width:9, color:'#2bd07a' },
+      name:`Возраст a=${age.toFixed(0)} (β=${s.bet.toFixed(2)})`,
+      hovertemplate:(normalize?'x/λ':'t')+`=%{x:.2f}<br>a=%{y} лет<br>R=%{z:.3f}<extra></extra>`
+    };
+
+    const cliffX = normalize ? Array.from({length:86},()=>1) : Array.from({length:86},()=> s.tCliff);
+    const cliffY = Array.from({length:86},(_,i)=> 5+i);
+    const cliffZ = Array.from({length:86},()=> 1/E);
+    const cliff  = { type:'scatter3d', mode:'lines', x:cliffX, y:cliffY, z:cliffZ,
+                     line:{width:5, dash:'dash', color:'#b7ff33'}, name:'λ-обрыв (R=1/e)' };
+
+    const earlyGuide = {
+      type:'scatter3d', mode:'lines',
+      x:[s.xEarly, s.xEarly], y:[A_MIN, A_MAX], z:[0,0],
+      line:{width:2, color:'rgba(220,220,255,0.45)', dash:'dot'},
+      name:'x_early', showlegend:false, hoverinfo:'skip'
+    };
+
+    return [ rightWall(normalize) ].concat( floorGrid(normalize) ).concat([ cliff, line, colorDotsTrace(s, normalize), earlyGuide ]);
+  }
+
+  // REPLACE your figureLayout(...) with this inline version (scene shorter + tight under legend)
+function figureLayout(age, tiltZ, normalize){
+  const axisTitle={color:'#e7eefb', size:16}, tick={color:'#c6cfde', size:12};
+  const xTitle = normalize ? 'x / λ' : 'Время после фиксации t';
+  const xRange = normalize ? [0,1] : [0,T_MAX];
+  const xDtick = normalize ? 0.05 : 1;
+
+  // scene height + position (bridges the gap to the legend)
+  const sceneTop = 0.93;     // top of scene
+  const sceneBottom = 0.22;  // raise bottom to make scene less tall
+
+  return {
+    scene:{
+      domain:{ x:[0.02, 0.92], y:[sceneBottom, sceneTop] },
+      xaxis:{ title:{text:xTitle, font:axisTitle}, range:xRange, tickfont:tick, dtick:xDtick,
+              gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
+      yaxis:{
+        title:{text:'Возраст a (лет)', font:axisTitle},
+        dtick:10, showticklabels:true, tickfont:tick,
+        gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false
+      },
+      zaxis:{ title:{text:'Удержание R', font:axisTitle}, range:[0,1], tickfont:tick,
+              gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
+      camera: cameraFacade(tiltZ),
+      projection:{ type:'perspective' },
+      aspectratio:{ x:2.1, y:0.28, z:0.55 },
+      bgcolor:'rgba(0,0,0,0)'
+    },
+    legend:{
+      x:0.02, xanchor:'left',
+      y: sceneTop + 0.006, yanchor:'bottom',   // legend sits just above scene (tiny gap)
+      orientation:'h', itemwidth:60,
+      bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(200,210,225,.25)', borderwidth:1, font:{color:'#e7eefb'}
+    },
+    margin:{ t:24, r:120, l:48, b:44 },       // slimmer top band
+    paper_bgcolor:'rgba(0,0,0,0)',
+    plot_bgcolor:'rgba(0,0,0,0)',
+    showlegend:true,
+    dragmode:'orbit'
+  };
+}
+  function flash(age){
+    const trace={ type:'scatter3d', mode:'markers', x:[0], y:[age], z:[1],
+                  marker:{ size:9, color:'#caa9ff' }, name:'Новая память' };
+    Plotly.addTraces('retention3D',[trace]);
+    setTimeout(()=> Plotly.deleteTraces('retention3D',-1), 500);
+  }
+
+  // Single-line, memory-focused insight + dynamic 9–5 narrate
+  function updateInsight(age, lambda0, normalize){
+    const lam=lambdaOfAge(lambda0, age), bet=betaOfAge(age), cliff=1/lam;
+    const rEarly = Math.exp(-Math.pow(lam*(normalize? 0.2/lam : 0.2*T_MAX), bet));
+    const startTag = bet>1.05?'мягкий старт':(bet<0.95?'резкий старт':'почти экспоненциальный старт');
+    const tip = lam > 0.7 ? 'Запланируйте второй короткий повтор сегодня.' : 'Можно немного увеличить интервал после сегодняшнего дня.';
+    document.getElementById('insightLine').textContent =
+      `a=${age.toFixed(0)} · β=${bet.toFixed(2)} (${startTag}) · λ=${lam.toFixed(2)} · обрыв≈${normalize?'x=1':'t='+cliff.toFixed(2)} · R@x${normalize?'/λ':''}=0.2≈${rEarly.toFixed(2)} — Совет: ${tip}`;
+
+    // NEW: live narrate for 9–5 card
+    const earlyWhere = normalize ? 'x/λ=0.2' : `t=${(0.2*T_MAX).toFixed(1)}`;
+    const narr = lam > 0.7
+      ? `Обрыв раньше; закрепите второй быстрый повтор сегодня. При ${earlyWhere} R≈${rEarly.toFixed(2)}.`
+      : `Обрыв позже; можно чуть отодвинуть второй повтор. При ${earlyWhere} R≈${rEarly.toFixed(2)}.`;
+    const n95 = document.getElementById('narrate95');
+    if (n95) n95.textContent = narr;
+  }
+
+  function wire(){
+    const sAge=document.getElementById('ageSlider');
+    const sLam=document.getElementById('lambda0Slider');
+    const sTilt=document.getElementById('tiltSlider');
+    const vAge=document.getElementById('ageValue');
+    const vLam=document.getElementById('lambda0Value');
+    const vTilt=document.getElementById('tiltValue');
+    const auto=document.getElementById('autoLifeSwitch');
+    const step=document.getElementById('lifeStep');
+    const tick=document.getElementById('lifeTick');
+    const norm=document.getElementById('normalizeSwitch');
+    const fetchBtn=document.getElementById('fetchBtn');
+    let autoTimer=null;
+
+    function redraw(){
+      const age=parseFloat(sAge.value), lambda0=parseFloat(sLam.value), tilt=parseFloat(sTilt.value), normalize=norm.checked;
+      vAge.textContent=age.toFixed(0); vLam.textContent=lambda0.toFixed(2); vTilt.textContent=tilt.toFixed(2);
+      Plotly.react('retention3D', figureData(lambda0,age,normalize), figureLayout(age,tilt,normalize), {responsive:true, displaylogo:false});
+      updateInsight(age, lambda0, normalize);
+      if (window.MathJax && typeof window.MathJax.typesetPromise==='function'){ window.MathJax.typesetPromise().catch(()=>{}); }
+    }
+
+    function startAuto(){
+      if (autoTimer) return;
+      autoTimer=setInterval(()=>{
+        const s=Math.max(1, Math.min(10, parseInt(step.value||'3',10)));
+        let a=parseFloat(sAge.value)+s; if(a>A_MAX) a=A_MIN;
+        sAge.value=a.toFixed(0);
+        redraw();
+        flash(a);
+      }, Math.max(300, Math.min(4000, parseInt(tick.value||'800',10))));
+    }
+    function stopAuto(){ if(autoTimer){ clearInterval(autoTimer); autoTimer=null; } }
+
+    sAge.addEventListener('input', redraw);
+    sLam.addEventListener('input', redraw);
+    sTilt.addEventListener('input', redraw);
+    norm.addEventListener('change', redraw);
+    auto.addEventListener('change', ()=> auto.checked ? startAuto() : stopAuto());
+    fetchBtn.addEventListener('click', redraw);
+
+    redraw();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    if(window.Plotly){ wire(); }
+    else { const i=setInterval(()=>{ if(window.Plotly){ clearInterval(i); wire(); }}, 30); setTimeout(()=> clearInterval(i), 8000); }
+    if (window.MathJax && typeof window.MathJax.typesetPromise==='function'){ window.MathJax.typesetPromise().catch(()=>{}); }
+  });
+})();
+</script>
+<script>
+(function bridgeLegendGap(){
+  const el = document.getElementById('retention3D');
+  if (!el || !window.Plotly) return;
+
+  // Make the scene shorter and align its top to the legend's bottom
+  const sceneTop = 0.985;              // top of scene (fraction of figure height)
+  const sceneBottom = 0.22;            // raise bottom to reduce scene height
+
+  window.Plotly.relayout(el, {
+    'legend.yanchor': 'bottom',        // anchor legend by its bottom edge
+    'legend.y': sceneTop + 0.003,      // ~3px gap above the scene
+    'scene.domain.y': [sceneBottom, sceneTop],
+    'margin.t': 24                     // shrink the top band outside the plot
+  });
+})();
+</script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; ядро науки и интерпретации чётко разделены.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

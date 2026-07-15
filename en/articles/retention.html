@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Retention Cliff · D.R.E.A.M</title>
+  <meta name="description" content="D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold. A 10→4 projection-first physics framework with the Retention Law as foundation." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    svg:   { linebreaks:{automatic:true, width:'container'}, displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    
+    body.is-article .site-header{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0; }
+    
+  </style>
+</head>
+<body data-lang="en" class="is-article">
+
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="../retention.html">Retention Law</a>
+      <a class="nav-link" href="../axioms.html">Axioms</a>
+      <a class="nav-link" href="../theorems.html">Theorems</a>
+      <a class="nav-link" href="../math.html">Math Frame</a>
+      <a class="nav-link" href="../kernel.html">Kernel</a>
+      <a class="nav-link" href="../topology.html">Topology</a>
+      <a class="nav-link" href="../spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="../predictions.html">Predictions</a>
+      <a class="nav-link" href="../falsification.html">Falsification</a>
+      <a class="nav-link" href="../tests.html">Tests</a>
+      <a class="nav-link" href="../faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="../about.html">AI Analysis</a>
+      <a class="nav-link" href="../time.html">Time</a>
+      <a class="nav-link" href="../memory.html">Memory</a>
+      <a class="nav-link active" href="../articles.html">Articles</a>
+      <a class="nav-link" href="../../plotter.html">Plotter Toy</a>
+      <a class="nav-link" href="../../npa-calculator.html">NPA Toy</a>
+      <a class="nav-link" href="../../intervention-simulator.html">Intervention Sim</a>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang">
+          <a class="lang-link " href="../../ru/" title="Русский">
+            <img src="https://flagcdn.com/24x18/ru.png"
+                 srcset="https://flagcdn.com/48x36/ru.png 2x, https://flagcdn.com/72x54/ru.png 3x"
+                 width="24" height="16" alt="Russia" class="flag-icon">
+          </a>
+          <a class="lang-link on" href="../../en/" title="English">
+            <img src="https://flagcdn.com/24x18/gb.png"
+                 srcset="https://flagcdn.com/48x36/gb.png 2x, https://flagcdn.com/72x54/gb.png 3x"
+                 width="24" height="16" alt="United Kingdom" class="flag-icon">
+          </a>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="container">
+<style>
+  html {
+    /* Fill the body margins so nothing shows through */
+
+    min-height: 100%;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 2% 8%;            /* keep your existing spacing */
+    color: #111;
+
+    min-height: 100%;
+    min-height: 100svh;       /* mobile-safe full viewport */
+  }
+
+  h1, h2, h3 {
+    color: black;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  pre, .equation {
+    
+    padding: 6px 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  blockquote {
+    border-left: 4px solid #96a31d;
+    padding-left: 15px;
+    color: black;
+    font-style: italic;
+    margin: 1em 0;
+    background: #fff;
+  }
+  .infobox {
+
+    border: 1px solid #dbe3f0;
+    border-left: 4px solid white;
+    padding: 12px 16px;
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.95em;
+    color: #444;
+  }
+
+
+
+  /* --- keep fractals visible behind everything --- */
+
+#fractal-canvas, #fractals, canvas#fractal {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* --- nuke the full-width wash coming from the shell/overlays --- */
+.article-shell,
+.article-shell > *:not(main):not(.article):not(.page-content):not(.content),
+#content-wrap, .content-wrap, .page-wrap, #page, .page, .site, #site,
+.container-fluid {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.article-shell::before, .article-shell::after,
+#content-wrap::before, #content-wrap::after,
+.page::before, .page::after,
+.site::before, .site::after {
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+}
+
+/* --- the article “card” (kept) --- */
+:root{
+  --text-max: 68ch;
+  --text-pad: clamp(14px, 2.2vw, 24px);
+  --card-bg: rgba(255,255,255,0.97); /* near-solid white */
+}
+
+:where(main, .article){
+  max-width: var(--text-max);
+  margin-inline: auto;
+  padding: var(--text-pad);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  min-height: calc(100svh - 4%);
+}
+</style>
+<div class="container">
+
+    <!-- INTRO CARD -->
+    <div class="card">
+      <span class="kicker">DREAM — Retention</span>
+      <h1>The Retention Cliff: How Finite Resolution Shapes Reality</h1>
+
+      <div data-mode="science">
+        <p>
+          DREAM models observable 4D fields as a push-forward of 10D structure through a single, fixed, finite-resolution kernel \(K_\lambda\).
+          The central working object here is the <em>retention function</em> \( \alpha(\lambda)\in[0,1] \), an invariant of the admissible kernel class:
+        </p>
+        <div class="math-block">\[
+          \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big],
+        \]</div>
+        <p>
+          where \( \lambda_q \) marks the coherence threshold (the “cliff”) and \( D_{\mathrm{eff}} \) is an effective spectral exponent that governs how swiftly information decays with scale. Everything below explains how this law arises from the push-forward, how it couples to focusing geometry, and how it organizes the spectrum of retained modes.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Imagine the world as a breathtaking mural painted on a hidden, ten-dimensional wall. We never see that wall directly.
+          Instead, a projector throws a version onto our four-dimensional screen. When you turn up the blur on any projector, tiny flecks vanish first; bold shapes linger longer.
+          The <strong>retention cliff</strong> is the setting where the fine sparkle suddenly drops out. This page is a guided tour of the projector’s “engineering manual” — the math of the blur, why big shapes are stubborn, and how the hidden wall leaves fingerprints in our everyday world.
+        </p>
+      </div>
+
+      <p class="note">Math is hidden when you choose General mode. Switch to Science mode to see formulas.</p>
+    </div>
+
+    <hr>
+
+    <!-- 1. PUSH-FORWARD MECHANICS -->
+    <div class="card">
+      <h2>1. Push-Forward Mechanics: From 10D to 4D</h2>
+
+      <div data-mode="science">
+        <p>
+          Let \( \Phi(X) \) be a field on the compact 10D Meta-Manifold (MM). Observables in 4D are kernel-weighted averages of fiber contributions:
+        </p>
+        <div class="math-block">\[
+          O(x)=\int_{\mathrm{MM}} K_\lambda(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),
+        \]</div>
+        <p>
+          with admissible guardrails (K1–K3): normalization \( \int_{\mathrm{MM}}K_\lambda(x;X)\,d\mu_{\mathrm{MM}}(X)=1 \),
+          locality-in-projection (finite support in \(x\)), and monotone fidelity \( \partial_\lambda \alpha(\lambda)\le 0 \).
+          Using the coarea framework for a surjection \( \pi:\mathrm{MM}\to\mathbb{R}^{3,1} \),
+        </p>
+        <div class="math-block">\[
+          O(x)=\int_{\pi^{-1}(x)}\!\frac{\Phi(X)}{J_\pi(X)}\,\underbrace{\Big(\int K_\lambda(x;X)\,d\lambda_{\text{loc}}\Big)}_{\text{instrument window}}\,d\Sigma_{6}(X),
+        \]</div>
+        <p>
+          so retention is controlled by two ingredients: (i) <em>focusing</em>, via the Jacobian factor \(1/J_\pi\) on each fiber, and (ii) <em>spectral thinning</em> due to finite resolution.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Think of each point you see as gathering whispers from a whole thread of hidden points behind it. Two things decide how much you keep:
+          <em>focusing</em> (do many hidden voices line up at this spot?) and <em>resolution</em> (how sharply you’re listening).
+          Where focusing is strong, you get the sense of <strong>hubs</strong> and <strong>filaments</strong> — the “beams” and “bones” of structure that survive blur.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 2. THE RETENTION LAW -->
+    <div class="card">
+      <h2>2. The Retention Law: A Stretched Exponential</h2>
+
+      <div data-mode="science">
+        <p>
+          Suppose increasing resolution by \( d\lambda \) removes a fraction proportional to the density of resolvable modes at current scale.
+          If the cumulative retained-mode count below cutoff obeys
+          \( N(\Omega)\propto \Omega^{D_{\mathrm{eff}}} \), then under a scale change \( \lambda\mapsto \lambda+d\lambda \) one obtains a differential thinning law
+        </p>
+        <div class="math-block">\[
+          \frac{d}{d\lambda}\big(-\ln \alpha(\lambda)\big)=
+          \frac{D_{\mathrm{eff}}}{\lambda_q^{D_{\mathrm{eff}}}}\;\lambda^{D_{\mathrm{eff}}-1},
+        \]</div>
+        <p>
+          integrating to the invariant form
+        </p>
+        <div class="math-block">\[
+          \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big].
+        \]</div>
+        <p>
+          In double-log coordinates this is linear:
+        </p>
+        <div class="math-block">\[
+          \ln\!\big(-\ln \alpha(\lambda)\big)=D_{\mathrm{eff}}\ln \lambda - D_{\mathrm{eff}}\ln \lambda_q,
+        \]</div>
+        <p>
+          exposing \(D_{\mathrm{eff}}\) as the slope and \( \lambda_q \) as the intercept-set point.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          The cliff has a fingerprint. If you plot “how much is left” after each notch of blur on a special graph,
+          the dots fall on a straight line. The tilt of that line is the world’s <strong>ruggedness number</strong> \(D_{\mathrm{eff}}\);
+          where the line touches your axis marks the cliff setting \( \lambda_q \). Different materials and phenomena share the same grammar, just with their own accent.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 3. TWO INFORMATION CHANNELS -->
+    <div class="card">
+      <h2>3. Two Information Channels: Shape vs. Sparkle</h2>
+
+      <div data-mode="science">
+        <p>
+          Two practical retention functionals probe distinct content:
+        </p>
+        <div class="math-block">\[
+          R_{\mathrm{corr}^2}(\lambda)=\mathrm{corr}^2\!\big(e_4\!\mid_{\lambda\!\to\!0},\,e_4\!\mid_{\lambda}\big),
+          \qquad
+          R_{\mathrm{HF}}(\lambda)=\frac{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid\lambda)|^2\,d\Omega}{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid 0)|^2\,d\Omega}.
+        \]</div>
+        <p>
+          Under the same kernel invariants, high-frequency content decays faster than structural correlation, i.e.
+          \( R_{\mathrm{HF}}(\lambda)\prec R_{\mathrm{corr}^2}(\lambda) \), but both share the same stretched-exponential law with channel-specific fit pairs \((\lambda_q,D_{\mathrm{eff}})\).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Your eyes know this trick: tiny glitter fades first, outlines last. DREAM bottles that everyday hunch into two curves — one for sparkle, one for shape — and shows they obey the same master rule, just with different staying power.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 4. FOCUSING & HUBS -->
+    <div class="card">
+      <h2>4. Focusing &amp; Hubs: Why Some Places Refuse to Fade</h2>
+
+      <div data-mode="science">
+        <p>
+          Via coarea, the local retained multiplicity is modulated by a focusing factor
+          \( A(x)=\langle 1/J_\pi\rangle_{\pi^{-1}(x)} \).
+          Define a scale-aware microstate budget \( M(\lambda,\varepsilon;x)\sim A(x)\,(\lambda/\varepsilon)^{D_I} \), where \( D_I\in(0,6] \) is an information-dimension proxy along the fiber.
+          The <em>Complexity-Packing Index</em> (CPI) is then
+        </p>
+        <div class="math-block">\[
+          \mathrm{CPI}(x)=\log_{10} M(\lambda,\varepsilon;x)=\log_{10}A(x)+D_I\log_{10}\!\Big(\tfrac{\lambda}{\varepsilon}\Big).
+        \]</div>
+        <p>
+          Regions with high \(A(x)\) and populated \(D_I\) behave as <em>hubs/filaments</em> that remain visible deep into the coarse-grain flow.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Picture a mountain range under rising fog. Valleys drown first, but ridgelines keep peeking through. Hubs are those ridges — places where countless hidden paths pile up into a single bold line on our screen. That’s why galaxies web, storms spiral, and cities form grids: ridges refuse to disappear.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 5. SPECTRAL STORY -->
+    <div class="card">
+      <h2>5. The Spectral Story: Counting What Survives</h2>
+
+      <div data-mode="science">
+        <p>
+          Let \(N(\Omega)\) be the cumulative count of modes retained below spectral scale \(\Omega\).
+          If retained states are self-similar over scales, a single exponent governs the asymptotics:
+        </p>
+        <div class="math-block">\[
+          N(\Omega)\propto \Omega^{D_{\mathrm{eff}}}, \qquad \rho(\Omega)=\frac{dN}{d\Omega}\propto \Omega^{D_{\mathrm{eff}}-1}.
+        \]</div>
+        <p>
+          The same \(D_{\mathrm{eff}}\) then controls the stretched-exponential decay of fidelity with blur-scale \( \lambda \), tying geometric focusing to spectral thinning:
+          fewer effective modes \( \Rightarrow \) faster decay of fine detail; strong focusing \( \Rightarrow \) larger local contribution before decay.
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          This is the part where the math smiles. The very number that tells you how many “notes” are still in the song as you turn down the treble —
+          that same number tells you how quickly the sparkle dies as you smear the picture. One knob, two revelations.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 6. THE CLIFF GEOMETRY -->
+    <div class="card">
+      <h2>6. The Cliff Itself: A Geometry of Edges</h2>
+
+      <div data-mode="science">
+        <p>
+          Near \( \lambda\approx\lambda_q \), the second derivative of \(-\ln\alpha\) with respect to \(\ln\lambda\) peaks:
+        </p>
+        <div class="math-block">\[
+          \frac{d^2}{d(\ln\lambda)^2}\big(-\ln\alpha(\lambda)\big)
+          = D_{\mathrm{eff}}(D_{\mathrm{eff}}-1)\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\!,
+        \]</div>
+        <p>
+          capturing the <em>acceleration</em> of loss across scales. This “knee” demarcates the watershed between interference-grade detail (sub-\( \lambda_q \)) and classicalized summaries (super-\( \lambda_q \)).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          Stand at the shoreline as the tide comes in. For a while, castles lose only their sharp edges — then, in a minute, whole turrets slump.
+          The cliff is that tipping minute, baked into the math of how patterns hold together.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 7. TIME & OBSERVERS -->
+    <div class="card">
+      <h2>7. Observers and Time: Choosing the Zoom</h2>
+
+      <div data-mode="science">
+        <p>
+          An observer with internal parameters \( \Theta \) implements a readout \( \mathcal{R}_\Theta[O] \) that implicitly chooses an operational scale \( \lambda(\Theta) \).
+          Stability of summaries demands \( \partial_\lambda \alpha(\lambda;\Theta)\le 0 \) across the operating band,
+          while multi-scale observers realize a family \( \{\lambda_k\} \) with band-limited fusion \( \bigoplus_k \mathcal{R}_{\Theta_k} \).
+        </p>
+      </div>
+
+      <div data-mode="public">
+        <p>
+          We don’t just watch the movie; we pick the zoom. Microscope, binoculars, or naked eye — each choice tunes the projector’s blur for us.
+          That’s why different instruments (and different minds) can both be right, while seeing different kinds of truth.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 8. GLOSSARY -->
+    <div class="card">
+      <h2>8. Quick Glossary</h2>
+
+      <div data-mode="science">
+        <ul>
+          <li><strong>\(K_\lambda\)</strong>: finite-resolution kernel for the push-forward from MM to 4D.</li>
+          <li><strong>\(\alpha(\lambda)\)</strong>: retention (fidelity) at scale \( \lambda \); invariant form \( \exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}] \).</li>
+          <li><strong>\(\lambda_q\)</strong>: coherence threshold where interference-grade detail yields to coarse summaries.</li>
+          <li><strong>\(D_{\mathrm{eff}}\)</strong>: effective spectral exponent linking mode counting and retention slope.</li>
+          <li><strong>Focusing \(A(x)\)</strong>: fiber-averaged \( \langle 1/J_\pi\rangle \) controlling hub/filament prominence.</li>
+          <li><strong>CPI</strong>: \( \log_{10}M(\lambda,\varepsilon;x) \) with \(M\sim A(x)(\lambda/\varepsilon)^{D_I}\): a local “microstate budget.”</li>
+        </ul>
+      </div>
+
+      <div data-mode="public">
+        <ul>
+          <li><strong>Kernel:</strong> the projector’s “lens.”</li>
+          <li><strong>Retention:</strong> how much of the picture survives a chosen blur.</li>
+          <li><strong>\( \lambda_q \):</strong> the cliff setting — the blur where the sparkle drops out.</li>
+          <li><strong>\( D_{\mathrm{eff}} \):</strong> the ruggedness number — how quickly detail disappears as you blur.</li>
+          <li><strong>Focusing:</strong> hidden paths piling up to make a ridge that refuses to fade.</li>
+          <li><strong>CPI:</strong> a pocket’s “capacity” to host organized complexity at a given zoom.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Optional: re-typeset when switching to Science mode -->
+  <script>
+  (function(){
+    const obs = new MutationObserver(() => {
+      const sciVisible = [...document.querySelectorAll('[data-mode="science"]')]
+        .some(n => n.offsetParent !== null);
+      if (sciVisible && window.MathJax?.typeset) MathJax.typeset();
+    });
+    obs.observe(document.body, {subtree:true, attributes:true, attributeFilter:['style','class']});
+  })();
+  </script>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+  <!-- ===== Chat bubble + dock (built by js/bot.js) ===== -->
+
+  <!-- ===== Math toggle / speculative / typeset hooks ===== -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('specToggle');
+  const BODY_FLAG = 'show-spec';
+  const KEY = 'spec:on';
+  const saved = localStorage.getItem(KEY);
+  if (saved !== null) {
+    const on = saved === '1';
+    document.body.classList.toggle(BODY_FLAG, on);
+    if (cb) cb.checked = on;
+  } else if (cb) {
+    document.body.classList.toggle(BODY_FLAG, cb.checked);
+  }
+  cb?.addEventListener('change', e => {
+    const on = e.target.checked;
+    document.body.classList.toggle(BODY_FLAG, on);
+    localStorage.setItem(KEY, on ? '1' : '0');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+    let t = el.textContent;
+    if (/\\[/.test(t) && !/\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+    if (/\\(/.test(t) && !/\\)/.test(t)) t = t.replace(/$/, '\\)');
+    if (t !== el.textContent) el.textContent = t;
+  });
+  const typeset = nodes =>
+    (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+  if (document.body.classList.contains('show-math')) typeset();
+  const mt = document.getElementById('mathToggle');
+  mt && mt.addEventListener('change', () => setTimeout(() => typeset(), 0));
+  document.querySelectorAll('details.more').forEach(d => {
+    d.addEventListener('toggle', () => d.open && typeset([d]));
+  });
+});
+</script>
+
+
+  <!-- ===== Language switch rewrite (must run before bot.js so bot picks
+        the right language pack from data-lang) ===== -->
+
+<script>
+(function(){
+  // Rewrite language toggle so it switches to the *same page* in the other language.
+  // Handles /<lang>/<slug>.html  AND  /<lang>/articles/<slug>.html
+  const here = location.pathname.replace(/\/index\.html$/i, '/');
+  const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+  let rest = '';
+  if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
+  document.querySelectorAll('.lang-link').forEach(a=>{
+    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const targetLang = isRu ? 'ru' : 'en';
+    // Compute the prefix: walk up to the language root, then into the other language.
+    // For /en/retention.html: depth=0 → prefix is "../"
+    // For /en/articles/introduction.html: depth=1 → prefix is "../../"
+    const parts = rest.split('/');
+    const depth = parts.length - 1;                     // 0 for top-level, 1 for articles/
+    const prefix = '../'.repeat(depth + 1);
+    a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+  });
+})();
+</script>
+
+
+  <!-- ===== Fractal backdrop ===== -->
+  <script defer src="../../js/fractal.js"></script>
+  <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
+  <script defer src="../../js/weave.js"></script>
+  <!-- ===== Bot (chat bubble) ===== -->
+  <script defer src="../../js/bot.js"></script>
+  <!-- ===== Fullscreen toggle for toys ===== -->
+  <script defer src="../../js/fs-toggle.js"></script>
+</body>
+</html>
