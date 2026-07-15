@@ -103,7 +103,7 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; gap: 8px;
   flex-wrap: nowrap;
-  padding: 10px 16px;
+  padding: 14px 18px;
   background: rgba(23, 32, 51, .85);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
