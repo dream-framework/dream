@@ -246,7 +246,7 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
   box-shadow: 0 0 0 2px rgba(142,197,232,.55) inset;
   border-color: var(--accent);
 }
-.flag-icon{ width: 24px; height: 16px; display:block; object-fit: cover; border-radius: 3px; }
+.flag-icon{ width: 16px; height: 11px; display: inline-block; object-fit: cover; border-radius: 2px; vertical-align: middle; }
 
 /* ---- Container & main ---- */
 main.container{
@@ -697,7 +697,7 @@ tr:hover td{ background: rgba(142,197,232,.04); }
   .nav{ gap: 2px; }
   .nav-link{ padding: 4px 7px; font-size: 10px; }
   .lang-link{ width: 22px; height: 15px; }
-  .flag-icon{ width: 20px; height: 14px; }
+  .flag-icon{ width: 14px; height: 10px; }
   .hero{ padding: 1rem; border-radius: 16px; }
   .card{ padding: .8rem; }
 }
