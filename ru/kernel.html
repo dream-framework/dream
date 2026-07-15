@@ -368,8 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
 
     return series.map(({k,name,color,alpha,size})=>{
       const t = data.traces[k];
-      return { type:'scatter3d', mode:'markers', name,
-               x:t.x, y:t.y, z:t.z,
+      return { type:'scatter', mode:'markers', name,
+               x:t.x, y:t.y,
                marker:{ size, opacity:alpha, color } };
     });
   }
@@ -379,7 +379,9 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
     return {
       paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
       font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
-      scene:{
+      xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
+      yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
+      _scene_unused:{
         xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },

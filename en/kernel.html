@@ -365,8 +365,8 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
 
     return series.map(({k,name,color,alpha,size})=>{
       const t = data.traces[k];
-      return { type:'scatter3d', mode:'markers', name,
-               x:t.x, y:t.y, z:t.z,
+      return { type:'scatter', mode:'markers', name,
+               x:t.x, y:t.y,
                marker:{ size, opacity:alpha, color } };
     });
   }
@@ -376,7 +376,9 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
     return {
       paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
       font:{ color:FG, family:getComputedStyle(document.body).fontFamily },
-      scene:{
+      xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
+      yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero, background:'rgba(15,23,42,0.3)' },
+      _scene_unused:{
         xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },
@@ -387,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
       margin:{ l:0, r:0, t:20, b:0 },
       showlegend:true,
       legend:{ orientation:'v', x:0.82, y:0.98, font:{ size:11, color:MUTED } },
-      title:{ text:'10D→4D Projection: principal 3D view (facets + filaments)', x:0.02, font:{ size:13, color:MUTED } }
+      title:{ text:'10D→4D Projection: principal 2D view (facets + filaments)', x:0.02, font:{ size:13, color:MUTED } }
     };
   }
 
