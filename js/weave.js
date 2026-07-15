@@ -42,7 +42,7 @@
         var t = (rng() - 0.5) * length;
         traces.filament.x.push(cx + t * Math.cos(angle) + gauss(rng) * 0.05 * (1 + noise));
         traces.filament.y.push(cy + t * Math.sin(angle) + gauss(rng) * 0.05 * (1 + noise));
-        traces.filament.z.push(0);
+        traces.filament.z.push(gauss(rng) * 0.05 * (1 + noise));
       }
     }
     traces.filament.count = traces.filament.x.length;
@@ -64,7 +64,7 @@
         var ly = r * ry * Math.sin(a);
         traces.facet.x.push(cx + lx * Math.cos(rot) - ly * Math.sin(rot) + gauss(rng) * 0.03 * (1 + noise));
         traces.facet.y.push(cy + lx * Math.sin(rot) + ly * Math.cos(rot) + gauss(rng) * 0.03 * (1 + noise));
-        traces.facet.z.push(0);
+        traces.facet.z.push(gauss(rng) * 0.08 * (1 + noise));
       }
     }
     traces.facet.count = traces.facet.x.length;
@@ -79,7 +79,7 @@
       for (var i = 0; i < per; i++) {
         traces.hub.x.push(cx + gauss(rng) * 0.06 * (1 + noise));
         traces.hub.y.push(cy + gauss(rng) * 0.06 * (1 + noise));
-        traces.hub.z.push(0);
+        traces.hub.z.push(gauss(rng) * 0.06 * (1 + noise));
       }
     }
     traces.hub.count = traces.hub.x.length;
@@ -89,7 +89,7 @@
     for (var i = 0; i < nDust; i++) {
       traces.dust.x.push(gauss(rng) * 1.2 * (1 + noise * 0.5));
       traces.dust.y.push(gauss(rng) * 1.2 * (1 + noise * 0.5));
-      traces.dust.z.push(0);
+      traces.dust.z.push(gauss(rng) * 1.2 * (1 + noise * 0.5));
     }
     traces.dust.count = traces.dust.x.length;
 

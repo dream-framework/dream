@@ -254,7 +254,7 @@
   </div>
 
   <!-- График -->
-  <div id="kw-plot" style="height:560px;width:100%;background:rgba(15,23,42,.5);border-radius:12px;"></div>
+  <div id="kw-plot" style="height:560px;width:100%;border-radius:12px;"></div>
   <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
 </div>
 
@@ -368,8 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
 
     return series.map(({k,name,color,alpha,size})=>{
       const t = data.traces[k];
-      return { type:'scatter', mode:'markers', name,
-               x:t.x, y:t.y,
+      return { type:'scatter3d', mode:'markers', name,
+               x:t.x, y:t.y, z:t.z,
                marker:{ size, opacity:alpha, color } };
     });
   }
