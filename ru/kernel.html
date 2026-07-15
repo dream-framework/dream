@@ -208,17 +208,17 @@
   <!-- Абсолютная конечная точка, чтобы работать под любым префиксом/blueprint -->
 
   <!-- Управление -->
-  <div class="kw-controls" style="margin-bottom:10px;">
+  <div class="kw-controls" style="margin-bottom:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px;">
     <label for="kw-lam" style="display:block;margin-bottom:6px;">λ (масштаб зондирования)</label>
 
-    <div class="kw-slider-wrap" style="position:relative;">
+    <div class="kw-slider-wrap" style="position:relative;flex:1;min-width:120px;max-width:200px;">
       <input id="kw-lam" type="range" min="0" max="2.0" step="0.02" value="0.30" style="width:100%;">
       <!-- Маркеры «обрыва» -->
       <div id="kw-cliff50" class="kw-cliff" title="R(λ)=0.5"></div>
       <div id="kw-cliff10" class="kw-cliff kw-cliff-weak" title="R(λ)=0.1"></div>
     </div>
 
-    <div style="font-size:13px;color:var(--muted);margin-top:6px;">
+    <div style="font-size:11px;color:var(--muted);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;">
       λ = <span id="kw-lam-val">0.30</span> · R(λ)=exp[−(λ/λ<sub>q</sub>)<sup>D<sub>eff</sub></sup>] → <strong id="kw-r-val">…</strong>
       <span id="kw-cliff-readout" style="margin-left:.75rem;"></span>
     </div>
@@ -254,7 +254,7 @@
   </div>
 
   <!-- График -->
-  <div id="kw-plot" style="height:560px;width:100%;border-radius:12px;"></div>
+  <div id="kw-plot" style="height:440px;width:100%;border-radius:10px;"></div>
   <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
 </div>
 
