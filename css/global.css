@@ -755,6 +755,7 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 
 .registry-summary{
   display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto;
+  justify-content: center;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
   margin-bottom: 1rem;
 }

@@ -72,8 +72,8 @@
         </label>
       </div>
         <div class="lang">
-          <a class="lang-link " href="../ru/" title="Русский">RU</a>
-          <a class="lang-link on" href="../en/" title="English">EN</a>
+          <a class="lang-link " href="../ru/" title="Русский"><img src="https://flagcdn.com/18x13/ru.png" width="18" height="13" alt="RU" class="flag-icon"></a>
+          <a class="lang-link on" href="../en/" title="English"><img src="https://flagcdn.com/18x13/gb.png" width="18" height="13" alt="EN" class="flag-icon"></a>
         </div>
     </div>
   </header>
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (m) rest = m[2];                                  // e.g. "retention" or "articles/introduction"
   if (!rest || rest === 'index') rest = 'index';   // default for directory roots
   document.querySelectorAll('.lang-link').forEach(a=>{
-    const isRu = /flagcdn\.com\/.*?ru\.png/.test(a.querySelector('img')?.src || '');
+    const img = a.querySelector('img'); const isRu = img && (img.src.includes('ru.png') || img.alt === 'RU');
     const targetLang = isRu ? 'ru' : 'en';
     // Compute the prefix: walk up to the language root, then into the other language.
     // For /en/retention.html: depth=0 → prefix is "../"
