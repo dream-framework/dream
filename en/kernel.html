@@ -281,22 +281,32 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
   const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
   const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
   const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
-  const elAutosBtn=document.getElementById('kw-autos-btn');
-  function updateAutoBtn(){
-    if(elAutosBtn){
-      elAutosBtn.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
-      elAutosBtn.title = elAutos.checked ? 'Auto ON — click to pause' : 'Auto OFF — click to run';
-      elAutosBtn.style.opacity = elAutos.checked ? '1' : '0.5';
+  const elPlay=document.getElementById('kw-play');
+  let playing=false, playDir=1, playTimer=null;
+  function startPlay(){
+    playing=true;
+    elPlay.innerHTML='&#x23F8;';
+    elPlay.title='Pause';
+    function step(){
+      if(!playing) return;
+      let v=parseFloat(elLam.value)+0.02*playDir;
+      if(v>=2.0){v=2.0;playDir=-1;}
+      if(v<=0){v=0;playDir=1;}
+      elLam.value=v;
+      onParamsChanged();
+      playTimer=setTimeout(step, 150);
     }
+    step();
   }
-  updateAutoBtn();
-  if(elAutosBtn){
-    elAutosBtn.addEventListener('click', function(){
-      elAutos.checked = !elAutos.checked;
-      updateAutoBtn();
-      if(elAutos.checked) setTimeout(update, 200);
-    });
+  function stopPlay(){
+    playing=false;
+    elPlay.innerHTML='&#x25B6;';
+    elPlay.title='Play: slide λ to show S2';
+    if(playTimer){clearTimeout(playTimer);playTimer=null;}
   }
+  elPlay.addEventListener('click', function(){
+    if(playing) stopPlay(); else startPlay();
+  });
   const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
   const elCliffReadout=document.getElementById('kw-cliff-readout');
 
