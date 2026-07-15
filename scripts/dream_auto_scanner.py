@@ -19,35 +19,59 @@ import numpy as np
 from scipy.optimize import curve_fit
 from datetime import datetime
 
+# Local model comparison — gates every fit before it can enter tests.html
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from s2_model_compare import compare as s2_compare, m_s2 as s2_func
+
 OUT_DIR = os.environ.get('SCAN_OUT', '/tmp/dream_scan')
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# ── S2 model ──
-def s2_func(t, A, lambda_q, D):
-    return A * np.exp(-np.power(np.maximum(t, 0.001) / lambda_q, D))
-
-def fit_s2(t, R, label=''):
+# ── S2 fit WITH model comparison ──
+# Returns None if no model fits; otherwise returns a dict that ALWAYS
+# includes the verdict ('S2_WINS' | 'S2_TIES' | 'S2_LOSES' | 'NO_FIT')
+# plus the full AICc ranking. The caller decides whether to promote
+# the entry to tests.html based on the verdict.
+def fit_s2(t, R, label='', require_wins=True):
     t = np.array(t, dtype=float)
     R = np.array(R, dtype=float)
     if len(t) < 5: return None
     t = t - t[0]
     if R[0] > 0: R_norm = R / R[0]
     else: R_norm = R
-    try:
-        p0 = [1.0, t[len(t)//2], 0.5]
-        bounds = ([0.01, 0.001, 0.01], [2.0, 1e6, 10.0])
-        popt, _ = curve_fit(s2_func, t, R_norm, p0=p0, maxfev=20000, bounds=bounds)
-        A, lambda_q, D = popt
-        R_pred = s2_func(t, *popt)
-        ss_res = np.sum((R_norm - R_pred) ** 2)
-        ss_tot = np.sum((R_norm - np.mean(R_norm)) ** 2)
-        r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0
-        verdict = 'EXTRACTION' if D > 1 else ('NATURAL' if D < 0.8 else 'THRESHOLD')
-        return {'D': round(float(D), 4), 'lambda_q': round(float(lambda_q), 2),
-                'r2': round(float(r2), 4), 'verdict': verdict, 'n': len(t),
-                'label': label}
-    except Exception as e:
-        return {'error': str(e), 'label': label}
+
+    cmp = s2_compare(t, R_norm, label)
+    if not cmp or cmp['verdict'] == 'NO_FIT' or cmp.get('s2') is None:
+        return None
+
+    # If S2 doesn't beat the alternatives, skip — don't pollute the registry
+    if require_wins and cmp['verdict'] == 'S2_LOSES':
+        print(f'    ✗ S2 loses to {cmp["best_alt_name"]} '
+              f'(ΔAICc={cmp["delta_aicc"]}) — skipping {label[:40]}')
+        return None
+
+    D = cmp['s2']['D']
+    s2_verdict = 'EXTRACTION' if D > 1 else ('NATURAL' if D < 0.8 else 'THRESHOLD')
+
+    # Build the human narrative — include the model comparison result
+    # so the registry card shows why S2 was promoted.
+    if cmp['verdict'] == 'S2_WINS':
+        model_note = f'S2 beats {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}).'
+    else:  # S2_TIES
+        model_note = f'S2 ties {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}, within ±2).'
+
+    return {
+        'D': D,
+        'lambda_q': cmp['s2']['lambda_q'],
+        'r2': cmp['s2']['r2'],
+        'verdict': s2_verdict,
+        'model_verdict': cmp['verdict'],      # S2_WINS | S2_TIES
+        'model_note': model_note,
+        'best_alt': cmp['best_alt_name'],
+        'delta_aicc': cmp['delta_aicc'],
+        'ranking': cmp['rank'],
+        'n': len(t),
+        'label': label,
+    }
 
 def retention_curve(values, max_lag=None):
     """ACF of |demeaned values| — the retention curve."""
@@ -255,21 +279,25 @@ def analyze_json_values(values, title):
 
 def groq_narrate(fit, backend_url=None):
     """Ask Groq to write a 1-2 sentence narrative for the fit."""
+    model_note = fit.get('model_note', '')
     if not backend_url:
         # Fallback: template narrative
         D = fit.get('D', 0)
         r2 = fit.get('r2', 0)
         verdict = fit.get('verdict', 'UNKNOWN')
         if verdict == 'EXTRACTION':
-            return f'D={D:.3f}, R²={r2:.4f}. D>1 indicates extraction regime — retention collapses super-exponentially.'
+            base = f'D={D:.3f}, R²={r2:.4f}. D>1 indicates extraction regime — retention collapses super-exponentially.'
         elif verdict == 'NATURAL':
-            return f'D={D:.3f}, R²={r2:.4f}. D<1 confirms natural retention — heavy-tailed, slow decay.'
+            base = f'D={D:.3f}, R²={r2:.4f}. D<1 confirms natural retention — heavy-tailed, slow decay.'
         else:
-            return f'D={D:.3f}, R²={r2:.4f}. D near threshold — regime transition zone.'
-    
+            base = f'D={D:.3f}, R²={r2:.4f}. D near threshold — regime transition zone.'
+        return f'{base} {model_note}'.strip()
+
     try:
         import urllib.request
-        msg = f"S2 fit result: D={fit.get('D')}, R²={fit.get('r2')}, verdict={fit.get('verdict')}, dataset={fit.get('label')}. Write a 1-2 sentence plain-English narrative."
+        msg = (f"S2 fit result: D={fit.get('D')}, R²={fit.get('r2')}, "
+               f"verdict={fit.get('verdict')}, dataset={fit.get('label')}. "
+               f"{model_note} Write a 1-2 sentence plain-English narrative.")
         payload = json.dumps({'message': msg, 'lang': 'en'}).encode()
         req = urllib.request.Request(f'{backend_url}/groq-chat',
             data=payload, headers={'Content-Type': 'application/json'})
@@ -354,6 +382,10 @@ def main():
                         'domain': 'scouting',
                         'D': fit['D'], 'r2': fit['r2'],
                         'verdict': fit['verdict'],
+                        'model_verdict': fit.get('model_verdict'),
+                        'model_note': fit.get('model_note', ''),
+                        'delta_aicc': fit.get('delta_aicc'),
+                        'best_alt': fit.get('best_alt'),
                         'narrative': narrative,
                         'url': item.get('doi', item.get('url', '')),
                     })
@@ -385,6 +417,10 @@ def main():
                 'domain': 'financial',
                 'D': fit['D'], 'r2': fit['r2'],
                 'verdict': fit['verdict'],
+                        'model_verdict': fit.get('model_verdict'),
+                        'model_note': fit.get('model_note', ''),
+                        'delta_aicc': fit.get('delta_aicc'),
+                        'best_alt': fit.get('best_alt'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
@@ -402,6 +438,10 @@ def main():
                 'domain': 'live',
                 'D': fit['D'], 'r2': fit['r2'],
                 'verdict': fit['verdict'],
+                        'model_verdict': fit.get('model_verdict'),
+                        'model_note': fit.get('model_note', ''),
+                        'delta_aicc': fit.get('delta_aicc'),
+                        'best_alt': fit.get('best_alt'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
@@ -419,6 +459,10 @@ def main():
                 'domain': 'financial',
                 'D': fit['D'], 'r2': fit['r2'],
                 'verdict': fit['verdict'],
+                        'model_verdict': fit.get('model_verdict'),
+                        'model_note': fit.get('model_note', ''),
+                        'delta_aicc': fit.get('delta_aicc'),
+                        'best_alt': fit.get('best_alt'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
@@ -432,9 +476,13 @@ def main():
     extraction = sum(1 for r in all_results if r.get('verdict') == 'EXTRACTION')
     natural = sum(1 for r in all_results if r.get('verdict') == 'NATURAL')
     pending = sum(1 for r in all_results if r.get('verdict') == 'PENDING')
+    s2_wins = sum(1 for r in all_results if r.get('model_verdict') == 'S2_WINS')
+    s2_ties = sum(1 for r in all_results if r.get('model_verdict') == 'S2_TIES')
     print(f'  EXTRACTION (D>1): {extraction}')
     print(f'  NATURAL (D<0.8): {natural}')
     print(f'  PENDING: {pending}')
+    print(f'  S2 WINS vs alternatives: {s2_wins}')
+    print(f'  S2 TIES (within ±2 AICc): {s2_ties}')
     
     # 9. Save results JSON
     results_path = os.path.join(OUT_DIR, 'scan_results.json')
