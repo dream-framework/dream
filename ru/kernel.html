@@ -402,6 +402,9 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
   }
 
   async function update(){
+    if(typeof Plotly==='undefined' || !window.DreamWeave){
+      setTimeout(update, 200); return;
+    }
     try{
       const data = await fetchData();
       const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
@@ -419,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
   // События
   function onParamsChanged(){
     placeCliffs();
-    if(document.getElementById('kw-autos').checked) update();
+    if(document.getElementById('kw-autos').checked) setTimeout(update, 300);
     else {
       // даже без «Авто» поддерживаем корректные считывания
       const r = R(parseFloat(elLam.value), parseFloat(elLq.value), parseFloat(elDeff.value));
@@ -430,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
   elLam.addEventListener('change', onParamsChanged);
   elDeff.addEventListener('change', onParamsChanged);
   elLq.addEventListener('change', onParamsChanged);
-  elRegen.addEventListener('click', ()=>{ elSeed.value=(Math.random()*1e6)|0; update(); });
+  elRegen.addEventListener('click', ()=>{ elSeed.value=(Math.random()*1e6)|0; setTimeout(update, 300); });
   window.addEventListener('resize', placeCliffs);
 
   // Первый рендер
