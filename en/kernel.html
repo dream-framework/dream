@@ -251,7 +251,7 @@
   </div>
 
   <!-- Plot -->
-  <div id="kw-plot" style="height:560px;width:100%;"></div>
+  <div id="kw-plot" style="height:560px;width:100%;background:rgba(15,23,42,.5);border-radius:12px;"></div>
   <div id="kw-msg" style="font-size:13px;color:var(--muted);margin-top:6px;display:none;"></div>
 </div>
 
@@ -352,8 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
     const alphaDus = 0.85 * Math.pow(r, 2.2);
 
     // optional: shrink dust points at high λ
-    const sizeDust = 2 * Math.max(0.35, Math.pow(r, 1.5));
-    const sizeRest = 2;
+    const sizeDust = 3 * Math.max(0.35, Math.pow(r, 1.5));
+    const sizeRest = 4;
 
     const N = k => data.traces[k].count;
     const series = [
@@ -380,7 +380,8 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
         xaxis:{ title:'PC1', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         yaxis:{ title:'PC2', color:MUTED, gridcolor:grid, zerolinecolor:zero },
         zaxis:{ title:'PC3', color:MUTED, gridcolor:grid, zerolinecolor:zero },
-        aspectmode:'cube'
+        aspectmode:'cube',
+        bgcolor:'rgba(15,23,42,0.8)'
       },
       margin:{ l:0, r:0, t:20, b:0 },
       showlegend:true,
