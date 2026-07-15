@@ -221,35 +221,25 @@
     </div>
 
     <div class="kw-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:10px;">
-      <div>
-        <label for="kw-deff" style="display:block;margin-bottom:4px;">D<sub>eff</sub></label>
-        <select id="kw-deff" style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:#0b0b0c;">
-          <option value="2.0">2.0 (filamentary)</option>
-          <option value="2.2" selected>2.2 (default)</option>
-          <option value="2.5">2.5</option>
-          <option value="3.0">3.0 (homogenizing)</option>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">D<sub>eff</sub></label>
+        <select id="kw-deff" style="padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
+          <option value="2.0">2.0</option><option value="2.2" selected>2.2</option><option value="2.5">2.5</option><option value="3.0">3.0</option>
         </select>
       </div>
-      <div>
-        <label for="kw-lq" style="display:block;margin-bottom:4px;">λ<sub>q</sub> (coherence)</label>
-        <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0"
-               style="width:100%;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:#0b0b0c;">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">λ<sub>q</sub></label>
+        <input id="kw-lq" type="number" min="0.2" step="0.1" value="1.0" style="width:50px;padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
       </div>
-      <div>
-        <label for="kw-seed" style="display:block;margin-bottom:4px;">Seed</label>
-        <input id="kw-seed" type="number" value="42"
-               style="width:120px;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:#0b0b0c;">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <label style="font-size:11px;color:var(--muted);white-space:nowrap;">Seed</label>
+        <input id="kw-seed" type="number" value="42" style="width:60px;padding:4px 6px;border:1px solid #334155;border-radius:6px;background:rgba(255,255,255,.06);color:var(--fg);font-size:11px;">
       </div>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <button id="kw-regen" title="Re-generate (new random seed)" 
-                style="background:rgba(142,197,232,.15);border:1px solid rgba(142,197,232,.4);color:var(--accent);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;line-height:1;transition:all .15s ease;">
-          &#x21bb; <!-- reload icon -->
-        </button>
-        <label title="Auto-update on parameter change" style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;color:var(--muted);">
-          <input id="kw-autos" type="checkbox" checked style="display:none;">
-          <span id="kw-autos-icon" style="font-size:14px;opacity:1;transition:opacity .2s;">&#x23F8; <!-- pause --> &#x25B6; <!-- play --></span>
-        </label>
-      </div>
+      <button id="kw-regen" title="Re-generate" 
+              style="background:rgba(142,197,232,.15);border:1px solid rgba(142,197,232,.4);color:var(--accent);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:13px;line-height:1;">&#x21bb;</button>
+      <button id="kw-autos-btn" title="Auto ON — click to pause" 
+              style="background:rgba(125,211,168,.12);border:1px solid rgba(125,211,168,.35);color:#7dd3a8;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:13px;line-height:1;">&#x23F8;</button>
+      <input id="kw-autos" type="checkbox" checked style="display:none;">
     </div>
   </div>
 
@@ -309,23 +299,22 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
   const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
   const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
   const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
-  const elAutosIcon=document.getElementById('kw-autos-icon');
-  function updateAutoIcon(){
-    if(elAutosIcon){
-      elAutosIcon.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
-      elAutosIcon.title = elAutos.checked ? 'Auto ON — click to pause' : 'Auto OFF — click to resume';
-      elAutosIcon.style.opacity = elAutos.checked ? '1' : '0.5';
+  const elAutosBtn=document.getElementById('kw-autos-btn');
+  function updateAutoBtn(){
+    if(elAutosBtn){
+      elAutosBtn.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
+      elAutosBtn.title = elAutos.checked ? 'Auto ON — click to pause' : 'Auto OFF — click to run';
+      elAutosBtn.style.opacity = elAutos.checked ? '1' : '0.5';
     }
   }
-  updateAutoIcon();
-  if(elAutosIcon){
-    elAutosIcon.addEventListener('click', function(){
+  updateAutoBtn();
+  if(elAutosBtn){
+    elAutosBtn.addEventListener('click', function(){
       elAutos.checked = !elAutos.checked;
-      updateAutoIcon();
+      updateAutoBtn();
+      if(elAutos.checked) setTimeout(update, 200);
     });
   }
-  elRegen.addEventListener('mouseenter', function(){ elRegen.style.transform='translateY(-1px)'; elRegen.style.boxShadow='0 0 10px rgba(142,197,232,.2)'; });
-  elRegen.addEventListener('mouseleave', function(){ elRegen.style.transform=''; elRegen.style.boxShadow=''; });
   const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
   const elCliffReadout=document.getElementById('kw-cliff-readout');
 

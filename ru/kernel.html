@@ -309,23 +309,22 @@ document.addEventListener('DOMContentLoaded', () => {  // Тема + цвета 
   const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
   const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
   const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
-  const elAutosIcon=document.getElementById('kw-autos-icon');
-  function updateAutoIcon(){
-    if(elAutosIcon){
-      elAutosIcon.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
-      elAutosIcon.title = elAutos.checked ? 'Auto ON — click to pause' : 'Auto OFF — click to resume';
-      elAutosIcon.style.opacity = elAutos.checked ? '1' : '0.5';
+  const elAutosBtn=document.getElementById('kw-autos-btn');
+  function updateAutoBtn(){
+    if(elAutosBtn){
+      elAutosBtn.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
+      elAutosBtn.title = elAutos.checked ? 'Авто: вкл. Нажмите для паузы' : 'Авто: выкл. Нажмите для запуска';
+      elAutosBtn.style.opacity = elAutos.checked ? '1' : '0.5';
     }
   }
-  updateAutoIcon();
-  if(elAutosIcon){
-    elAutosIcon.addEventListener('click', function(){
+  updateAutoBtn();
+  if(elAutosBtn){
+    elAutosBtn.addEventListener('click', function(){
       elAutos.checked = !elAutos.checked;
-      updateAutoIcon();
+      updateAutoBtn();
+      if(elAutos.checked) setTimeout(update, 200);
     });
   }
-  elRegen.addEventListener('mouseenter', function(){ elRegen.style.transform='translateY(-1px)'; elRegen.style.boxShadow='0 0 10px rgba(142,197,232,.2)'; });
-  elRegen.addEventListener('mouseleave', function(){ elRegen.style.transform=''; elRegen.style.boxShadow=''; });
   const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
   const elCliffReadout=document.getElementById('kw-cliff-readout');
 
