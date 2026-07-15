@@ -240,12 +240,15 @@
         <input id="kw-seed" type="number" value="42"
                style="width:120px;padding:6px;border:1px solid #334155;border-radius:8px;background:rgba(255,255,255,.06);color:#0b0b0c;">
       </div>
-      <div style="display:flex;gap:10px;align-items:center;">
-        <button id="kw-regen" class="btn"
-                style="background:var(--accent);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:600;cursor:pointer;">
-          Re-generate
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button id="kw-regen" title="Re-generate (new random seed)" 
+                style="background:rgba(142,197,232,.15);border:1px solid rgba(142,197,232,.4);color:var(--accent);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;line-height:1;transition:all .15s ease;">
+          &#x21bb; <!-- reload icon -->
         </button>
-        <label style="font-size:.95rem;color:var(--muted);"><input id="kw-autos" type="checkbox" checked> Auto</label>
+        <label title="Auto-update on parameter change" style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;color:var(--muted);">
+          <input id="kw-autos" type="checkbox" checked style="display:none;">
+          <span id="kw-autos-icon" style="font-size:14px;opacity:1;transition:opacity .2s;">&#x23F8; <!-- pause --> &#x25B6; <!-- play --></span>
+        </label>
       </div>
     </div>
   </div>
@@ -306,6 +309,23 @@ document.addEventListener('DOMContentLoaded', () => {  // Theme + series colors
   const elR=document.getElementById('kw-r-val'), elDeff=document.getElementById('kw-deff');
   const elLq=document.getElementById('kw-lq'), elSeed=document.getElementById('kw-seed');
   const elRegen=document.getElementById('kw-regen'), elAutos=document.getElementById('kw-autos');
+  const elAutosIcon=document.getElementById('kw-autos-icon');
+  function updateAutoIcon(){
+    if(elAutosIcon){
+      elAutosIcon.innerHTML = elAutos.checked ? '&#x23F8;' : '&#x25B6;';
+      elAutosIcon.title = elAutos.checked ? 'Auto ON — click to pause' : 'Auto OFF — click to resume';
+      elAutosIcon.style.opacity = elAutos.checked ? '1' : '0.5';
+    }
+  }
+  updateAutoIcon();
+  if(elAutosIcon){
+    elAutosIcon.addEventListener('click', function(){
+      elAutos.checked = !elAutos.checked;
+      updateAutoIcon();
+    });
+  }
+  elRegen.addEventListener('mouseenter', function(){ elRegen.style.transform='translateY(-1px)'; elRegen.style.boxShadow='0 0 10px rgba(142,197,232,.2)'; });
+  elRegen.addEventListener('mouseleave', function(){ elRegen.style.transform=''; elRegen.style.boxShadow=''; });
   const elCliff50=document.getElementById('kw-cliff50'), elCliff10=document.getElementById('kw-cliff10');
   const elCliffReadout=document.getElementById('kw-cliff-readout');
 
