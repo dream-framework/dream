@@ -14,7 +14,7 @@ Sources:
 Pipeline: search → download → parse → fit S2 → narrate → update tests.html
 """
 
-import os, sys, json, time, urllib.request, urllib.parse, csv, io
+import os, sys, json, time, re, urllib.request, urllib.parse, csv, io
 import numpy as np
 from scipy.optimize import curve_fit
 from datetime import datetime
@@ -308,6 +308,179 @@ def groq_narrate(fit, backend_url=None):
         return groq_narrate(fit)  # fallback to template
 
 # ═══════════════════════════════════════════════════════════════════════
+# DEDUPLICATION & PENDING RESOLUTION
+# ═══════════════════════════════════════════════════════════════════════
+
+def load_existing_tests(html_path):
+    """Parse the TESTS array from tests.html. Returns list of dicts."""
+    if not os.path.exists(html_path):
+        return []
+    with open(html_path) as f:
+        html = f.read()
+    # Extract the array body between "const TESTS = [" and "];"
+    m = re.search(r'const\s+TESTS\s*=\s*\[(.*?)\n\];', html, re.DOTALL)
+    if not m:
+        print('  ! Could not parse TESTS array — treating as empty')
+        return []
+    body = m.group(1)
+    # Parse each {...} entry. We use a simple brace-matching parser
+    # because the entries are JS object literals (not strict JSON).
+    entries = []
+    i = 0
+    while i < len(body):
+        # Find next '{'
+        brace = body.find('{', i)
+        if brace < 0:
+            break
+        # Match braces to find the closing '}'
+        depth = 0
+        j = brace
+        in_str = False
+        esc = False
+        while j < len(body):
+            c = body[j]
+            if esc:
+                esc = False
+            elif c == '\\':
+                esc = True
+            elif c == '"':
+                in_str = not in_str
+            elif not in_str:
+                if c == '{':
+                    depth += 1
+                elif c == '}':
+                    depth -= 1
+                    if depth == 0:
+                        break
+            j += 1
+        if depth != 0:
+            break
+        entry_str = body[brace:j+1]
+        # Extract key fields by regex (good enough for dedup)
+        entry = {}
+        for field in ('id', 'name', 'url', 'verdict', 'date', 'D', 'r2'):
+            fm = re.search(field + r'\s*:\s*"?(.*?)"?\s*[,}]', entry_str)
+            if fm:
+                val = fm.group(1)
+                if field in ('D', 'r2'):
+                    try:
+                        entry[field] = float(val) if val != 'null' else None
+                    except:
+                        entry[field] = None
+                else:
+                    entry[field] = val
+        entries.append(entry)
+        i = j + 1
+    return entries
+
+def is_duplicate(new_entry, existing_entries):
+    """Check if new_entry already exists by URL or name similarity."""
+    new_url = new_entry.get('url', '').rstrip('/')
+    new_name = new_entry.get('name', '').lower().strip()
+    for ex in existing_entries:
+        ex_url = ex.get('url', '').rstrip('/')
+        ex_name = ex.get('name', '').lower().strip()
+        # Match by URL (strongest signal)
+        if new_url and ex_url and new_url == ex_url:
+            return True
+        # Match by name prefix (handles truncated titles)
+        if new_name and ex_name:
+            if new_name[:40] == ex_name[:40]:
+                return True
+    return False
+
+def filter_duplicates(new_entries, existing_entries):
+    """Remove entries that already exist. Returns (kept, skipped_count)."""
+    kept = []
+    skipped = 0
+    for entry in new_entries:
+        if is_duplicate(entry, existing_entries):
+            skipped += 1
+        else:
+            kept.append(entry)
+    return kept, skipped
+
+def resolve_pending_arxiv(entry, groq_url=None):
+    """
+    Try to resolve a PENDING arXiv entry:
+    1. Fetch the arXiv abstract page
+    2. Look for linked data / code repos
+    3. If we find a CSV, download + fit S2
+    4. Update the entry with results
+    Returns the updated entry (or None if still unresolved).
+    """
+    url = entry.get('url', '')
+    if not url or 'arxiv.org' not in url:
+        return None
+
+    # Extract arXiv ID from URL
+    m = re.search(r'(\d{4}\.\d{4,5}|[a-z\-]+/\d{7})', url)
+    if not m:
+        return None
+    arxiv_id = m.group(1)
+
+    # Fetch abstract page
+    abs_url = f'https://arxiv.org/abs/{arxiv_id}'
+    print(f'    🔍 Resolving arXiv {arxiv_id}...')
+    data = fetch_url(abs_url, timeout=15)
+    if not data:
+        return None
+    html = data.decode('utf-8', errors='ignore')
+
+    # Look for linked Zenodo / GitHub / data URLs in the abstract page
+    data_urls = []
+    for pattern in [
+        r'href="(https://zenodo\.org/record/\d+)"',
+        r'href="(https://doi\.org/10\.5281/zenodo\.\d+)"',
+        r'href="(https://github\.com/[^"]+)"',
+    ]:
+        for m in re.finditer(pattern, html):
+            data_urls.append(m.group(1))
+
+    if not data_urls:
+        print(f'    ✗ No linked datasets found')
+        return None
+
+    # Try each linked URL — look for CSVs
+    for durl in data_urls[:2]:  # limit to 2 attempts
+        print(f'    → Checking {durl[:60]}...')
+        if 'zenodo.org' in durl:
+            # Use Zenodo API to list files
+            record_id = re.search(r'zenodo\.(\d+)', durl)
+            if record_id:
+                api_url = f'https://zenodo.org/api/records/{record_id.group(1)}'
+                api_data = fetch_url(api_url, timeout=15)
+                if api_data:
+                    try:
+                        rec = json.loads(api_data)
+                        files = rec.get('files', [])
+                        for f in files:
+                            fname = f.get('key', '')
+                            if fname.endswith(('.csv', '.tsv', '.txt')):
+                                furl = f.get('links', {}).get('self', '')
+                                print(f'      Found CSV: {fname}')
+                                csv_data = fetch_url(furl, timeout=30)
+                                if csv_data:
+                                    fpath = os.path.join(OUT_DIR, f'arxiv_{arxiv_id}_{fname}')
+                                    with open(fpath, 'wb') as fp:
+                                        fp.write(csv_data)
+                                    fit = analyze_csv_timeseries(fpath, f'arXiv {arxiv_id}: {fname}')
+                                    if fit and 'D' in fit:
+                                        narrative = groq_narrate(fit, groq_url if groq_url else None)
+                                        print(f'      ✓ RESOLVED: D={fit["D"]:.3f} R²={fit["r2"]:.4f}')
+                                        return {
+                                            'D': fit['D'],
+                                            'r2': fit['r2'],
+                                            'verdict': fit['verdict'],
+                                            'narrative': narrative,
+                                            'name': f'arXiv {arxiv_id} ({fname})',
+                                        }
+                    except:
+                        pass
+    print(f'    ✗ Could not extract fitable data')
+    return None
+
+# ═══════════════════════════════════════════════════════════════════════
 # UPDATE TESTS.HTML
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -356,6 +529,41 @@ def update_tests_html(new_entries, html_path):
     with open(html_path, 'w') as f:
         f.write(html)
     print(f'  ✓ Added {len(new_entries)} entries to {html_path}')
+
+def update_existing_entry(html_path, entry_id, updates):
+    """Update an existing entry in tests.html by id. Replaces D, r2, verdict, narrative, name."""
+    if not os.path.exists(html_path) or not entry_id:
+        return
+    with open(html_path) as f:
+        html = f.read()
+    # Find the entry by id
+    # Entry id format: id:"auto-2026-07-16-arxiv-3" or similar
+    id_pattern = re.compile(r'(id:"' + re.escape(entry_id) + r'",.*?)(?=\n  ,\{|\n\];)', re.DOTALL)
+    m = id_pattern.search(html)
+    if not m:
+        return
+    old_entry = m.group(1)
+    # Build new entry by replacing fields
+    new_entry = old_entry
+    if 'D' in updates:
+        d_val = f'{updates["D"]:.4f}'
+        new_entry = re.sub(r'D:.*?,', f'D:{d_val},', new_entry, count=1)
+    if 'r2' in updates:
+        r2_val = f'{updates["r2"]:.4f}'
+        new_entry = re.sub(r'r2:.*?,', f'r2:{r2_val},', new_entry, count=1)
+    if 'verdict' in updates:
+        v = updates['verdict'].replace('"', '\\"')
+        new_entry = re.sub(r'verdict:".*?"', f'verdict:"{v}"', new_entry, count=1)
+    if 'narrative' in updates:
+        n = updates['narrative'].replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
+        new_entry = re.sub(r'narrative:".*?"', f'narrative:"{n}"', new_entry, count=1)
+    if 'name' in updates:
+        nm = updates['name'].replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
+        new_entry = re.sub(r'name:".*?"', f'name:"{nm}"', new_entry, count=1)
+    html = html.replace(old_entry, new_entry, 1)
+    with open(html_path, 'w') as f:
+        f.write(html)
+    print(f'    ✓ Updated entry {entry_id}: D={updates.get("D","?")}, verdict={updates.get("verdict","?")}')
 
 # ═══════════════════════════════════════════════════════════════════════
 # MAIN
@@ -512,19 +720,43 @@ def main():
         }, f, indent=2)
     print(f'\n✓ Results: {results_path}')
     
-    # 10. Update tests.html if path provided
+    # 10. DEDUPLICATE against existing tests.html
+    print('\n🔍 Checking for duplicates...')
+    existing_en = load_existing_tests(tests_html)
+    existing_ru = load_existing_tests(tests_html.replace('en/', 'ru/'))
+    all_existing = existing_en + existing_ru
+    print(f'  Found {len(existing_en)} existing EN entries, {len(existing_ru)} RU entries')
+
+    kept_results, skipped_count = filter_duplicates(all_results, all_existing)
+    print(f'  Kept {len(kept_results)} new entries, skipped {skipped_count} duplicates')
+
+    # 10b. RESOLVE PENDING entries from previous runs
+    print('\n🔄 Resolving PENDING entries from previous runs...')
+    resolved_count = 0
+    for ex in existing_en:
+        if ex.get('verdict') == 'PENDING' and ex.get('url', '').startswith('http'):
+            print(f'  → {ex.get("name", "?")[:50]}')
+            resolved = resolve_pending_arxiv(ex, groq_url if groq_url else None)
+            if resolved:
+                # Update the existing entry in-place in tests.html
+                update_existing_entry(tests_html, ex.get('id', ''), resolved)
+                update_existing_entry(tests_html.replace('en/', 'ru/'), ex.get('id', ''), resolved)
+                resolved_count += 1
+    if resolved_count:
+        print(f'  ✓ Resolved {resolved_count} PENDING entries')
+    else:
+        print(f'  (no PENDING entries could be resolved this run)')
+
+    # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):
-        update_tests_html(all_results, tests_html)
+        update_tests_html(kept_results, tests_html)
     else:
         print(f'  tests.html not found at {tests_html} — skipping update')
-    
+
     # 11. Also update RU tests.html
     ru_html = tests_html.replace('en/', 'ru/')
     if os.path.exists(ru_html):
-        # Same entries but with source label in Russian
-        for entry in all_results:
-            entry['narrative'] = entry['narrative']  # keep English narrative (Groq handles RU if configured)
-        update_tests_html(all_results, ru_html)
+        update_tests_html(kept_results, ru_html)
     
     return all_results
 
