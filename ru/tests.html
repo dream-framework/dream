@@ -178,7 +178,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "16 Jul 2026 14:09 EST";
+const LAST_REFRESH = "16 Jul 2026 15:07 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -836,6 +836,8 @@ const TESTS = [
   ,{id:"auto-2026-07-16-fred-SP500",name:"FRED SP500 (ACF retention)",domain:"financial",D:1.0666,r2:0.9985,verdict:"EXTRACTION",narrative:"D=1.067, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-56.04).",source:"auto-scan 2026-07-16",date:"2026-07-16",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",image:null}
   ,{id:"auto-2026-07-16-wb-gdp",name:"World Bank: GDP (ACF retention)",domain:"financial",D:1.1175,r2:0.9980,verdict:"EXTRACTION",narrative:"D=1.117, R²=0.9980. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.2).",source:"auto-scan 2026-07-16",date:"2026-07-16",url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",image:null}
   ,{id:"auto-2026-07-16-wb-cpi",name:"World Bank: CPI (ACF retention)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",narrative:"D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",source:"auto-scan 2026-07-16",date:"2026-07-16",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
+  ,{id:"auto-2026-07-16-zenodo-0",name:"Zenodo: Data and Code for Data-Driven Insights to Accelera",domain:"scouting",D:1.5156,r2:0.7725,verdict:"EXTRACTION",narrative:"D=1.516, R²=0.7725. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=0.92, within ±2).",source:"auto-scan 2026-07-16",date:"2026-07-16",url:"10.5281/zenodo.21399447",image:null}
+  ,{id:"auto-2026-07-16-zenodo-1",name:"Zenodo: Normative handheld near-infrared spectroscopy (NIR",domain:"scouting",D:1.3292,r2:0.9983,verdict:"EXTRACTION",narrative:"D=1.329, R²=0.9983. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-25.04).",source:"auto-scan 2026-07-16",date:"2026-07-16",url:"10.5281/zenodo.21400378",image:null}
 ];
 
 /* ---- вспомогательные функции ---- */
