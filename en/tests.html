@@ -1031,7 +1031,11 @@ let activePillFilter = null; // e.g. "fit:CONFIRMED" or "regime:NATURAL" or null
 function matchesPillFilter(t){
   if(!activePillFilter || activePillFilter === 'all') return true;
   const [type, value] = activePillFilter.split(':');
-  if(type === 'fit') return fitQuality(t).label === value;
+  if(type === 'fit'){
+    const label = fitQuality(t).label;
+    const fitMap = {CONFIRMED:'ПОДТВЕРЖДЕНО', TENTATIVE:'ПРЕДВАРИТЕЛЬНО', UNDETERMINED:'НЕ ОПРЕДЕЛЕНО', REJECTED:'ОТКЛОНЕНО'};
+    return label === value || label === fitMap[value];
+  }
   if(type === 'regime'){
     // Use regimeLabel and check both English and Russian values
     const label = regimeLabel(t);
