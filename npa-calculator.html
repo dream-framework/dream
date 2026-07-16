@@ -582,7 +582,10 @@ button:active{ transform: translateY(0); }
         <span class="switch-label">Speculative</span>
       </label>
     </div>
-    <button id="navLangBtn" type="button" class="nav-link" style="cursor:pointer;min-height:32px" title="Switch language">EN</button>
+    <div class="lang" style="display:flex;gap:4px;align-items:center;">
+      <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon" style="display:block;"></a>
+      <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon" style="display:block;"></a>
+    </div>
   </div>
 </header>
 
@@ -868,12 +871,21 @@ function t(){ return I18N[LANG]; }
 // one flag visible at a time: button shows the *target* language
 
 function updateLangButton(){
-  // Nav-bar language toggle: shows the TARGET language (EN when in RU, RU when in EN)
-  const btn = document.getElementById("navLangBtn");
-  if(!btn) return;
-  const target = (LANG === "ru") ? "en" : "ru";
-  btn.textContent = (target === "en") ? "EN" : "RU";
-  btn.title = (target === "en") ? "Switch to English" : "Переключить на русский";
+  // Highlight the active flag, dim the other
+  const ruLink = document.getElementById("navLangRu");
+  const enLink = document.getElementById("navLangEn");
+  if(!ruLink || !enLink) return;
+  if(LANG === "ru"){
+    ruLink.classList.add("on");
+    enLink.classList.remove("on");
+    ruLink.style.opacity = "1";
+    enLink.style.opacity = "0.4";
+  } else {
+    enLink.classList.add("on");
+    ruLink.classList.remove("on");
+    enLink.style.opacity = "1";
+    ruLink.style.opacity = "0.4";
+  }
 }
 
 
@@ -1000,12 +1012,20 @@ tabPanel.addEventListener("click", ()=>setTab("p"));
 tabMapping.addEventListener("click", ()=>setTab("m"));
 
 // Language toggle
-document.getElementById("navLangBtn").addEventListener("click", (e)=>{
-  e.preventDefault();
-  LANG = (LANG === "ru") ? "en" : "ru";
+// Language switching via flag icons
+function setLang(newLang){
+  LANG = newLang;
   localStorage.setItem("lang", LANG);
   applyLang();
-  draw(); // refresh dynamic strings (legend labels on canvas, narrative)
+  draw();
+}
+document.getElementById("navLangRu").addEventListener("click", (e)=>{
+  e.preventDefault();
+  setLang("ru");
+});
+document.getElementById("navLangEn").addEventListener("click", (e)=>{
+  e.preventDefault();
+  setLang("en");
 });
 
 // Resize canvas to fit wrapper, DPR-aware
@@ -1446,6 +1466,16 @@ function fmtLifeYears(n){
   if(n >= 1e3)  return (n/1e3).toFixed(1) + 'k';
   return Math.round(n).toString();
 }
+const HOURS_PER_YEAR = 8760; // 24 * 365
+function fmtHours(lifeYears){
+  const h = lifeYears * HOURS_PER_YEAR;
+  if(h >= 1e15) return (h/1e15).toFixed(1) + 'Qh';
+  if(h >= 1e12) return (h/1e12).toFixed(1) + 'Th';
+  if(h >= 1e9)  return (h/1e9).toFixed(1) + 'Bh';
+  if(h >= 1e6)  return (h/1e6).toFixed(1) + 'Mh';
+  if(h >= 1e3)  return (h/1e3).toFixed(1) + 'kh';
+  return Math.round(h) + 'h';
+}
 
 function updateCaptions(p, h){
   if(probeCaption){
@@ -1513,7 +1543,7 @@ function narrativeHTML(a, p, h, ex, hyP, debt, halfAge, band, disc, fnGood, fnBa
       <div style="font-size:11px;color:var(--muted);line-height:1.4;font-family:ui-monospace,Menlo,Consolas,monospace;">
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
           <span>${isRU?"всего (пожизненно)":"total (lifetime)"}:</span>
-          <span style="color:${devDoomColor};font-weight:700;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl}</span>
+          <span style="color:${devDoomColor};font-weight:700;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtHours(dev.perPersonTotal)})</span></span>
         </div>
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
           <span>${isRU?`извлечено (${pctDone}%)`:`extracted (${pctDone}%)`}:</span>
@@ -1530,6 +1560,10 @@ function narrativeHTML(a, p, h, ex, hyP, debt, halfAge, band, disc, fnGood, fnBa
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;border-top:1px solid rgba(240,160,160,.15);padding-top:3px;">
           <span>${isRU?"глобально (4,5 млрд)":"global (4.5B pop)"}:</span>
           <span style="color:#f0a0a0;font-weight:700;">${fmtLifeYears(dev.globalDebtLifeYears)} ${devYearsLbl}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+          <span>${isRU?"глобально в часах":"global in hours"}:</span>
+          <span style="color:#f0a0a0;font-weight:700;">${fmtHours(dev.globalDebtLifeYears)}</span>
         </div>
         <div style="display:flex;justify-content:space-between;">
           <span>${isRU?"глобальный эквивалент":"global equivalent"}:</span>
@@ -1695,7 +1729,12 @@ resetBtn.addEventListener("click", ()=>{
 });
 doomBtn.addEventListener("click", ()=>setPreset("doom"));
 cleanBtn.addEventListener("click", ()=>setPreset("clean"));
-age.addEventListener("input", ()=>{ playAge = parseFloat(age.value); });
+// Instant redraw on slider change — no waiting for next animation frame
+probe.addEventListener("input", ()=>{ draw(); });
+hygiene.addEventListener("input", ()=>{ draw(); });
+age.addEventListener("input", ()=>{ playAge = parseFloat(age.value); draw(); });
+shadeDebt.addEventListener("change", ()=>{ draw(); });
+showBand.addEventListener("change", ()=>{ draw(); });
 
 // Keyboard shortcuts (do NOT translate key codes)
 window.addEventListener("keydown", (e)=>{
