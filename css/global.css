@@ -172,7 +172,10 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
   flex-direction: column; align-items: stretch; gap: 2px;
 }
 .nav-more.open .nav-more-menu{ display: flex; }
-.nav-more-menu .nav-link{ border-radius: 8px; }
+
+/* CSS-only fallback: dropdown also opens on hover/focus (in case JS fails) */
+.nav-more:hover .nav-more-menu,
+.nav-more:focus-within .nav-more-menu{ display: flex !important; }.nav-more-menu .nav-link{ border-radius: 8px; }
 .nav-link{
   padding: 5px 8px;
   border-radius: var(--radius-pill);
