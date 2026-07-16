@@ -177,7 +177,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "16 Jul 2026 18:09 UTC";
+const LAST_REFRESH = "16 Jul 2026 14:09 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -998,8 +998,13 @@ function lastUpdatePill(){
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const formatted = d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
   
-  // Check if this is today
-  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}\nRefreshed: ${LAST_REFRESH}"><span class="n">${latestCount}</span> <span class="l">new · ${formatted}</span></div>`;
+  // Check if this is today (in EST/EDT)
+  const nowEST = new Date(new Date().toLocaleString('en-US', {timeZone: 'America/New_York'}));
+  const todayStr = nowEST.getFullYear() + '-' + String(nowEST.getMonth()+1).padStart(2,'0') + '-' + String(nowEST.getDate()).padStart(2,'0');
+  const isToday = latestDate === todayStr;
+  const dayLabel = isToday ? 'today' : formatted;
+  
+  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}\nRefreshed: ${LAST_REFRESH}"><span class="n">${latestCount}</span> <span class="l">new · ${dayLabel}</span></div>`;
 }
 
 function tableRowHTML(t){

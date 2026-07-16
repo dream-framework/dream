@@ -489,10 +489,16 @@ def update_tests_html(new_entries, html_path):
     with open(html_path) as f:
         html = f.read()
     
-    # Update the LAST_REFRESH timestamp
-    now = datetime.utcnow()
+    # Update the LAST_REFRESH timestamp (EST/EDT = America/New_York)
+    from datetime import timezone, timedelta
+    # America/New_York: EST=-5, EDT=-4. Approximate: check if DST (March-November)
+    now_utc = datetime.utcnow()
+    # Simple DST check: if month is 3-11 and not (month==3 and day<13) and not (month==11 and day>=7)
+    is_dst = now_utc.month >= 3 and now_utc.month <= 11 and not (now_utc.month == 3 and now_utc.day < 13) and not (now_utc.month == 11 and now_utc.day >= 7)
+    est_offset = timedelta(hours=-4 if is_dst else -5)
+    now_est = now_utc + est_offset
     months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    refresh_str = f"{now.day} {months[now.month-1]} {now.year} {now.hour:02d}:{now.minute:02d} UTC"
+    refresh_str = f"{now_est.day} {months[now_est.month-1]} {now_est.year} {now_est.hour:02d}:{now_est.minute:02d} EST"
     refresh_pattern = re.compile(r'const LAST_REFRESH\s*=\s*"[^"]*"')
     if refresh_pattern.search(html):
         html = refresh_pattern.sub(f'const LAST_REFRESH = "{refresh_str}"', html)
