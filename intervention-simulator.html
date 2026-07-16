@@ -391,5 +391,32 @@
     });
   });
   </script>
+
+<script>
+// Math/Spec toggle handlers (self-contained)
+document.addEventListener('DOMContentLoaded', () => {
+  const mt = document.getElementById('mathToggle');
+  const st = document.getElementById('specToggle');
+  if (mt) {
+    const saved = localStorage.getItem('math:on');
+    if (saved !== null) { const on = saved === '1'; document.body.classList.toggle('show-math', on); mt.checked = on; }
+    mt.addEventListener('change', () => {
+      const on = mt.checked;
+      document.body.classList.toggle('show-math', on);
+      localStorage.setItem('math:on', on ? '1' : '0');
+    });
+  }
+  if (st) {
+    const saved = localStorage.getItem('spec:on');
+    if (saved !== null) { const on = saved === '1'; document.body.classList.toggle('show-spec', on); st.checked = on; }
+    st.addEventListener('change', () => {
+      const on = st.checked;
+      document.body.classList.toggle('show-spec', on);
+      localStorage.setItem('spec:on', on ? '1' : '0');
+    });
+  }
+});
+</script>
+
 </body>
 </html>
