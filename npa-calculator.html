@@ -1,61 +1,38 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Калькулятор NPR (NPV→NPR) • DREAM/S2</title>
 <link rel="stylesheet" href="css/global.css">
 <style>
-:root{
-  --bg:#283548;
-  --panel:#3b4a5f;
-  --border:#54637a;
-  --text:#f1f5f9;
-  --muted:#c4d0df;
-  --muted2:#94a3b8;
-  --good:#7dd3a8;
-  --bad:#f0a0a0;
-  --neutral:#8ec5e8;
-  --warn:#f0c878;
-  --shadow: 0 10px 30px rgba(0,0,0,.20);
-}
+/* NPA Calculator — uses global.css for base theme, adds app-specific layout */
 *{box-sizing:border-box}
 html, body{
-  height:100%;
   margin:0;
-  overflow:hidden;
-  background:var(--bg);
-  color:var(--text);
+  background:var(--bg, #070b14);
+  color:var(--fg, #eef2f7);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  display:flex;
-  flex-direction:column;
 }
 
-/* Override global.css .nav for this full-screen page: not sticky, flex-shrink */
-.nav{
-  position:relative;
-  flex-shrink:0;
-}
-
-.container{
-  flex:1;
-  min-height:0;
-  padding:12px;
+/* App container — scrollable like other DREAM pages, but keeps the grid layout */
+.npa-app{
   max-width:1440px;
   width:100%;
   margin:0 auto;
+  padding:12px;
   display:grid;
   grid-template-rows: auto 1fr;
   gap:10px;
-  overflow:hidden;
+  min-height:calc(100vh - 60px);
 }
-header{
+.npa-header{
   display:grid;
   grid-template-columns: 1fr auto;
   gap:12px;
   align-items:start;
 }
-header h1{
+.npa-header h1{
   margin:0;
   font-size:17px;
   font-weight:900;
@@ -566,31 +543,56 @@ button:active{ transform: translateY(0); }
 
 <body>
 
-<!-- Site navigation band (same .nav class as all other pages) -->
-<nav class="nav">
-  <div class="brand">
-    <svg class="brand-mark" viewBox="0 0 64 72" aria-hidden="true" focusable="false">
-      <path class="star"
-        d="M32 6l7 15 16 2-12 10 4 16-15-8-15 8 4-16L9 23l16-2 7-15z"
-        fill="#fa063bff" stroke="#fa063bff" stroke-width="6" stroke-linejoin="round"/>
-    </svg>
-    <span id="navBrand">Контуры коммунистического будущего</span>
-  </div>
-  <div class="tabs" id="navTabs">
-    <a class="tab" href="ru/manifesto.html" data-ru="Манифест" data-en="Manifesto">Манифест</a>
-    <a class="tab" href="ru/npa-manifesto.html" data-ru="NPA 2.0" data-en="NPA 2.0">NPA 2.0</a>
-    <a class="tab active" href="npa-calculator.html" data-ru="Калькулятор НПС" data-en="NPA Toy">Калькулятор НПС</a>
-    <a class="tab" href="ru/death.html" data-ru="Смерть кражи будущего" data-en="Death of Theft">Смерть кражи будущего</a>
-    <a class="tab" href="ru/math.html" data-ru="Математика" data-en="Math">Математика</a>
-    <a class="tab" href="ru/overview.html" data-ru="Технокоммунизм" data-en="Tech Communism">Технокоммунизм</a>
-    <a class="tab" href="ru/altruists.html" data-ru="Власть альтруистов" data-en="Power to Altruists">Власть альтруистов</a>
-    <a class="tab" href="ru/faq.html" data-ru="FAQ" data-en="FAQ">FAQ</a>
-    <a class="tab lang-toggle" href="#" id="navLangBtn" data-ru="EN" data-en="RU">EN</a>
-  </div>
-</nav>
+<!-- ===== Fractal backdrop ===== -->
+<div id="fx" aria-hidden="true">
+  <canvas id="mb"></canvas>
+</div>
 
-<div class="container">
-  <header>
+<!-- ===== Header / Nav (same as all DREAM pages) ===== -->
+<header class="site-header">
+  <div class="brand">
+    <span class="dot" aria-hidden="true"></span>
+    <a href="en/index.html">D.R.E.A.M</a>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-link" href="en/index.html">Home</a>
+    <a class="nav-link" href="en/case.html">Case for D.R.E.A.M</a>
+    <a class="nav-link" href="en/retention.html">Retention Law</a>
+    <a class="nav-link" href="en/axioms.html">Axioms</a>
+    <a class="nav-link" href="en/theorems.html">Theorems</a>
+    <a class="nav-link" href="en/math.html">Math Frame</a>
+    <a class="nav-link" href="en/kernel.html">Kernel</a>
+    <a class="nav-link" href="en/topology.html">Topology</a>
+    <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
+    <a class="nav-link foundation" href="en/predictions.html">Predictions</a>
+    <a class="nav-link" href="en/falsification.html">Falsification</a>
+    <a class="nav-link" href="en/tests.html">Tests</a>
+    <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
+    <a class="nav-link" href="en/about.html">AI Analysis</a>
+    <a class="nav-link" href="en/time.html">Time</a>
+    <a class="nav-link" href="en/memory.html">Memory</a>
+    <a class="nav-link" href="en/articles.html">Articles</a>
+    <a class="nav-link active" href="npa-calculator.html">NPA Toy</a>
+    <a class="nav-link" href="intervention-simulator.html">Intervention Sim</a>
+  </nav>
+  <div class="controls">
+    <div class="toggles">
+      <label class="switch" title="Show/Hide mathematical content">
+        <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+        <span class="switch-label">Math</span>
+      </label>
+      <label class="switch" title="Show speculative content">
+        <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+        <span class="switch-label">Speculative</span>
+      </label>
+    </div>
+    <button id="navLangBtn" class="nav-link" style="cursor:pointer;min-height:32px" title="Switch language">EN</button>
+  </div>
+</header>
+
+<main class="container">
+<div class="npa-app">
+  <div class="npa-header">
     <div>
       <h1 id="t_h1"></h1>
       <p class="kicker" id="t_kicker"></p>
@@ -601,7 +603,7 @@ button:active{ transform: translateY(0); }
       <div class="badge"><span class="dot neutral"></span><span id="t_badge_debt"></span></div>
       <div class="badge"><span class="dot warn"></span><span id="t_badge_age"></span></div>
     </div>
-  </header>
+  </div>
 
   <div class="main" data-fullscreen>
     <!-- Chart + controls (left column) -->
@@ -864,7 +866,7 @@ const I18N = {
   }
 };
 
-let LANG = localStorage.getItem("lang") || "ru";
+let LANG = localStorage.getItem("lang") || "en";
 function t(){ return I18N[LANG]; }
 
 // one flag visible at a time: button shows the *target* language
@@ -941,10 +943,10 @@ function applyLang(){
 
   // Update nav band labels + brand text
   const navBrand = document.getElementById("navBrand");
-  if(navBrand) navBrand.textContent = (LANG === "ru") ? "Контуры коммунистического будущего" : "Tech Communism";
+  // navBrand no longer exists — DREAM site-header is used instead
   document.querySelectorAll(".nav .tab").forEach(tab => {
-    const txt = tab.getAttribute("data-" + LANG);
-    if(txt) tab.textContent = txt;
+    // Nav links are now static English labels (DREAM site-header)
+    // Language switching is handled by the I18N object for app content
   });
 
   updateLangButton();
@@ -1727,6 +1729,16 @@ requestAnimationFrame(()=>{
   requestAnimationFrame(()=>requestAnimationFrame(tick));
 });
 </script>
+</div>
+</main>
+
+<!-- ===== Fractal backdrop ===== -->
+<script defer src="js/fractal.js"></script>
+<!-- ===== Mobile nav (hamburger) ===== -->
+<script defer src="js/nav-mobile.js"></script>
+<!-- ===== Bot (chat bubble) ===== -->
+<script defer src="js/bot.js"></script>
+<!-- ===== Fullscreen toggle for toys ===== -->
 <script src="js/fs-toggle.js"></script>
 </body>
 </html>
