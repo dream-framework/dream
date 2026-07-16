@@ -571,20 +571,10 @@ button:active{ transform: translateY(0); }
     <a class="nav-link active" href="npa-calculator.html">NPA Toy</a>
     <a class="nav-link" href="intervention-simulator.html">Intervention Sim</a>
   </nav>
-  <div class="controls">
-    <div class="toggles">
-      <label class="switch" title="Show/Hide mathematical content">
-        <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
-        <span class="switch-label">Math</span>
-      </label>
-      <label class="switch" title="Show speculative content">
-        <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
-        <span class="switch-label">Speculative</span>
-      </label>
-    </div>
-    <div class="lang" style="display:flex;gap:4px;align-items:center;">
-      <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
-      <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/gb.png" width="12" height="8" alt="EN" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
+  <div class="controls" style="gap:6px;">
+    <div class="lang" style="display:flex;gap:3px;align-items:center;">
+      <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
+      <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/gb.png" width="12" height="8" alt="EN" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
     </div>
   </div>
 </header>
@@ -1540,34 +1530,30 @@ function narrativeHTML(a, p, h, ex, hyP, debt, halfAge, band, disc, fnGood, fnBa
         ${devTitle}
         <span style="font-size:9px;font-weight:400;color:var(--muted2);margin-left:auto;">${devDoomWarning}</span>
       </div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.4;font-family:ui-monospace,Menlo,Consolas,monospace;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+      <div style="font-size:10px;color:var(--muted);line-height:1.5;font-family:ui-monospace,Menlo,Consolas,monospace;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:1px;white-space:nowrap;">
           <span>${isRU?"всего (пожизненно)":"total (lifetime)"}:</span>
-          <span style="color:${devDoomColor};font-weight:700;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl}</span>
+          <span style="color:${devDoomColor};font-weight:700;white-space:nowrap;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:1px;white-space:nowrap;">
           <span>${isRU?`извлечено (${pctDone}%)`:`extracted (${pctDone}%)`}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${Math.max(0, dev.perPersonExtracted).toFixed(1)} ${devYearsLbl}</span>
+          <span style="color:#f0a0a0;font-weight:700;white-space:nowrap;">${Math.max(0, dev.perPersonExtracted).toFixed(1)} ${devYearsLbl}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
-          <span>${isRU?"осталось извлечь":"remaining"}:</span>
-          <span style="color:#f0c878;font-weight:700;">${dev.perPersonRemaining.toFixed(1)} ${devYearsLbl}</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;border-top:1px solid rgba(240,160,160,.15);padding-top:3px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:1px;border-top:1px solid rgba(240,160,160,.15);padding-top:2px;white-space:nowrap;">
           <span>${isRU?"долг уже оплачен":"debt already paid"}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${fmtBigNumber(Math.max(0, dev.personalDebtExtracted))}</span>
+          <span style="color:#f0a0a0;font-weight:700;white-space:nowrap;">${fmtBigNumber(Math.max(0, dev.personalDebtExtracted))}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;border-top:1px solid rgba(240,160,160,.15);padding-top:3px;">
-          <span>${isRU?`глоб. извлечено (${pctDone}%)`:`global extracted (${pctDone}%)`}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${fmtLifeYears(dev.globalExtractedLifeYears)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtBigNumber(dev.globalExtractedDollars)})</span></span>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:1px;border-top:1px solid rgba(240,160,160,.15);padding-top:2px;white-space:nowrap;">
+          <span>${isRU?`глоб. ущерб (${pctDone}%)`:`global damage (${pctDone}%)`}:</span>
+          <span style="color:#f0a0a0;font-weight:700;white-space:nowrap;">${fmtLifeYears(dev.globalExtractedLifeYears)} ${devYearsLbl}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
-          <span>${isRU?"глоб. осталось":"global remaining"}:</span>
-          <span style="color:#f0c878;font-weight:700;">${fmtLifeYears(dev.globalRemainingLifeYears)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtBigNumber(dev.globalRemainingDollars)})</span></span>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:1px;white-space:nowrap;">
+          <span>${isRU?"глоб. эквивалент $":"global $ equiv"}:</span>
+          <span style="color:#f0a0a0;font-weight:700;white-space:nowrap;">${fmtBigNumber(dev.globalExtractedDollars)}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;">
-          <span>${isRU?"глобальный эквивалент (всего)":"global equivalent (total)"}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${fmtBigNumber(dev.globalDebtDollars)}</span>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;border-top:1px solid rgba(240,160,160,.15);padding-top:2px;white-space:nowrap;">
+          <span>${isRU?"всего $ (пожизненно)":"total $ (lifetime)"}:</span>
+          <span style="color:#f0a0a0;font-weight:700;white-space:nowrap;">${fmtBigNumber(dev.globalDebtDollars)}</span>
         </div>
       </div>
     </div>
