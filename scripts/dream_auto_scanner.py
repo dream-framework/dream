@@ -506,8 +506,7 @@ def update_tests_html(new_entries, html_path):
         # Add it if not present
         html = html.replace('<script>\n', f'<script>\nconst LAST_REFRESH = "{refresh_str}";\n', 1)
     
-    # Find the closing ]; of TESTS array
-    import re
+    # Find the closing ]; of TESTS array (re is imported at module level)
     match = re.search(r'\n\];', html)
     if not match:
         print('  ✗ Could not find TESTS array closing')
