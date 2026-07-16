@@ -1,6 +1,7 @@
 /**
- * nav-autoscroll.js — scrolls the nav horizontally to ensure the active link
- * AND the More dropdown are visible. Runs on page load and on resize.
+ * nav-autoscroll.js — shifts the nav content horizontally to show the active link
+ * and the More dropdown. Uses transform:translateX since overflow:clip prevents
+ * native scrolling.
  */
 (function () {
   'use strict';
@@ -12,37 +13,58 @@
     }
   }
 
-  function scrollNav() {
+  function shiftNav() {
     const nav = document.querySelector('.site-header .nav');
     if (!nav) return;
     
-    // First, try to scroll active link into view
+    // Reset transform first
+    nav.style.transform = '';
+    
+    // Find the active link or More toggle
     const active = nav.querySelector('.nav-link.active, .nav-more-toggle.active');
-    if (active) {
-      const navRect = nav.getBoundingClientRect();
-      const targetRect = active.getBoundingClientRect();
-      if (targetRect.right > navRect.right - 4) {
-        nav.scrollLeft += (targetRect.right - navRect.right + 10);
-      }
-      if (targetRect.left < navRect.left + 4) {
-        nav.scrollLeft -= (navRect.left - targetRect.left + 10);
-      }
+    const target = active || nav.querySelector('.nav-more-toggle');
+    if (!target) return;
+    
+    const navRect = nav.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    
+    // Calculate how much we need to shift
+    let shift = 0;
+    
+    // If target is off-screen to the right, shift left
+    if (targetRect.right > navRect.right - 4) {
+      shift = navRect.right - targetRect.right - 10;
+    }
+    // If target is off-screen to the left, shift right
+    if (targetRect.left < navRect.left + 4) {
+      shift = navRect.left - targetRect.left + 10;
     }
     
-    // Then, ensure the More dropdown toggle is also visible
+    if (shift !== 0) {
+      // Apply transform to the nav's children wrapper
+      // We need to shift all children. Use transform on the nav itself.
+      const currentTransform = nav.style.transform || '';
+      const currentShift = parseInt(currentTransform.match(/-?\d+/)?.[0] || '0');
+      nav.style.transform = `translateX(${currentShift + shift}px)`;
+    }
+    
+    // Also check if the More toggle is visible after shifting
     const moreToggle = nav.querySelector('.nav-more-toggle');
     if (moreToggle) {
-      const navRect = nav.getBoundingClientRect();
       const moreRect = moreToggle.getBoundingClientRect();
-      if (moreRect.right > navRect.right - 4) {
-        nav.scrollLeft += (moreRect.right - navRect.right + 10);
+      const navRect2 = nav.getBoundingClientRect();
+      if (moreRect.right > navRect2.right - 4) {
+        const currentTransform = nav.style.transform || '';
+        const currentShift = parseInt(currentTransform.match(/-?\d+/)?.[0] || '0');
+        const additionalShift = navRect2.right - moreRect.right - 10;
+        nav.style.transform = `translateX(${currentShift + additionalShift}px)`;
       }
     }
   }
 
   ready(() => {
-    setTimeout(scrollNav, 100);
-    setTimeout(scrollNav, 500); // run again after fonts load
-    window.addEventListener('resize', scrollNav);
+    setTimeout(shiftNav, 100);
+    setTimeout(shiftNav, 500);
+    window.addEventListener('resize', shiftNav);
   });
 })();
