@@ -328,12 +328,28 @@ def update_tests_html(new_entries, html_path):
     # Build new entry strings
     today = datetime.now().strftime('%Y-%m-%d')
     new_js = ''
+
+    def js_str(s):
+        """Escape a Python string for safe embedding in a JS double-quoted string literal."""
+        if s is None:
+            return ''
+        s = str(s)
+        s = s.replace("\\", "\\\\")
+        s = s.replace("\"", "\\\"")
+        s = s.replace("\n", " ")
+        s = s.replace("\r", " ")
+        s = s.replace("\t", " ")
+        return s
     for entry in new_entries:
         D_val = f'{entry["D"]:.4f}' if entry.get('D') else 'null'
         r2_val = f'{entry["r2"]:.4f}' if entry.get('r2') else 'null'
-        url_val = '"' + entry["url"] + '"' if entry.get('url') else 'null'
-        narr = entry['narrative'].replace('"', '\\\"').replace('\n', ' ')
-        new_js += f'\n  ,{{id:"auto-{today}-{entry["id"]}",name:"{entry["name"]}",domain:"{entry["domain"]}",D:{D_val},r2:{r2_val},verdict:"{entry["verdict"]}",narrative:"{narr}",source:"auto-scan {today}",date:"{today}",url:{url_val},image:null}}'
+        url_val = '"' + js_str(entry.get('url', '')) + '"' if entry.get('url') else 'null'
+        eid = js_str(entry.get('id', ''))
+        name = js_str(entry.get('name', ''))
+        domain = js_str(entry.get('domain', ''))
+        verdict = js_str(entry.get('verdict', ''))
+        narr = js_str(entry.get('narrative', ''))
+        new_js += f'\n  ,{{id:\"auto-{today}-{eid}\",name:\"{name}\",domain:\"{domain}\",D:{D_val},r2:{r2_val},verdict:\"{verdict}\",narrative:\"{narr}\",source:\"auto-scan {today}\",date:\"{today}\",url:{url_val},image:null}}'
     
     html = html[:insert_pos] + new_js + html[insert_pos:]
     
