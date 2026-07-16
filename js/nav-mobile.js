@@ -4,8 +4,8 @@
  * the hamburger button + dropdown panel into every .site-header.
  *
  * Behavior:
- *   - Desktop (>768px): no-op, existing horizontal nav works.
- *   - Mobile (<=768px): hides .nav, shows hamburger button.
+ *   - Desktop (>900px): no-op, existing horizontal nav works.
+ *   - Mobile (<=900px): hides .nav, shows hamburger button.
  *     Tap -> expands a full-width dropdown panel with all nav links
  *     in a vertical grid. Tap any link -> navigates + closes panel.
  *     Tap outside or X button -> closes panel.
@@ -148,7 +148,7 @@
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && isOpen) closePanel();
+      if (window.innerWidth > 900 && isOpen) closePanel();
     });
   }
 

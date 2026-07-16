@@ -908,7 +908,7 @@ table.registry-table tr.pending td{ opacity: .75; }
 
 .nav-mobile-btn{ display: none; }
 
-@media (max-width: 768px){
+@media (max-width: 900px){
   /* Hide the horizontal nav row entirely on mobile */
   .site-header .nav{ display: none !important; }
 
