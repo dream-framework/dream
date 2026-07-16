@@ -331,7 +331,9 @@ def update_tests_html(new_entries, html_path):
     for entry in new_entries:
         D_val = f'{entry["D"]:.4f}' if entry.get('D') else 'null'
         r2_val = f'{entry["r2"]:.4f}' if entry.get('r2') else 'null'
-        new_js += f'\n  ,{{id:"auto-{today}-{entry["id"]}",name:"{entry["name"]}",domain:"{entry["domain"]}",D:{D_val},r2:{r2_val},verdict:"{entry["verdict"]}",narrative:"{entry["narrative"]}",source:"auto-scan {today}",date:"{today}",url:{("\"" + entry["url"] + "\"") if entry.get("url") else "null"},image:null}}'
+        url_val = '"' + entry["url"] + '"' if entry.get('url') else 'null'
+        narr = entry['narrative'].replace('"', '\\\"').replace('\n', ' ')
+        new_js += f'\n  ,{{id:"auto-{today}-{entry["id"]}",name:"{entry["name"]}",domain:"{entry["domain"]}",D:{D_val},r2:{r2_val},verdict:"{entry["verdict"]}",narrative:"{narr}",source:"auto-scan {today}",date:"{today}",url:{url_val},image:null}}'
     
     html = html[:insert_pos] + new_js + html[insert_pos:]
     
