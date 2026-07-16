@@ -859,6 +859,29 @@ function phaseText(p){ return p.D === null || p.D === undefined ? "—" : Number
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+// Fit quality: was S2 verified against alternative models (AICc gate)?
+function fitQuality(t){
+  if(t.verdict === "CONFIRMED") return {label:"ПОДТВЕРЖДЕНО", cls:"fit-confirmed"};
+  if(t.model_verdict === "S2_WINS") return {label:"ПОДТВЕРЖДЕНО", cls:"fit-confirmed"};
+  if(t.model_verdict === "S2_TIES") return {label:"ПРЕДВАРИТЕЛЬНО", cls:"fit-tentative"};
+  if(t.model_verdict === "S2_LOSES") return {label:"ОТКЛОНЕНО", cls:"fit-rejected"};
+  const narr = t.narrative || "";
+  if(/S2 beats/i.test(narr)) return {label:"ПОДТВЕРЖДЕНО", cls:"fit-confirmed"};
+  if(/S2 ties/i.test(narr)) return {label:"ПРЕДВАРИТЕЛЬНО", cls:"fit-tentative"};
+  if(/S2 loses/i.test(narr)) return {label:"ОТКЛОНЕНО", cls:"fit-rejected"};
+  return {label:"НЕ ОПРЕДЕЛЕНО", cls:"fit-undetermined"};
+}
+
+// Regime label: NATURAL (D<1) or EXTRACTION (D>1)
+function regimeLabel(t){
+  if(t.kind === "natural") return "ЕСТЕСТВЕННО";
+  if(t.kind === "extraction") return "ИЗВЛЕЧЕНИЕ";
+  if(t.verdict === "NATURAL") return "ЕСТЕСТВЕННО";
+  if(t.verdict === "EXTRACTION") return "ИЗВЛЕЧЕНИЕ";
+  if(t.D !== null && t.D !== undefined) return t.D < 1 ? "ЕСТЕСТВЕННО" : "ИЗВЛЕЧЕНИЕ";
+  return t.verdict || "ОЖИДАНИЕ";
+}
+
 function cardHTML(t){
   const verdictCls = "verdict-" + (t.verdict || "PENDING");
   const dCls = dClass(t);
@@ -897,7 +920,8 @@ function cardHTML(t){
       <h3 class="test-name">${esc(t.name)}</h3>
       ${t.date ? '<span class="badge sm no-dot" style="opacity:.6;">' + esc(t.date) + '</span>' : ''}<div class="test-badges">
         <span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span>
-        <span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span>
+        <span class="badge sm no-dot verdict-${regimeLabel(t)}">${regimeLabel(t)}</span>
+        <span class="badge sm no-dot ${fitQuality(t).cls}">${fitQuality(t).label}</span>
       </div>
     </div>
     ${dBlock}
@@ -940,7 +964,7 @@ function tableRowHTML(t){
       <td><span class="badge sm no-dot domain-${esc(t.domain)}">${esc(CAT_LABELS[t.domain] || t.domain)}</span></td>
       <td class="d-cell ${dCls}">${dCell}</td>
       <td class="d-cell">${r2Text(t)}</td>
-      <td><span class="badge sm no-dot ${verdictCls}">${esc(t.verdict)}</span></td>
+      <td><span class="badge sm no-dot verdict-${regimeLabel(t)}">${regimeLabel(t)}</span> <span class="badge sm no-dot ${fitQuality(t).cls}">${fitQuality(t).label}</span></td>
       <td class="narr-cell">${esc(t.narrative)}</td>
     </tr>`;
 }
