@@ -963,7 +963,7 @@ function summaryPills(){
   const natural = TESTS.filter(t => regimeLabel(t) === "ЕСТЕСТВЕННО").length;
   const extraction = TESTS.filter(t => regimeLabel(t) === "ИЗВЛЕЧЕНИЕ").length;
   const intervention = TESTS.filter(t => regimeLabel(t) === "ВМЕШАТЕЛЬСТВО").length;
-  const pending = TESTS.filter(t => regimeLabel(t) === "ОЖИДАНИЕ").length;
+  const pending = TESTS.filter(t => { const r = regimeLabel(t); return r === "ОЖИДАНИЕ" || r === "PENDING"; }).length;
   const partial = TESTS.filter(t => t.verdict === "PARTIAL").length;
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
