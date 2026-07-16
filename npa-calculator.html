@@ -880,6 +880,10 @@ function updateNavLinks(){
   const nav = document.querySelector(".site-header .nav");
   if(!nav) return;
   nav.innerHTML = "";
+  // Create a scrollable wrapper for regular links (dropdown stays outside)
+  const scrollDiv = document.createElement("div");
+  scrollDiv.className = "nav-links-scroll";
+  nav.appendChild(scrollDiv);
   NAV_LINKS.forEach(link => {
     if(link.dropdown){
       // Check if any sub-item is active
@@ -913,7 +917,7 @@ function updateNavLinks(){
       a.className = "nav-link" + ((link.en && link.en.active) || (link.ru && link.ru.active) ? " active" : "") + (data.cls ? " " + data.cls : "");
       a.href = data.h;
       a.textContent = data.t;
-      nav.appendChild(a);
+      scrollDiv.appendChild(a);
     }
   });
 }
