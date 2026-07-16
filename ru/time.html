@@ -84,34 +84,34 @@
 
   <!-- HERO -->
   <div class="card hero">
-    <h1>Time Dynamics — S2 Studio</h1>
-    <p class="kicker">A different lens on the same law: explore how retention \(R=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\) shapes what “counts” as time.</p>
-    <p class="note">Math respects the site’s Math toggle; compact expanders below carry technical detail.</p>
+    <h1>Динамика времени — Студия S2</h1>
+    <p class="kicker">Другой взгляд на тот же закон: исследуйте, как сохранение \(R=\exp[-(\lambda/\lambda_q)^{D_{\mathrm{eff}}}]\) формирует то, что «считается» временем.</p>
+    <p class="note">Математика подчиняется переключателю «Математика»; компактные раскрытия ниже содержат технические детали.</p>
   </div>
 
   <!-- INTRO + MATH -->
   <div class="grid two" style="margin-top:1rem">
     <div class="card">
-      <h2>What this shows (everyday view)</h2>
+      <h2>Что здесь показано (повседневный взгляд)</h2>
       <p>
-        Slide the window size \( \lambda \). When the window is <em>small</em>, quick details matter. Around the
-        <strong>coherence scale</strong> \( \lambda_q \), detail drops fast — the <em>cliff</em>. Once the window is
-        <em>large</em>, tiny, fast events cancel out. That’s why <strong>seconds can’t move months</strong>: they’re
-        averaged inside the month-sized window.
+        Двигайте размер окна \( \lambda \). Когда окно <em>маленькое</em>, важны быстрые детали. Около
+        <strong>масштаба когерентности</strong> \( \lambda_q \) детали резко исчезают — <em>обрыв</em>. Когда окно
+        <em>большое</em>, мелкие быстрые события взаимно сокращаются. Поэтому <strong>секунды не могут сдвинуть месяцы</strong>: они
+        усредняются внутри окна размером с месяц.
       </p>
       <ul class="small">
-        <li><b>Left of ridge</b> (\(\lambda \ll \lambda_q\)): micro-events survive.</li>
-        <li><b>On ridge</b> (\(\lambda \approx \lambda_q\)): rapid loss — hand-off from detail to coarse.</li>
-        <li><b>Right of ridge</b> (\(\lambda \gg \lambda_q\)): only aggregates remain.</li>
+        <li><b>Слева от гребня</b> (\(\lambda \ll \lambda_q\)): микро-события сохраняются.</li>
+        <li><b>На гребне</b> (\(\lambda \approx \lambda_q\)): быстрая потеря — переход от деталей к крупному.</li>
+        <li><b>Справа от гребня</b> (\(\lambda \gg \lambda_q\)): остаются только агрегаты.</li>
       </ul>
     </div>
     <div class="card">
-      <h2>Formal frame (S2)</h2>
+      <h2>Формальная рамка (S2)</h2>
       <div class="math-block math-only">\[
         R(\lambda)=\exp\!\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\mathrm{eff}}}\right],\qquad
         y(\lambda)=\ln\!\big(-\ln R\big)=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q.
       \]</div>
-      <p class="small">The slope of \(y\) vs \(\ln\lambda\) estimates \(D_{\mathrm{eff}}\); the intercept sets \(\lambda_q\).</p>
+      <p class="small">Наклон \(y\) относительно \(\ln\lambda\) даёт оценку \(D_{\mathrm{eff}}\); точка пересечения задаёт \(\lambda_q\).</p>
     </div>
   </div>
 
@@ -119,33 +119,33 @@
   <div class="card" style="margin-top:1rem; overflow:hidden;">
     <div class="row" style="align-items:flex-end; gap:1rem; margin-bottom:.5rem;">
       <div class="col">
-        <h2 style="margin:0">Time Studio — Surface & Slice</h2>
-        <p class="muted small" style="margin:.25rem 0 0">Left: 3D surface \(z=R\) over \(x=\log_{10}(\lambda/\lambda_q)\), \(y=D_{\mathrm{eff}}\). Right: 2D slice \(R(\lambda)\) with cliff markers.</p>
+        <h2 style="margin:0">Студия времени — Поверхность и срез</h2>
+        <p class="muted small" style="margin:.25rem 0 0">Слева: 3D-поверхность \(z=R\) над \(x=\log_{10}(\lambda/\lambda_q)\), \(y=D_{\mathrm{eff}}\). Справа: 2D-срез \(R(\lambda)\) с маркерами обрыва.</p>
       </div>
       <div class="col" style="display:flex; gap:.5rem; justify-content:flex-end; flex-wrap:wrap">
-        <button id="ts-play"  class="btn">Play</button>
-        <button id="ts-pause" class="btn">Pause</button>
-        <button id="ts-step"  class="btn">Step</button>
-        <button id="ts-reset" class="btn ghost">Reset</button>
+        <button id="ts-play"  class="btn">Пуск</button>
+        <button id="ts-pause" class="btn">Пауза</button>
+        <button id="ts-step"  class="btn">Шаг</button>
+        <button id="ts-reset" class="btn ghost">Сброс</button>
       </div>
     </div>
 
     <!-- Controls -->
     <div class="grid three" style="gap:12px; align-items:end;">
       <div class="stack">
-        <label>Probe scale λ</label>
+        <label>Масштаб зонда λ</label>
         <input id="ts-lam" type="range" min="0.001" max="100" step="0.001" value="0.300">
         <div class="small">λ = <b id="ts-lam-val">0.300</b></div>
       </div>
 
       <div class="stack">
-        <label>Coherence λ<sub>q</sub></label>
+        <label>Когерентность λ<sub>q</sub></label>
         <input id="ts-lq" type="number" min="0.001" step="0.001" value="1.000" style="max-width:180px">
-        <div class="small">ridge at λ=λ<sub>q</sub></div>
+        <div class="small">гребень при λ=λ<sub>q</sub></div>
       </div>
 
       <div class="stack">
-        <label>D<sub>eff</sub> range</label>
+        <label>Диапазон D<sub>eff</sub></label>
         <div style="display:grid; gap:.35rem;">
           <input id="ts-dmin" type="range" min="0.6" max="4.5" step="0.1" value="1.2">
           <input id="ts-dmax" type="range" min="0.6" max="4.5" step="0.1" value="3.0">
@@ -154,16 +154,16 @@
       </div>
 
       <div class="stack">
-        <label>Span of λ/λ<sub>q</sub> (log₁₀)</label>
+        <label>Размах λ/λ<sub>q</sub> (log₁₀)</label>
         <input id="ts-span" type="range" min="1" max="6" step="0.1" value="3">
-        <div class="small">domain: <b id="ts-span-out">10⁻³ … 10³</b></div>
+        <div class="small">область: <b id="ts-span-out">10⁻³ … 10³</b></div>
       </div>
 
-      <label style="display:flex; align-items:center; gap:.5rem;"><input id="ts-auto" type="checkbox" checked> Auto sweep</label>
+      <label style="display:flex; align-items:center; gap:.5rem;"><input id="ts-auto" type="checkbox" checked> Авто-развёртка</label>
       <div class="stack">
-        <label>Speed</label>
+        <label>Скорость</label>
         <input id="ts-speed" type="range" min="0" max="1" step="0.0005" value="0">
-        <div class="small">speed: <b id="ts-speed-out">0%</b></div>
+        <div class="small">скорость: <b id="ts-speed-out">0%</b></div>
       </div>
     </div>
 
@@ -177,7 +177,7 @@
     <div class="card" style="margin-top:.5rem; background:transparent; border:0; box-shadow:none; padding:0 0 .5rem 0;">
       <p id="ts-narr-g" class="small" style="margin:.25rem 0 .25rem 0; color:var(--muted)"></p>
       <p id="ts-narr-t" class="small" style="margin:0; color:var(--muted)"></p>
-      <small id="ts-status" class="small" style="opacity:.8">paused • auto on</small>
+      <small id="ts-status" class="small" style="opacity:.8">пауза • авто вкл</small>
     </div>
   </div>
 </div>
@@ -352,24 +352,24 @@ document.addEventListener('DOMContentLoaded', function(){
     const x90=xAt(0.90,Dm), x10=xAt(0.10,Dm), thick=(x10-x90);
 
     let g;
-    if (ratio < 0.2)      g='Fine textures dominate; quick events still steer perception.';
-    else if (ratio < 0.5) g='Approaching the cliff: subtle structure thins out.';
-    else if (ratio < 0.9) g='Pre-cliff: loss accelerates; sequences blur.';
-    else if (ratio <=1.1) g='At the coherence ridge: rapid collapse from detailed to coarse.';
-    else if (ratio <=2.0) g='Post-cliff: aggregates dominate; sub-window jitter cancels.';
-    else                  g='Deep post-cliff: further coarsening changes little.';
+    if (ratio < 0.2)      g='Тонкие текстуры доминируют; быстрые события всё ещё управляют восприятием.';
+    else if (ratio < 0.5) g='Приближение к обрыву: тонкая структура истончается.';
+    else if (ratio < 0.9) g='Пред-обрыв: потеря ускоряется; последовательности размываются.';
+    else if (ratio <=1.1) g='На гребне когерентности: быстрый коллапс от детального к крупному.';
+    else if (ratio <=2.0) g='После обрыва: агрегаты доминируют; дрожание внутри окна сокращается.';
+    else                  g='Глубоко после обрыва: дальнейшее огрубление мало что меняет.';
 
-    narrG.textContent = `${g} Everyday read: once your window dwarfs an event’s timescale, those events average out—seconds can’t move months.`;
+    narrG.textContent = `${g} Повседневный смысл: как только ваше окно превосходит масштаб времени события, эти события усредняются — секунды не могут сдвинуть месяцы.`;
     narrT.innerHTML =
-      `Here \\(\\lambda/\\lambda_q\\approx ${ratio.toFixed(2)}\\), \\(R\\approx ${r.toFixed(3)}\\). `
-      + `With \\(D_{\\mathrm{eff}}=${Dm.toFixed(2)}\\), the 90→10% drop spans `
+      `Здесь \\(\\lambda/\\lambda_q\\approx ${ratio.toFixed(2)}\\), \\(R\\approx ${r.toFixed(3)}\\). `
+      + `С \\(D_{\\mathrm{eff}}=${Dm.toFixed(2)}\\), падение 90→10% охватывает `
       + `\\(\\Delta\\log_{10}(\\lambda/\\lambda_q)\\approx ${thick.toFixed(2)}\\).`;
     if (window.MathJax?.typeset) MathJax.typeset([$('time-studio-root')]);
   }
 
   function paint(){ drawSurface(); drawSlice(); narrate(); }
 
-  function putStatus(){ status.textContent=(playing?'playing':'paused')+' • auto '+(autoC.checked?'on':'off'); }
+  function putStatus(){ status.textContent=(playing?'воспроизведение':'пауза')+' • авто '+(autoC.checked?'вкл':'выкл'); }
   dOut.textContent = d0S.value+' → '+d1S.value;
   spanOut.textContent = fmtSpan(spanS.value);
   spOut.textContent = (parseFloat(spS.value||'0')*100).toFixed(1)+'%';

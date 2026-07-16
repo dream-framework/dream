@@ -1405,15 +1405,21 @@ function devastatorEstimates(ex, debt, halfAge, aLife, fnGood, fnBad){
   for(let a = 0; a < ageMax; a += step){
     const g1 = fnGood(a), g2 = fnGood(a + step);
     const b1 = fnBad(a), b2 = fnBad(a + step);
-    const seg = ((g1 - b1) + (g2 - b2)) * 0.5 * step;
+    // The gap is "damage" = how much worse extraction is vs hygiene.
+    // At young ages the curves can cross (hygiene R < extraction R), giving
+    // negative seg. Clamp to 0 — no negative damage.
+    const seg = Math.max(0, ((g1 - b1) + (g2 - b2)) * 0.5 * step);
     totalGap += seg;
     if(a < aLife) extractedSoFar += seg;
   }
-  const fracExtracted = totalGap > 0 ? extractedSoFar / totalGap : 0;
+  // Clamp fracExtracted to [0, 1] — can't have negative or >100% extraction
+  let fracExtracted = totalGap > 0 ? extractedSoFar / totalGap : 0;
+  fracExtracted = Math.max(0, Math.min(1, fracExtracted));
 
   // Per-person years already lost (at current age) vs remaining
-  const perPersonExtracted = perPersonTotal * fracExtracted;
-  const perPersonRemaining = perPersonTotal - perPersonExtracted;
+  // Clamp to non-negative — no negative damage
+  const perPersonExtracted = Math.max(0, perPersonTotal * fracExtracted);
+  const perPersonRemaining = Math.max(0, perPersonTotal - perPersonExtracted);
 
   const popAboveD1 = 4.5e9;
   const dollarPerYear = 10000;
