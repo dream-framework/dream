@@ -1032,7 +1032,14 @@ function matchesPillFilter(t){
   if(!activePillFilter || activePillFilter === 'all') return true;
   const [type, value] = activePillFilter.split(':');
   if(type === 'fit') return fitQuality(t).label === value;
-  if(type === 'regime') return regimeLabel(t) === value;
+  if(type === 'regime'){
+    // Check underlying kind/D value, not the display label (which may be translated)
+    if(value === 'NATURAL') return t.kind === 'natural' || (t.D !== null && t.D !== undefined && t.D < 1 && t.kind !== 'intervention' && t.kind !== 'consistent' && t.kind !== 'weak' && t.kind !== 'partial');
+    if(value === 'EXTRACTION') return t.kind === 'extraction' || (t.D !== null && t.D !== undefined && t.D > 1 && t.kind !== 'intervention');
+    if(value === 'INTERVENTION') return t.kind === 'intervention';
+    if(value === 'PENDING') return t.verdict === 'PENDING' || (t.D === null || t.D === undefined);
+    return regimeLabel(t) === value;
+  }
   return true;
 }
 
