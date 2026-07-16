@@ -177,6 +177,7 @@
 </div>
 
 <script>
+const LAST_REFRESH = "16 Jul 2026 18:09 UTC";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -998,12 +999,7 @@ function lastUpdatePill(){
   const formatted = d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
   
   // Check if this is today
-  const today = new Date();
-  const todayStr = today.toISOString().substring(0, 10);
-  const isToday = latestDate === todayStr;
-  const dayLabel = isToday ? 'today' : formatted;
-  
-  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}"><span class="n">${latestCount}</span> <span class="l">new · ${dayLabel}</span></div>`;
+  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}\nRefreshed: ${LAST_REFRESH}"><span class="n">${latestCount}</span> <span class="l">new · ${formatted}</span></div>`;
 }
 
 function tableRowHTML(t){

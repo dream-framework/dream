@@ -489,6 +489,17 @@ def update_tests_html(new_entries, html_path):
     with open(html_path) as f:
         html = f.read()
     
+    # Update the LAST_REFRESH timestamp
+    now = datetime.utcnow()
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    refresh_str = f"{now.day} {months[now.month-1]} {now.year} {now.hour:02d}:{now.minute:02d} UTC"
+    refresh_pattern = re.compile(r'const LAST_REFRESH\s*=\s*"[^"]*"')
+    if refresh_pattern.search(html):
+        html = refresh_pattern.sub(f'const LAST_REFRESH = "{refresh_str}"', html)
+    else:
+        # Add it if not present
+        html = html.replace('<script>\n', f'<script>\nconst LAST_REFRESH = "{refresh_str}";\n', 1)
+    
     # Find the closing ]; of TESTS array
     import re
     match = re.search(r'\n\];', html)
