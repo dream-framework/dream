@@ -554,7 +554,17 @@ button:active{ transform: translateY(0); }
       <!-- Nav links injected by updateNavLinks() based on LANG -->
     </nav>
   <div class="controls" style="gap:6px;">
-    <div class="lang" style="display:flex;gap:3px;align-items:center;">
+      <div class="toggles">
+        <label class="switch" title="Show/Hide mathematical content">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Math</span>
+        </label>
+        <label class="switch" title="Show speculative content">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Speculative</span>
+        </label>
+      </div>
+        <div class="lang" style="display:flex;gap:3px;align-items:center;">
       <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
       <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/gb.png" width="12" height="8" alt="EN" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
     </div>

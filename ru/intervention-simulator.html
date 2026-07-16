@@ -62,7 +62,17 @@
     </div>
     </nav>
     <div class="controls">
-    <div class="lang" style="display:flex;gap:3px;align-items:center;">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Мат</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интерп</span>
+        </label>
+      </div>
+        <div class="lang" style="display:flex;gap:3px;align-items:center;">
         <a class="lang-link on" href="intervention-simulator.html" title="Русский" style="display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
         <a class="lang-link" href="../intervention-simulator.html" title="English" style="display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/gb.png" width="12" height="8" alt="EN" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
       </div>
