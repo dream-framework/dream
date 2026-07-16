@@ -870,7 +870,7 @@ function updateNavLinks(){
   NAV_LINKS.forEach(link => {
     const a = document.createElement("a");
     const data = link[LANG] || link.en;
-    a.className = "nav-link" + (link.active ? " active" : "") + (data.cls ? " " + data.cls : "");
+    a.className = "nav-link" + ((link.en && link.en.active) || (link.ru && link.ru.active) ? " active" : "") + (data.cls ? " " + data.cls : "");
     a.href = data.h;
     a.textContent = data.t;
     nav.appendChild(a);
