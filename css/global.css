@@ -133,6 +133,18 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
   padding: 0;
   overflow: visible;
 }
+.nav-links-scroll{
+  display: flex; flex-wrap: nowrap; gap: 2px; align-items: center;
+  flex: 1 1 auto; min-width: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(142,197,232,.25) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-links-scroll::-webkit-scrollbar{ height: 3px; display: block; }
+.nav-links-scroll::-webkit-scrollbar-track{ background: transparent; }
+.nav-links-scroll::-webkit-scrollbar-thumb{ background: rgba(142,197,232,.25); border-radius: 2px; }
 .nav-more{ position: relative; }
 .nav-more-toggle{
   padding: 6px 11px;
