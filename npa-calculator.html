@@ -583,8 +583,8 @@ button:active{ transform: translateY(0); }
       </label>
     </div>
     <div class="lang" style="display:flex;gap:4px;align-items:center;">
-      <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon" style="display:block;"></a>
-      <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon" style="display:block;"></a>
+      <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;"></a>
+      <a class="lang-link on" id="navLangEn" href="#" title="English" style="cursor:pointer;display:inline-block;line-height:0;"><img src="https://flagcdn.com/16x12/gb.png" width="12" height="8" alt="EN" class="flag-icon" style="display:block;"></a>
     </div>
   </div>
 </header>
@@ -1436,6 +1436,12 @@ function devastatorEstimates(ex, debt, halfAge, aLife, fnGood, fnBad){
   const globalDebtLifeYears = perPersonTotal * popAboveD1;
   const globalDebtDollars = globalDebtLifeYears * dollarPerYear;
 
+  // Age-dynamic global values: extracted so far vs remaining (population-scale)
+  const globalExtractedLifeYears = perPersonExtracted * popAboveD1;
+  const globalRemainingLifeYears = perPersonRemaining * popAboveD1;
+  const globalExtractedDollars = globalExtractedLifeYears * dollarPerYear;
+  const globalRemainingDollars = globalRemainingLifeYears * dollarPerYear;
+
   return {
     D: D,
     perPersonTotal: perPersonTotal,
@@ -1447,6 +1453,10 @@ function devastatorEstimates(ex, debt, halfAge, aLife, fnGood, fnBad){
     personalDebtRemaining: personalDebtRemaining,
     globalDebtLifeYears: globalDebtLifeYears,
     globalDebtDollars: globalDebtDollars,
+    globalExtractedLifeYears: globalExtractedLifeYears,
+    globalRemainingLifeYears: globalRemainingLifeYears,
+    globalExtractedDollars: globalExtractedDollars,
+    globalRemainingDollars: globalRemainingDollars,
   };
 }
 
@@ -1465,16 +1475,6 @@ function fmtLifeYears(n){
   if(n >= 1e6)  return (n/1e6).toFixed(1) + 'M';
   if(n >= 1e3)  return (n/1e3).toFixed(1) + 'k';
   return Math.round(n).toString();
-}
-const HOURS_PER_YEAR = 8760; // 24 * 365
-function fmtHours(lifeYears){
-  const h = lifeYears * HOURS_PER_YEAR;
-  if(h >= 1e15) return (h/1e15).toFixed(1) + 'Qh';
-  if(h >= 1e12) return (h/1e12).toFixed(1) + 'Th';
-  if(h >= 1e9)  return (h/1e9).toFixed(1) + 'Bh';
-  if(h >= 1e6)  return (h/1e6).toFixed(1) + 'Mh';
-  if(h >= 1e3)  return (h/1e3).toFixed(1) + 'kh';
-  return Math.round(h) + 'h';
 }
 
 function updateCaptions(p, h){
@@ -1543,7 +1543,7 @@ function narrativeHTML(a, p, h, ex, hyP, debt, halfAge, band, disc, fnGood, fnBa
       <div style="font-size:11px;color:var(--muted);line-height:1.4;font-family:ui-monospace,Menlo,Consolas,monospace;">
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
           <span>${isRU?"всего (пожизненно)":"total (lifetime)"}:</span>
-          <span style="color:${devDoomColor};font-weight:700;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtHours(dev.perPersonTotal)})</span></span>
+          <span style="color:${devDoomColor};font-weight:700;">${dev.perPersonTotal.toFixed(1)} ${devYearsLbl}</span>
         </div>
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
           <span>${isRU?`извлечено (${pctDone}%)`:`extracted (${pctDone}%)`}:</span>
@@ -1558,15 +1558,15 @@ function narrativeHTML(a, p, h, ex, hyP, debt, halfAge, band, disc, fnGood, fnBa
           <span style="color:#f0a0a0;font-weight:700;">${fmtBigNumber(Math.max(0, dev.personalDebtExtracted))}</span>
         </div>
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;border-top:1px solid rgba(240,160,160,.15);padding-top:3px;">
-          <span>${isRU?"глобально (4,5 млрд)":"global (4.5B pop)"}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${fmtLifeYears(dev.globalDebtLifeYears)} ${devYearsLbl}</span>
+          <span>${isRU?`глоб. извлечено (${pctDone}%)`:`global extracted (${pctDone}%)`}:</span>
+          <span style="color:#f0a0a0;font-weight:700;">${fmtLifeYears(dev.globalExtractedLifeYears)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtBigNumber(dev.globalExtractedDollars)})</span></span>
         </div>
         <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
-          <span>${isRU?"глобально в часах":"global in hours"}:</span>
-          <span style="color:#f0a0a0;font-weight:700;">${fmtHours(dev.globalDebtLifeYears)}</span>
+          <span>${isRU?"глоб. осталось":"global remaining"}:</span>
+          <span style="color:#f0c878;font-weight:700;">${fmtLifeYears(dev.globalRemainingLifeYears)} ${devYearsLbl} <span style="font-size:9px;color:var(--muted2);">(${fmtBigNumber(dev.globalRemainingDollars)})</span></span>
         </div>
         <div style="display:flex;justify-content:space-between;">
-          <span>${isRU?"глобальный эквивалент":"global equivalent"}:</span>
+          <span>${isRU?"глобальный эквивалент (всего)":"global equivalent (total)"}:</span>
           <span style="color:#f0a0a0;font-weight:700;">${fmtBigNumber(dev.globalDebtDollars)}</span>
         </div>
       </div>
