@@ -791,6 +791,10 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 .summary-pill.good .n{ color: var(--good); }
 .summary-pill.warn .n{ color: var(--warn); }
 .summary-pill.mut .n{ color: var(--muted); }
+.summary-pill.pill-filter:hover{ transform: translateY(-1px); border-color: var(--accent); }
+.summary-pill.pill-active{ background: rgba(142,197,232,.25) !important; border-color: var(--accent) !important; box-shadow: 0 0 12px rgba(142,197,232,.35); transform: translateY(-1px); }
+.summary-pill.pill-active .n{ color: var(--accent) !important; }
+.summary-pill.pill-active .l{ color: var(--fg) !important; }
 
 .test-grid{
   display: grid;

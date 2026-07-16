@@ -968,14 +968,14 @@ function summaryPills(){
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
   return `
-    <div class="summary-pill mut"><span class="n">${total}</span> <span class="l">Всего</span></div>
-    <div class="summary-pill good"><span class="n">${fitConfirmed}</span> <span class="l">Подтверждено</span></div>
-    <div class="summary-pill warn"><span class="n">${fitTentative}</span> <span class="l">Предварительно</span></div>
-    <div class="summary-pill mut"><span class="n">${fitUndetermined}</span> <span class="l">Не определено</span></div>
-    <div class="summary-pill good"><span class="n">${natural}</span> <span class="l">Естественно</span></div>
-    <div class="summary-pill bad"><span class="n">${extraction}</span> <span class="l">Извлечение</span></div>
-    <div class="summary-pill warn"><span class="n">${intervention}</span> <span class="l">Вмешательство</span></div>
-    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Ожидание</span></div>
+    <div class="summary-pill mut pill-filter" data-filter="all" style="cursor:pointer"><span class="n">${total}</span> <span class="l">Всего</span></div>
+    <div class="summary-pill good pill-filter" data-filter="fit:CONFIRMED" style="cursor:pointer"><span class="n">${fitConfirmed}</span> <span class="l">Подтверждено</span></div>
+    <div class="summary-pill warn pill-filter" data-filter="fit:TENTATIVE" style="cursor:pointer"><span class="n">${fitTentative}</span> <span class="l">Предварительно</span></div>
+    <div class="summary-pill mut pill-filter" data-filter="fit:UNDETERMINED" style="cursor:pointer"><span class="n">${fitUndetermined}</span> <span class="l">Не определено</span></div>
+    <div class="summary-pill good pill-filter" data-filter="regime:NATURAL" style="cursor:pointer"><span class="n">${natural}</span> <span class="l">Естественно</span></div>
+    <div class="summary-pill bad pill-filter" data-filter="regime:EXTRACTION" style="cursor:pointer"><span class="n">${extraction}</span> <span class="l">Извлечение</span></div>
+    <div class="summary-pill warn pill-filter" data-filter="regime:INTERVENTION" style="cursor:pointer"><span class="n">${intervention}</span> <span class="l">Вмешательство</span></div>
+    <div class="summary-pill mut pill-filter" data-filter="regime:PENDING" style="cursor:pointer"><span class="n">${pending}</span> <span class="l">Ожидание</span></div>
     ${lastUpdatePill()};
   `;
 }
@@ -1023,9 +1023,19 @@ function tableRowHTML(t){
     </tr>`;
 }
 
+let activePillFilter = null;
+
+function matchesPillFilter(t){
+  if(!activePillFilter || activePillFilter === 'all') return true;
+  const [type, value] = activePillFilter.split(':');
+  if(type === 'fit') return fitQuality(t).label === value;
+  if(type === 'regime') return regimeLabel(t) === value;
+  return true;
+}
+
 function render(filter){
   const grid = document.getElementById('testGrid');
-  const list = TESTS.filter(t => filter === 'all' || groupsOf(t).includes(filter))
+  const list = TESTS.filter(t => (filter === 'all' || groupsOf(t).includes(filter)) && matchesPillFilter(t))
     .slice()
     .sort((a, b) => {
       const da = a.date || '';
@@ -1058,6 +1068,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved && CAT_LABELS[saved]) sel.value = saved;
   render(sel.value);
   sel.addEventListener('change', () => render(sel.value));
+  
+  document.getElementById('summaryPills').addEventListener('click', (e) => {
+    const pill = e.target.closest('.pill-filter');
+    if(!pill) return;
+    const filter = pill.dataset.filter;
+    if(activePillFilter === filter){
+      activePillFilter = null;
+      pill.classList.remove('pill-active');
+    } else {
+      activePillFilter = filter;
+      document.querySelectorAll('.pill-filter').forEach(p => p.classList.remove('pill-active'));
+      pill.classList.add('pill-active');
+    }
+    render(sel.value);
+  });
 });
 </script>
 
