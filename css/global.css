@@ -857,6 +857,12 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 .fit-undetermined{ background: rgba(148,163,184,.10); color: var(--muted); border-color: rgba(148,163,184,.3); font-style:italic; }
 .fit-rejected{ background: rgba(240,160,160,.10); color: var(--bad); border-color: rgba(240,160,160,.3); font-style:italic; }
 
+.verdict-INTERVENTION{ background: rgba(142,197,232,.12); color: var(--accent); border-color: rgba(142,197,232,.4); }
+.verdict-THRESHOLD{ background: rgba(240,200,120,.12); color: var(--warn); border-color: rgba(240,200,120,.4); }
+.verdict-CONFIRMED{ background: rgba(125,211,168,.18); color: var(--good); border-color: rgba(125,211,168,.5); font-weight:700; }
+/* Russian */
+.verdict-ВМЕШАТЕЛЬСТВО{ background: rgba(142,197,232,.12); color: var(--accent); border-color: rgba(142,197,232,.4); }
+.verdict-ПОРОГ{ background: rgba(240,200,120,.12); color: var(--warn); border-color: rgba(240,200,120,.4); }
 /* Russian verdict labels */
 .verdict-ЕСТЕСТВЕННО{ background: rgba(125,211,168,.12); color: var(--good); border-color: rgba(125,211,168,.4); }
 .verdict-ИЗВЛЕЧЕНИЕ{ background: rgba(240,160,160,.12); color: var(--bad); border-color: rgba(240,160,160,.4); }

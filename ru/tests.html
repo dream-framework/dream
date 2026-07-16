@@ -874,11 +874,15 @@ function fitQuality(t){
 
 // Regime label: NATURAL (D<1) or EXTRACTION (D>1)
 function regimeLabel(t){
+  if(t.kind === "intervention") return "ВМЕШАТЕЛЬСТВО";
+  if(t.kind === "threshold") return "ПОРОГ";
+  if(t.kind === "inconclusive") return "НЕОДНОЗНАЧНО";
   if(t.kind === "natural") return "ЕСТЕСТВЕННО";
   if(t.kind === "extraction") return "ИЗВЛЕЧЕНИЕ";
+  if(t.D !== null && t.D !== undefined && t.D === t.D) return t.D < 1 ? "ЕСТЕСТВЕННО" : "ИЗВЛЕЧЕНИЕ";
   if(t.verdict === "NATURAL") return "ЕСТЕСТВЕННО";
   if(t.verdict === "EXTRACTION") return "ИЗВЛЕЧЕНИЕ";
-  if(t.D !== null && t.D !== undefined) return t.D < 1 ? "ЕСТЕСТВЕННО" : "ИЗВЛЕЧЕНИЕ";
+  if(t.verdict === "CONFIRMED") return "ПОДТВЕРЖДЕНО";
   return t.verdict || "ОЖИДАНИЕ";
 }
 
@@ -932,24 +936,25 @@ function cardHTML(t){
 
 function summaryPills(){
   const total = TESTS.length;
-  const confirmed = TESTS.filter(t => t.verdict === "CONFIRMED").length;
-  const extraction = TESTS.filter(t => t.verdict === "EXTRACTION").length;
-  const inconclusive = TESTS.filter(t => t.verdict === "INCONCLUSIVE").length;
-  const pending = TESTS.filter(t => t.verdict === "PENDING").length;
-  const natural = TESTS.filter(t => t.verdict === "NATURAL").length;
+  const fitConfirmed = TESTS.filter(t => fitQuality(t).label === "ПОДТВЕРЖДЕНО").length;
+  const fitTentative = TESTS.filter(t => fitQuality(t).label === "ПРЕДВАРИТЕЛЬНО").length;
+  const fitUndetermined = TESTS.filter(t => fitQuality(t).label === "НЕ ОПРЕДЕЛЕНО").length;
+  const natural = TESTS.filter(t => regimeLabel(t) === "ЕСТЕСТВЕННО").length;
+  const extraction = TESTS.filter(t => regimeLabel(t) === "ИЗВЛЕЧЕНИЕ").length;
+  const intervention = TESTS.filter(t => regimeLabel(t) === "ВМЕШАТЕЛЬСТВО").length;
+  const pending = TESTS.filter(t => regimeLabel(t) === "ОЖИДАНИЕ").length;
   const partial = TESTS.filter(t => t.verdict === "PARTIAL").length;
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
   return `
     <div class="summary-pill mut"><span class="n">${total}</span> <span class="l">Всего</span></div>
-    <div class="summary-pill good"><div class="n">${confirmed}</div><div class="l">Подтверждено</div></div>
-    <div class="summary-pill good"><div class="n">${natural}</div><div class="l">Естественные</div></div>
-    <div class="summary-pill good"><div class="n">${consistent}</div><div class="l">Совместимо</div></div>
-    <div class="summary-pill bad"><div class="n">${extraction}</div><div class="l">Извлечение</div></div>
-    <div class="summary-pill warn"><div class="n">${inconclusive}</div><div class="l">Неоднозначно</div></div>
-    <div class="summary-pill warn"><div class="n">${weak}</div><div class="l">Слабо</div></div>
-    <div class="summary-pill warn"><div class="n">${partial}</div><div class="l">Частично</div></div>
-    <div class="summary-pill mut"><div class="n">${pending}</div><div class="l">Ожидают</div></div>`;
+    <div class="summary-pill good"><span class="n">${fitConfirmed}</span> <span class="l">Подтверждено</span></div>
+    <div class="summary-pill warn"><span class="n">${fitTentative}</span> <span class="l">Предварительно</span></div>
+    <div class="summary-pill mut"><span class="n">${fitUndetermined}</span> <span class="l">Не определено</span></div>
+    <div class="summary-pill good"><span class="n">${natural}</span> <span class="l">Естественно</span></div>
+    <div class="summary-pill bad"><span class="n">${extraction}</span> <span class="l">Извлечение</span></div>
+    <div class="summary-pill warn"><span class="n">${intervention}</span> <span class="l">Вмешательство</span></div>
+    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Ожидание</span></div>`;
 }
 
 function tableRowHTML(t){
