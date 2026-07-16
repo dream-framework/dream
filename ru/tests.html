@@ -877,6 +877,9 @@ function regimeLabel(t){
   if(t.kind === "intervention") return "ВМЕШАТЕЛЬСТВО";
   if(t.kind === "threshold") return "ПОРОГ";
   if(t.kind === "inconclusive") return "НЕОДНОЗНАЧНО";
+  if(t.kind === "consistent") return "СОВМЕСТИМО";
+  if(t.kind === "weak") return "СЛАБО";
+  if(t.kind === "partial") return "ЧАСТИЧНО";
   if(t.kind === "natural") return "ЕСТЕСТВЕННО";
   if(t.kind === "extraction") return "ИЗВЛЕЧЕНИЕ";
   if(t.D !== null && t.D !== undefined && t.D === t.D) return t.D < 1 ? "ЕСТЕСТВЕННО" : "ИЗВЛЕЧЕНИЕ";

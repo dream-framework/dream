@@ -847,7 +847,10 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 
 /* ---- Verdict badges ---- */
 .verdict-CONFIRMED{ background: rgba(125,211,168,.12); color: var(--good); border-color: rgba(125,211,168,.4); }
-.verdict-EXTRACTION{ background: rgba(240,160,160,.12); color: var(--bad); border-color: rgba(240,160,160,.4); }
+
+.verdict-CONSISTENT{ background: rgba(142,197,232,.10); color: var(--accent); border-color: rgba(142,197,232,.3); }
+.verdict-WEAK{ background: rgba(148,163,184,.10); color: var(--muted); border-color: rgba(148,163,184,.3); }
+.verdict-PARTIAL{ background: rgba(240,200,120,.10); color: var(--warn); border-color: rgba(240,200,120,.3); }.verdict-EXTRACTION{ background: rgba(240,160,160,.12); color: var(--bad); border-color: rgba(240,160,160,.4); }
 .verdict-NATURAL{ background: rgba(125,211,168,.12); color: var(--good); border-color: rgba(125,211,168,.4); }
 .verdict-INCONCLUSIVE{ background: rgba(240,200,120,.12); color: var(--warn); border-color: rgba(240,200,120,.4); }
 .verdict-PENDING{ background: rgba(148,163,184,.12); color: var(--muted); border-color: rgba(148,163,184,.4); }
