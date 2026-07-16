@@ -856,11 +856,14 @@ const NAV_LINKS = [
   {en:{t:"Tests",           h:"en/tests.html"},            ru:{t:"Тесты",              h:"ru/tests.html"}},
   {en:{t:"FAQ Clouds",      h:"en/faq.html"},              ru:{t:"Вопрос-Ответ",       h:"ru/faq.html"}},
   {en:{t:"AI Analysis",     h:"en/about.html"},            ru:{t:"Оценка ИИ",          h:"ru/about.html"}},
-  {en:{t:"Time",            h:"en/time.html"},             ru:{t:"Время",              h:"ru/time.html"}},
-  {en:{t:"Memory",          h:"en/memory.html"},           ru:{t:"Память",             h:"ru/memory.html"}},
   {en:{t:"Articles",        h:"en/articles.html"},         ru:{t:"Статьи",             h:"ru/articles.html"}},
-  {en:{t:"NPA Toy",         h:"npa-calculator.html", active:true}, ru:{t:"NPA Калькулятор", h:"npa-calculator.html", active:true}},
-  {en:{t:"Intervention Sim",h:"intervention-simulator.html"}, ru:{t:"Симулятор Вмешательства", h:"intervention-simulator.html"}},
+  // Dropdown: Time, Memory, NPA Toy, Intervention Sim
+  {dropdown:true, en:{t:"More"}, ru:{t:"Ещё"}, items:[
+    {en:{t:"Time",            h:"en/time.html"},             ru:{t:"Время",              h:"ru/time.html"}},
+    {en:{t:"Memory",          h:"en/memory.html"},           ru:{t:"Память",             h:"ru/memory.html"}},
+    {en:{t:"NPA Toy",         h:"npa-calculator.html", active:true}, ru:{t:"NPA Калькулятор", h:"npa-calculator.html", active:true}},
+    {en:{t:"Intervention Sim",h:"intervention-simulator.html"}, ru:{t:"Симулятор Вмешательства", h:"intervention-simulator.html"}},
+  ]},
 ];
 
 function updateNavLinks(){
@@ -868,12 +871,40 @@ function updateNavLinks(){
   if(!nav) return;
   nav.innerHTML = "";
   NAV_LINKS.forEach(link => {
-    const a = document.createElement("a");
-    const data = link[LANG] || link.en;
-    a.className = "nav-link" + ((link.en && link.en.active) || (link.ru && link.ru.active) ? " active" : "") + (data.cls ? " " + data.cls : "");
-    a.href = data.h;
-    a.textContent = data.t;
-    nav.appendChild(a);
+    if(link.dropdown){
+      // Check if any sub-item is active
+      const anyActive = link.items.some(it => (it[LANG] || it.en).active || (it.ru && it.ru.active));
+      const triggerData = link[LANG] || link.en;
+      const div = document.createElement("div");
+      div.className = "nav-more" + (anyActive ? " active" : "");
+      const btn = document.createElement("button");
+      btn.className = "nav-more-toggle" + (anyActive ? " active" : "");
+      btn.type = "button";
+      btn.innerHTML = triggerData.t + ' <span class="caret">▼</span>';
+      const menu = document.createElement("div");
+      menu.className = "nav-more-menu";
+      link.items.forEach(it => {
+        const a = document.createElement("a");
+        const idata = it[LANG] || it.en;
+        const iactive = (it.en && it.en.active) || (it.ru && it.ru.active);
+        a.className = "nav-link" + (iactive ? " active" : "") + (idata.cls ? " " + idata.cls : "");
+        a.href = idata.h;
+        a.textContent = idata.t;
+        menu.appendChild(a);
+      });
+      div.appendChild(btn);
+      div.appendChild(menu);
+      nav.appendChild(div);
+      // Dispatch event so nav-dropdown.js picks it up
+      setTimeout(() => document.dispatchEvent(new Event('dream:nav-rebuilt')), 0);
+    } else {
+      const a = document.createElement("a");
+      const data = link[LANG] || link.en;
+      a.className = "nav-link" + ((link.en && link.en.active) || (link.ru && link.ru.active) ? " active" : "") + (data.cls ? " " + data.cls : "");
+      a.href = data.h;
+      a.textContent = data.t;
+      nav.appendChild(a);
+    }
   });
 }
 

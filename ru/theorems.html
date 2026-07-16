@@ -54,11 +54,17 @@
       <a class="nav-link" href="tests.html">Тесты</a>
       <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
       <a class="nav-link" href="about.html">Оценка ИИ</a>
-      <a class="nav-link" href="time.html">Время</a>
-      <a class="nav-link" href="memory.html">Память</a>
       <a class="nav-link" href="articles.html">Статьи</a>
-      <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
-      <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+      
+      <div class="nav-more">
+      <button class="nav-more-toggle" type="button">Ещё <span class="caret">▼</span></button>
+      <div class="nav-more-menu">
+        <a class="nav-link" href="time.html">Время</a>
+        <a class="nav-link" href="memory.html">Память</a>
+        <a class="nav-link" href="../npa-calculator.html">NPA Калькулятор</a>
+        <a class="nav-link" href="../intervention-simulator.html">Симулятор Вмешательства</a>
+      </div>
+    </div>
     </nav>
     <div class="controls">
     <div class="lang">
@@ -321,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../js/weave.js"></script>
   <!-- ===== Bot (chat bubble) ===== -->
   <script defer src="../js/nav-mobile.js"></script>
+  <script defer src="../js/nav-dropdown.js"></script>
   <script defer src="../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../js/fs-toggle.js"></script>

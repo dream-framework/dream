@@ -54,11 +54,17 @@
       <a class="nav-link" href="tests.html">Tests</a>
       <a class="nav-link" href="faq.html">FAQ Clouds</a>
       <a class="nav-link" href="about.html">AI Analysis</a>
-      <a class="nav-link" href="time.html">Time</a>
-      <a class="nav-link" href="memory.html">Memory</a>
       <a class="nav-link" href="articles.html">Articles</a>
-      <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
-      <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+      
+      <div class="nav-more">
+      <button class="nav-more-toggle" type="button">More <span class="caret">▼</span></button>
+      <div class="nav-more-menu">
+        <a class="nav-link" href="time.html">Time</a>
+        <a class="nav-link" href="memory.html">Memory</a>
+        <a class="nav-link" href="../npa-calculator.html">NPA Toy</a>
+        <a class="nav-link" href="../intervention-simulator.html">Intervention Sim</a>
+      </div>
+    </div>
     </nav>
     <div class="controls">
     <div class="lang">
@@ -499,6 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../js/weave.js"></script>
   <!-- ===== Bot (chat bubble) ===== -->
   <script defer src="../js/nav-mobile.js"></script>
+  <script defer src="../js/nav-dropdown.js"></script>
   <script defer src="../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../js/fs-toggle.js"></script>
