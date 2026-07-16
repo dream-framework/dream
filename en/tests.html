@@ -971,7 +971,39 @@ function summaryPills(){
     <div class="summary-pill good"><span class="n">${natural}</span> <span class="l">Natural</span></div>
     <div class="summary-pill bad"><span class="n">${extraction}</span> <span class="l">Extraction</span></div>
     <div class="summary-pill warn"><span class="n">${intervention}</span> <span class="l">Intervention</span></div>
-    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Pending</span></div>`;
+    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Pending</span></div>
+    ${lastUpdatePill()};
+  `;
+}
+
+function lastUpdatePill(){
+  // Find the most recent date in TESTS (auto-scan entries have date:"YYYY-MM-DD")
+  let latestDate = null;
+  let latestCount = 0;
+  const dateCounts = {};
+  TESTS.forEach(t => {
+    const d = t.date;
+    if(!d) return;
+    // Only count ISO-style dates (YYYY-MM-DD) as "scan updates"
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+    dateCounts[d] = (dateCounts[d] || 0) + 1;
+    if(!latestDate || d > latestDate) latestDate = d;
+  });
+  if(!latestDate) return '';
+  latestCount = dateCounts[latestDate];
+  
+  // Format the date nicely
+  const d = new Date(latestDate + 'T00:00:00Z');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const formatted = d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+  
+  // Check if this is today
+  const today = new Date();
+  const todayStr = today.toISOString().substring(0, 10);
+  const isToday = latestDate === todayStr;
+  const dayLabel = isToday ? 'today' : formatted;
+  
+  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}"><span class="n">${latestCount}</span> <span class="l">new · ${dayLabel}</span></div>`;
 }
 
 function tableRowHTML(t){

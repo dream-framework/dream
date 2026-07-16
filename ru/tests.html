@@ -972,7 +972,36 @@ function summaryPills(){
     <div class="summary-pill good"><span class="n">${natural}</span> <span class="l">Естественно</span></div>
     <div class="summary-pill bad"><span class="n">${extraction}</span> <span class="l">Извлечение</span></div>
     <div class="summary-pill warn"><span class="n">${intervention}</span> <span class="l">Вмешательство</span></div>
-    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Ожидание</span></div>`;
+    <div class="summary-pill mut"><span class="n">${pending}</span> <span class="l">Ожидание</span></div>
+    ${lastUpdatePill()};
+  `;
+}
+
+function lastUpdatePill(){
+  let latestDate = null;
+  let latestCount = 0;
+  const dateCounts = {};
+  TESTS.forEach(t => {
+    const d = t.date;
+    if(!d) return;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+    dateCounts[d] = (dateCounts[d] || 0) + 1;
+    if(!latestDate || d > latestDate) latestDate = d;
+  });
+  if(!latestDate) return '';
+  latestCount = dateCounts[latestDate];
+  
+  const d = new Date(latestDate + 'T00:00:00Z');
+  const months = ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  const formatted = d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+  
+  const today = new Date();
+  const todayStr = today.toISOString().substring(0, 10);
+  const isToday = latestDate === todayStr;
+  const dayLabel = isToday ? 'сегодня' : formatted;
+  
+  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Последнее сканирование: ${latestCount} записей добавлено/обновлено ${formatted}"><span class="n">${latestCount}</span> <span class="l">новых · ${dayLabel}</span></div>`;
+}
 }
 
 function tableRowHTML(t){
