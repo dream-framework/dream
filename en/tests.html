@@ -1006,7 +1006,7 @@ function lastUpdatePill(){
   const isToday = latestDate === todayStr;
   const dayLabel = isToday ? 'today' : formatted;
   
-  return `<div class="summary-pill" style="background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}\nRefreshed: ${LAST_REFRESH}"><span class="n">${latestCount}</span> <span class="l">new · ${dayLabel}</span></div>`;
+  return `<div class="summary-pill pill-filter" data-filter="date:latest" data-date="${latestDate}" style="cursor:pointer;background:rgba(142,197,232,.10);color:var(--accent);border-color:rgba(142,197,232,.3);" title="Last scan: ${latestCount} entries added/updated on ${formatted}\nRefreshed: ${LAST_REFRESH}\nClick to filter"><span class="n">${latestCount}</span> <span class="l">new · ${dayLabel}</span></div>`;
 }
 
 function tableRowHTML(t){
@@ -1041,6 +1041,12 @@ function matchesPillFilter(t){
     const label = regimeLabel(t);
     const ruMap = {NATURAL:'ЕСТЕСТВЕННО', EXTRACTION:'ИЗВЛЕЧЕНИЕ', INTERVENTION:'ВМЕШАТЕЛЬСТВО', PENDING:'ОЖИДАНИЕ'};
     return label === value || label === ruMap[value];
+  }
+  if(type === 'date'){
+    const datePill = document.querySelector('.pill-filter[data-filter="date:latest"]');
+    if(!datePill) return true;
+    const latestDate = datePill.dataset.date;
+    return t.date === latestDate;
   }
   return true;
 }
