@@ -32,7 +32,7 @@ html, body{
   gap:12px;
   align-items:start;
 }
-.npa-header h1{
+.npa-.npa-header h1{
   margin:0;
   font-size:17px;
   font-weight:900;
@@ -347,9 +347,9 @@ button.danger{border-color:rgba(255,107,107,.55)}
     gap:6px;
     padding:6px 10px;
   }
-  .nav .tabs{gap:4px;}
-  .nav .tab{padding:4px 8px; font-size:10px;}
-  .container{
+  /* old tech-comm nav — removed */
+  /* old tech-comm nav — removed */
+  .npa-app{
     height:auto;
     min-height:0;
     overflow:visible;
@@ -361,7 +361,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
   .panel{max-height:none;}
   .tabcontent{overflow:visible;}
   #footerRight{max-width:none;}
-  header{
+  .npa-header{
     grid-template-columns:1fr;
     gap:8px;
   }
@@ -369,7 +369,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
     justify-content:flex-start;
     max-width:none;
   }
-  header h1{font-size:15px;}
+  .npa-.npa-header h1{font-size:15px;}
   .kicker{font-size:11px;}
 }
 
@@ -380,7 +380,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
     min-height:100vh;
     overflow:auto;
   }
-  .container{
+  .npa-app{
     height:auto;
     overflow:visible;
   }
@@ -391,12 +391,12 @@ button.danger{border-color:rgba(255,107,107,.55)}
     grid-template-columns:1fr;
     gap:8px;
   }
-  header{
+  .npa-header{
     grid-template-columns:1fr 1fr;
     gap:8px;
     align-items:center;
   }
-  header h1{font-size:13px;}
+  .npa-.npa-header h1{font-size:13px;}
   .kicker{
     font-size:10px;
     -webkit-line-clamp:1;
@@ -412,7 +412,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
 
 /* Very small screens — larger touch targets for player buttons */
 @media (max-width: 600px){
-  .container{padding:8px;}
+  .npa-app{padding:8px;}
   .controls{gap:12px;}
   .control{gap:8px;}
   .player-btn{
@@ -432,7 +432,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
   .callout{font-size:13px !important;}
   .chartArea{min-height:260px;}
   .canvasWrap{min-height:240px;}
-  header{
+  .npa-header{
     grid-template-columns:1fr;
     gap:6px;
   }
@@ -454,7 +454,7 @@ button.danger{border-color:rgba(255,107,107,.55)}
     min-height:100vh;
     overflow:auto;
   }
-  .container{
+  .npa-app{
     height:auto;
     overflow:visible;
     padding:8px;
@@ -465,9 +465,9 @@ button.danger{border-color:rgba(255,107,107,.55)}
   }
   .chartArea{min-height:200px;}
   .canvasWrap{min-height:180px;}
-  header{display:none;}  /* hide title/badges, nav is enough */
-  .nav{padding:4px 10px;}
-  .nav .tab{padding:3px 6px; font-size:9px;}
+  .npa-header{display:none;}  /* hide title/badges, nav is enough */
+  /* old tech-comm nav — removed */
+  /* old tech-comm nav — removed */
 }
 
 /* Pulse / blink animations for dynamic elements */
@@ -549,7 +549,7 @@ button:active{ transform: translateY(0); }
 </div>
 
 <!-- ===== Header / Nav (same as all DREAM pages) ===== -->
-<header class="site-header">
+<.npa-header class="site-header">
   <div class="brand">
     <span class="dot" aria-hidden="true"></span>
     <a href="en/index.html">D.R.E.A.M</a>
@@ -586,7 +586,7 @@ button:active{ transform: translateY(0); }
         <span class="switch-label">Speculative</span>
       </label>
     </div>
-    <button id="navLangBtn" class="nav-link" style="cursor:pointer;min-height:32px" title="Switch language">EN</button>
+    <button id="navLangBtn" type="button" class="nav-link" style="cursor:pointer;min-height:32px" title="Switch language">EN</button>
   </div>
 </header>
 
