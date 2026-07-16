@@ -551,26 +551,8 @@ button:active{ transform: translateY(0); }
     <a href="en/index.html">D.R.E.A.M</a>
   </div>
   <nav class="nav" aria-label="Primary">
-    <a class="nav-link" href="en/index.html">Home</a>
-    <a class="nav-link" href="en/case.html">Case for D.R.E.A.M</a>
-    <a class="nav-link" href="en/retention.html">Retention Law</a>
-    <a class="nav-link" href="en/axioms.html">Axioms</a>
-    <a class="nav-link" href="en/theorems.html">Theorems</a>
-    <a class="nav-link" href="en/math.html">Math Frame</a>
-    <a class="nav-link" href="en/kernel.html">Kernel</a>
-    <a class="nav-link" href="en/topology.html">Topology</a>
-    <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
-    <a class="nav-link foundation" href="en/predictions.html">Predictions</a>
-    <a class="nav-link" href="en/falsification.html">Falsification</a>
-    <a class="nav-link" href="en/tests.html">Tests</a>
-    <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
-    <a class="nav-link" href="en/about.html">AI Analysis</a>
-    <a class="nav-link" href="en/time.html">Time</a>
-    <a class="nav-link" href="en/memory.html">Memory</a>
-    <a class="nav-link" href="en/articles.html">Articles</a>
-    <a class="nav-link active" href="npa-calculator.html">NPA Toy</a>
-    <a class="nav-link" href="intervention-simulator.html">Intervention Sim</a>
-  </nav>
+      <!-- Nav links injected by updateNavLinks() based on LANG -->
+    </nav>
   <div class="controls" style="gap:6px;">
     <div class="lang" style="display:flex;gap:3px;align-items:center;">
       <a class="lang-link" id="navLangRu" href="#" title="Русский" style="cursor:pointer;display:inline-block;line-height:0;width:auto;height:auto;"><img src="https://flagcdn.com/16x12/ru.png" width="12" height="8" alt="RU" class="flag-icon" style="display:block;width:12px;height:8px;"></a>
@@ -858,6 +840,43 @@ const I18N = {
 let LANG = localStorage.getItem("lang") || "en";
 function t(){ return I18N[LANG]; }
 
+// Nav links — bilingual labels + hrefs. EN points to en/, RU points to ru/.
+const NAV_LINKS = [
+  {en:{t:"Home",            h:"en/index.html"},            ru:{t:"Главная",           h:"ru/index.html"}},
+  {en:{t:"Case for D.R.E.A.M",h:"en/case.html"},           ru:{t:"Сила D.R.E.A.M",    h:"ru/case.html"}},
+  {en:{t:"Retention Law",   h:"en/retention.html"},        ru:{t:"Принцип Сохранения",h:"ru/retention.html"}},
+  {en:{t:"Axioms",          h:"en/axioms.html"},           ru:{t:"Аксиомы",           h:"ru/axioms.html"}},
+  {en:{t:"Theorems",        h:"en/theorems.html"},         ru:{t:"Теоремы",           h:"ru/theorems.html"}},
+  {en:{t:"Math Frame",      h:"en/math.html"},             ru:{t:"Матмодель",         h:"ru/math.html"}},
+  {en:{t:"Kernel",          h:"en/kernel.html"},           ru:{t:"Проекция",          h:"ru/kernel.html"}},
+  {en:{t:"Topology",        h:"en/topology.html"},         ru:{t:"Топология",          h:"ru/topology.html"}},
+  {en:{t:"Fractal Spectrum",h:"en/spectrum.html"},         ru:{t:"Фрактальность",     h:"ru/spectrum.html"}},
+  {en:{t:"Predictions",     h:"en/predictions.html", cls:"foundation"}, ru:{t:"Предсказания", h:"ru/predictions.html", cls:"foundation"}},
+  {en:{t:"Falsification",   h:"en/falsification.html"},    ru:{t:"Фальсификация",     h:"ru/falsification.html"}},
+  {en:{t:"Tests",           h:"en/tests.html"},            ru:{t:"Тесты",              h:"ru/tests.html"}},
+  {en:{t:"FAQ Clouds",      h:"en/faq.html"},              ru:{t:"Вопрос-Ответ",       h:"ru/faq.html"}},
+  {en:{t:"AI Analysis",     h:"en/about.html"},            ru:{t:"Оценка ИИ",          h:"ru/about.html"}},
+  {en:{t:"Time",            h:"en/time.html"},             ru:{t:"Время",              h:"ru/time.html"}},
+  {en:{t:"Memory",          h:"en/memory.html"},           ru:{t:"Память",             h:"ru/memory.html"}},
+  {en:{t:"Articles",        h:"en/articles.html"},         ru:{t:"Статьи",             h:"ru/articles.html"}},
+  {en:{t:"NPA Toy",         h:"npa-calculator.html", active:true}, ru:{t:"NPA Калькулятор", h:"npa-calculator.html", active:true}},
+  {en:{t:"Intervention Sim",h:"intervention-simulator.html"}, ru:{t:"Симулятор Вмешательства", h:"intervention-simulator.html"}},
+];
+
+function updateNavLinks(){
+  const nav = document.querySelector(".site-header .nav");
+  if(!nav) return;
+  nav.innerHTML = "";
+  NAV_LINKS.forEach(link => {
+    const a = document.createElement("a");
+    const data = link[LANG] || link.en;
+    a.className = "nav-link" + (link.active ? " active" : "") + (data.cls ? " " + data.cls : "");
+    a.href = data.h;
+    a.textContent = data.t;
+    nav.appendChild(a);
+  });
+}
+
 // one flag visible at a time: button shows the *target* language
 
 function updateLangButton(){
@@ -939,13 +958,8 @@ function applyLang(){
   setHTML("t_map_7", t().map_7);
   setText("t_map_note", t().map_note);
 
-  // Update nav band labels + brand text
-  const navBrand = document.getElementById("navBrand");
-  // navBrand no longer exists — DREAM site-header is used instead
-  document.querySelectorAll(".nav .tab").forEach(tab => {
-    // Nav links are now static English labels (DREAM site-header)
-    // Language switching is handled by the I18N object for app content
-  });
+  // Update nav links to current language
+  updateNavLinks();
 
   updateLangButton();
 }
