@@ -796,24 +796,30 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 .summary-pill.pill-active .n{ color: var(--accent) !important; }
 .summary-pill.pill-active .l{ color: var(--fg) !important; }
 .pill-download{
-  background: rgba(142,197,232,.10);
-  border: 1px solid rgba(142,197,232,.3);
+  background: linear-gradient(135deg, rgba(142,197,232,.15), rgba(125,211,168,.10));
+  border: 1px solid rgba(142,197,232,.4);
   color: var(--accent);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
-  font-size: .68rem;
-  font-weight: 600;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .03em;
   cursor: pointer;
   white-space: nowrap;
-  transition: all .15s ease;
+  transition: all .18s ease;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
+  text-transform: uppercase;
 }
 .pill-download:hover{
-  background: rgba(142,197,232,.20);
+  background: linear-gradient(135deg, rgba(142,197,232,.25), rgba(125,211,168,.15));
   border-color: var(--accent);
   transform: translateY(-1px);
+  box-shadow: 0 2px 12px rgba(142,197,232,.25);
+}
+.pill-download:active{
+  transform: translateY(0);
 }
 
 .test-grid{

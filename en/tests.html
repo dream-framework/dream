@@ -428,7 +428,7 @@ const TESTS = [
     name:"Quantum magic accumulation (random circuits)",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:0.996,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Random-circuit magic-state accumulation tracks S2 retention with R²=0.996, ΔBIC>15 — the law reproduces across the qubit-count sweep.",
     image:null,
     source:"KB §27 (quantum magic scripts)"
@@ -438,7 +438,7 @@ const TESTS = [
     name:"Magic filament ridges (random circuits)",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Filament ridges in the magic-vs-depth surface are recoverable across replicates with AUC 0.70 — the S2 scaffolding is statistically visible.",
     image:null,
     source:"KB §27 (quantum magic scripts)"
@@ -448,7 +448,7 @@ const TESTS = [
     name:"D_eff scales with qubit count",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Effective exponent scales 1.04 (q=2) → 1.37 (q=6) — a qubit-count signature, confirming S2 sees quantum-volume growth as a coherent cliff shift.",
     image:null,
     source:"KB §27 (quantum magic scripts)"
@@ -458,7 +458,7 @@ const TESTS = [
     name:"Transpilation preserves S2",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"After Qiskit transpilation, the S2 fit is preserved with ΔBIC>47 — the law is invariant under gate-set rewrites.",
     image:null,
     source:"KB §27 (quantum magic scripts)"
@@ -581,7 +581,7 @@ const TESTS = [
     name:"Solar wind / plasma",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Solar-wind plasma streams exhibit the S2 cross-domain collapse — the standard-transform plot linearises with the predicted cliff, in-band with the OMNIweb dataset.",
     image:"dream_s2_cross_domain_collapse.png",
     source:"KB §27"
@@ -591,7 +591,7 @@ const TESTS = [
     name:"River flow (Potomac / gauges)",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Daily river-discharge series fit S2 retention — water flow displays the same stretched-exponential decay as cognition and capital.",
     image:null,
     source:"KB §27"
@@ -611,7 +611,7 @@ const TESTS = [
     name:"Wikimedia / information streams",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Edit/event streams on Wikimedia fit S2 retention — information flow behaves as a stretched-exponential channel, not a power law.",
     image:null,
     source:"KB §27"
@@ -631,7 +631,7 @@ const TESTS = [
     name:"Football event networks",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Event-scale (pass/shot) networks fit S2 and beat clock-scale binning — the law picks the natural event resolution over wall-clock aggregation.",
     image:null,
     source:"KB §27"
@@ -641,7 +641,7 @@ const TESTS = [
     name:"Transformer aging forecasts",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Per-day dedust on transformer thermal-aging data drives forecast WAPE down to 38% — S2 retention is operationally useful for grid asset forecasting.",
     image:null,
     source:"KB §27"
@@ -651,7 +651,7 @@ const TESTS = [
     name:"OMNI λ-cliff stratification",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"OMNIweb solar-wind data stratifies cleanly along the λ-cliff — the framework-specific cliff pattern is observable in operational space-weather data.",
     image:"dream_s2_standard_transform.png",
     source:"KB §27"
@@ -661,7 +661,7 @@ const TESTS = [
     name:"Gravitational wave speed = c",
     domain:"confirmed", groups:["confirmed","scouting"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"GW170817/GRB 170817A: |v_gw − c|/c ≤ 10⁻¹⁵ — the retention law’s prediction of a universal propagation speed holds to fifteen decimals.",
     image:null,
     source:"KB §27 (scouting cross-ref)"
@@ -671,7 +671,7 @@ const TESTS = [
     name:"Topological quantization (T1)",
     domain:"confirmed", groups:["confirmed","quantum"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Topological T1 charge quantization is reproduced — the S2 scaffolding is consistent with discrete topological charge sectors.",
     image:null,
     source:"KB §27"
@@ -691,7 +691,7 @@ const TESTS = [
     name:"Social/network identifiers (control)",
     domain:"confirmed",
     D:null, r2:0.996,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Control test on social-network identifier retention: R²=0.996, no D extracted. The control arm holds, validating the fit pipeline.",
     image:null,
     source:"KB §27 (control)"
@@ -701,7 +701,7 @@ const TESTS = [
     name:"TIM structured dynamics (control)",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Negative control: TIM structured dynamics do NOT favour S2 — confirms the law has a scope, not a universal fit. A successful falsification boundary.",
     image:null,
     source:"KB §27 (scope control)"

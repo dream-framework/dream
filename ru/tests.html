@@ -428,7 +428,7 @@ const TESTS = [
     name:"Накопление квантовой магии (случайные схемы)",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:0.996,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Накопление магических состояний в случайных схемах отслеживает S2-удержание с R²=0.996, ΔBIC>15 — закон воспроизводим по sweeps числа кубитов.",
     image:null,
     source:"KB §27 (скрипты квантовой магии)"
@@ -438,7 +438,7 @@ const TESTS = [
     name:"Гребни магических филаментов (случайные схемы)",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Гребни филаментов на поверхности магия-глубина восстанавливаются по репликатам с AUC 0.70 — S2-каркас статистически видим.",
     image:null,
     source:"KB §27 (скрипты квантовой магии)"
@@ -448,7 +448,7 @@ const TESTS = [
     name:"D_eff масштабируется с числом кубитов",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Эффективный показатель масштабируется 1.04 (q=2) → 1.37 (q=6) — кубитная сигнатура: S2 видит рост квантового объёма как когерентный сдвиг порога.",
     image:null,
     source:"KB §27 (скрипты квантовой магии)"
@@ -458,7 +458,7 @@ const TESTS = [
     name:"Транспиляция сохраняет S2",
     domain:"quantum", groups:["quantum","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"После транспиляции Qiskit S2-подгонка сохраняется с ΔBIC>47 — закон инвариантен относительно перезаписи базиса гейтов.",
     image:null,
     source:"KB §27 (скрипты квантовой магии)"
@@ -581,7 +581,7 @@ const TESTS = [
     name:"Солнечный ветер / плазма",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Потоки солнечного ветра проявляют кросс-доменный коллапс S2 — график стандартного преобразования линеаризуется с предсказанным порогом, в пределах датасета OMNIweb.",
     image:"dream_s2_cross_domain_collapse.png",
     source:"KB §27"
@@ -591,7 +591,7 @@ const TESTS = [
     name:"Речной сток (Потомак / датчики)",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Серии суточного речного стока описываются S2-удержанием — поток воды проявляет тот же растянуто-экспоненциальный распад, что и когнитивные и капитальные ряды.",
     image:null,
     source:"KB §27"
@@ -611,7 +611,7 @@ const TESTS = [
     name:"Wikimedia / информационные потоки",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Потоки правок/событий Wikimedia описываются S2-удержанием — информационный поток ведёт себя как растянуто-экспоненциальный канал, а не как степенной закон.",
     image:null,
     source:"KB §27"
@@ -631,7 +631,7 @@ const TESTS = [
     name:"Сети футбольных событий",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Сети на уровне событий (пасы/удары) подгоняются S2 и побеждают биннинг по часам — закон выбирает естественное событийное разрешение над агрегацией по стенному времени.",
     image:null,
     source:"KB §27"
@@ -641,7 +641,7 @@ const TESTS = [
     name:"Прогноз старения трансформаторов",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Посуточная dedust-обработка данных теплового старения трансформаторов снижает прогнозный WAPE до 38% — S2-удержание операционно полезно для прогнозирования сетевых активов.",
     image:null,
     source:"KB §27"
@@ -651,7 +651,7 @@ const TESTS = [
     name:"OMNI стратификация λ-порога",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Данные солнечного ветра OMNIweb стратифицируются чисто вдоль λ-порога — специфический для фреймворка паттерн порога наблюдаем в операционных данных космической погоды.",
     image:"dream_s2_standard_transform.png",
     source:"KB §27"
@@ -661,7 +661,7 @@ const TESTS = [
     name:"Скорость гравитационной волны = c",
     domain:"confirmed", groups:["confirmed","scouting"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"GW170817/GRB 170817A: |v_gw − c|/c ≤ 10⁻¹⁵ — предсказание закона удержания о универсальной скорости распространения выполняется до пятнадцати знаков.",
     image:null,
     source:"KB §27 (разведка)"
@@ -671,7 +671,7 @@ const TESTS = [
     name:"Топологическое квантование (T1)",
     domain:"confirmed", groups:["confirmed","quantum"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Топологическое квантование заряда T1 воспроизводится — S2-каркас совместим с дискретными топологическими секторами заряда.",
     image:null,
     source:"KB §27"
@@ -691,7 +691,7 @@ const TESTS = [
     name:"Социальные/сетевые идентификаторы (контроль)",
     domain:"confirmed",
     D:null, r2:0.996,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Контрольный тест удержания социальных идентификаторов: R²=0.996, D не извлечён. Контрольный рукав держится, валидируя конвейер подгонки.",
     image:null,
     source:"KB §27 (контроль)"
@@ -701,7 +701,7 @@ const TESTS = [
     name:"TIM структурированная динамика (контроль)",
     domain:"confirmed",
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"consistent",
+    verdict:"CONSISTENT", kind:"consistent",
     narrative:"Негативный контроль: структурированная динамика TIM НЕ благоприятствует S2 — подтверждает, что у закона есть область применимости, а не универсальная подгонка. Успешная граница фальсификации.",
     image:null,
     source:"KB §27 (контроль области)"
