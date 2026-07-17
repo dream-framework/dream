@@ -307,6 +307,52 @@ def groq_narrate(fit, backend_url=None):
     except:
         return groq_narrate(fit)  # fallback to template
 
+def groq_narrate_ru(fit, backend_url=None):
+    """Russian version of the narrative."""
+    model_note = fit.get('model_note', '')
+    model_note_ru = model_note.replace('S2 beats', 'S2 превосходит').replace('S2 ties', 'S2 сравнима с').replace('S2 loses to', 'S2 уступает').replace('within \u00b12', 'в пределах \u00b12')
+    if not backend_url:
+        D = fit.get('D', 0)
+        r2 = fit.get('r2', 0)
+        verdict = fit.get('verdict', 'UNKNOWN')
+        if verdict == 'EXTRACTION':
+            base = f'D={D:.3f}, R\u00b2={r2:.4f}. D>1 указывает на режим извлечения \u2014 сохранение коллапсирует сверхэкспоненциально.'
+        elif verdict == 'NATURAL':
+            base = f'D={D:.3f}, R\u00b2={r2:.4f}. D<1 подтверждает естественное сохранение \u2014 тяжёлый хвост, медленное угасание.'
+        else:
+            base = f'D={D:.3f}, R\u00b2={r2:.4f}. D около порога \u2014 зона перехода режимов.'
+        return f'{base} {model_note_ru}'.strip()
+    try:
+        import urllib.request
+        msg = (f"S2 fit result: D={fit.get('D')}, R\u00b2={fit.get('r2')}, verdict={fit.get('verdict')}, dataset={fit.get('label')}. {model_note_ru} Write a 1-2 sentence narrative in Russian.")
+        payload = json.dumps({'message': msg, 'lang': 'ru'}).encode()
+        req = urllib.request.Request(f'{backend_url}/groq-chat', data=payload, headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read())
+            return result.get('reply', '')[:200]
+    except:
+        return groq_narrate_ru(fit)
+
+def translate_name_ru(name):
+    """Translate common auto-scan name patterns to Russian."""
+    ru_names = {'FRED GDP':'FRED ВВП','FRED CPIAUCSL':'FRED ИПЦ','FRED UNRATE':'FRED Безработица','FRED FEDFUNDS':'FRED Ставка ФРС','FRED M2SL':'FRED M2','FRED DEXUSEU':'FRED USD/EUR','FRED SP500':'FRED S&P 500','FRED VIXCLS':'FRED VIX','FRED T10YIE':'FRED T10YIE','FRED DGS10':'FRED DGS10'}
+    for en, ru in ru_names.items():
+        if en in name:
+            return name.replace(en, ru).replace('(ACF retention)', '(АСФ сохранение)')
+    if 'World Bank: GDP' in name:
+        return name.replace('World Bank: GDP', 'World Bank: ВВП').replace('(ACF retention)', '(АСФ сохранение)')
+    if 'World Bank: CPI' in name:
+        return name.replace('World Bank: CPI', 'World Bank: ИПЦ').replace('(ACF retention)', '(АСФ сохранение)')
+    if 'World Bank: Unemployment' in name:
+        return name.replace('World Bank: Unemployment', 'World Bank: Безработица').replace('(ACF retention)', '(АСФ сохранение)')
+    if name.startswith('arXiv: '):
+        title = name[7:]
+        ru_title_map = {'Stretched Exponential Decay':'Растянутая экспонента','Exponential decay of correlations':'Экспоненциальное затухание корреляций','Cost-Aware Logging':'Логирование с учётом стоимости','Large deviations':'Большие уклонения','On the Polynomial and Exponential Decay':'О полиномиальном и экспоненциальном затухании'}
+        for en_t, ru_t in ru_title_map.items():
+            if title.startswith(en_t):
+                return f'arXiv: {ru_t}'
+    return name
+
 # ═══════════════════════════════════════════════════════════════════════
 # DEDUPLICATION & PENDING RESOLUTION
 # ═══════════════════════════════════════════════════════════════════════
@@ -484,7 +530,7 @@ def resolve_pending_arxiv(entry, groq_url=None):
 # UPDATE TESTS.HTML
 # ═══════════════════════════════════════════════════════════════════════
 
-def update_tests_html(new_entries, html_path):
+def update_tests_html(new_entries, html_path, is_ru=False):
     """Append new entries to the TESTS array in tests.html."""
     with open(html_path) as f:
         html = f.read()
@@ -534,10 +580,23 @@ def update_tests_html(new_entries, html_path):
         r2_val = f'{entry["r2"]:.4f}' if entry.get('r2') else 'null'
         url_val = '"' + js_str(entry.get('url', '')) + '"' if entry.get('url') else 'null'
         eid = js_str(entry.get('id', ''))
-        name = js_str(entry.get('name', ''))
+        name_raw = entry.get('name', '')
+        name = js_str(translate_name_ru(name_raw) if is_ru else name_raw)
         domain = js_str(entry.get('domain', ''))
         verdict = js_str(entry.get('verdict', ''))
-        narr = js_str(entry.get('narrative', ''))
+        narr_raw = entry.get('narrative', '')
+        if is_ru:
+            narr_en = narr_raw
+            narr_en = narr_en.replace('D>1 indicates extraction regime \u2014 retention collapses super-exponentially.', 'D>1 указывает на режим извлечения \u2014 сохранение коллапсирует сверхэкспоненциально.')
+            narr_en = narr_en.replace('D<1 confirms natural retention \u2014 heavy-tailed, slow decay.', 'D<1 подтверждает естественное сохранение \u2014 тяжёлый хвост, медленное угасание.')
+            narr_en = narr_en.replace('S2 beats', 'S2 превосходит')
+            narr_en = narr_en.replace('S2 ties', 'S2 сравнима с')
+            narr_en = narr_en.replace('S2 loses to', 'S2 уступает')
+            narr_en = narr_en.replace('within \u00b12', 'в пределах \u00b12')
+            narr_en = narr_en.replace('Paper found via arXiv search. Data extraction and S2 fit pending.', 'Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются.')
+            narr = js_str(narr_en)
+        else:
+            narr = js_str(narr_raw)
         new_js += f'\n  ,{{id:\"auto-{today}-{eid}\",name:\"{name}\",domain:\"{domain}\",D:{D_val},r2:{r2_val},verdict:\"{verdict}\",narrative:\"{narr}\",source:\"auto-scan {today}\",date:\"{today}\",url:{url_val},image:null}}'
     
     html = html[:insert_pos] + new_js + html[insert_pos:]
@@ -772,7 +831,7 @@ def main():
     # 11. Also update RU tests.html
     ru_html = tests_html.replace('en/', 'ru/')
     if os.path.exists(ru_html):
-        update_tests_html(kept_results, ru_html)
+        update_tests_html(kept_results, ru_html, is_ru=True)
     
     # Ensure every entry has a URL — fallback to source homepage
     for entry in all_results:
