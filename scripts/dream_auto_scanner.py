@@ -850,6 +850,17 @@ def main():
             else:
                 entry['url'] = 'https://dream-framework.github.io/dream/'
     
+    # 12. Export tests.json for download (EN + RU)
+    print('\n📦 Exporting tests.json...')
+    import subprocess
+    export_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'export_tests_json.py')
+    if os.path.exists(export_script):
+        try:
+            subprocess.run(['python3', export_script, '.'], capture_output=True, text=True, timeout=30)
+            print('  ✓ tests.json exported (EN + RU)')
+        except Exception as e:
+            print(f'  ✗ Export failed: {e}')
+    
     return all_results
 
 if __name__ == '__main__':

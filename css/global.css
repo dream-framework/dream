@@ -795,6 +795,26 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 .summary-pill.pill-active{ background: rgba(142,197,232,.25) !important; border-color: var(--accent) !important; box-shadow: 0 0 12px rgba(142,197,232,.35); transform: translateY(-1px); }
 .summary-pill.pill-active .n{ color: var(--accent) !important; }
 .summary-pill.pill-active .l{ color: var(--fg) !important; }
+.pill-download{
+  background: rgba(142,197,232,.10);
+  border: 1px solid rgba(142,197,232,.3);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: .68rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.pill-download:hover{
+  background: rgba(142,197,232,.20);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
 
 .test-grid{
   display: grid;

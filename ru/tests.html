@@ -122,6 +122,7 @@
         <option value="confirmed">Подтверждённые домены</option>
       </select>
       <span class="registry-count" id="count">—</span>
+      <button class="pill-download" onclick="downloadJson()" title="Скачать все 88 тестов в JSON">⬇ JSON</button>
     </div>
   </div>
 
@@ -1116,6 +1117,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <!-- ===== Переключатель математики / спекулятивного контента ===== -->
 
+<script>
+function downloadJson(){
+  fetch('tests.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'dream-tests-' + new Date().toISOString().slice(0,10) + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    })
+    .catch(e => alert('Не удалось загрузить tests.json: ' + e.message));
+}
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const cb = document.getElementById('specToggle');

@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.name  "dream-bot"
           git config user.email "dream-bot@users.noreply.github.com"
-          git add en/tests.html ru/tests.html 2>/dev/null || true
+          git add en/tests.html ru/tests.html en/tests.json ru/tests.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new S2_WINS entries today — skipping commit."
           else
