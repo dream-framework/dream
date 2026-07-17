@@ -774,6 +774,23 @@ def main():
     if os.path.exists(ru_html):
         update_tests_html(kept_results, ru_html)
     
+    # Ensure every entry has a URL — fallback to source homepage
+    for entry in all_results:
+        if not entry.get('url'):
+            source = entry.get('source', '')
+            if 'zenodo' in source:
+                entry['url'] = 'https://zenodo.org/search?q=stretched+exponential'
+            elif 'arxiv' in source:
+                entry['url'] = 'https://arxiv.org/search?q=stretched+exponential'
+            elif 'fred' in source.lower():
+                entry['url'] = 'https://fred.stlouisfed.org/'
+            elif 'usgs' in source.lower():
+                entry['url'] = 'https://earthquake.usgs.gov/'
+            elif 'world bank' in source.lower() or 'wb' in source.lower():
+                entry['url'] = 'https://data.worldbank.org/'
+            else:
+                entry['url'] = 'https://dream-framework.github.io/dream/'
+    
     return all_results
 
 if __name__ == '__main__':
