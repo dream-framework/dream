@@ -954,7 +954,7 @@ function cardHTML(t){
     ${dBlock}
     <p class="test-narr">${esc(t.narrative)}</p>
     ${figHTML}
-    <div class="test-source">ист.: ${esc(t.source || '—')}</div>`;
+    <div class="test-source">ист.: ${esc(t.source || '—')}${t.url && t.url !== 'null' ? ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">данные ↗</a>' : ''}</div>`;
 }
 
 function summaryPills(){
