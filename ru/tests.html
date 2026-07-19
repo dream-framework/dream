@@ -890,9 +890,9 @@ function fitQuality(t){
   if(t.model_verdict === "S2_TIES") return {label:"ПРЕДВАРИТЕЛЬНО", cls:"fit-tentative"};
   if(t.model_verdict === "S2_LOSES") return {label:"ОТКЛОНЕНО", cls:"fit-rejected"};
   const narr = t.narrative || "";
-  if(/S2 beats/i.test(narr)) return {label:"ПОДТВЕРЖДЕНО", cls:"fit-confirmed"};
-  if(/S2 ties/i.test(narr)) return {label:"ПРЕДВАРИТЕЛЬНО", cls:"fit-tentative"};
-  if(/S2 loses/i.test(narr)) return {label:"ОТКЛОНЕНО", cls:"fit-rejected"};
+  if(/S2 beats/i.test(narr) || /S2 превосходит/i.test(narr)) return {label:"ПОДТВЕРЖДЕНО", cls:"fit-confirmed"};
+  if(/S2 ties/i.test(narr) || /S2 сравнима/i.test(narr)) return {label:"ПРЕДВАРИТЕЛЬНО", cls:"fit-tentative"};
+  if(/S2 loses/i.test(narr) || /S2 уступает/i.test(narr)) return {label:"ОТКЛОНЕНО", cls:"fit-rejected"};
   return {label:"НЕ ОПРЕДЕЛЕНО", cls:"fit-undetermined"};
 }
 
