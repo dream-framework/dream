@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-07-20T14:21:28Z",
+  "exported_at": "2026-07-20T18:47:38Z",
   "total_tests": 94,
   "fields": [
     "id",
@@ -29,7 +29,7 @@
       "r2": 0.976,
       "verdict": "CONFIRMED",
       "kind": "natural",
-      "narrative": "The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process. S2 ties BIEXP (ΔAICc=-1.71, within ±2).",
+      "narrative": "The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process.",
       "source": "dream_memory_s2_results.json",
       "date": "1885",
       "url": "https://en.wikipedia.org/wiki/Forgetting_curve"
@@ -84,7 +84,7 @@
       "r2": 0.537,
       "verdict": "INCONCLUSIVE",
       "kind": "inconclusive",
-      "narrative": "Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict. S2 ties BIEXP (ΔAICc=0.14, within ±2).",
+      "narrative": "Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict.",
       "source": "fictitious_capital_s2_results.json",
       "url": "https://www.kaggle.com/datasets/bruschetti/crypto-hft-data"
     },
@@ -96,7 +96,7 @@
       "r2": 0.732,
       "verdict": "NATURAL",
       "kind": "natural",
-      "narrative": "Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff. S2 ties BIEXP (ΔAICc=-0.26, within ±2).",
+      "narrative": "Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff.",
       "source": "fictitious_capital_s2_results.json",
       "date": "2024",
       "url": "https://finance.yahoo.com/quote/SPY"
@@ -109,7 +109,7 @@
       "r2": 0.749,
       "verdict": "EXTRACTION",
       "kind": "threshold",
-      "narrative": "Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names. S2 ties EXP (ΔAICc=-0.03, within ±2).",
+      "narrative": "Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names.",
       "source": "fictitious_capital_s2_results.json",
       "date": "2024",
       "url": "https://finance.yahoo.com/quote/QQQ"
@@ -230,7 +230,7 @@
       "r2": 0.949,
       "verdict": "CONFIRMED",
       "kind": "natural",
-      "narrative": "Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold. S2 ties BIEXP (ΔAICc=-1.82, within ±2).",
+      "narrative": "Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold.",
       "source": "dream_nv_center_s2_results.json",
       "url": "https://doi.org/10.1038/s41534-024-00813-7"
     },
@@ -262,7 +262,7 @@
       "r2": 0.96,
       "verdict": "CONFIRMED",
       "kind": "natural",
-      "narrative": "Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC. S2 ties BIEXP (ΔAICc=-1.49, within ±2).",
+      "narrative": "Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC.",
       "source": "dream_nv_center_s2_results.json",
       "url": "https://doi.org/10.1103/PhysRevB.94.060101"
     },
@@ -278,7 +278,7 @@
       "r2": 0.935,
       "verdict": "CONFIRMED",
       "kind": "natural",
-      "narrative": "Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly. S2 ties BIEXP (ΔAICc=-1.82, within ±2).",
+      "narrative": "Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly.",
       "source": "dream_nv_center_s2_results.json",
       "url": "https://doi.org/10.1103/PhysRevB.94.060101"
     },
@@ -1032,7 +1032,7 @@
       "D": 0.7422,
       "r2": 0.9969,
       "verdict": "NATURAL",
-      "narrative": "D=0.742, R²=0.9969. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "narrative": "D=0.742, R²=0.9969. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats EXP (ΔAICc=-25.04).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://doi.org/10.5281/zenodo.21386508"
@@ -1044,7 +1044,7 @@
       "D": 0.7176,
       "r2": 0.9977,
       "verdict": "NATURAL",
-      "narrative": "D=0.718, R²=0.9977. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "narrative": "D=0.718, R²=0.9977. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-21.19).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://doi.org/10.5281/zenodo.21386508"
@@ -1116,7 +1116,7 @@
       "D": 1.1667,
       "r2": 0.9969,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.167, R²=0.9969. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.167, R²=0.9969. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-54.67).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP"
@@ -1128,7 +1128,7 @@
       "D": 1.2315,
       "r2": 0.9973,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.232, R²=0.9973. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.232, R²=0.9973. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-220.41).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
@@ -1140,7 +1140,7 @@
       "D": 1.1922,
       "r2": 0.8655,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.192, R²=0.8655. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.192, R²=0.8655. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-2.57).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE"
@@ -1152,7 +1152,7 @@
       "D": 1.4975,
       "r2": 0.9247,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.498, R²=0.9247. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.498, R²=0.9247. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-10.28).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS"
@@ -1164,7 +1164,7 @@
       "D": 1.2021,
       "r2": 0.999,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.202, R²=0.9990. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.202, R²=0.9990. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-360.94).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL"
@@ -1176,7 +1176,7 @@
       "D": 1.1369,
       "r2": 0.9996,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.137, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.137, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-382.2).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU"
@@ -1188,7 +1188,7 @@
       "D": 1.0666,
       "r2": 0.9985,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.067, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.067, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-56.04).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500"
@@ -1200,7 +1200,7 @@
       "D": 1.1175,
       "r2": 0.998,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.117, R²=0.9980. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.117, R²=0.9980. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.2).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100"
@@ -1212,7 +1212,7 @@
       "D": 1.333,
       "r2": 0.9961,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100"
@@ -1248,7 +1248,7 @@
       "D": 1.7582,
       "r2": 0.9981,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-17.09).",
       "source": "auto-scan 2026-07-17",
       "date": "2026-07-17",
       "url": "https://doi.org/10.5281/zenodo.21405880"
@@ -1260,7 +1260,7 @@
       "D": 1.3751,
       "r2": 0.9984,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-91.77).",
       "source": "auto-scan 2026-07-17",
       "date": "2026-07-17",
       "url": "https://doi.org/10.5281/zenodo.21405880"
@@ -1296,7 +1296,7 @@
       "D": 1.3756,
       "r2": 0.9997,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-767.85).",
       "source": "auto-scan 2026-07-18",
       "date": "2026-07-18",
       "url": "10.5281/zenodo.21424426"
@@ -1308,7 +1308,7 @@
       "D": 1.0003,
       "r2": 1.0,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-544.64).",
       "source": "auto-scan 2026-07-19",
       "date": "2026-07-19",
       "url": "10.5281/zenodo.21437667"
