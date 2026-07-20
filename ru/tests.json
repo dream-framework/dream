@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-07-20T18:47:38Z",
+  "exported_at": "2026-07-20T18:49:59Z",
   "total_tests": 94,
   "fields": [
     "id",
@@ -1224,7 +1224,7 @@
       "D": 1.5156,
       "r2": 0.7725,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.516, R²=0.7725. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "narrative": "D=1.516, R²=0.7725. D>1 indicates extraction regime — retention collapses super-exponentially. S2 сравнима с GAUSS (ΔAICc=0.92, в пределах ±2).",
       "source": "auto-scan 2026-07-16",
       "date": "2026-07-16",
       "url": "https://doi.org/10.5281/zenodo.21399447"
