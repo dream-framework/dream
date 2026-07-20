@@ -209,7 +209,7 @@ const TESTS = [
     domain:"cognitive", groups:["cognitive","confirmed"],
     D:0.153, r2:0.976,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process.",
+    narrative:"The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process. S2 ties BIEXP (ΔAICc=-1.71, within ±2).",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
   ,date:"1885",url:"https://en.wikipedia.org/wiki/Forgetting_curve"},
@@ -219,7 +219,7 @@ const TESTS = [
     domain:"cognitive", groups:["cognitive","confirmed"],
     D:0.219, r2:0.976,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"A 130-year replication of Ebbinghaus. S2 wins on AIC versus the power law (ΔAIC≈−28; AIC 17 vs 45). D=0.219 — the retention law is reproducible.",
+    narrative:"A 130-year replication of Ebbinghaus. S2 wins on AIC versus the power law (ΔAIC≈−28; AIC 17 vs 45). D=0.219 — the retention law is reproducible. S2 beats BIEXP (ΔAICc=-3.79).",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
   ,url:"https://doi.org/10.3758/s13423-014-0733-6"},
@@ -229,7 +229,7 @@ const TESTS = [
     domain:"cognitive",
     D:1.232, r2:0.992,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Attention-span decline across 2004–2012 crosses the D=1 threshold (D=1.232), indicating algorithmic extraction rather than natural decay.",
+    narrative:"Attention-span decline across 2004–2012 crosses the D=1 threshold (D=1.232), indicating algorithmic extraction rather than natural decay. S2 beats EXP (ΔAICc=-109.0).",
     image:"npa_chart3_timeline_en.png",
     source:"npa_attention_s2_results.json"
   ,date:"2012",url:"https://www.ics.uci.edu/~gmark/"},
@@ -251,7 +251,7 @@ const TESTS = [
     domain:"financial",
     D:0.591, r2:0.537,
     verdict:"INCONCLUSIVE", kind:"inconclusive",
-    narrative:"Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict.",
+    narrative:"Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict. S2 ties BIEXP (ΔAICc=0.14, within ±2).",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
   ,url:"https://www.kaggle.com/datasets/bruschetti/crypto-hft-data"},
@@ -261,7 +261,7 @@ const TESTS = [
     domain:"financial",
     D:0.711, r2:0.732,
     verdict:"NATURAL", kind:"natural",
-    narrative:"Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff.",
+    narrative:"Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff. S2 ties BIEXP (ΔAICc=-0.26, within ±2).",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
   ,date:"2024",url:"https://finance.yahoo.com/quote/SPY"},
@@ -271,7 +271,7 @@ const TESTS = [
     domain:"financial",
     D:1.016, r2:0.749,
     verdict:"EXTRACTION", kind:"threshold",
-    narrative:"Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names.",
+    narrative:"Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names. S2 ties EXP (ΔAICc=-0.03, within ±2).",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
   ,date:"2024",url:"https://finance.yahoo.com/quote/QQQ"},
@@ -281,7 +281,7 @@ const TESTS = [
     domain:"financial",
     D:1.559, r2:0.993,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Pre-digital holding-period decay already shows D>1 (1.559) — extraction is not purely an HFT phenomenon; it predates electronic trading.",
+    narrative:"Pre-digital holding-period decay already shows D>1 (1.559) — extraction is not purely an HFT phenomenon; it predates electronic trading. S2 beats GAUSS (ΔAICc=-113.37).",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
   ,date:"1980",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
@@ -291,7 +291,7 @@ const TESTS = [
     domain:"financial",
     D:1.005, r2:0.999,
     verdict:"EXTRACTION", kind:"threshold",
-    narrative:"Modern era sits on the threshold (D=1.005) with a near-perfect fit (R²=0.999). The entire post-1980 regime is at the extraction boundary.",
+    narrative:"Modern era sits on the threshold (D=1.005) with a near-perfect fit (R²=0.999). The entire post-1980 regime is at the extraction boundary. S2 beats EXP (ΔAICc=-4.0).",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
   ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
@@ -301,7 +301,7 @@ const TESTS = [
     domain:"financial",
     D:1.781, r2:1.000,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Trade-duration retention decays with D=1.781 — extraction. The perfect fit (R²=1.000) reflects the regularising effect of electronic matching.",
+    narrative:"Trade-duration retention decays with D=1.781 — extraction. The perfect fit (R²=1.000) reflects the regularising effect of electronic matching. S2 beats GAUSS (ΔAICc=-1032.93).",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
   ,date:"2000",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
@@ -311,7 +311,7 @@ const TESTS = [
     domain:"financial",
     D:2.454, r2:1.000,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"HFT era: D=2.454 — deep extraction. The doubling of D versus the prior era quantifies the acceleration of fictitious-capital turnover.",
+    narrative:"HFT era: D=2.454 — deep extraction. The doubling of D versus the prior era quantifies the acceleration of fictitious-capital turnover. S2 beats GAUSS (ΔAICc=-1012.53).",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
   ,date:"2023",url:"https://www.bankofengland.co.uk/speech/2010/race-to-zero"},
@@ -323,7 +323,7 @@ const TESTS = [
     domain:"cosmological",
     D:3.458, r2:0.992,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Star-formation-rate density declines with D=3.458 — the cosmos is in an extraction regime as dark energy suppresses structure formation.",
+    narrative:"Star-formation-rate density declines with D=3.458 — the cosmos is in an extraction regime as dark energy suppresses structure formation. S2 beats GAUSS (ΔAICc=-209.13).",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
   ,url:"https://doi.org/10.1051/0004-6361/201425035"},
@@ -333,7 +333,7 @@ const TESTS = [
     domain:"cosmological",
     D:2.571, r2:0.992,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Bound-structure growth decays with D=2.571 — extraction. Hierarchical clustering is being starved by accelerated expansion.",
+    narrative:"Bound-structure growth decays with D=2.571 — extraction. Hierarchical clustering is being starved by accelerated expansion. S2 beats GAUSS (ΔAICc=-141.88).",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
   ,url:"https://doi.org/10.1051/0004-6361/201425035"},
@@ -343,7 +343,7 @@ const TESTS = [
     domain:"cosmological",
     D:2.608, r2:0.999,
     verdict:"EXTRACTION", kind:"extraction",
-    narrative:"Cluster-growth retention: D=2.608, R²=0.999. Same family as SFR — the universe is losing its capacity to build bound objects.",
+    narrative:"Cluster-growth retention: D=2.608, R²=0.999. Same family as SFR — the universe is losing its capacity to build bound objects. S2 beats GAUSS (ΔAICc=-240.04).",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
   ,url:"https://doi.org/10.1051/0004-6361/201425035"},
@@ -355,7 +355,7 @@ const TESTS = [
     domain:"physical", groups:["physical","confirmed"],
     D:0.654, r2:0.973,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"T₁ relaxation in 40nm nanodiamonds: S2 is the best model (lowest AIC), D=0.654 — natural decoherence, well below the cliff.",
+    narrative:"T₁ relaxation in 40nm nanodiamonds: S2 is the best model (lowest AIC), D=0.654 — natural decoherence, well below the cliff. S2 beats BIEXP (ΔAICc=-3.16).",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
   ,url:"https://doi.org/10.1038/s41534-024-00813-7"},
@@ -365,7 +365,7 @@ const TESTS = [
     domain:"physical", groups:["physical","confirmed"],
     D:0.644, r2:0.949,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold.",
+    narrative:"Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold. S2 ties BIEXP (ΔAICc=-1.82, within ±2).",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
   ,url:"https://doi.org/10.1038/s41534-024-00813-7"},
@@ -375,7 +375,7 @@ const TESTS = [
     domain:"physical", groups:["physical","confirmed"],
     D:0.526, r2:0.982,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"Cryogenic 6K: D=0.526, R²=0.982. Cooling reduces the effective exponent further — natural retention is robust across temperature.",
+    narrative:"Cryogenic 6K: D=0.526, R²=0.982. Cooling reduces the effective exponent further — natural retention is robust across temperature. S2 beats BIEXP (ΔAICc=-7.9).",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
   ,url:"https://doi.org/10.1038/s41534-024-00813-7"},
@@ -385,7 +385,7 @@ const TESTS = [
     domain:"physical", groups:["physical","confirmed"],
     D:0.889, r2:0.960,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC.",
+    narrative:"Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC. S2 ties BIEXP (ΔAICc=-1.49, within ±2).",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
   ,url:"https://doi.org/10.1103/PhysRevB.94.060101"},
@@ -395,7 +395,7 @@ const TESTS = [
     domain:"physical", groups:["physical","confirmed"],
     D:0.527, r2:0.935,
     verdict:"CONFIRMED", kind:"natural",
-    narrative:"Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly.",
+    narrative:"Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly. S2 ties BIEXP (ΔAICc=-1.82, within ±2).",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
   ,url:"https://doi.org/10.1103/PhysRevB.94.060101"},
@@ -407,7 +407,7 @@ const TESTS = [
     domain:"physical",
     D:0.653, r2:0.972,
     verdict:"NATURAL", kind:"natural",
-    narrative:"Below-Tc spatial Ising retention: D=0.653 (R²=0.972). Power law marginally wins on AIC, but S2 is consistent — both fall on the natural side.",
+    narrative:"Below-Tc spatial Ising retention: D=0.653 (R²=0.972). Power law marginally wins on AIC, but S2 is consistent — both fall on the natural side. S2 beats BIEXP (ΔAICc=-3.06).",
     image:"dream_ising_spatial_retention.png",
     source:"dream_ising_spatial_retention_results.json"
   ,url:"https://doi.org/10.1103/PhysRev.65.117"},
@@ -417,7 +417,7 @@ const TESTS = [
     domain:"physical",
     D:1.088, r2:0.838,
     verdict:"EXTRACTION", kind:"threshold",
-    narrative:"At the critical temperature Tc≈2.269, simple exponential wins on AIC; S2 sits exactly on the D=1 cliff (D=1.088). A falsification boundary for the law.",
+    narrative:"At the critical temperature Tc≈2.269, simple exponential wins on AIC; S2 sits exactly on the D=1 cliff (D=1.088). A falsification boundary for the law. S2 beats EXP (ΔAICc=-6.01).",
     image:"dream_ising_crossover_plot.png",
     source:"dream_ising_crossover_results.json"
   ,url:"https://doi.org/10.1103/PhysRev.65.117"},
@@ -530,7 +530,7 @@ const TESTS = [
     domain:"live",
     D:5.0, r2:1.0,
     verdict:"WEAK", kind:"inconclusive",
-    narrative:"Hourly quake counts fit S2 with R²≈1.0 but D hit the upper parameter bound (5.0) — the law is consistent but the exponent is unbounded. A weak signal, not a confirmation.",
+    narrative:"Hourly quake counts fit S2 with R²≈1.0 but D hit the upper parameter bound (5.0) — the law is consistent but the exponent is unbounded. A weak signal, not a confirmation. S2 beats GAUSS (ΔAICc=-1130.06).",
     image:null,
     source:"s2_scout_results.json"
   ,url:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv"},
@@ -540,7 +540,7 @@ const TESTS = [
     domain:"live",
     D:5.0, r2:0.998,
     verdict:"WEAK", kind:"inconclusive",
-    narrative:"Solar-wind speed series hits the D=5.0 boundary with R²=0.998. S2 is consistent but the upper-bound hit means no quantitative exponent can be claimed.",
+    narrative:"Solar-wind speed series hits the D=5.0 boundary with R²=0.998. S2 is consistent but the upper-bound hit means no quantitative exponent can be claimed. S2 beats GAUSS (ΔAICc=-324.76).",
     image:null,
     source:"s2_scout_results.json"
   ,url:"https://www.swpc.noaa.gov/products/real-time-solar-wind"},
@@ -550,7 +550,7 @@ const TESTS = [
     domain:"live",
     D:5.0, r2:0.994,
     verdict:"WEAK", kind:"inconclusive",
-    narrative:"Annual US GDP series hits D=5.0 (R²=0.994). Macro time-aggregated series saturate the upper bound — flagged weak pending finer-grain data.",
+    narrative:"Annual US GDP series hits D=5.0 (R²=0.994). Macro time-aggregated series saturate the upper bound — flagged weak pending finer-grain data. S2 beats GAUSS (ΔAICc=-277.1).",
     image:null,
     source:"s2_scout_results.json"
   ,url:"https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=US"},
@@ -560,7 +560,7 @@ const TESTS = [
     domain:"live",
     D:5.0, r2:0.999,
     verdict:"WEAK", kind:"inconclusive",
-    narrative:"CPI series: D=5.0 boundary, R²=0.999. Inflation retention is consistent with S2 but the exponent is unbounded at this sampling rate.",
+    narrative:"CPI series: D=5.0 boundary, R²=0.999. Inflation retention is consistent with S2 but the exponent is unbounded at this sampling rate. S2 beats GAUSS (ΔAICc=-358.94).",
     image:null,
     source:"s2_scout_results.json"
   ,url:"https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=US"},
@@ -570,7 +570,7 @@ const TESTS = [
     domain:"live",
     D:2.284, r2:0.947,
     verdict:"WEAK", kind:"inconclusive",
-    narrative:"Unemployment retention: D=2.284, R²=0.947 — extraction regime, but the fit quality is marginal so the verdict is weak.",
+    narrative:"Unemployment retention: D=2.284, R²=0.947 — extraction regime, but the fit quality is marginal so the verdict is weak. S2 beats GAUSS (ΔAICc=-40.35).",
     image:null,
     source:"s2_scout_results.json"
   ,url:"https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?locations=US"},
@@ -809,10 +809,10 @@ const TESTS = [
     source:"scouting KB"
   ,url:"https://doi.org/10.1002/qute.201900090"}
   /* ============ 2026 WEB SCAN — NEW FINDINGS ============ */
-  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window.",source:"2026 web scan",image:null,date:"2024",url:"https://www.ucirvine.edu"}
-  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse.",source:"2026 web scan",image:null,date:"2026",url:"https://www.ucirvine.edu"}
-  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination.",source:"Health Canada 2024 report",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
-  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure.",source:"HFT market reports 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
+  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window. S2 beats BIEXP (ΔAICc=-2.22).",source:"2026 web scan",image:null,date:"2024",url:"https://www.ucirvine.edu"}
+  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse. S2 loses to EXP (ΔAICc=2.06).",source:"2026 web scan",image:null,date:"2026",url:"https://www.ucirvine.edu"}
+  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination. S2 beats BIEXP (ΔAICc=-2.86).",source:"Health Canada 2024 report",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
+  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure. S2 beats EXP (ΔAICc=-78.87).",source:"HFT market reports 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
   ,{id:"france-ftt-2025",name:"France FTT rate increase (Apr 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Rate raised from 0.3% to 0.4%. Prediction: D should drop in French equities. Data collection pending.",source:"Tax Foundation 2026",image:null,date:"2025-04",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
   ,{id:"italy-ftt-2025",name:"Italy FTT rates doubled (Jan 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Cash-equity FTT rates doubled. Prediction: D should drop in Italian equities. Natural experiment in progress.",source:"Tax Foundation 2026",image:null,date:"2025-01",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
   ,{id:"des-y6-de",name:"DES Y6 dark energy constraints",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Dark energy equation of state tightened. Growth factor data available for S2 fit. If w<-1, D should be increasing.",source:"DES collaboration 2025",image:null,date:"2025",url:"https://www.darkenergysurvey.org/des-year-6-cosmology-results/"}
