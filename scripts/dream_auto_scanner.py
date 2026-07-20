@@ -850,6 +850,16 @@ def main():
             else:
                 entry['url'] = 'https://dream-framework.github.io/dream/'
     
+    # 11b. Retrofit AICc gate on existing entries with downloadable real data
+    print('\n🔄 Retrofitting AICc on existing entries with real data...')
+    retrofit_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'retrofit_aicc_real.py')
+    if os.path.exists(retrofit_script):
+        try:
+            subprocess.run(['python3', retrofit_script], capture_output=True, text=True, timeout=120)
+            print('  ✓ AICc retrofit complete')
+        except Exception as e:
+            print(f'  ✗ Retrofit failed: {e}')
+    
     # 12. Export tests.json for download (EN + RU)
     print('\n📦 Exporting tests.json...')
     import subprocess
