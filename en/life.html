@@ -269,124 +269,129 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
     const t = parseFloat(timeEl.value) + playTime;
     const L = computeLambda();
 
-    // Background
-    const bgGrad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w/2);
-    bgGrad.addColorStop(0, '#0a1020');
-    bgGrad.addColorStop(1, '#050810');
-    ctx.fillStyle = bgGrad;
+    // Clear with dark background
+    ctx.fillStyle = '#050810';
     ctx.fillRect(0, 0, w, h);
 
     const cx = w / 2;
     const cy = h / 2;
     const time = t * 0.02;
+    const baseR = Math.min(w, h) * 0.22;
 
-    // Draw projection "shadow" — complexity determines how textured it is
-    const baseR = Math.min(w, h) * 0.25;
+    const numFolds = Math.floor(c * 10) + 3;
+    const foldDepth = c * 0.35;
+    const lifeFactor = Math.max(0, (L.lambda - 0.8) / 2);
 
-    // Number of folds increases with complexity
-    const numFolds = Math.floor(c * 12) + 2;
-    // Fold depth increases with complexity
-    const foldDepth = c * 0.4;
-    // Life factor: when L > 1, the system self-organizes (animated, pulsing)
-    const lifeFactor = Math.max(0, (L - 0.8) / 2);
+    // Vivid colors based on regime
+    let fillColor, strokeColor, particleColor;
+    if (L.lambda < 0.9) {
+      fillColor = [100, 110, 130]; strokeColor = [140, 150, 170]; particleColor = [120, 130, 150];
+    } else if (L.lambda < 1.1) {
+      fillColor = [200, 150, 50]; strokeColor = [255, 200, 80]; particleColor = [255, 190, 60];
+    } else {
+      fillColor = [40, 180, 90]; strokeColor = [80, 255, 130]; particleColor = [100, 255, 150];
+    }
 
-    // Color shifts from gray (dead) → amber (edge) → green (alive)
-    let r, g, b;
-    if (L < 0.9) { r = 120 + c * 80; g = 120 + c * 40; b = 130; }
-    else if (L < 1.1) { r = 240; g = 180; b = 80; }
-    else { r = 80 + lifeFactor * 40; g = 200 + lifeFactor * 55; b = 120 + lifeFactor * 40; }
-
-    // Draw a solid base shape first so something is always visible
+    // Draw BOLD filled projection shape
     ctx.beginPath();
-    for (let i = 0; i <= 60; i++) {
-      const angle = (i / 60) * Math.PI * 2;
-      const rr = baseR * (1 + Math.sin(angle * 3 + time) * foldDepth * 0.15);
-      const x = cx + Math.cos(angle) * rr;
-      const y = cy + Math.sin(angle) * rr;
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    const steps = 120;
+    for (let i = 0; i <= steps; i++) {
+      const angle = (i / steps) * Math.PI * 2;
+      let r2 = baseR;
+      // Add folds (complexity)
+      r2 += Math.sin(angle * numFolds + time * 2) * foldDepth * baseR * 0.4;
+      r2 += Math.cos(angle * (numFolds * 2) + time * 1.5) * foldDepth * baseR * 0.2;
+      r2 += Math.sin(angle * (numFolds * 3) + time * 0.8) * foldDepth * baseR * 0.1;
+      // Add life dynamics (self-organizing)
+      if (lifeFactor > 0) {
+        r2 += Math.sin(angle * 7 + time * 4) * 12 * lifeFactor;
+        r2 += Math.cos(angle * 11 + time * 3) * 8 * lifeFactor;
+      }
+      r2 = Math.max(baseR * 0.3, r2);
+      const x = cx + Math.cos(angle) * r2;
+      const y = cy + Math.sin(angle) * r2;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.fillStyle = `rgba(${r},${g},${b},${0.06 + c * 0.08})`;
+    
+    // Bold fill
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseR * 1.5);
+    grad.addColorStop(0, `rgba(${fillColor[0]+40},${fillColor[1]+40},${fillColor[2]+40},0.4)`);
+    grad.addColorStop(0.5, `rgba(${fillColor[0]},${fillColor[1]},${fillColor[2]},0.25)`);
+    grad.addColorStop(1, `rgba(${fillColor[0]},${fillColor[1]},${fillColor[2]},0.05)`);
+    ctx.fillStyle = grad;
     ctx.fill();
-    ctx.strokeStyle = `rgba(${r + 50},${g + 50},${b + 50},${0.3 + c * 0.2})`;
-    ctx.lineWidth = 2;
+    
+    // Bold stroke
+    ctx.strokeStyle = `rgba(${strokeColor[0]},${strokeColor[1]},${strokeColor[2]},0.9)`;
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = `rgba(${strokeColor[0]},${strokeColor[1]},${strokeColor[2]},0.5)`;
+    ctx.shadowBlur = 10;
     ctx.stroke();
+    ctx.shadowBlur = 0;
 
-    // Draw overlapping translucent shapes for texture
-    ctx.globalCompositeOperation = 'screen';
-
-    for (let layer = 0; layer < numFolds; layer++) {
-      const layerAngle = (layer / numFolds) * Math.PI * 2 + time * (0.3 + lifeFactor * 0.5);
-      const layerR = baseR * (1 - layer * 0.05);
-      const wobble = foldDepth * 30 * Math.sin(time * 2 + layer * 1.5);
-      const pulse = lifeFactor > 0 ? Math.sin(time * 3 + layer) * 5 * lifeFactor : 0;
-
+    // Draw inner layers (more folds visible inside)
+    for (let layer = 1; layer < Math.min(5, numFolds); layer++) {
       ctx.beginPath();
-      const steps = 80;
+      const layerR = baseR * (1 - layer * 0.15);
       for (let i = 0; i <= steps; i++) {
-        const angle = (i / steps) * Math.PI * 2;
-        // Simple sphere shadow: smooth circle
-        const smoothR = layerR;
-        // Complex statue shadow: add folds, cavities, texture
-        const foldR = layerR + Math.sin(angle * (numFolds + layer) + time + layer) * foldDepth * 25
-                     + Math.cos(angle * (numFolds * 2) + time * 0.7) * foldDepth * 15
-                     + Math.sin(angle * (numFolds * 3) + time * 1.3) * foldDepth * 8;
-        // Life: self-organizing dynamics add recursive structure
-        const lifeR = lifeFactor > 0 ? Math.sin(angle * 7 + time * 4 + layer * 2) * 8 * lifeFactor
-                     + Math.cos(angle * 11 + time * 2) * 5 * lifeFactor : 0;
-
-        const r2 = smoothR + (foldR - smoothR) * c + lifeR + wobble + pulse;
-        const x = cx + Math.cos(angle + layerAngle * 0.1) * r2;
-        const y = cy + Math.sin(angle + layerAngle * 0.1) * r2;
+        const angle = (i / steps) * Math.PI * 2 + layer * 0.3;
+        let r2 = layerR;
+        r2 += Math.sin(angle * (numFolds + layer) + time * (1.5 + layer * 0.3)) * foldDepth * layerR * 0.35;
+        if (lifeFactor > 0) r2 += Math.sin(angle * (6 + layer) + time * 3) * 6 * lifeFactor;
+        r2 = Math.max(layerR * 0.3, r2);
+        const x = cx + Math.cos(angle) * r2;
+        const y = cy + Math.sin(angle) * r2;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
       ctx.closePath();
-
-      const alpha = 0.12 + c * 0.15 + lifeFactor * 0.08;
-      ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
-      ctx.fill();
-
-      // Stroke for definition
-      ctx.strokeStyle = `rgba(${r + 40},${g + 40},${b + 40},${Math.min(0.8, alpha * 3)})`;
+      ctx.strokeStyle = `rgba(${strokeColor[0]},${strokeColor[1]},${strokeColor[2]},${0.4 - layer * 0.07})`;
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
 
-    // Draw "twirls" — small particles that appear with high complexity
-    if (c > 0.3) {
-      const numParticles = Math.floor((c - 0.3) * 100);
+    // Particles (twirls) — bright, visible dots
+    if (c > 0.2) {
+      const numParticles = Math.floor((c - 0.2) * 80) + 5;
       for (let i = 0; i < numParticles; i++) {
-        const angle = (i / numParticles) * Math.PI * 2 + time * 0.5;
-        const dist = baseR * (0.8 + Math.sin(i * 0.7 + time) * 0.4);
+        const angle = (i / numParticles) * Math.PI * 2 + time * 0.8;
+        const dist = baseR * (0.6 + Math.sin(i * 0.5 + time * 1.5) * 0.5);
         const px = cx + Math.cos(angle) * dist;
         const py = cy + Math.sin(angle) * dist;
-        const size = 1 + c * 2 + lifeFactor * 2;
-        const glow = lifeFactor > 0 ? lifeFactor * 0.3 : 0;
-
+        const size = 2 + c * 3 + lifeFactor * 3;
+        
+        // Glow
+        if (lifeFactor > 0.1) {
+          ctx.shadowColor = `rgba(${particleColor[0]},${particleColor[1]},${particleColor[2]},0.8)`;
+          ctx.shadowBlur = 8;
+        }
         ctx.beginPath();
         ctx.arc(px, py, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r + 20},${g + 40},${b + 20},${0.6 + c * 0.3 + glow})`;
+        ctx.fillStyle = `rgba(${particleColor[0]},${particleColor[1]},${particleColor[2]},${0.7 + lifeFactor * 0.3})`;
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
     }
 
     // Center glow when alive
-    if (L > 1) {
-      const glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseR * 0.5);
-      glowGrad.addColorStop(0, `rgba(${r + 30},${g + 30},${b + 30},${Math.min(0.4, (L.lambda - 1) * 0.25)})`);
+    if (L.lambda > 1) {
+      const glowR = baseR * 0.6;
+      const glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
+      glowGrad.addColorStop(0, `rgba(${strokeColor[0]},${strokeColor[1]},${strokeColor[2]},${Math.min(0.5, (L.lambda - 1) * 0.3)})`);
       glowGrad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, w, h);
     }
 
-    ctx.globalCompositeOperation = 'source-over';
-
-    // Labels
-    ctx.fillStyle = 'rgba(220,227,238,0.5)';
-    ctx.font = '10px system-ui';
-    ctx.fillText(`C=${c.toFixed(2)}  D=${D.toFixed(2)}  λq=${lam.toFixed(1)}  t=${(t).toFixed(1)}`, 10, 20);
-    ctx.fillText(`Λ=${L.lambda.toFixed(3)}  ${L.lambda < 1 ? 'NON-LIFE' : L.lambda < 1.1 ? 'EDGE' : 'ALIVE'}`, 10, 35);
+    // Labels — bright, readable
+    ctx.fillStyle = 'rgba(220,227,238,0.8)';
+    ctx.font = 'bold 11px system-ui';
+    ctx.fillText(`C=${c.toFixed(2)}  D=${D.toFixed(2)}  λq=${lam.toFixed(1)}`, 12, 22);
+    ctx.fillStyle = L.lambda < 0.9 ? '#f87171' : L.lambda < 1.1 ? '#fbbf24' : '#4ade80';
+    ctx.font = 'bold 13px ui-monospace,monospace';
+    ctx.fillText(`Λ=${L.lambda.toFixed(3)}  ${L.lambda < 1 ? 'NON-LIFE' : L.lambda < 1.1 ? 'EDGE OF LIFE' : 'ALIVE'}`, 12, 40);
 
     // Update gauge
     const gaugePct = Math.min(100, (L.lambda / 2) * 100);
