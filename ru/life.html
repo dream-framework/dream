@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Той Жизни · DREAM</title>
+<meta name="description" content="DREAM Той Жизни — абиогенез как нестабильность проекции. Спекулятивно." />
+<link rel="stylesheet" href="../css/global.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']], processEscapes: true, packages: {'[+]': ['ams']} }, chtml: { displayAlign:'center' }, svg: { displayAlign:'center' }, options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] } };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+.life-toy{max-width:1200px;margin:0 auto;padding:1rem}
+.lt-grid{display:grid;grid-template-columns:1fr 340px;gap:1rem;margin-top:1rem}
+@media(max-width:768px){.lt-grid{grid-template-columns:1fr}}
+.lt-canvas-wrap{background:var(--bg2);border:1px solid var(--border-2);border-radius:12px;padding:8px;position:relative;overflow:hidden}
+#projectionCanvas{width:100%;height:500px;display:block;border-radius:8px;background:#050810}
+.lt-controls{background:var(--bg2);border:1px solid var(--border-2);border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:1rem}
+.lt-slider-group{display:flex;flex-direction:column;gap:.3rem}
+.lt-slider-group label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.lt-slider-group label b{color:var(--fg);font-weight:700}
+.lt-slider-group input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none}
+.lt-slider-group input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px rgba(34,211,238,.4)}
+.lt-slider-group input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;border:0}
+.lt-gauge{display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.8rem;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)}
+.lt-gauge-bar{width:100%;height:24px;border-radius:12px;background:linear-gradient(90deg,#f87171 0%,#f87171 33%,#fbbf24 33%,#fbbf24 50%,#4ade80 50%,#4ade80 100%);position:relative;overflow:hidden}
+.lt-gauge-marker{position:absolute;top:-2px;width:4px;height:28px;background:var(--fg);border-radius:2px;box-shadow:0 0 8px var(--fg);transition:left .3s ease}
+.lt-gauge-value{font-size:20px;font-weight:800;font-family:ui-monospace,monospace}
+.lt-gauge-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.lt-narrate{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.15);border-radius:8px;padding:.6rem .8rem;font-size:12px;line-height:1.4;color:var(--fg);min-height:60px}
+.lt-narrate b{color:var(--accent)}
+.lt-phases{display:flex;gap:4px;margin-top:.5rem}
+.lt-phase{flex:1;text-align:center;padding:4px;border-radius:4px;font-size:9px;text-transform:uppercase;font-weight:600;transition:.3s}
+.lt-phase.dead{background:rgba(248,113,113,.1);color:var(--bad)}
+.lt-phase.edge{background:rgba(251,191,36,.1);color:var(--warn)}
+.lt-phase.alive{background:rgba(74,222,128,.1);color:var(--good)}
+.lt-phase.active{box-shadow:0 0 8px currentColor;transform:scale(1.05)}
+.lt-s2{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.5rem}
+.lt-s2 canvas{width:100%;height:80px;display:block}
+.lt-speculative{display:inline-block;background:rgba(251,191,36,.12);color:var(--warn);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-left:8px}
+.lt-player{display:flex;gap:4px;justify-content:center;margin-top:.5rem}
+.lt-player button{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3);color:var(--accent);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600}
+.lt-player button:hover{background:rgba(34,211,238,.2)}
+.lt-formula{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.6rem;font-size:11px;text-align:center;color:var(--muted);margin-top:.5rem}
+</style>
+</head>
+<body data-lang="ru" class="">
+
+<div id="fx" aria-hidden="true"><canvas id="mb"></canvas></div>
+
+<header class="site-header">
+  <div class="brand"><span class="dot" aria-hidden="true"></span><a href="index.html">D.R.E.A.M</a></div>
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-link" href="index.html">Главная</a>
+    <a class="nav-link" href="case.html">Сила D.R.E.A.M</a>
+    <a class="nav-link" href="retention.html">Принцип Сохранения</a>
+    <a class="nav-link" href="axioms.html">Аксиомы</a>
+    <a class="nav-link" href="theorems.html">Теоремы</a>
+    <a class="nav-link" href="math.html">Матмодель</a>
+    <a class="nav-link" href="kernel.html">Проекция</a>
+    <a class="nav-link" href="topology.html">Топология</a>
+    <a class="nav-link" href="spectrum.html">Фрактальность</a>
+    <a class="nav-link foundation" href="predictions.html">Предсказания</a>
+    <a class="nav-link" href="falsification.html">Фальсификация</a>
+    <a class="nav-link" href="tests.html">Тесты</a>
+    <a class="nav-link" href="faq.html">Вопрос-Ответ</a>
+    <a class="nav-link" href="about.html">Оценка ИИ</a>
+    <a class="nav-link" href="time.html">Время</a>
+    <a class="nav-link" href="memory.html">Память</a>
+    <a class="nav-link" href="articles.html">Статьи</a>
+    <a class="nav-link active" href="life.html">Той Жизни</a>
+  </nav>
+  <div class="controls">
+    <div class="lang">
+      <a class="lang-link on" href="../ru/life.html" title="Русский"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon" style="display:inline-block;"></a>
+      <a class="lang-link" href="../en/life.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon" style="display:inline-block;"></a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<div class="life-toy">
+  <div class="card hero" style="margin-bottom:1rem">
+    <span class="kicker">Спекулятивно · Интерактивно</span>
+    <h1>Той Жизни <span class="lt-speculative">Гипотеза</span></h1>
+    <p>Управляйте параметрами для изучения <strong>биогенеза как нестабильности проекции</strong>. Когда информационная сложность Мета-Многообразия превышает вместимость статической 4D-проекции, система должна самоорганизоваться. Эта динамическая проекция — то, что мы называем <em>жизнью</em>.</p>
+    <p class="note">Это спекулятивное расширение DREAM, не следствие текущих аксиом. Закон сохранения S2 по-прежнему действует — информация всегда теряется. Но <em>сохранённая</em> информация может стать слишком структурированной для статического представления.</p>
+  </div>
+
+  <div class="lt-grid">
+    <div class="lt-canvas-wrap">
+      <canvas id="projectionCanvas"></canvas>
+      <div class="lt-player">
+        <button id="playBtn" title="Пуск / Пауза (Space)">▶</button>
+        <button id="resetBtn" title="Сброс (R)">↺</button>
+        <button id="boostBtn" title="Всплеск сложности">⚡</button>
+      </div>
+    </div>
+
+    <div class="lt-controls">
+      <div class="lt-slider-group">
+        <label><b>Сложность (10D)</b> <span id="complexityVal">0.3</span></label>
+        <input id="complexity" type="range" min="0" max="1" step="0.01" value="0.3">
+      </div>
+      <div class="lt-slider-group">
+        <label><b>Когерентность λq</b> <span id="lambdaVal">10</span></label>
+        <input id="lambda" type="range" min="1" max="50" step="0.5" value="10">
+      </div>
+      <div class="lt-slider-group">
+        <label><b>Сохранение D</b> <span id="dVal">0.5</span></label>
+        <input id="dEff" type="range" min="0.1" max="3" step="0.01" value="0.5">
+      </div>
+      <div class="lt-slider-group">
+        <label><b>Время</b> <span id="timeVal">0</span></label>
+        <input id="time" type="range" min="0" max="100" step="0.1" value="0">
+      </div>
+
+      <div class="lt-gauge">
+        <div class="lt-gauge-label">Индекс Жизни Λ</div>
+        <div class="lt-gauge-bar"><div class="lt-gauge-marker" id="gaugeMarker" style="left:20%"></div></div>
+        <div class="lt-gauge-value" id="lambdaVal2">0.20</div>
+        <div class="lt-gauge-label" id="lambdaLabel">Не-жизнь</div>
+      </div>
+
+      <div class="lt-phases">
+        <div class="lt-phase dead" id="phaseDead">Мёртвое</div>
+        <div class="lt-phase edge" id="phaseEdge">Грань</div>
+        <div class="lt-phase alive" id="phaseAlive">Живое</div>
+      </div>
+
+      <div class="lt-narrate" id="narrate">Двигайте <b>Сложность</b> для увеличения структурной насыщенности 10D Мета-Многообразия. При росте сложности проекция развивает складки — информационные «завихрения», которые невозможно представить статически.</div>
+
+      <div class="lt-s2">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Кривая S2</div>
+        <canvas id="s2Canvas"></canvas>
+      </div>
+
+      <div class="lt-formula">
+        \(\Lambda = \frac{\text{информация восстановлена}}{\text{информация потеряна}}\)<br>
+        <span style="font-size:10px">Λ&lt;1: не-жизнь · Λ≈1: грань жизни · Λ&gt;1: автономная жизнь</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>Принцип Нестабильности Проекции (ПНП)</h2>
+    <p>При универсальном законе сохранения S2 рост структурной сложности достигает критического <strong>напряжения проекции</strong>. За этой точкой статические проекции нестабильны — устойчивые решения требуют рекурсивной самоорганизующейся динамики. Биологическая жизнь — одно из проявлений этой нестабильности.</p>
+    <p>S2 не создаёт жизнь. S2 создаёт <em>давление</em>. При низкой сложности статическая проекция достаточна. За порогом — статическая проекция нестабильна, потому что <em>сохранённая</em> информация слишком взаимосвязана для статического представления.</p>
+    <details class="exp">
+      <summary><strong>Аналогия с тенью</strong></summary>
+      <p>Представьте сферу, освещённую Солнцем. Её тень гладкая. Теперь представьте сложную статую с полостями и орнаментом — тень больше не силуэт, в ней появляются градиенты, полутени, текстура.</p>
+      <p>Жизнь аналогична этому явлению. Мета-Многообразие содержит сложную структуру. 4D-вселенная — её проекция через ядро \(K_\lambda\). Жизнь возникает, когда плотность информации превышает вместимость статического представления.</p>
+    </details>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <small>© 2024–2025 DREAM — прототип; спекулятивные расширения чётко обозначены.</small>
+  </div>
+</footer>
+
+<script defer src="../js/fractal.js"></script>
+<script defer src="../js/nav-mobile.js"></script>
+<script defer src="../js/nav-dropdown.js"></script>
+<script defer src="../js/nav-autoscroll.js"></script>
+<script defer src="../js/bot.js"></script>
+<script defer src="../js/fs-toggle.js"></script>
+
+<script>
+(function(){
+  const canvas = document.getElementById('projectionCanvas');
+  const ctx = canvas.getContext('2d');
+  const s2canvas = document.getElementById('s2Canvas');
+  const s2ctx = s2canvas.getContext('2d');
+  const complexityEl = document.getElementById('complexity');
+  const lambdaEl = document.getElementById('lambda');
+  const dEl = document.getElementById('dEff');
+  const timeEl = document.getElementById('time');
+  const narrateEl = document.getElementById('narrate');
+  const gaugeMarker = document.getElementById('gaugeMarker');
+  const lambdaValEl = document.getElementById('lambdaVal2');
+  const lambdaLabel = document.getElementById('lambdaLabel');
+  let playing = false; let playTime = 0; let complexitySurge = 0;
+
+  function resize(){const w=canvas.parentElement.clientWidth-16;canvas.width=w*window.devicePixelRatio;canvas.height=500*window.devicePixelRatio;canvas.style.width=w+'px';canvas.style.height='500px';ctx.scale(window.devicePixelRatio,window.devicePixelRatio);s2canvas.width=s2canvas.parentElement.clientWidth*window.devicePixelRatio;s2canvas.height=80*window.devicePixelRatio;s2canvas.style.width='100%';s2canvas.style.height='80px';s2ctx.scale(window.devicePixelRatio,window.devicePixelRatio)}
+  window.addEventListener('resize',resize);resize();
+
+  function retention(t,lam,D){return Math.exp(-Math.pow(Math.max(t,0.001)/Math.max(lam,0.01),Math.max(D,0.01)))}
+
+  function computeLambda(){const c=parseFloat(complexityEl.value)+complexitySurge;const lam=parseFloat(lambdaEl.value);const D=parseFloat(dEl.value);const t=parseFloat(timeEl.value)+playTime;const lost=1-retention(t*0.1,lam,D);const threshold=0.35;let restored;if(c<threshold){restored=c*c*0.5*(1-lost*0.3)}else{const excess=c-threshold;restored=(threshold*threshold*0.5+excess*2.0)*(1-lost*0.15)}const lambdaIndex=lost>0.01?restored/lost:restored*10;return{lambda:Math.max(0,Math.min(3,lambdaIndex)),lost,restored,complexity:c}}
+
+  function getNarrative(L,c,D,lam){
+    if(L<0.5)return `<b>Статичная материя.</b> Проекция гладкая и инертная — как тень сферы. Сложность (C=${c.toFixed(2)}) слишком низка. S2 удаляет информацию быстрее, чем структура накапливается. Объект — <b>камень</b>.`;
+    if(L<0.9)return `<b>Диссипативная структура.</b> Подобна пламени — динамична, но не самоподдерживающа. Сложность (C=${c.toFixed(2)}) приближается к порогу. Восстановление растёт, но всё ещё ниже потерь.`;
+    if(L<1.1)return `<b>Грань жизни.</b> Напряжение проекции в критической точке. Здесь происходит <b>абиогенез</b> — переход от химии к биологии. Λ ≈ 1.`;
+    if(L<1.8)return `<b>Автономная жизнь.</b> Проекция динамически самоорганизуется. Восстановление превышает потери (Λ=${L.toFixed(2)}). Это <b>гомеостаз</b>. Метаболизм и саморемонт — следствия динамической проекции.`;
+    return `<b>Сложная жизнь.</b> Глубоко в живом режиме (Λ=${L.toFixed(2)}). Рекурсивные складки — многоуровневые самоусиливающиеся аттракторы. Эволюция исследует это пространство.`;
+  }
+
+  function drawProjection(){
+    const w=canvas.width/window.devicePixelRatio;const h=canvas.height/window.devicePixelRatio;
+    const c=parseFloat(complexityEl.value)+complexitySurge;const lam=parseFloat(lambdaEl.value);
+    const D=parseFloat(dEl.value);const t=parseFloat(timeEl.value)+playTime;const L=computeLambda();
+    const bgGrad=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);bgGrad.addColorStop(0,'#0a1020');bgGrad.addColorStop(1,'#050810');
+    ctx.fillStyle=bgGrad;ctx.fillRect(0,0,w,h);
+    const cx=w/2;const cy=h/2;const time=t*0.02;const baseR=Math.min(w,h)*0.25;
+    const numFolds=Math.floor(c*12)+2;const foldDepth=c*0.4;
+    const lifeFactor=Math.max(0,(L.lambda-0.8)/2);
+    let r,g,b;
+    if(L.lambda<0.9){r=120+c*80;g=120+c*40;b=130}
+    else if(L.lambda<1.1){r=240;g=180;b=80}
+    else{r=80+lifeFactor*40;g=200+lifeFactor*55;b=120+lifeFactor*40}
+    ctx.globalCompositeOperation='screen';
+    for(let layer=0;layer<numFolds;layer++){
+      const layerAngle=(layer/numFolds)*Math.PI*2+time*(0.3+lifeFactor*0.5);
+      const layerR=baseR*(1-layer*0.05);
+      const wobble=foldDepth*30*Math.sin(time*2+layer*1.5);
+      const pulse=lifeFactor>0?Math.sin(time*3+layer)*5*lifeFactor:0;
+      ctx.beginPath();const steps=80;
+      for(let i=0;i<=steps;i++){
+        const angle=(i/steps)*Math.PI*2;const smoothR=layerR;
+        const foldR=layerR+Math.sin(angle*(numFolds+layer)+time+layer)*foldDepth*25+Math.cos(angle*(numFolds*2)+time*0.7)*foldDepth*15+Math.sin(angle*(numFolds*3)+time*1.3)*foldDepth*8;
+        const lifeR=lifeFactor>0?Math.sin(angle*7+time*4+layer*2)*8*lifeFactor+Math.cos(angle*11+time*2)*5*lifeFactor:0;
+        const r2=smoothR+(foldR-smoothR)*c+lifeR+wobble+pulse;
+        const x=cx+Math.cos(angle+layerAngle*0.1)*r2;const y=cy+Math.sin(angle+layerAngle*0.1)*r2;
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.closePath();const alpha=0.04+c*0.06+lifeFactor*0.04;
+      ctx.fillStyle=`rgba(${r},${g},${b},${alpha})`;ctx.fill();
+      ctx.strokeStyle=`rgba(${r},${g},${b},${alpha*2})`;ctx.lineWidth=0.8;ctx.stroke();
+    }
+    if(c>0.3){const numParticles=Math.floor((c-0.3)*100);
+      for(let i=0;i<numParticles;i++){
+        const angle=(i/numParticles)*Math.PI*2+time*0.5;const dist=baseR*(0.8+Math.sin(i*0.7+time)*0.4);
+        const px=cx+Math.cos(angle)*dist;const py=cy+Math.sin(angle)*dist;
+        const size=1+c*2+lifeFactor*2;const glow=lifeFactor>0?lifeFactor*0.3:0;
+        ctx.beginPath();ctx.arc(px,py,size,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${r},${g+30},${b},${0.3+c*0.3+glow})`;ctx.fill();
+      }
+    }
+    if(L.lambda>1){const glowGrad=ctx.createRadialGradient(cx,cy,0,cx,cy,baseR*0.5);
+      glowGrad.addColorStop(0,`rgba(${r},${g},${b},${(L.lambda-1)*0.15})`);glowGrad.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=glowGrad;ctx.fillRect(0,0,w,h);
+    }
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(220,227,238,0.5)';ctx.font='10px system-ui';
+    ctx.fillText(`C=${c.toFixed(2)}  D=${D.toFixed(2)}  λq=${lam.toFixed(1)}  t=${t.toFixed(1)}`,10,20);
+    ctx.fillText(`Λ=${L.lambda.toFixed(3)}  ${L.lambda<1?'НЕ-ЖИЗНЬ':L.lambda<1.1?'ГРАНЬ':'ЖИЗНЬ'}`,10,35);
+    const gaugePct=Math.min(100,(L.lambda/2)*100);gaugeMarker.style.left=gaugePct+'%';
+    lambdaValEl.textContent=L.lambda.toFixed(2);
+    lambdaValEl.style.color=L.lambda<0.9?'var(--bad)':L.lambda<1.1?'var(--warn)':'var(--good)';
+    if(L.lambda<0.9){lambdaLabel.textContent='Не-жизнь';document.getElementById('phaseDead').classList.add('active');document.getElementById('phaseEdge').classList.remove('active');document.getElementById('phaseAlive').classList.remove('active')}
+    else if(L.lambda<1.1){lambdaLabel.textContent='Грань жизни';document.getElementById('phaseDead').classList.remove('active');document.getElementById('phaseEdge').classList.add('active');document.getElementById('phaseAlive').classList.remove('active')}
+    else{lambdaLabel.textContent='Автономная жизнь';document.getElementById('phaseDead').classList.remove('active');document.getElementById('phaseEdge').classList.remove('active');document.getElementById('phaseAlive').classList.add('active')}
+    narrateEl.innerHTML=getNarrative(L.lambda,c,D,lam);
+    drawS2(lam,D,L.lost);
+  }
+
+  function drawS2(lam,D,lost){
+    const w=s2canvas.width/window.devicePixelRatio;const h=s2canvas.height/window.devicePixelRatio;
+    s2ctx.clearRect(0,0,w,h);const pad=6;const tMax=50;
+    s2ctx.strokeStyle='rgba(255,255,255,0.05)';s2ctx.lineWidth=0.5;
+    for(let v=0;v<=1;v+=0.25){const y=h-pad-v*(h-2*pad);s2ctx.beginPath();s2ctx.moveTo(pad,y);s2ctx.lineTo(w-pad,y);s2ctx.stroke()}
+    s2ctx.beginPath();
+    for(let i=0;i<=100;i++){const t=(i/100)*tMax;const R=retention(t,lam,D);const x=pad+(t/tMax)*(w-2*pad);const y=h-pad-R*(h-2*pad);if(i===0)s2ctx.moveTo(x,y);else s2ctx.lineTo(x,y)}
+    const curveColor=D>1?'#f87171':D<0.8?'#4ade80':'#fbbf24';s2ctx.strokeStyle=curveColor;s2ctx.lineWidth=2;s2ctx.stroke();
+    s2ctx.lineTo(w-pad,h-pad);s2ctx.lineTo(pad,h-pad);s2ctx.closePath();s2ctx.fillStyle=curveColor+'15';s2ctx.fill();
+    s2ctx.fillStyle='rgba(248,113,113,0.08)';s2ctx.fillRect(pad,pad,(w-2*pad)*lost,h-2*pad);
+    s2ctx.fillStyle='rgba(220,227,238,0.4)';s2ctx.font='8px system-ui';s2ctx.fillText('R(t)',2,pad+6);s2ctx.fillText('t→',w-12,h-2);
+    s2ctx.fillStyle=curveColor;s2ctx.fillText(`D=${D.toFixed(2)}`,w-40,pad+8);
+  }
+
+  function update(){
+    document.getElementById('complexityVal').textContent=(parseFloat(complexityEl.value)+complexitySurge).toFixed(2);
+    document.getElementById('lambdaVal').textContent=parseFloat(lambdaEl.value).toFixed(1);
+    document.getElementById('dVal').textContent=parseFloat(dEl.value).toFixed(2);
+    document.getElementById('timeVal').textContent=(parseFloat(timeEl.value)+playTime).toFixed(1);
+    if(complexitySurge>0)complexitySurge=Math.max(0,complexitySurge-0.002);
+    if(playing){playTime+=0.3;if(playTime>100)playTime=0}
+    drawProjection();
+  }
+
+  [complexityEl,lambdaEl,dEl,timeEl].forEach(el=>el.addEventListener('input',update));
+  document.getElementById('playBtn').addEventListener('click',()=>{playing=!playing;document.getElementById('playBtn').textContent=playing?'⏸':'▶'});
+  document.getElementById('resetBtn').addEventListener('click',()=>{complexityEl.value=0.3;lambdaEl.value=10;dEl.value=0.5;timeEl.value=0;playTime=0;complexitySurge=0;playing=false;document.getElementById('playBtn').textContent='▶';update()});
+  document.getElementById('boostBtn').addEventListener('click',()=>{complexitySurge=Math.min(0.7,complexitySurge+0.3);update()});
+  window.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();document.getElementById('playBtn').click()}if(e.key==='r'||e.key==='R')document.getElementById('resetBtn').click()});
+  function loop(){if(playing||complexitySurge>0)update();requestAnimationFrame(loop)}
+  update();loop();
+})();
+</script>
+</body>
+</html>
