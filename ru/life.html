@@ -213,7 +213,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
     if(L.lambda<0.9){r=120+c*80;g=120+c*40;b=130}
     else if(L.lambda<1.1){r=240;g=180;b=80}
     else{r=80+lifeFactor*40;g=200+lifeFactor*55;b=120+lifeFactor*40}
-    ctx.globalCompositeOperation='screen';
+    ctx.beginPath();for(let i=0;i<=60;i++){const angle=(i/60)*Math.PI*2;const rr=baseR*(1+Math.sin(angle*3+time)*foldDepth*0.15);const x=cx+Math.cos(angle)*rr;const y=cy+Math.sin(angle)*rr;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.closePath();ctx.fillStyle=`rgba(${r},${g},${b},${0.06+c*0.08})`;ctx.fill();ctx.strokeStyle=`rgba(${r+50},${g+50},${b+50},${0.3+c*0.2})`;ctx.lineWidth=2;ctx.stroke();ctx.globalCompositeOperation='screen';
     for(let layer=0;layer<numFolds;layer++){
       const layerAngle=(layer/numFolds)*Math.PI*2+time*(0.3+lifeFactor*0.5);
       const layerR=baseR*(1-layer*0.05);
@@ -228,9 +228,9 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
         const x=cx+Math.cos(angle+layerAngle*0.1)*r2;const y=cy+Math.sin(angle+layerAngle*0.1)*r2;
         if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
       }
-      ctx.closePath();const alpha=0.04+c*0.06+lifeFactor*0.04;
+      ctx.closePath();const alpha=0.12+c*0.15+lifeFactor*0.08;
       ctx.fillStyle=`rgba(${r},${g},${b},${alpha})`;ctx.fill();
-      ctx.strokeStyle=`rgba(${r},${g},${b},${alpha*2})`;ctx.lineWidth=0.8;ctx.stroke();
+      ctx.strokeStyle=`rgba(${r+40},${g+40},${b+40},${Math.min(0.8,alpha*3)})`;ctx.lineWidth=1.5;ctx.stroke();
     }
     if(c>0.3){const numParticles=Math.floor((c-0.3)*100);
       for(let i=0;i<numParticles;i++){
@@ -238,11 +238,11 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
         const px=cx+Math.cos(angle)*dist;const py=cy+Math.sin(angle)*dist;
         const size=1+c*2+lifeFactor*2;const glow=lifeFactor>0?lifeFactor*0.3:0;
         ctx.beginPath();ctx.arc(px,py,size,0,Math.PI*2);
-        ctx.fillStyle=`rgba(${r},${g+30},${b},${0.3+c*0.3+glow})`;ctx.fill();
+        ctx.fillStyle=`rgba(${r+20},${g+40},${b+20},${0.6+c*0.3+glow})`;ctx.fill();
       }
     }
     if(L.lambda>1){const glowGrad=ctx.createRadialGradient(cx,cy,0,cx,cy,baseR*0.5);
-      glowGrad.addColorStop(0,`rgba(${r},${g},${b},${(L.lambda-1)*0.15})`);glowGrad.addColorStop(1,'rgba(0,0,0,0)');
+      glowGrad.addColorStop(0,`rgba(${r+30},${g+30},${b+30},${Math.min(0.4,(L.lambda-1)*0.25)})`);glowGrad.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle=glowGrad;ctx.fillRect(0,0,w,h);
     }
     ctx.globalCompositeOperation='source-over';

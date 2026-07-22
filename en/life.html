@@ -296,7 +296,23 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
     else if (L < 1.1) { r = 240; g = 180; b = 80; }
     else { r = 80 + lifeFactor * 40; g = 200 + lifeFactor * 55; b = 120 + lifeFactor * 40; }
 
-    // Draw the projection as overlapping translucent shapes
+    // Draw a solid base shape first so something is always visible
+    ctx.beginPath();
+    for (let i = 0; i <= 60; i++) {
+      const angle = (i / 60) * Math.PI * 2;
+      const rr = baseR * (1 + Math.sin(angle * 3 + time) * foldDepth * 0.15);
+      const x = cx + Math.cos(angle) * rr;
+      const y = cy + Math.sin(angle) * rr;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${r},${g},${b},${0.06 + c * 0.08})`;
+    ctx.fill();
+    ctx.strokeStyle = `rgba(${r + 50},${g + 50},${b + 50},${0.3 + c * 0.2})`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw overlapping translucent shapes for texture
     ctx.globalCompositeOperation = 'screen';
 
     for (let layer = 0; layer < numFolds; layer++) {
@@ -327,13 +343,13 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
       }
       ctx.closePath();
 
-      const alpha = 0.04 + c * 0.06 + lifeFactor * 0.04;
+      const alpha = 0.12 + c * 0.15 + lifeFactor * 0.08;
       ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
       ctx.fill();
 
       // Stroke for definition
-      ctx.strokeStyle = `rgba(${r},${g},${b},${alpha * 2})`;
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = `rgba(${r + 40},${g + 40},${b + 40},${Math.min(0.8, alpha * 3)})`;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
     }
 
@@ -350,7 +366,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
 
         ctx.beginPath();
         ctx.arc(px, py, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g + 30},${b},${0.3 + c * 0.3 + glow})`;
+        ctx.fillStyle = `rgba(${r + 20},${g + 40},${b + 20},${0.6 + c * 0.3 + glow})`;
         ctx.fill();
       }
     }
@@ -358,7 +374,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
     // Center glow when alive
     if (L > 1) {
       const glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseR * 0.5);
-      glowGrad.addColorStop(0, `rgba(${r},${g},${b},${(L - 1) * 0.15})`);
+      glowGrad.addColorStop(0, `rgba(${r + 30},${g + 30},${b + 30},${Math.min(0.4, (L.lambda - 1) * 0.25)})`);
       glowGrad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, w, h);
