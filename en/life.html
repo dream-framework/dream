@@ -199,17 +199,15 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
 
   function resize() {
     const w = canvas.parentElement.clientWidth - 16;
-    canvas.width = w * window.devicePixelRatio;
-    canvas.height = 500 * window.devicePixelRatio;
+    canvas.width = w;
+    canvas.height = 500;
     canvas.style.width = w + 'px';
     canvas.style.height = '500px';
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-    s2canvas.width = s2canvas.parentElement.clientWidth * window.devicePixelRatio;
-    s2canvas.height = 80 * window.devicePixelRatio;
+    s2canvas.width = s2canvas.parentElement.clientWidth;
+    s2canvas.height = 80;
     s2canvas.style.width = '100%';
     s2canvas.style.height = '80px';
-    s2ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
   window.addEventListener('resize', resize);
   resize();
@@ -261,8 +259,8 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
   }
 
   function drawProjection() {
-    const w = canvas.width / window.devicePixelRatio;
-    const h = canvas.height / window.devicePixelRatio;
+    const w = canvas.width;
+    const h = canvas.height;
     const c = parseFloat(complexityEl.value) + complexitySurge;
     const lam = parseFloat(lambdaEl.value);
     const D = parseFloat(dEl.value);
@@ -424,8 +422,8 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [[
   }
 
   function drawS2(lam, D, lost) {
-    const w = s2canvas.width / window.devicePixelRatio;
-    const h = s2canvas.height / window.devicePixelRatio;
+    const w = s2canvas.width;
+    const h = s2canvas.height;
     s2ctx.clearRect(0, 0, w, h);
 
     const pad = 6;
