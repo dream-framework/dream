@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Жизнь (3D) · DREAM</title>
-<meta name="description" content="DREAM Жизнь — 3D-сфера, поверхность которой развивает складки, завихрения и ветвящиеся жилы по мере роста сложности. Серый камень → золотые завихрения → ярко-зелёная жизнь. Спекулятивно." />
+<title>DREAM-Life: проективная морфогенез · DREAM</title>
+<meta name="description" content="DREAM-Life — проективная морфогенез и активное удержание. 3D-сфера, поверхность которой развивает складки, завихрения и ветвящиеся жилы по мере роста сложности. Серый камень → золотые завихрения → зелёная жизнеподобная морфология. Спекулятивно." />
 <link rel="stylesheet" href="../css/global.css">
 <style>
 :root{
@@ -148,7 +148,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 <div class="life-toy">
   <div class="lt-header">
     <h1>Life Toy <span class="lt-speculative">3D</span></h1>
-    <span class="kicker">Сфера отбрасывает простую тень. Складки, завихрения и ветвящиеся жилы появляются <em>по поверхности</em> по мере роста сложности — жизнь возникает как самоорганизующаяся динамика. Серый → жёлтый → зелёный. Тяните для вращения, колесо для зума.</span>
+    <span class="kicker">Сфера отбрасывает простую тень. Складки, завихрения и ветвящиеся жилы появляются <em>по поверхности</em> по мере роста сложности — проективная морфология усложняется. Серый → жёлтый → зелёный. Тяните для вращения, колесо или ± для зума.</span>
   </div>
 
   <div class="lt-grid">
@@ -158,13 +158,13 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         <canvas id="life3d"></canvas>
         <div class="lt-overlay tl">
           <div><span class="k">REGIME</span> <b id="ov_regime">TWIRLED</b></div>
-          <div><span class="k">D_eff</span> <b id="ov_d">1.47</b> <span class="k">·</span> <span class="k">S2</span> <b id="ov_s2">0.54</b></div>
+          <div><span class="k">d_proj</span> <b id="ov_d">1.47</b> <span class="k">·</span> <span class="k">R(λ)</span> <b id="ov_s2">0.54</b></div>
         </div>
         <div class="lt-overlay tr">
           <div><span class="k">→</span> <b id="ov_proj">TENDRILS</b></div>
           <div><span class="k">fold</span> <b id="ov_fold">0.49</b></div>
         </div>
-        <div class="lt-overlay bl"><span class="k">drag · wheel</span></div>
+        <div class="lt-overlay bl"><span class="k">drag · wheel · ± zoom</span></div>
         <div class="lt-overlay br"><span class="live" id="ov_live">● alive</span> <span class="k">·</span> <span class="spark" id="ov_fps">— fps</span></div>
         <div class="lt-cxbar"><span id="cxB" style="width:45%"></span></div>
       </div>
@@ -188,6 +188,8 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
           <button class="primary" id="btnEvolve">▶</button>
           <button id="btnSphere">○</button>
           <button id="btnLife">✦</button>
+          <button id="btnZoomOut" title="Zoom out">−</button>
+          <button id="btnZoomIn" title="Zoom in">+</button>
         </div>
       </div>
     </div>
@@ -292,32 +294,34 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     ru: {
       l_complexity:"Сложность", l_stir:"Помех", l_branches:"Ветви",
       tab_narrate:"Нарратив", tab_regimes:"Режимы", tab_math:"Математика", tab_readout:"Данные",
-      h_math:"Эффективная размерность",
-      p_math:"При c=0 силуэт — 1-D окружность (D=1). При c→1 ветвящиеся жилы толкают D к 2 — тень заполняет площадь, система переходит в жизнеподобный режим.",
+      h_math:"Проективная размерность",
+      p_math:"d_proj(0)=1 (гладкий круг), d_proj(1)=2 (заполняющий площадь силуэт). Это дескриптор морфологии, НЕ D_eff из DREAM (которая подгоняется из закона удержания S2: R(λ)=exp[−(λ/λ_q)^D_eff]). Показанное R(λ) иллюстративно, не является результатом подгонки.",
       h_shadow:"Аналогия с тенью",
-      p_shadow:"Гладкая сфера отбрасывает круглую тень — мало информации, без складок. Добавьте завихрения, впадины и ветвящиеся гребни <em>по поверхности</em>, и силуэт становится сложным. Форма в 3D <em>есть</em> система, тень на стене <em>есть</em> наблюдаемое.",
+      p_shadow:"Гладкая сфера отбрасывает круглую тень — мало информации, без складок. Добавьте завихрения, впадины и ветвящиеся гребни <em>по поверхности</em>, и силуэт становится сложным. Форма в 3D <em>есть</em> система, тень на стене <em>есть</em> наблюдаемое. Это демонстрирует рост морфологической сложности — но НЕ активное удержание, память или наследственность.",
+      h_life:"Чем это НЕ является",
+      p_life:"Ветвление, фрактальность и самоорганизация недостаточны для отличия жизни от нежизни. Пламя, штормы, рост кристаллов, речные сети и молнии тоже ветвятся без жизни. Финальный режим назван <b>жизнеподобная морфология</b>, а не <b>жизнь</b>. Более сильная гипотеза DREAM-Life определяет жизнь как <b>активное, ресурснозависимое удержание и воспроизводство проективных инвариантов</b> — требующее потока энергии, внутренней памяти, ремонта и наследственности. Эта игрушка этого пока не моделирует.",
       h_live:"Живой снимок",
-      ms_d:"D_эфф", ms_s2:"S2 удержание", ms_fold:"Глубина складок",
-      ms_branches:"Ветви", ms_sparks:"Искры жизни", ms_proj:"Периметр",
-      r0_t:"Сфера", r0_d:"Без складок. D=1. Тень=круг.",
-      r1_t:"Рябь", r1_d:"Первые гармоники. Поверхность начинает складываться.",
-      r2_t:"Завихрения", r2_d:"Вихревые складки. Тень обрастает щупальцами.",
-      r3_t:"Ветви", r3_d:"Фрактальные жилы по поверхности. D > 1.",
-      r4_t:"Жизнь", r4_d:"Самоподдерживающаяся динамика. Искры на жилах.",
-      regimes:["СФЕРА","РЯБЬ","ЗАВИХРЕНИЯ","ВЕТВИ","ЖИЗНЬ"],
+      ms_d:"d_proj", ms_s2:"R(λ) иллюстр.", ms_fold:"Глубина складок",
+      ms_branches:"Ветви", ms_sparks:"Жизнеподобные искры", ms_proj:"Периметр",
+      r0_t:"Гладкая геометрия", r0_d:"Без складок. d_proj=1. Тень=круг.",
+      r1_t:"Пассивная деформация", r1_d:"Первые гармоники. Поверхность начинает складываться.",
+      r2_t:"Концентрация кообласти", r2_d:"Вихревые складки. Тень обрастает щупальцами.",
+      r3_t:"Самоорганизованная морфология", r3_d:"Фрактальные жилы по поверхности. d_proj > 1.",
+      r4_t:"Жизнеподобная морфология", r4_d:"Сложное ветвление. НЕ активное удержание — искры символичны.",
+      regimes:["ГЛАДКАЯ","ДЕФОРМ.","КООБЛАСТЬ","МОРФОЛОГИЯ","ЖИЗНЕПОДОБНО"],
       projs:["КРУГ","ВОЛНЫ","ЩУПАЛЬЦА","ЖИЛЫ","ЛИШАЙНИК"],
-      alive:"● жива",
+      alive:"● морфинг",
       narrations:[
-        { phase:"rock", label:"СТАТИЧНАЯ МАТЕРИЯ",
-          text:"<b>Камень.</b> Серый, инертный, гладкий. Проекция — простой круг, без складок, без информации. D=1. S2 удержание полное, но удерживать нечего. Это материя до сложности." },
-        { phase:"ripple", label:"РЯБЬ",
+        { phase:"rock", label:"ГЛАДКАЯ ГЕОМЕТРИЯ",
+          text:"<b>Камень.</b> Серый, инертный, гладкий. Проекция — простой круг, без складок, без информации. d_proj=1. Это материя до сложности." },
+        { phase:"ripple", label:"ПАССИВНАЯ ДЕФОРМАЦИЯ",
           text:"<b>Первая рябь.</b> Поверхность начинает складываться. Появляются крошечные гармоники — тень больше не идеальный круг. Информация накапливается на границе. Всё ещё серый, всё ещё инертный." },
-        { phase:"twirl", label:"ЗАВИХРЕНИЯ",
-          text:"<b>Завихрения.</b> Вихревые складки curl по поверхности. Тень обрастает щупальцами. Цвет смещается к <b>золоту</b> — энергия течёт через границу. D>1. Система совершает работу." },
-        { phase:"branch", label:"ВЕТВИ",
-          text:"<b>Фрактальные жилы.</b> Ветвящиеся гребни расползаются по поверхности. Тень — сеть жил. Цвет смещается к <b>циану</b>. D приближается к 2 — проекция заполняет площадь." },
-        { phase:"life", label:"ЖИЗНЬ",
-          text:"<b>Жизнь.</b> Самоподдерживающаяся динамика. Искры кластеризуются на жилах. Форма <b>ярко-зелёная</b>, светится. D=2. Удержанная информация слишком структурирована для статического представления — система должна самоорганизоваться. Это порог." }
+        { phase:"twirl", label:"КОНЦЕНТРАЦИЯ КООБЛАСТИ",
+          text:"<b>Завихрения.</b> Вихревые складки по поверхности. Тень обрастает щупальцами. Цвет смещается к <b>золоту</b> — структура концентрируется. d_proj > 1." },
+        { phase:"branch", label:"САМООРГАНИЗОВАННАЯ МОРФОЛОГИЯ",
+          text:"<b>Фрактальные жилы.</b> Ветвящиеся гребни по поверхности. Тень — сеть жил. Цвет смещается к <b>циан-зелёному</b>. d_proj приближается к 2 — проекция заполняет площадь." },
+        { phase:"life", label:"ЖИЗНЕПОДОБНАЯ МОРФОЛОГИЯ",
+          text:"<b>Жизнеподобная морфология.</b> Сложное ветвление с самоорганизующейся динамикой. Форма <b>ярко-зелёная</b>. НО: это морфология, а не жизнь. Пламя, штормы и кристаллы тоже ветвятся. <b>Активное удержание, память и наследственность здесь не моделируются.</b>" }
       ]
     }
   };
@@ -328,7 +332,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     const map = {
       t_l_complexity:"l_complexity", t_l_stir:"l_stir", t_l_branches:"l_branches",
       t_tab_narrate:"tab_narrate", t_tab_regimes:"tab_regimes", t_tab_math:"tab_math", t_tab_readout:"tab_readout",
-      t_h_math:"h_math", t_p_math:"p_math", t_h_shadow:"h_shadow", t_p_shadow:"p_shadow",
+      t_h_math:"h_math", t_p_math:"p_math", t_h_shadow:"h_shadow", t_p_shadow:"p_shadow", t_h_life:"h_life", t_p_life:"p_life",
       t_h_live:"h_live",
       t_ms_d:"ms_d", t_ms_s2:"ms_s2", t_ms_fold:"ms_fold",
       t_ms_branches:"ms_branches", t_ms_sparks:"ms_sparks", t_ms_proj:"ms_proj",
@@ -340,7 +344,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       const el = document.getElementById(id);
       if (!el) continue;
       const v = t[map[id]];
-      if (id === "t_p_shadow" || id === "t_p_math") el.innerHTML = v;
+      if (id === "t_p_shadow" || id === "t_p_math" || id === "t_p_life") el.innerHTML = v;
       else el.textContent = v;
     }
     document.getElementById("ov_live").textContent = t.alive;
@@ -365,8 +369,8 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x060810);
   scene.fog = new THREE.FogExp2(0x060810, 0.05);
-  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-  camera.position.set(0, 0.4, 4.2);
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  camera.position.set(0, 0.4, 7.0);
   camera.lookAt(0,0,0);
 
   scene.add(new THREE.AmbientLight(0x2a3550, 0.5));
@@ -642,8 +646,8 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   const state = {
     complexity:0.45, stir:0.55, branch:0.60,
     auto:false, autoDir:+1,
-    camYaw:0, camPitch:0.08, camDist:4.2,
-    targetYaw:0, targetPitch:0.08, targetDist:4.2
+    camYaw:0, camPitch:0.08, camDist:7.0,
+    targetYaw:0, targetPitch:0.08, targetDist:7.0
   };
   const sCx=document.getElementById("sComplexity");
   const sSt=document.getElementById("sStir");
@@ -654,6 +658,8 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   const btnEvolve=document.getElementById("btnEvolve");
   const btnSphere=document.getElementById("btnSphere");
   const btnLife=document.getElementById("btnLife");
+  const btnZoomIn=document.getElementById("btnZoomIn");
+  const btnZoomOut=document.getElementById("btnZoomOut");
 
   function syncSliders(){
     sCx.value=state.complexity; sSt.value=state.stir; sBr.value=state.branch;
@@ -679,6 +685,12 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     btnEvolve.classList.remove("on"); btnEvolve.textContent="▶";
     syncSliders();
   });
+  btnZoomIn.addEventListener("click", ()=>{ state.targetDist=Math.max(2.8, state.targetDist-0.6); });
+  btnZoomOut.addEventListener("click", ()=>{ state.targetDist=Math.min(10, state.targetDist+0.6); });
+  window.addEventListener("keydown", e=>{
+    if(e.key==="+"||e.key==="=") state.targetDist=Math.max(2.8, state.targetDist-0.6);
+    if(e.key==="-"||e.key==="_") state.targetDist=Math.min(10, state.targetDist+0.6);
+  });
 
   // Camera orbit
   let dragging=false, lastX=0, lastY=0;
@@ -691,7 +703,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   });
   canvas.addEventListener("pointerup", e=>{ dragging=false; canvas.releasePointerCapture(e.pointerId); });
   canvas.addEventListener("pointercancel", ()=>{ dragging=false; });
-  canvas.addEventListener("wheel", e=>{ e.preventDefault(); state.targetDist=Math.max(2.6, Math.min(8, state.targetDist+e.deltaY*0.004)); }, {passive:false});
+  canvas.addEventListener("wheel", e=>{ e.preventDefault(); state.targetDist=Math.max(2.8, Math.min(10, state.targetDist+e.deltaY*0.004)); }, {passive:false});
 
   function resize(){
     const r=canvas.getBoundingClientRect();
@@ -704,8 +716,9 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   window.addEventListener("resize", resize);
 
   function regimeIndex(c){ if(c<0.18) return 0; if(c<0.40) return 1; if(c<0.65) return 2; if(c<0.85) return 3; return 4; }
-  function dEff(c){ return 1+2*c*(1-Math.exp(-3*c)); }
-  function s2Retention(c){ const D=dEff(c); let r=Math.exp(-(D-1)*0.85); if(c>0.85) r+=(c-0.85)*1.6; return Math.max(0, Math.min(1.0, r)); }
+  const K=3.0, K_NORM=(1-Math.exp(-K));
+  function dProj(c){ return 1 + c*(1-Math.exp(-K*c))/K_NORM; }
+  function s2Retention(c){ const d=dProj(c); let r=Math.exp(-(d-1)*1.2); if(c>0.85) r+=(c-0.85)*0.8; return Math.max(0, Math.min(1.0, r)); }
   function foldDepth(c){ return c*(0.50+0.30*state.branch); }
   function branchCount(c,b){ return Math.round(c*b*240); }
   function sparkCount(c){ return Math.round(c*c*c*SPARK_MAX); }
@@ -715,11 +728,11 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     const c=state.complexity; const ri=regimeIndex(c); const t=T();
     document.getElementById("ov_regime").textContent=t.regimes[ri];
     document.getElementById("ov_proj").textContent=t.projs[ri];
-    document.getElementById("ov_d").textContent=dEff(c).toFixed(2);
+    document.getElementById("ov_d").textContent=dProj(c).toFixed(2);
     document.getElementById("ov_s2").textContent=s2Retention(c).toFixed(2);
     document.getElementById("ov_fold").textContent=foldDepth(c).toFixed(2);
     document.getElementById("cxB").style.width=(c*100).toFixed(1)+"%";
-    document.getElementById("ms_d").textContent=dEff(c).toFixed(2);
+    document.getElementById("ms_d").textContent=dProj(c).toFixed(2);
     document.getElementById("ms_s2").textContent=s2Retention(c).toFixed(3);
     document.getElementById("ms_fold").textContent=foldDepth(c).toFixed(2);
     document.getElementById("ms_branches").textContent=branchCount(c,state.branch);
