@@ -309,7 +309,7 @@
   camera.lookAt(0,0,0);
 
   scene.add(new THREE.AmbientLight(0x2a3550, 0.65));
-  const keyLight = new THREE.DirectionalLight(0xfff1d6, 1.05);
+  const keyLight = new THREE.DirectionalLight(0xfff1d6, 0.72);
   keyLight.position.set(4,5,6); scene.add(keyLight);
   const rimLight = new THREE.DirectionalLight(0x6fc8ff, 0.55);
   rimLight.position.set(-5,-2,-3); scene.add(rimLight);
@@ -327,11 +327,11 @@
   const formMat = new THREE.ShaderMaterial({
     uniforms: {
       uTime:{value:0}, uComplexity:{value:0.45}, uStir:{value:0.55}, uBranch:{value:0.60},
-      uColorLo:{value:new THREE.Color(0x5a7bb0)},
-      uColorMid:{value:new THREE.Color(0x7dd3e8)},
-      uColorHi:{value:new THREE.Color(0x7dd3a8)},
-      uColorVein:{value:new THREE.Color(0xffd27a)},
-      uColorSpark:{value:new THREE.Color(0xffe6a8)}
+      uColorLo:{value:new THREE.Color(0x2a4a6a)},     // dark steel-blue (sphere)
+      uColorMid:{value:new THREE.Color(0x3a7a98)},    // muted teal (twirled)
+      uColorHi:{value:new THREE.Color(0x2e7a58)},     // forest green (life)
+      uColorVein:{value:new THREE.Color(0xd4a040)},   // amber gold (veins)
+      uColorSpark:{value:new THREE.Color(0xffd27a)}
     },
     vertexShader: `
       uniform float uTime, uComplexity, uStir, uBranch;
@@ -376,9 +376,9 @@
           float n=1.0-abs(snoise(rp*f)); n=n*n; ridge+=a*n; f*=2.07; a*=0.55;
         }
         float disp=0.0;
-        disp+=uComplexity*0.85*fold;
-        disp+=uComplexity*uBranch*0.45*(ridge-0.4);
-        disp+=uStir*0.08*sin(t*2.0+dir.y*6.0);
+        disp+=uComplexity*0.38*fold;                       // reduced: keep silhouette
+        disp+=uComplexity*uBranch*0.55*(ridge-0.35);       // boosted: veins as real relief
+        disp+=uStir*0.05*sin(t*2.0+dir.y*6.0);
         vDisp=disp; vVein=ridge;
         vec3 newPos=position+normalize(position)*disp;
         vec3 tangent1=normalize(cross(dir,vec3(0.0,1.0,0.0)+vec3(1e-5)));
@@ -395,8 +395,8 @@
             float na=1.0-abs(snoise(rpA*f2)); float nb=1.0-abs(snoise(rpB*f2));
             na=na*na; nb=nb*nb; ridgeA+=a2*na; ridgeB+=a2*nb; f2*=2.07; a2*=0.55; }
         }
-        float dispA=uComplexity*0.85*foldA+uComplexity*uBranch*0.45*(ridgeA-0.4);
-        float dispB=uComplexity*0.85*foldB+uComplexity*uBranch*0.45*(ridgeB-0.4);
+        float dispA=uComplexity*0.38*foldA+uComplexity*uBranch*0.55*(ridgeA-0.35);
+        float dispB=uComplexity*0.38*foldB+uComplexity*uBranch*0.55*(ridgeB-0.35);
         vec3 newPosA=nA*length(position)+nA*dispA;
         vec3 newPosB=nB*length(position)+nB*dispB;
         vec3 newNormal=normalize(cross(newPosA-newPos,newPosB-newPos));
@@ -411,20 +411,28 @@
       varying vec3 vNormal; varying vec3 vWorldPos; varying float vDisp; varying float vVein; varying vec3 vOrigDir;
       void main(){
         vec3 N=normalize(vNormal); vec3 V=normalize(cameraPosition-vWorldPos);
-        float fres=pow(1.0-max(dot(N,V),0.0),2.6);
+        float fres=pow(1.0-max(dot(N,V),0.0),3.2);
+        // Base color: darken slightly at high complexity so vein relief reads as structure
         vec3 base=mix(uColorLo,uColorMid,smoothstep(0.0,0.55,uComplexity));
         base=mix(base,uColorHi,smoothstep(0.45,1.0,uComplexity));
-        float veinMask=smoothstep(0.55,1.05,vVein*(0.4+uBranch*0.9));
+        base*=mix(1.0,0.62,smoothstep(0.5,1.0,uComplexity));
+        // Veins: thin gold lines, NOT a wash. Sharpen the mask so only ridges get gold.
+        float veinMask=smoothstep(0.72,1.15,vVein*(0.4+uBranch*0.9));
         float pulse=0.6+0.4*sin(uTime*3.0+vVein*12.0);
-        vec3 veinCol=uColorVein*(0.7+0.3*pulse);
-        vec3 col=mix(base,veinCol,veinMask*(0.35+0.5*uComplexity));
-        float sp=smoothstep(0.92,1.4,vVein)*uComplexity;
-        float sparkle=sp*(0.5+0.5*sin(uTime*6.0+vOrigDir.x*20.0+vOrigDir.y*13.0));
-        col+=uColorSpark*sparkle*0.8;
+        vec3 veinCol=uColorVein*(0.55+0.25*pulse);
+        // Veins are an ACCENT (max 45% mix), not a replacement for base
+        vec3 col=mix(base,veinCol,veinMask*(0.20+0.25*uComplexity));
+        // Sparkles: tiny, dim, gold — not white. Only on the very crests of veins.
+        float sp=smoothstep(1.05,1.45,vVein)*uComplexity;
+        float sparkle=sp*(0.4+0.6*sin(uTime*6.0+vOrigDir.x*20.0+vOrigDir.y*13.0));
+        col+=uColorVein*sparkle*0.25;
+        // Strong Lambert so the 3D fold relief is visible (dark valleys, lit ridges)
         vec3 L=normalize(vec3(0.4,0.5,0.7)); float diff=max(dot(N,L),0.0);
-        col*=0.35+0.85*diff;
-        col+=fres*(0.18+0.32*uComplexity)*mix(uColorMid,uColorHi,uComplexity);
-        col+=veinMask*uComplexity*0.25*uColorVein;
+        col*=0.18+1.25*diff;
+        // Subtle fresnel rim — capped so it never blows out
+        col+=fres*0.12*mix(uColorMid,uColorHi,uComplexity);
+        // Tone-map (Reinhard) so highlights compress instead of clipping to white
+        col=col/(1.0+0.6*col);
         gl_FragColor=vec4(col,1.0);
       }
     `,
@@ -441,7 +449,7 @@
       uniform float uComplexity; uniform vec3 uColorVein; uniform vec3 uColorHi;
       varying float vVein; varying float vDisp;
       void main(){
-        float a=0.06+0.35*uComplexity;
+        float a=0.03+0.12*uComplexity;
         vec3 c=mix(uColorHi,uColorVein,smoothstep(0.4,1.0,vVein));
         gl_FragColor=vec4(c,a*(0.4+0.6*smoothstep(0.0,0.3,abs(vDisp))));
       }
@@ -468,13 +476,17 @@
       uniform sampler2D uMap; uniform float uTime, uComplexity; varying vec2 vUv;
       void main(){
         float l=texture2D(uMap,vUv).r;
-        vec3 cool=vec3(0.35,0.55,0.85); vec3 warm=vec3(0.78,0.93,0.75); vec3 gold=vec3(1.0,0.82,0.48);
+        // Wall stays DARK — it's the shadow receiver. Only the silhouette glow reads.
+        vec3 cool=vec3(0.12,0.20,0.32); vec3 warm=vec3(0.18,0.28,0.22); vec3 gold=vec3(0.45,0.35,0.18);
         vec3 col=mix(cool,warm,smoothstep(0.0,0.6,uComplexity));
-        col=mix(col,gold,smoothstep(0.55,1.0,uComplexity)*0.6);
-        float flick=0.85+0.15*sin(uTime*4.0+vUv.x*30.0);
+        col=mix(col,gold,smoothstep(0.55,1.0,uComplexity)*0.5);
+        float flick=0.92+0.08*sin(uTime*4.0+vUv.x*30.0);
         col*=flick;
-        float a=l*(0.55+0.35*uComplexity);
-        gl_FragColor=vec4(col*(0.5+l),a);
+        // Silhouette glow: bright only where l is high, dim everywhere else
+        float a=l*l*(0.45+0.30*uComplexity);
+        vec3 glowCol=mix(vec3(0.4,0.6,0.8),vec3(0.6,0.5,0.25),smoothstep(0.5,1.0,uComplexity));
+        vec3 finalCol=col+glowCol*l*0.6;
+        gl_FragColor=vec4(finalCol,a);
       }
     `,
     transparent:true, depthWrite:false
