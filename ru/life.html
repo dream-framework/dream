@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DREAM-Life: проективная морфогенез · DREAM</title>
-<meta name="description" content="DREAM-Life — проективная морфогенез и активное удержание. 3D-сфера, поверхность которой развивает складки, завихрения и ветвящиеся жилы по мере роста сложности. Серый камень → золотые завихрения → зелёная жизнеподобная морфология. Спекулятивно." />
+<meta name="description" content="DREAM-Life — projected morphogenesis and active retention. 3D morphing sphere whose surface develops folds, twirls and branching veins as complexity rises. Grey rock → yellow twirls → green life-like morphology. Speculative." />
 <link rel="stylesheet" href="../css/global.css">
 <style>
 :root{
@@ -51,6 +51,18 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 .lt-overlay .spark{color:var(--lt-spark)}
 .lt-cxbar{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:min(340px,55%);height:5px;background:rgba(255,255,255,.06);border-radius:99px;border:1px solid var(--lt-border);overflow:hidden;pointer-events:none}
 .lt-cxbar>span{display:block;height:100%;background:linear-gradient(90deg,#8a8a8a,var(--lt-accent2) 50%,var(--lt-life));box-shadow:0 0 10px rgba(125,211,168,.5);transition:width .12s linear}
+
+/* Resource / Organization / Damage bars */
+.lt-bar-overlay{position:absolute;left:12px;bottom:28px;width:160px;display:flex;flex-direction:column;gap:3px;z-index:4;pointer-events:none}
+.lt-bar-row{display:flex;align-items:center;gap:6px}
+.lt-bar-label{font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:var(--muted-2);white-space:nowrap;width:58px;text-align:right}
+.lt-bar-track{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:99px;border:1px solid var(--lt-border);overflow:hidden}
+.lt-bar-fill{height:100%;border-radius:99px;transition:width .15s linear}
+.lt-bar-resource{background:linear-gradient(90deg,#5a9a6a,var(--lt-life));box-shadow:0 0 6px rgba(125,211,168,.4)}
+.lt-bar-org{background:linear-gradient(90deg,var(--lt-accent),var(--lt-accent2));box-shadow:0 0 6px rgba(125,211,232,.4)}
+.lt-bar-damage{background:linear-gradient(90deg,#c04040,#f06060);box-shadow:0 0 6px rgba(240,96,96,.5)}
+.lt-btnrow button.danger{border-color:rgba(240,96,96,.5);color:#f08080}
+.lt-btnrow button.danger:hover{background:rgba(240,96,96,.12);border-color:rgba(240,96,96,.7)}
 
 /* Compact controls strip — below canvas, minimal */
 .lt-controls{padding:6px 10px;border-top:1px solid var(--lt-border);background:var(--lt-panel2);display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap}
@@ -147,7 +159,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 <main class="container">
 <div class="life-toy">
   <div class="lt-header">
-    <h1>Life Toy <span class="lt-speculative">3D</span></h1>
+    <h1>DREAM-Life <span class="lt-speculative">проективная морфогенез</span></h1>
     <span class="kicker">Сфера отбрасывает простую тень. Складки, завихрения и ветвящиеся жилы появляются <em>по поверхности</em> по мере роста сложности — проективная морфология усложняется. Серый → жёлтый → зелёный. Тяните для вращения, колесо или ± для зума.</span>
   </div>
 
@@ -157,30 +169,36 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       <div class="lt-stage">
         <canvas id="life3d"></canvas>
         <div class="lt-overlay tl">
-          <div><span class="k">REGIME</span> <b id="ov_regime">TWIRLED</b></div>
-          <div><span class="k">d_proj</span> <b id="ov_d">1.47</b> <span class="k">·</span> <span class="k">R(λ)</span> <b id="ov_s2">0.54</b></div>
+          <div><span class="k">РЕЖИМ</span> <b id="ov_regime">COAREA</b></div>
+          <div><span class="k">d_proj</span> <b id="ov_d">1.35</b> <span class="k">·</span> <span class="k">R(λ)</span> <b id="ov_s2">0.66</b></div>
         </div>
         <div class="lt-overlay tr">
           <div><span class="k">→</span> <b id="ov_proj">TENDRILS</b></div>
-          <div><span class="k">fold</span> <b id="ov_fold">0.49</b></div>
+          <div><span class="k">fold</span> <b id="ov_fold">0.39</b></div>
         </div>
-        <div class="lt-overlay bl"><span class="k">drag · wheel · ± zoom</span></div>
-        <div class="lt-overlay br"><span class="live" id="ov_live">● alive</span> <span class="k">·</span> <span class="spark" id="ov_fps">— fps</span></div>
+        <div class="lt-overlay bl"><span class="k">вращение · колесо · ± зум</span></div>
+        <div class="lt-overlay br"><span class="live" id="ov_live">● морфинг</span> <span class="k">·</span> <span class="spark" id="ov_fps">— fps</span></div>
         <div class="lt-cxbar"><span id="cxB" style="width:45%"></span></div>
+        <!-- Resource + Organization bars -->
+        <div class="lt-bar-overlay">
+          <div class="lt-bar-row"><span class="lt-bar-label">J ресурс</span><div class="lt-bar-track"><div class="lt-bar-fill lt-bar-resource" id="barResource" style="width:100%"></div></div></div>
+          <div class="lt-bar-row"><span class="lt-bar-label">I организация</span><div class="lt-bar-track"><div class="lt-bar-fill lt-bar-org" id="barOrg" style="width:100%"></div></div></div>
+          <div class="lt-bar-row"><span class="lt-bar-label">повреждение</span><div class="lt-bar-track"><div class="lt-bar-fill lt-bar-damage" id="barDamage" style="width:0%"></div></div></div>
+        </div>
       </div>
       <div class="lt-controls">
         <div class="lt-slider">
-          <label><b id="t_l_complexity">Complexity</b></label>
+          <label><b id="t_l_complexity">Сложность</b></label>
           <input id="sComplexity" type="range" min="0" max="1" step="0.001" value="0.45">
           <span class="val" id="cvComplexity">0.45</span>
         </div>
         <div class="lt-slider">
-          <label><b id="t_l_stir">Stir</b></label>
-          <input id="sStir" type="range" min="0" max="1" step="0.001" value="0.55">
-          <span class="val" id="cvStir">0.55</span>
+          <label><b id="t_l_activity">Активность</b></label>
+          <input id="sActivity" type="range" min="0" max="1" step="0.001" value="0.0">
+          <span class="val" id="cvActivity">0.00</span>
         </div>
         <div class="lt-slider">
-          <label><b id="t_l_branches">Branch</b></label>
+          <label><b id="t_l_branches">Ветви</b></label>
           <input id="sBranches" type="range" min="0" max="1" step="0.001" value="0.60">
           <span class="val" id="cvBranches">0.60</span>
         </div>
@@ -188,6 +206,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
           <button class="primary" id="btnEvolve">▶</button>
           <button id="btnSphere">○</button>
           <button id="btnLife">✦</button>
+          <button id="btnDamage" title="Apply damage">⚡</button>
           <button id="btnZoomOut" title="Zoom out">−</button>
           <button id="btnZoomIn" title="Zoom in">+</button>
         </div>
@@ -207,32 +226,36 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         <div class="lt-pane active" id="pane-narrate">
           <div class="lt-narrate" id="narrateText">—</div>
         </div>
-        <!-- REGIMES PANE -->
+        <!-- РЕЖИМS PANE -->
         <div class="lt-pane" id="pane-regimes">
-          <div class="lt-regime" data-r="0"><div class="n">0</div><div><div class="t" id="t_r0_t">Sphere</div><div class="d" id="t_r0_d">No folds. D=1. Shadow=circle.</div><div class="v">c &lt; 0.18</div></div></div>
-          <div class="lt-regime" data-r="1"><div class="n">1</div><div><div class="t" id="t_r1_t">Rippled</div><div class="d" id="t_r1_d">First harmonics. Surface begins to fold.</div><div class="v">0.18–0.40</div></div></div>
-          <div class="lt-regime" data-r="2"><div class="n">2</div><div><div class="t" id="t_r2_t">Twirled</div><div class="d" id="t_r2_d">Vortical folds. Shadow grows tendrils.</div><div class="v">0.40–0.65</div></div></div>
-          <div class="lt-regime" data-r="3"><div class="n">3</div><div><div class="t" id="t_r3_t">Branched</div><div class="d" id="t_r3_d">Fractal veins over surface. D > 1.</div><div class="v">0.65–0.85</div></div></div>
-          <div class="lt-regime" data-r="4"><div class="n">4</div><div><div class="t" id="t_r4_t">Life</div><div class="d" id="t_r4_d">Self-sustaining dynamics. Sparks on veins.</div><div class="v">c &gt; 0.85</div></div></div>
+          <div class="lt-regime" data-r="0"><div class="n">0</div><div><div class="t" id="t_r0_t">Smooth geometry</div><div class="d" id="t_r0_d">No folds. d_proj=1. Shadow=circle.</div><div class="v">c &lt; 0.18</div></div></div>
+          <div class="lt-regime" data-r="1"><div class="n">1</div><div><div class="t" id="t_r1_t">Passive deformation</div><div class="d" id="t_r1_d">First harmonics. Surface begins to fold.</div><div class="v">0.18–0.40</div></div></div>
+          <div class="lt-regime" data-r="2"><div class="n">2</div><div><div class="t" id="t_r2_t">Coarea concentration</div><div class="d" id="t_r2_d">Vortical folds. Shadow grows tendrils.</div><div class="v">0.40–0.65</div></div></div>
+          <div class="lt-regime" data-r="3"><div class="n">3</div><div><div class="t" id="t_r3_t">Self-organized morphology</div><div class="d" id="t_r3_d">Fractal veins over surface. d_proj > 1.</div><div class="v">0.65–0.85</div></div></div>
+          <div class="lt-regime" data-r="4"><div class="n">4</div><div><div class="t" id="t_r4_t">Life-like morphology</div><div class="d" id="t_r4_d">Complex branching. NOT yet active retention — sparks are symbolic.</div><div class="v">c &gt; 0.85</div></div></div>
         </div>
         <!-- MATH PANE -->
         <div class="lt-pane" id="pane-math">
-          <h3 id="t_h_math">Effective dimension</h3>
-          <div class="eq">D_eff(c) = 1 + 2·c·(1 − e<sup>−3c</sup>)</div>
-          <p id="t_p_math">At c=0 the silhouette is a 1-D circle (D=1). At c→1 the branching veins push D toward 2 — the shadow is area-filling, the system has crossed into a life-like regime.</p>
+          <h3 id="t_h_math">Projected dimension</h3>
+          <div class="eq">d_proj(c) = 1 + c·(1 − e<sup>−3c</sup>) / (1 − e<sup>−3</sup>)</div>
+          <p id="t_p_math">d_proj(0)=1 (smooth circle), d_proj(1)=2 (area-filling silhouette). This is a morphology descriptor, NOT DREAM's D_eff (which is fitted from the S2 retention law R(λ)=exp[−(λ/λ_q)^D_eff]). The displayed R(λ) is illustrative, not a fitted measurement.</p>
           <h3 id="t_h_shadow">The shadow analogy</h3>
-          <p id="t_p_shadow">A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable.</p>
+          <p id="t_p_shadow">A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable. This demonstrates increasing morphological complexity — it does NOT yet model active retention, memory, or heredity.</p>
+          <h3 id="t_h_life">What this is NOT</h3>
+          <p id="t_p_life">Branching, fractality and self-organization are insufficient to distinguish life from nonlife. Flames, storms, crystal growth, river networks and lightning all show complex branching without being alive. The final regime is labeled <b>life-like morphology</b>, not <b>life</b>. A stronger DREAM-Life hypothesis would define life as <b>active, resource-driven retention and reproduction of projected invariants</b> — requiring energy throughput, internal memory, repair, and heredity. This toy does not yet model those.</p>
         </div>
         <!-- READOUT PANE -->
         <div class="lt-pane" id="pane-readout">
           <h3 id="t_h_live">Live readout</h3>
           <div class="lt-ministat">
-            <span class="k" id="t_ms_d">D_eff</span><span class="v accent" id="ms_d">1.47</span>
-            <span class="k" id="t_ms_s2">S2 retention</span><span class="v warn" id="ms_s2">0.540</span>
-            <span class="k" id="t_ms_fold">Fold depth</span><span class="v" id="ms_fold">0.49</span>
+            <span class="k" id="t_ms_d">d_proj</span><span class="v accent" id="ms_d">1.35</span>
+            <span class="k" id="t_ms_s2">R(λ) illustrative</span><span class="v warn" id="ms_s2">0.660</span>
+            <span class="k" id="t_ms_fold">Fold depth</span><span class="v" id="ms_fold">0.39</span>
             <span class="k" id="t_ms_branches">Surface branches</span><span class="v" id="ms_branches">65</span>
-            <span class="k" id="t_ms_sparks">Life sparks</span><span class="v life" id="ms_sparks">243</span>
-            <span class="k" id="t_ms_proj">Projection perimeter</span><span class="v" id="ms_proj">11.34</span>
+            <span class="k">Activity A</span><span class="v life" id="ms_activity">0.00</span>
+            <span class="k">Resource J</span><span class="v" id="ms_resource">1.00</span>
+            <span class="k">Organization I</span><span class="v accent" id="ms_org">0.45</span>
+            <span class="k">Damage</span><span class="v" id="ms_damage" style="color:#f08080">0.00</span>
           </div>
         </div>
       </div>
@@ -261,38 +284,40 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 (function(){
   const I18N = {
     en: {
-      l_complexity:"Complexity", l_stir:"Stir", l_branches:"Branch",
+      l_complexity:"Complexity", l_stir:"Stir", l_branches:"Branch", l_activity:"Activity",
       tab_narrate:"Narrate", tab_regimes:"Regimes", tab_math:"Math", tab_readout:"Readout",
-      h_math:"Effective dimension",
-      p_math:"At c=0 the silhouette is a 1-D circle (D=1). At c→1 the branching veins push D toward 2 — the shadow is area-filling, the system has crossed into a life-like regime.",
+      h_math:"Projected dimension",
+      p_math:"d_proj(0)=1 (smooth circle), d_proj(1)=2 (area-filling silhouette). This is a morphology descriptor, NOT DREAM's D_eff (which is fitted from the S2 retention law R(λ)=exp[−(λ/λ_q)^D_eff]). The displayed R(λ) is illustrative, not a fitted measurement.",
       h_shadow:"The shadow analogy",
-      p_shadow:"A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable.",
+      p_shadow:"A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable. This demonstrates increasing morphological complexity — it does NOT yet model active retention, memory, or heredity.",
+      h_life:"What this is NOT",
+      p_life:"Branching, fractality and self-organization are insufficient to distinguish life from nonlife. Flames, storms, crystal growth, river networks and lightning all show complex branching without being alive. The final regime is labeled <b>life-like morphology</b>, not <b>life</b>. A stronger DREAM-Life hypothesis would define life as <b>active, resource-driven retention and reproduction of projected invariants</b> — requiring energy throughput, internal memory, repair, and heredity. This toy does not yet model those.",
       h_live:"Live readout",
-      ms_d:"D_eff", ms_s2:"S2 retention", ms_fold:"Fold depth",
-      ms_branches:"Surface branches", ms_sparks:"Life sparks", ms_proj:"Projection perimeter",
-      r0_t:"Sphere", r0_d:"No folds. D=1. Shadow=circle.",
-      r1_t:"Rippled", r1_d:"First harmonics. Surface begins to fold.",
-      r2_t:"Twirled", r2_d:"Vortical folds. Shadow grows tendrils.",
-      r3_t:"Branched", r3_d:"Fractal veins over surface. D > 1.",
-      r4_t:"Life", r4_d:"Self-sustaining dynamics. Sparks on veins.",
-      regimes:["SPHERE","RIPPLED","TWIRLED","BRANCHED","LIFE"],
+      ms_d:"d_proj", ms_s2:"R(λ) illustrative", ms_fold:"Fold depth",
+      ms_branches:"Surface branches", ms_sparks:"Life-like sparks", ms_proj:"Projection perimeter",
+      r0_t:"Smooth geometry", r0_d:"No folds. d_proj=1. Shadow=circle.",
+      r1_t:"Passive deformation", r1_d:"First harmonics. Surface begins to fold.",
+      r2_t:"Coarea concentration", r2_d:"Vortical folds. Shadow grows tendrils.",
+      r3_t:"Self-organized morphology", r3_d:"Fractal veins over surface. d_proj > 1.",
+      r4_t:"Life-like morphology", r4_d:"Complex branching. NOT yet active retention — sparks are symbolic.",
+      regimes:["SMOOTH","DEFORMED","COAREA","MORPHOLOGY","LIFE-LIKE"],
       projs:["CIRCLE","WAVES","TENDRILS","VEINS","LICHEN"],
-      alive:"● alive",
+      alive:"● морфинг",
       narrations:[
-        { phase:"rock", label:"STATIC MATTER",
-          text:"<b>A rock.</b> Grey, inert, smooth. The projection is a simple circle — no folds, no information. D=1. S2 retention is total but there is nothing to retain. This is matter before complexity." },
-        { phase:"ripple", label:"RIPPLED",
+        { phase:"rock", label:"SMOOTH GEOMETRY",
+          text:"<b>A rock.</b> Grey, inert, smooth. The projection is a simple circle — no folds, no information. d_proj=1. This is matter before complexity." },
+        { phase:"ripple", label:"PASSIVE DEFORMATION",
           text:"<b>First ripples.</b> The surface begins to fold. Tiny harmonics appear — the shadow is no longer a perfect circle. Information starts to accumulate in the boundary. Still grey, still mostly inert." },
-        { phase:"twirl", label:"TWIRLED",
-          text:"<b>Twirls emerge.</b> Vortical folds curl across the surface. The shadow grows tendrils. Color shifts to <b>gold</b> — energy is flowing through the boundary. D>1. The system is doing work." },
-        { phase:"branch", label:"BRANCHED",
-          text:"<b>Fractal veins.</b> Branching ridges spread over the surface. The shadow is now a network of veins. Color shifts toward <b>cyan</b>. D approaches 2 — the projection is becoming area-filling." },
-        { phase:"life", label:"ALIVE",
-          text:"<b>Life.</b> Self-sustaining dynamics. Sparks cluster on the veins. The form is <b>bright green</b>, glowing. D=2. The retained information is too structured for static representation — the system must self-organize. This is the threshold." }
+        { phase:"twirl", label:"COAREA CONCENTRATION",
+          text:"<b>Twirls emerge.</b> Vortical folds curl across the surface. The shadow grows tendrils. Color shifts to <b>gold</b> — structure is concentrating. d_proj > 1." },
+        { phase:"branch", label:"SELF-ORGANIZED MORPHOLOGY",
+          text:"<b>Fractal veins.</b> Branching ridges spread over the surface. The shadow is now a network of veins. Color shifts toward <b>teal-green</b>. d_proj approaches 2 — the projection is becoming area-filling." },
+        { phase:"life", label:"LIFE-LIKE MORPHOLOGY",
+          text:"<b>Life-like morphology.</b> Complex branching with self-organizing dynamics. The form is <b>bright green</b>. BUT: this is morphology, not yet life. Flames, storms and crystals also branch. <b>Active retention, memory and heredity are not modeled here.</b>" }
       ]
     },
     ru: {
-      l_complexity:"Сложность", l_stir:"Помех", l_branches:"Ветви",
+      l_complexity:"Сложность", l_stir:"Помех", l_branches:"Ветви", l_activity:"Активность",
       tab_narrate:"Нарратив", tab_regimes:"Режимы", tab_math:"Математика", tab_readout:"Данные",
       h_math:"Проективная размерность",
       p_math:"d_proj(0)=1 (гладкий круг), d_proj(1)=2 (заполняющий площадь силуэт). Это дескриптор морфологии, НЕ D_eff из DREAM (которая подгоняется из закона удержания S2: R(λ)=exp[−(λ/λ_q)^D_eff]). Показанное R(λ) иллюстративно, не является результатом подгонки.",
@@ -330,7 +355,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   function applyI18N(){
     const t = T();
     const map = {
-      t_l_complexity:"l_complexity", t_l_stir:"l_stir", t_l_branches:"l_branches",
+      t_l_complexity:"l_complexity", t_l_stir:"l_stir", t_l_branches:"l_branches", t_l_activity:"l_activity",
       t_tab_narrate:"tab_narrate", t_tab_regimes:"tab_regimes", t_tab_math:"tab_math", t_tab_readout:"tab_readout",
       t_h_math:"h_math", t_p_math:"p_math", t_h_shadow:"h_shadow", t_p_shadow:"p_shadow", t_h_life:"h_life", t_p_life:"p_life",
       t_h_live:"h_live",
@@ -392,6 +417,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   const formMat = new THREE.ShaderMaterial({
     uniforms: {
       uTime:{value:0}, uComplexity:{value:0.45}, uStir:{value:0.55}, uBranch:{value:0.60},
+      uDamage:{value:0.0}, uDamageDir:{value:new THREE.Vector3(1,0,0)}, uActivity:{value:0.0},
       // Color scale: grey (rock) → gold (twirl) → bright green (life)
       uColorRock:{value:new THREE.Color(0x7a7a7a)},   // grey
       uColorRipple:{value:new THREE.Color(0x9a8a6a)},  // warm grey
@@ -401,8 +427,9 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       uColorVein:{value:new THREE.Color(0xffd27a)},    // amber spark
     },
     vertexShader: `
-      uniform float uTime, uComplexity, uStir, uBranch;
-      varying vec3 vNormal; varying vec3 vWorldPos; varying float vDisp; varying float vVein; varying float vFold; varying vec3 vOrigDir;
+      uniform float uTime, uComplexity, uStir, uBranch, uDamage, uActivity;
+      uniform vec3 uDamageDir;
+      varying vec3 vNormal; varying vec3 vWorldPos; varying float vDisp; varying float vVein; varying float vFold; varying vec3 vOrigDir; varying float vDamageRegion;
       vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
       vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
       vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
@@ -461,6 +488,11 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         disp+=uComplexity*uBranch*0.50*(ridge-0.4);
         disp+=uStir*0.06*sin(t*2.0+dir.y*6.0);
         vDisp=disp; vVein=ridge; vFold=fold;
+        // Damage disruption: near damageDir, add chaotic displacement
+        float dmgRegion=smoothstep(0.4, 0.0, acos(clamp(dot(dir,normalize(uDamageDir)),-1.0,1.0))/3.14159);
+        vDamageRegion=dmgRegion;
+        float dmgDisp=uDamage*dmgRegion*0.5*sin(uTime*15.0+dir.x*30.0+dir.y*20.0);
+        disp+=dmgDisp;
         vec3 newPos=position+normalize(position)*disp;
         // Recompute normal via neighbors
         vec3 tangent1=normalize(cross(dir,vec3(0.0,1.0,0.0)+vec3(1e-5)));
@@ -484,9 +516,9 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       }
     `,
     fragmentShader: `
-      uniform float uTime, uComplexity, uStir, uBranch;
-      uniform vec3 uColorRock, uColorRipple, uColorTwirl, uColorBranch, uColorLife, uColorVein;
-      varying vec3 vNormal; varying vec3 vWorldPos; varying float vDisp; varying float vVein; varying float vFold; varying vec3 vOrigDir;
+      uniform float uTime, uComplexity, uStir, uBranch, uDamage, uActivity;
+      uniform vec3 uColorRock, uColorRipple, uColorTwirl, uColorBranch, uColorLife, uColorVein, uDamageDir;
+      varying vec3 vNormal; varying vec3 vWorldPos; varying float vDisp; varying float vVein; varying float vFold; varying vec3 vOrigDir; varying float vDamageRegion;
       void main(){
         vec3 N=normalize(vNormal); vec3 V=normalize(cameraPosition-vWorldPos);
         float fres=pow(1.0-max(dot(N,V),0.0),3.0);
@@ -512,6 +544,17 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         col+=fres*0.06*col;
         // Hard clamp — NEVER white. Max brightness = 0.85.
         col=min(col, vec3(0.85));
+        // Damage: red disrupted region where damage was applied
+        if(vDamageRegion>0.01 && uDamage>0.01){
+          float dmgVis=vDamageRegion*uDamage;
+          vec3 dmgCol=vec3(0.8,0.2,0.15)*(0.5+0.5*sin(uTime*20.0+vOrigDir.x*40.0));
+          col=mix(col, dmgCol, dmgVis*0.6);
+        }
+        // Activity glow: when active and repairing, add green pulse
+        if(uActivity>0.01 && uDamage>0.01){
+          float repairPulse=uActivity*vDamageRegion*(0.3+0.2*sin(uTime*5.0));
+          col+=vec3(0.0,0.15,0.05)*repairPulse;
+        }
         gl_FragColor=vec4(col,1.0);
       }
     `,
@@ -644,31 +687,34 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 
   /* ============ STATE + UI ============ */
   const state = {
-    complexity:0.45, stir:0.55, branch:0.60,
+    complexity:0.45, stir:0.55, branch:0.60, activity:0.0,
     auto:false, autoDir:+1,
+    damage:0.0, damageDir:new THREE.Vector3(1,0,0),
+    resource:1.0, organization:1.0,
     camYaw:0, camPitch:0.08, camDist:7.0,
     targetYaw:0, targetPitch:0.08, targetDist:7.0
   };
   const sCx=document.getElementById("sComplexity");
-  const sSt=document.getElementById("sStir");
+  const sAc=document.getElementById("sActivity");
   const sBr=document.getElementById("sBranches");
   const cvCx=document.getElementById("cvComplexity");
-  const cvSt=document.getElementById("cvStir");
+  const cvAc=document.getElementById("cvActivity");
   const cvBr=document.getElementById("cvBranches");
   const btnEvolve=document.getElementById("btnEvolve");
   const btnSphere=document.getElementById("btnSphere");
   const btnLife=document.getElementById("btnLife");
+  const btnDamage=document.getElementById("btnDamage");
   const btnZoomIn=document.getElementById("btnZoomIn");
   const btnZoomOut=document.getElementById("btnZoomOut");
 
   function syncSliders(){
-    sCx.value=state.complexity; sSt.value=state.stir; sBr.value=state.branch;
+    sCx.value=state.complexity; sAc.value=state.activity; sBr.value=state.branch;
     cvCx.textContent=state.complexity.toFixed(2);
-    cvSt.textContent=state.stir.toFixed(2);
+    cvAc.textContent=state.activity.toFixed(2);
     cvBr.textContent=state.branch.toFixed(2);
   }
   sCx.addEventListener("input", e=>{ state.complexity=+e.target.value; state.auto=false; btnEvolve.classList.remove("on"); btnEvolve.textContent="▶"; syncSliders(); });
-  sSt.addEventListener("input", e=>{ state.stir=+e.target.value; syncSliders(); });
+  sAc.addEventListener("input", e=>{ state.activity=+e.target.value; syncSliders(); });
   sBr.addEventListener("input", e=>{ state.branch=+e.target.value; syncSliders(); });
   btnEvolve.addEventListener("click", ()=>{
     state.auto=!state.auto;
@@ -676,20 +722,29 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     btnEvolve.textContent=state.auto?"❚❚":"▶";
   });
   btnSphere.addEventListener("click", ()=>{
-    state.complexity=0.0; state.stir=0.0; state.branch=0.0; state.auto=false;
+    state.complexity=0.0; state.activity=0.0; state.branch=0.0; state.auto=false;
+    state.damage=0.0; state.resource=1.0; state.organization=1.0;
     btnEvolve.classList.remove("on"); btnEvolve.textContent="▶";
     syncSliders();
   });
   btnLife.addEventListener("click", ()=>{
-    state.complexity=0.95; state.stir=0.75; state.branch=0.9; state.auto=false;
+    state.complexity=0.95; state.activity=0.8; state.branch=0.9; state.auto=false;
+    state.damage=0.0; state.resource=1.0; state.organization=1.0;
     btnEvolve.classList.remove("on"); btnEvolve.textContent="▶";
     syncSliders();
   });
+  btnDamage.addEventListener("click", ()=>{
+    // Apply localized damage in a random direction
+    state.damage = 1.0;
+    const theta=Math.random()*2*Math.PI, phi=Math.acos(2*Math.random()-1);
+    state.damageDir.set(Math.sin(phi)*Math.cos(theta), Math.sin(phi)*Math.sin(theta), Math.cos(phi));
+  });
   btnZoomIn.addEventListener("click", ()=>{ state.targetDist=Math.max(2.8, state.targetDist-0.6); });
   btnZoomOut.addEventListener("click", ()=>{ state.targetDist=Math.min(10, state.targetDist+0.6); });
+  // Keyboard zoom
   window.addEventListener("keydown", e=>{
-    if(e.key==="+"||e.key==="=") state.targetDist=Math.max(2.8, state.targetDist-0.6);
-    if(e.key==="-"||e.key==="_") state.targetDist=Math.min(10, state.targetDist+0.6);
+    if(e.key==="+"||e.key=="=") state.targetDist=Math.max(2.8, state.targetDist-0.6);
+    if(e.key==="-"||e.key=="_") state.targetDist=Math.min(10, state.targetDist+0.6);
   });
 
   // Camera orbit
@@ -716,8 +771,10 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   window.addEventListener("resize", resize);
 
   function regimeIndex(c){ if(c<0.18) return 0; if(c<0.40) return 1; if(c<0.65) return 2; if(c<0.85) return 3; return 4; }
+  // d_proj: constrained to [1,2]. d_proj(0)=1, d_proj(1)=2.
   const K=3.0, K_NORM=(1-Math.exp(-K));
   function dProj(c){ return 1 + c*(1-Math.exp(-K*c))/K_NORM; }
+  // R(λ) — illustrative, NOT a fitted S2 measurement
   function s2Retention(c){ const d=dProj(c); let r=Math.exp(-(d-1)*1.2); if(c>0.85) r+=(c-0.85)*0.8; return Math.max(0, Math.min(1.0, r)); }
   function foldDepth(c){ return c*(0.50+0.30*state.branch); }
   function branchCount(c,b){ return Math.round(c*b*240); }
@@ -736,8 +793,14 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     document.getElementById("ms_s2").textContent=s2Retention(c).toFixed(3);
     document.getElementById("ms_fold").textContent=foldDepth(c).toFixed(2);
     document.getElementById("ms_branches").textContent=branchCount(c,state.branch);
-    document.getElementById("ms_sparks").textContent=sparkCount(c);
-    document.getElementById("ms_proj").textContent=projPerim(c).toFixed(2);
+    document.getElementById("ms_activity").textContent=state.activity.toFixed(2);
+    document.getElementById("ms_resource").textContent=state.resource.toFixed(2);
+    document.getElementById("ms_org").textContent=state.organization.toFixed(2);
+    document.getElementById("ms_damage").textContent=state.damage.toFixed(2);
+    // Update bars
+    document.getElementById("barResource").style.width=(state.resource*100).toFixed(0)+"%";
+    document.getElementById("barOrg").style.width=(state.organization*100).toFixed(0)+"%";
+    document.getElementById("barDamage").style.width=(state.damage*100).toFixed(0)+"%";
     // Highlight active regime
     const regimes=document.querySelectorAll(".lt-regime");
     regimes.forEach((el,i)=>el.classList.toggle("active", i===ri));
@@ -763,10 +826,29 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       state.complexity += dt*0.025*state.autoDir;
       if(state.complexity>=1.0){ state.complexity=1.0; state.autoDir=-1; }
       if(state.complexity<=0.0){ state.complexity=0.0; state.autoDir=+1; }
-      state.stir=0.3+0.5*state.complexity;
+      state.activity=0.3+0.5*state.complexity;
       state.branch=0.3+0.6*state.complexity;
       syncSliders();
     }
+
+    // ── Damage / Repair dynamics ──
+    // dI/dt = F_formation + A_repair - L_dissipation - L_damage
+    // Passive (activity=0): A_repair=0, damage persists
+    // Active (activity>0): A_repair = activity * resource * damage
+    if(state.damage > 0){
+      if(state.activity > 0.01 && state.resource > 0.01){
+        // Active repair: consumes resource, reduces damage
+        const repair = state.activity * state.resource * dt * 1.2;
+        state.damage = Math.max(0, state.damage - repair);
+        state.resource = Math.max(0, state.resource - repair * 0.25);
+      }
+      // Passive: damage persists (no repair)
+    } else {
+      // No damage: resource slowly regenerates (like photosynthesis)
+      state.resource = Math.min(1.0, state.resource + dt * 0.05);
+    }
+    // Organization = function of complexity minus damage
+    state.organization = Math.max(0, state.complexity * (1 - state.damage * 0.7));
 
     state.camYaw += (state.targetYaw-state.camYaw)*0.08;
     state.camPitch += (state.targetPitch-state.camPitch)*0.08;
@@ -781,6 +863,9 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     formMat.uniforms.uComplexity.value=state.complexity;
     formMat.uniforms.uStir.value=state.stir;
     formMat.uniforms.uBranch.value=state.branch;
+    formMat.uniforms.uDamage.value=state.damage;
+    formMat.uniforms.uDamageDir.value.copy(state.damageDir);
+    formMat.uniforms.uActivity.value=state.activity;
     wallTexMat.uniforms.uTime.value=elapsed;
     wallTexMat.uniforms.uComplexity.value=state.complexity;
     sparkMat.uniforms.uTime.value=elapsed;
