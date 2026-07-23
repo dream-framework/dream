@@ -20,6 +20,8 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;overflow:hidden}
+/* Hide the global fractal backdrop — it washes out the 3D canvas */
+#fx{display:none !important}
 .life-toy{display:flex;flex-direction:column;height:calc(100vh - 56px);padding:6px 8px;gap:6px}
 main.container{padding:6px 8px !important;max-width:1600px !important;height:calc(100vh - 56px);display:flex;flex-direction:column}
 
@@ -356,11 +358,12 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 
   /* ============ THREE.JS SCENE ============ */
   const canvas = document.getElementById("life3d");
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:"high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:"high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
-  renderer.setClearColor(0x000000, 0);
+  renderer.setClearColor(0x060810, 1);
 
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x060810);
   scene.fog = new THREE.FogExp2(0x060810, 0.05);
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
   camera.position.set(0, 0.4, 4.2);
@@ -484,27 +487,27 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         vec3 N=normalize(vNormal); vec3 V=normalize(cameraPosition-vWorldPos);
         float fres=pow(1.0-max(dot(N,V),0.0),3.0);
         // Color scale: grey → warm grey → gold → teal-green → bright green
-        // NO white fade. Structure always visible.
+        // NO white fade. Structure always visible. Colors stay saturated.
         vec3 col=uColorRock;
         col=mix(col, uColorRipple, smoothstep(0.10, 0.35, uComplexity));
         col=mix(col, uColorTwirl, smoothstep(0.30, 0.60, uComplexity));
         col=mix(col, uColorBranch, smoothstep(0.55, 0.80, uComplexity));
         col=mix(col, uColorLife, smoothstep(0.75, 1.0, uComplexity));
-        // Vein highlight: thin amber lines on ridges — NOT a wash
-        float veinMask=smoothstep(0.75, 1.2, vVein);
+        // Vein highlight: thin amber lines on ridges only
+        float veinMask=smoothstep(0.80, 1.25, vVein);
         float pulse=0.6+0.4*sin(uTime*3.0+vVein*14.0);
-        col=mix(col, uColorVein, veinMask*0.30*uComplexity);
-        // Sparkles on vein crests — tiny, amber, only at high complexity
-        float sp=smoothstep(1.1, 1.5, vVein)*uComplexity;
+        col=mix(col, uColorVein, veinMask*0.25*uComplexity);
+        // Sparkles on vein crests — tiny, dim
+        float sp=smoothstep(1.15, 1.55, vVein)*uComplexity;
         float sparkle=sp*(0.4+0.6*sin(uTime*7.0+vOrigDir.x*22.0+vOrigDir.y*15.0));
-        col+=uColorVein*sparkle*0.20;
-        // Strong directional light — dark valleys, lit ridges (structure visible)
+        col+=uColorVein*sparkle*0.12;
+        // Directional light — moderate contrast, dark valleys, lit ridges
         vec3 L=normalize(vec3(0.4,0.5,0.7)); float diff=max(dot(N,L),0.0);
-        col*=0.22+1.15*diff;
-        // Rim light — subtle, color-matched, never blows out
-        col+=fres*0.10*col;
-        // Mild tone map — compress but don't desaturate
-        col=col/(1.0+0.35*col);
+        col*=0.30+0.85*diff;
+        // Rim — very subtle
+        col+=fres*0.06*col;
+        // Hard clamp — NEVER white. Max brightness = 0.85.
+        col=min(col, vec3(0.85));
         gl_FragColor=vec4(col,1.0);
       }
     `,
@@ -555,12 +558,12 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         col=mix(col, green, smoothstep(0.6,1.0,uComplexity));
         float flick=0.92+0.08*sin(uTime*3.0+vUv.x*28.0);
         col*=flick;
-        // Silhouette glow
-        float a=l*l*(0.40+0.35*uComplexity);
-        vec3 glowGrey=vec3(0.3,0.4,0.5); vec3 glowGold=vec3(0.6,0.5,0.2); vec3 glowGreen=vec3(0.3,0.7,0.4);
+        // Silhouette glow — very faint, just a hint of the shadow projection
+        float a=l*l*0.08;
+        vec3 glowGrey=vec3(0.10,0.14,0.20); vec3 glowGold=vec3(0.20,0.15,0.06); vec3 glowGreen=vec3(0.08,0.18,0.10);
         vec3 glowCol=mix(glowGrey, glowGold, smoothstep(0.2,0.6,uComplexity));
         glowCol=mix(glowCol, glowGreen, smoothstep(0.6,1.0,uComplexity));
-        vec3 finalCol=col+glowCol*l*0.7;
+        vec3 finalCol=col+glowCol*l*0.25;
         gl_FragColor=vec4(finalCol,a);
       }
     `,
@@ -744,7 +747,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     const elapsed=clock.getElapsedTime();
 
     if(state.auto){
-      state.complexity += dt*0.07*state.autoDir;
+      state.complexity += dt*0.025*state.autoDir;
       if(state.complexity>=1.0){ state.complexity=1.0; state.autoDir=-1; }
       if(state.complexity<=0.0){ state.complexity=0.0; state.autoDir=+1; }
       state.stir=0.3+0.5*state.complexity;
