@@ -978,6 +978,8 @@ function summaryPills(){
   const fitConfirmed = TESTS.filter(t => fitQuality(t).label === "ПОДТВЕРЖДЕНО").length;
   const fitTentative = TESTS.filter(t => fitQuality(t).label === "ПРЕДВАРИТЕЛЬНО").length;
   const fitUndetermined = TESTS.filter(t => fitQuality(t).label === "НЕ ОПРЕДЕЛЕНО").length;
+  const fitRejected = TESTS.filter(t => fitQuality(t).label === "ОТКЛОНЕНО").length;
+  const s2Present = TESTS.filter(t => t.D !== null && t.D !== undefined && t.D === t.D).length;
   const natural = TESTS.filter(t => regimeLabel(t) === "ЕСТЕСТВЕННО").length;
   const extraction = TESTS.filter(t => regimeLabel(t) === "ИЗВЛЕЧЕНИЕ").length;
   const intervention = TESTS.filter(t => regimeLabel(t) === "ВМЕШАТЕЛЬСТВО").length;
@@ -985,11 +987,14 @@ function summaryPills(){
   const partial = TESTS.filter(t => t.verdict === "PARTIAL").length;
   const consistent = TESTS.filter(t => t.verdict === "CONSISTENT").length;
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
+  const s2Pct = total > 0 ? Math.round(100 * s2Present / total) : 0;
   return `
     <div class="summary-pill mut pill-filter" data-filter="all" style="cursor:pointer"><span class="n">${total}</span> <span class="l">Всего</span></div>
-    <div class="summary-pill good pill-filter" data-filter="fit:CONFIRMED" style="cursor:pointer"><span class="n">${fitConfirmed}</span> <span class="l">Подтверждено</span></div>
-    <div class="summary-pill warn pill-filter" data-filter="fit:TENTATIVE" style="cursor:pointer"><span class="n">${fitTentative}</span> <span class="l">Предварительно</span></div>
-    <div class="summary-pill mut pill-filter" data-filter="fit:UNDETERMINED" style="cursor:pointer"><span class="n">${fitUndetermined}</span> <span class="l">Не определено</span></div>
+    <div class="summary-pill good pill-filter" data-filter="fit:CONFIRMED" style="cursor:pointer" title="S2 превосходит все альтернативные модели по AICc"><span class="n">${fitConfirmed}</span> <span class="l">S2 выигрывает</span></div>
+    <div class="summary-pill warn pill-filter" data-filter="fit:TENTATIVE" style="cursor:pointer" title="S2 сравнима с альтернативами (ΔAICc < 2)"><span class="n">${fitTentative}</span> <span class="l">S2 сравнима</span></div>
+    <div class="summary-pill bad pill-filter" data-filter="fit:REJECTED" style="cursor:pointer" title="S2 проигрывает альтернативной модели"><span class="n">${fitRejected}</span> <span class="l">S2 проигрывает</span></div>
+    <div class="summary-pill mut pill-filter" data-filter="fit:UNDETERMINED" style="cursor:pointer" title="Сравнение моделей не проводилось"><span class="n">${fitUndetermined}</span> <span class="l">Без сравнения</span></div>
+    <div class="summary-pill" style="cursor:default;background:rgba(125,211,168,.10);color:var(--good);border-color:rgba(125,211,168,.3);" title="${s2Present} из ${total} тестов имеют подгонку S2 (имеют значение D), независимо от того, является ли S2 лучшей моделью"><span class="n">${s2Present}</span> <span class="l">S2 подогнано (${s2Pct}%)</span></div>
     <div class="summary-pill good pill-filter" data-filter="regime:NATURAL" style="cursor:pointer"><span class="n">${natural}</span> <span class="l">Естественно</span></div>
     <div class="summary-pill bad pill-filter" data-filter="regime:EXTRACTION" style="cursor:pointer"><span class="n">${extraction}</span> <span class="l">Извлечение</span></div>
     <div class="summary-pill warn pill-filter" data-filter="regime:INTERVENTION" style="cursor:pointer"><span class="n">${intervention}</span> <span class="l">Вмешательство</span></div>
