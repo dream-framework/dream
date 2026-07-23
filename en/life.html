@@ -38,7 +38,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 /* LEFT: canvas + compact controls below */
 .lt-stage-card{background:var(--lt-panel);border:1px solid var(--lt-border);border-radius:10px;display:flex;flex-direction:column;overflow:hidden;min-height:0}
 .lt-stage{position:relative;flex:1;min-height:0;background:radial-gradient(circle at 50% 50%,#0e1320 0%,#060810 70%);overflow:hidden}
-#life3d{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+#life3d{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;background:#060810 !important}
 #life3d:active{cursor:grabbing}
 .lt-overlay{position:absolute;pointer-events:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);font-size:10.5px;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.7)}
 .lt-overlay.tl{top:10px;left:12px}
@@ -358,9 +358,9 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
 
   /* ============ THREE.JS SCENE ============ */
   const canvas = document.getElementById("life3d");
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:"high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:"high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
-  renderer.setClearColor(0x060810, 1);
+  renderer.setClearColor(0x060810, 0);
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x060810);
@@ -573,7 +573,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   wallMat0.dispose();
 
   // Life-spark particles — brighter, more visible
-  const SPARK_MAX = 1500;
+  const SPARK_MAX = 400;
   const sparkGeom = new THREE.BufferGeometry();
   const sparkPos = new Float32Array(SPARK_MAX*3);
   const sparkSeed = new Float32Array(SPARK_MAX);
@@ -605,8 +605,8 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
         p*=1.0+0.05*sin(uTime*2.5+aSeed);
         vec4 mv=modelViewMatrix*vec4(p,1.0);
         gl_Position=projectionMatrix*mv;
-        gl_PointSize=aSize*(1.8+uVisible*5.0)*(300.0/-mv.z);
-        vAlpha=uVisible*(0.4+0.6*(0.5+0.5*sin(uTime*3.5+aSeed*6.0)));
+        gl_PointSize=aSize*(1.2+uVisible*2.5)*(300.0/-mv.z);
+        vAlpha=uVisible*(0.2+0.3*(0.5+0.5*sin(uTime*3.5+aSeed*6.0)));
       }
     `,
     fragmentShader: `
@@ -614,11 +614,11 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
       void main(){
         vec2 d=gl_PointCoord-0.5; float r=length(d); if(r>0.5) discard;
         float core=smoothstep(0.5,0.0,r); float glow=smoothstep(0.5,0.15,r);
-        vec3 c=mix(uColor,vec3(1.0),core*0.5);
-        gl_FragColor=vec4(c,(core*0.9+glow*0.3)*vAlpha);
+        vec3 c=mix(uColor,vec3(1.0),core*0.3);
+        gl_FragColor=vec4(c,(core*0.5+glow*0.15)*vAlpha);
       }
     `,
-    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+    transparent:true, depthWrite:false
   });
   const sparks = new THREE.Points(sparkGeom, sparkMat);
   scene.add(sparks);
@@ -634,7 +634,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     dustPos[i*3+2]=r*Math.cos(phi)-1.0;
   }
   dustGeom.setAttribute("position", new THREE.BufferAttribute(dustPos,3));
-  const dustMat = new THREE.PointsMaterial({ color:0x7da7d0, size:0.022, transparent:true, opacity:0.4, depthWrite:false, blending:THREE.AdditiveBlending });
+  const dustMat = new THREE.PointsMaterial({ color:0x7da7d0, size:0.022, transparent:true, opacity:0.4, depthWrite:false });
   const dust = new THREE.Points(dustGeom, dustMat);
   scene.add(dust);
 
@@ -708,7 +708,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   function s2Retention(c){ const D=dEff(c); let r=Math.exp(-(D-1)*0.85); if(c>0.85) r+=(c-0.85)*1.6; return Math.max(0, Math.min(1.0, r)); }
   function foldDepth(c){ return c*(0.50+0.30*state.branch); }
   function branchCount(c,b){ return Math.round(c*b*240); }
-  function sparkCount(c){ return Math.round(c*c*SPARK_MAX); }
+  function sparkCount(c){ return Math.round(c*c*c*SPARK_MAX); }
   function projPerim(c){ const base=2*Math.PI; return base*(1+c*1.4+state.branch*c*1.8); }
 
   function updateReadout(){
@@ -771,7 +771,7 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     wallTexMat.uniforms.uTime.value=elapsed;
     wallTexMat.uniforms.uComplexity.value=state.complexity;
     sparkMat.uniforms.uTime.value=elapsed;
-    const sparkVis=Math.max(0, Math.min(1, (state.complexity-0.20)/0.55));
+    const sparkVis=Math.max(0, Math.min(1, (state.complexity-0.65)/0.30));
     sparkMat.uniforms.uVisible.value=sparkVis;
     const sparkN=Math.max(0, Math.min(SPARK_MAX, sparkCount(state.complexity)));
     sparkGeom.setDrawRange(0, sparkN);
