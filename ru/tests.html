@@ -992,7 +992,7 @@ function summaryPills(){
   const weak = TESTS.filter(t => t.verdict === "WEAK").length;
   const s2Pct = total > 0 ? Math.round(100 * s2Present / total) : 0;
   return `
-    <div class="summary-pill mut pill-filter" data-filter="all" style="cursor:pointer"><span class="n">${total}</span> <span class="l">Всего</span></div>
+    <div class="summary-pill mut pill-filter" data-filter="all" style="cursor:pointer"><span class="n">${total}</span> <span class="l">Все</span></div>
     <div class="summary-pill good pill-filter" data-filter="fit:CONFIRMED" style="cursor:pointer" title="S2 превосходит все альтернативные модели по AICc"><span class="n">${fitConfirmed}</span> <span class="l">S2 выигрывает</span></div>
     <div class="summary-pill warn pill-filter" data-filter="fit:TENTATIVE" style="cursor:pointer" title="S2 сравнима с альтернативами (ΔAICc < 2)"><span class="n">${fitTentative}</span> <span class="l">S2 сравнима</span></div>
     <div class="summary-pill bad pill-filter" data-filter="fit:REJECTED" style="cursor:pointer" title="S2 проигрывает альтернативной модели"><span class="n">${fitRejected}</span> <span class="l">S2 проигрывает</span></div>
