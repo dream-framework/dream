@@ -404,7 +404,7 @@ def load_existing_tests(html_path):
         entry_str = body[brace:j+1]
         # Extract key fields by regex (good enough for dedup)
         entry = {}
-        for field in ('id', 'name', 'url', 'verdict', 'date', 'D', 'r2'):
+        for field in ('id', 'name', 'url', 'verdict', 'date', 'D', 'r2', 'model_verdict', 'kind', 'domain', 'source'):
             fm = re.search(field + r'\s*:\s*"?(.*?)"?\s*[,}]', entry_str)
             if fm:
                 val = fm.group(1)
@@ -635,10 +635,132 @@ def update_existing_entry(html_path, entry_id, updates):
     if 'name' in updates:
         nm = updates['name'].replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
         new_entry = re.sub(r'name:".*?"', f'name:"{nm}"', new_entry, count=1)
+    if 'model_verdict' in updates:
+        mv = updates['model_verdict']
+        if re.search(r'model_verdict:', new_entry):
+            new_entry = re.sub(r'model_verdict:".*?"', f'model_verdict:"{mv}"', new_entry, count=1)
+        else:
+            new_entry = re.sub(r'(verdict:".*?",)', r'\1\n    model_verdict:"' + mv + '",', new_entry, count=1)
     html = html.replace(old_entry, new_entry, 1)
     with open(html_path, 'w') as f:
         f.write(html)
     print(f'    ✓ Updated entry {entry_id}: D={updates.get("D","?")}, verdict={updates.get("verdict","?")}')
+
+def retry_no_comparison_entries(existing_entries, groq_url=None):
+    """Retry entries with D but no model_verdict — re-download and fit with comparison."""
+    import numpy as np
+    from scipy.optimize import curve_fit
+    def s2_func(t, lam_q, D): return np.exp(-np.power(np.clip(t, 1e-10, None) / max(lam_q, 1e-10), max(D, 0.01)))
+    def power_law(t, lam_0, alpha): return np.exp(-np.power(np.clip(t, 1e-10, None) / max(lam_0, 1e-10), max(alpha, 0.01)))
+    def exp_func(t, tau): return np.exp(-np.clip(t, 1e-10, None) / max(tau, 1e-10))
+    def aic(n, rss, k):
+        if n - k - 1 <= 0 or rss <= 0: return 9999
+        return n * np.log(rss / n) + 2 * k + 2 * k * (k + 1) / (n - k - 1)
+    def acf_retention(vals, max_lag=None):
+        vals = np.array(vals, dtype=float); n = len(vals)
+        if n < 10: return None, None
+        vals = vals - vals.mean(); var = np.var(vals)
+        if var == 0: return None, None
+        max_lag = min(max_lag or n//2, n-1, 100)
+        R = [np.sum(vals[:n-k] * vals[k:]) / (n * var) for k in range(max_lag)]
+        return np.arange(max_lag), np.array(R)
+    def fit_cmp(t, R):
+        t = np.array(t, dtype=float); R = np.array(R, dtype=float)
+        if len(t) < 5: return None
+        t = t - t[0]
+        if R[0] > 0: R = R / R[0]
+        results = {}
+        try:
+            popt, _ = curve_fit(s2_func, t, R, p0=[t[len(t)//2], 0.5], maxfev=5000)
+            rss = np.sum((R - s2_func(t, *popt))**2)
+            results['s2'] = {'D': popt[1], 'aic': aic(len(t), rss, 2), 'rss': rss}
+        except: results['s2'] = None
+        try:
+            popt, _ = curve_fit(power_law, t, R, p0=[t[len(t)//2], 1.0], maxfev=5000)
+            rss = np.sum((R - power_law(t, *popt))**2)
+            results['power'] = {'aic': aic(len(t), rss, 2)}
+        except: results['power'] = None
+        try:
+            popt, _ = curve_fit(exp_func, t, R, p0=[t[len(t)//2]], maxfev=5000)
+            rss = np.sum((R - exp_func(t, *popt))**2)
+            results['exp'] = {'aic': aic(len(t), rss, 1)}
+        except: results['exp'] = None
+        aics = {k: v['aic'] for k, v in results.items() if v}
+        if not aics or not results.get('s2'): return None
+        best = min(aics, key=aics.get)
+        s2_aic = results['s2']['aic']
+        best_alt = min(v for k, v in aics.items() if k != 's2') if len(aics) > 1 else s2_aic
+        delta = s2_aic - best_alt if best != 's2' else 0
+        if best == 's2': verdict = 'S2_WINS' if delta < -2 else 'S2_TIES'
+        elif delta < 2: verdict = 'S2_TIES'
+        else: verdict = 'S2_LOSES'
+        r2 = 1 - results['s2']['rss'] / max(np.sum((R - R.mean())**2), 1e-10)
+        return {'D': results['s2']['D'], 'r2': r2, 'model_verdict': verdict, 'delta_aic': delta}
+    retried = resolved = 0
+    for ex in existing_entries:
+        if ex.get('model_verdict') or ex.get('D') is None: continue
+        url = ex.get('url', '')
+        if not url.startswith('http'): continue
+        if not any(x in url for x in ['fredgraph.csv', 'api.worldbank', 'coingecko', 'binance', 'open-meteo', 'earthquake.usgs.gov/earthquakes/feed']): continue
+        retried += 1
+        eid = ex.get('id', ''); name = ex.get('name', '?')
+        print(f'  -> Retrying: {name[:50]} ({eid})')
+        try:
+            vals = None
+            if 'fredgraph.csv' in url:
+                data = fetch_url(url, timeout=20)
+                if data:
+                    import csv as csvmod
+                    rows = list(csvmod.reader(data.decode('utf-8').splitlines()))
+                    vals = [float(r[1]) for r in rows[1:] if len(r) >= 2 and r[1] not in ('', '.')]
+            elif 'api.worldbank' in url:
+                data = fetch_url(url, timeout=20)
+                if data:
+                    d = json.loads(data)
+                    if len(d) > 1 and d[1]:
+                        vals = [x['value'] for x in d[1] if x['value'] is not None]
+                        vals.reverse()
+            elif 'coingecko' in url:
+                data = fetch_url(url, timeout=20)
+                if data: vals = [p[1] for p in json.loads(data).get('prices', [])]
+            elif 'binance' in url:
+                data = fetch_url(url, timeout=20)
+                if data: vals = [float(k[4]) for k in json.loads(data)]
+            elif 'open-meteo' in url:
+                data = fetch_url(url, timeout=20)
+                if data:
+                    d = json.loads(data)
+                    for var in ['temperature_2m_mean', 'wind_speed_10m_max', 'precipitation_sum']:
+                        if var in d.get('daily', {}):
+                            vals = [v for v in d['daily'][var] if v is not None]; break
+            elif 'earthquake.usgs.gov/earthquakes/feed' in url:
+                data = fetch_url(url, timeout=20)
+                if data:
+                    import csv as csvmod
+                    reader = csvmod.DictReader(data.decode('utf-8').splitlines())
+                    mags = [float(r['mag']) for r in reader if r.get('mag') and r['mag'] != '']
+                    if len(mags) > 20:
+                        n = len(mags)
+                        thresholds = np.linspace(max(mags), min(mags), min(50, n))
+                        R = np.array([np.sum(np.array(mags) >= t) / n for t in thresholds])
+                        t_arr = np.arange(len(thresholds))
+                        result = fit_cmp(t_arr, R)
+                        if result:
+                            update_existing_entry('en/tests.html', eid, result)
+                            update_existing_entry('ru/tests.html', eid, result)
+                            resolved += 1
+                        continue
+            if not vals or len(vals) < 10: continue
+            t, R = acf_retention(vals)
+            if t is None: continue
+            result = fit_cmp(t, R)
+            if result:
+                update_existing_entry('en/tests.html', eid, result)
+                update_existing_entry('ru/tests.html', eid, result)
+                resolved += 1
+        except Exception as e:
+            print(f'    Failed: {e}')
+    return retried, resolved
 
 # ═══════════════════════════════════════════════════════════════════════
 # MAIN
@@ -821,6 +943,14 @@ def main():
         print(f'  ✓ Resolved {resolved_count} PENDING entries')
     else:
         print(f'  (no PENDING entries could be resolved this run)')
+
+    # 10b2. RETRY no-comparison entries (have D but no model_verdict)
+    print('\n🔄 Retrying no-comparison entries (have D, need AICc comparison)...')
+    retried, resolved_cmp = retry_no_comparison_entries(existing_en, groq_url if groq_url else None)
+    if retried:
+        print(f'  ✓ Retried {retried} entries, resolved {resolved_cmp} with model comparison')
+    else:
+        print(f'  (no no-comparison entries with downloadable URLs found)')
 
     # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):
