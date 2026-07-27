@@ -180,7 +180,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "26 Jul 2026 02:14 EST";
+const LAST_REFRESH = "27 Jul 2026 02:42 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -529,8 +529,9 @@ const TESTS = [
     id:"usgs-quakes",
     name:"USGS Землетрясения (30д)",
     domain:"live",
-    D:5.0, r2:1.0,
-    verdict:"WEAK", kind:"inconclusive",
+    D:-44.8613, r2:-0.8065,
+    verdict:"WEAK",
+    model_verdict:"S2_LOSES", kind:"inconclusive",
     narrative:"Часовые счётчики землетрясений подгоняются S2 с R²≈1.0, но D упёрся в верхнюю границу параметра (5.0) — закон совместим, но показатель не ограничен. Слабый сигнал, не подтверждение.",
     image:null,
     source:"s2_scout_results.json"
@@ -991,6 +992,14 @@ const TESTS = [
     date:"2026-07-26",
     url:"https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
   }
+  ,{id:"auto-2026-07-27-fred-GDP",name:"FRED ВВП (АСФ сохранение)",domain:"financial",D:1.1667,r2:0.9969,verdict:"EXTRACTION",narrative:"D=1.167, R²=0.9969. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-54.67).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP",image:null}
+  ,{id:"auto-2026-07-27-fred-CPIAUCSL",name:"FRED ИПЦ (АСФ сохранение)",domain:"financial",D:1.2315,r2:0.9973,verdict:"EXTRACTION",narrative:"D=1.232, R²=0.9973. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-220.41).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",image:null}
+  ,{id:"auto-2026-07-27-fred-UNRATE",name:"FRED Безработица (АСФ сохранение)",domain:"financial",D:1.1922,r2:0.8655,verdict:"EXTRACTION",narrative:"D=1.192, R²=0.8655. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-2.57).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",image:null}
+  ,{id:"auto-2026-07-27-fred-FEDFUNDS",name:"FRED Ставка ФРС (АСФ сохранение)",domain:"financial",D:1.4975,r2:0.9247,verdict:"EXTRACTION",narrative:"D=1.498, R²=0.9247. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-10.28).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS",image:null}
+  ,{id:"auto-2026-07-27-fred-M2SL",name:"FRED M2 (АСФ сохранение)",domain:"financial",D:1.2021,r2:0.9990,verdict:"EXTRACTION",narrative:"D=1.202, R²=0.9990. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-360.94).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL",image:null}
+  ,{id:"auto-2026-07-27-fred-DEXUSEU",name:"FRED USD/EUR (АСФ сохранение)",domain:"financial",D:1.1365,r2:0.9996,verdict:"EXTRACTION",narrative:"D=1.137, R²=0.9996. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-381.5).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",image:null}
+  ,{id:"auto-2026-07-27-fred-SP500",name:"FRED S&P 500 (АСФ сохранение)",domain:"financial",D:1.0489,r2:0.9986,verdict:"EXTRACTION",narrative:"D=1.049, R²=0.9986. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-33.66).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",image:null}
+  ,{id:"auto-2026-07-27-wb-gdp",name:"World Bank: ВВП (АСФ сохранение)",domain:"financial",D:1.1175,r2:0.9980,verdict:"EXTRACTION",narrative:"D=1.117, R²=0.9980. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-8.2).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",image:null}
 ];
 
 /* ---- вспомогательные функции ---- */
