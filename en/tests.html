@@ -1519,24 +1519,28 @@ function computeMetaS2(){
   const medianD = Ds[n >> 1];
   const pctNatural = Ds.filter(d => d < 1).length;
   const pctExtraction = Ds.filter(d => d > 1).length;
+  const totalTests = TESTS.length;
+  const compared = TESTS.filter(t => t.model_verdict === 'S2_WINS' || t.model_verdict === 'S2_TIES' || t.model_verdict === 'S2_LOSES').length;
+  const noComp = n - compared;
   
   // Update the stats display
   const statsEl = document.getElementById('metaS2Stats');
   statsEl.innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px 12px;margin-bottom:6px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:4px 10px;margin-bottom:6px">
       <div><span style="color:var(--muted-2)">D_meta</span> <b style="color:var(--accent);font-family:monospace">${D_fit.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">λ_q</span> <b style="color:var(--accent);font-family:monospace">${lam_fit.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">R²</span> <b style="color:var(--accent);font-family:monospace">${r2_direct.toFixed(4)}</b></div>
-      <div><span style="color:var(--muted-2)">n</span> <b style="font-family:monospace">${n}</b></div>
+      <div><span style="color:var(--muted-2)">n (Meta-S2)</span> <b style="font-family:monospace">${n}</b></div>
       <div><span style="color:var(--muted-2)">mean D</span> <b style="font-family:monospace">${meanD.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">median D</span> <b style="font-family:monospace">${medianD.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">D&lt;1</span> <b style="color:var(--good);font-family:monospace">${pctNatural} (${(100*pctNatural/n).toFixed(0)}%)</b></div>
       <div><span style="color:var(--muted-2)">D&gt;1</span> <b style="color:var(--bad);font-family:monospace">${pctExtraction} (${(100*pctExtraction/n).toFixed(0)}%)</b></div>
     </div>
-    <div style="font-size:11px;color:var(--muted-2)">
-      Direct-d Weibull fit: Ŝ(d) = exp[−(d/λ_q)<sup>D_meta</sup>].
-      Linearized: D=${D_meta.toFixed(3)}, λ=${lam_q.toFixed(3)}, R²=${r2.toFixed(4)}.
+    <div style="font-size:10px;color:var(--muted-2);margin-top:4px;line-height:1.4">
+      <b>Eligibility:</b> ${totalTests} registered → ${n} with valid D → ${compared} model-compared (${noComp} awaiting comparison).<br>
+      Direct-d Weibull fit: Ŝ(d) = exp[−(d/λ_q)<sup>D_meta</sup>]. Linearized: D=${D_meta.toFixed(3)}, λ=${lam_q.toFixed(3)}, R²=${r2.toFixed(4)}.
       ${n > 60 ? 'KS p > 0.05 (cannot reject Weibull).' : 'Sample too small for KS test.'}
+      <br><span style="color:var(--accent-2)">⚠ Dependent systems (same crypto market, same weather provider) inflate n. Family-level bootstrap CI needed — see <a href="articles/meta-s2.html" style="color:var(--accent)">full analysis</a>.</span>
     </div>
   `;
   
