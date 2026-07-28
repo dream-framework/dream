@@ -62,49 +62,58 @@ R(λ) = exp[−(λ/λ_q)<sup>D_eff</sup>]
 
 <h3>Finding 1: The distribution of D values follows S2</h3>
 
-<p>The complementary cumulative distribution of D_eff — that is, the fraction of systems with D ≥ d, as a function of d — was fitted to the S2 functional form:</p>
+<p>The complementary cumulative distribution (survival function) of D_eff — that is, the fraction of systems with D ≥ d — was fitted <strong>directly against the actual D values</strong> to the S2 / Weibull functional form:</p>
 
 <div class="eq" style="font-family:monospace;background:rgba(142,197,232,.08);padding:1rem;border-radius:8px;text-align:center;margin:1rem 0">
-P(D ≥ d) = exp[−(d / λ_q<sup>meta</sup>)<sup>D_meta</sup>]
+Ŝ(d) = P(D ≥ d) = exp[−(d / λ_q<sup>meta</sup>)<sup>D_meta</sup>]
 </div>
 
-<p>Result:</p>
-<ul>
-<li><strong>D_meta = 1.611</strong></li>
-<li><strong>λ_q<sup>meta</sup> = 14.36</strong></li>
-<li><strong>R² = 0.978</strong></li>
-</ul>
+<p>Three fits were performed:</p>
 
-<p>This means: the S2 retention law, which describes how individual systems lose information with probe scale, <em>also</em> describes how the collection of fitted exponents is distributed across systems. The ensemble of S2 parameters itself follows S2.</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin:1rem 0">
+<tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:6px">Method</th><th style="text-align:right;padding:6px">D_meta</th><th style="text-align:right;padding:6px">λ_q</th><th style="text-align:right;padding:6px">R² / p</th></tr>
+<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Direct-d least squares (all 74)</td><td style="text-align:right;font-family:monospace">1.908</td><td style="text-align:right;font-family:monospace">1.414</td><td style="text-align:right;font-family:monospace">R²=0.987</td></tr>
+<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td style="text-align:right;font-family:monospace">1.577</td><td style="text-align:right;font-family:monospace">1.548</td><td style="text-align:right;font-family:monospace">R²=0.960</td></tr>
+<tr><td style="padding:6px">Weibull MLE (all 74)</td><td style="text-align:right;font-family:monospace">1.402</td><td style="text-align:right;font-family:monospace">1.535</td><td style="text-align:right;font-family:monospace">KS p=0.084</td></tr>
+</table>
+
+<p>All three methods agree that the distribution of D_eff is well-described by a Weibull (stretched-exponential) survival function with shape parameter D_meta ≈ 1.4–1.9 and scale λ_q ≈ 1.4–1.5 <strong>in D units</strong>. The Kolmogorov-Smirnov test cannot reject the Weibull hypothesis (p = 0.084 > 0.05).</p>
 
 <p>For comparison, a power-law fit to the same distribution gave P(D ≥ d) ~ d<sup>−1.015</sup> with R² = 0.755 — a weaker fit than S2.</p>
 
-<h3>Finding 2: The distribution shows evidence of bimodality</h3>
+<h3>Finding 2: Bimodality analysis</h3>
 
-<p>Three tests were applied to check whether the distribution of D values is unimodal or multimodal:</p>
+<p><strong>Censoring:</strong> Three values hit the optimizer boundary at D = 5.0. These are treated as right-censored and excluded from the bimodality analysis, leaving n = 71 uncensored observations.</p>
 
-<table style="width:100%;border-collapse:collapse;font-size:14px;margin:1rem 0">
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin:1rem 0">
 <tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:6px">Test</th><th style="text-align:right;padding:6px">Result</th><th style="text-align:right;padding:6px">Verdict</th></tr>
 <tr style="border-bottom:1px solid var(--border-2)">
-<td style="padding:6px">Bimodality coefficient</td>
-<td style="text-align:right;font-family:monospace">0.697</td>
-<td style="text-align:right">BC &gt; 0.555 → bimodal</td>
-</tr>
-<tr style="border-bottom:1px solid var(--border-2)">
-<td style="padding:6px">GMM BIC (1 vs 2 comp)</td>
-<td style="text-align:right;font-family:monospace">ΔBIC = −38.1</td>
+<td style="padding:6px">GMM ΔBIC = BIC₂ − BIC₁ (uncensored)</td>
+<td style="text-align:right;font-family:monospace">−12.33</td>
 <td style="text-align:right">2-comp preferred</td>
 </tr>
-<tr>
-<td style="padding:6px">GMM component means</td>
-<td style="text-align:right;font-family:monospace">1.12, 4.47</td>
+<tr style="border-bottom:1px solid var(--border-2)">
+<td style="padding:6px">GMM component means (uncensored)</td>
+<td style="text-align:right;font-family:monospace">1.04, 2.92</td>
 <td style="text-align:right">Two clusters</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-2)">
+<td style="padding:6px">Silverman's bandwidth test (bootstrap, 200 reps)</td>
+<td style="text-align:right;font-family:monospace">p = 0.46</td>
+<td style="text-align:right">Cannot reject unimodality</td>
+</tr>
+<tr>
+<td style="padding:6px">Weibull KS test (uncensored)</td>
+<td style="text-align:right;font-family:monospace">p = 0.30</td>
+<td style="text-align:right">Cannot reject Weibull</td>
 </tr>
 </table>
 
-<p>The Gaussian Mixture Model identifies two clusters: a large component centered at D ≈ 1.12 (91.9% of systems) and a smaller component at D ≈ 4.47 (8.1% of systems). The gap between these clusters is statistically significant (ΔBIC = −38.1, strongly favoring 2 components).</p>
+<p><strong>The bimodality evidence is mixed.</strong> The GMM prefers 2 components (ΔBIC = −12.33, where ΔBIC = BIC₂ − BIC₁; negative means 2-component is preferred). The uncensored cluster means are D ≈ 1.04 (89.6%) and D ≈ 2.92 (10.4%).</p>
 
-<p>Note: The bimodality is <em>not</em> simply at the D = 1 threshold. The two clusters are "typical systems" (D ≈ 1.1) and "extreme extractors" (D ≈ 4.5), not "natural" vs "extraction." This is a different and perhaps more interesting structure than initially expected.</p>
+<p>However, <strong>Silverman's bootstrap test cannot reject unimodality</strong> (p = 0.46). This means the apparent bimodality may be a small-sample artifact — with 71 points, the second mode is not statistically robust. The GMM result should be treated as suggestive, not confirmed.</p>
+
+<p>The uncensored Weibull MLE gives shape = 1.615, scale = 1.385, KS p = 0.30 — a good fit to a single unimodal Weibull distribution.</p>
 
 <h3>Finding 3: Selection bias</h3>
 
@@ -134,12 +143,16 @@ P(D ≥ d) = exp[−(d / λ_q<sup>meta</sup>)<sup>D_meta</sup>]
 <p>The strongest empirical finding is not philosophical — it is mathematical:</p>
 
 <blockquote style="border-left:3px solid var(--accent);margin:1rem 0;padding:0.5rem 1.5rem;font-style:italic;color:var(--accent)">
-S2 describes individual system retention. The distribution of S2 exponents across systems also follows S2.
+The S2 retention law describes individual system retention. The distribution of fitted S2 exponents across 74 systems is itself well-described by a Weibull (stretched-exponential) distribution — the same functional family as S2.
 </blockquote>
 
-<p>This recursive property — S2 describing the distribution of S2 parameters — is genuinely unusual. If it persists as additional systems are measured, it may indicate that S2 is a <strong>fixed point under aggregation</strong>: collections of systems possess emergent retention dynamics governed by the same functional form as their constituents.</p>
+<p>This <em>distributional recurrence</em> — S2 describing the distribution of S2 parameters — is a weaker claim than mathematical closure under aggregation. It says: the exponents D_i are Weibull-distributed. It does <strong>not</strong> prove that the composite retention R_ensemble(λ) = A({R_i(λ)}) is itself S2. That stronger closure claim would require defining the aggregation operator A and proving that A maps S2-family functions to S2-family functions.</p>
 
-<p>This would be analogous to how the normal distribution is its own conjugate prior in Bayesian inference, or how stable distributions are closed under convolution. S2 would be closed under a different operation — the operation of "collecting independent retention processes and asking how their exponents are distributed."</p>
+<p>The current analysis examines D_i ~ Weibull. This is valuable but conceptually distinct from proving closure of retention processes under aggregation. The distinction is:</p>
+<ul>
+<li><strong>Distributional recurrence</strong> (shown): The <em>parameters</em> of individual S2 fits are Weibull-distributed.</li>
+<li><strong>Closure under aggregation</strong> (not shown): The <em>composite retention</em> of many S2 systems is itself S2.</li>
+</ul>
 
 <h3>What this would mean</h3>
 
@@ -154,8 +167,9 @@ S2 describes individual system retention. The distribution of S2 exponents acros
 
 <ul>
 <li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, the majority of measured systems have D > 1," but we cannot generalize to the universe without a random sample.</li>
-<li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided yet.</li>
-<li><strong>"D = 1 is a phase transition."</strong> The bimodality tests show two clusters, but they are at D ≈ 1.1 and D ≈ 4.5, not at D = 1. The threshold D = 1 separates natural from extraction <em>within</em> individual systems, but the meta-distribution does not clearly show a gap there.</li>
+<li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided.</li>
+<li><strong>"S2 is closed under aggregation."</strong> The current analysis shows <em>distributional recurrence</em> (the parameters are Weibull-distributed), not mathematical closure (the composite retention is S2). These are conceptually distinct. Closure would require defining an aggregation operator and proving it maps S2 to S2.</li>
+<li><strong>"The distribution is bimodal."</strong> Silverman's test cannot reject unimodality (p = 0.46). The GMM's 2-component preference (ΔBIC = −12.3) is suggestive but not conclusive. With n = 71, the second mode may be a small-sample artifact.</li>
 </ul>
 
 <h3>How to test it</h3>
@@ -163,15 +177,15 @@ S2 describes individual system retention. The distribution of S2 exponents acros
 <p>The hypothesis makes a testable prediction:</p>
 
 <blockquote style="border-left:3px solid var(--good);margin:1rem 0;padding:0.5rem 1.5rem">
-As the test registry grows beyond 74 systems, the meta-S2 fit should remain stable (D_meta ≈ 1.6, R² > 0.95) if the recursive property is real. If D_meta drifts significantly or R² drops below 0.9 as more systems are added, the recursive property was an artifact of the current sample.
+As the test registry grows beyond 74 systems, the Weibull fit to the distribution of D values should remain stable (D_meta ≈ 1.4–1.9, KS p > 0.05) if the distributional recurrence is real. If D_meta drifts significantly or the KS test rejects Weibull as more systems are added, the current result was an artifact of the sample.
 </blockquote>
 
 <p>Specifically:</p>
 <ul>
-<li>If the next 100 systems (doubling the registry) still fit S2 with D_meta ≈ 1.5–1.7, the hypothesis is strengthened.</li>
+<li>If the next 100 systems (doubling the registry) still fit Weibull with D_meta ≈ 1.4–1.9, the distributional recurrence is strengthened.</li>
 <li>If the fit degrades, the current result was selection bias.</li>
-<li>If the bimodality persists with the same cluster locations, the two-class structure is real.</li>
-<li>If the bimodality disappears, it was a small-sample artifact.</li>
+<li>If Silverman's test begins to reject unimodality as n grows, the two-class structure is real. If it never does, the GMM result was a small-sample artifact.</li>
+<li>If the D = 5.0 boundary values disappear when the optimizer ceiling is raised, the high-D tail was artifact.</li>
 </ul>
 
 <hr>
@@ -185,22 +199,30 @@ As the test registry grows beyond 74 systems, the meta-S2 fit should remain stab
 
 <p><strong>Data:</strong> 74 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-07-28. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
 
-<p><strong>Meta-fit:</strong> The 74 D values were sorted. The complementary CDF P(D ≥ d) was computed at 50 evenly-spaced thresholds d ∈ [0.1, 5.0]. This CDF was then fitted to the S2 form P(D ≥ d) = exp[−(t/λ_q)^D] where t is the rank index (1 to 50).</p>
+<p><strong>Meta-fit (corrected):</strong> The 74 D values were sorted ascending: D_(1) ≤ D_(2) ≤ ... ≤ D_(74). The empirical survival function was computed as Ŝ(D_(i)) = (n − i) / n. Three fits were performed:</p>
+<ol>
+<li><strong>Direct-d least squares:</strong> Ŝ(d) = exp[−(d/λ_q)^D] fitted directly against actual D values using scipy.optimize.curve_fit.</li>
+<li><strong>Linearized regression:</strong> ln[−ln(Ŝ(d))] = D_meta · ln(d) − D_meta · ln(λ_q), fitted as a linear regression on the log-log scale.</li>
+<li><strong>Weibull MLE:</strong> Maximum likelihood estimation of Weibull(shape=D_meta, scale=λ_q) using scipy.stats.weibull_min.fit, with loc fixed at 0. This is the statistically preferred method.</li>
+</ol>
+
+<p><strong>Censoring:</strong> Three values hit the optimizer boundary at D = 5.0 (the upper fitting limit). These are treated as right-censored and excluded from the uncensored analysis (n = 71).</p>
 
 <p><strong>Bimodality tests:</strong></p>
 <ul>
-<li>Bimodality coefficient: BC = (skewness² + 1) / kurtosis. Threshold for bimodality: BC > 0.555.</li>
-<li>Gaussian Mixture Model: 1-component vs 2-component, compared via BIC and AIC. Lower BIC preferred.</li>
+<li>Gaussian Mixture Model: 1-component vs 2-component, compared via BIC. ΔBIC = BIC₂ − BIC₁ (negative means 2-component preferred).</li>
+<li>Silverman's bandwidth test: bootstrap with 200 resamples at the critical bandwidth.</li>
+<li>Kolmogorov-Smirnov test against the fitted Weibull distribution.</li>
 </ul>
 
 <p><strong>Software:</strong> Python 3.12, scipy 1.x, scikit-learn (GaussianMixture).</p>
 
 <p><strong>Limitations:</strong></p>
 <ul>
-<li>Hartigan's dip test was not available in the installed scipy version; the bimodality coefficient was used as a substitute. A proper dip test should be run.</li>
-<li>The meta-fit uses rank as the independent variable, not D itself. A direct fit to the empirical CDF would be more rigorous.</li>
-<li>The 74 systems are not independent — some share datasets (e.g., multiple FRED series from the same economic system).</li>
-<li>Several D values hit the fitting boundary at D = 5.0 (the upper limit of the optimizer), which may distort the tail of the distribution.</li>
+<li>The 74 systems are not independent — some share datasets (e.g., multiple FRED series from the same economic system). Bootstrap by dataset family, not by individual series, is needed for robust inference.</li>
+<li>Three D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
+<li>The Weibull MLE (shape=1.40) and direct-d fit (D_meta=1.91) disagree by ~0.5, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
+<li>Silverman's test cannot reject unimodality (p=0.46), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
 </ul>
 
 </div>
