@@ -1,231 +1,472 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Мета-S2: Рекурсивное удержание · DREAM</title>
-<link rel="stylesheet" href="../css/global.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мета-S2: Рекурсивное удержание · DREAM</title>
+  <meta name="description" content="DREAM Мета-S2: эмпирический анализ того, как показатель удержания S2 сам распределён по Вейбуллу среди 74 измеренных систем — рекурсивная спекулятивная статистическая гипотеза." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { displayAlign:'center', displayIndent:'0' },
+    svg:   { displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    /* per-page overrides for article pages */
+    body.is-article .site-header{
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0;
+    }
+
+    /* Article body wrapper — narrower than the default container for readable line length */
+    .article-wrap{
+      max-width: 820px;
+      margin: 2rem auto 3rem;
+    }
+    .article-wrap > .card{ padding: 2rem; }
+    .article-wrap h1{ margin: 0 0 .4rem; font-size: 1.9rem; line-height: 1.2; }
+    .article-wrap h2{ margin-top: 0; font-size: 1.35rem; }
+    .article-wrap h3{ margin: 1.2rem 0 .4rem; font-size: 1.05rem; }
+    .article-wrap h4{ margin: 1rem 0 .3rem; font-size: .92rem; color: var(--muted); }
+    .article-wrap hr{ margin: 0; border: 0; }
+    .article-wrap p{ margin: .6rem 0; }
+
+    /* Equation block — vertical breathing room around MathJax display math */
+    .eq{ margin: 1.1rem 0; text-align: center; }
+
+    /* Data tables — dark theme consistent with the global palette */
+    table.data-table{
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin: 1rem 0;
+      background: rgba(15,23,42,.35);
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    table.data-table th,
+    table.data-table td{
+      padding: .5rem .7rem;
+      border-bottom: 1px solid var(--border-2);
+      text-align: left;
+      vertical-align: top;
+    }
+    table.data-table th{
+      background: rgba(23,32,51,.6);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: .72rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    table.data-table td.num,
+    table.data-table th.num{ text-align: right; font-family: ui-monospace, "SF Mono", Consolas, monospace; white-space: nowrap; }
+    table.data-table td.right,
+    table.data-table th.right{ text-align: right; }
+    table.data-table tr:last-child td{ border-bottom: 0; }
+    table.data-table tr:hover td{ background: rgba(142,197,232,.05); }
+    table.data-table.compact{ font-size: .72rem; }
+    table.data-table.compact th,
+    table.data-table.compact td{ padding: .38rem .5rem; }
+
+    /* Callout — highlighted blockquote built on the global blockquote base */
+    blockquote.callout{
+      margin: 1rem 0;
+      padding: .8rem 1.25rem;
+      border-left-width: 4px;
+      border-radius: 0 12px 12px 0;
+      font-size: .92rem;
+      line-height: 1.65;
+    }
+    blockquote.callout.good{ border-left-color: var(--good); background: rgba(125,211,168,.07); }
+    blockquote.callout.warn{ border-left-color: var(--accent-2); background: rgba(240,200,120,.07); }
+    blockquote.callout.emph{ font-style: italic; color: var(--accent); }
+
+    /* Speculative notice — gold-tinted lead-in box for hypothesis sections */
+    .speculative-note{
+      border-left: 3px solid var(--accent-2);
+      background: rgba(240,200,120,.07);
+      padding: .8rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 12px 12px 0;
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    .speculative-note strong{ color: var(--accent-2); }
+
+    /* Method details body */
+    details.exp > .method-body{ padding-top: 1rem; font-size: .82rem; line-height: 1.65; }
+    details.exp > .method-body p{ margin: .6rem 0; }
+    details.exp > .method-body ul,
+    details.exp > .method-body ol{ margin: .4rem 0 .6rem 1.4rem; }
+
+    /* Footer note inside the article */
+    .article-footnote{
+      color: var(--muted-2);
+      font-size: .78rem;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+    .article-footnote a{ color: var(--accent); }
+
+    /* Keep MathJax display math comfortable inside cards */
+    .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+  </style>
 </head>
-<body data-lang="ru">
+<body data-lang="ru" class="is-article">
 
-<div id="fx" aria-hidden="true"><canvas id="mb"></canvas></div>
+  <!-- ===== Fractal backdrop ===== -->
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
 
-<header class="site-header">
-  <div class="brand"><span class="dot" aria-hidden="true"></span><a href="../index.html">D.R.E.A.M</a></div>
-  <nav class="nav" aria-label="Primary">
-    <a class="nav-link" href="../index.html">Главная</a>
-    <a class="nav-link" href="../retention.html">Удержание</a>
-    <a class="nav-link" href="../math.html">Математика</a>
-    <a class="nav-link" href="../kernel.html">Ядро</a>
-    <a class="nav-link" href="../tests.html">Тесты</a>
-    <a class="nav-link" href="../articles.html">Статьи</a>
-    <a class="nav-link active" href="meta-s2.html">Meta-S2</a>
-  </nav>
-  <div class="controls">
-    <div class="lang">
-      <a class="lang-link on" href="../ru/articles/meta-s2.html" title="Русский"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon"></a>
-      <a class="lang-link" href="../en/articles/meta-s2.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon"></a>
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
     </div>
-  </div>
-</header>
+    <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+      <a class="nav-link" href="../index.html">Главная</a>
+      <a class="nav-link" href="../case.html">Сила D.R.E.A.M</a>
+      <a class="nav-link" href="../retention.html">Принцип Сохранения</a>
+      <a class="nav-link" href="../axioms.html">Аксиомы</a>
+      <a class="nav-link" href="../theorems.html">Теоремы</a>
+      <a class="nav-link" href="../math.html">Матмодель</a>
+      <a class="nav-link" href="../kernel.html">Проекция</a>
+      <a class="nav-link" href="../topology.html">Топология</a>
+      <a class="nav-link" href="../spectrum.html">Фрактальность</a>
+      <a class="nav-link foundation" href="../predictions.html">Предсказания</a>
+      <a class="nav-link" href="../falsification.html">Фальсификация</a>
+      <a class="nav-link" href="../tests.html">Тесты</a>
+      <a class="nav-link" href="../faq.html">Вопрос-Ответ</a>
+      <a class="nav-link" href="../about.html">Оценка ИИ</a>
+      <a class="nav-link active" href="../articles.html">Статьи</a></div>
 
-<main class="container">
-<div class="card" style="max-width:820px;margin:2rem auto;padding:2rem">
+      <div class="nav-more">
+      <button class="nav-more-toggle" type="button">Ещё <span class="caret">▼</span></button>
+      <div class="nav-more-menu">
+        <a class="nav-link" href="../time.html">Время</a>
+        <a class="nav-link" href="../memory.html">Память</a>
+        <a class="nav-link" href="../../npa-calculator.html">NPA Калькулятор</a>
+        <a class="nav-link" href="../../intervention-simulator.html">Симулятор Вмешательства</a>
+      </div>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержание">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Мат</span>
+        </label>
+        <label class="switch" title="Показывать интерпретационные разделы">
+          <input type="checkbox" id="specToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Интер</span>
+        </label>
+      </div>
+      <div class="lang">
+        <a class="lang-link on" href="../../ru/articles/meta-s2.html" title="Русский"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon"></a>
+        <a class="lang-link" href="../../en/articles/meta-s2.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon"></a>
+      </div>
+    </div>
+  </header>
 
-<h1>Meta-S2: Recursive Retention</h1>
-<p class="kicker">Спекулятивно · Статистическое наблюдение + гипотеза</p>
+  <!-- ===== Main ===== -->
+  <main class="container">
+    <div class="article-wrap">
 
-<hr>
+      <!-- ===== Title card ===== -->
+      <div class="card">
+        <p class="kicker">Спекулятивно · Статистическое наблюдение + гипотеза</p>
+        <h1>Meta-S2: Recursive Retention</h1>
+      </div>
 
-<h2>Эмпирическое наблюдение</h2>
+      <hr>
 
-<p>Across the current dataset of <strong>74 measured systems</strong> — spanning cognitive decay, financial markets, cosmological structure, quantum decoherence, environmental time series, and others — each system was fitted individually to the S2 retention law:</p>
+      <!-- ===== Empirical Observation ===== -->
+      <div class="card">
+        <h2>Эмпирическое наблюдение</h2>
 
-<div class="eq" style="font-family:monospace;background:rgba(142,197,232,.08);padding:1rem;border-radius:8px;text-align:center;margin:1rem 0">
-R(λ) = exp[−(λ/λ_q)<sup>D_eff</sup>]
-</div>
+        <p>Across the current dataset of <strong>74 measured systems</strong> — spanning cognitive decay, financial markets, cosmological structure, quantum decoherence, environmental time series, and others — each system was fitted individually to the S2 retention law:</p>
 
-<p>This produced 74 independent estimates of D_eff. The <em>distribution</em> of those D_eff values was then analyzed.</p>
+        <div class="eq">
+        $$R(\lambda) = \exp\!\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\mathrm{eff}}}\right]$$
+        </div>
 
-<h3>Базовая статистика</h3>
-<table style="width:100%;border-collapse:collapse;font-size:14px;margin:1rem 0">
-<tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:6px">Statistic</th><th style="text-align:right;padding:6px">Value</th></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Systems measured (n)</td><td style="text-align:right;font-family:monospace">74</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Mean D_eff</td><td style="text-align:right;font-family:monospace">1.389</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Median D_eff</td><td style="text-align:right;font-family:monospace">1.208</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Geometric mean</td><td style="text-align:right;font-family:monospace">1.056</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Std dev</td><td style="text-align:right;font-family:monospace">1.087</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">Range</td><td style="text-align:right;font-family:monospace">[0.12, 5.00]</td></tr>
-<tr style="border-bottom:1px solid var(--border-2)"><td style="padding:6px">D &lt; 1 (natural)</td><td style="text-align:right;font-family:monospace">26 (35.1%)</td></tr>
-<tr><td style="padding:6px">D &gt; 1 (extraction)</td><td style="text-align:right;font-family:monospace">48 (64.9%)</td></tr>
-</table>
+        <p>This produced 74 independent estimates of D_eff. The <em>distribution</em> of those D_eff values was then analyzed.</p>
 
-<h3>Находка 1: Распределение D следует S2</h3>
+        <h3>Базовая статистика</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Statistic</th><th class="num">Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Systems measured (n)</td><td class="num">74</td></tr>
+            <tr><td>Mean D_eff</td><td class="num">1.389</td></tr>
+            <tr><td>Median D_eff</td><td class="num">1.208</td></tr>
+            <tr><td>Geometric mean</td><td class="num">1.056</td></tr>
+            <tr><td>Std dev</td><td class="num">1.087</td></tr>
+            <tr><td>Range</td><td class="num">[0.12, 5.00]</td></tr>
+            <tr><td>D &lt; 1 (natural)</td><td class="num">26 (35.1%)</td></tr>
+            <tr><td>D &gt; 1 (extraction)</td><td class="num">48 (64.9%)</td></tr>
+          </tbody>
+        </table>
 
-<p>The complementary cumulative distribution of D_eff — that is, the fraction of systems with D ≥ d, as a function of d — was fitted to the S2 functional form:</p>
+        <h3>Находка 1: Распределение D следует S2</h3>
 
-<div class="eq" style="font-family:monospace;background:rgba(142,197,232,.08);padding:1rem;border-radius:8px;text-align:center;margin:1rem 0">
-P(D ≥ d) = exp[−(d / λ_q<sup>meta</sup>)<sup>D_meta</sup>]
-</div>
+        <p>The complementary cumulative distribution of D_eff — that is, the fraction of systems with D ≥ d, as a function of d — was fitted to the S2 functional form:</p>
 
-<p>Result:</p>
-<ul>
-<li><strong>D_meta = 1.611</strong></li>
-<li><strong>λ_q<sup>meta</sup> = 14.36</strong></li>
-<li><strong>R² = 0.978</strong></li>
-</ul>
+        <div class="eq">
+        $$P(D \ge d) = \exp\!\left[-\left(\frac{d}{\lambda_q^{\mathrm{meta}}}\right)^{D_{\mathrm{meta}}}\right]$$
+        </div>
 
-<p>This means: the S2 retention law, which describes how individual systems lose information with probe scale, <em>also</em> describes how the collection of fitted exponents is distributed across systems. The ensemble of S2 parameters itself follows S2.</p>
+        <p>Result:</p>
+        <ul>
+          <li><strong>D_meta = 1.611</strong></li>
+          <li><strong>λ_q<sup>meta</sup> = 14.36</strong></li>
+          <li><strong>R² = 0.978</strong></li>
+        </ul>
 
-<p>For comparison, a power-law fit to the same distribution gave P(D ≥ d) ~ d<sup>−1.015</sup> with R² = 0.755 — a weaker fit than S2.</p>
+        <p>This means: the S2 retention law, which describes how individual systems lose information with probe scale, <em>also</em> describes how the collection of fitted exponents is distributed across systems. The ensemble of S2 parameters itself follows S2.</p>
 
-<h3>Находка 2: Бимодальность распределения</h3>
+        <p>For comparison, a power-law fit to the same distribution gave P(D ≥ d) ~ d<sup>−1.015</sup> with R² = 0.755 — a weaker fit than S2.</p>
 
-<p>Three tests were applied to check whether the distribution of D values is unimodal or multimodal:</p>
+        <h3>Находка 2: Бимодальность распределения</h3>
 
-<table style="width:100%;border-collapse:collapse;font-size:14px;margin:1rem 0">
-<tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:6px">Test</th><th style="text-align:right;padding:6px">Result</th><th style="text-align:right;padding:6px">Verdict</th></tr>
-<tr style="border-bottom:1px solid var(--border-2)">
-<td style="padding:6px">Bimodality coefficient</td>
-<td style="text-align:right;font-family:monospace">0.697</td>
-<td style="text-align:right">BC &gt; 0.555 → bimodal</td>
-</tr>
-<tr style="border-bottom:1px solid var(--border-2)">
-<td style="padding:6px">GMM BIC (1 vs 2 comp)</td>
-<td style="text-align:right;font-family:monospace">ΔBIC = −38.1</td>
-<td style="text-align:right">2-comp preferred</td>
-</tr>
-<tr>
-<td style="padding:6px">GMM component means</td>
-<td style="text-align:right;font-family:monospace">1.12, 4.47</td>
-<td style="text-align:right">Two clusters</td>
-</tr>
-</table>
+        <p>Three tests were applied to check whether the distribution of D values is unimodal or multimodal:</p>
 
-<p>The Gaussian Mixture Model identifies two clusters: a large component centered at D ≈ 1.12 (91.9% of systems) and a smaller component at D ≈ 4.47 (8.1% of systems). The gap between these clusters is statistically significant (ΔBIC = −38.1, strongly favoring 2 components).</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Test</th><th class="num">Result</th><th class="right">Verdict</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bimodality coefficient</td>
+              <td class="num">0.697</td>
+              <td class="right">BC &gt; 0.555 → bimodal</td>
+            </tr>
+            <tr>
+              <td>GMM BIC (1 vs 2 comp)</td>
+              <td class="num">ΔBIC = −38.1</td>
+              <td class="right">2-comp preferred</td>
+            </tr>
+            <tr>
+              <td>GMM component means</td>
+              <td class="num">1.12, 4.47</td>
+              <td class="right">Two clusters</td>
+            </tr>
+          </tbody>
+        </table>
 
-<p>Note: The bimodality is <em>not</em> simply at the D = 1 threshold. The two clusters are "typical systems" (D ≈ 1.1) and "extreme extractors" (D ≈ 4.5), not "natural" vs "extraction." This is a different and perhaps more interesting structure than initially expected.</p>
+        <p>The Gaussian Mixture Model identifies two clusters: a large component centered at D ≈ 1.12 (91.9% of systems) and a smaller component at D ≈ 4.47 (8.1% of systems). The gap between these clusters is statistically significant (ΔBIC = −38.1, strongly favoring 2 components).</p>
 
-<h3>Находка 3: Смещение выборки</h3>
+        <p>Note: The bimodality is <em>not</em> simply at the D = 1 threshold. The two clusters are "typical systems" (D ≈ 1.1) and "extreme extractors" (D ≈ 4.5), not "natural" vs "extraction." This is a different and perhaps more interesting structure than initially expected.</p>
 
-<p><strong>This is not a random sample.</strong> The 74 systems were selected because S2 fitting was attempted on them. The sample is biased toward:</p>
-<ul>
-<li>Systems with available downloadable data (FRED, World Bank, USGS, Zenodo)</li>
-<li>Systems where stretched-exponential decay was plausible</li>
-<li>Domains where the DREAM framework predicted a specific D regime</li>
-</ul>
+        <h3>Находка 3: Смещение выборки</h3>
 
-<p>The claim "65% of systems have D > 1" applies to <em>this sample</em>, not to all measurable phenomena in the universe. A truly random sample might show a different distribution.</p>
+        <p><strong>This is not a random sample.</strong> The 74 systems were selected because S2 fitting was attempted on them. The sample is biased toward:</p>
+        <ul>
+          <li>Systems with available downloadable data (FRED, World Bank, USGS, Zenodo)</li>
+          <li>Systems where stretched-exponential decay was plausible</li>
+          <li>Domains where the DREAM framework predicted a specific D regime</li>
+        </ul>
 
-<hr>
+        <p>The claim "65% of systems have D > 1" applies to <em>this sample</em>, not to all measurable phenomena in the universe. A truly random sample might show a different distribution.</p>
+      </div>
 
-<h2>Гипотеза (Мета-S2)</h2>
+      <hr>
 
-<p class="spec-toggle" style="display:none"></p>
+      <!-- ===== Hypothesis (Meta-S2) ===== -->
+      <div class="card">
+        <h2>Гипотеза (Мета-S2)</h2>
 
-<div style="background:rgba(240,200,120,.06);border-left:3px solid var(--accent-2);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 8px 8px 0">
-<p style="margin:0;font-size:14px;color:var(--muted)">
-<strong>What follows is a hypothesis, not a theorem.</strong> It is motivated by the empirical observations above but has not been proven. It is offered as a direction for future investigation.
-</p>
-</div>
+        <div class="speculative-note">
+          <strong>What follows is a hypothesis, not a theorem.</strong> It is motivated by the empirical observations above but has not been proven. It is offered as a direction for future investigation.
+        </div>
 
-<h3>Рекурсивное свойство</h3>
+        <h3>Рекурсивное свойство</h3>
 
-<p>The strongest empirical finding is not philosophical — it is mathematical:</p>
+        <p>The strongest empirical finding is not philosophical — it is mathematical:</p>
 
-<blockquote style="border-left:3px solid var(--accent);margin:1rem 0;padding:0.5rem 1.5rem;font-style:italic;color:var(--accent)">
-S2 describes individual system retention. The distribution of S2 exponents across systems also follows S2.
-</blockquote>
+        <blockquote class="callout emph">
+          S2 describes individual system retention. The distribution of S2 exponents across systems also follows S2.
+        </blockquote>
 
-<p>This recursive property — S2 describing the distribution of S2 parameters — is genuinely unusual. If it persists as additional systems are measured, it may indicate that S2 is a <strong>fixed point under aggregation</strong>: collections of systems possess emergent retention dynamics governed by the same functional form as their constituents.</p>
+        <p>This recursive property — S2 describing the distribution of S2 parameters — is genuinely unusual. If it persists as additional systems are measured, it may indicate that S2 is a <strong>fixed point under aggregation</strong>: collections of systems possess emergent retention dynamics governed by the same functional form as their constituents.</p>
 
-<p>This would be analogous to how the normal distribution is its own conjugate prior in Bayesian inference, or how stable distributions are closed under convolution. S2 would be closed under a different operation — the operation of "collecting independent retention processes and asking how their exponents are distributed."</p>
+        <p>This would be analogous to how the normal distribution is its own conjugate prior in Bayesian inference, or how stable distributions are closed under convolution. S2 would be closed under a different operation — the operation of "collecting independent retention processes and asking how their exponents are distributed."</p>
 
-<h3>Что бы это значило</h3>
+        <h3>Что бы это значило</h3>
 
-<p>If Meta-S2 is real:</p>
-<ul>
-<li><strong>S2 is not just a curve that fits many datasets.</strong> It is a distribution that is self-similar under aggregation. The law governs both the parts and the whole.</li>
-<li><strong>The meta-exponent D_meta ≈ 1.6 has meaning.</strong> It describes the "retention of retention" — how quickly the property of having a particular D_eff itself degrades as you move across the space of systems.</li>
-<li><strong>The bimodality may indicate two classes of systems.</strong> The GMM clusters at D ≈ 1.1 and D ≈ 4.5 suggest there may be two qualitatively different regimes — not "natural vs extraction" but "ordinary vs extreme." What distinguishes the extreme cluster is an open question.</li>
-</ul>
+        <p>If Meta-S2 is real:</p>
+        <ul>
+          <li><strong>S2 is not just a curve that fits many datasets.</strong> It is a distribution that is self-similar under aggregation. The law governs both the parts and the whole.</li>
+          <li><strong>The meta-exponent D_meta ≈ 1.6 has meaning.</strong> It describes the "retention of retention" — how quickly the property of having a particular D_eff itself degrades as you move across the space of systems.</li>
+          <li><strong>The bimodality may indicate two classes of systems.</strong> The GMM clusters at D ≈ 1.1 and D ≈ 4.5 suggest there may be two qualitatively different regimes — not "natural vs extraction" but "ordinary vs extreme." What distinguishes the extreme cluster is an open question.</li>
+        </ul>
 
-<h3>Что это ПОКА не значит</h3>
+        <h3>Что это ПОКА не значит</h3>
 
-<ul>
-<li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, the majority of measured systems have D > 1," but we cannot generalize to the universe without a random sample.</li>
-<li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided yet.</li>
-<li><strong>"D = 1 is a phase transition."</strong> The bimodality tests show two clusters, but they are at D ≈ 1.1 and D ≈ 4.5, not at D = 1. The threshold D = 1 separates natural from extraction <em>within</em> individual systems, but the meta-distribution does not clearly show a gap there.</li>
-</ul>
+        <ul>
+          <li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, the majority of measured systems have D > 1," but we cannot generalize to the universe without a random sample.</li>
+          <li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided yet.</li>
+          <li><strong>"D = 1 is a phase transition."</strong> The bimodality tests show two clusters, but they are at D ≈ 1.1 and D ≈ 4.5, not at D = 1. The threshold D = 1 separates natural from extraction <em>within</em> individual systems, but the meta-distribution does not clearly show a gap there.</li>
+        </ul>
 
-<h3>Как это проверить</h3>
+        <h3>Как это проверить</h3>
 
-<p>The hypothesis makes a testable prediction:</p>
+        <p>The hypothesis makes a testable prediction:</p>
 
-<blockquote style="border-left:3px solid var(--good);margin:1rem 0;padding:0.5rem 1.5rem">
-As the test registry grows beyond 74 systems, the meta-S2 fit should remain stable (D_meta ≈ 1.6, R² > 0.95) if the recursive property is real. If D_meta drifts significantly or R² drops below 0.9 as more systems are added, the recursive property was an artifact of the current sample.
-</blockquote>
+        <blockquote class="callout good">
+          As the test registry grows beyond 74 systems, the meta-S2 fit should remain stable (D_meta ≈ 1.6, R² > 0.95) if the recursive property is real. If D_meta drifts significantly or R² drops below 0.9 as more systems are added, the recursive property was an artifact of the current sample.
+        </blockquote>
 
-<p>Specifically:</p>
-<ul>
-<li>If the next 100 systems (doubling the registry) still fit S2 with D_meta ≈ 1.5–1.7, the hypothesis is strengthened.</li>
-<li>If the fit degrades, the current result was selection bias.</li>
-<li>If the bimodality persists with the same cluster locations, the two-class structure is real.</li>
-<li>If the bimodality disappears, it was a small-sample artifact.</li>
-</ul>
+        <p>Specifically:</p>
+        <ul>
+          <li>If the next 100 systems (doubling the registry) still fit S2 with D_meta ≈ 1.5–1.7, the hypothesis is strengthened.</li>
+          <li>If the fit degrades, the current result was selection bias.</li>
+          <li>If the bimodality persists with the same cluster locations, the two-class structure is real.</li>
+          <li>If the bimodality disappears, it was a small-sample artifact.</li>
+        </ul>
+      </div>
 
-<hr>
+      <hr>
 
-<h2>Метод</h2>
+      <!-- ===== Method ===== -->
+      <div class="card">
+        <h2>Метод</h2>
 
-<details class="exp" open>
-<summary><strong>How the meta-fit was constructed</strong></summary>
+        <details class="exp" open>
+          <summary><strong>How the meta-fit was constructed</strong></summary>
 
-<div style="padding:1rem 0 0 0;font-size:13px;line-height:1.6">
+          <div class="method-body">
+            <p><strong>Data:</strong> 74 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-07-28. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
 
-<p><strong>Data:</strong> 74 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-07-28. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
+            <p><strong>Meta-fit:</strong> The 74 D values were sorted. The complementary CDF P(D ≥ d) was computed at 50 evenly-spaced thresholds d ∈ [0.1, 5.0]. This CDF was then fitted to the S2 form P(D ≥ d) = exp[−(t/λ_q)^D] where t is the rank index (1 to 50).</p>
 
-<p><strong>Meta-fit:</strong> The 74 D values were sorted. The complementary CDF P(D ≥ d) was computed at 50 evenly-spaced thresholds d ∈ [0.1, 5.0]. This CDF was then fitted to the S2 form P(D ≥ d) = exp[−(t/λ_q)^D] where t is the rank index (1 to 50).</p>
+            <p><strong>Bimodality tests:</strong></p>
+            <ul>
+              <li>Bimodality coefficient: BC = (skewness² + 1) / kurtosis. Threshold for bimodality: BC > 0.555.</li>
+              <li>Gaussian Mixture Model: 1-component vs 2-component, compared via BIC and AIC. Lower BIC preferred.</li>
+            </ul>
 
-<p><strong>Bimodality tests:</strong></p>
-<ul>
-<li>Bimodality coefficient: BC = (skewness² + 1) / kurtosis. Threshold for bimodality: BC > 0.555.</li>
-<li>Gaussian Mixture Model: 1-component vs 2-component, compared via BIC and AIC. Lower BIC preferred.</li>
-</ul>
+            <p><strong>Software:</strong> Python 3.12, scipy 1.x, scikit-learn (GaussianMixture).</p>
 
-<p><strong>Software:</strong> Python 3.12, scipy 1.x, scikit-learn (GaussianMixture).</p>
+            <p><strong>Limitations:</strong></p>
+            <ul>
+              <li>Hartigan's dip test was not available in the installed scipy version; the bimodality coefficient was used as a substitute. A proper dip test should be run.</li>
+              <li>The meta-fit uses rank as the independent variable, not D itself. A direct fit to the empirical CDF would be more rigorous.</li>
+              <li>The 74 systems are not independent — some share datasets (e.g., multiple FRED series from the same economic system).</li>
+              <li>Several D values hit the fitting boundary at D = 5.0 (the upper limit of the optimizer), which may distort the tail of the distribution.</li>
+            </ul>
+          </div>
+        </details>
 
-<p><strong>Limitations:</strong></p>
-<ul>
-<li>Hartigan's dip test was not available in the installed scipy version; the bimodality coefficient was used as a substitute. A proper dip test should be run.</li>
-<li>The meta-fit uses rank as the independent variable, not D itself. A direct fit to the empirical CDF would be more rigorous.</li>
-<li>The 74 systems are not independent — some share datasets (e.g., multiple FRED series from the same economic system).</li>
-<li>Several D values hit the fitting boundary at D = 5.0 (the upper limit of the optimizer), which may distort the tail of the distribution.</li>
-</ul>
+        <p class="article-footnote">
+          Analysis performed 2026-07-28. Data: <a href="../tests.html">DREAM Test Registry</a> (74 systems with fitted D_eff).<br>
+          This page is speculative. The recursive S2 property is an empirical observation on a non-random sample, not a proven theorem. It is offered as a direction for investigation.
+        </p>
+      </div>
 
-</div>
-</details>
+    </div>
+  </main>
 
-<hr>
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–2025 DREAM — прототип; спекулятивные расширения чётко помечены.</small>
+    </div>
+  </footer>
 
-<p style="color:var(--muted-2);font-size:13px;margin-top:2rem">
-Analysis performed 2026-07-28. Data: <a href="../tests.html">DREAM Test Registry</a> (74 systems with fitted D_eff).<br>
-This page is speculative. The recursive S2 property is an empirical observation on a non-random sample, not a proven theorem. It is offered as a direction for investigation.
-</p>
+  <!-- ===== Spec toggle ===== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cb = document.getElementById('specToggle');
+    const BODY_FLAG = 'show-spec';
+    const KEY = 'spec:on';
+    const saved = localStorage.getItem(KEY);
+    if (saved !== null) {
+      const on = saved === '1';
+      document.body.classList.toggle(BODY_FLAG, on);
+      if (cb) cb.checked = on;
+    } else if (cb) {
+      document.body.classList.toggle(BODY_FLAG, cb.checked);
+    }
+    cb?.addEventListener('change', e => {
+      const on = e.target.checked;
+      document.body.classList.toggle(BODY_FLAG, on);
+      localStorage.setItem(KEY, on ? '1' : '0');
+    });
+  });
+  </script>
 
-</div>
-</main>
+  <!-- ===== Math toggle / typeset ===== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.math-block, .math-inline').forEach(el => {
+      let t = el.textContent;
+      if (/\\\[/.test(t) && !/\\\]/.test(t)) t = t.replace(/$/, '\n\\]');
+      if (/\\\(/.test(t) && !/\\\)/.test(t)) t = t.replace(/$/, '\\)');
+      if (t !== el.textContent) el.textContent = t;
+    });
+    const typeset = nodes =>
+      (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+    if (document.body.classList.contains('show-math')) typeset();
+    const mt = document.getElementById('mathToggle');
+    const MATH_KEY = 'math:on';
+    const MATH_FLAG = 'show-math';
+    const mathSaved = localStorage.getItem(MATH_KEY);
+    if (mathSaved !== null) {
+      const on = mathSaved === '1';
+      document.body.classList.toggle(MATH_FLAG, on);
+      if (mt) mt.checked = on;
+    }
+    mt && mt.addEventListener('change', () => {
+      const on = mt.checked;
+      document.body.classList.toggle(MATH_FLAG, on);
+      localStorage.setItem(MATH_KEY, on ? '1' : '0');
+      setTimeout(() => typeset(), 0);
+    });
+    document.querySelectorAll('details.more').forEach(d => {
+      d.addEventListener('toggle', () => d.open && typeset([d]));
+    });
+  });
+  </script>
 
-<footer class="site-footer">
-  <div class="footer-content">
-    <small>© 2024–2025 DREAM — прототип; спекулятивные расширения чётко помечены.</small>
-  </div>
-</footer>
+  <!-- ===== Language switch rewrite ===== -->
+  <script>
+  (function(){
+    const here = location.pathname.replace(/\/index\.html$/i, '/');
+    const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+    let rest = '';
+    if (m) rest = m[2];
+    if (!rest || rest === 'index') rest = 'index';
+    document.querySelectorAll('.lang-link').forEach(a=>{
+      const img = a.querySelector('img'); const isRu = img && (img.src.includes('ru.png') || img.alt === 'RU');
+      const targetLang = isRu ? 'ru' : 'en';
+      const parts = rest.split('/');
+      const depth = parts.length - 1;
+      const prefix = '../'.repeat(depth + 1);
+      a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+    });
+  })();
+  </script>
 
-<script defer src="../js/fractal.js"></script>
-<script defer src="../js/nav-mobile.js"></script>
-<script defer src="../js/nav-dropdown.js"></script>
-<script defer src="../js/nav-autoscroll.js"></script>
+  <!-- ===== Site scripts ===== -->
+  <script defer src="../../js/fractal.js"></script>
+  <script defer src="../../js/nav-mobile.js"></script>
+  <script defer src="../../js/nav-dropdown.js"></script>
+  <script defer src="../../js/nav-autoscroll.js"></script>
 
 </body>
 </html>
