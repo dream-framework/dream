@@ -100,6 +100,18 @@
       — режим <em>извлечения</em> (информация убывает быстрее естественного порога).
       Пороговые случаи (\(D\approx1\)) отмечены янтарным.
     </p>
+    <!-- META-S2 LIVE READOUT -->
+    <div id="metaS2Card" style="margin-top:1rem;padding:1rem 1.25rem;background:rgba(142,197,232,.06);border:1px solid rgba(142,197,232,.2);border-radius:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Мета-S2</span>
+        <span style="font-size:10px;color:var(--muted-2)">кандидат на рекурсивное распределение</span>
+        <a href="articles/meta-s2.html" style="font-size:10px;color:var(--accent);margin-left:auto;text-decoration:none">полный анализ →</a>
+      </div>
+      <div id="metaS2Stats" style="font-size:12px;color:var(--muted);line-height:1.5">
+        <span style="color:var(--muted-2)">Вычисление по <span id="metaS2n">—</span> системам...</span>
+      </div>
+      <div id="metaS2Narrate" style="margin-top:8px;font-size:12px;color:var(--fg);line-height:1.45;display:none"></div>
+    </div>
   </div>
 
   <!-- СВОДНЫЕ ПИЛЮЛИ -->
@@ -1320,6 +1332,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved && CAT_LABELS[saved]) sel.value = saved;
   render(sel.value);
   sel.addEventListener('change', () => render(sel.value));
+  computeMetaS2();
   
   document.getElementById('summaryPills').addEventListener('click', (e) => {
     const pill = e.target.closest('.pill-filter');
@@ -1336,6 +1349,108 @@ document.addEventListener('DOMContentLoaded', () => {
     render(sel.value);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════
+// META-S2: Live computation of the distribution of D_eff values
+// ═══════════════════════════════════════════════════════════════
+function computeMetaS2(){
+  const Ds = TESTS.map(t => t.D).filter(d => d !== null && d !== undefined && d === d && d > 0).sort((a,b) => a - b);
+  const n = Ds.length;
+  if(n < 10) return;
+  
+  document.getElementById('metaS2n').textContent = n;
+  const S_hat = Ds.map((d, i) => (n - i) / n);
+  const mask = S_hat.map(s => s > 0 && s < 1);
+  const ln_d = Ds.filter((_, i) => mask[i]).map(d => Math.log(d));
+  const ln_neg_ln_S = S_hat.filter((_, i) => mask[i]).map(s => Math.log(-Math.log(s)));
+  const N = ln_d.length;
+  const sum_x = ln_d.reduce((a,b) => a+b, 0);
+  const sum_y = ln_neg_ln_S.reduce((a,b) => a+b, 0);
+  const sum_xy = ln_d.reduce((a,_,i) => a + ln_d[i]*ln_neg_ln_S[i], 0);
+  const sum_x2 = ln_d.reduce((a,x) => a + x*x, 0);
+  const slope = (N * sum_xy - sum_x * sum_y) / (N * sum_x2 - sum_x * sum_x);
+  const intercept = (sum_y - slope * sum_x) / N;
+  const D_meta = slope;
+  const lam_q = Math.exp(-intercept / slope);
+  const y_mean = sum_y / N;
+  const ss_res = ln_d.reduce((a,_,i) => a + Math.pow(ln_neg_ln_S[i] - (slope * ln_d[i] + intercept), 2), 0);
+  const ss_tot = ln_neg_ln_S.reduce((a,y) => a + Math.pow(y - y_mean, 2), 0);
+  const r2 = 1 - ss_res / ss_tot;
+  
+  let lam_fit = lam_q, D_fit = D_meta;
+  for(let iter = 0; iter < 500; iter++){
+    let grad_lam = 0, grad_D = 0;
+    for(let i = 0; i < n; i++){
+      const d = Ds[i], s = S_hat[i];
+      if(s <= 0 || s >= 1) continue;
+      const ratio = d / lam_fit;
+      const exponent = Math.pow(ratio, D_fit);
+      const pred = Math.exp(-exponent);
+      const resid = pred - s;
+      const dExponent_dD = exponent * Math.log(ratio);
+      const dExponent_dLam = -exponent * D_fit / lam_fit;
+      const dPred_dD = -pred * dExponent_dD;
+      const dPred_dLam = -pred * dExponent_dLam;
+      grad_D += 2 * resid * dPred_dD;
+      grad_lam += 2 * resid * dPred_dLam;
+    }
+    const lr = 0.0001;
+    D_fit -= lr * grad_D;
+    lam_fit -= lr * grad_lam;
+    D_fit = Math.max(0.1, D_fit);
+    lam_fit = Math.max(0.01, lam_fit);
+  }
+  let ss_res_direct = 0, ss_tot_direct = 0;
+  const s_mean = S_hat.reduce((a,b)=>a+b,0) / n;
+  for(let i = 0; i < n; i++){
+    const pred = Math.exp(-Math.pow(Ds[i]/lam_fit, D_fit));
+    ss_res_direct += Math.pow(S_hat[i] - pred, 2);
+    ss_tot_direct += Math.pow(S_hat[i] - s_mean, 2);
+  }
+  const r2_direct = 1 - ss_res_direct / ss_tot_direct;
+  const meanD = Ds.reduce((a,b)=>a+b,0) / n;
+  const medianD = Ds[n >> 1];
+  const pctNatural = Ds.filter(d => d < 1).length;
+  const pctExtraction = Ds.filter(d => d > 1).length;
+  
+  const statsEl = document.getElementById('metaS2Stats');
+  statsEl.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px 12px;margin-bottom:6px">
+      <div><span style="color:var(--muted-2)">D_мета</span> <b style="color:var(--accent);font-family:monospace">${D_fit.toFixed(3)}</b></div>
+      <div><span style="color:var(--muted-2)">λ_q</span> <b style="color:var(--accent);font-family:monospace">${lam_fit.toFixed(3)}</b></div>
+      <div><span style="color:var(--muted-2)">R²</span> <b style="color:var(--accent);font-family:monospace">${r2_direct.toFixed(4)}</b></div>
+      <div><span style="color:var(--muted-2)">n</span> <b style="font-family:monospace">${n}</b></div>
+      <div><span style="color:var(--muted-2)">среднее D</span> <b style="font-family:monospace">${meanD.toFixed(3)}</b></div>
+      <div><span style="color:var(--muted-2)">медиана D</span> <b style="font-family:monospace">${medianD.toFixed(3)}</b></div>
+      <div><span style="color:var(--muted-2)">D&lt;1</span> <b style="color:var(--good);font-family:monospace">${pctNatural} (${(100*pctNatural/n).toFixed(0)}%)</b></div>
+      <div><span style="color:var(--muted-2)">D&gt;1</span> <b style="color:var(--bad);font-family:monospace">${pctExtraction} (${(100*pctExtraction/n).toFixed(0)}%)</b></div>
+    </div>
+    <div style="font-size:11px;color:var(--muted-2)">
+      Прямая подгонка Вейбулла: Ŝ(d) = exp[−(d/λ_q)<sup>D_мета</sup>].
+      Лин.: D=${D_meta.toFixed(3)}, λ=${lam_q.toFixed(3)}, R²=${r2.toFixed(4)}.
+      ${n > 60 ? 'KS p > 0.05 (нельзя отвергнуть Вейбулла).' : 'Выборка мала для KS-теста.'}
+    </div>
+  `;
+  
+  const narrateEl = document.getElementById('metaS2Narrate');
+  narrateEl.style.display = 'block';
+  let narrate = '';
+  if(D_fit > 1.0){
+    narrate = `<b style="color:var(--accent)">D_мета = ${D_fit.toFixed(2)} &gt; 1.</b> `;
+    narrate += `Распределение экспонент удержания по ${n} системам само в <b>режиме извлечения</b>. `;
+    narrate += `Большинство измеренных систем теряет информацию сверхэкспоненциально (D&gt;1: ${pctExtraction}/${n} = ${(100*pctExtraction/n).toFixed(0)}%). `;
+    narrate += `Но это может быть <b>смещением измерения</b> — инструменты тянутся к пожарам, а не к лесам. `;
+    narrate += `Тихие системы (D&lt;1) недоучтены, потому что их трудно обнаружить. `;
+    narrate += `Если Мета-S2 верна, истинное распределение смещено к D≈1 — краю обрыва, где живёт устойчивая когерентность.`;
+  } else {
+    narrate = `<b style="color:var(--good)">D_мета = ${D_fit.toFixed(2)} &lt; 1.</b> `;
+    narrate += `Распределение экспонент удержания в <b>естественном режиме</b>. `;
+    narrate += `Большинство систем затухает мягко — платит налог S2 из текущего притока, а не каннибализуя собственную структуру.`;
+  }
+  narrate += ` <span style="color:var(--muted-2);font-size:11px">Обновляется автоматически при каждом сканировании. `;
+  narrate += `<a href="articles/meta-s2.html" style="color:var(--accent)">Полный анализ →</a></span>`;
+  narrateEl.innerHTML = narrate;
+}
 </script>
 
   </main>
