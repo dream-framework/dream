@@ -182,6 +182,7 @@ def scan_fred(series_ids=None):
             'url': url,
             'filename': filepath,
             'format': 'csv',
+            'series_id': sid,
         })
     print(f'  Downloaded {len(found)} series')
     return found
