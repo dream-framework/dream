@@ -1551,11 +1551,11 @@ function computeMetaS2(){
   let narrate = '';
   if(D_fit > 1.0){
     narrate = `<b style="color:var(--accent)">D_meta = ${D_fit.toFixed(2)} &gt; 1.</b> `;
-    narrate += `The distribution of retention exponents across ${n} systems is itself in <b>extraction regime</b>. `;
-    narrate += `Most measured systems lose information super-exponentially (D&gt;1: ${pctExtraction}/${n} = ${(100*pctExtraction/n).toFixed(0)}%). `;
+    narrate += `The distribution of retention exponents across ${n} system-level estimates is itself in <b>extraction regime</b>. `;
+    narrate += `${pctExtraction} of ${n} fitted retention curves have D&gt;1, corresponding to faster-than-exponential decay in the fitted S2 model. `;
     narrate += `But this may be <b>measurement bias</b> — human instruments are drawn to fires, not forests. `;
-    narrate += `The quiet systems (D&lt;1) are undercounted because they are hard to detect. `;
-    narrate += `If Meta-S2 holds, the true distribution skews toward D≈1 — the cliff edge where sustainable coherence lives.`;
+    narrate += `If the registry is biased toward conspicuous high-deformation systems, the population distribution may contain more D&lt;1 systems than the present sample indicates. `;
+    narrate += `Quantifying that possibility requires an explicit sampling-bias model.`;
   } else {
     narrate = `<b style="color:var(--good)">D_meta = ${D_fit.toFixed(2)} &lt; 1.</b> `;
     narrate += `The distribution of retention exponents is in <b>natural regime</b>. `;
