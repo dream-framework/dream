@@ -23,9 +23,105 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <style>
     /* per-page overrides for article pages */
-    
-    body.is-article .site-header{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0; }
-    
+    body.is-article .site-header{
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0;
+    }
+
+    /* Article body wrapper — narrower than the default container for readable line length */
+    .article-wrap{
+      max-width: 820px;
+      margin: 2rem auto 3rem;
+    }
+    .article-wrap > .card{ padding: 2rem; }
+    .article-wrap h1{ margin: 0 0 .4rem; font-size: 1.9rem; line-height: 1.2; }
+    .article-wrap h2{ margin-top: 0; font-size: 1.35rem; }
+    .article-wrap h3{ margin: 1.2rem 0 .4rem; font-size: 1.05rem; }
+    .article-wrap h4{ margin: 1rem 0 .3rem; font-size: .92rem; color: var(--muted); }
+    .article-wrap hr{ margin: 0; border: 0; }
+    .article-wrap p{ margin: .6rem 0; }
+
+    /* Equation block — vertical breathing room around MathJax display math */
+    .eq{ margin: 1.1rem 0; text-align: center; }
+
+    /* Data tables — dark theme consistent with the global palette */
+    table.data-table{
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin: 1rem 0;
+      background: rgba(15,23,42,.35);
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    table.data-table th,
+    table.data-table td{
+      padding: .5rem .7rem;
+      border-bottom: 1px solid var(--border-2);
+      text-align: left;
+      vertical-align: top;
+    }
+    table.data-table th{
+      background: rgba(23,32,51,.6);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: .72rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    table.data-table td.num,
+    table.data-table th.num{ text-align: right; font-family: ui-monospace, "SF Mono", Consolas, monospace; white-space: nowrap; }
+    table.data-table td.right,
+    table.data-table th.right{ text-align: right; }
+    table.data-table tr:last-child td{ border-bottom: 0; }
+    table.data-table tr:hover td{ background: rgba(142,197,232,.05); }
+    table.data-table.compact{ font-size: .72rem; }
+    table.data-table.compact th,
+    table.data-table.compact td{ padding: .38rem .5rem; }
+
+    /* Callout — highlighted blockquote built on the global blockquote base */
+    blockquote.callout{
+      margin: 1rem 0;
+      padding: .8rem 1.25rem;
+      border-left-width: 4px;
+      border-radius: 0 12px 12px 0;
+      font-size: .92rem;
+      line-height: 1.65;
+    }
+    blockquote.callout.good{ border-left-color: var(--good); background: rgba(125,211,168,.07); }
+    blockquote.callout.warn{ border-left-color: var(--accent-2); background: rgba(240,200,120,.07); }
+    blockquote.callout.emph{ font-style: italic; color: var(--accent); }
+
+    /* Speculative notice — gold-tinted lead-in box for hypothesis sections */
+    .speculative-note{
+      border-left: 3px solid var(--accent-2);
+      background: rgba(240,200,120,.07);
+      padding: .8rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 12px 12px 0;
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    .speculative-note strong{ color: var(--accent-2); }
+
+    /* Method details body */
+    details.exp > .method-body{ padding-top: 1rem; font-size: .82rem; line-height: 1.65; }
+    details.exp > .method-body p{ margin: .6rem 0; }
+    details.exp > .method-body ul,
+    details.exp > .method-body ol{ margin: .4rem 0 .6rem 1.4rem; }
+
+    /* Footer note inside the article */
+    .article-footnote{
+      color: var(--muted-2);
+      font-size: .78rem;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+    .article-footnote a{ color: var(--accent); }
+
+    /* Keep MathJax display math comfortable inside cards */
+    .card mjx-container[display="true"]{ margin: .6rem auto !important; }
   </style>
 </head>
 <body data-lang="ru" class="is-article">
@@ -87,6 +183,8 @@
 
   <!-- ===== Main ===== -->
   <main class="container">
+<div class="article-wrap">
+
 <style>
   html {
     /* Fill the body margins so nothing shows through */
@@ -464,7 +562,9 @@
     obs.observe(document.body, {subtree:true, attributes:true, attributeFilter:['style','class']});
   })();
   </script>
-  </main>
+  
+</div>
+</main>
 
   <!-- ===== Footer ===== -->
   <footer class="site-footer">
