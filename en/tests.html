@@ -209,7 +209,8 @@ const TESTS = [
     name:"Ebbinghaus memory (1885)",
     domain:"cognitive", groups:["cognitive","confirmed"],
     D:0.153, r2:0.976,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"The original forgetting curve fits S2 with D=0.153 — far below the extraction threshold, confirming memory decay as a natural retention process.",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
@@ -219,7 +220,8 @@ const TESTS = [
     name:"Murre & Dros memory (2015)",
     domain:"cognitive", groups:["cognitive","confirmed"],
     D:0.219, r2:0.976,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"S2_WINS", kind:"natural",
     narrative:"A 130-year replication of Ebbinghaus. S2 wins on AIC versus the power law (ΔAIC≈−28; AIC 17 vs 45). D=0.219 — the retention law is reproducible.",
     image:"dream_memory_s2_test.png",
     source:"dream_memory_s2_results.json"
@@ -229,7 +231,8 @@ const TESTS = [
     name:"Gloria Mark attention (2004–12)",
     domain:"cognitive",
     D:1.232, r2:0.992,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Attention-span decline across 2004–2012 crosses the D=1 threshold (D=1.232), indicating algorithmic extraction rather than natural decay.",
     image:"npa_chart3_timeline_en.png",
     source:"npa_attention_s2_results.json"
@@ -239,7 +242,8 @@ const TESTS = [
     name:"Gloria Mark attention (2012–22)",
     domain:"cognitive",
     D:4.28, r2:null,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"From the NPA manifesto: attention collapse accelerates after 2012 (D≈4.28) — a deep-extraction regime as short-form feeds dominate.",
     image:"npa_chart1_d_extraction_en.png",
     source:"NPA-Manifesto-2.0.pdf"
@@ -251,7 +255,8 @@ const TESTS = [
     name:"ETH hourly (crypto HFT)",
     domain:"financial",
     D:0.591, r2:0.537,
-    verdict:"INCONCLUSIVE", kind:"inconclusive",
+    verdict:"INCONCLUSIVE",
+    model_verdict:"NO_FIT", kind:"inconclusive",
     narrative:"Crypto hourly autocorrelation is noisy (R²=0.537). D=0.591 suggests natural, but the poor fit means no firm verdict.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
@@ -261,7 +266,8 @@ const TESTS = [
     name:"SPY daily (equity index)",
     domain:"financial",
     D:0.711, r2:0.732,
-    verdict:"NATURAL", kind:"natural",
+    verdict:"NATURAL",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Broad equity index shows D=0.711 — natural retention. The market aggregates enough actors to stay below the extraction cliff.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
@@ -271,7 +277,8 @@ const TESTS = [
     name:"QQQ daily (tech ETF)",
     domain:"financial",
     D:1.016, r2:0.749,
-    verdict:"EXTRACTION", kind:"threshold",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"threshold",
     narrative:"Tech-heavy ETF sits exactly at the threshold (D=1.016). Consistent with the concentration of algorithmic flow in tech names.",
     image:"fictitious_capital_s2_analysis.png",
     source:"fictitious_capital_s2_results.json"
@@ -281,7 +288,8 @@ const TESTS = [
     name:"Stock holding period (1940–80)",
     domain:"financial",
     D:1.559, r2:0.993,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Pre-digital holding-period decay already shows D>1 (1.559) — extraction is not purely an HFT phenomenon; it predates electronic trading.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
@@ -291,7 +299,8 @@ const TESTS = [
     name:"Stock holding period (1980–2023)",
     domain:"financial",
     D:1.005, r2:0.999,
-    verdict:"EXTRACTION", kind:"threshold",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"threshold",
     narrative:"Modern era sits on the threshold (D=1.005) with a near-perfect fit (R²=0.999). The entire post-1980 regime is at the extraction boundary.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
@@ -301,7 +310,8 @@ const TESTS = [
     name:"Trade duration (1980–2000)",
     domain:"financial",
     D:1.781, r2:1.000,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Trade-duration retention decays with D=1.781 — extraction. The perfect fit (R²=1.000) reflects the regularising effect of electronic matching.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
@@ -311,7 +321,8 @@ const TESTS = [
     name:"Trade duration (2000–2023)",
     domain:"financial",
     D:2.454, r2:1.000,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"HFT era: D=2.454 — deep extraction. The doubling of D versus the prior era quantifies the acceleration of fictitious-capital turnover.",
     image:"financial_vs_cognitive_s2_retention.png",
     source:"financial_vs_cognitive_s2_results.json"
@@ -323,7 +334,8 @@ const TESTS = [
     name:"SFR density decline (z=2→0)",
     domain:"cosmological",
     D:3.458, r2:0.992,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Star-formation-rate density declines with D=3.458 — the cosmos is in an extraction regime as dark energy suppresses structure formation.",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
@@ -333,7 +345,8 @@ const TESTS = [
     name:"Bound structure growth decline (z=1.5→0)",
     domain:"cosmological",
     D:2.571, r2:0.992,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Bound-structure growth decays with D=2.571 — extraction. Hierarchical clustering is being starved by accelerated expansion.",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
@@ -343,7 +356,8 @@ const TESTS = [
     name:"Cluster growth decline (z=1→0)",
     domain:"cosmological",
     D:2.608, r2:0.999,
-    verdict:"EXTRACTION", kind:"extraction",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"extraction",
     narrative:"Cluster-growth retention: D=2.608, R²=0.999. Same family as SFR — the universe is losing its capacity to build bound objects.",
     image:"cosmological_s2_retention.png",
     source:"cosmological_s2_results.json"
@@ -355,7 +369,8 @@ const TESTS = [
     name:"NV nanodiamond 40nm, room temp",
     domain:"physical", groups:["physical","confirmed"],
     D:0.654, r2:0.973,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"T₁ relaxation in 40nm nanodiamonds: S2 is the best model (lowest AIC), D=0.654 — natural decoherence, well below the cliff.",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
@@ -365,7 +380,8 @@ const TESTS = [
     name:"NV nanodiamond 3μm, room temp",
     domain:"physical", groups:["physical","confirmed"],
     D:0.644, r2:0.949,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Larger 3μm diamonds retain the same natural regime (D=0.644). Size scaling does not push NV centres past the extraction threshold.",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
@@ -375,7 +391,8 @@ const TESTS = [
     name:"NV nanodiamond 40nm, ~6K",
     domain:"physical", groups:["physical","confirmed"],
     D:0.526, r2:0.982,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Cryogenic 6K: D=0.526, R²=0.982. Cooling reduces the effective exponent further — natural retention is robust across temperature.",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
@@ -385,7 +402,8 @@ const TESTS = [
     name:"NV ensemble, 1ppm N impurity",
     domain:"physical", groups:["physical","confirmed"],
     D:0.889, r2:0.960,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Dilute ensemble (1ppm): D=0.889 — closest to the cliff but still natural. S2 bests power and exponential on AIC.",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
@@ -395,7 +413,8 @@ const TESTS = [
     name:"NV ensemble, 100ppm N impurity",
     domain:"physical", groups:["physical","confirmed"],
     D:0.527, r2:0.935,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Dense 100ppm ensemble: D=0.527. Higher impurity does not induce extraction — the retention law governs T₂ echo decay uniformly.",
     image:"dream_nv_center_s2_test.png",
     source:"dream_nv_center_s2_results.json"
@@ -407,7 +426,8 @@ const TESTS = [
     name:"Ising spatial T=1.5",
     domain:"physical",
     D:0.653, r2:0.972,
-    verdict:"NATURAL", kind:"natural",
+    verdict:"NATURAL",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"Below-Tc spatial Ising retention: D=0.653 (R²=0.972). Power law marginally wins on AIC, but S2 is consistent — both fall on the natural side.",
     image:"dream_ising_spatial_retention.png",
     source:"dream_ising_spatial_retention_results.json"
@@ -417,7 +437,8 @@ const TESTS = [
     name:"Ising crossover T=2.269 (critical)",
     domain:"physical",
     D:1.088, r2:0.838,
-    verdict:"EXTRACTION", kind:"threshold",
+    verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED", kind:"threshold",
     narrative:"At the critical temperature Tc≈2.269, simple exponential wins on AIC; S2 sits exactly on the D=1 cliff (D=1.088). A falsification boundary for the law.",
     image:"dream_ising_crossover_plot.png",
     source:"dream_ising_crossover_results.json"
@@ -471,7 +492,8 @@ const TESTS = [
     name:"Sweden FTT (1984–91)",
     domain:"interventions", groups:["interventions","ecological","financial","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"intervention",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"intervention",
     narrative:"A financial-transactions tax suppressed turnover and pushed D below the extraction threshold during the tax, then snapped back to deep extraction (4.74) after repeal — fully reversible, as predicted.",
     image:"intervention_falsifiability_test.png",
     source:"intervention_falsifiability_results.json",
@@ -486,7 +508,8 @@ const TESTS = [
     name:"China minor gaming ban (2021)",
     domain:"interventions", groups:["interventions","cognitive","ecological","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"intervention",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"intervention",
     narrative:"Banning algorithmic feeds for minors collapsed attention extraction from D=4.15 to D=0.12 — the largest single intervention effect on record.",
     image:"intervention_falsifiability_test.png",
     source:"intervention_falsifiability_results.json",
@@ -500,7 +523,8 @@ const TESTS = [
     name:"Montréal Protocol (1987)",
     domain:"interventions", groups:["interventions","ecological","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"intervention",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"intervention",
     narrative:"The CFC ban slowed ozone decline; ecological retention crossed from extraction (1.27) back to natural (0.58). The retention law responds to policy, not just to markets.",
     image:"intervention_falsifiability_test.png",
     source:"intervention_falsifiability_results.json",
@@ -514,7 +538,8 @@ const TESTS = [
     name:"Volcker Rule (2012)",
     domain:"interventions", groups:["interventions","financial","confirmed"],
     D:null, r2:null,
-    verdict:"CONFIRMED", kind:"intervention",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"intervention",
     narrative:"Prop-trading restriction reduced D from 1.50 to 0.97 — just below the threshold. A policy lever on fictitious-capital extraction.",
     image:"intervention_falsifiability_test.png",
     source:"intervention_falsifiability_results.json",
@@ -541,7 +566,8 @@ const TESTS = [
     name:"NOAA Solar Wind Speed",
     domain:"live",
     D:5.0, r2:0.998,
-    verdict:"WEAK", kind:"inconclusive",
+    verdict:"WEAK",
+    model_verdict:"UNDETERMINED", kind:"inconclusive",
     narrative:"Solar-wind speed series hits the D=5.0 boundary with R²=0.998. S2 is consistent but the upper-bound hit means no quantitative exponent can be claimed.",
     image:null,
     source:"s2_scout_results.json"
@@ -551,7 +577,8 @@ const TESTS = [
     name:"World Bank USA GDP",
     domain:"live",
     D:5.0, r2:0.994,
-    verdict:"WEAK", kind:"inconclusive",
+    verdict:"WEAK",
+    model_verdict:"UNDETERMINED", kind:"inconclusive",
     narrative:"Annual US GDP series hits D=5.0 (R²=0.994). Macro time-aggregated series saturate the upper bound — flagged weak pending finer-grain data.",
     image:null,
     source:"s2_scout_results.json"
@@ -561,7 +588,8 @@ const TESTS = [
     name:"World Bank USA CPI",
     domain:"live",
     D:5.0, r2:0.999,
-    verdict:"WEAK", kind:"inconclusive",
+    verdict:"WEAK",
+    model_verdict:"UNDETERMINED", kind:"inconclusive",
     narrative:"CPI series: D=5.0 boundary, R²=0.999. Inflation retention is consistent with S2 but the exponent is unbounded at this sampling rate.",
     image:null,
     source:"s2_scout_results.json"
@@ -571,7 +599,8 @@ const TESTS = [
     name:"World Bank USA Unemployment",
     domain:"live",
     D:2.284, r2:0.947,
-    verdict:"WEAK", kind:"inconclusive",
+    verdict:"WEAK",
+    model_verdict:"UNDETERMINED", kind:"inconclusive",
     narrative:"Unemployment retention: D=2.284, R²=0.947 — extraction regime, but the fit quality is marginal so the verdict is weak.",
     image:null,
     source:"s2_scout_results.json"
@@ -603,7 +632,8 @@ const TESTS = [
     name:"Cryptocurrency markets (cross-coin)",
     domain:"confirmed", groups:["confirmed","financial"],
     D:0.30, r2:null,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"S2_WINS", kind:"natural",
     narrative:"Aggregated crypto-return retention: D=0.30 — S2 fits and beats the power law across the cross-coin panel.",
     image:"fictitious_capital_s2_analysis.png",
     source:"KB §27"
@@ -623,7 +653,8 @@ const TESTS = [
     name:"Earthquakes (global catalogue)",
     domain:"confirmed", groups:["confirmed","ecological"],
     D:0.12, r2:null,
-    verdict:"CONFIRMED", kind:"natural",
+    verdict:"CONFIRMED",
+    model_verdict:"UNDETERMINED", kind:"natural",
     narrative:"After dust decomposition, the seismic-event retention exponent collapses to D=0.12 — extremely natural; the long tail is a dust artefact, not extraction.",
     image:"dream_s2_dust_decomposition.png",
     source:"KB §27"
@@ -811,10 +842,14 @@ const TESTS = [
     source:"scouting KB"
   ,url:"https://doi.org/10.1002/qute.201900090"}
   /* ============ 2026 WEB SCAN — NEW FINDINGS ============ */
-  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window.",source:"2026 web scan",image:null,date:"2024",url:"https://www.ucirvine.edu"}
-  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse. S2 loses to EXP (ΔAICc=2.06).",source:"2026 web scan",image:null,date:"2026",url:"https://www.ucirvine.edu"}
-  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination.",source:"Health Canada 2024 report",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
-  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure.",source:"HFT market reports 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
+  ,{id:"attn-2024-upd",name:"Attention span 2004–2024 (updated)",domain:"cognitive",D:0.779,r2:0.9793,verdict:"NATURAL",
+    model_verdict:"UNDETERMINED",narrative:"Updated Gloria Mark data through 2024. D approaching 1 — extraction intensifying but not yet super-exponential in this window.",source:"2026 web scan",image:null,date:"2024",url:"https://www.ucirvine.edu"}
+  ,{id:"attn-2026-vid",name:"Attention span 2004–2026 (with video metric)",domain:"cognitive",D:0.947,r2:0.9556,verdict:"NATURAL",
+    model_verdict:"S2_LOSES",narrative:"Including 2026 TikTok-era 8-second metric. D approaching 1 — on the threshold of super-exponential collapse. S2 loses to EXP (ΔAICc=2.06).",source:"2026 web scan",image:null,date:"2026",url:"https://www.ucirvine.edu"}
+  ,{id:"maid-2024",name:"MAID Canada retention 2021–2024",domain:"cognitive",D:0.763,r2:0.9841,verdict:"NATURAL",
+    model_verdict:"UNDETERMINED",narrative:"Euthanasia rate rising: 10,064 (2021) → 16,499 (2024) deaths. Retention of non-MAID death share declining. Capital normalizing elimination.",source:"Health Canada 2024 report",image:null,date:"2024",url:"https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"}
+  ,{id:"hft-mkt-2026",name:"HFT market growth inverse 2020–2026",domain:"financial",D:1.317,r2:0.9663,verdict:"EXTRACTION",
+    model_verdict:"UNDETERMINED",narrative:"HFT market growing from $5B to $21B. Non-HFT share declining super-exponentially. D>1 confirms extraction regime in financial infrastructure.",source:"HFT market reports 2026",image:null,date:"2026",url:"https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"}
   ,{id:"france-ftt-2025",name:"France FTT rate increase (Apr 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Rate raised from 0.3% to 0.4%. Prediction: D should drop in French equities. Data collection pending.",source:"Tax Foundation 2026",image:null,date:"2025-04",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
   ,{id:"italy-ftt-2025",name:"Italy FTT rates doubled (Jan 2025)",domain:"interventions",D:null,r2:null,verdict:"PENDING",narrative:"Cash-equity FTT rates doubled. Prediction: D should drop in Italian equities. Natural experiment in progress.",source:"Tax Foundation 2026",image:null,date:"2025-01",url:"https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"}
   ,{id:"des-y6-de",name:"DES Y6 dark energy constraints",domain:"cosmological",D:null,r2:null,verdict:"PENDING",narrative:"Dark energy equation of state tightened. Growth factor data available for S2 fit. If w<-1, D should be increasing.",source:"DES collaboration 2025",image:null,date:"2025",url:"https://www.darkenergysurvey.org/des-year-6-cosmology-results/"}
@@ -841,26 +876,46 @@ const TESTS = [
   
   
   
-  ,{id:"auto-2026-07-17-zenodo-1",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.7582,r2:0.9981,verdict:"EXTRACTION",narrative:"D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-17.09).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
-  ,{id:"auto-2026-07-17-zenodo-2",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.3751,r2:0.9984,verdict:"EXTRACTION",narrative:"D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-91.77).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
-  ,{id:"auto-2026-07-18-zenodo-0",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.2654,r2:0.2416,verdict:"EXTRACTION",narrative:"D=1.265, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.78, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-18-zenodo-1",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3598,r2:0.5442,verdict:"EXTRACTION",narrative:"D=1.360, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-18-zenodo-2",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3756,r2:0.9997,verdict:"EXTRACTION",narrative:"D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-767.85).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-19-zenodo-0",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.0003,r2:1.0000,verdict:"EXTRACTION",narrative:"D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-544.64).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-19-zenodo-1",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:0.3016,r2:0.1321,verdict:"NATURAL",narrative:"D=0.302, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.3, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-19-zenodo-2",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.3671,r2:0.1659,verdict:"EXTRACTION",narrative:"D=1.367, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.6, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-22-zenodo-0",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3994,r2:0.9943,verdict:"NATURAL",narrative:"D=0.399, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-94.17).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-1",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.6149,r2:0.9999,verdict:"NATURAL",narrative:"D=0.615, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-235.84).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-2",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3015,r2:0.9910,verdict:"NATURAL",narrative:"D=0.301, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-81.01).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-3",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.2847,r2:0.9824,verdict:"NATURAL",narrative:"D=0.285, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-228.41).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-4",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.5253,r2:0.9994,verdict:"NATURAL",narrative:"D=0.525, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-49.62).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-23-zenodo-0",name:"Zenodo: Data and code for: Photo-induced currents and shor",domain:"scouting",D:1.0114,r2:1.0000,verdict:"EXTRACTION",narrative:"D=1.011, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-551.53).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21453837",image:null}
-  ,{id:"auto-2026-07-23-zenodo-1",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:0.8590,r2:0.8091,verdict:"THRESHOLD",narrative:"D=0.859, R²=0.8091. D near threshold — regime transition zone. S2 ties EXP (ΔAICc=1.38, within ±2).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
-  ,{id:"auto-2026-07-23-zenodo-2",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:1.0180,r2:1.0000,verdict:"EXTRACTION",narrative:"D=1.018, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-448.17).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
-  ,{id:"auto-2026-07-24-zenodo-0",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.2321,r2:0.9256,verdict:"NATURAL",narrative:"D=0.232, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties POWER (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-24-zenodo-1",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.3340,r2:0.8723,verdict:"NATURAL",narrative:"D=0.334, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-24-zenodo-2",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:1.5463,r2:0.8173,verdict:"EXTRACTION",narrative:"D=1.546, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=1.21, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-25-zenodo-0",name:"Zenodo: Computational Verification Suite for Singular-Seri",domain:"scouting",D:1.3385,r2:0.9985,verdict:"EXTRACTION",narrative:"D=1.339, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-47.04).",source:"auto-scan 2026-07-25",date:"2026-07-25",url:"10.5281/zenodo.21534407",image:null}
+  ,{id:"auto-2026-07-17-zenodo-1",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.7582,r2:0.9981,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-17.09).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
+  ,{id:"auto-2026-07-17-zenodo-2",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.3751,r2:0.9984,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-91.77).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
+  ,{id:"auto-2026-07-18-zenodo-0",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.2654,r2:0.2416,verdict:"EXTRACTION",
+    model_verdict:"S2_TIES",narrative:"D=1.265, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.78, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"auto-2026-07-18-zenodo-1",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3598,r2:0.5442,verdict:"EXTRACTION",
+    model_verdict:"S2_TIES",narrative:"D=1.360, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"auto-2026-07-18-zenodo-2",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3756,r2:0.9997,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-767.85).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"auto-2026-07-19-zenodo-0",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.0003,r2:1.0000,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-544.64).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"auto-2026-07-19-zenodo-1",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:0.3016,r2:0.1321,verdict:"NATURAL",
+    model_verdict:"S2_TIES",narrative:"D=0.302, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.3, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"auto-2026-07-19-zenodo-2",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.3671,r2:0.1659,verdict:"EXTRACTION",
+    model_verdict:"S2_TIES",narrative:"D=1.367, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.6, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"auto-2026-07-22-zenodo-0",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3994,r2:0.9943,verdict:"NATURAL",
+    model_verdict:"S2_WINS",narrative:"D=0.399, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-94.17).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"auto-2026-07-22-zenodo-1",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.6149,r2:0.9999,verdict:"NATURAL",
+    model_verdict:"S2_WINS",narrative:"D=0.615, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-235.84).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"auto-2026-07-22-zenodo-2",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3015,r2:0.9910,verdict:"NATURAL",
+    model_verdict:"S2_WINS",narrative:"D=0.301, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-81.01).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"auto-2026-07-22-zenodo-3",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.2847,r2:0.9824,verdict:"NATURAL",
+    model_verdict:"S2_WINS",narrative:"D=0.285, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-228.41).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"auto-2026-07-22-zenodo-4",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.5253,r2:0.9994,verdict:"NATURAL",
+    model_verdict:"S2_WINS",narrative:"D=0.525, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-49.62).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"auto-2026-07-23-zenodo-0",name:"Zenodo: Data and code for: Photo-induced currents and shor",domain:"scouting",D:1.0114,r2:1.0000,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.011, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-551.53).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21453837",image:null}
+  ,{id:"auto-2026-07-23-zenodo-1",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:0.8590,r2:0.8091,verdict:"THRESHOLD",
+    model_verdict:"S2_TIES",narrative:"D=0.859, R²=0.8091. D near threshold — regime transition zone. S2 ties EXP (ΔAICc=1.38, within ±2).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
+  ,{id:"auto-2026-07-23-zenodo-2",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:1.0180,r2:1.0000,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.018, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-448.17).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
+  ,{id:"auto-2026-07-24-zenodo-0",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.2321,r2:0.9256,verdict:"NATURAL",
+    model_verdict:"S2_TIES",narrative:"D=0.232, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties POWER (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"auto-2026-07-24-zenodo-1",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.3340,r2:0.8723,verdict:"NATURAL",
+    model_verdict:"S2_TIES",narrative:"D=0.334, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"auto-2026-07-24-zenodo-2",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:1.5463,r2:0.8173,verdict:"EXTRACTION",
+    model_verdict:"S2_TIES",narrative:"D=1.546, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=1.21, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"auto-2026-07-25-zenodo-0",name:"Zenodo: Computational Verification Suite for Singular-Seri",domain:"scouting",D:1.3385,r2:0.9985,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.339, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-47.04).",source:"auto-scan 2026-07-25",date:"2026-07-25",url:"10.5281/zenodo.21534407",image:null}
 
   ,{
     id:"retest-2026-07-26-000",
@@ -1013,7 +1068,8 @@ const TESTS = [
   ,{id:"auto-2026-07-28-arxiv-2",name:"arXiv: Cost-Aware Logging: Measuring the Financial Impact",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Cost-Aware Logging: Measuring the Financial Impact of Excessive Log Retention in",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/2601.11584v1",image:null}
   ,{id:"auto-2026-07-28-arxiv-3",name:"arXiv: Large deviations for dynamical systems with stretc",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Large deviations for dynamical systems with stretched exponential decay of corre",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1812.09742v2",image:null}
   ,{id:"auto-2026-07-28-arxiv-4",name:"arXiv: On the Polynomial and Exponential Decay of Eigen-F",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. On the Polynomial and Exponential Decay of Eigen-Forms of Generalized Time-Harmo",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1105.4105v1",image:null}
-  ,{id:"auto-2026-07-28-wb-cpi",name:"World Bank: CPI (ACF retention)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",narrative:"D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
+  ,{id:"auto-2026-07-28-wb-cpi",name:"World Bank: CPI (ACF retention)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",
+    model_verdict:"S2_WINS",narrative:"D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
 ];
 
 /* ---- helpers ---- */
