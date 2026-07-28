@@ -182,8 +182,256 @@ def scan_fred(series_ids=None):
             'url': url,
             'filename': filepath,
             'format': 'csv',
-            'series_id': sid,
         })
+    print(f'  Downloaded {len(found)} series')
+    return found
+
+def scan_coingecko():
+    """Download crypto daily closes from CoinGecko (no key)."""
+    print('\n📡 CoinGecko')
+    coins = ['bitcoin', 'ethereum', 'ripple', 'cardano', 'solana', 'dogecoin', 'polkadot', 'chainlink']
+    found = []
+    for coin in coins:
+        url = f'https://api.coingecko.com/api/v3/coins/{coin}/market_chart?vs_currency=usd&days=365&interval=daily'
+        data = fetch_url(url, timeout=15)
+        if not data: continue
+        try:
+            d = json.loads(data)
+            vals = [p[1] for p in d.get('prices', [])]
+            if len(vals) < 10: continue
+            filepath = os.path.join(OUT_DIR, f'coingecko_{coin}.json')
+            with open(filepath, 'w') as f:
+                json.dump(vals, f)
+            found.append({
+                'source': 'coingecko',
+                'title': f'CoinGecko: {coin}',
+                'url': url,
+                'filename': filepath,
+                'format': 'json',
+                'values': vals,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} coins')
+    return found
+
+def scan_binance():
+    """Download crypto daily klines from Binance (no key)."""
+    print('\n📡 Binance')
+    symbols = [('BTCUSDT', 'BTC'), ('ETHUSDT', 'ETH'), ('SOLUSDT', 'SOL'),
+               ('ADAUSDT', 'ADA'), ('DOTUSDT', 'DOT'), ('XRPUSDT', 'XRP'),
+               ('DOGEUSDT', 'DOGE'), ('LINKUSDT', 'LINK')]
+    found = []
+    for sym, name in symbols:
+        url = f'https://api.binance.com/api/v3/klines?symbol={sym}&interval=1d&limit=365'
+        data = fetch_url(url, timeout=15)
+        if not data: continue
+        try:
+            d = json.loads(data)
+            vals = [float(k[4]) for k in d]  # close price
+            if len(vals) < 10: continue
+            filepath = os.path.join(OUT_DIR, f'binance_{name}.json')
+            with open(filepath, 'w') as f:
+                json.dump(vals, f)
+            found.append({
+                'source': 'binance',
+                'title': f'Binance: {name}',
+                'url': url,
+                'filename': filepath,
+                'format': 'json',
+                'values': vals,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} pairs')
+    return found
+
+def scan_openmeteo():
+    """Download weather/environmental data from Open-Meteo (no key)."""
+    print('\n📡 Open-Meteo')
+    locations = [
+        ('52.52', '13.41', 'Berlin'),
+        ('35.68', '139.69', 'Tokyo'),
+        ('40.71', '-74.01', 'NYC'),
+        ('51.51', '-0.13', 'London'),
+        ('-33.87', '151.21', 'Sydney'),
+        ('55.75', '37.62', 'Moscow'),
+        ('28.61', '77.21', 'Delhi'),
+        ('-22.91', '-43.17', 'Rio'),
+    ]
+    variables = ['temperature_2m_mean', 'wind_speed_10m_max', 'precipitation_sum']
+    found = []
+    for lat, lon, city in locations:
+        for var in variables:
+            url = (f'https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}'
+                   f'&start_date=2025-01-01&end_date=2026-07-01&daily={var}')
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            try:
+                d = json.loads(data)
+                vals = d.get('daily', {}).get(var, [])
+                vals = [v for v in vals if v is not None]
+                if len(vals) < 10: continue
+                filepath = os.path.join(OUT_DIR, f'openmeteo_{city}_{var}.json')
+                with open(filepath, 'w') as f:
+                    json.dump(vals, f)
+                found.append({
+                    'source': 'openmeteo',
+                    'title': f'Open-Meteo: {city} {var}',
+                    'url': url,
+                    'filename': filepath,
+                    'format': 'json',
+                    'values': vals,
+                })
+            except: pass
+    print(f'  Downloaded {len(found)} series')
+    return found
+
+def scan_noaa_space():
+    """Download NOAA space weather data."""
+    print('\n📡 NOAA Space Weather')
+    endpoints = [
+        ('https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json', 'NOAA Solar Wind Speed', 'speed'),
+        ('https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json', 'NOAA Solar Wind Bz', 'bz'),
+        ('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json', 'NOAA Planetary K-index', None),
+    ]
+    found = []
+    for url, name, key in endpoints:
+        data = fetch_url(url, timeout=20)
+        if not data: continue
+        try:
+            d = json.loads(data)
+            if isinstance(d, list) and len(d) > 20:
+                if key:
+                    vals = [item.get(key, 0) for item in d if item.get(key) is not None]
+                else:
+                    # K-index: list of [timestamp, value] pairs, skip header
+                    vals = [float(row[-1]) for row in d[1:] if row and len(row) > 1]
+                if len(vals) < 10: continue
+                filepath = os.path.join(OUT_DIR, f'noaa_{name.replace(" ","_").lower()}.json')
+                with open(filepath, 'w') as f:
+                    json.dump(vals, f)
+                found.append({
+                    'source': 'noaa',
+                    'title': name,
+                    'url': url,
+                    'filename': filepath,
+                    'format': 'json',
+                    'values': vals,
+                })
+        except: pass
+    print(f'  Downloaded {len(found)} series')
+    return found
+
+def scan_nasa_giss():
+    """Download NASA GISS global temperature."""
+    print('\n📡 NASA GISS')
+    url = 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
+    data = fetch_url(url, timeout=20)
+    if not data: return []
+    text = data.decode('utf-8', errors='ignore')
+    vals = []
+    for line in text.strip().split('\n'):
+        parts = line.split(',')
+        if parts and re.match(r'^\d{4}$', parts[0].strip()):
+            for p in parts[1:13]:
+                try:
+                    v = float(p.strip())
+                    if v != -9999: vals.append(v)
+                except: pass
+    if len(vals) < 10: return []
+    filepath = os.path.join(OUT_DIR, 'giss_temp.json')
+    with open(filepath, 'w') as f:
+        json.dump(vals, f)
+    print(f'  {len(vals)} monthly values')
+    return [{'source': 'giss', 'title': 'NASA GISS Global Temperature', 'url': url,
+             'filename': filepath, 'format': 'json', 'values': vals}]
+
+def scan_covid():
+    """Download COVID-19 time series from JHU CSSE."""
+    print('\n📡 COVID-19 (JHU CSSE)')
+    found = []
+    for kind, label in [('confirmed', 'Confirmed'), ('deaths', 'Deaths')]:
+        url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_{kind}_global.csv'
+        data = fetch_url(url, timeout=30)
+        if not data: continue
+        try:
+            import csv as csvmod
+            reader = csvmod.reader(data.decode('utf-8').splitlines())
+            rows = list(reader)
+            daily = [0] * (len(rows[0]) - 4)
+            for row in rows[1:]:
+                for i in range(4, len(row)):
+                    try: daily[i-4] += int(row[i])
+                    except: pass
+            new_vals = [max(0, daily[i] - daily[i-1]) for i in range(1, len(daily))]
+            if len(new_vals) < 10: continue
+            filepath = os.path.join(OUT_DIR, f'covid_{kind}.json')
+            with open(filepath, 'w') as f:
+                json.dump(new_vals, f)
+            found.append({
+                'source': 'covid',
+                'title': f'COVID-19 {label} (daily new, global)',
+                'url': url,
+                'filename': filepath,
+                'format': 'json',
+                'values': new_vals,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} series')
+    return found
+
+def scan_global_temp():
+    """Download global temperature from datasets library."""
+    print('\n📡 Global Temperature (HadCRUT)')
+    url = 'https://raw.githubusercontent.com/datasets/global-temp/master/data/monthly.csv'
+    data = fetch_url(url, timeout=15)
+    if not data: return []
+    try:
+        import csv as csvmod
+        reader = csvmod.DictReader(data.decode('utf-8').splitlines())
+        vals = [float(row['Mean']) for row in reader if 'Mean' in row]
+        if len(vals) < 10: return []
+        filepath = os.path.join(OUT_DIR, 'global_temp.json')
+        with open(filepath, 'w') as f:
+            json.dump(vals, f)
+        print(f'  {len(vals)} monthly values')
+        return [{'source': 'globaltemp', 'title': 'Global Temperature (HadCRUT)', 'url': url,
+                 'filename': filepath, 'format': 'json', 'values': vals}]
+    except: return []
+
+def scan_eurostat():
+    """Download Eurostat economic indicators (no key)."""
+    print('\n📡 Eurostat')
+    indicators = [
+        ('ei_bsrt_m_rt', 'Eurostat Business Climate Indicator'),
+        ('teim020', 'Eurostat Industrial Production Index'),
+    ]
+    found = []
+    for code, name in indicators:
+        url = f'https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{code}?format=SDMX-CSV'
+        data = fetch_url(url, timeout=15)
+        if not data: continue
+        try:
+            import csv as csvmod
+            reader = csvmod.DictReader(data.decode('utf-8').splitlines())
+            vals = []
+            for row in reader:
+                for k in row:
+                    if 'OBS_VALUE' in k:
+                        try: vals.append(float(row[k]))
+                        except: pass
+            if len(vals) < 10: continue
+            filepath = os.path.join(OUT_DIR, f'eurostat_{code}.json')
+            with open(filepath, 'w') as f:
+                json.dump(vals, f)
+            found.append({
+                'source': 'eurostat',
+                'title': name,
+                'url': url,
+                'filename': filepath,
+                'format': 'json',
+                'values': vals,
+            })
+        except: pass
     print(f'  Downloaded {len(found)} series')
     return found
 
@@ -787,6 +1035,21 @@ def main():
     usgs_results = scan_usgs()
     wb_results = scan_worldbank()
     
+    # New meta-sources (no API key required)
+    coingecko_results = scan_coingecko()
+    binance_results = scan_binance()
+    openmeteo_results = scan_openmeteo()
+    noaa_results = scan_noaa_space()
+    giss_results = scan_nasa_giss()
+    covid_results = scan_covid()
+    globaltemp_results = scan_global_temp()
+    eurostat_results = scan_eurostat()
+    
+    # Combine all JSON-value sources for unified analysis
+    json_sources = (coingecko_results + binance_results + openmeteo_results +
+                    noaa_results + giss_results + covid_results + 
+                    globaltemp_results + eurostat_results + wb_results)
+    
     # 3. Download and analyze Zenodo CSVs
     print('\n📊 Analyzing Zenodo datasets...')
     for item in zenodo_results[:5]:  # limit to 5
@@ -890,6 +1153,37 @@ def main():
                 'url': item.get('url', ''),
             })
             print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+    
+    # 7b. Analyze new meta-sources (CoinGecko, Binance, Open-Meteo, NOAA, GISS, COVID, Global Temp, Eurostat)
+    print('\n📊 Analyzing new meta-sources...')
+    for item in json_sources:
+        if item in wb_results: continue  # already analyzed above
+        fit = analyze_json_values(item.get('values', []), item['title'][:60])
+        if fit and 'D' in fit:
+            narrative = groq_narrate(fit, groq_url if groq_url else None)
+            source_name = item.get('source', 'unknown')
+            domain_map = {
+                'coingecko': 'crypto', 'binance': 'crypto',
+                'openmeteo': 'environmental', 'noaa': 'space_weather',
+                'giss': 'environmental', 'covid': 'ecological',
+                'globaltemp': 'environmental', 'eurostat': 'economic',
+            }
+            domain = domain_map.get(source_name, 'scouting')
+            entry_id = f'{source_name}-{item["title"].lower().replace(" ","-").replace(":","")[:30]}'
+            all_results.append({
+                'id': entry_id,
+                'name': f'{item["title"]} (ACF retention)',
+                'domain': domain,
+                'D': fit['D'], 'r2': fit['r2'],
+                'verdict': fit['verdict'],
+                        'model_verdict': fit.get('model_verdict'),
+                        'model_note': fit.get('model_note', ''),
+                        'delta_aicc': fit.get('delta_aicc'),
+                        'best_alt': fit.get('best_alt'),
+                'narrative': narrative,
+                'url': item.get('url', ''),
+            })
+            print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]} — {item["title"][:40]}')
     
     # 8. Summary
     print(f'\n{"="*60}')
