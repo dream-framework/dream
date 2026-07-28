@@ -1082,6 +1082,72 @@ const TESTS = [
   ,{id:"auto-2026-07-28-arxiv-4",name:"arXiv: О полиномиальном и экспоненциальном затухании",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. On the Polynomial and Exponential Decay of Eigen-Forms of Generalized Time-Harmo",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1105.4105v1",image:null}
   ,{id:"auto-2026-07-28-wb-cpi",name:"World Bank: ИПЦ (АСФ сохранение)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",
     model_verdict:"S2_WINS",narrative:"D=1.333, R²=0.9961. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-19.81).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
+
+  ,{
+    id:"batch2-2026-07-29-000",
+    name:"GISS Global Temperature (monthly ACF)",
+    domain:"environmental", groups:["environmental","scouting"],
+    D:0.4803, r2:0.9953,
+    verdict:"TENTATIVE", kind:"natural",
+    model_verdict:"S2_TIES",
+    narrative:"D=0.4803 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9953, n=100.",
+    image:null,
+    source:"batch2 2026-07-29",
+    date:"2026-07-29",
+    url:"https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv"
+  }
+  ,{
+    id:"batch2-2026-07-29-001",
+    name:"COVID-19 Confirmed (daily new, global ACF)",
+    domain:"ecological", groups:["ecological","scouting"],
+    D:1.0953, r2:0.9640,
+    verdict:"TENTATIVE", kind:"extraction",
+    model_verdict:"S2_TIES",
+    narrative:"D=1.0953 > 1 — extraction regime. S2 ties best model (ΔAICc=0.00). R²=0.9640, n=60.",
+    image:null,
+    source:"batch2 2026-07-29",
+    date:"2026-07-29",
+    url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+  }
+  ,{
+    id:"batch2-2026-07-29-002",
+    name:"COVID-19 Deaths (daily new, global ACF)",
+    domain:"ecological", groups:["ecological","scouting"],
+    D:0.3566, r2:0.7916,
+    verdict:"TENTATIVE", kind:"natural",
+    model_verdict:"S2_TIES",
+    narrative:"D=0.3566 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.7916, n=60.",
+    image:null,
+    source:"batch2 2026-07-29",
+    date:"2026-07-29",
+    url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+  }
+  ,{
+    id:"batch2-2026-07-29-003",
+    name:"Global Temperature monthly (HadCRUT, ACF)",
+    domain:"environmental", groups:["environmental","scouting"],
+    D:0.3848, r2:0.9496,
+    verdict:"TENTATIVE", kind:"natural",
+    model_verdict:"S2_TIES",
+    narrative:"D=0.3848 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9496, n=100.",
+    image:null,
+    source:"batch2 2026-07-29",
+    date:"2026-07-29",
+    url:"https://raw.githubusercontent.com/datasets/global-temp/master/data/monthly.csv"
+  }
+  ,{
+    id:"batch2-2026-07-29-004",
+    name:"USGS Earthquakes (30d, hourly count ACF)",
+    domain:"geophysical", groups:["geophysical","scouting"],
+    D:0.6933, r2:0.9982,
+    verdict:"TENTATIVE", kind:"natural",
+    model_verdict:"S2_TIES",
+    narrative:"D=0.6933 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9982, n=72.",
+    image:null,
+    source:"batch2 2026-07-29",
+    date:"2026-07-29",
+    url:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv"
+  }
 ];
 
 /* ---- вспомогательные функции ---- */
