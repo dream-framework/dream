@@ -17,7 +17,16 @@
     },
     chtml: { displayAlign:'center', displayIndent:'0' },
     svg:   { displayAlign:'center', displayIndent:'0' },
-    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+    options: { skipHtmlTags:[] },
+    startup: {
+      typeset: true,
+      ready: () => {
+        MathJax.startup.defaultReady();
+        MathJax.startup.promise.then(() => {
+          MathJax.typesetPromise();
+        });
+      }
+    }
   };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
@@ -122,9 +131,13 @@
 
     /* Keep MathJax display math comfortable inside cards */
     .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+
+    /* Show math by default in articles (override global.css display:none) */
+    .math-block{ display: block !important; }
+    .math-inline{ display: inline !important; }
   </style>
 </head>
-<body data-lang="ru" class="is-article">
+<body data-lang="ru" class="is-article show-math">
 
   <!-- ===== Fractal backdrop ===== -->
   <div id="fx" aria-hidden="true">
@@ -510,5 +523,28 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../../js/fs-toggle.js"></script>
+<script>
+// Clear MathJax state and re-typeset after CSS makes math visible
+window.addEventListener('load', function() {
+  function tryTypeset(retries) {
+    if (window.MathJax && MathJax.typesetPromise && MathJax.typesetClear) {
+      // First clear any previous partial typesetting
+      MathJax.typesetClear();
+      // Then re-typeset everything
+      MathJax.typesetPromise().then(function() {
+        console.log('MathJax re-typeset complete:', document.querySelectorAll('mjx-container').length, 'elements');
+      }).catch(function(e) {
+        console.log('MathJax typeset error:', e.message);
+        if (retries > 0) setTimeout(function() { tryTypeset(retries - 1); }, 500);
+      });
+    } else if (retries > 0) {
+      setTimeout(function() { tryTypeset(retries - 1); }, 300);
+    }
+  }
+  // Delay to let MathJax finish its initial (partial) typeset first
+  setTimeout(function() { tryTypeset(10); }, 500);
+});
+</script>
+<!-- force-typeset -->
 </body>
 </html>

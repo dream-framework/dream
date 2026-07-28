@@ -17,7 +17,16 @@
     },
     chtml: { displayAlign:'center', displayIndent:'0' },
     svg:   { displayAlign:'center', displayIndent:'0' },
-    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+    options: { skipHtmlTags:[] },
+    startup: {
+      typeset: true,
+      ready: () => {
+        MathJax.startup.defaultReady();
+        MathJax.startup.promise.then(() => {
+          MathJax.typesetPromise();
+        });
+      }
+    }
   };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
@@ -122,9 +131,13 @@
 
     /* Keep MathJax display math comfortable inside cards */
     .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+
+    /* Show math by default in articles (override global.css display:none) */
+    .math-block{ display: block !important; }
+    .math-inline{ display: inline !important; }
   </style>
 </head>
-<body data-lang="en" class="is-article">
+<body data-lang="en" class="is-article show-math">
 
   <!-- ===== Fractal backdrop ===== -->
   <div id="fx" aria-hidden="true">
@@ -198,9 +211,9 @@
           DREAM models observable 4D fields as a push-forward of 10D structure through a single, fixed, finite-resolution kernel \(K_\lambda\).
           The central working object here is the <em>retention function</em> \( \alpha(\lambda)\in[0,1] \), an invariant of the admissible kernel class:
         </p>
-        <div class="math-block">\[
+        \[
           \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big],
-        \]</div>
+        \]
         <p>
           where \( \lambda_q \) marks the coherence threshold (the “cliff”) and \( D_{\mathrm{eff}} \) is an effective spectral exponent that governs how swiftly information decays with scale. Everything below explains how this law arises from the push-forward, how it couples to focusing geometry, and how it organizes the spectrum of retained modes.
         </p>
@@ -227,17 +240,17 @@
         <p>
           Let \( \Phi(X) \) be a field on the compact 10D Meta-Manifold (MM). Observables in 4D are kernel-weighted averages of fiber contributions:
         </p>
-        <div class="math-block">\[
+        \[
           O(x)=\int_{\mathrm{MM}} K_\lambda(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),
-        \]</div>
+        \]
         <p>
           with admissible guardrails (K1–K3): normalization \( \int_{\mathrm{MM}}K_\lambda(x;X)\,d\mu_{\mathrm{MM}}(X)=1 \),
           locality-in-projection (finite support in \(x\)), and monotone fidelity \( \partial_\lambda \alpha(\lambda)\le 0 \).
           Using the coarea framework for a surjection \( \pi:\mathrm{MM}\to\mathbb{R}^{3,1} \),
         </p>
-        <div class="math-block">\[
+        \[
           O(x)=\int_{\pi^{-1}(x)}\!\frac{\Phi(X)}{J_\pi(X)}\,\underbrace{\Big(\int K_\lambda(x;X)\,d\lambda_{\text{loc}}\Big)}_{\text{instrument window}}\,d\Sigma_{6}(X),
-        \]</div>
+        \]
         <p>
           so retention is controlled by two ingredients: (i) <em>focusing</em>, via the Jacobian factor \(1/J_\pi\) on each fiber, and (ii) <em>spectral thinning</em> due to finite resolution.
         </p>
@@ -264,22 +277,22 @@
           If the cumulative retained-mode count below cutoff obeys
           \( N(\Omega)\propto \Omega^{D_{\mathrm{eff}}} \), then under a scale change \( \lambda\mapsto \lambda+d\lambda \) one obtains a differential thinning law
         </p>
-        <div class="math-block">\[
+        \[
           \frac{d}{d\lambda}\big(-\ln \alpha(\lambda)\big)=
           \frac{D_{\mathrm{eff}}}{\lambda_q^{D_{\mathrm{eff}}}}\;\lambda^{D_{\mathrm{eff}}-1},
-        \]</div>
+        \]
         <p>
           integrating to the invariant form
         </p>
-        <div class="math-block">\[
+        \[
           \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big].
-        \]</div>
+        \]
         <p>
           In double-log coordinates this is linear:
         </p>
-        <div class="math-block">\[
+        \[
           \ln\!\big(-\ln \alpha(\lambda)\big)=D_{\mathrm{eff}}\ln \lambda - D_{\mathrm{eff}}\ln \lambda_q,
-        \]</div>
+        \]
         <p>
           exposing \(D_{\mathrm{eff}}\) as the slope and \( \lambda_q \) as the intercept-set point.
         </p>
@@ -304,11 +317,11 @@
         <p>
           Two practical retention functionals probe distinct content:
         </p>
-        <div class="math-block">\[
+        \[
           R_{\mathrm{corr}^2}(\lambda)=\mathrm{corr}^2\!\big(e_4\!\mid_{\lambda\!\to\!0},\,e_4\!\mid_{\lambda}\big),
           \qquad
           R_{\mathrm{HF}}(\lambda)=\frac{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid\lambda)|^2\,d\Omega}{\int_{\Omega>\Omega_{\mathrm{Nyq}}}\!|\widehat{e_4}(\Omega\mid 0)|^2\,d\Omega}.
-        \]</div>
+        \]
         <p>
           Under the same kernel invariants, high-frequency content decays faster than structural correlation, i.e.
           \( R_{\mathrm{HF}}(\lambda)\prec R_{\mathrm{corr}^2}(\lambda) \), but both share the same stretched-exponential law with channel-specific fit pairs \((\lambda_q,D_{\mathrm{eff}})\).
@@ -335,9 +348,9 @@
           Define a scale-aware microstate budget \( M(\lambda,\varepsilon;x)\sim A(x)\,(\lambda/\varepsilon)^{D_I} \), where \( D_I\in(0,6] \) is an information-dimension proxy along the fiber.
           The <em>Complexity-Packing Index</em> (CPI) is then
         </p>
-        <div class="math-block">\[
+        \[
           \mathrm{CPI}(x)=\log_{10} M(\lambda,\varepsilon;x)=\log_{10}A(x)+D_I\log_{10}\!\Big(\tfrac{\lambda}{\varepsilon}\Big).
-        \]</div>
+        \]
         <p>
           Regions with high \(A(x)\) and populated \(D_I\) behave as <em>hubs/filaments</em> that remain visible deep into the coarse-grain flow.
         </p>
@@ -361,9 +374,9 @@
           Let \(N(\Omega)\) be the cumulative count of modes retained below spectral scale \(\Omega\).
           If retained states are self-similar over scales, a single exponent governs the asymptotics:
         </p>
-        <div class="math-block">\[
+        \[
           N(\Omega)\propto \Omega^{D_{\mathrm{eff}}}, \qquad \rho(\Omega)=\frac{dN}{d\Omega}\propto \Omega^{D_{\mathrm{eff}}-1}.
-        \]</div>
+        \]
         <p>
           The same \(D_{\mathrm{eff}}\) then controls the stretched-exponential decay of fidelity with blur-scale \( \lambda \), tying geometric focusing to spectral thinning:
           fewer effective modes \( \Rightarrow \) faster decay of fine detail; strong focusing \( \Rightarrow \) larger local contribution before decay.
@@ -388,10 +401,10 @@
         <p>
           Near \( \lambda\approx\lambda_q \), the second derivative of \(-\ln\alpha\) with respect to \(\ln\lambda\) peaks:
         </p>
-        <div class="math-block">\[
+        \[
           \frac{d^2}{d(\ln\lambda)^2}\big(-\ln\alpha(\lambda)\big)
           = D_{\mathrm{eff}}(D_{\mathrm{eff}}-1)\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\!,
-        \]</div>
+        \]
         <p>
           capturing the <em>acceleration</em> of loss across scales. This “knee” demarcates the watershed between interference-grade detail (sub-\( \lambda_q \)) and classicalized summaries (super-\( \lambda_q \)).
         </p>
@@ -576,5 +589,28 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../../js/fs-toggle.js"></script>
+<script>
+// Clear MathJax state and re-typeset after CSS makes math visible
+window.addEventListener('load', function() {
+  function tryTypeset(retries) {
+    if (window.MathJax && MathJax.typesetPromise && MathJax.typesetClear) {
+      // First clear any previous partial typesetting
+      MathJax.typesetClear();
+      // Then re-typeset everything
+      MathJax.typesetPromise().then(function() {
+        console.log('MathJax re-typeset complete:', document.querySelectorAll('mjx-container').length, 'elements');
+      }).catch(function(e) {
+        console.log('MathJax typeset error:', e.message);
+        if (retries > 0) setTimeout(function() { tryTypeset(retries - 1); }, 500);
+      });
+    } else if (retries > 0) {
+      setTimeout(function() { tryTypeset(retries - 1); }, 300);
+    }
+  }
+  // Delay to let MathJax finish its initial (partial) typeset first
+  setTimeout(function() { tryTypeset(10); }, 500);
+});
+</script>
+<!-- force-typeset -->
 </body>
 </html>

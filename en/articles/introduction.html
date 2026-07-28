@@ -17,7 +17,16 @@
     },
     chtml: { displayAlign:'center', displayIndent:'0' },
     svg:   { displayAlign:'center', displayIndent:'0' },
-    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+    options: { skipHtmlTags:[] },
+    startup: {
+      typeset: true,
+      ready: () => {
+        MathJax.startup.defaultReady();
+        MathJax.startup.promise.then(() => {
+          MathJax.typesetPromise();
+        });
+      }
+    }
   };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
@@ -122,9 +131,13 @@
 
     /* Keep MathJax display math comfortable inside cards */
     .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+
+    /* Show math by default in articles (override global.css display:none) */
+    .math-block{ display: block !important; }
+    .math-inline{ display: inline !important; }
   </style>
 </head>
-<body data-lang="en" class="is-article">
+<body data-lang="en" class="is-article show-math">
 
   <!-- ===== Fractal backdrop ===== -->
   <div id="fx" aria-hidden="true">
@@ -208,14 +221,14 @@
 
     <div data-mode="science">
       <p>The kernel is a non-invertible linear operator \( \mathcal{K}_\lambda: L^2(\mathrm{MM})\!\to\! L^2(\mathbb{R}^{3,1}) \) with finite resolution \(\lambda\) (our slice uses \(\lambda=\lambda_q\)). Observables are push-forwards</p>
-      <div class="math-block">\[
+      \[
         O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
-      \]</div>
+      \]
       <p>Only invariants of the admissible kernel class are empirical; constants of nature act as parameters of our slice. A convenient fidelity/retention law reads</p>
-      <div class="math-block">\[
+      \[
         \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big],\quad
         \text{with guardrails K1–K3: normalization, locality-in-projection, monotone fidelity.}
-      \]</div>
+      \]
       <p>We package constants as a parameter vector \( \boldsymbol{\theta}_K=\{c,\hbar,G,\alpha,\dots\} \) attached to the kernel invariants at our resolution, not derived inside the model.</p>
     </div>
 
@@ -233,10 +246,10 @@
 
     <div data-mode="science">
       <p>The MM is a compact, orientable, smooth 10-manifold \((\mathrm{MM},g_{\mathrm{MM}},d\mu_{\mathrm{MM}})\). We assume a topological surjection \( \pi:\mathrm{MM}\to\mathbb{R}^{3,1} \) and use the coarea framework to separate fiber contributions:</p>
-      <div class="math-block">\[
+      \[
         \int_{\mathrm{MM}}\! f(X)\,d\mu_{\mathrm{MM}}(X)
         =\int_{\mathbb{R}^{3,1}}\!\left(\int_{\pi^{-1}(x)} f(X)\,J_\pi(X)\,d\mu_{\text{fiber}}(X)\right)\!dx,
-      \]</div>
+      \]
       <p>so that push-forwards average fiber structure with kernel weights. Fiber “multiplicity” (effective CPI) and spectral scaling (via \(D_{\mathrm{eff}}\)) jointly govern retained organization.</p>
     </div>
 
@@ -255,11 +268,11 @@
     <div data-mode="science">
       <p>For fields \(\Phi\) on MM, 4D structures are kernel-weighted averages over fibers. Stability arises from finite resolution: sub-\(\lambda_q\) oscillations average out, projection invariants survive. A minimal action sketch:
       </p>
-      <div class="math-block">\[
+      \[
         S_{\mathrm{MM}}[\Phi]+\text{push-forward} \;\Longrightarrow\;
         S_{\mathrm{eff}}[O;\boldsymbol{\theta}_K],\quad
         \frac{\delta S_{\mathrm{eff}}}{\delta O}=0 \text{ with } \boldsymbol{\theta}_K \text{ fixed}.
-      \]</div>
+      \]
       <p>Two regimes follow from \(\alpha(\lambda)\): quantum-grade retention for \(\lambda\!\ll\!\lambda_q\); classical coarse-grain for \(\lambda\!\gg\!\lambda_q\).</p>
     </div>
 
@@ -277,9 +290,9 @@
 
     <div data-mode="science">
       <p>Let \(\rho(X)\) denote an MM energy/structure density and let \( \rho_\lambda(x)=\int_{\pi^{-1}(x)} K_\lambda(x;X)\rho(X)\,d\mu_{\text{fiber}} \). Complexity is maximized when \(\rho_\lambda\) balances interaction strength and retention—below a chaos threshold and above a sparsity threshold. Coarse-graining map \( \mathcal{C}_b: \lambda\mapsto b\lambda \) yields fixed-points that characterize “habitable” organizational scales.</p>
-      <div class="math-block">\[
+      \[
         \text{Phase diagram:}\quad \rho_\lambda \in (\rho_{\min},\rho_{\max}) \;\Rightarrow\; \text{long-lived attractors (hubs)}.
-      \]</div>
+      \]
     </div>
 
     <div data-mode="public">
@@ -296,13 +309,13 @@
 
     <div data-mode="science">
       <p>The retained spectrum follows an effective exponent \(D_{\mathrm{eff}}\). The cumulative count below cutoff \(\Omega\) and the density of states obey</p>
-      <div class="math-block">\[
+      \[
         N(\Omega)\propto \Omega^{D_{\mathrm{eff}}},\qquad \rho(\Omega)=\frac{dN}{d\Omega}\propto \Omega^{D_{\mathrm{eff}}-1}.
-      \]</div>
+      \]
       <p>Discrete ladder indices \(n\) then satisfy \( n\sim N(m_n) \Rightarrow m_n \propto n^{1/D_{\mathrm{eff}}} \) with the non-harmonic ratio law</p>
-      <div class="math-block">\[
+      \[
         \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\Rightarrow f_1\approx 15.717\,\mathrm{MHz}.
-      \]</div>
+      \]
     </div>
 
     <div data-mode="public">
@@ -481,5 +494,28 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../../js/fs-toggle.js"></script>
+<script>
+// Clear MathJax state and re-typeset after CSS makes math visible
+window.addEventListener('load', function() {
+  function tryTypeset(retries) {
+    if (window.MathJax && MathJax.typesetPromise && MathJax.typesetClear) {
+      // First clear any previous partial typesetting
+      MathJax.typesetClear();
+      // Then re-typeset everything
+      MathJax.typesetPromise().then(function() {
+        console.log('MathJax re-typeset complete:', document.querySelectorAll('mjx-container').length, 'elements');
+      }).catch(function(e) {
+        console.log('MathJax typeset error:', e.message);
+        if (retries > 0) setTimeout(function() { tryTypeset(retries - 1); }, 500);
+      });
+    } else if (retries > 0) {
+      setTimeout(function() { tryTypeset(retries - 1); }, 300);
+    }
+  }
+  // Delay to let MathJax finish its initial (partial) typeset first
+  setTimeout(function() { tryTypeset(10); }, 500);
+});
+</script>
+<!-- force-typeset -->
 </body>
 </html>

@@ -17,7 +17,16 @@
     },
     chtml: { displayAlign:'center', displayIndent:'0' },
     svg:   { displayAlign:'center', displayIndent:'0' },
-    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+    options: { skipHtmlTags:[] },
+    startup: {
+      typeset: true,
+      ready: () => {
+        MathJax.startup.defaultReady();
+        MathJax.startup.promise.then(() => {
+          MathJax.typesetPromise();
+        });
+      }
+    }
   };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
@@ -122,9 +131,13 @@
 
     /* Keep MathJax display math comfortable inside cards */
     .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+
+    /* Show math by default in articles (override global.css display:none) */
+    .math-block{ display: block !important; }
+    .math-inline{ display: inline !important; }
   </style>
 </head>
-<body data-lang="ru" class="is-article">
+<body data-lang="ru" class="is-article show-math">
 
   <!-- ===== Fractal backdrop ===== -->
   <div id="fx" aria-hidden="true">
@@ -211,14 +224,14 @@
 
     <div data-mode="science">
       <p>Ядро — неинвертируемый линейный оператор \( \mathcal{K}_\lambda: L^2(\mathrm{MM})\!\to\! L^2(\mathbb{R}^{3,1}) \) с конечным разрешением \(\lambda\) (в нашем «срезе»: \(\lambda=\lambda_q\)). Наблюдаемые — это пуш-форварды</p>
-      <div class="math-block">\[
+      \[
         O(x)=\int_{\mathrm{MM}} K_{\lambda}(x;X)\,\Phi(X)\,d\mu_{\mathrm{MM}}(X),\qquad \lambda=\lambda_q.
-      \]</div>
+      \]
       <p>Эмпирически значимы лишь инварианты допустимого класса ядер; «константы природы» выступают параметрами нашего среза. Удобный закон сохранения информации (фиделити):</p>
-      <div class="math-block">\[
+      \[
         \alpha(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big],\quad
         \text{ограничения K1–K3: нормировка, локальность проекции, монотонность фиделити.}
-      \]</div>
+      \]
       <p>Собираем параметры в вектор \( \boldsymbol{\theta}_K=\{c,\hbar,G,\alpha,\dots\} \), привязанный к инвариантам ядра на нашем разрешении; внутри модели они не «выводятся».</p>
     </div>
 
@@ -236,10 +249,10 @@
 
     <div data-mode="science">
       <p>MM — компактное, ориентируемое, гладкое 10-мерное многообразие \((\mathrm{MM},g_{\mathrm{MM}},d\mu_{\mathrm{MM}})\). Предполагается топологическая сюръекция \( \pi:\mathrm{MM}\to\mathbb{R}^{3,1} \); используем схему формулы сообъёма (coarea), чтобы отделить вклад волокон:</p>
-      <div class="math-block">\[
+      \[
         \int_{\mathrm{MM}}\! f(X)\,d\mu_{\mathrm{MM}}(X)
         =\int_{\mathbb{R}^{3,1}}\!\left(\int_{\pi^{-1}(x)} f(X)\,J_\pi(X)\,d\mu_{\text{fiber}}(X)\right)\!dx,
-      \]</div>
+      \]
       <p>так что пуш-форвард усредняет структуру волокон с весами ядра. «Мультипликативность» волокон (эффективная мера, условно CPI) и спектральное масштабирование (через \(D_{\mathrm{eff}}\)) совместно определяют сохраняемую организацию.</p>
     </div>
 
@@ -257,11 +270,11 @@
 
     <div data-mode="science">
       <p>Для полей \(\Phi\) на MM 4D-структуры — это ядровзвешенные усреднения по волокнам. Устойчивость обеспечивается конечным разрешением: суб-\(\lambda_q\)-осцилляции усредняются, инварианты проекции сохраняются. Эскиз на уровне действия:</p>
-      <div class="math-block">\[
+      \[
         S_{\mathrm{MM}}[\Phi]+\text{push-forward} \;\Longrightarrow\;
         S_{\mathrm{eff}}[O;\boldsymbol{\theta}_K],\quad
         \frac{\delta S_{\mathrm{eff}}}{\delta O}=0 \text{ при фиксированном } \boldsymbol{\theta}_K.
-      \]</div>
+      \]
       <p>Из \(\alpha(\lambda)\) следуют два режима: квантоподобное удержание при \(\lambda\!\ll\!\lambda_q\) и классическое грубое усреднение при \(\lambda\!\gg\!\lambda_q\).</p>
     </div>
 
@@ -279,9 +292,9 @@
 
     <div data-mode="science">
       <p>Пусть \(\rho(X)\) — плотность энергии/структуры на MM, а \( \rho_\lambda(x)=\int_{\pi^{-1}(x)} K_\lambda(x;X)\rho(X)\,d\mu_{\text{fiber}} \). Сложность максимальна, когда \(\rho_\lambda\) балансирует силу взаимодействий и удержание — ниже порога хаоса и выше порога разреженности. Оператор укрупнения \( \mathcal{C}_b: \lambda\mapsto b\lambda \) задаёт фикс-точки «обитаемых» масштабов организации.</p>
-      <div class="math-block">\[
+      \[
         \text{Фазовая диаграмма:}\quad \rho_\lambda \in (\rho_{\min},\rho_{\max}) \;\Rightarrow\; \text{долго живущие аттракторы (узлы/«хабы»)}.
-      \]</div>
+      \]
     </div>
 
     <div data-mode="public">
@@ -298,13 +311,13 @@
 
     <div data-mode="science">
       <p>Сохраняемый спектр подчиняется эффективному показателю \(D_{\mathrm{eff}}\). Кумулятивный счёт мод ниже отсечки \(\Omega\) и плотность состояний:</p>
-      <div class="math-block">\[
+      \[
         N(\Omega)\propto \Omega^{D_{\mathrm{eff}}},\qquad \rho(\Omega)=\frac{dN}{d\Omega}\propto \Omega^{D_{\mathrm{eff}}-1}.
-      \]</div>
+      \]
       <p>Для дискретной «лестницы» индексы \(n\) удовлетворяют \( n\sim N(m_n) \Rightarrow m_n \propto n^{1/D_{\mathrm{eff}}} \), получаем негармонический закон отношений</p>
-      <div class="math-block">\[
+      \[
         \frac{m_n}{m_1}=n^{1/D_{\mathrm{eff}}},\qquad m_1\approx 65\,\mathrm{neV}\Rightarrow f_1\approx 15.717\,\mathrm{MHz}.
-      \]</div>
+      \]
     </div>
 
     <div data-mode="public">
@@ -481,5 +494,28 @@ document.addEventListener('DOMContentLoaded', () => {
   <script defer src="../../js/bot.js"></script>
   <!-- ===== Fullscreen toggle for toys ===== -->
   <script defer src="../../js/fs-toggle.js"></script>
+<script>
+// Clear MathJax state and re-typeset after CSS makes math visible
+window.addEventListener('load', function() {
+  function tryTypeset(retries) {
+    if (window.MathJax && MathJax.typesetPromise && MathJax.typesetClear) {
+      // First clear any previous partial typesetting
+      MathJax.typesetClear();
+      // Then re-typeset everything
+      MathJax.typesetPromise().then(function() {
+        console.log('MathJax re-typeset complete:', document.querySelectorAll('mjx-container').length, 'elements');
+      }).catch(function(e) {
+        console.log('MathJax typeset error:', e.message);
+        if (retries > 0) setTimeout(function() { tryTypeset(retries - 1); }, 500);
+      });
+    } else if (retries > 0) {
+      setTimeout(function() { tryTypeset(retries - 1); }, 300);
+    }
+  }
+  // Delay to let MathJax finish its initial (partial) typeset first
+  setTimeout(function() { tryTypeset(10); }, 500);
+});
+</script>
+<!-- force-typeset -->
 </body>
 </html>
