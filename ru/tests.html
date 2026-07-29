@@ -192,7 +192,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "29 Jul 2026 02:09 EST";
+const LAST_REFRESH = "29 Jul 2026 19:45 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -1175,6 +1175,9 @@ const TESTS = [
     model_verdict:"S2_TIES",narrative:"D=1.530, R²=0.7695. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с GAUSS (ΔAICc=0.06, в пределах ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",image:null}
   ,{id:"auto-2026-07-28-openmeteo-open-meteo-rio-temperature_2m_",name:"Open-Meteo: Rio temperature_2m_mean (ACF retention)",domain:"environmental",D:1.0289,r2:0.8916,verdict:"EXTRACTION",
     model_verdict:"S2_TIES",narrative:"D=2.417, R²=0.8510. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с GAUSS (ΔAICc=-0.62, в пределах ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"auto-2026-07-29-openmeteo-open-meteo-berlin-precipitatio",name:"Open-Meteo: Berlin precipitation_sum (ACF retention)",domain:"environmental",D:0.4118,r2:0.8541,verdict:"NATURAL",narrative:"D=0.412, R²=0.8541. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=0.68, в пределах ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"auto-2026-07-29-openmeteo-open-meteo-london-precipitatio",name:"Open-Meteo: London precipitation_sum (ACF retention)",domain:"environmental",D:0.2828,r2:0.8295,verdict:"NATURAL",narrative:"D=0.283, R²=0.8295. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с LOGNORM (ΔAICc=-0.83, в пределах ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"auto-2026-07-29-openmeteo-open-meteo-moscow-precipitatio",name:"Open-Meteo: Moscow precipitation_sum (ACF retention)",domain:"environmental",D:0.5558,r2:0.8117,verdict:"NATURAL",narrative:"D=0.556, R²=0.8117. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с LOGNORM (ΔAICc=-0.19, в пределах ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
 ];
 
 /* ---- вспомогательные функции ---- */
