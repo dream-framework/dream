@@ -1471,7 +1471,7 @@ function computeMetaS2(){
   
   const statsEl = document.getElementById('metaS2Stats');
   statsEl.innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:4px 10px;margin-bottom:6px">
+    <div style="display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:6px;align-items:baseline">
       <div><span style="color:var(--muted-2)">D_мета (MLE) <span style="font-size:8px;color:var(--good)">канон</span></span> <b style="color:var(--accent);font-family:monospace">${m.d_mle.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">λ_мета</span> <b style="color:var(--accent);font-family:monospace">${m.lam_mle.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">KS p</span> <b style="font-family:monospace">${m.ks_p.toFixed(3)}</b></div>
