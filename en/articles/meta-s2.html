@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Meta-S2: Recursive Retention · DREAM</title>
-  <meta name="description" content="DREAM Meta-S2: empirical analysis showing the S2 retention exponent is itself Weibull-distributed across 91 measured systems — a recursive, speculative statistical hypothesis." />
+  <meta name="description" content="DREAM Meta-S2: empirical analysis showing the S2 retention exponent is itself Weibull-distributed across 89 uncensored system-level estimates — a recursive, speculative statistical hypothesis." />
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <script>
@@ -245,8 +245,8 @@
 
         <p>All three methods agree that the distribution of D_eff is well-described by a Weibull (stretched-exponential) survival function with D_meta ≈ 1.677 and λ_meta ≈ 1.47 <strong>in D units</strong>. The nonlinear direct-d fit and Weibull-linearized fit produce nearly identical shape estimates (1.588 vs 1.656). Their R² values are not directly comparable because they are calculated in different transformed spaces. A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.195). Note: because the Weibull parameters were estimated from the same 91 observations, the ordinary tabulated KS p-value is not strictly valid; a parametric-bootstrap KS test that refits parameters inside each bootstrap sample would be preferable.</p>
 
-        <blockquote class="callout good">
-          <strong>Prospective update — July 28, 2026:</strong> After 16 additional registry tests increased the Meta-S2 sample from 75 to 89 eligible systems, D_meta changed from 1.577 to 1.669 (ΔD = 0.011, ~0.7%) and R² improved from 0.9865 to 0.9880. The first out-of-sample registry expansion therefore remained within the predicted stability interval. This is materially stronger evidence than the original static fit: the estimated shape parameter remained nearly unchanged during a meaningful registry expansion while the fit improved.
+        <blockquote class="callout warn">
+          <strong>Prospective update — July 29, 2026 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.669. The estimator range is [1.67, 2.01]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.67 as genuinely new, independent systems are added?
         </blockquote>
 
         <h4>Additional fit statistics (n = 89)</h4>
@@ -419,10 +419,10 @@
 
         <p>The hypothesis makes a testable prediction:</p>
 
-        <blockquote class="callout good">
-          As the test registry grows beyond 89 systems, the Weibull fit to the distribution of D values should remain stable (D_meta ≈ 1.4–1.9, KS p > 0.05) if the distributional recurrence is real. If D_meta drifts significantly or the KS test rejects Weibull as more systems are added, the current result was an artifact of the sample.
+        <blockquote class="callout warn">
+          As the test registry grows beyond 89 uncensored systems, the Weibull MLE shape parameter should remain in the range [1.4, 2.0] with KS p > 0.05 if the distributional recurrence is real. If D_meta(MLE) drifts systematically outside this range, or if the KS test consistently rejects Weibull across multiple independent families, the result was an artifact of the current sample.
           <br><br>
-          <strong>First prospective test (July 28, 2026): PASSED.</strong> Registry expanded from 75 → 89 systems. D_meta changed from 1.577 to 1.669 (Δ = 0.7%). R² improved from 0.9865 to 0.9880. The prediction was fulfilled.
+          <strong>Clean prospective test: PENDING.</strong> The previous "PASSED" status was based on contaminated data and is suspended. The clean baseline is D_meta(MLE) = 1.669, n = 89.
         </blockquote>
 
         <p>Specifically:</p>
@@ -539,13 +539,31 @@
           As the Meta-S2 sample increased from 75 to 89 systems, the estimated Weibull shape parameter remained stable near D_meta ≈ 1.677 (ΔD = 0.011, ~0.7%), while R² improved from 0.9865 to 0.9880. This is consistent with, but does not prove, the distributional recurrence hypothesis. The Weibull fit is adequate (KS p = 0.195) but not uniquely preferred (Gamma and Lognormal are competitive by AIC). The family-level bootstrap 95% CI is [1.25, 2.27] — wide, reflecting the dependence structure. The first prospective prediction (stability under registry expansion) has been fulfilled.
         </blockquote>
 
-        <p>The next decisive milestone is not merely adding more rows. It is demonstrating that the estimate remains stable under:</p>
+        <h3>What survives</h3>
         <ul>
-          <li><strong>Family-level exclusion</strong> — shown: D_meta stays in [1.45, 1.80] when any family is removed.</li>
-          <li><strong>Clustered resampling</strong> — shown: family-block bootstrap gives CI [1.25, 2.27].</li>
-          <li><strong>Preprocessing changes</strong> — not yet done: temperature series should be tested before and after seasonal adjustment. If D > 1 disappears after removing the annual cycle, the "extraction" interpretation for temperature is an artifact of deterministic seasonality, not structural information loss.</li>
-          <li><strong>Alternative goodness-of-fit tests</strong> — shown: KS (p=0.195, cannot reject) and AD (1.031, marginal). Both are borderline. More data or more powerful tests are needed.</li>
+          <li><strong>D_meta > 1 across all estimators.</strong> The qualitative conclusion that the exponent distribution lies on the extraction side remains intact.</li>
+          <li><strong>Weibull is not rejected.</strong> KS p = 0.195 (MLE). The distribution is broadly compatible with a stretched-exponential form.</li>
+          <li><strong>Family-level robustness.</strong> D_meta stays in [1.45, 1.80] (MLE) when any family is removed. No single family drives the result.</li>
         </ul>
+
+        <h3>What does not survive (suspended claims)</h3>
+        <ul>
+          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.59 cannot be treated as a kernel invariant or universal exponent. The estimator range is 1.4–2.0, and movement of ~20% under data cleaning shows sensitivity to population and method.</li>
+          <li><strong>Exact Weibull recurrence.</strong> Gamma has lower AIC than Weibull (ΔAIC = −2.5). The correct interpretation may be: the distribution belongs to a broader positive, right-skewed decay family that is approximately Weibull over the current range.</li>
+          <li><strong>Incremental stability.</strong> The "first prospective test passed" claim was based on contaminated data. The clean prospective test starts now.</li>
+        </ul>
+
+        <h3>What is needed next</h3>
+        <ul>
+          <li><strong>One canonical estimator</strong> (Weibull MLE, adopted) with diagnostics clearly labeled.</li>
+          <li><strong>Immutable snapshots per scan</strong> containing {timestamp, n, D_MLE, D_direct, D_linear, λ, KS, AD, AICs} for historical comparison.</li>
+          <li><strong>Genuinely independent families</strong> — not more crypto or weather series, but new domains (biological aging, linguistic decay, archaeological dating).</li>
+          <li><strong>Seasonal adjustment test</strong> for temperature series: D_raw vs D_seasonally-adjusted.</li>
+          <li><strong>Parametric-bootstrap KS test</strong> that refits parameters inside each bootstrap sample.</li>
+        </ul>
+
+        <h3>The DREAM irony</h3>
+        <p>The most important discovery from today's movement may be that D_meta is sensitive to the population of systems and to the statistical lens used to observe it — precisely the kind of projection dependence DREAM itself would predict. If the 10D → 4D projection smooths information differently depending on resolution, then different estimators (which operate at different effective resolutions) should see different D_meta values. The estimator sensitivity may not be a bug; it may be the theory working as predicted. Modeling this projection dependence — rather than ignoring it — is the next theoretical step.</p>
 
         <p>The wide bootstrap CI means more <em>independent</em> families are needed, not just more rows from existing families. Adding 10 more crypto or weather series will not narrow the CI meaningfully. Adding a genuinely new domain (e.g., biological aging, linguistic decay, archaeological dating) would.</p>
 
