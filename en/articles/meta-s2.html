@@ -212,8 +212,8 @@
           </thead>
           <tbody>
             <tr><td>Systems measured (n)</td><td class="num">91</td></tr>
-            <tr><td>Mean D_eff</td><td class="num">1.282</td></tr>
-            <tr><td>Median D_eff</td><td class="num">1.150</td></tr>
+            <tr><td>Mean D_eff</td><td class="num">1.197</td></tr>
+            <tr><td>Median D_eff</td><td class="num">1.155</td></tr>
             <tr><td>Geometric mean</td><td class="num">1.034</td></tr>
             <tr><td>Std dev</td><td class="num">1.079</td></tr>
             <tr><td>Range</td><td class="num">[0.12, 5.00]</td></tr>
@@ -237,13 +237,13 @@
             <tr><th>Method</th><th class="num">D_meta</th><th class="num">λ_q</th><th class="num">R² / p</th></tr>
           </thead>
           <tbody>
-            <tr><td>Direct-d least squares (all 91)</td><td class="num">1.588</td><td class="num">1.471</td><td class="num">R²=0.990</td></tr>
-            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.656</td><td class="num">1.471</td><td class="num">R²=0.958</td></tr>
+            <tr><td>Direct-d least squares</td><td class="num">2.009</td><td class="num">1.326</td><td class="num">R²=0.988</td></tr>
+            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.795</td><td class="num">1.358</td><td class="num">R²=0.974</td></tr>
             <tr><td>Weibull MLE (all 91)</td><td class="num">1.425</td><td class="num">1.530</td><td class="num">KS p=0.195</td></tr>
           </tbody>
         </table>
 
-        <p>All three methods agree that the distribution of D_eff is well-described by a Weibull (stretched-exponential) survival function with D_meta ≈ 1.677 and λ_meta ≈ 1.47 <strong>in D units</strong>. The nonlinear direct-d fit and Weibull-linearized fit produce nearly identical shape estimates (1.588 vs 1.656). Their R² values are not directly comparable because they are calculated in different transformed spaces. A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.195). Note: because the Weibull parameters were estimated from the same 91 observations, the ordinary tabulated KS p-value is not strictly valid; a parametric-bootstrap KS test that refits parameters inside each bootstrap sample would be preferable.</p>
+        <p>All three methods agree that the distribution of D_eff is well-described by a Weibull (stretched-exponential) survival function with D_meta ≈ 1.669 and λ_meta ≈ 1.343 <strong>in D units</strong>. The nonlinear direct-d fit and Weibull-linearized fit produce materially different shape estimates (2.009 vs 1.795). Their R² values are not directly comparable because they are calculated in different transformed spaces. A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.195). Note: because the Weibull parameters were estimated from the same 91 observations, the ordinary tabulated KS p-value is not strictly valid; a parametric-bootstrap KS test that refits parameters inside each bootstrap sample would be preferable.</p>
 
         <blockquote class="callout warn">
           <strong>Prospective update — July 29, 2026 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.669. The estimator range is [1.67, 2.01]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.67 as genuinely new, independent systems are added?
@@ -311,7 +311,7 @@
 
         <h3>Finding 3: Leave-one-family-out robustness</h3>
 
-        <p>Because many systems are dependent (5 cryptocurrencies share a market regime, 15 weather series share a provider), the effective sample size is smaller than n = 95. To test whether any single family drives the result, each family was excluded and the meta-fit was recomputed:</p>
+        <p>Because many systems are dependent (5 cryptocurrencies share a market regime, 15 weather series share a provider), the effective sample size is smaller than n = 89. To test whether any single family drives the result, each family was excluded and the meta-fit was recomputed:</p>
 
         <table class="data-table compact">
           <thead>
@@ -468,7 +468,7 @@
             <ul>
               <li>The 89 systems are not independent — five cryptocurrencies share a market regime, fifteen weather series share a data provider, multiple FRED series share an economic system. Family-level block bootstrap (not individual-series bootstrap) is needed for robust inference.</li>
               <li>Three D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
-              <li>The Weibull MLE (shape=1.40) and direct-d fit (D_meta=1.91) disagree by ~0.5, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
+              <li>The Weibull MLE (shape=1.40) and direct-d fit (D_meta=2.009) disagree by ~0.34, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
               <li>Silverman's test cannot reject unimodality (p=0.46), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
             </ul>
           </div>
@@ -491,7 +491,7 @@
           </thead>
           <tbody>
             <tr><td>0</td><td>Individual system retention R(λ)</td><td class="num">D_i (varies)</td><td>S2 fits individual systems</td><td>Physical / observed systems</td></tr>
-            <tr><td>1</td><td>Distribution of D_i across systems</td><td class="num">D_meta ≈ 1.677</td><td>Weibull (KS p = 0.195)</td><td>Distribution over parameters</td></tr>
+            <tr><td>1</td><td>Distribution of D_i across systems</td><td class="num">D_meta ≈ 1.669</td><td>Weibull (KS p = 0.195)</td><td>Distribution over parameters</td></tr>
             <tr><td>2</td><td>Distribution of D_meta estimates (bootstrap)</td><td class="num">≈ 9.4 (MLE)</td><td><strong>Rejected</strong> (KS p = 0.0005)</td><td>Sampling distribution of estimator</td></tr>
           </tbody>
         </table>
@@ -536,7 +536,7 @@
 
         <blockquote class="callout">
           <strong>Incrementally stable evidence for Meta-S2 distributional recurrence.</strong><br><br>
-          As the Meta-S2 sample increased from 75 to 89 systems, the estimated Weibull shape parameter remained stable near D_meta ≈ 1.677 (ΔD = 0.011, ~0.7%), while R² improved from 0.9865 to 0.9880. This is consistent with, but does not prove, the distributional recurrence hypothesis. The Weibull fit is adequate (KS p = 0.195) but not uniquely preferred (Gamma and Lognormal are competitive by AIC). The family-level bootstrap 95% CI is [1.25, 2.27] — wide, reflecting the dependence structure. The first prospective prediction (stability under registry expansion) has been fulfilled.
+          As the Meta-S2 sample increased from 75 to 89 systems, the estimated Weibull shape parameter remained stable near D_meta ≈ 1.669 (ΔD = 0.011, ~0.7%), while R² improved from 0.9865 to 0.9880. This is consistent with, but does not prove, the distributional recurrence hypothesis. The Weibull fit is adequate (KS p = 0.195) but not uniquely preferred (Gamma and Lognormal are competitive by AIC). The family-level bootstrap 95% CI is [1.25, 2.27] — wide, reflecting the dependence structure. The first prospective prediction (stability under registry expansion) has been fulfilled.
         </blockquote>
 
         <h3>What survives</h3>
@@ -548,7 +548,7 @@
 
         <h3>What does not survive (suspended claims)</h3>
         <ul>
-          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.59 cannot be treated as a kernel invariant or universal exponent. The estimator range is 1.4–2.0, and movement of ~20% under data cleaning shows sensitivity to population and method.</li>
+          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.67 cannot be treated as a kernel invariant or universal exponent. The estimator range is 1.4–2.0, and movement of ~20% under data cleaning shows sensitivity to population and method.</li>
           <li><strong>Exact Weibull recurrence.</strong> Gamma has lower AIC than Weibull (ΔAIC = −2.5). The correct interpretation may be: the distribution belongs to a broader positive, right-skewed decay family that is approximately Weibull over the current range.</li>
           <li><strong>Incremental stability.</strong> The "first prospective test passed" claim was based on contaminated data. The clean prospective test starts now.</li>
         </ul>
