@@ -1447,7 +1447,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Live computation of the distribution of D_eff values
 // ═══════════════════════════════════════════════════════════════
 function computeMetaS2(){
-  const Ds = TESTS.map(t => t.D).filter(d => d !== null && d !== undefined && d === d && d > 0).sort((a,b) => a - b);
+  const Ds = TESTS.map(t => t.D).filter(d => d !== null && d !== undefined && d === d && d > 0 && d < 4.99).sort((a,b) => a - b);
   const n = Ds.length;
   if(n < 10) return;
   
