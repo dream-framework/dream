@@ -477,6 +477,59 @@
 
       <hr>
 
+      <!-- ===== Recursion Analysis ===== -->
+      <div class="card">
+        <h2>Recursion Analysis: Is S2 Fractal?</h2>
+
+        <p>If S2 governs individual systems (Level 0) and the distribution of S2 exponents also follows S2 (Level 1, Meta-S2), a natural question is whether this recursion continues: does the distribution of D_meta also follow S2?</p>
+
+        <h3>Three levels tested</h3>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Level</th><th>What it describes</th><th class="num">Shape parameter</th><th>Weibull fit?</th><th>Mathematical object</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>Individual system retention R(λ)</td><td class="num">D_i (varies)</td><td>S2 fits individual systems</td><td>Physical / observed systems</td></tr>
+            <tr><td>1</td><td>Distribution of D_i across systems</td><td class="num">D_meta ≈ 1.59</td><td>Weibull (KS p = 0.165)</td><td>Distribution over parameters</td></tr>
+            <tr><td>2</td><td>Distribution of D_meta estimates (bootstrap)</td><td class="num">≈ 9.4 (MLE)</td><td><strong>Rejected</strong> (KS p = 0.0005)</td><td>Sampling distribution of estimator</td></tr>
+          </tbody>
+        </table>
+
+        <p>At Level 2, the bootstrap distribution of D_meta is <strong>not Weibull</strong> — it is approximately Gaussian (Weibull shape ≈ 9.4 converges toward normal). The S2 signature disappears at the second level.</p>
+
+        <h3>What this does and does not mean</h3>
+
+        <div class="speculative-note">
+          <strong>Statistical fact (established):</strong> Under many statistical conditions, parameter estimates become approximately normal because of the Central Limit Theorem. A Gaussian at Level 2 is not surprising — it is expected for the sampling distribution of an estimator based on 91 observations. The underlying distribution (Level 1) may still be S2/Weibull; the uncertainty in estimating its parameters simply becomes Gaussian. These are compatible statements.
+        </div>
+
+        <p><strong>The Gaussian at Level 2 does NOT prove that S2 has "disappeared physically."</strong> It could simply reflect that parameter estimates average many independent sources of uncertainty. The distinction matters:</p>
+        <ul>
+          <li><strong>Established:</strong> S2 fits Level 0 (individual systems). Weibull fits Level 1 (distribution of D_i). Gaussian fits Level 2 (estimator variability). This is a standard statistical hierarchy.</li>
+          <li><strong>Not established:</strong> That the DREAM projection kernel causes the transition from S2 to Gaussian. That would require showing that successive physical projections — not just statistical aggregation — produce this pattern.</li>
+        </ul>
+
+        <h3>Conjecture (Double-Projection Hypothesis)</h3>
+
+        <div class="speculative-note">
+          <strong>Conjecture:</strong> If the DREAM projection kernel acts repeatedly on S2-governed variables, then the first projection preserves S2 structure at the ensemble level (Meta-S2), while subsequent projections progressively suppress higher-order structure, yielding approximately Gaussian statistics for aggregate observables.
+        </div>
+
+        <p>This conjecture has three properties that make it scientifically useful:</p>
+        <ol>
+          <li><strong>It is clearly labeled as a conjecture</strong>, not a theorem or an established fact.</li>
+          <li><strong>It is falsifiable.</strong> If one can show that a second independent physical projection (not just CLT aggregation) still yields S2 structure, the conjecture is false. If successive projections consistently produce Gaussianity, it is supported.</li>
+          <li><strong>It separates established statistical facts</strong> (Gaussian estimators often occur under CLT) <strong>from the new physical interpretation</strong> (the kernel causes the transition from S2 to Gaussian).</li>
+        </ol>
+
+        <p>If this conjecture could eventually be demonstrated — that one projection consistently yields S2 and two independent projections consistently yield Gaussian behavior across multiple datasets — it would connect the statistical hierarchy directly to the architecture of the DREAM framework, where observables arise through a non-invertible projection kernel and S2 governs retention. That would be a much more distinctive result than simply observing Gaussian parameter estimates.</p>
+
+        <p class="note">Tested 2026-07-29 via 500-iteration bootstrap of D_meta from 91 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.0005). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
+      </div>
+
+      <hr>
+
       <!-- ===== Current Verdict ===== -->
       <div class="card">
         <h2>Current Verdict</h2>
