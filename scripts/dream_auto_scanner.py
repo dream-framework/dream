@@ -947,7 +947,10 @@ def retry_no_comparison_entries(existing_entries, groq_url=None):
         return {'D': results['s2']['D'], 'r2': r2, 'model_verdict': verdict, 'delta_aic': delta}
     retried = resolved = 0
     for ex in existing_entries:
-        if ex.get('model_verdict') or ex.get('D') is None: continue
+        # Only retry entries that have D but NO model_verdict (or UNDETERMINED)
+        existing_mv = ex.get('model_verdict', '')
+        if existing_mv and existing_mv != 'UNDETERMINED': continue
+        if ex.get('D') is None: continue
         url = ex.get('url', '')
         if not url.startswith('http'): continue
         if not any(x in url for x in ['fredgraph.csv', 'api.worldbank', 'coingecko', 'binance', 'open-meteo', 'earthquake.usgs.gov/earthquakes/feed']): continue
@@ -1004,9 +1007,13 @@ def retry_no_comparison_entries(existing_entries, groq_url=None):
             if t is None: continue
             result = fit_cmp(t, R)
             if result:
-                update_existing_entry('en/tests.html', eid, result)
-                update_existing_entry('ru/tests.html', eid, result)
-                resolved += 1
+                # Guard: reject bad fits (negative D, negative R², extreme D)
+                if result.get('D') is not None and 0 < result['D'] < 10 and result.get('r2', 0) >= 0:
+                    update_existing_entry('en/tests.html', eid, result)
+                    update_existing_entry('ru/tests.html', eid, result)
+                    resolved += 1
+                else:
+                    print(f'    Skipping bad fit: D={result.get("D")}, R²={result.get("r2")}')
         except Exception as e:
             print(f'    Failed: {e}')
     return retried, resolved
