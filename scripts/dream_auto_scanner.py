@@ -1315,87 +1315,90 @@ def main():
     return all_results
 
 def update_meta_s2_article(tests_html_path, is_ru=False):
-    """Update the meta-s2 article with current D_meta, n, R² from the registry."""
+    """Update the meta-s2 article AND generate snapshot JSON for the live readout."""
     article_path = tests_html_path.replace('tests.html', 'articles/meta-s2.html')
-    if not os.path.exists(article_path):
-        return
+    snapshot_path = os.path.join(os.path.dirname(tests_html_path), '..', 'meta_s2_snapshot.json')
     
     # Load D values from tests.html
     existing = load_existing_tests(tests_html_path)
-    Ds = sorted([e['D'] for e in existing if e.get('D') is not None and 0 < e['D'] < 10])
-    n = len(Ds)
+    # Use uncensored values (0 < D < 4.99) for all computations
+    Ds_all = sorted([e['D'] for e in existing if e.get('D') is not None and 0 < e['D'] < 4.99])
+    n = len(Ds_all)
     if n < 10:
         return
     
-    # Compute direct-d Weibull fit (same as the JS on tests.html)
+    # Compute all three estimators (MLE is canonical)
     import numpy as np
     from scipy.optimize import curve_fit
     from scipy.stats import weibull_min, kstest
     
+    Ds_arr = np.array(Ds_all)
     S_hat = np.array([(n - i) / n for i in range(n)])
+    
+    # 1. Weibull MLE (canonical)
+    try:
+        shape_mle, loc_mle, scale_mle = weibull_min.fit(Ds_arr, floc=0)
+        ks_stat, ks_p = kstest(Ds_arr, 'weibull_min', args=(shape_mle, loc_mle, scale_mle))
+    except:
+        shape_mle, scale_mle, ks_p = 1.5, 1.5, 0.5
+    
+    # 2. Linearized fit (diagnostic)
     mask = (S_hat > 0) & (S_hat < 1)
-    ln_d = np.log(np.array(Ds)[mask])
+    ln_d = np.log(Ds_arr[mask])
     ln_neg_ln_S = np.log(-np.log(S_hat[mask]))
     N = len(ln_d)
-    sum_x, sum_y = ln_d.sum(), ln_neg_ln_S.sum()
-    sum_xy = np.sum(ln_d * ln_neg_ln_S)
-    sum_x2 = np.sum(ln_d ** 2)
-    slope = (N * sum_xy - sum_x * sum_y) / (N * sum_x2 - sum_x ** 2)
-    intercept = (sum_y - slope * sum_x) / N
-    D_meta_lin = slope
-    lam_q_lin = np.exp(-intercept / slope)
+    sx, sy = ln_d.sum(), ln_neg_ln_S.sum()
+    sxy = np.sum(ln_d * ln_neg_ln_S)
+    sx2 = np.sum(ln_d ** 2)
+    slope = (N * sxy - sx * sy) / (N * sx2 - sx ** 2)
+    intercept = (sy - slope * sx) / N
+    d_linear = slope
+    r2_linear = 1 - np.sum((ln_neg_ln_S - (slope*ln_d+intercept))**2) / np.sum((ln_neg_ln_S - ln_neg_ln_S.mean())**2)
     
-    # Direct-d fit
+    # 3. Direct-d fit (diagnostic)
     def s2_func(t, lam_q, D):
         return np.exp(-np.power(np.clip(t, 1e-10, None) / max(lam_q, 1e-10), max(D, 0.01)))
     
     try:
-        popt, _ = curve_fit(s2_func, np.array(Ds), S_hat, p0=[lam_q_lin, D_meta_lin], maxfev=10000)
-        D_meta, lam_q = popt
-        r_pred = s2_func(np.array(Ds), *popt)
-        r2 = 1 - np.sum((S_hat - r_pred) ** 2) / np.sum((S_hat - S_hat.mean()) ** 2)
+        popt, _ = curve_fit(s2_func, Ds_arr, S_hat, p0=[scale_mle, shape_mle], maxfev=10000)
+        d_direct = popt[1]
+        lam_direct = popt[0]
+        r_pred = s2_func(Ds_arr, *popt)
+        r2_direct = 1 - np.sum((S_hat - r_pred) ** 2) / np.sum((S_hat - S_hat.mean()) ** 2)
     except:
-        D_meta, lam_q, r2 = D_meta_lin, lam_q_lin, 0.96
+        d_direct, lam_direct, r2_direct = d_linear, scale_mle, r2_linear
     
-    # KS test
-    try:
-        shape, loc, scale = weibull_min.fit(np.array(Ds), floc=0)
-        ks_stat, ks_p = kstest(np.array(Ds), 'weibull_min', args=(shape, loc, scale))
-    except:
-        ks_p = 0.5
-    
-    natural = sum(1 for d in Ds if d < 1)
-    extraction = sum(1 for d in Ds if d > 1)
-    mean_d = np.mean(Ds)
-    median_d = np.median(Ds)
+    # KS test (already computed above with MLE)
+    natural = sum(1 for d in Ds_all if d < 1)
+    extraction = sum(1 for d in Ds_all if d > 1)
+    mean_d = float(np.mean(Ds_arr))
+    median_d = float(np.median(Ds_arr))
     total_tests = len(existing)
     compared = sum(1 for e in existing if e.get('model_verdict') in ('S2_WINS', 'S2_TIES', 'S2_LOSES'))
+    
+    # Write snapshot JSON for the live tests.html readout
+    snapshot = {
+        'n': n, 'd_mle': round(float(shape_mle), 4), 'lam_mle': round(float(scale_mle), 4),
+        'ks_p': round(float(ks_p), 4), 'd_direct': round(float(d_direct), 4),
+        'r2_direct': round(float(r2_direct), 4), 'd_linear': round(float(d_linear), 4),
+        'r2_linear': round(float(r2_linear), 4), 'natural': natural,
+        'extraction': extraction, 'mean': round(mean_d, 4),
+        'median': round(median_d, 4), 'total': total_tests,
+        'compared': compared
+    }
+    with open(snapshot_path, 'w') as f:
+        json.dump(snapshot, f, indent=2)
+    if not is_ru:
+        print(f'  Snapshot: {json.dumps(snapshot)}')
     
     # Read the article
     with open(article_path) as f:
         html = f.read()
     
-    # Update key numbers using regex
-    # 1. Update n=91 references → current n
-    html = re.sub(r'91 system-level estimates', f'{n} system-level estimates', html)
-    html = re.sub(r'91 systems', f'{n} systems', html)
-    html = re.sub(r'91 Meta-S2', f'{n} Meta-S2', html)
-    html = re.sub(r'91 eligible', f'{n} eligible', html)
-    html = re.sub(r'n = 91', f'n = {n}', html)
-    html = re.sub(r'\(n = 91\)', f'(n = {n})', html)
-    
-    # 2. Update D_meta values
-    html = re.sub(r'D_meta ≈ 1\.59', f'D_meta ≈ {D_meta:.2f}', html)
-    html = re.sub(r'D_meta = 1\.588', f'D_meta = {D_meta:.3f}', html)
-    
-    # 3. Update R²
-    html = re.sub(r'R² = 0\.9897', f'R² = {r2:.4f}', html)
-    html = re.sub(r'R² improved from 0\.9865 to 0\.9897', f'R² improved from 0.9865 to {r2:.4f}', html)
-    
-    # 4. Update λ_q (remove old 14.36 if present)
-    html = re.sub(r'λ_q ≈ 1\.45–1\.53', f'λ_q ≈ {lam_q:.2f}', html)
-    html = html.replace('λ_q = 14.36', f'λ_q = {lam_q:.3f}')
-    html = html.replace('14.36', f'{lam_q:.3f}')
+    # Update key numbers using regex — use MLE as canonical
+    D_meta = shape_mle  # canonical = MLE
+    lam_q = scale_mle
+    r2 = r2_direct
     
     # 5. Update natural/extraction counts
     html = re.sub(r'35 \(38\.5%\)', f'{natural} ({100*natural/n:.1f}%)', html)
