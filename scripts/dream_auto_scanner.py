@@ -1315,116 +1315,67 @@ def main():
     return all_results
 
 def update_meta_s2_article(tests_html_path, is_ru=False):
-    """Update the meta-s2 article AND generate snapshot JSON for the live readout."""
+    """
+    Update the meta-s2 article AND generate snapshot JSON for the live readout.
+
+    Both the English and Russian versions of `articles/meta-s2.html` are
+    regenerated from scratch using `meta_s2_article.render()`. Every numeric
+    value in the article body comes from the freshly-computed snapshot, so the
+    article always reflects the current state of the test registry.
+
+    The snapshot JSON (written to `meta_s2_snapshot.json` at the repo root) is
+    also consumed by the live Meta-S2 readout on tests.html.
+    """
+    # Local imports — meta_s2_article lives next to this scanner
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from meta_s2_article import extend_snapshot, render
+
     article_path = tests_html_path.replace('tests.html', 'articles/meta-s2.html')
+    # Snapshot lives at repo root (one level up from en/ or ru/)
     snapshot_path = os.path.join(os.path.dirname(tests_html_path), '..', 'meta_s2_snapshot.json')
-    
-    # Load D values from tests.html
+
+    # Load existing tests from tests.html
     existing = load_existing_tests(tests_html_path)
-    # Use uncensored values (0 < D < 4.99) for all computations
     Ds_all = sorted([e['D'] for e in existing if e.get('D') is not None and 0 < e['D'] < 4.99])
     n = len(Ds_all)
     if n < 10:
+        print(f'  ! Skipping meta-s2 update — only {n} uncensored D values')
         return
-    
-    # Compute all three estimators (MLE is canonical)
-    import numpy as np
-    from scipy.optimize import curve_fit
-    from scipy.stats import weibull_min, kstest
-    
-    Ds_arr = np.array(Ds_all)
-    S_hat = np.array([(n - i) / n for i in range(n)])
-    
-    # 1. Weibull MLE (canonical)
+
+    # Compute the full snapshot (all stats needed by the article template)
     try:
-        shape_mle, loc_mle, scale_mle = weibull_min.fit(Ds_arr, floc=0)
-        ks_stat, ks_p = kstest(Ds_arr, 'weibull_min', args=(shape_mle, loc_mle, scale_mle))
-    except:
-        shape_mle, scale_mle, ks_p = 1.5, 1.5, 0.5
-    
-    # 2. Linearized fit (diagnostic)
-    mask = (S_hat > 0) & (S_hat < 1)
-    ln_d = np.log(Ds_arr[mask])
-    ln_neg_ln_S = np.log(-np.log(S_hat[mask]))
-    N = len(ln_d)
-    sx, sy = ln_d.sum(), ln_neg_ln_S.sum()
-    sxy = np.sum(ln_d * ln_neg_ln_S)
-    sx2 = np.sum(ln_d ** 2)
-    slope = (N * sxy - sx * sy) / (N * sx2 - sx ** 2)
-    intercept = (sy - slope * sx) / N
-    d_linear = slope
-    r2_linear = 1 - np.sum((ln_neg_ln_S - (slope*ln_d+intercept))**2) / np.sum((ln_neg_ln_S - ln_neg_ln_S.mean())**2)
-    
-    # 3. Direct-d fit (diagnostic)
-    def s2_func(t, lam_q, D):
-        return np.exp(-np.power(np.clip(t, 1e-10, None) / max(lam_q, 1e-10), max(D, 0.01)))
-    
-    try:
-        popt, _ = curve_fit(s2_func, Ds_arr, S_hat, p0=[scale_mle, shape_mle], maxfev=10000)
-        d_direct = popt[1]
-        lam_direct = popt[0]
-        r_pred = s2_func(Ds_arr, *popt)
-        r2_direct = 1 - np.sum((S_hat - r_pred) ** 2) / np.sum((S_hat - S_hat.mean()) ** 2)
-    except:
-        d_direct, lam_direct, r2_direct = d_linear, scale_mle, r2_linear
-    
-    # KS test (already computed above with MLE)
-    natural = sum(1 for d in Ds_all if d < 1)
-    extraction = sum(1 for d in Ds_all if d > 1)
-    mean_d = float(np.mean(Ds_arr))
-    median_d = float(np.median(Ds_arr))
-    total_tests = len(existing)
-    compared = sum(1 for e in existing if e.get('model_verdict') in ('S2_WINS', 'S2_TIES', 'S2_LOSES'))
-    
-    # Write snapshot JSON for the live tests.html readout
-    snapshot = {
-        'n': n, 'd_mle': round(float(shape_mle), 4), 'lam_mle': round(float(scale_mle), 4),
-        'ks_p': round(float(ks_p), 4), 'd_direct': round(float(d_direct), 4),
-        'r2_direct': round(float(r2_direct), 4), 'd_linear': round(float(d_linear), 4),
-        'r2_linear': round(float(r2_linear), 4), 'natural': natural,
-        'extraction': extraction, 'mean': round(mean_d, 4),
-        'median': round(median_d, 4), 'total': total_tests,
-        'compared': compared
-    }
-    with open(snapshot_path, 'w') as f:
-        json.dump(snapshot, f, indent=2)
+        snapshot = extend_snapshot(existing)
+    except Exception as e:
+        print(f'  ! Snapshot computation failed: {e}')
+        return
+
+    # Write the snapshot JSON (shared between EN and RU — only write once)
+    # Both EN and RU renderers read from the same snapshot.
     if not is_ru:
-        print(f'  Snapshot: {json.dumps(snapshot)}')
-    
-    # Read the article
-    with open(article_path) as f:
-        html = f.read()
-    
-    # Update key numbers using regex — use MLE as canonical
-    D_meta = shape_mle  # canonical = MLE
-    lam_q = scale_mle
-    r2 = r2_direct
-    
-    # 5. Update natural/extraction counts
-    html = re.sub(r'35 \(38\.5%\)', f'{natural} ({100*natural/n:.1f}%)', html)
-    html = re.sub(r'56 \(61\.5%\)', f'{extraction} ({100*extraction/n:.1f}%)', html)
-    html = re.sub(r'"62% of systems', f'"{100*extraction/n:.0f}% of systems', html)
-    html = re.sub(r'"65% of systems', f'"{100*extraction/n:.0f}% of systems', html)
-    
-    # 6. Update total registered count
-    html = re.sub(r'of 132 total registered', f'of {total_tests} total registered', html)
-    html = re.sub(r'132 registered', f'{total_tests} registered', html)
-    html = re.sub(r'132 →', f'{total_tests} →', html)
-    
-    # 7. Update mean/median
-    html = re.sub(r'Mean D_eff</td><td class="num">[\d.]+</td>', f'Mean D_eff</td><td class="num">{mean_d:.3f}</td>', html)
-    html = re.sub(r'Median D_eff</td><td class="num">[\d.]+</td>', f'Median D_eff</td><td class="num">{median_d:.3f}</td>', html)
-    
-    # 8. Update KS p-value
-    html = re.sub(r'KS p = 0\.165', f'KS p = {ks_p:.3f}', html)
-    html = re.sub(r'KS p=0\.165', f'KS p={ks_p:.3f}', html)
-    html = re.sub(r'\(p = 0\.165\)', f'(p = {ks_p:.3f})', html)
-    html = re.sub(r'\(p=0\.165\)', f'(p={ks_p:.3f})', html)
-    
+        with open(snapshot_path, 'w') as f:
+            json.dump(snapshot, f, indent=2)
+        print(f'  Snapshot: n={snapshot["n"]}, D_mle={snapshot["d_mle"]}, '
+              f'KS p={snapshot["ks_p"]}, AD={snapshot["ad_stat"]}, '
+              f'ΔAIC_W={snapshot["delta_aic_weibull"]}, '
+              f'ΔAIC_G={snapshot["delta_aic_gamma"]}, '
+              f'ΔAIC_L={snapshot["delta_aic_lognormal"]}, '
+              f'Silverman p={snapshot["silverman_p"]}, '
+              f'CI=[{snapshot["boot_lo"]}, {snapshot["boot_hi"]}]')
+
+    # Render the article for the requested language
+    lang = 'ru' if is_ru else 'en'
+    try:
+        html = render(lang, snapshot, existing=existing)
+    except Exception as e:
+        print(f'  ! {lang} render failed: {e}')
+        return
+
     with open(article_path, 'w') as f:
         f.write(html)
-    
-    print(f'  {article_path}: n={n}, D_meta={D_meta:.3f}, R²={r2:.4f}, KS p={ks_p:.3f}')
+
+    print(f'  {article_path}: n={snapshot["n"]}, D_meta={snapshot["d_mle"]:.3f}, '
+          f'KS p={snapshot["ks_p"]:.3f} ({lang})')
+
 
 if __name__ == '__main__':
     results = main()
