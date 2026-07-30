@@ -1316,15 +1316,19 @@ def main():
 
 def update_meta_s2_article(tests_html_path, is_ru=False):
     """
-    Update the meta-s2 article AND generate snapshot JSON for the live readout.
+    Update the meta-s2 article, the snapshot JSON, AND the embedded
+    META_S2_SNAPSHOT constant in tests.html.
 
-    Both the English and Russian versions of `articles/meta-s2.html` are
-    regenerated from scratch using `meta_s2_article.render()`. Every numeric
-    value in the article body comes from the freshly-computed snapshot, so the
-    article always reflects the current state of the test registry.
+    All three must stay in sync — the article body and the live readout card
+    on tests.html must show the same numbers. The scanner regenerates:
 
-    The snapshot JSON (written to `meta_s2_snapshot.json` at the repo root) is
-    also consumed by the live Meta-S2 readout on tests.html.
+      1. `meta_s2_snapshot.json` (repo root) — single source of truth
+      2. `articles/meta-s2.html` (EN + RU) — full article, rendered from template
+      3. The `META_S2_SNAPSHOT = {...}` JS constant embedded in `tests.html`
+         (EN + RU) — used by the live Meta-S2 readout card
+
+    Without step 3, the live card on tests.html stays stale even when the
+    article is updated.
     """
     # Local imports — meta_s2_article lives next to this scanner
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -1350,7 +1354,6 @@ def update_meta_s2_article(tests_html_path, is_ru=False):
         return
 
     # Write the snapshot JSON (shared between EN and RU — only write once)
-    # Both EN and RU renderers read from the same snapshot.
     if not is_ru:
         with open(snapshot_path, 'w') as f:
             json.dump(snapshot, f, indent=2)
@@ -1361,6 +1364,63 @@ def update_meta_s2_article(tests_html_path, is_ru=False):
               f'ΔAIC_L={snapshot["delta_aic_lognormal"]}, '
               f'Silverman p={snapshot["silverman_p"]}, '
               f'CI=[{snapshot["boot_lo"]}, {snapshot["boot_hi"]}]')
+
+    # ── Step 3: Patch the embedded META_S2_SNAPSHOT constant in tests.html ──
+    # The live readout card reads from this JS object, not from the JSON file.
+    # If we don't rewrite it, the card shows stale numbers.
+    try:
+        with open(tests_html_path) as f:
+            html = f.read()
+
+        # Build the JS object literal — keep field names compatible with the
+        # existing readout code in tests.html (which expects: n, d_mle, lam_mle,
+        # ks_p, d_direct, r2_direct, d_linear, r2_linear, natural, extraction,
+        # mean, median, total, compared).
+        embedded = {
+            'n': snapshot['n'],
+            'd_mle': snapshot['d_mle'],
+            'lam_mle': snapshot['lam_mle'],
+            'ks_p': snapshot['ks_p'],
+            'd_direct': snapshot['d_direct'],
+            'r2_direct': snapshot['r2_direct'],
+            'd_linear': snapshot['d_linear'],
+            'r2_linear': snapshot['r2_linear'],
+            'natural': snapshot['natural'],
+            'extraction': snapshot['extraction'],
+            'mean': snapshot['mean'],
+            'median': snapshot['median'],
+            # tests.html uses 'total' and 'compared' (not n_total / n_compared)
+            'total': snapshot['n_total'],
+            'compared': snapshot['n_compared'],
+            # Also include the extended stats so the readout can show them later
+            'ad_stat': snapshot['ad_stat'],
+            'delta_aic_weibull': snapshot['delta_aic_weibull'],
+            'delta_aic_gamma': snapshot['delta_aic_gamma'],
+            'delta_aic_lognormal': snapshot['delta_aic_lognormal'],
+            'silverman_p': snapshot['silverman_p'],
+            'boot_lo': snapshot['boot_lo'],
+            'boot_hi': snapshot['boot_hi'],
+            'date': snapshot['date'],
+        }
+        embedded_json = json.dumps(embedded, indent=2)
+
+        # Replace the META_S2_SNAPSHOT = {...} block in tests.html.
+        # Match from "const META_S2_SNAPSHOT = {" to the closing "};"
+        # (the closing brace + semicolon on its own line).
+        pattern = re.compile(
+            r'const\s+META_S2_SNAPSHOT\s*=\s*\{.*?\n\};',
+            re.DOTALL
+        )
+        new_block = f'const META_S2_SNAPSHOT = {embedded_json};'
+        if pattern.search(html):
+            html = pattern.sub(new_block, html, count=1)
+            with open(tests_html_path, 'w') as f:
+                f.write(html)
+            print(f'  ✓ Embedded META_S2_SNAPSHOT patched in {tests_html_path}')
+        else:
+            print(f'  ! Could not find META_S2_SNAPSHOT in {tests_html_path} — leaving unchanged')
+    except Exception as e:
+        print(f'  ! Failed to patch embedded snapshot in {tests_html_path}: {e}')
 
     # Render the article for the requested language
     lang = 'ru' if is_ru else 'en'
