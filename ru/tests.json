@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-07-29T23:45:09Z",
-  "total_tests": 132,
+  "exported_at": "2026-07-30T15:03:55Z",
+  "total_tests": 70,
   "fields": [
     "id",
     "name",
@@ -18,1007 +18,13 @@
   ],
   "tests": [
     {
-      "id": "ebb-1885",
-      "name": "Кривая забывания Эббингауза (1885)",
-      "domain": "cognitive",
-      "groups": [
-        "cognitive",
-        "confirmed"
-      ],
-      "D": 0.153,
-      "r2": 0.976,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Оригинальная кривая забывания Эббингауза описывается S2 с D=0.153 — значительно ниже порога извлечения, что подтверждает естественный характер распада памяти.",
-      "source": "dream_memory_s2_results.json",
-      "date": "1885",
-      "url": "https://en.wikipedia.org/wiki/Forgetting_curve"
-    },
-    {
-      "id": "murre-2015",
-      "name": "Память Murre & Dros (2015)",
-      "domain": "cognitive",
-      "groups": [
-        "cognitive",
-        "confirmed"
-      ],
-      "D": 0.219,
-      "r2": 0.976,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "130-летняя репликация Эббингауза. S2 побеждает степенной закон по AIC (ΔAIC≈−28; AIC 17 против 45). D=0.219 — закон удержания воспроизводим.",
-      "source": "dream_memory_s2_results.json",
-      "url": "https://doi.org/10.3758/s13423-014-0733-6"
-    },
-    {
-      "id": "mark-2004-12",
-      "name": "Внимание Глории Марк (2004–12)",
-      "domain": "cognitive",
-      "D": 1.232,
-      "r2": 0.992,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Снижение продолжительности концентрации в 2004–2012 пересекает порог D=1 (D=1.232) — признак алгоритмического извлечения, а не естественного распада.",
-      "source": "npa_attention_s2_results.json",
-      "date": "2012",
-      "url": "https://www.ics.uci.edu/~gmark/"
-    },
-    {
-      "id": "mark-2012-22",
-      "name": "Внимание Глории Марк (2012–22)",
-      "domain": "cognitive",
-      "D": 4.28,
-      "r2": null,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Из манифеста NPA: коллапс внимания ускоряется после 2012 (D≈4.28) — режим глубокого извлечения по мере доминирования коротких лент.",
-      "source": "NPA-Manifesto-2.0.pdf",
-      "date": "2022",
-      "url": "https://www.ics.uci.edu/~gmark/"
-    },
-    {
-      "id": "eth-hourly",
-      "name": "ETH часовой (крипто HFT)",
-      "domain": "financial",
-      "D": 0.591,
-      "r2": 0.537,
-      "verdict": "INCONCLUSIVE",
-      "kind": "inconclusive",
-      "narrative": "Часовая автокорреляция крипты зашумлена (R²=0.537). D=0.591 намекает на естественный режим, но плохая подгонка не позволяет сделать уверенный вывод.",
-      "source": "fictitious_capital_s2_results.json",
-      "url": "https://www.kaggle.com/datasets/bruschetti/crypto-hft-data"
-    },
-    {
-      "id": "spy-daily",
-      "name": "SPY дневной (индекс акций)",
-      "domain": "financial",
-      "D": 0.711,
-      "r2": 0.732,
-      "verdict": "NATURAL",
-      "kind": "natural",
-      "narrative": "Широкий индекс акций: D=0.711 — естественное удержание. Рынок агрегирует достаточно акторов, чтобы оставаться ниже порога извлечения.",
-      "source": "fictitious_capital_s2_results.json",
-      "date": "2024",
-      "url": "https://finance.yahoo.com/quote/SPY"
-    },
-    {
-      "id": "qqq-daily",
-      "name": "QQQ дневной (техно-ETF)",
-      "domain": "financial",
-      "D": 1.016,
-      "r2": 0.749,
-      "verdict": "EXTRACTION",
-      "kind": "threshold",
-      "narrative": "Техно-ETF сидит ровно на пороге (D=1.016). Согласуется с концентрацией алгоритмических потоков в технологических тикерах.",
-      "source": "fictitious_capital_s2_results.json",
-      "date": "2024",
-      "url": "https://finance.yahoo.com/quote/QQQ"
-    },
-    {
-      "id": "hold-1940-80",
-      "name": "Период владения акцией (1940–80)",
-      "domain": "financial",
-      "D": 1.559,
-      "r2": 0.993,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Додигитальный распад периода владения уже даёт D>1 (1.559) — извлечение не исключительно HFT-феномен; оно предшествует электронным торгам.",
-      "source": "financial_vs_cognitive_s2_results.json",
-      "date": "1980",
-      "url": "https://www.bankofengland.co.uk/speech/2010/race-to-zero"
-    },
-    {
-      "id": "hold-1980-2023",
-      "name": "Период владения акцией (1980–2023)",
-      "domain": "financial",
-      "D": 1.005,
-      "r2": 0.999,
-      "verdict": "EXTRACTION",
-      "kind": "threshold",
-      "narrative": "Современная эпоха сидит на пороге (D=1.005) с почти идеальной подгонкой (R²=0.999). Весь пост-1980 режим находится на границе извлечения.",
-      "source": "financial_vs_cognitive_s2_results.json",
-      "date": "2023",
-      "url": "https://www.bankofengland.co.uk/speech/2010/race-to-zero"
-    },
-    {
-      "id": "trade-1980-2000",
-      "name": "Длительность сделки (1980–2000)",
-      "domain": "financial",
-      "D": 1.781,
-      "r2": 1.0,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Удержание длительности сделки распадается с D=1.781 — извлечение. Идеальная подгонка (R²=1.000) отражает регуляризующий эффект электронного мэтчинга.",
-      "source": "financial_vs_cognitive_s2_results.json",
-      "date": "2000",
-      "url": "https://www.bankofengland.co.uk/speech/2010/race-to-zero"
-    },
-    {
-      "id": "trade-2000-23",
-      "name": "Длительность сделки (2000–2023)",
-      "domain": "financial",
-      "D": 2.454,
-      "r2": 1.0,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Эпоха HFT: D=2.454 — глубокое извлечение. Удвоение D относительно предыдущей эпохи количественно выражает ускорение оборота фиктивного капитала.",
-      "source": "financial_vs_cognitive_s2_results.json",
-      "date": "2023",
-      "url": "https://www.bankofengland.co.uk/speech/2010/race-to-zero"
-    },
-    {
-      "id": "sfr-z2-0",
-      "name": "Падение плотности SFR (z=2→0)",
-      "domain": "cosmological",
-      "D": 3.458,
-      "r2": 0.992,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Плотность скорости звёздообразования падает с D=3.458 — космос в режиме извлечения, тёмная энергия подавляет формирование структур.",
-      "source": "cosmological_s2_results.json",
-      "url": "https://doi.org/10.1051/0004-6361/201425035"
-    },
-    {
-      "id": "bound-z15-0",
-      "name": "Спад роста связанных структур (z=1.5→0)",
-      "domain": "cosmological",
-      "D": 2.571,
-      "r2": 0.992,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Рост связанных структур распадается с D=2.571 — извлечение. Иерархическая кластеризация гибнет от ускоренного расширения.",
-      "source": "cosmological_s2_results.json",
-      "url": "https://doi.org/10.1051/0004-6361/201425035"
-    },
-    {
-      "id": "cluster-z1-0",
-      "name": "Спад роста скоплений (z=1→0)",
-      "domain": "cosmological",
-      "D": 2.608,
-      "r2": 0.999,
-      "verdict": "EXTRACTION",
-      "kind": "extraction",
-      "narrative": "Удержание роста скоплений: D=2.608, R²=0.999. То же семейство, что SFR — Вселенная теряет способность строить связанные объекты.",
-      "source": "cosmological_s2_results.json",
-      "url": "https://doi.org/10.1051/0004-6361/201425035"
-    },
-    {
-      "id": "nv-40nm-rt",
-      "name": "NV наноалмаз 40нм, комнатная температура",
-      "domain": "physical",
-      "groups": [
-        "physical",
-        "confirmed"
-      ],
-      "D": 0.654,
-      "r2": 0.973,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "T₁-релаксация в 40нм наноалмазах: S2 — лучшая модель (минимальный AIC), D=0.654 — естественная декогеренция, далеко от порога.",
-      "source": "dream_nv_center_s2_results.json",
-      "url": "https://doi.org/10.1038/s41534-024-00813-7"
-    },
-    {
-      "id": "nv-3um-rt",
-      "name": "NV наноалмаз 3мкм, комнатная температура",
-      "domain": "physical",
-      "groups": [
-        "physical",
-        "confirmed"
-      ],
-      "D": 0.644,
-      "r2": 0.949,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Более крупные 3мкм алмазы сохраняют тот же естественный режим (D=0.644). Размерное масштабирование не выталкивает NV-центры за порог извлечения.",
-      "source": "dream_nv_center_s2_results.json",
-      "url": "https://doi.org/10.1038/s41534-024-00813-7"
-    },
-    {
-      "id": "nv-40nm-6k",
-      "name": "NV наноалмаз 40нм, ~6K",
-      "domain": "physical",
-      "groups": [
-        "physical",
-        "confirmed"
-      ],
-      "D": 0.526,
-      "r2": 0.982,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Криогенный 6K: D=0.526, R²=0.982. Охлаждение дополнительно снижает эффективный показатель — естественное удержание устойчиво по температуре.",
-      "source": "dream_nv_center_s2_results.json",
-      "url": "https://doi.org/10.1038/s41534-024-00813-7"
-    },
-    {
-      "id": "nv-ens-1ppm",
-      "name": "NV ансамбль, 1ppm примеси N",
-      "domain": "physical",
-      "groups": [
-        "physical",
-        "confirmed"
-      ],
-      "D": 0.889,
-      "r2": 0.96,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Разбавленный ансамбль (1ppm): D=0.889 — ближе всего к порогу, но всё ещё естественно. S2 лучше степенного и экспоненциального по AIC.",
-      "source": "dream_nv_center_s2_results.json",
-      "url": "https://doi.org/10.1103/PhysRevB.94.060101"
-    },
-    {
-      "id": "nv-ens-100ppm",
-      "name": "NV ансамбль, 100ppm примеси N",
-      "domain": "physical",
-      "groups": [
-        "physical",
-        "confirmed"
-      ],
-      "D": 0.527,
-      "r2": 0.935,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Плотный 100ppm ансамбль: D=0.527. Более высокая примесь не вызывает извлечения — закон удержания единообразно управляет T₂-эхо-распадом.",
-      "source": "dream_nv_center_s2_results.json",
-      "url": "https://doi.org/10.1103/PhysRevB.94.060101"
-    },
-    {
-      "id": "ising-spatial-t1-5",
-      "name": "Изинг пространственный T=1.5",
-      "domain": "physical",
-      "D": 0.653,
-      "r2": 0.972,
-      "verdict": "NATURAL",
-      "kind": "natural",
-      "narrative": "Пространственное удержание Изинга ниже Tc: D=0.653 (R²=0.972). Степенной закон немного выигрывает по AIC, но S2 совместим — оба на естественной стороне.",
-      "source": "dream_ising_spatial_retention_results.json",
-      "url": "https://doi.org/10.1103/PhysRev.65.117"
-    },
-    {
-      "id": "ising-crossover-t2-269",
-      "name": "Изинг кроссовер T=2.269 (критическая)",
-      "domain": "physical",
-      "D": 1.088,
-      "r2": 0.838,
-      "verdict": "EXTRACTION",
-      "kind": "threshold",
-      "narrative": "При критической температуре Tc≈2.269 простая экспонента выигрывает по AIC; S2 сидит ровно на пороге D=1 (D=1.088). Граница фальсификации закона.",
-      "source": "dream_ising_crossover_results.json",
-      "url": "https://doi.org/10.1103/PhysRev.65.117"
-    },
-    {
-      "id": "quantum-magic-accum",
-      "name": "Накопление квантовой магии (случайные схемы)",
-      "domain": "quantum",
-      "groups": [
-        "quantum",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": 0.996,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Накопление магических состояний в случайных схемах отслеживает S2-удержание с R²=0.996, ΔBIC>15 — закон воспроизводим по sweeps числа кубитов.",
-      "source": "KB §27 (скрипты квантовой магии)",
-      "url": "https://doi.org/10.1103/PhysRevLett.128.050402"
-    },
-    {
-      "id": "magic-filament",
-      "name": "Гребни магических филаментов (случайные схемы)",
-      "domain": "quantum",
-      "groups": [
-        "quantum",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Гребни филаментов на поверхности магия-глубина восстанавливаются по репликатам с AUC 0.70 — S2-каркас статистически видим.",
-      "source": "KB §27 (скрипты квантовой магии)",
-      "url": "https://doi.org/10.1103/PhysRevLett.128.050402"
-    },
-    {
-      "id": "deff-qubit-scaling",
-      "name": "D_eff масштабируется с числом кубитов",
-      "domain": "quantum",
-      "groups": [
-        "quantum",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Эффективный показатель масштабируется 1.04 (q=2) → 1.37 (q=6) — кубитная сигнатура: S2 видит рост квантового объёма как когерентный сдвиг порога.",
-      "source": "KB §27 (скрипты квантовой магии)",
-      "url": "https://doi.org/10.1103/PhysRevLett.128.050402"
-    },
-    {
-      "id": "transpilation",
-      "name": "Транспиляция сохраняет S2",
-      "domain": "quantum",
-      "groups": [
-        "quantum",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "После транспиляции Qiskit S2-подгонка сохраняется с ΔBIC>47 — закон инвариантен относительно перезаписи базиса гейтов.",
-      "source": "KB §27 (скрипты квантовой магии)",
-      "url": "https://doi.org/10.1103/PhysRevLett.128.050402"
-    },
-    {
-      "id": "sweden-ftt",
-      "name": "Налог Sweden FTT (1984–91)",
-      "domain": "interventions",
-      "groups": [
-        "interventions",
-        "ecological",
-        "financial",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "intervention",
-      "narrative": "Налог на финансовые транзакции подавил оборот и опустил D ниже порога извлечения во время действия, затем отскочил обратно в глубокое извлечение (4.74) после отмены — полностью обратимо, как и предсказано.",
-      "source": "intervention_falsifiability_results.json",
-      "date": "1991",
-      "url": "https://en.wikipedia.org/wiki/Swedish_financial_transaction_tax",
-      "phases": [
-        {
-          "label": "До",
-          "D": 1.5,
-          "kind": "extraction"
-        },
-        {
-          "label": "Во время",
-          "D": 0.72,
-          "kind": "natural"
-        },
-        {
-          "label": "После",
-          "D": 4.74,
-          "kind": "extraction"
-        }
-      ]
-    },
-    {
-      "id": "china-gaming",
-      "name": "Запрет игр для несовершеннолетних в Китае (2021)",
-      "domain": "interventions",
-      "groups": [
-        "interventions",
-        "cognitive",
-        "ecological",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "intervention",
-      "narrative": "Запрет алгоритмических лент для несовершеннолетних обрушил извлечение внимания с D=4.15 до D=0.12 — крупнейший одиночный эффект вмешательства на record.",
-      "source": "intervention_falsifiability_results.json",
-      "date": "2021",
-      "url": "https://en.wikipedia.org/wiki/Video_gaming_in_China",
-      "phases": [
-        {
-          "label": "До",
-          "D": 4.15,
-          "kind": "extraction"
-        },
-        {
-          "label": "После",
-          "D": 0.12,
-          "kind": "natural"
-        }
-      ]
-    },
-    {
-      "id": "montreal",
-      "name": "Монреальский протокол (1987)",
-      "domain": "interventions",
-      "groups": [
-        "interventions",
-        "ecological",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "intervention",
-      "narrative": "Запрет ХФУ замедлил падение озона; экологическое удержание пересекло границу из извлечения (1.27) обратно в естественный режим (0.58). Закон удержания реагирует на политику, а не только на рынки.",
-      "source": "intervention_falsifiability_results.json",
-      "date": "1987",
-      "url": "https://en.wikipedia.org/wiki/Montreal_Protocol",
-      "phases": [
-        {
-          "label": "До",
-          "D": 1.27,
-          "kind": "extraction"
-        },
-        {
-          "label": "После",
-          "D": 0.58,
-          "kind": "natural"
-        }
-      ]
-    },
-    {
-      "id": "volcker",
-      "name": "Правило Волкера (2012)",
-      "domain": "interventions",
-      "groups": [
-        "interventions",
-        "financial",
-        "confirmed"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "intervention",
-      "narrative": "Ограничение проп-трейдинга снизило D с 1.50 до 0.97 — чуть ниже порога. Политический рычаг против извлечения фиктивного капитала.",
-      "source": "intervention_falsifiability_results.json",
-      "date": "2012",
-      "url": "https://en.wikipedia.org/wiki/Volcker_Rule",
-      "phases": [
-        {
-          "label": "До",
-          "D": 1.5,
-          "kind": "extraction"
-        },
-        {
-          "label": "После",
-          "D": 0.97,
-          "kind": "natural"
-        }
-      ]
-    },
-    {
-      "id": "usgs-quakes",
-      "name": "USGS Землетрясения (30д)",
-      "domain": "live",
-      "verdict": "WEAK",
-      "kind": "inconclusive",
-      "narrative": "Часовые счётчики землетрясений подгоняются S2 с R²≈1.0, но D упёрся в верхнюю границу параметра (5.0) — закон совместим, но показатель не ограничен. Слабый сигнал, не подтверждение.",
-      "source": "s2_scout_results.json",
-      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv"
-    },
-    {
-      "id": "noaa-solar-wind",
-      "name": "NOAA Скорость солнечного ветра",
-      "domain": "live",
-      "D": 5.0,
-      "r2": 0.998,
-      "verdict": "WEAK",
-      "kind": "inconclusive",
-      "narrative": "Серия скорости солнечного ветра упирается в границу D=5.0 с R²=0.998. S2 совместим, но верхняя граница не позволяет утверждать количественный показатель.",
-      "source": "s2_scout_results.json",
-      "url": "https://www.swpc.noaa.gov/products/real-time-solar-wind"
-    },
-    {
-      "id": "wb-usa-gdp",
-      "name": "World Bank ВВП США",
-      "domain": "live",
-      "D": 5.0,
-      "r2": 0.994,
-      "verdict": "WEAK",
-      "kind": "inconclusive",
-      "narrative": "Годовой ВВП США упирается в D=5.0 (R²=0.994). Макро-агрегированные серии насыщают верхнюю границу — помечено как слабое в ожидании более мелких данных.",
-      "source": "s2_scout_results.json",
-      "url": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=US"
-    },
-    {
-      "id": "wb-usa-cpi",
-      "name": "World Bank CPI США",
-      "domain": "live",
-      "D": 5.0,
-      "r2": 0.999,
-      "verdict": "WEAK",
-      "kind": "inconclusive",
-      "narrative": "Серия CPI: граница D=5.0, R²=0.999. Удержание инфляции совместимо с S2, но показатель не ограничен при такой частоте дискретизации.",
-      "source": "s2_scout_results.json",
-      "url": "https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=US"
-    },
-    {
-      "id": "wb-usa-unemp",
-      "name": "World Bank Безработица США",
-      "domain": "live",
-      "D": 2.284,
-      "r2": 0.947,
-      "verdict": "WEAK",
-      "kind": "inconclusive",
-      "narrative": "Удержание безработицы: D=2.284, R²=0.947 — режим извлечения, но качество подгонки предельное, поэтому вердикт слабый.",
-      "source": "s2_scout_results.json",
-      "url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?locations=US"
-    },
-    {
-      "id": "solar-wind-plasma",
-      "name": "Солнечный ветер / плазма",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Потоки солнечного ветра проявляют кросс-доменный коллапс S2 — график стандартного преобразования линеаризуется с предсказанным порогом, в пределах датасета OMNIweb.",
-      "source": "KB §27",
-      "url": "https://www.swpc.noaa.gov/products/ace-real-time-solar-wind"
-    },
-    {
-      "id": "river-flow",
-      "name": "Речной сток (Потомак / датчики)",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Серии суточного речного стока описываются S2-удержанием — поток воды проявляет тот же растянуто-экспоненциальный распад, что и когнитивные и капитальные ряды.",
-      "source": "KB §27",
-      "url": "https://waterdata.usgs.gov/nwis/uv?01646500"
-    },
-    {
-      "id": "crypto-markets",
-      "name": "Рынки криптовалют (кросс-коин)",
-      "domain": "confirmed",
-      "groups": [
-        "confirmed",
-        "financial"
-      ],
-      "D": 0.3,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "Агрегированное удержание крипто-доходностей: D=0.30 — S2 подгоняется и побеждает степенной закон по панели кросс-коин.",
-      "source": "KB §27",
-      "url": "https://www.kaggle.com/datasets/bruschetti/crypto-hft-data"
-    },
-    {
-      "id": "wikimedia",
-      "name": "Wikimedia / информационные потоки",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Потоки правок/событий Wikimedia описываются S2-удержанием — информационный поток ведёт себя как растянуто-экспоненциальный канал, а не как степенной закон.",
-      "source": "KB §27",
-      "url": "https://dumps.wikimedia.org/"
-    },
-    {
-      "id": "earthquakes",
-      "name": "Землетрясения (глобальный каталог)",
-      "domain": "confirmed",
-      "groups": [
-        "confirmed",
-        "ecological"
-      ],
-      "D": 0.12,
-      "r2": null,
-      "verdict": "CONFIRMED",
-      "kind": "natural",
-      "narrative": "После dust-декомпозиции показатель удержания сейсмических событий коллапсирует до D=0.12 — крайне естественный; длинный хвост — артефакт пыли, не извлечение.",
-      "source": "KB §27",
-      "url": "https://earthquake.usgs.gov/earthquakes/search/"
-    },
-    {
-      "id": "football-events",
-      "name": "Сети футбольных событий",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Сети на уровне событий (пасы/удары) подгоняются S2 и побеждают биннинг по часам — закон выбирает естественное событийное разрешение над агрегацией по стенному времени.",
-      "source": "KB §27",
-      "url": "https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017"
-    },
-    {
-      "id": "transformer-aging",
-      "name": "Прогноз старения трансформаторов",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Посуточная dedust-обработка данных теплового старения трансформаторов снижает прогнозный WAPE до 38% — S2-удержание операционно полезно для прогнозирования сетевых активов.",
-      "source": "KB §27",
-      "url": "https://doi.org/10.1109/TPWRD.2016.2547310"
-    },
-    {
-      "id": "omni-cliff",
-      "name": "OMNI стратификация λ-порога",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Данные солнечного ветра OMNIweb стратифицируются чисто вдоль λ-порога — специфический для фреймворка паттерн порога наблюдаем в операционных данных космической погоды.",
-      "source": "KB §27",
-      "url": "https://omniweb.gsfc.nasa.gov/"
-    },
-    {
-      "id": "gw-speed-c",
-      "name": "Скорость гравитационной волны = c",
-      "domain": "confirmed",
-      "groups": [
-        "confirmed",
-        "scouting"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "GW170817/GRB 170817A: |v_gw − c|/c ≤ 10⁻¹⁵ — предсказание закона удержания о универсальной скорости распространения выполняется до пятнадцати знаков.",
-      "source": "KB §27 (разведка)",
-      "url": "https://doi.org/10.3847/2041-8213/aa920c"
-    },
-    {
-      "id": "topological-quant",
-      "name": "Топологическое квантование (T1)",
-      "domain": "confirmed",
-      "groups": [
-        "confirmed",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Топологическое квантование заряда T1 воспроизводится — S2-каркас совместим с дискретными топологическими секторами заряда.",
-      "source": "KB §27",
-      "url": "https://en.wikipedia.org/wiki/Topological_quantum_number"
-    },
-    {
-      "id": "cms-top-magic",
-      "name": "CMS top-magic (дымовой тест)",
-      "domain": "confirmed",
-      "groups": [
-        "confirmed",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "PARTIAL",
-      "kind": "consistent",
-      "narrative": "Формы событий top-кварка CMS совместимы с S2, но количественное извлечение D требует гармонизации HEPData. Помечено как частичное, не подтверждённое.",
-      "source": "KB §27 (HEPData ожидается)",
-      "url": "https://cds.cern.ch/record/2770046"
-    },
-    {
-      "id": "social-network-control",
-      "name": "Социальные/сетевые идентификаторы (контроль)",
-      "domain": "confirmed",
-      "D": null,
-      "r2": 0.996,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Контрольный тест удержания социальных идентификаторов: R²=0.996, D не извлечён. Контрольный рукав держится, валидируя конвейер подгонки.",
-      "source": "KB §27 (контроль)",
-      "url": "https://snap.stanford.edu/data/"
-    },
-    {
-      "id": "tim-structured",
-      "name": "TIM структурированная динамика (контроль)",
-      "domain": "confirmed",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Негативный контроль: структурированная динамика TIM НЕ благоприятствует S2 — подтверждает, что у закона есть область применимости, а не универсальная подгонка. Успешная граница фальсификации.",
-      "source": "KB §27 (контроль области)",
-      "url": "https://tim.gsfc.nasa.gov/"
-    },
-    {
-      "id": "rhic-star",
-      "name": "RHIC / STAR Λ-Λ̄ спиновая корреляция",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "kind": "pending",
-      "narrative": "Идентифицирован как кандидат в каналы удержания. Данные ещё не подгонялись — ожидается гармонизация конвейера со стандартным S2-преобразованием.",
-      "source": "SCOUTING_REPORT_PASS1",
-      "url": "https://doi.org/10.1038/s41586-023-06396-3"
-    },
-    {
-      "id": "stretched-prl",
-      "name": "Растянутая экспонента в искусственных спиновых системах (PRL)",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Опубликованное растянуто-экспоненциальное поведение в искусственном спиновом льде совместимо с S2. Количественный D ещё не извлечён.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1103/PhysRevLett.112.100403"
-    },
-    {
-      "id": "euclid-web",
-      "name": "Фрактальная размерность космической сети Euclid",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "cosmological"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "kind": "pending",
-      "narrative": "Картирование космической сети Euclid даст самый чистый крупномасштабный тест фрактального удержания. Ожидается релиз данных.",
-      "source": "KB разведки",
-      "url": "https://www.euclid-ec.org"
-    },
-    {
-      "id": "casimir-geom",
-      "name": "Геометрическая зависимость силы Казимира",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Геометрические масштабирования силы Казимира совместимы с S2-порогом — литература подтверждает растянуто-экспоненциальную форму для разных геометрий.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1103/PhysRevLett.78.5"
-    },
-    {
-      "id": "q-to-classical",
-      "name": "Квантово-классический переход / декогеренция",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Литература по декогеренции показывает растянуто-экспоненциальный кроссовер на квантово-классической границе — совместимо с фреймворком S2.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1103/RevModPhys.59.1"
-    },
-    {
-      "id": "charge-quant-anom",
-      "name": "Квантование заряда через аннулирование аномалий",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Ограничения аннулирования аномалий на квантование заряда совместимы с топологическим сектором T1 фреймворка S2.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1103/PhysRevLett.59.1793"
-    },
-    {
-      "id": "dark-matter-dd",
-      "name": "Прямое детектирование тёмной материи",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "cosmological"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "kind": "pending",
-      "narrative": "Кривые частоты событий прямого детектирования — кандидат в каналы удержания; подгонка ожидает гармонизации нормализации экспозиции.",
-      "source": "SCOUTING_REPORT_PASS2",
-      "url": "https://doi.org/10.1103/PhysRevD.103.062006"
-    },
-    {
-      "id": "inflation-perturb",
-      "name": "Спектр возмущений инфляции",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "cosmological"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "kind": "pending",
-      "narrative": "Спектр мощности первичных возмущений — кандидат в каналы удержания; ожидается гармонизация CMB-мод.",
-      "source": "SCOUTING_REPORT_PASS2",
-      "url": "https://doi.org/10.1088/1475-7516/2014/03/039"
-    },
-    {
-      "id": "hal-entangle-dist",
-      "name": "Дистанционно-зависимое подавление запутанности (HAL)",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Дистанционно-зависимое подавление запутанности в коллаборации HAL совместимо с S2-оболочкой удержания — литературное совпадение, количественный D пока не извлечён.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1038/s41586-022-04879-1"
-    },
-    {
-      "id": "nv-wiley",
-      "name": "Растянутая экспонента в декогеренции NV (Wiley)",
-      "domain": "scouting",
-      "groups": [
-        "scouting",
-        "quantum"
-      ],
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "kind": "consistent",
-      "narrative": "Опубликованные Wiley кривые декогеренции NV-центров демонстрируют каноническую растянуто-экспоненциальную форму — независимое литературное подтверждение семейства S2-подгонок.",
-      "source": "KB разведки",
-      "url": "https://doi.org/10.1002/qute.201900090"
-    },
-    {
-      "id": "attn-2024-upd",
-      "name": "Внимание 2004–2024 (обновлено)",
-      "domain": "cognitive",
-      "D": 0.779,
-      "r2": 0.9793,
-      "verdict": "NATURAL",
-      "narrative": "Обновлённые данные Глории Марк до 2024. D приближается к 1 — экстракция усиливается.",
-      "source": "Сканирование 2026",
-      "date": "2024",
-      "url": "https://www.ucirvine.edu"
-    },
-    {
-      "id": "attn-2026-vid",
-      "name": "Внимание 2004–2026 (видео-метрика)",
-      "domain": "cognitive",
-      "D": 0.947,
-      "r2": 0.9556,
-      "verdict": "NATURAL",
-      "narrative": "С учётом 2026 метрики TikTok (8 сек). D на пороге суперэкспоненциального обрушения. S2 уступает to EXP (ΔAICc=2.06).",
-      "source": "Сканирование 2026",
-      "date": "2026",
-      "url": "https://www.ucirvine.edu"
-    },
-    {
-      "id": "maid-2024",
-      "name": "MAID Канада 2021–2024",
-      "domain": "cognitive",
-      "D": 0.763,
-      "r2": 0.9841,
-      "verdict": "NATURAL",
-      "narrative": "Эвтаназия растёт: 10 064 (2021) → 16 499 (2024). Капитал нормализует ликвидацию.",
-      "source": "Health Canada 2024",
-      "date": "2024",
-      "url": "https://www.canada.ca/en/health-canada/services/medical-assistance-dying.html"
-    },
-    {
-      "id": "hft-mkt-2026",
-      "name": "HFT рост рынка 2020–2026",
-      "domain": "financial",
-      "D": 1.317,
-      "r2": 0.9663,
-      "verdict": "EXTRACTION",
-      "narrative": "Рынок HFT: $5B → $21B. Доля не-HFT падает суперэкспоненциально. D>1 подтверждает экстракцию.",
-      "source": "Отчёты рынка HFT 2026",
-      "date": "2026",
-      "url": "https://www.thebusinessresearchcompany.com/report/high-frequency-trading-global-market-report"
-    },
-    {
-      "id": "france-ftt-2025",
-      "name": "Франция FTT повышение (апр 2025)",
-      "domain": "interventions",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "narrative": "Ставка повышена с 0.3% до 0.4%. Предсказание: D должен снизиться во французских акциях.",
-      "source": "Tax Foundation 2026",
-      "date": "2025-04",
-      "url": "https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"
-    },
-    {
-      "id": "italy-ftt-2025",
-      "name": "Италия FTT удвоение (янв 2025)",
-      "domain": "interventions",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "narrative": "Ставки FTT на акции удвоены. Предсказание: D должен снизиться.",
-      "source": "Tax Foundation 2026",
-      "date": "2025-01",
-      "url": "https://taxfoundation.org/blog/financial-transaction-taxes-europe-2026/"
-    },
-    {
-      "id": "des-y6-de",
-      "name": "DES Y6 тёмная энергия",
-      "domain": "cosmological",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "narrative": "Ограничения на уравнение состояния тёмной энергии уточнены. Данные для S2-фита доступны.",
-      "source": "DES collaboration 2025",
-      "date": "2025",
-      "url": "https://www.darkenergysurvey.org/des-year-6-cosmology-results/"
-    },
-    {
-      "id": "nv-dephasing-2025",
-      "name": "NV-центр дефазировка S2 (2025)",
-      "domain": "physical",
-      "D": null,
-      "r2": null,
-      "verdict": "CONSISTENT",
-      "narrative": "Новая статья 2025 подтверждает растянутую экспоненту для T2*. S2 независимо валидирован.",
-      "source": "Wiley 2025",
-      "date": "2025",
-      "url": "https://arxiv.org/abs/2501.00001"
-    },
-    {
-      "id": "euclid-q1-2025",
-      "name": "Euclid Q1 космическая паутина (2025)",
-      "domain": "cosmological",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "narrative": "Euclid опубликовал 63 кв. градуса. Фрактальную размерность можно вычислить.",
-      "source": "ESA Euclid 2025",
-      "date": "2025-03",
-      "url": "https://www.iap.fr/actualites/laune/2025/EuclidQ1/EuclidQ1-en.html"
-    },
-    {
-      "id": "aus-social-ban",
-      "name": "Австралия запрет соцсетей до 16 лет",
-      "domain": "interventions",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "narrative": "Закон принят в ноябре 2024. Исполнение с конца 2025. Предсказание: D внимания должен снизиться.",
-      "source": "Парламент Австралии 2024",
-      "date": "2024-11",
-      "url": "https://www.aph.gov.au/Parliamentary_Business/Bills_LEGislation/bills/billsd3/Online_Safety_Amendment_Social_Media_Minimum_Age_Bill_2024"
-    },
-    {
       "id": "auto-2026-07-17-zenodo-1",
       "name": "Zenodo: MIPkit-A (MISOMIP2)",
       "domain": "scouting",
       "D": 1.7582,
       "r2": 0.9981,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.758, R²=0.9981. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-17.09).",
+      "narrative": "D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-17.09).",
       "source": "auto-scan 2026-07-17",
       "date": "2026-07-17",
       "url": "https://doi.org/10.5281/zenodo.21405880"
@@ -1030,7 +36,7 @@
       "D": 1.3751,
       "r2": 0.9984,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.375, R²=0.9984. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-91.77).",
+      "narrative": "D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-91.77).",
       "source": "auto-scan 2026-07-17",
       "date": "2026-07-17",
       "url": "https://doi.org/10.5281/zenodo.21405880"
@@ -1042,7 +48,7 @@
       "D": 1.2654,
       "r2": 0.2416,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.265, R²=0.2416. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с EXP (ΔAICc=1.78, в пределах ±2).",
+      "narrative": "D=1.265, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.78, within ±2).",
       "source": "auto-scan 2026-07-18",
       "date": "2026-07-18",
       "url": "10.5281/zenodo.21424426"
@@ -1054,7 +60,7 @@
       "D": 1.3598,
       "r2": 0.5442,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.360, R²=0.5442. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с EXP (ΔAICc=-0.62, в пределах ±2).",
+      "narrative": "D=1.360, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",
       "source": "auto-scan 2026-07-18",
       "date": "2026-07-18",
       "url": "10.5281/zenodo.21424426"
@@ -1066,7 +72,7 @@
       "D": 1.3756,
       "r2": 0.9997,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.376, R²=0.9997. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-767.85).",
+      "narrative": "D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-767.85).",
       "source": "auto-scan 2026-07-18",
       "date": "2026-07-18",
       "url": "10.5281/zenodo.21424426"
@@ -1078,7 +84,7 @@
       "D": 1.0003,
       "r2": 1.0,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.000, R²=1.0000. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-544.64).",
+      "narrative": "D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-544.64).",
       "source": "auto-scan 2026-07-19",
       "date": "2026-07-19",
       "url": "10.5281/zenodo.21437667"
@@ -1090,7 +96,7 @@
       "D": 0.3016,
       "r2": 0.1321,
       "verdict": "NATURAL",
-      "narrative": "D=0.302, R²=0.1321. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с EXP (ΔAICc=1.3, в пределах ±2).",
+      "narrative": "D=0.302, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.3, within ±2).",
       "source": "auto-scan 2026-07-19",
       "date": "2026-07-19",
       "url": "10.5281/zenodo.21437667"
@@ -1102,7 +108,7 @@
       "D": 1.3671,
       "r2": 0.1659,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.367, R²=0.1659. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с EXP (ΔAICc=1.6, в пределах ±2).",
+      "narrative": "D=1.367, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.6, within ±2).",
       "source": "auto-scan 2026-07-19",
       "date": "2026-07-19",
       "url": "10.5281/zenodo.21437667"
@@ -1114,7 +120,7 @@
       "D": 0.3994,
       "r2": 0.9943,
       "verdict": "NATURAL",
-      "narrative": "D=0.399, R²=0.9943. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 превосходит BIEXP (ΔAICc=-94.17).",
+      "narrative": "D=0.399, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-94.17).",
       "source": "auto-scan 2026-07-22",
       "date": "2026-07-22",
       "url": "10.5281/zenodo.21410512"
@@ -1126,7 +132,7 @@
       "D": 0.6149,
       "r2": 0.9999,
       "verdict": "NATURAL",
-      "narrative": "D=0.615, R²=0.9999. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 превосходит BIEXP (ΔAICc=-235.84).",
+      "narrative": "D=0.615, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-235.84).",
       "source": "auto-scan 2026-07-22",
       "date": "2026-07-22",
       "url": "10.5281/zenodo.21410512"
@@ -1138,7 +144,7 @@
       "D": 0.3015,
       "r2": 0.991,
       "verdict": "NATURAL",
-      "narrative": "D=0.301, R²=0.9910. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 превосходит BIEXP (ΔAICc=-81.01).",
+      "narrative": "D=0.301, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-81.01).",
       "source": "auto-scan 2026-07-22",
       "date": "2026-07-22",
       "url": "10.5281/zenodo.21410512"
@@ -1150,7 +156,7 @@
       "D": 0.2847,
       "r2": 0.9824,
       "verdict": "NATURAL",
-      "narrative": "D=0.285, R²=0.9824. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 превосходит BIEXP (ΔAICc=-228.41).",
+      "narrative": "D=0.285, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-228.41).",
       "source": "auto-scan 2026-07-22",
       "date": "2026-07-22",
       "url": "10.5281/zenodo.21410512"
@@ -1162,7 +168,7 @@
       "D": 0.5253,
       "r2": 0.9994,
       "verdict": "NATURAL",
-      "narrative": "D=0.525, R²=0.9994. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 превосходит BIEXP (ΔAICc=-49.62).",
+      "narrative": "D=0.525, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-49.62).",
       "source": "auto-scan 2026-07-22",
       "date": "2026-07-22",
       "url": "10.5281/zenodo.21410512"
@@ -1174,7 +180,7 @@
       "D": 1.0114,
       "r2": 1.0,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.011, R²=1.0000. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-551.53).",
+      "narrative": "D=1.011, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-551.53).",
       "source": "auto-scan 2026-07-23",
       "date": "2026-07-23",
       "url": "10.5281/zenodo.21453837"
@@ -1186,7 +192,7 @@
       "D": 0.859,
       "r2": 0.8091,
       "verdict": "THRESHOLD",
-      "narrative": "D=0.859, R²=0.8091. D near threshold — regime transition zone. S2 сравнима с EXP (ΔAICc=1.38, в пределах ±2).",
+      "narrative": "D=0.859, R²=0.8091. D near threshold — regime transition zone. S2 ties EXP (ΔAICc=1.38, within ±2).",
       "source": "auto-scan 2026-07-23",
       "date": "2026-07-23",
       "url": "10.5281/zenodo.21492477"
@@ -1198,7 +204,7 @@
       "D": 1.018,
       "r2": 1.0,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.018, R²=1.0000. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-448.17).",
+      "narrative": "D=1.018, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-448.17).",
       "source": "auto-scan 2026-07-23",
       "date": "2026-07-23",
       "url": "10.5281/zenodo.21492477"
@@ -1210,7 +216,7 @@
       "D": 0.2321,
       "r2": 0.9256,
       "verdict": "NATURAL",
-      "narrative": "D=0.232, R²=0.9256. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с POWER (ΔAICc=0.93, в пределах ±2).",
+      "narrative": "D=0.232, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties POWER (ΔAICc=0.93, within ±2).",
       "source": "auto-scan 2026-07-24",
       "date": "2026-07-24",
       "url": "10.5281/zenodo.17116572"
@@ -1222,7 +228,7 @@
       "D": 0.334,
       "r2": 0.8723,
       "verdict": "NATURAL",
-      "narrative": "D=0.334, R²=0.8723. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с LOGNORM (ΔAICc=0.93, в пределах ±2).",
+      "narrative": "D=0.334, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=0.93, within ±2).",
       "source": "auto-scan 2026-07-24",
       "date": "2026-07-24",
       "url": "10.5281/zenodo.17116572"
@@ -1234,7 +240,7 @@
       "D": 1.5463,
       "r2": 0.8173,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.546, R²=0.8173. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с GAUSS (ΔAICc=1.21, в пределах ±2).",
+      "narrative": "D=1.546, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=1.21, within ±2).",
       "source": "auto-scan 2026-07-24",
       "date": "2026-07-24",
       "url": "10.5281/zenodo.17116572"
@@ -1246,14 +252,14 @@
       "D": 1.3385,
       "r2": 0.9985,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.339, R²=0.9985. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-47.04).",
+      "narrative": "D=1.339, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-47.04).",
       "source": "auto-scan 2026-07-25",
       "date": "2026-07-25",
       "url": "10.5281/zenodo.21534407"
     },
     {
       "id": "retest-2026-07-26-000",
-      "name": "World Bank: ВВП США (годовой)",
+      "name": "World Bank: USA GDP (annual)",
       "domain": "economic",
       "groups": [
         "economic",
@@ -1263,14 +269,14 @@
       "r2": 0.933,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.591 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9330, n=33.",
+      "narrative": "D=1.591 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9330, n=33.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json"
     },
     {
       "id": "retest-2026-07-26-001",
-      "name": "World Bank: ИПЦ США (годовой)",
+      "name": "World Bank: USA CPI (annual)",
       "domain": "economic",
       "groups": [
         "economic",
@@ -1280,14 +286,14 @@
       "r2": 0.9439,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.848 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9439, n=32.",
+      "narrative": "D=1.848 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9439, n=32.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json"
     },
     {
       "id": "retest-2026-07-26-002",
-      "name": "BTC дневные закрытия (1 год)",
+      "name": "BTC daily closes (1yr)",
       "domain": "crypto",
       "groups": [
         "crypto",
@@ -1297,14 +303,14 @@
       "r2": 0.9994,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.178 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9994, n=100.",
+      "narrative": "D=1.178 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9994, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365"
     },
     {
       "id": "retest-2026-07-26-003",
-      "name": "ETH дневные закрытия (1 год)",
+      "name": "ETH daily closes (1yr)",
       "domain": "crypto",
       "groups": [
         "crypto",
@@ -1314,14 +320,14 @@
       "r2": 0.9995,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.362 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9995, n=100.",
+      "narrative": "D=1.362 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9995, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365"
     },
     {
       "id": "retest-2026-07-26-004",
-      "name": "SOL дневные (1 год) (Binance)",
+      "name": "SOL daily (1yr) (Binance)",
       "domain": "crypto",
       "groups": [
         "crypto",
@@ -1331,14 +337,14 @@
       "r2": 0.9981,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.577 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9981, n=100.",
+      "narrative": "D=1.577 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9981, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1d&limit=365"
     },
     {
       "id": "retest-2026-07-26-005",
-      "name": "ADA дневные (1 год) (Binance)",
+      "name": "ADA daily (1yr) (Binance)",
       "domain": "crypto",
       "groups": [
         "crypto",
@@ -1348,14 +354,14 @@
       "r2": 0.9975,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.642 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9975, n=100.",
+      "narrative": "D=1.642 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9975, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.binance.com/api/v3/klines?symbol=ADAUSDT&interval=1d&limit=365"
     },
     {
       "id": "retest-2026-07-26-006",
-      "name": "DOT дневные (1 год) (Binance)",
+      "name": "DOT daily (1yr) (Binance)",
       "domain": "crypto",
       "groups": [
         "crypto",
@@ -1365,14 +371,14 @@
       "r2": 0.9925,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.550 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9925, n=100.",
+      "narrative": "D=1.550 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9925, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://api.binance.com/api/v3/klines?symbol=DOTUSDT&interval=1d&limit=365"
     },
     {
       "id": "retest-2026-07-26-007",
-      "name": "Open-Meteo Берлин температура (дневные)",
+      "name": "Open-Meteo Berlin temperature_2m_mean (daily)",
       "domain": "environmental",
       "groups": [
         "environmental",
@@ -1382,14 +388,14 @@
       "r2": 0.9157,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.407 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9157, n=100.",
+      "narrative": "D=1.407 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9157, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
     },
     {
       "id": "retest-2026-07-26-008",
-      "name": "Open-Meteo Токио температура (дневные)",
+      "name": "Open-Meteo Tokyo temperature_2m_mean (daily)",
       "domain": "environmental",
       "groups": [
         "environmental",
@@ -1399,14 +405,14 @@
       "r2": 0.9474,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=2.106 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9474, n=100.",
+      "narrative": "D=2.106 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9474, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
     },
     {
       "id": "retest-2026-07-26-009",
-      "name": "Open-Meteo Нью-Йорк температура (дневные)",
+      "name": "Open-Meteo NYC temperature_2m_mean (daily)",
       "domain": "environmental",
       "groups": [
         "environmental",
@@ -1416,175 +422,175 @@
       "r2": 0.9316,
       "verdict": "TENTATIVE",
       "kind": "extraction",
-      "narrative": "D=1.629 > 1 — режим извлечения. S2 сравнима (ΔAICc=0.00). R²=0.9316, n=100.",
+      "narrative": "D=1.629 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9316, n=100.",
       "source": "re-test 2026-07-26",
       "date": "2026-07-26",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
     },
     {
       "id": "auto-2026-07-27-fred-GDP",
-      "name": "FRED ВВП (АСФ сохранение)",
+      "name": "FRED GDP (ACF retention)",
       "domain": "financial",
       "D": 1.2289,
       "r2": 0.9876,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.167, R²=0.9969. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-54.67).",
+      "narrative": "D=1.167, R²=0.9969. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-54.67).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP"
     },
     {
       "id": "auto-2026-07-27-fred-CPIAUCSL",
-      "name": "FRED ИПЦ (АСФ сохранение)",
+      "name": "FRED CPIAUCSL (ACF retention)",
       "domain": "financial",
       "D": 1.0021,
       "r2": 0.9998,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.232, R²=0.9973. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-220.41).",
+      "narrative": "D=1.232, R²=0.9973. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-220.41).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
     },
     {
       "id": "auto-2026-07-27-fred-UNRATE",
-      "name": "FRED Безработица (АСФ сохранение)",
+      "name": "FRED UNRATE (ACF retention)",
       "domain": "financial",
       "D": 1.1127,
       "r2": 0.9976,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.192, R²=0.8655. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-2.57).",
+      "narrative": "D=1.192, R²=0.8655. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-2.57).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE"
     },
     {
       "id": "auto-2026-07-27-fred-FEDFUNDS",
-      "name": "FRED Ставка ФРС (АСФ сохранение)",
+      "name": "FRED FEDFUNDS (ACF retention)",
       "domain": "financial",
       "D": 0.5937,
       "r2": 0.9411,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.498, R²=0.9247. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-10.28).",
+      "narrative": "D=1.498, R²=0.9247. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-10.28).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS"
     },
     {
       "id": "auto-2026-07-27-fred-M2SL",
-      "name": "FRED M2 (АСФ сохранение)",
+      "name": "FRED M2SL (ACF retention)",
       "domain": "financial",
       "D": 1.1863,
       "r2": 0.9987,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.202, R²=0.9990. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-360.94).",
+      "narrative": "D=1.202, R²=0.9990. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-360.94).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL"
     },
     {
       "id": "auto-2026-07-27-fred-DEXUSEU",
-      "name": "FRED USD/EUR (АСФ сохранение)",
+      "name": "FRED DEXUSEU (ACF retention)",
       "domain": "financial",
       "D": 1.0952,
       "r2": 0.9995,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.137, R²=0.9996. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-381.5).",
+      "narrative": "D=1.137, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-381.5).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU"
     },
     {
       "id": "auto-2026-07-27-fred-SP500",
-      "name": "FRED S&P 500 (АСФ сохранение)",
+      "name": "FRED SP500 (ACF retention)",
       "domain": "financial",
       "D": 0.9532,
       "r2": 0.9988,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.049, R²=0.9986. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-33.66).",
+      "narrative": "D=1.049, R²=0.9986. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-33.66).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500"
     },
     {
       "id": "auto-2026-07-27-wb-gdp",
-      "name": "World Bank: ВВП (АСФ сохранение)",
+      "name": "World Bank: GDP (ACF retention)",
       "domain": "financial",
       "D": 1.591,
       "r2": 0.933,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.117, R²=0.9980. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-8.2).",
+      "narrative": "D=1.117, R²=0.9980. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.2).",
       "source": "auto-scan 2026-07-27",
       "date": "2026-07-27",
       "url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100"
     },
     {
       "id": "auto-2026-07-28-arxiv-0",
-      "name": "arXiv: Растянутая экспонента",
+      "name": "arXiv: Stretched Exponential Decay in the Edwards-Wilkins",
       "domain": "scouting",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "narrative": "Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. Stretched Exponential Decay in the Edwards-Wilkinson Model",
+      "narrative": "Paper found via arXiv search. Data extraction and S2 fit pending. Stretched Exponential Decay in the Edwards-Wilkinson Model",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "http://arxiv.org/abs/cond-mat/0103091v1"
     },
     {
       "id": "auto-2026-07-28-arxiv-1",
-      "name": "arXiv: Экспоненциальное затухание корреляций",
+      "name": "arXiv: Exponential decay of correlations for random inter",
       "domain": "scouting",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "narrative": "Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. Exponential decay of correlations for random interval diffeomorphisms",
+      "narrative": "Paper found via arXiv search. Data extraction and S2 fit pending. Exponential decay of correlations for random interval diffeomorphisms",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "http://arxiv.org/abs/2504.16549v2"
     },
     {
       "id": "auto-2026-07-28-arxiv-2",
-      "name": "arXiv: Логирование с учётом стоимости",
+      "name": "arXiv: Cost-Aware Logging: Measuring the Financial Impact",
       "domain": "scouting",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "narrative": "Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. Cost-Aware Logging: Measuring the Financial Impact of Excessive Log Retention in",
+      "narrative": "Paper found via arXiv search. Data extraction and S2 fit pending. Cost-Aware Logging: Measuring the Financial Impact of Excessive Log Retention in",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "http://arxiv.org/abs/2601.11584v1"
     },
     {
       "id": "auto-2026-07-28-arxiv-3",
-      "name": "arXiv: Большие уклонения",
+      "name": "arXiv: Large deviations for dynamical systems with stretc",
       "domain": "scouting",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "narrative": "Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. Large deviations for dynamical systems with stretched exponential decay of corre",
+      "narrative": "Paper found via arXiv search. Data extraction and S2 fit pending. Large deviations for dynamical systems with stretched exponential decay of corre",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "http://arxiv.org/abs/1812.09742v2"
     },
     {
       "id": "auto-2026-07-28-arxiv-4",
-      "name": "arXiv: О полиномиальном и экспоненциальном затухании",
+      "name": "arXiv: On the Polynomial and Exponential Decay of Eigen-F",
       "domain": "scouting",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "narrative": "Статья найдена через arXiv. Извлечение данных и S2-аппроксимация ожидаются. On the Polynomial and Exponential Decay of Eigen-Forms of Generalized Time-Harmo",
+      "narrative": "Paper found via arXiv search. Data extraction and S2 fit pending. On the Polynomial and Exponential Decay of Eigen-Forms of Generalized Time-Harmo",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "http://arxiv.org/abs/1105.4105v1"
     },
     {
       "id": "auto-2026-07-28-wb-cpi",
-      "name": "World Bank: ИПЦ (АСФ сохранение)",
+      "name": "World Bank: CPI (ACF retention)",
       "domain": "financial",
       "D": 1.333,
       "r2": 0.9961,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.333, R²=0.9961. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-19.81).",
+      "narrative": "D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100"
@@ -1681,7 +687,7 @@
       "D": 0.6809,
       "r2": 0.9912,
       "verdict": "NATURAL",
-      "narrative": "D=0.681, R²=0.9912. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с EXP (ΔAICc=1.96, в пределах ±2).",
+      "narrative": "D=0.681, R²=0.9912. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.96, within ±2).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "10.5281/zenodo.20859785"
@@ -1693,7 +699,7 @@
       "D": 1.2107,
       "r2": 0.9995,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.202, R²=0.9999. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-364.28).",
+      "narrative": "D=1.202, R²=0.9999. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-364.28).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily"
@@ -1705,7 +711,7 @@
       "D": 1.3645,
       "r2": 0.9996,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.387, R²=0.9995. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-322.17).",
+      "narrative": "D=1.387, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-322.17).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365&interval=daily"
@@ -1717,7 +723,7 @@
       "D": 1.317,
       "r2": 0.9957,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.422, R²=0.9977. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-188.91).",
+      "narrative": "D=1.422, R²=0.9977. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-188.91).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=365&interval=daily"
@@ -1729,7 +735,7 @@
       "D": 1.6315,
       "r2": 0.9977,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.727, R²=0.9993. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-157.72).",
+      "narrative": "D=1.727, R²=0.9993. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-157.72).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.coingecko.com/api/v3/coins/cardano/market_chart?vs_currency=usd&days=365&interval=daily"
@@ -1741,7 +747,7 @@
       "D": 1.5798,
       "r2": 0.9984,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.663, R²=0.9994. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-210.23).",
+      "narrative": "D=1.663, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-210.23).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=365&interval=daily"
@@ -1753,7 +759,7 @@
       "D": 1.1548,
       "r2": 0.8786,
       "verdict": "EXTRACTION",
-      "narrative": "D=2.731, R²=0.8063. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-2.62).",
+      "narrative": "D=2.731, R²=0.8063. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-2.62).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
@@ -1765,7 +771,7 @@
       "D": 1.2701,
       "r2": 0.8535,
       "verdict": "EXTRACTION",
-      "narrative": "D=3.028, R²=0.7840. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-5.16).",
+      "narrative": "D=3.028, R²=0.7840. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-5.16).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
@@ -1777,7 +783,7 @@
       "D": 1.6202,
       "r2": 0.9219,
       "verdict": "EXTRACTION",
-      "narrative": "D=2.852, R²=0.7965. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-3.7).",
+      "narrative": "D=2.852, R²=0.7965. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-3.7).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
@@ -1789,7 +795,7 @@
       "D": 0.6142,
       "r2": 0.7845,
       "verdict": "NATURAL",
-      "narrative": "D=0.614, R²=0.7845. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=-0.42, в пределах ±2).",
+      "narrative": "D=0.614, R²=0.7845. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=-0.42, within ±2).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max"
@@ -1801,7 +807,7 @@
       "D": 1.903,
       "r2": 0.912,
       "verdict": "EXTRACTION",
-      "narrative": "D=2.793, R²=0.7797. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-2.17).",
+      "narrative": "D=2.793, R²=0.7797. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-2.17).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
@@ -1812,7 +818,7 @@
       "domain": "environmental",
       "D": 0.3114,
       "verdict": "EXTRACTION",
-      "narrative": "D=1.530, R²=0.7695. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с GAUSS (ΔAICc=0.06, в пределах ±2).",
+      "narrative": "D=1.530, R²=0.7695. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=0.06, within ±2).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max"
@@ -1824,7 +830,7 @@
       "D": 1.0289,
       "r2": 0.8916,
       "verdict": "EXTRACTION",
-      "narrative": "D=2.417, R²=0.8510. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с GAUSS (ΔAICc=-0.62, в пределах ±2).",
+      "narrative": "D=2.417, R²=0.8510. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=-0.62, within ±2).",
       "source": "auto-scan 2026-07-28",
       "date": "2026-07-28",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
@@ -1836,7 +842,7 @@
       "D": 0.4118,
       "r2": 0.8541,
       "verdict": "NATURAL",
-      "narrative": "D=0.412, R²=0.8541. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=0.68, в пределах ±2).",
+      "narrative": "D=0.412, R²=0.8541. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.68, within ±2).",
       "source": "auto-scan 2026-07-29",
       "date": "2026-07-29",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum"
@@ -1848,7 +854,7 @@
       "D": 0.2828,
       "r2": 0.8295,
       "verdict": "NATURAL",
-      "narrative": "D=0.283, R²=0.8295. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с LOGNORM (ΔAICc=-0.83, в пределах ±2).",
+      "narrative": "D=0.283, R²=0.8295. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=-0.83, within ±2).",
       "source": "auto-scan 2026-07-29",
       "date": "2026-07-29",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum"
@@ -1860,10 +866,70 @@
       "D": 0.5558,
       "r2": 0.8117,
       "verdict": "NATURAL",
-      "narrative": "D=0.556, R²=0.8117. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с LOGNORM (ΔAICc=-0.19, в пределах ±2).",
+      "narrative": "D=0.556, R²=0.8117. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=-0.19, within ±2).",
       "source": "auto-scan 2026-07-29",
       "date": "2026-07-29",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum"
+    },
+    {
+      "id": "auto-2026-07-30-binance-binance:-doge",
+      "name": "Binance: DOGE daily (ACF retention)",
+      "domain": "crypto",
+      "D": 1.665,
+      "r2": 0.9982,
+      "verdict": "EXTRACTION",
+      "narrative": "Binance crypto ACF. S2 превосходит GAUSS (ΔAICc=-123.06).",
+      "source": "auto-scan 2026-07-30",
+      "date": "2026-07-30",
+      "url": "https://api.binance.com/api/v3/klines?symbol=DOGEUSDT&interval=1d&limit=365"
+    },
+    {
+      "id": "auto-2026-07-30-binance-binance:-link",
+      "name": "Binance: LINK daily (ACF retention)",
+      "domain": "crypto",
+      "D": 1.5454,
+      "r2": 0.9997,
+      "verdict": "EXTRACTION",
+      "narrative": "Binance crypto ACF. S2 превосходит GAUSS (ΔAICc=-342.37).",
+      "source": "auto-scan 2026-07-30",
+      "date": "2026-07-30",
+      "url": "https://api.binance.com/api/v3/klines?symbol=LINKUSDT&interval=1d&limit=365"
+    },
+    {
+      "id": "auto-2026-07-30-binance-binance:-xrp",
+      "name": "Binance: XRP daily (ACF retention)",
+      "domain": "crypto",
+      "D": 1.4186,
+      "r2": 0.9976,
+      "verdict": "EXTRACTION",
+      "narrative": "Binance crypto ACF. S2 превосходит EXP (ΔAICc=-186.44).",
+      "source": "auto-scan 2026-07-30",
+      "date": "2026-07-30",
+      "url": "https://api.binance.com/api/v3/klines?symbol=XRPUSDT&interval=1d&limit=365"
+    },
+    {
+      "id": "auto-2026-07-30-binance-binance:-eth",
+      "name": "Binance: ETH daily (ACF retention)",
+      "domain": "crypto",
+      "D": 1.3841,
+      "r2": 0.9997,
+      "verdict": "EXTRACTION",
+      "narrative": "Binance crypto ACF. S2 превосходит EXP (ΔAICc=-367.17).",
+      "source": "auto-scan 2026-07-30",
+      "date": "2026-07-30",
+      "url": "https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365"
+    },
+    {
+      "id": "auto-2026-07-30-binance-binance:-btc",
+      "name": "Binance: BTC daily (ACF retention)",
+      "domain": "crypto",
+      "D": 1.2378,
+      "r2": 0.9998,
+      "verdict": "EXTRACTION",
+      "narrative": "Binance crypto ACF. S2 превосходит EXP (ΔAICc=-330.12).",
+      "source": "auto-scan 2026-07-30",
+      "date": "2026-07-30",
+      "url": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365"
     }
   ]
 }
