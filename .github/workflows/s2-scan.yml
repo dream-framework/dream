@@ -2,8 +2,8 @@ name: DREAM S2 Auto-Scan
 
 on:
   schedule:
-    # Run every day at 03:17 UTC (off-peak, avoids GitHub cron congestion)
-    - cron: '17 3 * * *'
+    # Run every 6 hours to retry no-comparison entries and scan for new data
+    - cron: '17 */6 * * *'
   workflow_dispatch:
     # Allow manual triggering from the Actions tab
 
@@ -30,7 +30,7 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install numpy scipy
+          pip install numpy scipy scikit-learn
 
       - name: Run auto-scanner with model-comparison gate
         env:
@@ -44,12 +44,14 @@ jobs:
         run: |
           git config user.name  "dream-bot"
           git config user.email "dream-bot@users.noreply.github.com"
-          git add en/tests.html ru/tests.html 2>/dev/null || true
+          git add en/tests.html ru/tests.html en/tests.json ru/tests.json \
+                  en/articles/meta-s2.html ru/articles/meta-s2.html \
+                  meta_s2_snapshot.json scripts/meta_s2_article.py 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new S2_WINS entries today — skipping commit."
           else
             STAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-            git commit -m "auto-scan: $STAMP — S2 gate (AICc) update"
+            git commit -m "auto-scan: $STAMP — S2 gate (AICc) + meta-s2 article update"
             git push origin gh-pages
             echo "Pushed new test entries to gh-pages."
           fi
