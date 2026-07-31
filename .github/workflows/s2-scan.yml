@@ -48,6 +48,7 @@ jobs:
                   en/articles/meta-s2.html ru/articles/meta-s2.html \
                   meta_s2_snapshot.json scripts/meta_s2_article.py \
                   scripts/registry_integrity_reconcile.py \
+                  scripts/backfill_model_verdict.py \
                   scout_provenance_ledger.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new S2_WINS entries today — skipping commit."
