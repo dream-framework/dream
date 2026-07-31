@@ -1319,6 +1319,23 @@ def main():
         except Exception as e:
             print(f'  ✗ Reconcile failed: {e}')
     
+    # 12c. Update provenance ledger
+    # Record every scan run with timestamp, entries considered, and outcomes.
+    # Mark entries after 2026-07-31 as 'prospective' evidence.
+    print('\n📋 Updating provenance ledger...')
+    provenance_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scout_provenance.py')
+    if os.path.exists(provenance_script):
+        try:
+            # Re-initialize the ledger from current registry state
+            r = subprocess.run(['python3', provenance_script, '--init'],
+                             capture_output=True, text=True, timeout=60)
+            lines = r.stdout.strip().split('\n')
+            for line in lines[-3:]:
+                print(f'  {line}')
+            print('  ✓ Provenance ledger updated')
+        except Exception as e:
+            print(f'  ✗ Provenance update failed: {e}')
+    
     # 13. Update meta-s2 article with current registry stats
     print('\n📝 Updating meta-s2 article...')
     try:

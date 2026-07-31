@@ -1,0 +1,2452 @@
+{
+  "version": "1.0",
+  "initialized": "2026-07-31T16:24:15.665969+00:00",
+  "prospective_baseline_date": "2026-07-31",
+  "protocol": {
+    "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
+    "lag_window": "max_lag = min(n//3, 40) for time series; magnitude-frequency for events",
+    "missing_data_treatment": "drop NaN/Inf values before computing ACF",
+    "parameter_bounds": {
+      "D": [
+        0.01,
+        10.0
+      ],
+      "lambda_q": [
+        0.01,
+        1000.0
+      ]
+    },
+    "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+    "candidate_models": {
+      "nested": [
+        "EXP",
+        "GAUSS"
+      ],
+      "non_nested": [
+        "POWER",
+        "BIEXP",
+        "LOGNORM"
+      ],
+      "canonical": "S2 (stretched exponential)"
+    },
+    "model_selection_criterion": "AICc (corrected Akaike Information Criterion)",
+    "gate_threshold": "S2 must win or tie (ΔAICc within ±2) to enter registry"
+  },
+  "entries": [
+    {
+      "id": "",
+      "name": "Zenodo: MIPkit-A (MISOMIP2)",
+      "family": "zenodo",
+      "source_url": "https://doi.org/10.5281/zenodo.21405880",
+      "registry_date": "2026-07-17",
+      "D": 1.7582,
+      "r2": 0.9981,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.7582, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: MIPkit-A (MISOMIP2)",
+      "family": "zenodo",
+      "source_url": "https://doi.org/10.5281/zenodo.21405880",
+      "registry_date": "2026-07-17",
+      "D": 1.3751,
+      "r2": 0.9984,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3751, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: COVID-19-Todesfälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21424426",
+      "registry_date": "2026-07-18",
+      "D": 1.2654,
+      "r2": 0.2416,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.2654, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: COVID-19-Todesfälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21424426",
+      "registry_date": "2026-07-18",
+      "D": 1.3598,
+      "r2": 0.5442,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.3598, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: COVID-19-Todesfälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21424426",
+      "registry_date": "2026-07-18",
+      "D": 1.3756,
+      "r2": 0.9997,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3756, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21437667",
+      "registry_date": "2026-07-19",
+      "D": 1.0003,
+      "r2": 1.0,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.0003, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21437667",
+      "registry_date": "2026-07-19",
+      "D": 0.3016,
+      "r2": 0.1321,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3016, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21437667",
+      "registry_date": "2026-07-19",
+      "D": 1.3671,
+      "r2": 0.1659,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.3671, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: High-resolution multi-modal accessibility metrics ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21410512",
+      "registry_date": "2026-07-22",
+      "D": 0.3994,
+      "r2": 0.9943,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.3994, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: High-resolution multi-modal accessibility metrics ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21410512",
+      "registry_date": "2026-07-22",
+      "D": 0.6149,
+      "r2": 0.9999,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.6149, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: High-resolution multi-modal accessibility metrics ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21410512",
+      "registry_date": "2026-07-22",
+      "D": 0.3015,
+      "r2": 0.991,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.3015, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: High-resolution multi-modal accessibility metrics ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21410512",
+      "registry_date": "2026-07-22",
+      "D": 0.2847,
+      "r2": 0.9824,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.2847, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: High-resolution multi-modal accessibility metrics ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21410512",
+      "registry_date": "2026-07-22",
+      "D": 0.5253,
+      "r2": 0.9994,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.5253, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and code for: Photo-induced currents and shor",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21453837",
+      "registry_date": "2026-07-23",
+      "D": 1.0114,
+      "r2": 1.0,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.0114, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and code for: \"Where to look for fungi in a b",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21492477",
+      "registry_date": "2026-07-23",
+      "D": 0.859,
+      "r2": 0.8091,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.8590, R²=0.8091. D≈1 — threshold regime, near-exponential decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and code for: \"Where to look for fungi in a b",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21492477",
+      "registry_date": "2026-07-23",
+      "D": 1.018,
+      "r2": 1.0,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.0180, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Probiotic and postbiotic treatment in situ during ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.17116572",
+      "registry_date": "2026-07-24",
+      "D": 0.2321,
+      "r2": 0.9256,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.2321, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Probiotic and postbiotic treatment in situ during ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.17116572",
+      "registry_date": "2026-07-24",
+      "D": 0.334,
+      "r2": 0.8723,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3340, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Probiotic and postbiotic treatment in situ during ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.17116572",
+      "registry_date": "2026-07-24",
+      "D": 1.5463,
+      "r2": 0.8173,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.5463, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Computational Verification Suite for Singular-Seri",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21534407",
+      "registry_date": "2026-07-25",
+      "D": 1.3385,
+      "r2": 0.9985,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3385, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "World Bank: USA GDP (annual)",
+      "family": "world bank",
+      "source_url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json",
+      "registry_date": "2026-07-26",
+      "D": 1.591,
+      "r2": 0.933,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.5910, R²=0.9330. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "World Bank: USA CPI (annual)",
+      "family": "world bank",
+      "source_url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json",
+      "registry_date": "2026-07-26",
+      "D": 1.8483,
+      "r2": 0.9439,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.8483, R²=0.9439. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "BTC daily closes (1yr)",
+      "family": "crypto",
+      "source_url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365",
+      "registry_date": "2026-07-26",
+      "D": 1.1782,
+      "r2": 0.9994,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.1782, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "ETH daily closes (1yr)",
+      "family": "crypto",
+      "source_url": "https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365",
+      "registry_date": "2026-07-26",
+      "D": 1.362,
+      "r2": 0.9995,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.3620, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "SOL daily (1yr) (Binance)",
+      "family": "crypto",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-26",
+      "D": 1.5774,
+      "r2": 0.9981,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.5774, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "ADA daily (1yr) (Binance)",
+      "family": "crypto",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=ADAUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-26",
+      "D": 1.6416,
+      "r2": 0.9975,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.6416, R²=0.9975. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "DOT daily (1yr) (Binance)",
+      "family": "crypto",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=DOTUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-26",
+      "D": 1.5497,
+      "r2": 0.9925,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.5497, R²=0.9925. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo Berlin temperature_2m_mean (daily)",
+      "family": "weather",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-26",
+      "D": 1.4069,
+      "r2": 0.9157,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.4069, R²=0.9157. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo Tokyo temperature_2m_mean (daily)",
+      "family": "weather",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-26",
+      "D": 2.1057,
+      "r2": 0.9474,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=2.1057, R²=0.9474. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo NYC temperature_2m_mean (daily)",
+      "family": "weather",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-26",
+      "D": 1.6293,
+      "r2": 0.9316,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.6293, R²=0.9316. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED GDP (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP",
+      "registry_date": "2026-07-27",
+      "D": 1.2289,
+      "r2": 0.9876,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.2289, R²=0.9876. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED CPIAUCSL (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+      "registry_date": "2026-07-27",
+      "D": 1.0021,
+      "r2": 0.9998,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.0021, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED UNRATE (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
+      "registry_date": "2026-07-27",
+      "D": 1.1127,
+      "r2": 0.9976,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.1127, R²=0.9976. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED FEDFUNDS (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS",
+      "registry_date": "2026-07-27",
+      "D": 0.5937,
+      "r2": 0.9411,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.5937, R²=0.9411. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED M2SL (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL",
+      "registry_date": "2026-07-27",
+      "D": 1.1863,
+      "r2": 0.9987,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.1863, R²=0.9987. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED DEXUSEU (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",
+      "registry_date": "2026-07-27",
+      "D": 1.0952,
+      "r2": 0.9995,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.0952, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED SP500 (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",
+      "registry_date": "2026-07-27",
+      "D": 0.9532,
+      "r2": 0.9988,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.9532, R²=0.9988. D≈1 — threshold regime, near-exponential decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "World Bank: GDP (ACF retention)",
+      "family": "world bank",
+      "source_url": "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",
+      "registry_date": "2026-07-27",
+      "D": 1.591,
+      "r2": 0.933,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.5910, R²=0.9330. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "arXiv: Stretched Exponential Decay in the Edwards-Wilkins",
+      "family": "arxiv",
+      "source_url": "http://arxiv.org/abs/cond-mat/0103091v1",
+      "registry_date": "2026-07-28",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": false,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "arXiv: Exponential decay of correlations for random inter",
+      "family": "arxiv",
+      "source_url": "http://arxiv.org/abs/2504.16549v2",
+      "registry_date": "2026-07-28",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": false,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "arXiv: Cost-Aware Logging: Measuring the Financial Impact",
+      "family": "arxiv",
+      "source_url": "http://arxiv.org/abs/2601.11584v1",
+      "registry_date": "2026-07-28",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": false,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "arXiv: Large deviations for dynamical systems with stretc",
+      "family": "arxiv",
+      "source_url": "http://arxiv.org/abs/1812.09742v2",
+      "registry_date": "2026-07-28",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": false,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "arXiv: On the Polynomial and Exponential Decay of Eigen-F",
+      "family": "arxiv",
+      "source_url": "http://arxiv.org/abs/1105.4105v1",
+      "registry_date": "2026-07-28",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": false,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "World Bank: CPI (ACF retention)",
+      "family": "world bank",
+      "source_url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",
+      "registry_date": "2026-07-28",
+      "D": 1.333,
+      "r2": 0.9961,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3330, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "GISS Global Temperature (monthly ACF)",
+      "family": "weather",
+      "source_url": "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",
+      "registry_date": "2026-07-29",
+      "D": 0.4803,
+      "r2": 0.9953,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.4803, R²=0.9953. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "COVID-19 Confirmed (daily new, global ACF)",
+      "family": "covid",
+      "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+      "registry_date": "2026-07-29",
+      "D": 1.0953,
+      "r2": 0.964,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.0953, R²=0.9640. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "COVID-19 Deaths (daily new, global ACF)",
+      "family": "covid",
+      "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+      "registry_date": "2026-07-29",
+      "D": 0.3566,
+      "r2": 0.7916,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3566, R²=0.7916. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Global Temperature monthly (HadCRUT, ACF)",
+      "family": "weather",
+      "source_url": "https://raw.githubusercontent.com/datasets/global-temp/master/data/monthly.csv",
+      "registry_date": "2026-07-29",
+      "D": 0.3848,
+      "r2": 0.9496,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3848, R²=0.9496. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "USGS Earthquakes (30d, hourly count ACF)",
+      "family": "earthquakes",
+      "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv",
+      "registry_date": "2026-07-29",
+      "D": 0.6933,
+      "r2": 0.9982,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.6933, R²=0.9982. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: The Manufacturing Facility Inventory National Data",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.20859785",
+      "registry_date": "2026-07-28",
+      "D": 0.6809,
+      "r2": 0.9912,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.6809, R²=0.9912. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: bitcoin (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-07-28",
+      "D": 1.2107,
+      "r2": 0.9995,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.2107, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: ethereum (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-07-28",
+      "D": 1.3645,
+      "r2": 0.9996,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3645, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: ripple (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-07-28",
+      "D": 1.317,
+      "r2": 0.9957,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3170, R²=0.9957. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: cardano (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/cardano/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-07-28",
+      "D": 1.6315,
+      "r2": 0.9977,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.6315, R²=0.9977. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: solana (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-07-28",
+      "D": 1.5798,
+      "r2": 0.9984,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.5798, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: London temperature_2m_mean (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-28",
+      "D": 1.1548,
+      "r2": 0.8786,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.1548, R²=0.8786. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Sydney temperature_2m_mean (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-28",
+      "D": 1.2701,
+      "r2": 0.8535,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.2701, R²=0.8535. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Moscow temperature_2m_mean (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-28",
+      "D": 1.6202,
+      "r2": 0.9219,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.6202, R²=0.9219. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Moscow wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-07-28",
+      "D": 0.6142,
+      "r2": 0.7845,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.6142, R²=0.7845. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Delhi temperature_2m_mean (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-28",
+      "D": 1.903,
+      "r2": 0.912,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.9030, R²=0.9120. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Delhi wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-07-28",
+      "D": 0.3114,
+      "r2": -0.6749,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3114, R²=-0.6749. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Rio temperature_2m_mean (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",
+      "registry_date": "2026-07-28",
+      "D": 1.0289,
+      "r2": 0.8916,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.0289, R²=0.8916. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Berlin precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-07-29",
+      "D": 0.4118,
+      "r2": 0.8541,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.4118, R²=0.8541. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: London precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-07-29",
+      "D": 0.2828,
+      "r2": 0.8295,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.2828, R²=0.8295. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Moscow precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-07-29",
+      "D": 0.5558,
+      "r2": 0.8117,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.5558, R²=0.8117. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Binance: DOGE daily (ACF retention)",
+      "family": "binance",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=DOGEUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-30",
+      "D": 1.665,
+      "r2": 0.9982,
+      "verdict": "EXTRACTION",
+      "model_verdict": "",
+      "narrative": "D=1.6650, R²=0.9982. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Binance: LINK daily (ACF retention)",
+      "family": "binance",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=LINKUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-30",
+      "D": 1.5454,
+      "r2": 0.9997,
+      "verdict": "EXTRACTION",
+      "model_verdict": "",
+      "narrative": "D=1.5454, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Binance: XRP daily (ACF retention)",
+      "family": "binance",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=XRPUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-30",
+      "D": 1.4186,
+      "r2": 0.9976,
+      "verdict": "EXTRACTION",
+      "model_verdict": "",
+      "narrative": "D=1.4186, R²=0.9976. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Binance: ETH daily (ACF retention)",
+      "family": "binance",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-30",
+      "D": 1.3841,
+      "r2": 0.9997,
+      "verdict": "EXTRACTION",
+      "model_verdict": "",
+      "narrative": "D=1.3841, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Binance: BTC daily (ACF retention)",
+      "family": "binance",
+      "source_url": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365",
+      "registry_date": "2026-07-30",
+      "D": 1.2378,
+      "r2": 0.9998,
+      "verdict": "EXTRACTION",
+      "model_verdict": "",
+      "narrative": "D=1.2378, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Acceptability Judgement Task",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21714976",
+      "registry_date": "2026-07-31",
+      "D": 0.7144,
+      "r2": 0.3243,
+      "verdict": "NATURAL",
+      "model_verdict": "",
+      "narrative": "D=0.7144, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": false,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    }
+  ],
+  "scan_runs": []
+}
