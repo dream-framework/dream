@@ -846,7 +846,22 @@ def update_tests_html(new_entries, html_path, is_ru=False):
             narr = js_str(narr_en)
         else:
             narr = js_str(narr_raw)
-        new_js += f'\n  ,{{id:\"auto-{today}-{eid}\",name:\"{name}\",domain:\"{domain}\",D:{D_val},r2:{r2_val},verdict:\"{verdict}\",narrative:\"{narr}\",source:\"auto-scan {today}\",date:\"{today}\",url:{url_val},image:null}}'
+        
+        # Build model comparison fields (if available)
+        model_verdict_val = ''
+        if entry.get('model_verdict'):
+            mv = js_str(entry['model_verdict'])
+            model_verdict_val += f',model_verdict:"{mv}"'
+        if entry.get('delta_aicc') is not None:
+            model_verdict_val += f',delta_aicc:{entry["delta_aicc"]:.4f}'
+        if entry.get('best_alt'):
+            ba = js_str(entry['best_alt'])
+            model_verdict_val += f',best_alt:"{ba}"'
+        if entry.get('model_note'):
+            mn = js_str(entry['model_note'])
+            model_verdict_val += f',model_note:"{mn}"'
+        
+        new_js += f'\n  ,{{id:\"auto-{today}-{eid}\",name:\"{name}\",domain:\"{domain}\",D:{D_val},r2:{r2_val},verdict:\"{verdict}\"{model_verdict_val},narrative:\"{narr}\",source:\"auto-scan {today}\",date:\"{today}\",url:{url_val},image:null}}'
     
     html = html[:insert_pos] + new_js + html[insert_pos:]
     
