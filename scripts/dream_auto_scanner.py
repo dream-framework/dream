@@ -1303,6 +1303,22 @@ def main():
         except Exception as e:
             print(f'  ✗ Export failed: {e}')
     
+    # 12b. Reconcile registry data integrity
+    # Derive every narrative + regime label from immutable numeric fields.
+    # This prevents stale narratives from persisting after D/r2 refits.
+    print('\n🔧 Reconciling registry data integrity...')
+    reconcile_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'registry_integrity_reconcile.py')
+    if os.path.exists(reconcile_script):
+        try:
+            r = subprocess.run(['python3', reconcile_script], capture_output=True, text=True, timeout=60)
+            # Print last few lines of output
+            lines = r.stdout.strip().split('\n')
+            for line in lines[-5:]:
+                print(f'  {line}')
+            print('  ✓ Registry reconciled')
+        except Exception as e:
+            print(f'  ✗ Reconcile failed: {e}')
+    
     # 13. Update meta-s2 article with current registry stats
     print('\n📝 Updating meta-s2 article...')
     try:

@@ -215,302 +215,78 @@ const LAST_REFRESH = "31 Jul 2026 10:41 EST";
    ============================================================================ */
 const IMG = "../img/tests/";
 const TESTS = [
-  {id:"auto-2026-07-17-zenodo-1",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.7582,r2:0.9981,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.758, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-17.09).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
-  ,{id:"auto-2026-07-17-zenodo-2",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.3751,r2:0.9984,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.375, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-91.77).",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
-  ,{id:"auto-2026-07-18-zenodo-0",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.2654,r2:0.2416,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=1.265, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.78, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-18-zenodo-1",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3598,r2:0.5442,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=1.360, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-18-zenodo-2",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3756,r2:0.9997,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.376, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-767.85).",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
-  ,{id:"auto-2026-07-19-zenodo-0",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.0003,r2:1.0000,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.000, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-544.64).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-19-zenodo-1",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:0.3016,r2:0.1321,verdict:"NATURAL",
-    model_verdict:"S2_TIES",narrative:"D=0.302, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.3, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-19-zenodo-2",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.3671,r2:0.1659,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=1.367, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.6, within ±2).",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
-  ,{id:"auto-2026-07-22-zenodo-0",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3994,r2:0.9943,verdict:"NATURAL",
-    model_verdict:"S2_WINS",narrative:"D=0.399, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-94.17).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-1",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.6149,r2:0.9999,verdict:"NATURAL",
-    model_verdict:"S2_WINS",narrative:"D=0.615, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-235.84).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-2",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3015,r2:0.9910,verdict:"NATURAL",
-    model_verdict:"S2_WINS",narrative:"D=0.301, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-81.01).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-3",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.2847,r2:0.9824,verdict:"NATURAL",
-    model_verdict:"S2_WINS",narrative:"D=0.285, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-228.41).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-22-zenodo-4",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.5253,r2:0.9994,verdict:"NATURAL",
-    model_verdict:"S2_WINS",narrative:"D=0.525, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-49.62).",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
-  ,{id:"auto-2026-07-23-zenodo-0",name:"Zenodo: Data and code for: Photo-induced currents and shor",domain:"scouting",D:1.0114,r2:1.0000,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.011, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-551.53).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21453837",image:null}
-  ,{id:"auto-2026-07-23-zenodo-1",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:0.8590,r2:0.8091,verdict:"THRESHOLD",
-    model_verdict:"S2_TIES",narrative:"D=0.859, R²=0.8091. D near threshold — regime transition zone. S2 ties EXP (ΔAICc=1.38, within ±2).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
-  ,{id:"auto-2026-07-23-zenodo-2",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:1.0180,r2:1.0000,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.018, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-448.17).",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
-  ,{id:"auto-2026-07-24-zenodo-0",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.2321,r2:0.9256,verdict:"NATURAL",
-    model_verdict:"S2_TIES",narrative:"D=0.232, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties POWER (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-24-zenodo-1",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.3340,r2:0.8723,verdict:"NATURAL",
-    model_verdict:"S2_TIES",narrative:"D=0.334, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=0.93, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-24-zenodo-2",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:1.5463,r2:0.8173,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=1.546, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=1.21, within ±2).",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
-  ,{id:"auto-2026-07-25-zenodo-0",name:"Zenodo: Computational Verification Suite for Singular-Seri",domain:"scouting",D:1.3385,r2:0.9985,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.339, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-47.04).",source:"auto-scan 2026-07-25",date:"2026-07-25",url:"10.5281/zenodo.21534407",image:null}
+  {id:"",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.7582,r2:0.9981,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.7582, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
+  ,{id:"",name:"Zenodo: MIPkit-A (MISOMIP2)",domain:"scouting",D:1.3751,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3751, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-17",date:"2026-07-17",url:"https://doi.org/10.5281/zenodo.21405880",image:null}
+  ,{id:"",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.2654,r2:0.2416,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.2654, R²=0.2416. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3598,r2:0.5442,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.3598, R²=0.5442. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"",name:"Zenodo: COVID-19-Todesfälle in Deutschland",domain:"scouting",D:1.3756,r2:0.9997,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3756, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-18",date:"2026-07-18",url:"10.5281/zenodo.21424426",image:null}
+  ,{id:"",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.0003,r2:1.0000,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.0003, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:0.3016,r2:0.1321,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.3016, R²=0.1321. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"",name:"Zenodo: 7-Tage-Inzidenz der COVID-19-Fälle in Deutschland",domain:"scouting",D:1.3671,r2:0.1659,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.3671, R²=0.1659. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-19",date:"2026-07-19",url:"10.5281/zenodo.21437667",image:null}
+  ,{id:"",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3994,r2:0.9943,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.3994, R²=0.9943. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.6149,r2:0.9999,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.6149, R²=0.9999. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.3015,r2:0.9910,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.3015, R²=0.9910. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.2847,r2:0.9824,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.2847, R²=0.9824. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"",name:"Zenodo: High-resolution multi-modal accessibility metrics ",domain:"scouting",D:0.5253,r2:0.9994,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.5253, R²=0.9994. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-22",date:"2026-07-22",url:"10.5281/zenodo.21410512",image:null}
+  ,{id:"",name:"Zenodo: Data and code for: Photo-induced currents and shor",domain:"scouting",D:1.0114,r2:1.0000,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.0114, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21453837",image:null}
+  ,{id:"",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:0.8590,r2:0.8091,verdict:"THRESHOLD",model_verdict:"S2_TIES",narrative:"D=0.8590, R²=0.8091. D≈1 — threshold regime, near-exponential decay.",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
+  ,{id:"",name:"Zenodo: Data and code for: \"Where to look for fungi in a b",domain:"scouting",D:1.0180,r2:1.0000,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.0180, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-23",date:"2026-07-23",url:"10.5281/zenodo.21492477",image:null}
+  ,{id:"",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.2321,r2:0.9256,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.2321, R²=0.9256. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:0.3340,r2:0.8723,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.3340, R²=0.8723. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"",name:"Zenodo: Probiotic and postbiotic treatment in situ during ",domain:"scouting",D:1.5463,r2:0.8173,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.5463, R²=0.8173. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-24",date:"2026-07-24",url:"10.5281/zenodo.17116572",image:null}
+  ,{id:"",name:"Zenodo: Computational Verification Suite for Singular-Seri",domain:"scouting",D:1.3385,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3385, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-25",date:"2026-07-25",url:"10.5281/zenodo.21534407",image:null}
+  ,{id:"",name:"World Bank: USA GDP (annual)",domain:"economic",D:1.5910,r2:0.9330,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.5910, R²=0.9330. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json",image:null}
+  ,{id:"",name:"World Bank: USA CPI (annual)",domain:"economic",D:1.8483,r2:0.9439,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.8483, R²=0.9439. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json",image:null}
+  ,{id:"",name:"BTC daily closes (1yr)",domain:"crypto",D:1.1782,r2:0.9994,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.1782, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365",image:null}
+  ,{id:"",name:"ETH daily closes (1yr)",domain:"crypto",D:1.3620,r2:0.9995,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.3620, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365",image:null}
+  ,{id:"",name:"SOL daily (1yr) (Binance)",domain:"crypto",D:1.5774,r2:0.9981,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.5774, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"ADA daily (1yr) (Binance)",domain:"crypto",D:1.6416,r2:0.9975,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.6416, R²=0.9975. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.binance.com/api/v3/klines?symbol=ADAUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"DOT daily (1yr) (Binance)",domain:"crypto",D:1.5497,r2:0.9925,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.5497, R²=0.9925. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://api.binance.com/api/v3/klines?symbol=DOTUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Open-Meteo Berlin temperature_2m_mean (daily)",domain:"environmental",D:1.4069,r2:0.9157,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.4069, R²=0.9157. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo Tokyo temperature_2m_mean (daily)",domain:"environmental",D:2.1057,r2:0.9474,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=2.1057, R²=0.9474. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo NYC temperature_2m_mean (daily)",domain:"environmental",D:1.6293,r2:0.9316,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.6293, R²=0.9316. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"re-test 2026-07-26",date:"2026-07-26",url:"https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"FRED GDP (ACF retention)",domain:"financial",D:1.2289,r2:0.9876,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.2289, R²=0.9876. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP",image:null}
+  ,{id:"",name:"FRED CPIAUCSL (ACF retention)",domain:"financial",D:1.0021,r2:0.9998,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.0021, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",image:null}
+  ,{id:"",name:"FRED UNRATE (ACF retention)",domain:"financial",D:1.1127,r2:0.9976,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.1127, R²=0.9976. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",image:null}
+  ,{id:"",name:"FRED FEDFUNDS (ACF retention)",domain:"financial",D:0.5937,r2:0.9411,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.5937, R²=0.9411. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS",image:null}
+  ,{id:"",name:"FRED M2SL (ACF retention)",domain:"financial",D:1.1863,r2:0.9987,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.1863, R²=0.9987. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL",image:null}
+  ,{id:"",name:"FRED DEXUSEU (ACF retention)",domain:"financial",D:1.0952,r2:0.9995,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.0952, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",image:null}
+  ,{id:"",name:"FRED SP500 (ACF retention)",domain:"financial",D:0.9532,r2:0.9988,verdict:"THRESHOLD",model_verdict:"S2_WINS",narrative:"D=0.9532, R²=0.9988. D≈1 — threshold regime, near-exponential decay.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",image:null}
+  ,{id:"",name:"World Bank: GDP (ACF retention)",domain:"financial",D:1.5910,r2:0.9330,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.5910, R²=0.9330. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",image:null}
+  ,{id:"",name:"arXiv: Stretched Exponential Decay in the Edwards-Wilkins",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"S2 fit pending — data acquired but not yet analyzed.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/cond-mat/0103091v1",image:null}
+  ,{id:"",name:"arXiv: Exponential decay of correlations for random inter",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"S2 fit pending — data acquired but not yet analyzed.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/2504.16549v2",image:null}
+  ,{id:"",name:"arXiv: Cost-Aware Logging: Measuring the Financial Impact",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"S2 fit pending — data acquired but not yet analyzed.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/2601.11584v1",image:null}
+  ,{id:"",name:"arXiv: Large deviations for dynamical systems with stretc",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"S2 fit pending — data acquired but not yet analyzed.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1812.09742v2",image:null}
+  ,{id:"",name:"arXiv: On the Polynomial and Exponential Decay of Eigen-F",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"S2 fit pending — data acquired but not yet analyzed.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1105.4105v1",image:null}
+  ,{id:"",name:"World Bank: CPI (ACF retention)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3330, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
+  ,{id:"",name:"GISS Global Temperature (monthly ACF)",domain:"environmental",D:0.4803,r2:0.9953,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.4803, R²=0.9953. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"batch2 2026-07-29",date:"2026-07-29",url:"https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",image:null}
+  ,{id:"",name:"COVID-19 Confirmed (daily new, global ACF)",domain:"ecological",D:1.0953,r2:0.9640,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.0953, R²=0.9640. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"batch2 2026-07-29",date:"2026-07-29",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",image:null}
+  ,{id:"",name:"COVID-19 Deaths (daily new, global ACF)",domain:"ecological",D:0.3566,r2:0.7916,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.3566, R²=0.7916. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"batch2 2026-07-29",date:"2026-07-29",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",image:null}
+  ,{id:"",name:"Global Temperature monthly (HadCRUT, ACF)",domain:"environmental",D:0.3848,r2:0.9496,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.3848, R²=0.9496. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"batch2 2026-07-29",date:"2026-07-29",url:"https://raw.githubusercontent.com/datasets/global-temp/master/data/monthly.csv",image:null}
+  ,{id:"",name:"USGS Earthquakes (30d, hourly count ACF)",domain:"geophysical",D:0.6933,r2:0.9982,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.6933, R²=0.9982. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"batch2 2026-07-29",date:"2026-07-29",url:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv",image:null}
+  ,{id:"",name:"Zenodo: The Manufacturing Facility Inventory National Data",domain:"scouting",D:0.6809,r2:0.9912,verdict:"NATURAL",narrative:"D=0.6809, R²=0.9912. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"10.5281/zenodo.20859785",image:null}
+  ,{id:"",name:"CoinGecko: bitcoin (ACF retention)",domain:"crypto",D:1.2107,r2:0.9995,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.2107, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"CoinGecko: ethereum (ACF retention)",domain:"crypto",D:1.3645,r2:0.9996,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3645, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"CoinGecko: ripple (ACF retention)",domain:"crypto",D:1.3170,r2:0.9957,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3170, R²=0.9957. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"CoinGecko: cardano (ACF retention)",domain:"crypto",D:1.6315,r2:0.9977,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.6315, R²=0.9977. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/cardano/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"CoinGecko: solana (ACF retention)",domain:"crypto",D:1.5798,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.5798, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"Open-Meteo: London temperature_2m_mean (ACF retention)",domain:"environmental",D:1.1548,r2:0.8786,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.1548, R²=0.8786. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo: Sydney temperature_2m_mean (ACF retention)",domain:"environmental",D:1.2701,r2:0.8535,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.2701, R²=0.8535. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo: Moscow temperature_2m_mean (ACF retention)",domain:"environmental",D:1.6202,r2:0.9219,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.6202, R²=0.9219. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo: Moscow wind_speed_10m_max (ACF retention)",domain:"environmental",D:0.6142,r2:0.7845,verdict:"NATURAL",narrative:"D=0.6142, R²=0.7845. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",image:null}
+  ,{id:"",name:"Open-Meteo: Delhi temperature_2m_mean (ACF retention)",domain:"environmental",D:1.9030,r2:0.9120,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.9030, R²=0.9120. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo: Delhi wind_speed_10m_max (ACF retention)",domain:"environmental",D:0.3114,r2:-0.6749,verdict:"NATURAL",model_verdict:"S2_TIES",narrative:"D=0.3114, R²=-0.6749. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",image:null}
+  ,{id:"",name:"Open-Meteo: Rio temperature_2m_mean (ACF retention)",domain:"environmental",D:1.0289,r2:0.8916,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=1.0289, R²=0.8916. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
+  ,{id:"",name:"Open-Meteo: Berlin precipitation_sum (ACF retention)",domain:"environmental",D:0.4118,r2:0.8541,verdict:"NATURAL",narrative:"D=0.4118, R²=0.8541. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"",name:"Open-Meteo: London precipitation_sum (ACF retention)",domain:"environmental",D:0.2828,r2:0.8295,verdict:"NATURAL",narrative:"D=0.2828, R²=0.8295. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"",name:"Open-Meteo: Moscow precipitation_sum (ACF retention)",domain:"environmental",D:0.5558,r2:0.8117,verdict:"NATURAL",narrative:"D=0.5558, R²=0.8117. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"",name:"Binance: DOGE daily (ACF retention)",domain:"crypto",D:1.6650,r2:0.9982,verdict:"EXTRACTION",narrative:"D=1.6650, R²=0.9982. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=DOGEUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Binance: LINK daily (ACF retention)",domain:"crypto",D:1.5454,r2:0.9997,verdict:"EXTRACTION",narrative:"D=1.5454, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=LINKUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Binance: XRP daily (ACF retention)",domain:"crypto",D:1.4186,r2:0.9976,verdict:"EXTRACTION",narrative:"D=1.4186, R²=0.9976. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=XRPUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Binance: ETH daily (ACF retention)",domain:"crypto",D:1.3841,r2:0.9997,verdict:"EXTRACTION",narrative:"D=1.3841, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Binance: BTC daily (ACF retention)",domain:"crypto",D:1.2378,r2:0.9998,verdict:"EXTRACTION",narrative:"D=1.2378, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365",image:null}
+  ,{id:"",name:"Zenodo: Acceptability Judgement Task",domain:"scouting",D:0.7144,r2:0.3243,verdict:"NATURAL",narrative:"D=0.7144, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-31",date:"2026-07-31",url:"10.5281/zenodo.21714976",image:null}
 
-  ,{
-    id:"retest-2026-07-26-000",
-    name:"World Bank: USA GDP (annual)",
-    domain:"economic", groups:["economic","scouting"],
-    D:1.5910, r2:0.9330,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.591 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9330, n=33.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json"
-  }
-  ,{
-    id:"retest-2026-07-26-001",
-    name:"World Bank: USA CPI (annual)",
-    domain:"economic", groups:["economic","scouting"],
-    D:1.8483, r2:0.9439,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.848 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9439, n=32.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json"
-  }
-  ,{
-    id:"retest-2026-07-26-002",
-    name:"BTC daily closes (1yr)",
-    domain:"crypto", groups:["crypto","scouting"],
-    D:1.1782, r2:0.9994,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.178 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9994, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365"
-  }
-  ,{
-    id:"retest-2026-07-26-003",
-    name:"ETH daily closes (1yr)",
-    domain:"crypto", groups:["crypto","scouting"],
-    D:1.3620, r2:0.9995,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.362 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9995, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365"
-  }
-  ,{
-    id:"retest-2026-07-26-004",
-    name:"SOL daily (1yr) (Binance)",
-    domain:"crypto", groups:["crypto","scouting"],
-    D:1.5774, r2:0.9981,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.577 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9981, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1d&limit=365"
-  }
-  ,{
-    id:"retest-2026-07-26-005",
-    name:"ADA daily (1yr) (Binance)",
-    domain:"crypto", groups:["crypto","scouting"],
-    D:1.6416, r2:0.9975,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.642 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9975, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.binance.com/api/v3/klines?symbol=ADAUSDT&interval=1d&limit=365"
-  }
-  ,{
-    id:"retest-2026-07-26-006",
-    name:"DOT daily (1yr) (Binance)",
-    domain:"crypto", groups:["crypto","scouting"],
-    D:1.5497, r2:0.9925,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.550 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9925, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://api.binance.com/api/v3/klines?symbol=DOTUSDT&interval=1d&limit=365"
-  }
-  ,{
-    id:"retest-2026-07-26-007",
-    name:"Open-Meteo Berlin temperature_2m_mean (daily)",
-    domain:"environmental", groups:["environmental","scouting"],
-    D:1.4069, r2:0.9157,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.407 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9157, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
-  }
-  ,{
-    id:"retest-2026-07-26-008",
-    name:"Open-Meteo Tokyo temperature_2m_mean (daily)",
-    domain:"environmental", groups:["environmental","scouting"],
-    D:2.1057, r2:0.9474,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=2.106 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9474, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
-  }
-  ,{
-    id:"retest-2026-07-26-009",
-    name:"Open-Meteo NYC temperature_2m_mean (daily)",
-    domain:"environmental", groups:["environmental","scouting"],
-    D:1.6293, r2:0.9316,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.629 > 1 — extraction regime. S2 ties (ΔAICc=0.00). R²=0.9316, n=100.",
-    image:null,
-    source:"re-test 2026-07-26",
-    date:"2026-07-26",
-    url:"https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean"
-  }
-  ,{id:"auto-2026-07-27-fred-GDP",name:"FRED GDP (ACF retention)",domain:"financial",D:1.2289,r2:0.9876,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.167, R²=0.9969. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-54.67).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDP",image:null}
-  ,{id:"auto-2026-07-27-fred-CPIAUCSL",name:"FRED CPIAUCSL (ACF retention)",domain:"financial",D:1.0021,r2:0.9998,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.232, R²=0.9973. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-220.41).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",image:null}
-  ,{id:"auto-2026-07-27-fred-UNRATE",name:"FRED UNRATE (ACF retention)",domain:"financial",D:1.1127,r2:0.9976,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.192, R²=0.8655. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-2.57).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",image:null}
-  ,{id:"auto-2026-07-27-fred-FEDFUNDS",name:"FRED FEDFUNDS (ACF retention)",domain:"financial",D:0.5937,r2:0.9411,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.498, R²=0.9247. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-10.28).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS",image:null}
-  ,{id:"auto-2026-07-27-fred-M2SL",name:"FRED M2SL (ACF retention)",domain:"financial",D:1.1863,r2:0.9987,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.202, R²=0.9990. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-360.94).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=M2SL",image:null}
-  ,{id:"auto-2026-07-27-fred-DEXUSEU",name:"FRED DEXUSEU (ACF retention)",domain:"financial",D:1.0952,r2:0.9995,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.137, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-381.5).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",image:null}
-  ,{id:"auto-2026-07-27-fred-SP500",name:"FRED SP500 (ACF retention)",domain:"financial",D:0.9532,r2:0.9988,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.049, R²=0.9986. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-33.66).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",image:null}
-  ,{id:"auto-2026-07-27-wb-gdp",name:"World Bank: GDP (ACF retention)",domain:"financial",D:1.5910,r2:0.9330,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.117, R²=0.9980. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.2).",source:"auto-scan 2026-07-27",date:"2026-07-27",url:"https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",image:null}
-  ,{id:"auto-2026-07-28-arxiv-0",name:"arXiv: Stretched Exponential Decay in the Edwards-Wilkins",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Stretched Exponential Decay in the Edwards-Wilkinson Model",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/cond-mat/0103091v1",image:null}
-  ,{id:"auto-2026-07-28-arxiv-1",name:"arXiv: Exponential decay of correlations for random inter",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Exponential decay of correlations for random interval diffeomorphisms",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/2504.16549v2",image:null}
-  ,{id:"auto-2026-07-28-arxiv-2",name:"arXiv: Cost-Aware Logging: Measuring the Financial Impact",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Cost-Aware Logging: Measuring the Financial Impact of Excessive Log Retention in",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/2601.11584v1",image:null}
-  ,{id:"auto-2026-07-28-arxiv-3",name:"arXiv: Large deviations for dynamical systems with stretc",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. Large deviations for dynamical systems with stretched exponential decay of corre",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1812.09742v2",image:null}
-  ,{id:"auto-2026-07-28-arxiv-4",name:"arXiv: On the Polynomial and Exponential Decay of Eigen-F",domain:"scouting",D:null,r2:null,verdict:"PENDING",narrative:"Paper found via arXiv search. Data extraction and S2 fit pending. On the Polynomial and Exponential Decay of Eigen-Forms of Generalized Time-Harmo",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"http://arxiv.org/abs/1105.4105v1",image:null}
-  ,{id:"auto-2026-07-28-wb-cpi",name:"World Bank: CPI (ACF retention)",domain:"financial",D:1.3330,r2:0.9961,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.333, R²=0.9961. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-19.81).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",image:null}
-
-  ,{
-    id:"batch2-2026-07-29-000",
-    name:"GISS Global Temperature (monthly ACF)",
-    domain:"environmental", groups:["environmental","scouting"],
-    D:0.4803, r2:0.9953,
-    verdict:"TENTATIVE", kind:"natural",
-    model_verdict:"S2_TIES",
-    narrative:"D=0.4803 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9953, n=100.",
-    image:null,
-    source:"batch2 2026-07-29",
-    date:"2026-07-29",
-    url:"https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv"
-  }
-  ,{
-    id:"batch2-2026-07-29-001",
-    name:"COVID-19 Confirmed (daily new, global ACF)",
-    domain:"ecological", groups:["ecological","scouting"],
-    D:1.0953, r2:0.9640,
-    verdict:"TENTATIVE", kind:"extraction",
-    model_verdict:"S2_TIES",
-    narrative:"D=1.0953 > 1 — extraction regime. S2 ties best model (ΔAICc=0.00). R²=0.9640, n=60.",
-    image:null,
-    source:"batch2 2026-07-29",
-    date:"2026-07-29",
-    url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-  }
-  ,{
-    id:"batch2-2026-07-29-002",
-    name:"COVID-19 Deaths (daily new, global ACF)",
-    domain:"ecological", groups:["ecological","scouting"],
-    D:0.3566, r2:0.7916,
-    verdict:"TENTATIVE", kind:"natural",
-    model_verdict:"S2_TIES",
-    narrative:"D=0.3566 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.7916, n=60.",
-    image:null,
-    source:"batch2 2026-07-29",
-    date:"2026-07-29",
-    url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
-  }
-  ,{
-    id:"batch2-2026-07-29-003",
-    name:"Global Temperature monthly (HadCRUT, ACF)",
-    domain:"environmental", groups:["environmental","scouting"],
-    D:0.3848, r2:0.9496,
-    verdict:"TENTATIVE", kind:"natural",
-    model_verdict:"S2_TIES",
-    narrative:"D=0.3848 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9496, n=100.",
-    image:null,
-    source:"batch2 2026-07-29",
-    date:"2026-07-29",
-    url:"https://raw.githubusercontent.com/datasets/global-temp/master/data/monthly.csv"
-  }
-  ,{
-    id:"batch2-2026-07-29-004",
-    name:"USGS Earthquakes (30d, hourly count ACF)",
-    domain:"geophysical", groups:["geophysical","scouting"],
-    D:0.6933, r2:0.9982,
-    verdict:"TENTATIVE", kind:"natural",
-    model_verdict:"S2_TIES",
-    narrative:"D=0.6933 < 1 — natural retention. S2 ties best model (ΔAICc=0.00). R²=0.9982, n=72.",
-    image:null,
-    source:"batch2 2026-07-29",
-    date:"2026-07-29",
-    url:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv"
-  }
-  ,{id:"auto-2026-07-28-zenodo-0",name:"Zenodo: The Manufacturing Facility Inventory National Data",domain:"scouting",D:0.6809,r2:0.9912,verdict:"NATURAL",narrative:"D=0.681, R²=0.9912. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=1.96, within ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"10.5281/zenodo.20859785",image:null}
-  ,{id:"auto-2026-07-28-coingecko-coingecko-bitcoin",name:"CoinGecko: bitcoin (ACF retention)",domain:"crypto",D:1.2107,r2:0.9995,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.202, R²=0.9999. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-364.28).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
-  ,{id:"auto-2026-07-28-coingecko-coingecko-ethereum",name:"CoinGecko: ethereum (ACF retention)",domain:"crypto",D:1.3645,r2:0.9996,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.387, R²=0.9995. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-322.17).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
-  ,{id:"auto-2026-07-28-coingecko-coingecko-ripple",name:"CoinGecko: ripple (ACF retention)",domain:"crypto",D:1.3170,r2:0.9957,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.422, R²=0.9977. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-188.91).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
-  ,{id:"auto-2026-07-28-coingecko-coingecko-cardano",name:"CoinGecko: cardano (ACF retention)",domain:"crypto",D:1.6315,r2:0.9977,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.727, R²=0.9993. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-157.72).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/cardano/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
-  ,{id:"auto-2026-07-28-coingecko-coingecko-solana",name:"CoinGecko: solana (ACF retention)",domain:"crypto",D:1.5798,r2:0.9984,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=1.663, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-210.23).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
-  
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-london-temperature_",name:"Open-Meteo: London temperature_2m_mean (ACF retention)",domain:"environmental",D:1.1548,r2:0.8786,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=2.731, R²=0.8063. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-2.62).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
-  
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-sydney-temperature_",name:"Open-Meteo: Sydney temperature_2m_mean (ACF retention)",domain:"environmental",D:1.2701,r2:0.8535,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=3.028, R²=0.7840. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-5.16).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-moscow-temperature_",name:"Open-Meteo: Moscow temperature_2m_mean (ACF retention)",domain:"environmental",D:1.6202,r2:0.9219,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=2.852, R²=0.7965. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-3.7).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-moscow-wind_speed_1",name:"Open-Meteo: Moscow wind_speed_10m_max (ACF retention)",domain:"environmental",D:0.6142,r2:0.7845,verdict:"NATURAL",narrative:"D=0.614, R²=0.7845. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=-0.42, within ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",image:null}
-  
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-delhi-temperature_2",name:"Open-Meteo: Delhi temperature_2m_mean (ACF retention)",domain:"environmental",D:1.9030,r2:0.9120,verdict:"EXTRACTION",
-    model_verdict:"S2_WINS",narrative:"D=2.793, R²=0.7797. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-2.17).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-delhi-wind_speed_10",name:"Open-Meteo: Delhi wind_speed_10m_max (ACF retention)",domain:"environmental",D:0.3114,r2:-0.6749,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=1.530, R²=0.7695. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=0.06, within ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",image:null}
-  ,{id:"auto-2026-07-28-openmeteo-open-meteo-rio-temperature_2m_",name:"Open-Meteo: Rio temperature_2m_mean (ACF retention)",domain:"environmental",D:1.0289,r2:0.8916,verdict:"EXTRACTION",
-    model_verdict:"S2_TIES",narrative:"D=2.417, R²=0.8510. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties GAUSS (ΔAICc=-0.62, within ±2).",source:"auto-scan 2026-07-28",date:"2026-07-28",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=temperature_2m_mean",image:null}
-  ,{id:"auto-2026-07-29-openmeteo-open-meteo-berlin-precipitatio",name:"Open-Meteo: Berlin precipitation_sum (ACF retention)",domain:"environmental",D:0.4118,r2:0.8541,verdict:"NATURAL",narrative:"D=0.412, R²=0.8541. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.68, within ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
-  ,{id:"auto-2026-07-29-openmeteo-open-meteo-london-precipitatio",name:"Open-Meteo: London precipitation_sum (ACF retention)",domain:"environmental",D:0.2828,r2:0.8295,verdict:"NATURAL",narrative:"D=0.283, R²=0.8295. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=-0.83, within ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
-  ,{id:"auto-2026-07-29-openmeteo-open-meteo-moscow-precipitatio",name:"Open-Meteo: Moscow precipitation_sum (ACF retention)",domain:"environmental",D:0.5558,r2:0.8117,verdict:"NATURAL",narrative:"D=0.556, R²=0.8117. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties LOGNORM (ΔAICc=-0.19, within ±2).",source:"auto-scan 2026-07-29",date:"2026-07-29",url:"https://archive-api.open-meteo.com/v1/archive?latitude=55.75&longitude=37.62&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
-  ,{id:"auto-2026-07-30-binance-binance:-doge",name:"Binance: DOGE daily (ACF retention)",domain:"crypto",D:1.6650,r2:0.9982,verdict:"EXTRACTION",narrative:"Binance crypto ACF. S2 beats GAUSS (ΔAICc=-123.06).",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=DOGEUSDT&interval=1d&limit=365",image:null}
-  ,{id:"auto-2026-07-30-binance-binance:-link",name:"Binance: LINK daily (ACF retention)",domain:"crypto",D:1.5454,r2:0.9997,verdict:"EXTRACTION",narrative:"Binance crypto ACF. S2 beats GAUSS (ΔAICc=-342.37).",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=LINKUSDT&interval=1d&limit=365",image:null}
-  ,{id:"auto-2026-07-30-binance-binance:-xrp",name:"Binance: XRP daily (ACF retention)",domain:"crypto",D:1.4186,r2:0.9976,verdict:"EXTRACTION",narrative:"Binance crypto ACF. S2 beats EXP (ΔAICc=-186.44).",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=XRPUSDT&interval=1d&limit=365",image:null}
-  ,{id:"auto-2026-07-30-binance-binance:-eth",name:"Binance: ETH daily (ACF retention)",domain:"crypto",D:1.3841,r2:0.9997,verdict:"EXTRACTION",narrative:"Binance crypto ACF. S2 beats EXP (ΔAICc=-367.17).",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365",image:null}
-  ,{id:"auto-2026-07-30-binance-binance:-btc",name:"Binance: BTC daily (ACF retention)",domain:"crypto",D:1.2378,r2:0.9998,verdict:"EXTRACTION",narrative:"Binance crypto ACF. S2 beats EXP (ΔAICc=-330.12).",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365",image:null}
-  ,{id:"auto-2026-07-31-zenodo-0",name:"Zenodo: Acceptability Judgement Task",domain:"scouting",D:0.7144,r2:0.3243,verdict:"NATURAL",narrative:"D=0.714, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=0.75, within ±2).",source:"auto-scan 2026-07-31",date:"2026-07-31",url:"10.5281/zenodo.21714976",image:null}
 ];
 
 /* ---- helpers ---- */
