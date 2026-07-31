@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-07-30T15:03:55Z",
-  "total_tests": 70,
+  "exported_at": "2026-07-31T12:15:33Z",
+  "total_tests": 71,
   "fields": [
     "id",
     "name",
@@ -930,6 +930,18 @@
       "source": "auto-scan 2026-07-30",
       "date": "2026-07-30",
       "url": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365"
+    },
+    {
+      "id": "auto-2026-07-31-zenodo-0",
+      "name": "Zenodo: Acceptability Judgement Task",
+      "domain": "scouting",
+      "D": 0.7144,
+      "r2": 0.3243,
+      "verdict": "NATURAL",
+      "narrative": "D=0.714, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=0.75, within ±2).",
+      "source": "auto-scan 2026-07-31",
+      "date": "2026-07-31",
+      "url": "10.5281/zenodo.21714976"
     }
   ]
 }
