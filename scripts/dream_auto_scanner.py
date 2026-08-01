@@ -483,6 +483,299 @@ def scan_worldbank():
     return found
 
 # ═══════════════════════════════════════════════════════════════════════
+# NEW SOURCES — wider family diversity
+# ═══════════════════════════════════════════════════════════════════════
+
+def scan_wikipedia_pageviews():
+    """Download Wikipedia pageview time series for notable articles.
+    New family: cultural attention / information seeking behavior."""
+    print('\n📡 Wikipedia Pageviews')
+    articles = [
+        ('Earth', 'en'), ('Albert_Einstein', 'en'), ('World_War_II', 'en'),
+        ('COVID-19_pandemic', 'en'), ('Climate_change', 'en'),
+        ('Quantum_mechanics', 'en'), ('Artificial_intelligence', 'en'),
+    ]
+    found = []
+    for title, lang in articles:
+        url = (f'https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/'
+               f'{lang}.wikipedia/all-access/user/{title}/daily/2020010100/2025123100')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'items' not in obj: continue
+            values = [item['views'] for item in obj['items']]
+            if len(values) < 50: continue
+            found.append({
+                'source': 'wikipedia',
+                'title': f'Wikipedia: {title.replace("_"," ")} pageviews',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} Wikipedia pageview series')
+    return found
+
+def scan_ecb():
+    """Download European Central Bank data portal series.
+    New family: European financial (different jurisdiction from FRED)."""
+    print('\n📡 ECB Data Portal')
+    series = [
+        ('ICP.M.U2.N.000000.4.ANR', 'Euro Area HICP (annual rate)'),
+        ('STS.M.U2.Y.PROD.NSA0100', 'Euro Area Industrial Production'),
+        ('BKN.M.U2.N.STS100.4.0000', 'Euro Area Business Climate'),
+        ('ILM.M.U2.EUR.4F.BB.U2_10Y.YLD', 'Euro Area 10Y Bond Yield'),
+    ]
+    found = []
+    for key, name in series:
+        url = f'https://data-api.ecb.europa.eu/service/data/{key}?format=csvdata&lastNObservations=120'
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            text = data.decode('utf-8') if isinstance(data, bytes) else data
+            rows = list(csv.reader(io.StringIO(text)))
+            if len(rows) < 5: continue
+            header = rows[0]
+            val_idx = header.index('OBS_VALUE') if 'OBS_VALUE' in header else -1
+            if val_idx < 0: continue
+            values = []
+            for row in rows[1:]:
+                if val_idx < len(row):
+                    try:
+                        v = float(row[val_idx])
+                        if not np.isnan(v): values.append(v)
+                    except: pass
+            if len(values) < 20: continue
+            found.append({
+                'source': 'ecb',
+                'title': f'ECB: {name}',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} ECB series')
+    return found
+
+def scan_oecd():
+    """Download OECD statistics.
+    New family: international economic (different from World Bank/FRED)."""
+    print('\n📡 OECD Stats')
+    datasets = [
+        ('MEI', 'M.USA.CPI...IX', 'USA CPI (OECD)'),
+        ('MEI', 'M.JPN.CPI...IX', 'Japan CPI (OECD)'),
+        ('MEI', 'M.GBR.CPI...IX', 'UK CPI (OECD)'),
+        ('MEI', 'M.DEU.CPI...IX', 'Germany CPI (OECD)'),
+    ]
+    found = []
+    for ds_id, key, name in datasets:
+        url = f'https://stats.oecd.org/SDMX-JSON/data/{ds_id}/{key}/all?startTime=2000-01&endTime=2025-12'
+        try:
+            data = fetch_url(url, timeout=10)  # shorter timeout
+            if not data: continue
+            obj = json.loads(data)
+            if 'dataSets' not in obj: continue
+            ds0 = obj['dataSets'][0]
+            if 'observations' not in ds0: continue
+            obs = ds0['observations']
+            values = [float(obs[k][0]) for k in sorted(obs.keys()) if obs[k] and obs[k][0] is not None]
+            if len(values) < 20: continue
+            found.append({
+                'source': 'oecd',
+                'title': f'OECD: {name}',
+                'url': url, 'values': values,
+            })
+        except Exception as e:
+            print(f'  ✗ OECD {name}: {e}')
+    print(f'  Downloaded {len(found)} OECD series')
+    return found
+
+def scan_berkeley_earth():
+    """Download Berkeley Earth temperature data.
+    New family: independent climate reconstruction (different from GISS/HadCRUT)."""
+    print('\n📡 Berkeley Earth')
+    url = 'http://berkeleyearth.lbl.gov/auto/Global/Land_and_Ocean_complete.txt'
+    try:
+        data = fetch_url(url, timeout=20)
+        if not data:
+            print('  ✗ No data')
+            return []
+        text = data.decode('utf-8') if isinstance(data, bytes) else data
+        values = []
+        for line in text.split('\n'):
+            if line.startswith('%') or not line.strip(): continue
+            parts = line.split()
+            if len(parts) >= 3:
+                try:
+                    v = float(parts[2])
+                    if not np.isnan(v): values.append(v)
+                except: pass
+        if len(values) < 50:
+            print(f'  ✗ Only {len(values)} values')
+            return []
+        found = [{
+            'source': 'berkeley_earth',
+            'title': 'Berkeley Earth Global Temperature (monthly anomaly)',
+            'url': url, 'values': values,
+        }]
+        print(f'  Downloaded {len(values)} monthly values')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+def scan_un_comtrade():
+    """Download UN Comtrade international trade flow data.
+    New family: trade flows (new domain)."""
+    print('\n📡 UN Comtrade')
+    reporters = [('842', 'USA'), ('156', 'China'), ('392', 'Japan'), ('276', 'Germany')]
+    found = []
+    for reporter_code, reporter_name in reporters:
+        url = (f'https://comtradeapi.un.org/public/v1/preview/C/A/HS?'
+               f'reporterCode={reporter_code}&period=2005,2006,2007,2008,2009,2010,'
+               f'2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023&'
+               f'partnerCode=World&cmdCode=TOTAL&flowCode=M,X')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'data' not in obj or not obj['data']: continue
+            by_year = {}
+            for item in obj['data']:
+                yr = item.get('period')
+                val = item.get('primaryValue')
+                if yr and val:
+                    by_year.setdefault(yr, 0)
+                    by_year[yr] += val
+            years = sorted(by_year.keys())
+            values = [by_year[y] for y in years]
+            if len(values) < 10: continue
+            found.append({
+                'source': 'un_comtrade',
+                'title': f'UN Comtrade: {reporter_name} total trade (annual)',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} Comtrade series')
+    return found
+
+def scan_data_gov():
+    """Download from US government open data (BLS employment).
+    New family: government operations."""
+    print('\n📡 Data.gov / BLS')
+    sources = [
+        ('https://api.bls.gov/publicAPI/v2/timeseries/data/CES0000000001?startyear=2010&endyear=2025',
+         'BLS: Total Nonfarm Payrolls (monthly)'),
+    ]
+    found = []
+    for url, name in sources:
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'Results' not in obj or not obj['Results']: continue
+            series = obj['Results']['series'][0]
+            values = []
+            for item in reversed(series.get('data', [])):
+                try:
+                    v = float(item['value'])
+                    if not np.isnan(v): values.append(v)
+                except: pass
+            if len(values) < 20: continue
+            found.append({
+                'source': 'data_gov',
+                'title': name,
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} Data.gov series')
+    return found
+
+def scan_met_museum():
+    """Download Metropolitan Museum of Art collection data.
+    New family: cultural / artistic creation dates."""
+    print('\n📡 Met Museum (cultural)')
+    url = 'https://github.com/metmuseum/openaccess/raw/master/MetObjects.csv'
+    try:
+        data = fetch_url(url, timeout=30)
+        if not data:
+            print('  ✗ No data')
+            return []
+        text = data.decode('utf-8') if isinstance(data, bytes) else data
+        rows = list(csv.reader(io.StringIO(text)))
+        if len(rows) < 10:
+            return []
+        header = rows[0]
+        date_idx = -1
+        for i, h in enumerate(header):
+            if 'Begin Date' in h:
+                date_idx = i
+                break
+        if date_idx < 0:
+            print('  ✗ No date column')
+            return []
+        dates = []
+        for row in rows[1:]:
+            if date_idx < len(row):
+                try:
+                    d = int(row[date_idx])
+                    if -3000 <= d <= 2025:
+                        dates.append(d)
+                except: pass
+        if len(dates) < 50:
+            print(f'  ✗ Only {len(dates)} dates')
+            return []
+        from collections import Counter
+        century_counts = Counter()
+        for d in dates:
+            c = (d // 100) * 100
+            century_counts[c] += 1
+        centuries = sorted(century_counts.keys())
+        counts = [century_counts[c] for c in centuries]
+        found = [{
+            'source': 'met_museum',
+            'title': 'Met Museum: Object creation date distribution (by century)',
+            'url': url, 'values': counts,
+        }]
+        print(f'  Downloaded {len(dates)} objects across {len(centuries)} centuries')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+def scan_seismic():
+    """Download seismic data from IRIS (seismology).
+    New family: geophysics / seismology (different from USGS earthquakes)."""
+    print('\n📡 IRIS Seismic')
+    url = ('https://service.iris.edu/fdsnws/event/1/query?'
+           'starttime=2020-01-01&endtime=2025-12-31&'
+           'minmagnitude=5.0&format=text')
+    try:
+        data = fetch_url(url, timeout=20)
+        if not data:
+            print('  ✗ No data')
+            return []
+        text = data.decode('utf-8') if isinstance(data, bytes) else data
+        magnitudes = []
+        for line in text.strip().split('\n')[1:]:
+            parts = line.split('|')
+            if len(parts) >= 11:
+                try:
+                    mag = float(parts[10])
+                    if not np.isnan(mag): magnitudes.append(mag)
+                except: pass
+        if len(magnitudes) < 50:
+            print(f'  ✗ Only {len(magnitudes)} events')
+            return []
+        found = [{
+            'source': 'iris_seismic',
+            'title': 'IRIS Seismic events M>=5.0 (2020-2025, magnitude distribution)',
+            'url': url, 'values': magnitudes,
+        }]
+        print(f'  Downloaded {len(magnitudes)} seismic events')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+# ═══════════════════════════════════════════════════════════════════════
 # ANALYZE
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -675,22 +968,43 @@ def is_duplicate(new_entry, existing_entries):
     for ex in existing_entries:
         ex_url = ex.get('url', '').rstrip('/')
         ex_name = ex.get('name', '').lower().strip()
-        # Match by URL (strongest signal)
         if new_url and ex_url and new_url == ex_url:
             return True
-        # Match by name prefix (handles truncated titles)
         if new_name and ex_name:
             if new_name[:40] == ex_name[:40]:
                 return True
     return False
 
+def is_blacklisted(entry):
+    """Check if an entry matches the blacklist (scan_blacklist.json)."""
+    bl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'scan_blacklist.json')
+    if not os.path.exists(bl_path):
+        return False
+    try:
+        with open(bl_path) as f:
+            bl = json.load(f)
+    except:
+        return False
+    name = entry.get('name', '').lower()
+    url = entry.get('url', '').lower()
+    for bl_name in bl.get('blacklisted_names', []):
+        if bl_name.lower() in name:
+            return True
+    for pattern in bl.get('blacklisted_url_patterns', []):
+        if pattern in url:
+            return True
+    return False
+
 def filter_duplicates(new_entries, existing_entries):
-    """Remove entries that already exist. Returns (kept, skipped_count)."""
+    """Remove entries that already exist or are blacklisted. Returns (kept, skipped_count)."""
     kept = []
     skipped = 0
     for entry in new_entries:
         if is_duplicate(entry, existing_entries):
             skipped += 1
+        elif is_blacklisted(entry):
+            skipped += 1
+            print(f'    ✗ Blacklisted: {entry.get("name","?")[:50]}')
         else:
             kept.append(entry)
     return kept, skipped
@@ -1068,10 +1382,23 @@ def main():
     globaltemp_results = scan_global_temp()
     eurostat_results = scan_eurostat()
     
+    # NEW: Wider family sources
+    wikipedia_results = scan_wikipedia_pageviews()
+    ecb_results = scan_ecb()
+    oecd_results = scan_oecd()
+    berkeley_results = scan_berkeley_earth()
+    comtrade_results = scan_un_comtrade()
+    data_gov_results = scan_data_gov()
+    met_results = scan_met_museum()
+    seismic_results = scan_seismic()
+    
     # Combine all JSON-value sources for unified analysis
     json_sources = (coingecko_results + binance_results + openmeteo_results +
                     noaa_results + giss_results + covid_results + 
-                    globaltemp_results + eurostat_results + wb_results)
+                    globaltemp_results + eurostat_results + wb_results +
+                    wikipedia_results + ecb_results + oecd_results +
+                    berkeley_results + comtrade_results + data_gov_results +
+                    met_results + seismic_results)
     
     # 3. Download and analyze Zenodo CSVs
     print('\n📊 Analyzing Zenodo datasets...')
@@ -1190,6 +1517,10 @@ def main():
                 'openmeteo': 'environmental', 'noaa': 'space_weather',
                 'giss': 'environmental', 'covid': 'ecological',
                 'globaltemp': 'environmental', 'eurostat': 'economic',
+                'wikipedia': 'cultural', 'ecb': 'economic_eu',
+                'oecd': 'economic_intl', 'berkeley_earth': 'climate',
+                'un_comtrade': 'trade', 'data_gov': 'government',
+                'met_museum': 'cultural', 'iris_seismic': 'geophysics',
             }
             domain = domain_map.get(source_name, 'scouting')
             entry_id = f'{source_name}-{item["title"].lower().replace(" ","-").replace(":","")[:30]}'

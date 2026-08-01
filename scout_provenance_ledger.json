@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-01T14:00:45.886707+00:00",
+  "initialized": "2026-08-01T15:37:20.981022+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -1327,176 +1327,6 @@
     },
     {
       "id": "",
-      "name": "arXiv: Stretched Exponential Decay in the Edwards-Wilkins",
-      "family": "arxiv",
-      "source_url": "http://arxiv.org/abs/cond-mat/0103091v1",
-      "registry_date": "2026-07-28",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": false,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "arXiv: Exponential decay of correlations for random inter",
-      "family": "arxiv",
-      "source_url": "http://arxiv.org/abs/2504.16549v2",
-      "registry_date": "2026-07-28",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": false,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "arXiv: Cost-Aware Logging: Measuring the Financial Impact",
-      "family": "arxiv",
-      "source_url": "http://arxiv.org/abs/2601.11584v1",
-      "registry_date": "2026-07-28",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": false,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "arXiv: Large deviations for dynamical systems with stretc",
-      "family": "arxiv",
-      "source_url": "http://arxiv.org/abs/1812.09742v2",
-      "registry_date": "2026-07-28",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": false,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "arXiv: On the Polynomial and Exponential Decay of Eigen-F",
-      "family": "arxiv",
-      "source_url": "http://arxiv.org/abs/1105.4105v1",
-      "registry_date": "2026-07-28",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": false,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
       "name": "World Bank: CPI (ACF retention)",
       "family": "world bank",
       "source_url": "https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL?format=json&per_page=100",
@@ -2594,6 +2424,108 @@
       "verdict": "EXTRACTION",
       "model_verdict": "S2_WINS",
       "narrative": "D=1.4139, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: World War II pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/World_War_II/daily/2020010100/2025123100",
+      "registry_date": "2026-08-01",
+      "D": 0.4485,
+      "r2": 0.9834,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.4485, R²=0.9834. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-68.89).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Earth pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Earth/daily/2020010100/2025123100",
+      "registry_date": "2026-08-01",
+      "D": 0.3067,
+      "r2": 0.8991,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.3067, R²=0.8991. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-57.39).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Quantum mechanics pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Quantum_mechanics/daily/2020010100/2025123100",
+      "registry_date": "2026-08-01",
+      "D": 0.1128,
+      "r2": 0.9877,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=0.1128, R²=0.9877. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-197.26).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

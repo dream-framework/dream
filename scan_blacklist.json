@@ -1,0 +1,13 @@
+{
+  "blacklisted_names": [
+    "arXiv: Stretched Exponential Decay in the Edwards-Wilkins",
+    "arXiv: Exponential decay of correlations for random inter",
+    "arXiv: Cost-Aware Logging: Measuring the Financial Impact",
+    "arXiv: Large deviations for dynamical systems with stretc",
+    "arXiv: On the Polynomial and Exponential Decay of Eigen-F"
+  ],
+  "blacklisted_url_patterns": [
+    "arxiv.org/abs/"
+  ],
+  "reason": "arXiv papers with no downloadable data \u2014 PENDING forever, no D value, no Meta-S2 contribution"
+}
