@@ -88,6 +88,18 @@ def parse_entry(text):
     m = re.search(r'verdict:"([^"]*)"', text)
     if m: result['verdict'] = m.group(1)
     
+    m = re.search(r'model_verdict:"([^"]*)"', text)
+    if m: result['model_verdict'] = m.group(1)
+    
+    m = re.search(r'\bdelta_aicc:(-?[\d.]+)', text)
+    if m: result['delta_aicc'] = float(m.group(1))
+    
+    m = re.search(r'best_alt:"([^"]*)"', text)
+    if m: result['best_alt'] = m.group(1)
+    
+    m = re.search(r'model_note:"((?:[^"\\]|\\.)*)"', text)
+    if m: result['model_note'] = m.group(1).replace('\\"', '"').replace('\\\\', '\\')
+    
     m = re.search(r'kind:"([^"]*)"', text)
     if m: result['kind'] = m.group(1)
     
@@ -120,7 +132,7 @@ def parse_entry(text):
             phases.append(phase)
         result['phases'] = phases
     
-    return result if result.get('id') else None
+    return result if result.get('name') else None
 
 def export_json(html_path, json_path):
     """Export TESTS from html_path to json_path."""
@@ -132,7 +144,8 @@ def export_json(html_path, json_path):
     output = {
         'exported_at': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
         'total_tests': len(tests),
-        'fields': ['id', 'name', 'domain', 'groups', 'D', 'r2', 'verdict', 
+        'fields': ['id', 'name', 'domain', 'groups', 'D', 'r2', 'verdict',
+                   'model_verdict', 'delta_aicc', 'best_alt', 'model_note',
                    'kind', 'narrative', 'source', 'date', 'url', 'phases'],
         'tests': tests,
     }

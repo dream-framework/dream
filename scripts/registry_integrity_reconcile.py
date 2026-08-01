@@ -165,7 +165,7 @@ def parse_tests_html(html_path):
         # Parse fields
         entry = {}
         for field in ['id', 'name', 'domain', 'verdict', 'model_verdict', 'narrative',
-                       'source', 'date', 'url', 'image', 'kind']:
+                       'source', 'date', 'url', 'image', 'kind', 'best_alt', 'model_note']:
             fm = re.search(r'(?:^|,)\s*' + field + r'\s*:\s*"((?:[^"\\]|\\.)*)"', entry_str)
             if fm:
                 entry[field] = fm.group(1).replace('\\"', '"').replace('\\\\', '\\')
@@ -233,6 +233,12 @@ def rebuild_entry_string(entry, is_ru=False):
     parts.append(f'verdict:"{js_str(entry.get("verdict", ""))}"')
     if entry.get('model_verdict'):
         parts.append(f'model_verdict:"{js_str(entry["model_verdict"])}"')
+    if entry.get('delta_aicc') is not None:
+        parts.append(f'delta_aicc:{entry["delta_aicc"]:.4f}')
+    if entry.get('best_alt'):
+        parts.append(f'best_alt:"{js_str(entry["best_alt"])}"')
+    if entry.get('model_note'):
+        parts.append(f'model_note:"{js_str(entry["model_note"])}"')
     parts.append(f'narrative:"{js_str(entry.get("narrative", ""))}"')
     parts.append(f'source:"{js_str(entry.get("source", ""))}"')
     parts.append(f'date:"{js_str(entry.get("date", ""))}"')

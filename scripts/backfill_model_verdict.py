@@ -269,10 +269,10 @@ def main():
         entries, html = parse_entries(html_path)
         print(f'Parsed {len(entries)} entries')
         
-        # Find entries with D but no model_verdict
+        # Find entries with D but missing model_verdict OR delta_aicc
         needs_backfill = [e for e in entries 
                          if e.get('D') is not None 
-                         and not e.get('model_verdict')]
+                         and (not e.get('model_verdict') or e.get('delta_aicc') is None)]
         print(f'Need backfill: {len(needs_backfill)}')
         
         if not needs_backfill:
