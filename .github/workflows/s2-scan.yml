@@ -2,8 +2,8 @@ name: DREAM S2 Auto-Scan
 
 on:
   schedule:
-    # Run every 6 hours to retry no-comparison entries and scan for new data
-    - cron: '17 */6 * * *'
+    # Run every 4 hours to widen the search and catch new data faster
+    - cron: '17 */4 * * *'
   workflow_dispatch:
     # Allow manual triggering from the Actions tab
 
