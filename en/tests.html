@@ -191,7 +191,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "31 Jul 2026 23:56 EST";
+const LAST_REFRESH = "1 Aug 2026 04:37 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -286,6 +286,11 @@ const TESTS = [
   ,{id:"",name:"Binance: ETH daily (ACF retention)",domain:"crypto",D:1.3841,r2:0.9997,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3841, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365",image:null}
   ,{id:"",name:"Binance: BTC daily (ACF retention)",domain:"crypto",D:1.2378,r2:0.9998,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.2378, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365",image:null}
   ,{id:"",name:"Zenodo: Acceptability Judgement Task",domain:"scouting",D:0.7144,r2:0.3243,verdict:"NATURAL",narrative:"D=0.7144, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-31",date:"2026-07-31",url:"10.5281/zenodo.21714976",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4176,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4176, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-185.54).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3994,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3994, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-218.41).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4121,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4121, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-279.20).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3992,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3992, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-265.61).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4139,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4139, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-183.28).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
 
 ];
 
@@ -568,26 +573,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 66,
-  "d_mle": 2.451,
-  "lam_mle": 1.2326,
-  "ks_p": 0.2594,
-  "d_direct": 2.4252,
-  "r2_direct": 0.9628,
-  "d_linear": 2.0384,
-  "r2_linear": 0.938,
+  "n": 71,
+  "d_mle": 2.5857,
+  "lam_mle": 1.2553,
+  "ks_p": 0.1015,
+  "d_direct": 2.7496,
+  "r2_direct": 0.9548,
+  "d_linear": 2.083,
+  "r2_linear": 0.9301,
   "natural": 22,
-  "extraction": 44,
-  "mean": 1.0934,
-  "median": 1.1985,
-  "total": 71,
-  "compared": 64,
-  "ad_stat": 1.9945,
+  "extraction": 49,
+  "mean": 1.1156,
+  "median": 1.2378,
+  "total": 76,
+  "compared": 69,
+  "ad_stat": 2.581,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 8.56,
-  "delta_aic_lognormal": 18.5,
-  "silverman_p": 0.545,
-  "boot_lo": 2.021,
+  "delta_aic_gamma": 11.16,
+  "delta_aic_lognormal": 23.04,
+  "silverman_p": 0.455,
+  "boot_lo": 2.131,
   "boot_hi": 4.794,
   "date": "2026-08-01"
 };
