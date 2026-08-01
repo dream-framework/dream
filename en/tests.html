@@ -191,7 +191,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "1 Aug 2026 04:37 EST";
+const LAST_REFRESH = "1 Aug 2026 10:00 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -286,11 +286,11 @@ const TESTS = [
   ,{id:"",name:"Binance: ETH daily (ACF retention)",domain:"crypto",D:1.3841,r2:0.9997,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3841, R²=0.9997. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=365",image:null}
   ,{id:"",name:"Binance: BTC daily (ACF retention)",domain:"crypto",D:1.2378,r2:0.9998,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.2378, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-07-30",date:"2026-07-30",url:"https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=365",image:null}
   ,{id:"",name:"Zenodo: Acceptability Judgement Task",domain:"scouting",D:0.7144,r2:0.3243,verdict:"NATURAL",narrative:"D=0.7144, R²=0.3243. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-07-31",date:"2026-07-31",url:"10.5281/zenodo.21714976",image:null}
-  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4176,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4176, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-185.54).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
-  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3994,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3994, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-218.41).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
-  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4121,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4121, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-279.20).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
-  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3992,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3992, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-265.61).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
-  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4139,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4139, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-183.28).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4176,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4176, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3994,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3994, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4121,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4121, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3992,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3992, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
+  ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4139,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4139, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
 
 ];
 
