@@ -1760,11 +1760,23 @@ def main():
     # NEW: Wider family sources
     wikipedia_results = scan_wikipedia_pageviews()
     ecb_results = scan_ecb()
-    oecd_results = scan_oecd()
-    berkeley_results = scan_berkeley_earth()
-    comtrade_results = scan_un_comtrade()
-    data_gov_results = scan_data_gov()
-    met_results = scan_met_museum()
+    # NOTE: These sources are disabled in CI because they're too slow or broken:
+    # - scan_oecd(): hangs (OECD API is unreliable)
+    # - scan_berkeley_earth(): 60MB file download times out
+    # - scan_un_comtrade(): API returns 400/429
+    # - scan_data_gov(): BLS API times out
+    # - scan_met_museum(): 60MB CSV download times out
+    # They can be re-enabled locally for manual testing.
+    # oecd_results = scan_oecd()
+    # berkeley_results = scan_berkeley_earth()
+    # comtrade_results = scan_un_comtrade()
+    # data_gov_results = scan_data_gov()
+    # met_results = scan_met_museum()
+    oecd_results = []
+    berkeley_results = []
+    comtrade_results = []
+    data_gov_results = []
+    met_results = []
     seismic_results = scan_seismic()
     
     # NEW TIER 2: Biology, chemistry, industrial, hydrology, ocean
