@@ -776,6 +776,286 @@ def scan_seismic():
         return []
 
 # ═══════════════════════════════════════════════════════════════════════
+# TIER 2 NEW SOURCES — biology, chemistry, industrial, hydrology, ocean
+# ═══════════════════════════════════════════════════════════════════════
+
+def scan_usgs_hydrology():
+    """Download USGS river flow / gauge data (hydrology — different from earthquakes).
+    New family: hydrology."""
+    print('\n📡 USGS Hydrology (river flow)')
+    sites = [
+        ('01646500', 'Potomac River at Point of Rocks, MD'),
+        ('04213500', 'Cuyahoga River at Independence, OH'),
+        ('07010000', 'Mississippi River at St. Louis, MO'),
+        ('11447650', 'Sacramento River at Freeport, CA'),
+    ]
+    found = []
+    for site_id, name in sites:
+        url = (f'https://waterservices.usgs.gov/nwis/dv/?sites={site_id}'
+               f'&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'value' not in obj or 'timeSeries' not in obj['value']: continue
+            ts = obj['value']['timeSeries']
+            if not ts: continue
+            values = []
+            for item in ts[0].get('values', [{}])[0].get('value', []):
+                try:
+                    v = float(item['value'])
+                    if v >= 0: values.append(v)
+                except: pass
+            if len(values) < 50: continue
+            found.append({
+                'source': 'usgs_hydrology',
+                'title': f'USGS: {name} (daily discharge)',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} hydrology series')
+    return found
+
+def scan_noaa_tides():
+    """Download NOAA water level data (ocean/coastal). New family: oceanography."""
+    print('\n📡 NOAA Tides & Currents')
+    stations = [
+        ('8454000', 'Providence, RI'),
+        ('8518750', 'The Battery, NY'),
+        ('9447130', 'Seattle, WA'),
+    ]
+    found = []
+    for station_id, name in stations:
+        url = (f'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?'
+               f'begin_date=20230601&end_date=20230630&station={station_id}'
+               f'&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            text = data.decode('utf-8') if isinstance(data, bytes) else data
+            rows = list(csv.reader(io.StringIO(text)))
+            if len(rows) < 5: continue
+            header = rows[0]
+            wl_idx = -1
+            for i, h in enumerate(header):
+                if ' Water Level' in h:
+                    wl_idx = i; break
+            if wl_idx < 0: wl_idx = 1
+            values = []
+            for row in rows[1:]:
+                if wl_idx < len(row):
+                    try:
+                        v = float(row[wl_idx])
+                        if not np.isnan(v): values.append(v)
+                    except: pass
+            if len(values) < 50: continue
+            found.append({
+                'source': 'noaa_tides',
+                'title': f'NOAA Tide: {name} (6-min water level)',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} tide series')
+    return found
+
+def scan_ndbc_buoy():
+    """Download NDBC buoy data. New family: ocean buoys."""
+    print('\n📡 NDBC Buoys')
+    buoys = [('46035', 'Bering Sea'), ('41001', 'E Hatteras'), ('51001', 'NW Hawaiian')]
+    found = []
+    for buoy_id, name in buoys:
+        url = f'https://www.ndbc.noaa.gov/data/realtime2/{buoy_id}.txt'
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            text = data.decode('utf-8') if isinstance(data, bytes) else data
+            rows = text.strip().split('\n')
+            if len(rows) < 5: continue
+            values = []
+            for row in rows[2:]:
+                parts = row.split()
+                if len(parts) >= 6:
+                    try:
+                        v = float(parts[5])  # WVHT
+                        if 0 <= v < 99: values.append(v)
+                    except: pass
+            if len(values) < 50: continue
+            found.append({
+                'source': 'ndbc_buoy',
+                'title': f'NDBC Buoy {buoy_id} ({name}) wave height',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} buoy series')
+    return found
+
+def scan_swpc_sunspots():
+    """Download NOAA SWPC sunspot number (275 years!). New family: solar physics."""
+    print('\n📡 SWPC Sunspot Number (since 1749)')
+    url = 'https://services.swpc.noaa.gov/json/solar-cycle/sunspots.json'
+    try:
+        data = fetch_url(url, timeout=15)
+        if not data: return []
+        obj = json.loads(data)
+        if not isinstance(obj, list): return []
+        values = []
+        for item in obj:
+            if isinstance(item, dict):
+                v = item.get('sunspot_count', item.get('smoothed', item.get('ssn', 0)))
+                if v is not None and v >= 0: values.append(float(v))
+        if len(values) < 50:
+            print(f'  ✗ Only {len(values)} values')
+            return []
+        found = [{'source': 'swpc_sunspots',
+                  'title': 'SWPC Sunspot Number (monthly, 1749-present)',
+                  'url': url, 'values': values}]
+        print(f'  Downloaded {len(values)} monthly values')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+def scan_swpc_xray():
+    """Download NOAA SWPC GOES X-ray flux. New family: solar flares."""
+    print('\n📡 SWPC GOES X-ray Flux')
+    url = 'https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json'
+    try:
+        data = fetch_url(url, timeout=15)
+        if not data: return []
+        obj = json.loads(data)
+        if not isinstance(obj, list): return []
+        values = []
+        for item in obj:
+            if isinstance(item, dict):
+                flux = item.get('flux', 0)
+                if flux and float(flux) > 0: values.append(float(flux))
+        if len(values) < 50:
+            print(f'  ✗ Only {len(values)} values')
+            return []
+        found = [{'source': 'swpc_xray',
+                  'title': 'SWPC GOES X-ray Flux (1-day, short band)',
+                  'url': url, 'values': values}]
+        print(f'  Downloaded {len(values)} values')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+def scan_usgs_geomag():
+    """Download USGS geomagnetic field data. New family: geomagnetism."""
+    print('\n📡 USGS Geomagnetic Field')
+    stations = ['BOU', 'BRW', 'FRD', 'HON']
+    found = []
+    for station in stations:
+        url = (f'https://geomag.usgs.gov/ws/data/?id={station}'
+               f'&starttime=2023-06-01T00:00:00Z&endtime=2023-06-30T00:00:00Z'
+               f'&elements=X&format=json')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            values = []
+            if 'values' in obj:
+                for item in obj['values']:
+                    if isinstance(item, dict) and 'X' in item:
+                        try: values.append(float(item['X']))
+                        except: pass
+                    elif isinstance(item, list) and len(item) > 1:
+                        try: values.append(float(item[1]))
+                        except: pass
+            if len(values) < 50: continue
+            found.append({'source': 'usgs_geomag',
+                          'title': f'USGS Geomag: {station} (X-component, 1-min)',
+                          'url': url, 'values': values})
+        except: pass
+    print(f'  Downloaded {len(found)} geomag series')
+    return found
+
+def scan_energy_charts():
+    """Download European electricity spot prices. New family: energy markets."""
+    print('\n📡 Energy-Charts (electricity prices)')
+    zones = [('DE-LU', 'Germany-Luxembourg'), ('FR', 'France'), ('NL', 'Netherlands'), ('CH', 'Switzerland')]
+    found = []
+    for zone, name in zones:
+        url = (f'https://api.energy-charts.info/price?bzn={zone}'
+               f'&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'price' not in obj: continue
+            values = [float(p) for p in obj['price'] if p is not None]
+            if len(values) < 50: continue
+            found.append({'source': 'energy_charts',
+                          'title': f'Energy-Charts: {name} electricity spot price (hourly)',
+                          'url': url, 'values': values})
+        except: pass
+    print(f'  Downloaded {len(found)} electricity price series')
+    return found
+
+def scan_waqi_air():
+    """Download WAQI air quality data. New family: air quality / chemistry."""
+    print('\n📡 WAQI Air Quality')
+    cities = ['beijing', 'delhi', 'london', 'tokyo', 'newyork']
+    found = []
+    for city in cities:
+        url = f'https://api.waqi.info/feed/{city}/?token=demo'
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if obj.get('status') != 'ok': continue
+            d = obj.get('data', {})
+            forecast = d.get('forecast', {}).get('daily', {})
+            pm25 = forecast.get('pm25', [])
+            values = [f.get('avg', 0) for f in pm25 if isinstance(f, dict)]
+            if len(values) < 10: continue
+            found.append({'source': 'waqi_air',
+                          'title': f'WAQI: {city} PM2.5 (daily forecast)',
+                          'url': url, 'values': values})
+        except: pass
+    print(f'  Downloaded {len(found)} air quality series')
+    return found
+
+def scan_water_quality():
+    """Download US Water Quality Portal data. New family: chemistry."""
+    print('\n📡 Water Quality Portal')
+    url = ('https://www.waterqualitydata.us/data/Result/search?'
+           'siteid=USGS-01594440&characteristicName=Nitrate&mimeType=csv&zip=no')
+    try:
+        data = fetch_url(url, timeout=20)
+        if not data: return []
+        text = data.decode('utf-8') if isinstance(data, bytes) else data
+        rows = list(csv.reader(io.StringIO(text)))
+        if len(rows) < 5: return []
+        header = rows[0]
+        val_idx = -1
+        for i, h in enumerate(header):
+            if 'ResultMeasureValue' in h or 'MeasureValue' in h:
+                val_idx = i; break
+        if val_idx < 0:
+            print('  ✗ No value column')
+            return []
+        values = []
+        for row in rows[1:]:
+            if val_idx < len(row):
+                try:
+                    v = float(row[val_idx])
+                    if not np.isnan(v) and v >= 0: values.append(v)
+                except: pass
+        if len(values) < 20:
+            print(f'  ✗ Only {len(values)} values')
+            return []
+        found = [{'source': 'water_quality',
+                  'title': 'Water Quality Portal: Nitrate at USGS-01594440',
+                  'url': url, 'values': values}]
+        print(f'  Downloaded {len(values)} measurements')
+        return found
+    except Exception as e:
+        print(f'  ✗ Error: {e}')
+        return []
+
+# ═══════════════════════════════════════════════════════════════════════
 # ANALYZE
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -1392,13 +1672,27 @@ def main():
     met_results = scan_met_museum()
     seismic_results = scan_seismic()
     
+    # NEW TIER 2: Biology, chemistry, industrial, hydrology, ocean
+    hydrology_results = scan_usgs_hydrology()
+    tide_results = scan_noaa_tides()
+    buoy_results = scan_ndbc_buoy()
+    sunspot_results = scan_swpc_sunspots()
+    xray_results = scan_swpc_xray()
+    geomag_results = scan_usgs_geomag()
+    energy_results = scan_energy_charts()
+    waqi_results = scan_waqi_air()
+    water_quality_results = scan_water_quality()
+    
     # Combine all JSON-value sources for unified analysis
     json_sources = (coingecko_results + binance_results + openmeteo_results +
                     noaa_results + giss_results + covid_results + 
                     globaltemp_results + eurostat_results + wb_results +
                     wikipedia_results + ecb_results + oecd_results +
                     berkeley_results + comtrade_results + data_gov_results +
-                    met_results + seismic_results)
+                    met_results + seismic_results +
+                    hydrology_results + tide_results + buoy_results +
+                    sunspot_results + xray_results + geomag_results +
+                    energy_results + waqi_results + water_quality_results)
     
     # 3. Download and analyze Zenodo CSVs
     print('\n📊 Analyzing Zenodo datasets...')
@@ -1521,6 +1815,11 @@ def main():
                 'oecd': 'economic_intl', 'berkeley_earth': 'climate',
                 'un_comtrade': 'trade', 'data_gov': 'government',
                 'met_museum': 'cultural', 'iris_seismic': 'geophysics',
+                'usgs_hydrology': 'hydrology', 'noaa_tides': 'oceanography',
+                'ndbc_buoy': 'oceanography', 'swpc_sunspots': 'solar_physics',
+                'swpc_xray': 'solar_physics', 'usgs_geomag': 'geomagnetism',
+                'energy_charts': 'energy', 'waqi_air': 'air_quality',
+                'water_quality': 'chemistry',
             }
             domain = domain_map.get(source_name, 'scouting')
             entry_id = f'{source_name}-{item["title"].lower().replace(" ","-").replace(":","")[:30]}'

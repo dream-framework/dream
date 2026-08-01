@@ -191,7 +191,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "1 Aug 2026 11:37 EST";
+const LAST_REFRESH = "1 Aug 2026 12:13 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -286,9 +286,15 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4121,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4121, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
   ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.3992,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.3992, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
   ,{id:"",name:"Zenodo: Aerodynamic Data for Validation: The CHN-T1 Large ",domain:"scouting",D:1.4139,r2:0.9985,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4139, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21422698",image:null}
-  ,{id:"",name:"Wikipedia: World War II pageviews (ACF retention)",domain:"cultural",D:0.4485,r2:0.9834,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.4485, R²=0.9834. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-68.89).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/World_War_II/daily/2020010100/2025123100",image:null}
-  ,{id:"",name:"Wikipedia: Earth pageviews (ACF retention)",domain:"cultural",D:0.3067,r2:0.8991,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.3067, R²=0.8991. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-57.39).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Earth/daily/2020010100/2025123100",image:null}
-  ,{id:"",name:"Wikipedia: Quantum mechanics pageviews (ACF retention)",domain:"cultural",D:0.1128,r2:0.9877,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.1128, R²=0.9877. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-197.26).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Quantum_mechanics/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"Wikipedia: World War II pageviews (ACF retention)",domain:"cultural",D:0.4485,r2:0.9834,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.4485, R²=0.9834. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/World_War_II/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"Wikipedia: Earth pageviews (ACF retention)",domain:"cultural",D:0.3067,r2:0.8991,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.3067, R²=0.8991. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Earth/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"Wikipedia: Quantum mechanics pageviews (ACF retention)",domain:"cultural",D:0.1128,r2:0.9877,verdict:"NATURAL",model_verdict:"S2_WINS",narrative:"D=0.1128, R²=0.9877. D<1 confirms natural retention — heavy-tailed, slow decay.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Quantum_mechanics/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"NOAA Tide: The Battery, NY (6-min water level) (ACF retention)",domain:"oceanography",D:3.5732,r2:0.1841,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=3.5732, R²=0.1841. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=8518750&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",image:null}
+  ,{id:"",name:"NOAA Tide: Providence, RI (6-min water level) (ACF retention)",domain:"oceanography",D:3.4173,r2:0.1907,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=3.4173, R²=0.1907. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=8454000&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",image:null}
+  ,{id:"",name:"NOAA Tide: Seattle, WA (6-min water level) (ACF retention)",domain:"oceanography",D:3.3806,r2:0.4881,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=3.3806, R²=0.4881. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=9447130&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",image:null}
+  ,{id:"",name:"SWPC Sunspot Number (monthly, 1749-present) (ACF retention)",domain:"solar_physics",D:3.0090,r2:0.3658,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=3.0090, R²=0.3658. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://services.swpc.noaa.gov/json/solar-cycle/sunspots.json",image:null}
+  ,{id:"",name:"USGS: Mississippi River at St. Louis, MO (daily discharge) (ACF retention)",domain:"hydrology",D:2.3647,r2:0.7787,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=2.3647, R²=0.7787. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://waterservices.usgs.gov/nwis/dv/?sites=07010000&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
+  ,{id:"",name:"NDBC Buoy 46035 (Bering Sea) wave height (ACF retention)",domain:"oceanography",D:1.7354,r2:0.9516,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.7354, R²=0.9516. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://www.ndbc.noaa.gov/data/realtime2/46035.txt",image:null}
 
 ];
 
@@ -571,27 +577,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 74,
-  "d_mle": 2.3497,
-  "lam_mle": 1.2184,
-  "ks_p": 0.0806,
-  "d_direct": 2.3527,
-  "r2_direct": 0.9488,
-  "d_linear": 1.9547,
-  "r2_linear": 0.9299,
+  "n": 80,
+  "d_mle": 1.8129,
+  "lam_mle": 1.3725,
+  "ks_p": 0.1963,
+  "d_direct": 2.2698,
+  "r2_direct": 0.9627,
+  "d_linear": 1.8191,
+  "r2_linear": 0.943,
   "natural": 25,
-  "extraction": 49,
-  "mean": 1.0821,
-  "median": 1.2198,
-  "total": 74,
-  "compared": 72,
-  "ad_stat": 2.8069,
+  "extraction": 55,
+  "mean": 1.2195,
+  "median": 1.2677,
+  "total": 80,
+  "compared": 78,
+  "ad_stat": 1.767,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 10.67,
-  "delta_aic_lognormal": 24.66,
-  "silverman_p": 0.41,
-  "boot_lo": 1.762,
-  "boot_hi": 3.459,
+  "delta_aic_gamma": 0.76,
+  "delta_aic_lognormal": 10.08,
+  "silverman_p": 0.505,
+  "boot_lo": 1.446,
+  "boot_hi": 2.703,
   "date": "2026-08-01"
 };
 

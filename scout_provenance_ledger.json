@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-01T15:37:20.981022+00:00",
+  "initialized": "2026-08-01T16:14:19.035608+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2457,7 +2457,7 @@
       "r2": 0.9834,
       "verdict": "NATURAL",
       "model_verdict": "S2_WINS",
-      "narrative": "D=0.4485, R²=0.9834. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-68.89).",
+      "narrative": "D=0.4485, R²=0.9834. D<1 confirms natural retention — heavy-tailed, slow decay.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -2491,7 +2491,7 @@
       "r2": 0.8991,
       "verdict": "NATURAL",
       "model_verdict": "S2_WINS",
-      "narrative": "D=0.3067, R²=0.8991. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-57.39).",
+      "narrative": "D=0.3067, R²=0.8991. D<1 confirms natural retention — heavy-tailed, slow decay.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -2525,7 +2525,211 @@
       "r2": 0.9877,
       "verdict": "NATURAL",
       "model_verdict": "S2_WINS",
-      "narrative": "D=0.1128, R²=0.9877. D<1 confirms natural retention — heavy-tailed, slow decay. S2 beats BIEXP (ΔAICc=-197.26).",
+      "narrative": "D=0.1128, R²=0.9877. D<1 confirms natural retention — heavy-tailed, slow decay.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NOAA Tide: The Battery, NY (6-min water level) (ACF retention)",
+      "family": "noaa tide",
+      "source_url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=8518750&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",
+      "registry_date": "2026-08-01",
+      "D": 3.5732,
+      "r2": 0.1841,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=3.5732, R²=0.1841. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NOAA Tide: Providence, RI (6-min water level) (ACF retention)",
+      "family": "noaa tide",
+      "source_url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=8454000&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",
+      "registry_date": "2026-08-01",
+      "D": 3.4173,
+      "r2": 0.1907,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=3.4173, R²=0.1907. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NOAA Tide: Seattle, WA (6-min water level) (ACF retention)",
+      "family": "noaa tide",
+      "source_url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20230601&end_date=20230630&station=9447130&product=water_level&datum=mllw&units=metric&time_zone=gmt&format=csv&application=web",
+      "registry_date": "2026-08-01",
+      "D": 3.3806,
+      "r2": 0.4881,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=3.3806, R²=0.4881. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "SWPC Sunspot Number (monthly, 1749-present) (ACF retention)",
+      "family": "swpc",
+      "source_url": "https://services.swpc.noaa.gov/json/solar-cycle/sunspots.json",
+      "registry_date": "2026-08-01",
+      "D": 3.009,
+      "r2": 0.3658,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=3.0090, R²=0.3658. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "USGS: Mississippi River at St. Louis, MO (daily discharge) (ACF retention)",
+      "family": "usgs",
+      "source_url": "https://waterservices.usgs.gov/nwis/dv/?sites=07010000&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",
+      "registry_date": "2026-08-01",
+      "D": 2.3647,
+      "r2": 0.7787,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=2.3647, R²=0.7787. D>1 indicates extraction regime — retention collapses super-exponentially.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NDBC Buoy 46035 (Bering Sea) wave height (ACF retention)",
+      "family": "ndbc",
+      "source_url": "https://www.ndbc.noaa.gov/data/realtime2/46035.txt",
+      "registry_date": "2026-08-01",
+      "D": 1.7354,
+      "r2": 0.9516,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.7354, R²=0.9516. D>1 indicates extraction regime — retention collapses super-exponentially.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
