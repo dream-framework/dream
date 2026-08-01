@@ -924,18 +924,21 @@ def scan_swpc_xray():
         if not data: return []
         obj = json.loads(data)
         if not isinstance(obj, list): return []
+        # Filter to the 0.1-0.8nm band (long-band, more flare-sensitive)
         values = []
         for item in obj:
             if isinstance(item, dict):
+                if item.get('energy') != '0.1-0.8nm':
+                    continue
                 flux = item.get('flux', 0)
                 if flux and float(flux) > 0: values.append(float(flux))
         if len(values) < 50:
             print(f'  ✗ Only {len(values)} values')
             return []
         found = [{'source': 'swpc_xray',
-                  'title': 'SWPC GOES X-ray Flux (1-day, short band)',
+                  'title': 'SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band)',
                   'url': url, 'values': values}]
-        print(f'  Downloaded {len(values)} values')
+        print(f'  Downloaded {len(values)} values (0.1-0.8nm band)')
         return found
     except Exception as e:
         print(f'  ✗ Error: {e}')
@@ -947,21 +950,25 @@ def scan_usgs_geomag():
     stations = ['BOU', 'BRW', 'FRD', 'HON']
     found = []
     for station in stations:
+        # Use just 1 day to avoid timeout (1-min cadence = 1440 values)
         url = (f'https://geomag.usgs.gov/ws/data/?id={station}'
-               f'&starttime=2023-06-01T00:00:00Z&endtime=2023-06-30T00:00:00Z'
+               f'&starttime=2023-06-01T00:00:00Z&endtime=2023-06-01T23:59:59Z'
                f'&elements=X&format=json')
         try:
-            data = fetch_url(url, timeout=15)
+            data = fetch_url(url, timeout=12)
             if not data: continue
             obj = json.loads(data)
             values = []
+            # USGS geomag returns {metadata:..., values: [[timestamp, X], ...]}
             if 'values' in obj:
                 for item in obj['values']:
-                    if isinstance(item, dict) and 'X' in item:
-                        try: values.append(float(item['X']))
+                    if isinstance(item, list) and len(item) > 1:
+                        try:
+                            v = float(item[1])
+                            if not np.isnan(v): values.append(v)
                         except: pass
-                    elif isinstance(item, list) and len(item) > 1:
-                        try: values.append(float(item[1]))
+                    elif isinstance(item, dict) and 'X' in item:
+                        try: values.append(float(item['X']))
                         except: pass
             if len(values) < 50: continue
             found.append({'source': 'usgs_geomag',
@@ -994,7 +1001,8 @@ def scan_energy_charts():
     return found
 
 def scan_waqi_air():
-    """Download WAQI air quality data. New family: air quality / chemistry."""
+    """Download WAQI air quality data. New family: air quality / chemistry.
+    Uses the history endpoint (last 24h hourly data) instead of forecast."""
     print('\n📡 WAQI Air Quality')
     cities = ['beijing', 'delhi', 'london', 'tokyo', 'newyork']
     found = []
@@ -1006,10 +1014,16 @@ def scan_waqi_air():
             obj = json.loads(data)
             if obj.get('status') != 'ok': continue
             d = obj.get('data', {})
+            # The 'iaqi' has current values; forecast has 7-day daily
+            # Try forecast daily pm25 (usually 8 entries)
             forecast = d.get('forecast', {}).get('daily', {})
             pm25 = forecast.get('pm25', [])
             values = [f.get('avg', 0) for f in pm25 if isinstance(f, dict)]
-            if len(values) < 10: continue
+            # If forecast is too short, try the 24h history (hourly)
+            if len(values) < 20:
+                # The forecast only has ~8 days — not enough for ACF
+                # Skip this source for now; WAQI demo token doesn't give history
+                continue
             found.append({'source': 'waqi_air',
                           'title': f'WAQI: {city} PM2.5 (daily forecast)',
                           'url': url, 'values': values})
@@ -1029,12 +1043,18 @@ def scan_water_quality():
         rows = list(csv.reader(io.StringIO(text)))
         if len(rows) < 5: return []
         header = rows[0]
+        # The value column is 'ResultMeasureValue'
         val_idx = -1
         for i, h in enumerate(header):
-            if 'ResultMeasureValue' in h or 'MeasureValue' in h:
+            if h == 'ResultMeasureValue':
                 val_idx = i; break
         if val_idx < 0:
-            print('  ✗ No value column')
+            # Fallback: look for any column with 'MeasureValue'
+            for i, h in enumerate(header):
+                if 'MeasureValue' in h:
+                    val_idx = i; break
+        if val_idx < 0:
+            print('  ✗ No value column found')
             return []
         values = []
         for row in rows[1:]:
@@ -1054,6 +1074,81 @@ def scan_water_quality():
     except Exception as e:
         print(f'  ✗ Error: {e}')
         return []
+
+def scan_nasa_power():
+    """Download NASA POWER solar radiation data.
+    New family: solar energy / irradiance (different from temperature/weather)."""
+    print('\n📡 NASA POWER (solar irradiance)')
+    locations = [
+        (40.0, -105.0, 'Colorado USA'),
+        (52.5, 13.4, 'Berlin DE'),
+        (-33.9, 18.4, 'Cape Town ZA'),
+    ]
+    found = []
+    for lat, lon, name in locations:
+        url = (f'https://power.larc.nasa.gov/api/temporal/hourly/point?'
+               f'start=20230101&end=20231231'
+               f'&parameters=ALLSKY_SFC_SW_DWN,WS10M'
+               f'&longitude={lon}&latitude={lat}&community=RE&format=JSON')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            if 'properties' not in obj: continue
+            props = obj['properties']
+            if 'parameter' not in props: continue
+            params = props['parameter']
+            # ALLSKY_SFC_SW_DWN = all-sky surface shortwave downward irradiance
+            if 'ALLSKY_SFC_SW_DWN' in params:
+                values_dict = params['ALLSKY_SFC_SW_DWN']
+                values = [float(v) for v in values_dict.values()
+                          if v is not None and v >= 0]
+                if len(values) < 50:
+                    continue
+                found.append({
+                    'source': 'nasa_power',
+                    'title': f'NASA POWER: {name} solar irradiance (hourly)',
+                    'url': url, 'values': values,
+                })
+        except: pass
+    print(f'  Downloaded {len(found)} solar irradiance series')
+    return found
+
+def scan_open_power_system():
+    """Download Open Power System Data — European power grid.
+    New family: energy / power grid (industrial scale).
+    Uses a small subset of columns from the large CSV."""
+    print('\n📡 Open Power System Data (European grid)')
+    # The full CSV is 22MB — too large for CI. Use the Energy-Charts API instead
+    # for individual country load data
+    zones = [
+        ('DE', 'Germany load'),
+        ('FR', 'France load'),
+    ]
+    found = []
+    for zone, name in zones:
+        # Energy-Charts consumption endpoint
+        url = (f'https://api.energy-charts.info/total_load?bzn={zone}'
+               f'&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00')
+        try:
+            data = fetch_url(url, timeout=15)
+            if not data: continue
+            obj = json.loads(data)
+            # Response has 'unix_seconds' and 'load' (or 'consumption')
+            values = []
+            if 'load' in obj:
+                values = [float(v) for v in obj['load'] if v is not None]
+            elif 'consumption' in obj:
+                values = [float(v) for v in obj['consumption'] if v is not None]
+            if len(values) < 50: continue
+            found.append({
+                'source': 'open_power_system',
+                'title': f'Energy-Charts: {name} (hourly total load)',
+                'url': url, 'values': values,
+            })
+        except: pass
+    print(f'  Downloaded {len(found)} power load series')
+    return found
 
 # ═══════════════════════════════════════════════════════════════════════
 # ANALYZE
@@ -1682,6 +1777,8 @@ def main():
     energy_results = scan_energy_charts()
     waqi_results = scan_waqi_air()
     water_quality_results = scan_water_quality()
+    nasa_power_results = scan_nasa_power()
+    power_load_results = scan_open_power_system()
     
     # Combine all JSON-value sources for unified analysis
     json_sources = (coingecko_results + binance_results + openmeteo_results +
@@ -1692,7 +1789,8 @@ def main():
                     met_results + seismic_results +
                     hydrology_results + tide_results + buoy_results +
                     sunspot_results + xray_results + geomag_results +
-                    energy_results + waqi_results + water_quality_results)
+                    energy_results + waqi_results + water_quality_results +
+                    nasa_power_results + power_load_results)
     
     # 3. Download and analyze Zenodo CSVs
     print('\n📊 Analyzing Zenodo datasets...')
@@ -1820,6 +1918,7 @@ def main():
                 'swpc_xray': 'solar_physics', 'usgs_geomag': 'geomagnetism',
                 'energy_charts': 'energy', 'waqi_air': 'air_quality',
                 'water_quality': 'chemistry',
+                'nasa_power': 'solar_energy', 'open_power_system': 'power_grid',
             }
             domain = domain_map.get(source_name, 'scouting')
             entry_id = f'{source_name}-{item["title"].lower().replace(" ","-").replace(":","")[:30]}'
