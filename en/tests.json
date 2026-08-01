@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-01T18:59:36Z",
-  "total_tests": 81,
+  "exported_at": "2026-08-01T21:14:14Z",
+  "total_tests": 82,
   "fields": [
     "id",
     "name",
@@ -1175,6 +1175,22 @@
       "source": "auto-scan 2026-08-01",
       "date": "2026-08-01",
       "url": "10.5281/zenodo.21744621"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Simulation Data and Experimental Results for Contr",
+      "domain": "scouting",
+      "D": 1.537,
+      "r2": 0.9955,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -230.88,
+      "best_alt": "GAUSS",
+      "model_note": "S2 beats GAUSS (ΔAICc=-230.88).",
+      "narrative": "D=1.5370, R²=0.9955. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-230.88).",
+      "source": "auto-scan 2026-08-01",
+      "date": "2026-08-01",
+      "url": "10.5281/zenodo.21747268"
     }
   ]
 }
