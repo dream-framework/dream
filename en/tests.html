@@ -191,7 +191,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "1 Aug 2026 12:13 EST";
+const LAST_REFRESH = "1 Aug 2026 14:48 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -295,6 +295,7 @@ const TESTS = [
   ,{id:"",name:"SWPC Sunspot Number (monthly, 1749-present) (ACF retention)",domain:"solar_physics",D:3.0090,r2:0.3658,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=3.0090, R²=0.3658. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://services.swpc.noaa.gov/json/solar-cycle/sunspots.json",image:null}
   ,{id:"",name:"USGS: Mississippi River at St. Louis, MO (daily discharge) (ACF retention)",domain:"hydrology",D:2.3647,r2:0.7787,verdict:"EXTRACTION",model_verdict:"S2_TIES",narrative:"D=2.3647, R²=0.7787. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://waterservices.usgs.gov/nwis/dv/?sites=07010000&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"NDBC Buoy 46035 (Bering Sea) wave height (ACF retention)",domain:"oceanography",D:1.7354,r2:0.9516,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.7354, R²=0.9516. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://www.ndbc.noaa.gov/data/realtime2/46035.txt",image:null}
+  ,{id:"",name:"Zenodo: ETF Tracker: An Automated Canadian ETF Screener an",domain:"scouting",D:1.4105,r2:0.9987,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4105, R²=0.9987. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-522.39).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21744621",image:null}
 
 ];
 
@@ -577,27 +578,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 80,
-  "d_mle": 1.8129,
-  "lam_mle": 1.3725,
-  "ks_p": 0.1963,
-  "d_direct": 2.2698,
-  "r2_direct": 0.9627,
-  "d_linear": 1.8191,
-  "r2_linear": 0.943,
+  "n": 81,
+  "d_mle": 1.8263,
+  "lam_mle": 1.3753,
+  "ks_p": 0.1814,
+  "d_direct": 2.3238,
+  "r2_direct": 0.961,
+  "d_linear": 1.828,
+  "r2_linear": 0.9419,
   "natural": 25,
-  "extraction": 55,
-  "mean": 1.2195,
-  "median": 1.2677,
-  "total": 80,
-  "compared": 78,
-  "ad_stat": 1.767,
+  "extraction": 56,
+  "mean": 1.2218,
+  "median": 1.2701,
+  "total": 81,
+  "compared": 79,
+  "ad_stat": 1.8755,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 0.76,
-  "delta_aic_lognormal": 10.08,
-  "silverman_p": 0.505,
-  "boot_lo": 1.446,
-  "boot_hi": 2.703,
+  "delta_aic_gamma": 0.89,
+  "delta_aic_lognormal": 10.58,
+  "silverman_p": 0.565,
+  "boot_lo": 1.449,
+  "boot_hi": 2.707,
   "date": "2026-08-01"
 };
 
