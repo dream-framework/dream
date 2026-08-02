@@ -2128,17 +2128,20 @@ def main():
                 for t in tests_t:
                     parts = []
                     for k, v in t.items():
-                        if isinstance(v, str):
+                        if isinstance(v, bool):
+                            # MUST check bool BEFORE int (bool is subclass of int in Python)
+                            parts.append(f'{k}:{"true" if v else "false"}')
+                        elif isinstance(v, str):
                             parts.append(f'{k}:"{esc_t(v)}"')
                         elif isinstance(v, (int, float)):
-                            if math.isinf(v) if isinstance(v, float) else False:
-                                parts.append(f'{k}:Infinity')
-                            elif math.isnan(v) if isinstance(v, float) else False:
+                            if isinstance(v, float) and math.isinf(v):
+                                pass  # skip Infinity
+                            elif isinstance(v, float) and math.isnan(v):
                                 pass  # skip NaN
                             else:
                                 parts.append(f'{k}:{v}')
-                        elif isinstance(v, bool):
-                            parts.append(f'{k}:{"true" if v else "false"}')
+                        elif v is None:
+                            pass  # skip None
                     js_entries.append('  {' + ','.join(parts) + '}')
                 js_block = ',\n'.join(js_entries)
                 new_array = f'const THEOREM_TESTS = [\n{js_block}\n];'
