@@ -553,18 +553,25 @@ def test_cosmology_real():
             verdict = 'CONSISTENT'
         elif has_fractal:
             verdict = 'PARTIAL'  # fractal confirmed but transition unclear
+        elif has_bao and not math.isnan(small_scale_deff):
+            # Fractal testable but D_eff >= 2 (not clearly fractal)
+            verdict = 'INCONSISTENT'
+        elif has_bao:
+            # No small-scale data at all (e.g., BOSS starts at r=30)
+            # Can't test fractal regime — BAO confirmed, fractal not testable
+            verdict = 'PARTIAL'
         else:
             verdict = 'INCONSISTENT'
         
         narrative = (
             f'{survey["name"]}: Small-scale D_eff={small_scale_deff:.2f} at r<10 Mpc/h '
-            f'(fractal regime, {"confirmed" if has_fractal else "not confirmed"}). '
+            f'(fractal regime, {"confirmed" if has_fractal else "not testable (no r<10 data)"}). '
         )
         
         if has_bao:
             narrative += (
                 f'BAO transition at r~100-150 Mpc/h detected '
-                f'(CPI ridge predicted by T4 — structure persists as skeleton). '
+                f'(CPI ridge — structure persists as skeleton, T4). '
             )
         
         if has_zero_crossing:
@@ -580,9 +587,7 @@ def test_cosmology_real():
             )
         
         narrative += (
-            f'Note: the coherence cliff is at ~100-150 Mpc/h, NOT 30 Mpc/h. '
-            f'The Saraswati superstructure (~200-500 Mpc) is a CPI ridge '
-            f'predicted by T4 — it does not contradict T5/S3 homogeneity. '
+            f'Coherence cliff is at ~100-150 Mpc/h (BAO scale), not 30 Mpc/h. '
             f'Small-scale power-law: γ={gamma_small:.3f} (D_eff={d_eff_small_fit:.2f}, R²={r2_small:.4f}).'
         )
         

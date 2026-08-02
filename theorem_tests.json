@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-02T15:54:11.170174+00:00",
+  "exported_at": "2026-08-02T16:01:37.998134+00:00",
   "total_tests": 17,
   "categories": [
     "cosmology",
@@ -29,7 +29,7 @@
       "has_zero_crossing": true,
       "coherence_cliff_scale": "~100-150 Mpc/h",
       "verdict": "CONSISTENT",
-      "narrative": "SDSS DR7 (Zehavi et al. 2011, extended): Small-scale D_eff=1.55 at r<10 Mpc/h (fractal regime, confirmed). BAO transition at r~100-150 Mpc/h detected (CPI ridge predicted by T4 — structure persists as skeleton). ξ(r) crosses zero at r~300 Mpc/h (definitive homogeneity — CONSISTENT with T5/S3). Note: the coherence cliff is at ~100-150 Mpc/h, NOT 30 Mpc/h. The Saraswati superstructure (~200-500 Mpc) is a CPI ridge predicted by T4 — it does not contradict T5/S3 homogeneity. Small-scale power-law: γ=1.497 (D_eff=1.50, R²=0.9981)."
+      "narrative": "SDSS DR7 (Zehavi et al. 2011, extended): Small-scale D_eff=1.55 at r<10 Mpc/h (fractal regime, confirmed). BAO transition at r~100-150 Mpc/h detected (CPI ridge — structure persists as skeleton, T4). ξ(r) crosses zero at r~300 Mpc/h (definitive homogeneity — CONSISTENT with T5/S3). Coherence cliff is at ~100-150 Mpc/h (BAO scale), not 30 Mpc/h. Small-scale power-law: γ=1.497 (D_eff=1.50, R²=0.9981)."
     },
     {
       "theorem": "T5/S3",
@@ -49,8 +49,8 @@
       "has_bao": true,
       "has_zero_crossing": false,
       "coherence_cliff_scale": "~100-150 Mpc/h",
-      "verdict": "INCONSISTENT",
-      "narrative": "BOSS DR11 BAO (Anderson et al. 2014): Small-scale D_eff=nan at r<10 Mpc/h (fractal regime, not confirmed). BAO transition at r~100-150 Mpc/h detected (CPI ridge predicted by T4 — structure persists as skeleton). Note: the coherence cliff is at ~100-150 Mpc/h, NOT 30 Mpc/h. The Saraswati superstructure (~200-500 Mpc) is a CPI ridge predicted by T4 — it does not contradict T5/S3 homogeneity. Small-scale power-law: γ=nan (D_eff=nan, R²=nan)."
+      "verdict": "PARTIAL",
+      "narrative": "BOSS DR11 BAO (Anderson et al. 2014): Small-scale D_eff=nan at r<10 Mpc/h (fractal regime, not testable (no r<10 data)). BAO transition at r~100-150 Mpc/h detected (CPI ridge — structure persists as skeleton, T4). Coherence cliff is at ~100-150 Mpc/h (BAO scale), not 30 Mpc/h. Small-scale power-law: γ=nan (D_eff=nan, R²=nan)."
     },
     {
       "theorem": "T5/S3",
@@ -71,7 +71,7 @@
       "has_zero_crossing": false,
       "coherence_cliff_scale": "~100-150 Mpc/h",
       "verdict": "CONSISTENT",
-      "narrative": "2dFGRS (Hawkins et al. 2003, extended): Small-scale D_eff=1.50 at r<10 Mpc/h (fractal regime, confirmed). BAO transition at r~100-150 Mpc/h detected (CPI ridge predicted by T4 — structure persists as skeleton). Note: the coherence cliff is at ~100-150 Mpc/h, NOT 30 Mpc/h. The Saraswati superstructure (~200-500 Mpc) is a CPI ridge predicted by T4 — it does not contradict T5/S3 homogeneity. Small-scale power-law: γ=1.581 (D_eff=1.42, R²=0.9970)."
+      "narrative": "2dFGRS (Hawkins et al. 2003, extended): Small-scale D_eff=1.50 at r<10 Mpc/h (fractal regime, confirmed). BAO transition at r~100-150 Mpc/h detected (CPI ridge — structure persists as skeleton, T4). Coherence cliff is at ~100-150 Mpc/h (BAO scale), not 30 Mpc/h. Small-scale power-law: γ=1.581 (D_eff=1.42, R²=0.9970)."
     },
     {
       "theorem": "T4",
