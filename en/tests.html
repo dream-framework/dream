@@ -115,34 +115,47 @@
   </div>
 
   <!-- ═══ TAB BAR ═══ -->
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--border,#2a2f3a)">
+  <div class="tab-bar-wrap">
+    <div class="tab-bar-scroll">
       <button class="theorem-tab active" data-tab="s2" onclick="switchTab('s2')">
-        <span style="font-weight:800">S2 Retention</span>
+        <span class="tab-icon">◆</span>
+        <span class="tab-label">S2 Retention</span>
         <span class="tab-count" id="tabCountS2">—</span>
       </button>
       <button class="theorem-tab" data-tab="cosmology" onclick="switchTab('cosmology')">
-        Cosmology (T5/S3)
+        <span class="tab-icon">◯</span>
+        <span class="tab-label">Cosmology</span>
+        <span class="tab-sub">T5/S3</span>
         <span class="tab-count" id="tabCountCosmology">—</span>
       </button>
       <button class="theorem-tab" data-tab="spectral_ratios" onclick="switchTab('spectral_ratios')">
-        Spectral Ratios (T6)
+        <span class="tab-icon">≣</span>
+        <span class="tab-label">Spectral Ratios</span>
+        <span class="tab-sub">T6</span>
         <span class="tab-count" id="tabCountSpectral">—</span>
       </button>
       <button class="theorem-tab" data-tab="topology" onclick="switchTab('topology')">
-        Topology (T1)
+        <span class="tab-icon">⊕</span>
+        <span class="tab-label">Topology</span>
+        <span class="tab-sub">T1</span>
         <span class="tab-count" id="tabCountTopology">—</span>
       </button>
       <button class="theorem-tab" data-tab="symmetry" onclick="switchTab('symmetry')">
-        Symmetry (T2)
+        <span class="tab-icon">↔</span>
+        <span class="tab-label">Symmetry</span>
+        <span class="tab-sub">T2</span>
         <span class="tab-count" id="tabCountSymmetry">—</span>
       </button>
       <button class="theorem-tab" data-tab="structure" onclick="switchTab('structure')">
-        Structure (T4)
+        <span class="tab-icon">⌘</span>
+        <span class="tab-label">Structure</span>
+        <span class="tab-sub">T4</span>
         <span class="tab-count" id="tabCountStructure">—</span>
       </button>
       <button class="theorem-tab" data-tab="lensing" onclick="switchTab('lensing')">
-        Lensing (S5)
+        <span class="tab-icon">◉</span>
+        <span class="tab-label">Lensing</span>
+        <span class="tab-sub">S5</span>
         <span class="tab-count" id="tabCountLensing">—</span>
       </button>
     </div>
@@ -691,61 +704,171 @@ function computeMetaS2(){
 
 <!-- ═══ TAB STYLES + THEOREM TEST RENDERING ═══ -->
 <style>
+/* ═══ Sleek Tab Bar ═══ */
+.tab-bar-wrap{
+  margin-bottom:1rem;
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border,#2a2f3a);
+  overflow:hidden;
+}
+.tab-bar-scroll{
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border,#2a2f3a) transparent;
+  -webkit-overflow-scrolling:touch;
+}
+.tab-bar-scroll::-webkit-scrollbar{height:3px}
+.tab-bar-scroll::-webkit-scrollbar-track{background:transparent}
+.tab-bar-scroll::-webkit-scrollbar-thumb{background:var(--border,#2a2f3a);border-radius:2px}
+
 .theorem-tab{
-  padding:.6rem 1rem;
-  font-size:.85rem;
+  flex:0 0 auto;
+  padding:.65rem 1.1rem;
+  font-size:.82rem;
   font-weight:600;
   color:var(--muted);
   background:none;
   border:none;
   border-bottom:2px solid transparent;
   cursor:pointer;
-  transition:all .15s;
+  transition:color .15s,background .15s,border-color .15s;
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:7px;
   white-space:nowrap;
+  position:relative;
+  letter-spacing:.01em;
 }
-.theorem-tab:hover{color:var(--fg);background:rgba(255,255,255,.03)}
+.theorem-tab:hover{
+  color:var(--fg);
+  background:rgba(255,255,255,.04);
+}
 .theorem-tab.active{
   color:var(--accent);
   border-bottom-color:var(--accent);
-  background:rgba(142,197,232,.05);
+  background:linear-gradient(180deg,rgba(142,197,232,.08) 0%,rgba(142,197,232,.02) 100%);
 }
+.tab-icon{
+  font-size:.9rem;
+  opacity:.5;
+  transition:opacity .15s;
+}
+.theorem-tab:hover .tab-icon{opacity:.8}
+.theorem-tab.active .tab-icon{opacity:1}
+.tab-label{font-weight:600}
+.tab-sub{
+  font-size:.65rem;
+  font-weight:700;
+  color:var(--muted-2);
+  opacity:.6;
+  letter-spacing:.02em;
+}
+.theorem-tab.active .tab-sub{color:var(--accent);opacity:.7}
 .tab-count{
-  font-size:.7rem;
+  font-size:.68rem;
   font-weight:700;
   color:var(--muted-2);
   background:rgba(255,255,255,.06);
-  padding:1px 6px;
-  border-radius:8px;
-  min-width:18px;
+  padding:1px 7px;
+  border-radius:10px;
+  min-width:20px;
   text-align:center;
+  transition:all .15s;
 }
 .theorem-tab.active .tab-count{
-  color:var(--accent);
-  background:rgba(142,197,232,.12);
+  color:#0f172a;
+  background:var(--accent);
+  box-shadow:0 0 8px rgba(142,197,232,.3);
 }
+
+/* ═══ Theorem Test Cards ═══ */
 .theorem-card{
-  padding:1rem 1.2rem;
+  padding:1.1rem 1.3rem;
   border:1px solid var(--border,#2a2f3a);
-  border-radius:8px;
-  margin-bottom:.8rem;
-  background:rgba(255,255,255,.02);
+  border-radius:10px;
+  margin-bottom:.7rem;
+  background:linear-gradient(135deg,rgba(255,255,255,.025) 0%,rgba(255,255,255,.01) 100%);
+  transition:border-color .15s,transform .1s;
 }
-.theorem-card .verdict-badge{
-  display:inline-block;
-  font-size:.7rem;
+.theorem-card:hover{
+  border-color:rgba(142,197,232,.25);
+  transform:translateY(-1px);
+}
+.theorem-card .tc-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+  margin-bottom:.5rem;
+}
+.theorem-card .tc-name{
+  font-weight:700;
+  font-size:.92rem;
+  color:var(--fg);
+  line-height:1.3;
+}
+.theorem-card .tc-meta{
+  font-size:.72rem;
+  color:var(--muted-2);
+  margin-top:3px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.theorem-card .tc-meta a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:500;
+}
+.theorem-card .tc-meta a:hover{text-decoration:underline}
+.theorem-card .tc-narrative{
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:.5rem;
+}
+.theorem-card .tc-metric{
+  font-size:.72rem;
+  color:var(--muted-2);
+  margin-top:.5rem;
+  font-family:monospace;
+  letter-spacing:.02em;
+}
+.verdict-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:.68rem;
   font-weight:800;
-  padding:2px 8px;
-  border-radius:4px;
+  padding:3px 10px;
+  border-radius:6px;
   text-transform:uppercase;
-  letter-spacing:.04em;
+  letter-spacing:.05em;
+  white-space:nowrap;
+  flex-shrink:0;
 }
-.theorem-card .verdict-badge.CONSISTENT{background:rgba(125,211,168,.15);color:#7dd3a8}
-.theorem-card .verdict-badge.INCONSISTENT{background:rgba(239,68,68,.15);color:#ef4444}
-.theorem-card .verdict-badge.PARTIAL{background:rgba(240,173,78,.15);color:#f0ad4e}
-.theorem-card .verdict-badge.PENDING{background:rgba(142,197,232,.12);color:#8ec5e8}
+.verdict-badge::before{
+  content:'';
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+}
+.verdict-badge.CONSISTENT{background:rgba(125,211,168,.12);color:#7dd3a8;border:1px solid rgba(125,211,168,.2)}
+.verdict-badge.INCONSISTENT{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.verdict-badge.PARTIAL{background:rgba(240,173,78,.12);color:#f0ad4e;border:1px solid rgba(240,173,78,.2)}
+.verdict-badge.PENDING{background:rgba(142,197,232,.12);color:#8ec5e8;border:1px solid rgba(142,197,232,.2)}
+
+/* Responsive */
+@media(max-width:768px){
+  .theorem-tab{padding:.5rem .7rem;font-size:.75rem;gap:5px}
+  .tab-icon{display:none}
+  .tab-sub{display:none}
+  .theorem-card{padding:.8rem 1rem}
+}
 </style>
 
 <script>
@@ -816,18 +939,20 @@ function renderTheoremTab(tabName) {
 
   grid.innerHTML = tests.map(t => `
     <div class="theorem-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;margin-bottom:.5rem">
+      <div class="tc-header">
         <div>
-          <div style="font-weight:700;font-size:.95rem;color:var(--fg)">${t.name || t.theorem}</div>
-          <div style="font-size:.75rem;color:var(--muted-2);margin-top:2px">
-            ${t.source || ''} · ${t.date || ''} ·
-            <a href="${t.url || '#'}" target="_blank" style="color:var(--accent);text-decoration:none">source ↗</a>
+          <div class="tc-name">${t.name || t.theorem}</div>
+          <div class="tc-meta">
+            ${t.source || ''}
+            ${t.source ? ' · ' : ''}
+            ${t.date || ''}
+            ${t.url ? ` · <a href="${t.url}" target="_blank">source ↗</a>` : ''}
           </div>
         </div>
         <span class="verdict-badge ${t.verdict || 'PENDING'}">${t.verdict || 'PENDING'}</span>
       </div>
-      <div style="font-size:.82rem;color:var(--muted);line-height:1.55;margin-top:.4rem">${t.narrative || ''}</div>
-      ${t.D_eff !== undefined ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem">D_eff = ${t.D_eff}${t.r_squared !== undefined ? ' (R²='+t.r_squared+')' : ''}</div>` : ''}
+      <div class="tc-narrative">${t.narrative || ''}</div>
+      ${t.D_eff !== undefined ? `<div class="tc-metric">D_eff = ${t.D_eff}${t.r_squared !== undefined ? ' · R² = '+t.r_squared : ''}</div>` : ''}
     </div>
   `).join('');
 }
