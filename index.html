@@ -6,6 +6,14 @@
   <title>D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold</title>
   <meta http-equiv="refresh" content="0;url=en/index.html">
   <meta name="description" content="D.R.E.A.M — a 10→4 projection-first physics framework with the Retention Law as foundation. Static GitHub Pages build.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DREAM">
   <style>
     /* minimal pre-CSS fallback so the redirect page isn't a blank white screen */
     html, body { margin: 0; padding: 0; height: 100%; background: #1e293b; color: #f1f5f9; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -38,6 +46,18 @@
       // honor hash if user explicitly clicked a lang link
       if (!location.hash) location.replace(target);
     })();
+  </script>
+  <script>
+    // Register service worker for PWA offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js').then(function(reg) {
+          console.log('SW registered:', reg.scope);
+        }).catch(function(err) {
+          console.log('SW registration failed:', err);
+        });
+      });
+    }
   </script>
 </body>
 </html>

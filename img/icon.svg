@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="dot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8ec5e8"/>
+      <stop offset="100%" stop-color="#7dd3a8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Concentric rings (representing the projection kernel) -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#334155" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#475569" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#64748b" stroke-width="2" opacity="0.7"/>
+  <!-- Central dot (the brand dot) -->
+  <circle cx="256" cy="256" r="36" fill="url(#dot)" filter="url(#glow)"/>
+  <!-- D.R.E.A.M text -->
+  <text x="256" y="430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="900" fill="#f1f5f9" letter-spacing="2">D.R.E.A.M</text>
+</svg>

@@ -1,0 +1,78 @@
+{
+  "name": "D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold",
+  "short_name": "DREAM",
+  "description": "A 10→4 projection-first physics framework with the Retention Law (S2) as foundation. Cross-domain test registry, Meta-S2 analysis, and interactive visualizations.",
+  "start_url": "./en/index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "categories": ["science", "education", "reference"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Test Registry",
+      "short_name": "Tests",
+      "description": "Live S2 test registry with Meta-S2 readout",
+      "url": "./en/tests.html",
+      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Meta-S2 Article",
+      "short_name": "Meta-S2",
+      "description": "Full Meta-S2 recursive retention analysis",
+      "url": "./en/articles/meta-s2.html",
+      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Life Toy",
+      "short_name": "Life",
+      "description": "Interactive 3D morphogenesis visualization",
+      "url": "./en/life.html",
+      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Axioms",
+      "short_name": "Axioms",
+      "description": "The 6 axioms of DREAM",
+      "url": "./en/axioms.html",
+      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
