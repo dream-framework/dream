@@ -2101,6 +2101,54 @@ def main():
     except Exception as e:
         print(f'  ✗ meta-s2 update failed: {e}')
     
+    # 14. Run multi-theorem scanner (cosmology, spectral ratios, topology, etc.)
+    print('\n📡 Running multi-theorem scanner...')
+    theorem_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dream_theorem_scanner.py')
+    if os.path.exists(theorem_script):
+        try:
+            r = subprocess.run(['python3', theorem_script], capture_output=True, text=True, timeout=120)
+            lines = r.stdout.strip().split('\n')
+            for line in lines[-8:]:
+                print(f'  {line}')
+            print('  ✓ Theorem scanner complete')
+            
+            # Embed theorem tests into tests.html
+            theorem_json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'theorem_tests.json')
+            if os.path.exists(theorem_json_path):
+                with open(theorem_json_path) as f:
+                    tdata = json.load(f)
+                tests_t = tdata.get('tests', [])
+                
+                # Build JS entries
+                def esc(s):
+                    if s is None: return ''
+                    return str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
+                
+                js_entries = []
+                for t in tests_t:
+                    parts = []
+                    for k, v in t.items():
+                        if isinstance(v, str):
+                            parts.append(f'{k}:"{esc(v)}"')
+                        elif isinstance(v, (int, float)):
+                            parts.append(f'{k}:{v}')
+                        elif isinstance(v, bool):
+                            parts.append(f'{k}:{"true" if v else "false"}')
+                    js_entries.append('  {' + ','.join(parts) + '}')
+                js_block = ',\n'.join(js_entries)
+                
+                # Patch both EN and RU tests.html
+                for html_path in [tests_html, tests_html.replace('en/', 'ru/')]:
+                    if os.path.exists(html_path):
+                        with open(html_path) as f:
+                            html = f.read()
+                        html = html.replace('// THEOREM_TESTS_INSERTION_POINT', js_block)
+                        with open(html_path, 'w') as f:
+                            f.write(html)
+                print(f'  ✓ Embedded {len(tests_t)} theorem tests into tests.html (EN+RU)')
+        except Exception as e:
+            print(f'  ✗ Theorem scanner failed: {e}')
+    
     return all_results
 
 def update_meta_s2_article(tests_html_path, is_ru=False):
