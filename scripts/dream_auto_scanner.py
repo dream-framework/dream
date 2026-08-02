@@ -14,7 +14,7 @@ Sources:
 Pipeline: search → download → parse → fit S2 → narrate → update tests.html
 """
 
-import os, sys, json, time, re, urllib.request, urllib.parse, csv, io
+import os, sys, json, time, re, urllib.request, urllib.parse, csv, io, math
 import numpy as np
 from scipy.optimize import curve_fit
 from datetime import datetime
@@ -2112,7 +2112,7 @@ def main():
                 print(f'  {line}')
             print('  ✓ Theorem scanner complete')
             
-            # Embed theorem tests into tests.html
+            # Embed theorem tests into tests.html — replace the ENTIRE THEOREM_TESTS array
             theorem_json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'theorem_tests.json')
             if os.path.exists(theorem_json_path):
                 with open(theorem_json_path) as f:
@@ -2120,29 +2120,43 @@ def main():
                 tests_t = tdata.get('tests', [])
                 
                 # Build JS entries
-                def esc(s):
+                def esc_t(s):
                     if s is None: return ''
-                    return str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
+                    return str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ').replace('\r', '')
                 
                 js_entries = []
                 for t in tests_t:
                     parts = []
                     for k, v in t.items():
                         if isinstance(v, str):
-                            parts.append(f'{k}:"{esc(v)}"')
+                            parts.append(f'{k}:"{esc_t(v)}"')
                         elif isinstance(v, (int, float)):
-                            parts.append(f'{k}:{v}')
+                            if math.isinf(v) if isinstance(v, float) else False:
+                                parts.append(f'{k}:Infinity')
+                            elif math.isnan(v) if isinstance(v, float) else False:
+                                pass  # skip NaN
+                            else:
+                                parts.append(f'{k}:{v}')
                         elif isinstance(v, bool):
                             parts.append(f'{k}:{"true" if v else "false"}')
                     js_entries.append('  {' + ','.join(parts) + '}')
                 js_block = ',\n'.join(js_entries)
+                new_array = f'const THEOREM_TESTS = [\n{js_block}\n];'
                 
-                # Patch both EN and RU tests.html
+                # Patch both EN and RU tests.html — replace the entire THEOREM_TESTS array
                 for html_path in [tests_html, tests_html.replace('en/', 'ru/')]:
                     if os.path.exists(html_path):
                         with open(html_path) as f:
                             html = f.read()
-                        html = html.replace('// THEOREM_TESTS_INSERTION_POINT', js_block)
+                        # Replace everything between "const THEOREM_TESTS = [" and the closing "];"
+                        import re as _re
+                        html = _re.sub(
+                            r'const\s+THEOREM_TESTS\s*=\s*\[.*?\];',
+                            new_array,
+                            html,
+                            count=1,
+                            flags=_re.DOTALL
+                        )
                         with open(html_path, 'w') as f:
                             f.write(html)
                 print(f'  ✓ Embedded {len(tests_t)} theorem tests into tests.html (EN+RU)')
