@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-01T21:14:14Z",
-  "total_tests": 82,
+  "exported_at": "2026-08-02T03:58:59Z",
+  "total_tests": 83,
   "fields": [
     "id",
     "name",
@@ -1191,6 +1191,22 @@
       "source": "auto-scan 2026-08-01",
       "date": "2026-08-01",
       "url": "10.5281/zenodo.21747268"
+    },
+    {
+      "id": "",
+      "name": "NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",
+      "domain": "oceanography",
+      "D": 0.5553,
+      "r2": 0.9885,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 0.0,
+      "best_alt": "BIEXP",
+      "model_note": "S2 ties BIEXP (ΔAICc=0.0, within ±2).",
+      "narrative": "D=0.5553, R²=0.9885. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=0.00, в пределах ±2).",
+      "source": "auto-scan 2026-08-02",
+      "date": "2026-08-02",
+      "url": "https://www.ndbc.noaa.gov/data/realtime2/51001.txt"
     }
   ]
 }

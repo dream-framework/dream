@@ -191,7 +191,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "1 Aug 2026 17:14 EST";
+const LAST_REFRESH = "1 Aug 2026 23:58 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -297,6 +297,7 @@ const TESTS = [
   ,{id:"",name:"NDBC Buoy 46035 (Bering Sea) wave height (ACF retention)",domain:"oceanography",D:1.7354,r2:0.9516,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.7354, R²=0.9516. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"https://www.ndbc.noaa.gov/data/realtime2/46035.txt",image:null}
   ,{id:"",name:"Zenodo: ETF Tracker: An Automated Canadian ETF Screener an",domain:"scouting",D:1.4105,r2:0.9987,verdict:"EXTRACTION",model_verdict:"S2_WINS",narrative:"D=1.4105, R²=0.9987. D>1 indicates extraction regime — retention collapses super-exponentially.",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21744621",image:null}
   ,{id:"",name:"Zenodo: Simulation Data and Experimental Results for Contr",domain:"scouting",D:1.5370,r2:0.9955,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-230.8800,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-230.88).",narrative:"D=1.5370, R²=0.9955. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-230.88).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21747268",image:null}
+  ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D=0.5553, R²=0.9885. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.00, within ±2).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
 
 ];
 
@@ -579,28 +580,28 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 82,
-  "d_mle": 1.8399,
-  "lam_mle": 1.3798,
-  "ks_p": 0.1637,
-  "d_direct": 2.3754,
-  "r2_direct": 0.9601,
-  "d_linear": 1.8355,
-  "r2_linear": 0.9412,
-  "natural": 25,
+  "n": 83,
+  "d_mle": 1.8309,
+  "lam_mle": 1.3708,
+  "ks_p": 0.1728,
+  "d_direct": 2.2779,
+  "r2_direct": 0.9605,
+  "d_linear": 1.8387,
+  "r2_linear": 0.9431,
+  "natural": 26,
   "extraction": 57,
-  "mean": 1.2257,
-  "median": 1.2935,
-  "total": 82,
-  "compared": 80,
-  "ad_stat": 1.9628,
+  "mean": 1.2176,
+  "median": 1.2701,
+  "total": 83,
+  "compared": 81,
+  "ad_stat": 1.8907,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.09,
-  "delta_aic_lognormal": 11.18,
-  "silverman_p": 0.435,
+  "delta_aic_gamma": 0.82,
+  "delta_aic_lognormal": 10.53,
+  "silverman_p": 0.42,
   "boot_lo": 1.454,
-  "boot_hi": 2.729,
-  "date": "2026-08-01"
+  "boot_hi": 2.722,
+  "date": "2026-08-02"
 };
 
 function computeMetaS2(){
