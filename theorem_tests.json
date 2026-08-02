@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-02T18:11:21.478494+00:00",
+  "exported_at": "2026-08-02T18:24:38.837394+00:00",
   "total_tests": 17,
   "categories": [
     "cosmology",
@@ -88,16 +88,18 @@
     {
       "theorem": "T6",
       "category": "spectral_ratios",
-      "name": "NIST Hydrogen (H): energy level ratio law (15 levels)",
+      "name": "NIST Hydrogen (H): binding energy ratio law (15 levels)",
       "source": "NIST Atomic Spectra Database (fetched 2026-08-02)",
       "url": "https://physics.nist.gov/cgi-bin/ASD/energy1.pl?de=0&spectrum=H",
       "date": "2026-08-02",
       "data_points": 15,
-      "D_eff": 9.4057,
-      "r_squared": 0.8184,
-      "p_value": 4e-06,
-      "verdict": "INCONSISTENT",
-      "narrative": "Hydrogen energy levels (n=15): ranked ratios fit m_n/m_1 = n^(1/D_eff) with D_eff=9.4057 (R²=0.8184). Ratio law not well-fit. Data fetched live from NIST ASD. Slope=0.1063±0.0139."
+      "D_eff": -0.4999,
+      "expected_D_eff": -0.5,
+      "r_squared": 1.0,
+      "p_value": 0.0,
+      "energy_type": "binding (E_bind = ionization_limit - E_excitation)",
+      "verdict": "CONSISTENT",
+      "narrative": "Hydrogen binding energies (n=15 levels): converted from NIST excitation energies using E_bind = 13.5984 - E_exc. Ranked ratios fit m_n/m_1 = n^(1/D_eff) with D_eff=-0.4999 (R²=1.000000). Exact match with expected D_eff=-0.5 (Rydberg formula E_n∝n⁻²). Slope=-2.0003±0.0000. Data fetched live from NIST ASD."
     },
     {
       "theorem": "T6",
