@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-02T14:03:08Z",
-  "total_tests": 83,
+  "exported_at": "2026-08-02T17:21:59Z",
+  "total_tests": 84,
   "fields": [
     "id",
     "name",
@@ -1207,6 +1207,22 @@
       "source": "auto-scan 2026-08-02",
       "date": "2026-08-02",
       "url": "https://www.ndbc.noaa.gov/data/realtime2/51001.txt"
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: dogecoin (ACF retention)",
+      "domain": "crypto",
+      "D": 1.6637,
+      "r2": 0.9981,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -119.95,
+      "best_alt": "GAUSS",
+      "model_note": "S2 beats GAUSS (ΔAICc=-119.95).",
+      "narrative": "D=1.6637, R²=0.9981. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-119.95).",
+      "source": "auto-scan 2026-08-02",
+      "date": "2026-08-02",
+      "url": "https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily"
     }
   ]
 }

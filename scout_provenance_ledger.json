@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-02T14:03:18.734737+00:00",
+  "initialized": "2026-08-02T17:22:09.574429+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2832,6 +2832,40 @@
       "verdict": "NATURAL",
       "model_verdict": "S2_TIES",
       "narrative": "D=0.5553, R²=0.9885. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.00, within ±2).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "CoinGecko: dogecoin (ACF retention)",
+      "family": "coingecko",
+      "source_url": "https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",
+      "registry_date": "2026-08-02",
+      "D": 1.6637,
+      "r2": 0.9981,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.6637, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-119.95).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
