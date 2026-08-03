@@ -917,59 +917,6 @@ function switchTab(tabName) {
 }
 
 // ═══ RENDER THEOREM TESTS ═══
-function renderTheoremTab(tabName) {
-  const categoryMap = {
-    'cosmology': 'cosmology',
-    'spectral_ratios': 'spectral_ratios',
-    'topology': 'topology',
-    'symmetry': 'symmetry',
-    'structure': 'structure_focusing',
-    'lensing': 'strong_lensing',
-  };
-  const category = categoryMap[tabName] || tabName;
-  const tests = THEOREM_TESTS.filter(t => t.category === category);
-  const gridIds = {
-    'cosmology': 'theoremGridCosmology',
-    'spectral_ratios': 'theoremGridSpectral',
-    'topology': 'theoremGridTopology',
-    'symmetry': 'theoremGridSymmetry',
-    'structure': 'theoremGridStructure',
-    'lensing': 'theoremGridLensing',
-  };
-  const gridId = gridIds[tabName];
-  if (!gridId) return;
-  const grid = document.getElementById(gridId);
-  if (!grid) return;
-
-  if (tests.length === 0) {
-    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">Нет тестов для этой теоремы. Сканер заполнит при следующем запуске.</p>';
-    return;
-  }
-
-  grid.innerHTML = tests.map(t => {
-    const tr = translateTest(t);
-    return `
-    <div class="theorem-card">
-      <div class="tc-header">
-        <div>
-          <div class="tc-name">${tr.name}</div>
-          <div class="tc-meta">
-            ${tr.source}
-            ${tr.source ? ' · ' : ''}
-            ${t.date || ''}
-            ${t.url ? ` · <a href="${t.url}" target="_blank">источник ↗</a>` : ''}
-          </div>
-        </div>
-        <span class="verdict-badge ${t.verdict || 'PENDING'}">${tr.verdict}</span>
-      </div>
-      <div class="tc-narrative">${tr.narrative}</div>
-      ${tr.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${tr.verdict_note}</div>` : ''}
-      ${t.D_eff !== undefined ? `<div class="tc-metric">D_eff = ${t.D_eff}${t.r_squared !== undefined ? ' · R² = '+t.r_squared : ''}</div>` : ''}
-    </div>
-  `).join('');
-}
-
-// ═══ ПЕРЕВОД ТЕСТОВ НА РУССКИЙ ═══
 function translateTest(t) {
   const tr = {name: t.name || t.theorem || '', narrative: t.narrative || '', 
               source: t.source || '', verdict: t.verdict || 'PENDING',
@@ -982,7 +929,7 @@ function translateTest(t) {
     'CONFIRMED': 'ПОДТВЕРЖДЕНО',
     'PARTIAL': 'ЧАСТИЧНО',
     'PENDING': 'ОЖИДАЕТ',
-    'INCONSISTENT': 'НЕСОвместно'.toUpperCase(),
+    'INCONSISTENT': 'НЕСОВМЕСТНО',
   };
   tr.verdict = verdictMap[t.verdict] || t.verdict || 'ОЖИДАЕТ';
   
@@ -1076,6 +1023,59 @@ function translateTest(t) {
   }
   
   return tr;
+}
+
+
+function renderTheoremTab(tabName) {
+  const categoryMap = {
+    'cosmology': 'cosmology',
+    'spectral_ratios': 'spectral_ratios',
+    'topology': 'topology',
+    'symmetry': 'symmetry',
+    'structure': 'structure_focusing',
+    'lensing': 'strong_lensing',
+  };
+  const category = categoryMap[tabName] || tabName;
+  const tests = THEOREM_TESTS.filter(t => t.category === category);
+  const gridIds = {
+    'cosmology': 'theoremGridCosmology',
+    'spectral_ratios': 'theoremGridSpectral',
+    'topology': 'theoremGridTopology',
+    'symmetry': 'theoremGridSymmetry',
+    'structure': 'theoremGridStructure',
+    'lensing': 'theoremGridLensing',
+  };
+  const gridId = gridIds[tabName];
+  if (!gridId) return;
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  if (tests.length === 0) {
+    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">\u041d\u0435\u0442 \u0442\u0435\u0441\u0442\u043e\u0432 \u0434\u043b\u044f \u044d\u0442\u043e\u0439 \u0442\u0435\u043e\u0440\u0435\u043c\u044b.</p>';
+    return;
+  }
+
+  grid.innerHTML = tests.map(t => {
+    const tr = translateTest(t);
+    return `
+    <div class="theorem-card">
+      <div class="tc-header">
+        <div>
+          <div class="tc-name">${tr.name}</div>
+          <div class="tc-meta">
+            ${tr.source}
+            ${tr.source ? ' \u00b7 ' : ''}
+            ${t.date || ''}
+            ${t.url ? ` \u00b7 <a href="${t.url}" target="_blank">\u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u2197</a>` : ''}
+          </div>
+        </div>
+        <span class="verdict-badge ${t.verdict || 'PENDING'}">${tr.verdict}</span>
+      </div>
+      <div class="tc-narrative">${tr.narrative}</div>
+      ${tr.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${tr.verdict_note}</div>` : ''}
+      ${t.D_eff !== undefined ? `<div class="tc-metric">D_eff = ${t.D_eff}${t.r_squared !== undefined ? ' \u00b7 R\u00b2 = '+t.r_squared : ''}</div>` : ''}
+    </div>
+  `}).join('');
 }
 
 // ═══ UPDATE TAB COUNTS ═══
@@ -1240,7 +1240,7 @@ function renderCoupled() {
   const grid = document.getElementById('theoremGridCoupled');
   if (!grid) return;
   if (COUPLED_TESTS.length === 0) {
-    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">Нет тестов связанного удержания. Сканер заполнит при следующем запуске.</p>';
+    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">\u041d\u0435\u0442 \u0442\u0435\u0441\u0442\u043e\u0432.</p>';
     return;
   }
   grid.innerHTML = COUPLED_TESTS.map(t => {
@@ -1252,18 +1252,18 @@ function renderCoupled() {
           <div class="tc-name">${tr.name}</div>
           <div class="tc-meta">
             ${tr.source}
-            ${tr.source ? ' · ' : ''}
+            ${tr.source ? ' \u00b7 ' : ''}
             ${t.date || ''}
-            ${t.url ? ` · <a href="${t.url}" target="_blank">источник ↗</a>` : ''}
+            ${t.url ? ` \u00b7 <a href="${t.url}" target="_blank">\u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u2197</a>` : ''}
           </div>
         </div>
         <span class="verdict-badge ${t.verdict || 'PENDING'}">${tr.verdict}</span>
       </div>
       <div class="tc-narrative">${tr.narrative}</div>
       ${tr.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${tr.verdict_note}</div>` : ''}
-      ${t.D_eff_principal !== undefined && t.D_eff_principal !== null ? `<div class="tc-metric">Главная мода: D_eff=${t.D_eff_principal} · R²=${t.r2_principal} | Ср. одиночная: R²=${t.avg_r2_single} | Связывание: ${t.coupling_strength} (${t.coupling_level || ''})</div>` : ''}
+      ${t.D_eff_principal !== undefined && t.D_eff_principal !== null ? `<div class="tc-metric">D_eff=${t.D_eff_principal} \u00b7 R\u00b2=${t.r2_principal} | \u0421\u0440. \u043e\u0434\u0438\u043d\u043e\u0447\u043d\u0430\u044f: R\u00b2=${t.avg_r2_single} | \u0421\u0432\u044f\u0437\u044b\u0432\u0430\u043d\u0438\u0435: ${t.coupling_strength} (${t.coupling_level || ''})</div>` : ''}
     </div>
-  `).join('');
+  `}).join('');
 }
 
 function renderAdversarial() {
@@ -1329,7 +1329,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Delay slightly to let TESTS array be fully parsed
   setTimeout(updateTabCounts, 100);
 });
-
 </script>
 
   </div><!-- /tab-s2 -->
