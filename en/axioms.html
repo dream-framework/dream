@@ -345,7 +345,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <!-- ===== Fractal backdrop ===== -->
-  <script defer src="../js/fractal.js"></script>
+    <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–<span id="currentYear"></span> DREAM Framework — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+
+<script defer src="../js/fractal.js"></script>
   <!-- ===== Kernel weave generator (only used on kernel page, but harmless elsewhere) ===== -->
   <script defer src="../js/weave.js"></script>
   <!-- ===== Bot (chat bubble) ===== -->

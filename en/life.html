@@ -263,7 +263,16 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   </div>
 </div>
 </main>
-  <script defer src="../js/fractal.js"></script>
+    <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–<span id="currentYear"></span> DREAM Framework — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+
+<script defer src="../js/fractal.js"></script>
 <script defer src="../js/nav-mobile.js"></script>
 <script defer src="../js/nav-dropdown.js"></script>
 <script defer src="../js/nav-autoscroll.js"></script>

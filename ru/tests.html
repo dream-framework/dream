@@ -1688,7 +1688,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <!-- ===== Фрактальный фон ===== -->
-  <script defer src="../js/fractal.js"></script>
+    <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–<span id="currentYear"></span> DREAM Framework — прототип; основная наука и спекуляции чётко разделены.</small>
+    </div>
+  </footer>
+
+
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+
+<script defer src="../js/fractal.js"></script>
   <!-- ===== Генератор плетения проекции (используется только на странице
         проекции, но безвреден в других местах) ===== -->
   <script defer src="../js/weave.js"></script>
