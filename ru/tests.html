@@ -942,29 +942,140 @@ function renderTheoremTab(tabName) {
   if (!grid) return;
 
   if (tests.length === 0) {
-    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">No tests yet for this theorem. Scanner will populate on next run.</p>';
+    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">Нет тестов для этой теоремы. Сканер заполнит при следующем запуске.</p>';
     return;
   }
 
-  grid.innerHTML = tests.map(t => `
+  grid.innerHTML = tests.map(t => {
+    const tr = translateTest(t);
+    return `
     <div class="theorem-card">
       <div class="tc-header">
         <div>
-          <div class="tc-name">${t.name || t.theorem}</div>
+          <div class="tc-name">${tr.name}</div>
           <div class="tc-meta">
-            ${t.source || ''}
-            ${t.source ? ' · ' : ''}
+            ${tr.source}
+            ${tr.source ? ' · ' : ''}
             ${t.date || ''}
-            ${t.url ? ` · <a href="${t.url}" target="_blank">source ↗</a>` : ''}
+            ${t.url ? ` · <a href="${t.url}" target="_blank">источник ↗</a>` : ''}
           </div>
         </div>
-        <span class="verdict-badge ${t.verdict || 'PENDING'}">${t.verdict || 'PENDING'}</span>
+        <span class="verdict-badge ${t.verdict || 'PENDING'}">${tr.verdict}</span>
       </div>
-      <div class="tc-narrative">${t.narrative || ''}</div>
-      ${t.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${t.verdict_note}</div>` : ''}
+      <div class="tc-narrative">${tr.narrative}</div>
+      ${tr.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${tr.verdict_note}</div>` : ''}
       ${t.D_eff !== undefined ? `<div class="tc-metric">D_eff = ${t.D_eff}${t.r_squared !== undefined ? ' · R² = '+t.r_squared : ''}</div>` : ''}
     </div>
   `).join('');
+}
+
+// ═══ ПЕРЕВОД ТЕСТОВ НА РУССКИЙ ═══
+function translateTest(t) {
+  const tr = {name: t.name || t.theorem || '', narrative: t.narrative || '', 
+              source: t.source || '', verdict: t.verdict || 'PENDING',
+              verdict_note: t.verdict_note || ''};
+  
+  // Вердикты
+  const verdictMap = {
+    'SUPPORTED': 'ПОДЕРЖАНО',
+    'CONSISTENT': 'СОВМЕСТНО',
+    'CONFIRMED': 'ПОДТВЕРЖДЕНО',
+    'PARTIAL': 'ЧАСТИЧНО',
+    'PENDING': 'ОЖИДАЕТ',
+    'INCONSISTENT': 'НЕСОвместно'.toUpperCase(),
+  };
+  tr.verdict = verdictMap[t.verdict] || t.verdict || 'ОЖИДАЕТ';
+  
+  // Источники
+  const sourceMap = [
+    ['NIST Atomic Spectra Database', 'База атомных спектров NIST'],
+    ['IAEA AME2020', 'МАГАТЭ AME2020'],
+    ['LIGO/Virgo GraceDB', 'LIGO/Virgo GraceDB'],
+    ['ACME Collaboration', 'Коллаборация ACME'],
+    ['AMS-02 Collaboration', 'Коллаборация AMS-02'],
+    ['PDG Review of Particle Physics', 'Обзор PDG по физике частиц'],
+    ['SLAC mQ, Fermilab MilliQan', 'SLAC mQ, Фермилаб MilliQan'],
+    ['Oklo reactor data', 'Данные реактора Окло'],
+    ['SDSS DR7', 'SDSS DR7'],
+    ['BOSS DR11 BAO', 'BOSS DR11 BAO'],
+    ['2dFGRS', '2dFGRS'],
+    ['Bagchi et al. 2017', 'Багчи и др. 2017'],
+    ['Hubble Frontier Fields', 'Hubble Frontier Fields'],
+    ['Dynamic fetch', 'Динамический запрос'],
+  ];
+  for (const [en, ru] of sourceMap) {
+    if (tr.source.includes(en)) { tr.source = tr.source.replace(en, ru); break; }
+  }
+  
+  // Названия тестов
+  const nameMap = [
+    ['D_eff flow to homogeneity', 'поток D_eff к однородности'],
+    ['binding energy ratio law', 'закон отношений энергий связи'],
+    ['nuclear mass ratio law', 'закон отношений ядерных масс'],
+    ['electron EDM bound', 'ограничение EDM электрона'],
+    ['Lorentz invariance bound', 'ограничение лоренц-инвариантности'],
+    ['fine-structure constant stability', 'стабильность постоянной тонкой структуры'],
+    ['Charge quantization', 'Квантование заряда'],
+    ['Milli-charge particle search', 'Поиск милли-заряжённых частиц'],
+    ['event topology', 'топология событий'],
+    ['gravitational wave events', 'события гравитационных волн'],
+    ['CPI ridge', 'CPI-гребень'],
+    ['arc/ring skeleton persistence', 'устойчивость скелета дуг/колец'],
+    ['coupled retention matrix', 'матрица связанного удержания'],
+    ['energy level ratio law', 'закон отношений уровней энергии'],
+    ['fractional charge bound', 'ограничение дробного заряда'],
+    ['CP symmetry / kernel equivariance', 'CP-симметрия / эквивариантность ядра'],
+    ['Lorentz invariance at TeV energies', 'лоренц-инвариантность при ТэВ-энергиях'],
+    ['fine-structure constant stability over 2 Gyr', 'стабильность постоянной тонкой структуры за 2 млрд лет'],
+    ['all observed free particles have integer charges', 'все наблюдаемые свободные частицы имеют целые заряды'],
+    ['network connectivity', 'сетевая связность'],
+    ['persists above coherence cliff', 'сохраняется над когерентным обрывом'],
+  ];
+  for (const [en, ru] of nameMap) {
+    tr.name = tr.name.replace(en, ru);
+  }
+  
+  // Нарративы — ключевые фразы
+  const narrMap = [
+    ['fractal regime, confirmed', 'фрактальный режим, подтверждён'],
+    ['fractal regime, not testable', 'фрактальный режим, не тестируем'],
+    ['BAO transition', 'BAO-переход'],
+    ['CPI ridge', 'CPI-гребень'],
+    ['structure persists as skeleton', 'структура сохраняется как скелет'],
+    ['definitive homogeneity', 'окончательная однородность'],
+    ['Coherence cliff is at', 'Когерентный обрыв находится на'],
+    ['Small-scale power-law', 'Малоразмерный степенной закон'],
+    ['Exact match with expected', 'Точное совпадение с ожидаемым'],
+    ['Rydberg formula', 'формула Ридберга'],
+    ['Ratio law confirmed', 'Закон отношений подтверждён'],
+    ['Data fetched live from', 'Данные получены в реальном времени из'],
+    ['No electron EDM detected', 'EDM электрона не обнаружен'],
+    ['No fractional charge', 'Дробной заряд не обнаружен'],
+    ['No fractional-charge particles found', 'Дробно-заряжённые частицы не найдены'],
+    ['No frame-dependent effects detected', 'Зависящих от системы отсчёта эффектов не обнаружено'],
+    ['No drift detected', 'Дрейф не обнаружен'],
+    ['all integer multiples of e', 'все целые кратные e'],
+    ['integer-quantized', 'квантован в целых числах'],
+    ['multi-detector coincidence', 'многодетекторное совпадение'],
+    ['principal eigenmode', 'главная собственная мода'],
+    ['fits S2 better', 'соответствует S2 лучше'],
+    ['coupling signature', 'сигнатура связывания'],
+    ['CONSISTENT ≠ CONFIRMED', 'СОВМЕСТНО ≠ ПОДТВЕРЖДЕНО'],
+    ['SUPPORTED — quantitative', 'ПОДДЕРЖАНО — количественное'],
+    ['null result', 'нулевой результат'],
+    ['not uniquely discriminating', 'не однозначно различимо'],
+    ['arc skeleton survives', 'скелет дуг сохраняется'],
+    ['star-forming knots wash out', 'звёздообразующие узлы размываются'],
+    ['Quantitative λ_q measurement requires', 'Количественное измерение λ_q требует'],
+    ['Two-channel split', 'Двухканальное разделение'],
+    ['visually confirmed', 'визуально подтверждено'],
+  ];
+  for (const [en, ru] of narrMap) {
+    tr.narrative = tr.narrative.split(en).join(ru);
+    tr.verdict_note = tr.verdict_note.split(en).join(ru);
+  }
+  
+  return tr;
 }
 
 // ═══ UPDATE TAB COUNTS ═══
@@ -1127,26 +1238,28 @@ function renderCoupled() {
   const grid = document.getElementById('theoremGridCoupled');
   if (!grid) return;
   if (COUPLED_TESTS.length === 0) {
-    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">No coupled retention tests yet. Scanner will populate on next run.</p>';
+    grid.innerHTML = '<p style="color:var(--muted-2);font-style:italic">Нет тестов связанного удержания. Сканер заполнит при следующем запуске.</p>';
     return;
   }
-  grid.innerHTML = COUPLED_TESTS.map(t => `
+  grid.innerHTML = COUPLED_TESTS.map(t => {
+    const tr = translateTest(t);
+    return `
     <div class="theorem-card">
       <div class="tc-header">
         <div>
-          <div class="tc-name">${t.name || t.theorem}</div>
+          <div class="tc-name">${tr.name}</div>
           <div class="tc-meta">
-            ${t.source || ''}
-            ${t.source ? ' · ' : ''}
+            ${tr.source}
+            ${tr.source ? ' · ' : ''}
             ${t.date || ''}
-            ${t.url ? ` · <a href="${t.url}" target="_blank">source ↗</a>` : ''}
+            ${t.url ? ` · <a href="${t.url}" target="_blank">источник ↗</a>` : ''}
           </div>
         </div>
-        <span class="verdict-badge ${t.verdict || 'PENDING'}">${t.verdict || 'PENDING'}</span>
+        <span class="verdict-badge ${t.verdict || 'PENDING'}">${tr.verdict}</span>
       </div>
-      <div class="tc-narrative">${t.narrative || ''}</div>
-      ${t.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${t.verdict_note}</div>` : ''}
-      ${t.D_eff_principal !== undefined && t.D_eff_principal !== null ? `<div class="tc-metric">Principal: D_eff=${t.D_eff_principal} · R²=${t.r2_principal} | Single avg: R²=${t.avg_r2_single} | Coupling: ${t.coupling_strength} (${t.coupling_level || ''})</div>` : ''}
+      <div class="tc-narrative">${tr.narrative}</div>
+      ${tr.verdict_note ? `<div style="font-size:.72rem;color:var(--muted-2);margin-top:.4rem;font-style:italic;border-left:2px solid var(--border,#2a2f3a);padding-left:.6rem">${tr.verdict_note}</div>` : ''}
+      ${t.D_eff_principal !== undefined && t.D_eff_principal !== null ? `<div class="tc-metric">Главная мода: D_eff=${t.D_eff_principal} · R²=${t.r2_principal} | Ср. одиночная: R²=${t.avg_r2_single} | Связывание: ${t.coupling_strength} (${t.coupling_level || ''})</div>` : ''}
     </div>
   `).join('');
 }
