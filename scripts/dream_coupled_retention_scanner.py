@@ -417,6 +417,55 @@ def test_coupled_retention():
         print(f'    Parameters: {list(meteo_data.keys())}')
         datasets.append(('Open-Meteo Weather', meteo_data, 'environmental'))
     
+    # 5. COVID-19 (S2 "failure" dataset — lost to BIEXP in single-curve fit)
+    print('\n  Fetching COVID-19 data (S2 failure dataset)...')
+    covid_data = {}
+    for kind in ['confirmed', 'deaths']:
+        url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_{kind}_global.csv'
+        data = fetch_url(url, timeout=15)
+        if data:
+            text = data.decode('utf-8') if isinstance(data, bytes) else data
+            rows = list(csv.reader(io.StringIO(text)))
+            if len(rows) > 1:
+                # Sum all regions per day
+                daily_sums = []
+                for col in range(4, len(rows[0])):
+                    total = 0
+                    for row in rows[1:]:
+                        if col < len(row):
+                            try:
+                                total += int(row[col])
+                            except:
+                                pass
+                    daily_sums.append(total)
+                # Convert to daily new (diff)
+                daily_new = [max(0, daily_sums[i] - daily_sums[i-1]) for i in range(1, len(daily_sums))]
+                if len(daily_new) >= 50:
+                    covid_data[f'COVID_{kind}'] = daily_new
+                    print(f'    COVID {kind}: {len(daily_new)} days')
+    if len(covid_data) >= 2:
+        datasets.append(('COVID-19 (S2 failure)', covid_data, 'epidemiological'))
+    
+    # 6. Energy-Charts electricity prices (S2 "failure" — lost to BIEXP)
+    print('\n  Fetching Energy-Charts prices (S2 failure dataset)...')
+    energy_data = {}
+    for zone, name in [('DE-LU', 'DE'), ('FR', 'FR'), ('NL', 'NL'), ('CH', 'CH')]:
+        url = (f'https://api.energy-charts.info/price?bzn={zone}'
+               f'&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00')
+        data = fetch_url(url, timeout=15)
+        if data:
+            try:
+                obj = json.loads(data)
+                if 'price' in obj:
+                    prices = [float(p) for p in obj['price'] if p is not None]
+                    if len(prices) >= 50:
+                        energy_data[f'{name}_price'] = prices
+                        print(f'    {name}: {len(prices)} hours')
+            except:
+                pass
+    if len(energy_data) >= 3:
+        datasets.append(('Energy Prices (S2 failure)', energy_data, 'energy'))
+    
     # Analyze each dataset
     for ds_name, observables, domain in datasets:
         print(f'\n  Analyzing: {ds_name} ({len(observables)} observables)')
@@ -454,8 +503,9 @@ def test_coupled_retention():
         
         avg_single_r2 = np.mean([f['r2'] for f in single_fits.values()]) if single_fits else 0
         
-        # Verdict: does principal eigenmode fit better than average single curve?
+        # Verdict: refined logic based on improvement magnitude and coupling strength
         eigenmode_better = r2_principal is not None and r2_principal > avg_single_r2
+        improvement = (r2_principal - avg_single_r2) if r2_principal is not None else 0
         
         # Coupling complexity
         if coupling < 0.1:
@@ -465,6 +515,35 @@ def test_coupled_retention():
         else:
             coupling_level = 'High (strong coupling)'
         
+        # REFINED VERDICT LOGIC:
+        # SUPPORTED: improvement > 0.05 AND coupling > 0.15 (meaningful improvement in coupled system)
+        # PARTIAL: eigenmode fits but marginal (<0.05 improvement) OR coupling too low to matter
+        # INCONSISTENT: eigenmode worse than single curves OR fit failed
+        if r2_principal is None:
+            verdict = 'INCONSISTENT'
+            verdict_note = 'Could not fit S2 to principal eigenmode. May need more observables or different lag range.'
+        elif improvement > 0.05 and coupling > 0.15:
+            verdict = 'SUPPORTED'
+            verdict_note = (
+                f'SUPPORTED: eigenmode improves R² by +{improvement:.3f} over single curves '
+                f'with coupling={coupling:.3f}. T7 applies: the principal retention mode '
+                f'captures structure that individual observables miss.'
+            )
+        elif eigenmode_better:
+            verdict = 'PARTIAL'
+            verdict_note = (
+                f'PARTIAL (marginal): eigenmode improves R² by only +{improvement:.3f}. '
+                f'This is below the 0.05 threshold for meaningful improvement. '
+                f'Coupling={coupling:.3f} may be too {"low" if coupling < 0.15 else "moderate"} '
+                f'for T7 to add significant value. Single curves already fit well.'
+            )
+        else:
+            verdict = 'INCONSISTENT'
+            verdict_note = (
+                f'Eigenmode R²={r2_principal:.4f} is WORSE than single avg R²={avg_single_r2:.4f}. '
+                f'T7 does not help for this dataset.'
+            )
+        
         # Build narrative
         if D_principal is not None:
             narrative = (
@@ -473,10 +552,9 @@ def test_coupled_retention():
                 f'Principal eigenvalue fitted to S2: D_eff={D_principal:.4f}, '
                 f'λ_q={lam_principal:.4f}, R²={r2_principal:.4f}. '
                 f'Average single-curve R²={avg_single_r2:.4f}. '
-                f'Eigenmode fit is {"BETTER" if eigenmode_better else "WORSE"} than '
-                f'average single-curve fit. '
+                f'Improvement: +{improvement:.4f} ({"+".replace("+","+") if improvement > 0 else ""}{improvement*100:.1f}%). '
                 f'Coupling strength={coupling:.3f} ({coupling_level}). '
-                f'{"Principal retention mode fits S2 better than any individual observable — supports T7." if eigenmode_better else "Principal mode does not improve fit — coupling may be too complex for simple eigenmode analysis."}'
+                f'{verdict_note}'
             )
         else:
             narrative = (
@@ -500,20 +578,12 @@ def test_coupled_retention():
             'r2_principal': round(float(r2_principal), 4) if r2_principal else None,
             'avg_r2_single': round(float(avg_single_r2), 4),
             'best_r2_single': round(float(best_single_r2), 4) if best_single_r2 >= 0 else None,
+            'improvement': round(float(improvement), 4),
             'coupling_strength': round(float(coupling), 4),
             'coupling_level': coupling_level,
             'eigenmode_better': bool(eigenmode_better),
-            'verdict': 'SUPPORTED' if eigenmode_better else ('PARTIAL' if r2_principal else 'INCONSISTENT'),
-            'verdict_note': (
-                'SUPPORTED: principal eigenmode of coupled observables fits S2 better than '
-                'individual single curves. This supports T7: S2 governs the dominant retention '
-                'mode, not individual observables. The coupling matrix R_ij captures how '
-                'different MM topological features interact in the 4D projection.'
-                if eigenmode_better else
-                'PARTIAL: coupled retention matrix computed but principal eigenmode does not '
-                'clearly outperform single curves. May need more observables or different '
-                'eigenvalue analysis.'
-            ),
+            'verdict': verdict,
+            'verdict_note': verdict_note,
             'narrative': narrative,
         })
         

@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-03T00:41:22.532592+00:00",
-  "total_tests": 3,
+  "exported_at": "2026-08-03T02:45:26.324075+00:00",
+  "total_tests": 5,
   "tests": [
     {
       "theorem": "T7",
@@ -14,14 +14,15 @@
       "observable_names": "BTC_price, BTC_volume, ETH_price, ETH_volume, SOL_price, SOL_volume",
       "D_eff_principal": 0.6199,
       "r2_principal": 0.9942,
-      "avg_r2_single": 0.8279,
+      "avg_r2_single": 0.8278,
       "best_r2_single": 0.9995,
-      "coupling_strength": 0.4135,
+      "improvement": 0.1664,
+      "coupling_strength": 0.4136,
       "coupling_level": "High (strong coupling)",
       "eigenmode_better": true,
       "verdict": "SUPPORTED",
-      "verdict_note": "SUPPORTED: principal eigenmode of coupled observables fits S2 better than individual single curves. This supports T7: S2 governs the dominant retention mode, not individual observables. The coupling matrix R_ij captures how different MM topological features interact in the 4D projection.",
-      "narrative": "Binance Crypto: 6 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 25 lags. Principal eigenvalue fitted to S2: D_eff=0.6199, λ_q=197.8580, R²=0.9942. Average single-curve R²=0.8279. Eigenmode fit is BETTER than average single-curve fit. Coupling strength=0.414 (High (strong coupling)). Principal retention mode fits S2 better than any individual observable — supports T7."
+      "verdict_note": "SUPPORTED: eigenmode improves R² by +0.166 over single curves with coupling=0.414. T7 applies: the principal retention mode captures structure that individual observables miss.",
+      "narrative": "Binance Crypto: 6 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 25 lags. Principal eigenvalue fitted to S2: D_eff=0.6199, λ_q=197.7893, R²=0.9942. Average single-curve R²=0.8278. Improvement: +0.1664 (+16.6%). Coupling strength=0.414 (High (strong coupling)). SUPPORTED: eigenmode improves R² by +0.166 over single curves with coupling=0.414. T7 applies: the principal retention mode captures structure that individual observables miss."
     },
     {
       "theorem": "T7",
@@ -37,12 +38,13 @@
       "r2_principal": 0.8173,
       "avg_r2_single": 0.6845,
       "best_r2_single": 0.998,
+      "improvement": 0.1329,
       "coupling_strength": 0.1505,
       "coupling_level": "Medium (moderate coupling)",
       "eigenmode_better": true,
       "verdict": "SUPPORTED",
-      "verdict_note": "SUPPORTED: principal eigenmode of coupled observables fits S2 better than individual single curves. This supports T7: S2 governs the dominant retention mode, not individual observables. The coupling matrix R_ij captures how different MM topological features interact in the 4D projection.",
-      "narrative": "NASA POWER Environmental: 6 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.5343, λ_q=104.1324, R²=0.8173. Average single-curve R²=0.6845. Eigenmode fit is BETTER than average single-curve fit. Coupling strength=0.150 (Medium (moderate coupling)). Principal retention mode fits S2 better than any individual observable — supports T7."
+      "verdict_note": "SUPPORTED: eigenmode improves R² by +0.133 over single curves with coupling=0.150. T7 applies: the principal retention mode captures structure that individual observables miss.",
+      "narrative": "NASA POWER Environmental: 6 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.5343, λ_q=104.1324, R²=0.8173. Average single-curve R²=0.6845. Improvement: +0.1329 (+13.3%). Coupling strength=0.150 (Medium (moderate coupling)). SUPPORTED: eigenmode improves R² by +0.133 over single curves with coupling=0.150. T7 applies: the principal retention mode captures structure that individual observables miss."
     },
     {
       "theorem": "T7",
@@ -58,12 +60,57 @@
       "r2_principal": 0.9888,
       "avg_r2_single": 0.9827,
       "best_r2_single": 0.9896,
+      "improvement": 0.0061,
       "coupling_strength": 0.1946,
       "coupling_level": "Medium (moderate coupling)",
       "eigenmode_better": true,
-      "verdict": "SUPPORTED",
-      "verdict_note": "SUPPORTED: principal eigenmode of coupled observables fits S2 better than individual single curves. This supports T7: S2 governs the dominant retention mode, not individual observables. The coupling matrix R_ij captures how different MM topological features interact in the 4D projection.",
-      "narrative": "Open-Meteo Weather: 3 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.8915, λ_q=130.5373, R²=0.9888. Average single-curve R²=0.9827. Eigenmode fit is BETTER than average single-curve fit. Coupling strength=0.195 (Medium (moderate coupling)). Principal retention mode fits S2 better than any individual observable — supports T7."
+      "verdict": "PARTIAL",
+      "verdict_note": "PARTIAL (marginal): eigenmode improves R² by only +0.006. This is below the 0.05 threshold for meaningful improvement. Coupling=0.195 may be too moderate for T7 to add significant value. Single curves already fit well.",
+      "narrative": "Open-Meteo Weather: 3 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.8915, λ_q=130.5373, R²=0.9888. Average single-curve R²=0.9827. Improvement: +0.0061 (+0.6%). Coupling strength=0.195 (Medium (moderate coupling)). PARTIAL (marginal): eigenmode improves R² by only +0.006. This is below the 0.05 threshold for meaningful improvement. Coupling=0.195 may be too moderate for T7 to add significant value. Single curves already fit well."
+    },
+    {
+      "theorem": "T7",
+      "category": "coupled_retention",
+      "name": "COVID-19 (S2 failure): coupled retention matrix (2 observables)",
+      "source": "Dynamic fetch (2026-08-03)",
+      "url": "",
+      "date": "2026-08-03",
+      "data_points": 50,
+      "n_observables": 2,
+      "observable_names": "COVID_confirmed, COVID_deaths",
+      "D_eff_principal": 0.8145,
+      "r2_principal": 0.7386,
+      "avg_r2_single": 0.7328,
+      "best_r2_single": 0.8357,
+      "improvement": 0.0059,
+      "coupling_strength": 0.2074,
+      "coupling_level": "Medium (moderate coupling)",
+      "eigenmode_better": true,
+      "verdict": "PARTIAL",
+      "verdict_note": "PARTIAL (marginal): eigenmode improves R² by only +0.006. This is below the 0.05 threshold for meaningful improvement. Coupling=0.207 may be too moderate for T7 to add significant value. Single curves already fit well.",
+      "narrative": "COVID-19 (S2 failure): 2 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.8145, λ_q=90.1854, R²=0.7386. Average single-curve R²=0.7328. Improvement: +0.0059 (+0.6%). Coupling strength=0.207 (Medium (moderate coupling)). PARTIAL (marginal): eigenmode improves R² by only +0.006. This is below the 0.05 threshold for meaningful improvement. Coupling=0.207 may be too moderate for T7 to add significant value. Single curves already fit well."
+    },
+    {
+      "theorem": "T7",
+      "category": "coupled_retention",
+      "name": "Energy Prices (S2 failure): coupled retention matrix (4 observables)",
+      "source": "Dynamic fetch (2026-08-03)",
+      "url": "",
+      "date": "2026-08-03",
+      "data_points": 50,
+      "n_observables": 4,
+      "observable_names": "DE_price, FR_price, NL_price, CH_price",
+      "D_eff_principal": 0.6833,
+      "r2_principal": 0.7455,
+      "avg_r2_single": 0.8016,
+      "best_r2_single": 0.87,
+      "improvement": -0.0561,
+      "coupling_strength": 0.76,
+      "coupling_level": "High (strong coupling)",
+      "eigenmode_better": false,
+      "verdict": "INCONSISTENT",
+      "verdict_note": "Eigenmode R²=0.7455 is WORSE than single avg R²=0.8016. T7 does not help for this dataset.",
+      "narrative": "Energy Prices (S2 failure): 4 coupled observables analyzed. Cross-retention matrix R_ij(λ) computed with 50 lags. Principal eigenvalue fitted to S2: D_eff=0.6833, λ_q=65.2633, R²=0.7455. Average single-curve R²=0.8016. Improvement: +-0.0561 (-5.6%). Coupling strength=0.760 (High (strong coupling)). Eigenmode R²=0.7455 is WORSE than single avg R²=0.8016. T7 does not help for this dataset."
     }
   ]
 }
