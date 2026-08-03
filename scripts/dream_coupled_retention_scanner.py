@@ -108,10 +108,37 @@ def compute_ccf(values_i, values_j, max_lag=None):
     return np.array(lags, dtype=float), np.array(C, dtype=float)
 
 
-def build_retention_matrix(observables, max_lag=30):
+def detrend_periodic(values, period=24):
+    """Remove periodic component (e.g., diurnal cycle for hourly data).
+    
+    NASA POWER and Open-Meteo provide hourly data with strong 24-hour cycles.
+    The irradiance ACF goes negative at lag 6 (nighttime) — this is NOT
+    retention decay, it's the diurnal cycle. We remove it before computing
+    retention.
+    
+    Method: subtract the mean for each hour-of-day.
+    """
+    v = np.array(values, dtype=float)
+    n = len(v)
+    if n < period * 3:
+        return v  # not enough data for detrending
+    
+    # Compute mean for each phase of the cycle
+    residual = np.copy(v)
+    for phase in range(period):
+        mask = np.arange(n) % period == phase
+        if mask.sum() > 0:
+            phase_mean = np.mean(v[mask])
+            residual[mask] = v[mask] - phase_mean
+    
+    return residual
+
+
+def build_retention_matrix(observables, max_lag=30, detrend_period=None):
     """Build cross-retention matrix R_ij(λ) for a set of coupled observables.
     
     observables: dict of {name: values_array}
+    detrend_period: if set (e.g., 24 for hourly data), removes periodic component
     Returns: dict with lags, self_retention, cross_retention, eigenvalues, eigenmodes
     """
     names = list(observables.keys())
@@ -124,9 +151,13 @@ def build_retention_matrix(observables, max_lag=30):
     if min_len < 20:
         return None
     
-    # Truncate to common length
+    # Truncate and optionally detrend
+    processed = {}
     for name in names:
-        observables[name] = observables[name][:min_len]
+        vals = observables[name][:min_len]
+        if detrend_period is not None:
+            vals = detrend_periodic(vals, period=detrend_period)
+        processed[name] = vals
     
     # Compute self-retention (diagonal) and cross-retention (off-diagonal)
     lags = None
@@ -136,10 +167,10 @@ def build_retention_matrix(observables, max_lag=30):
         for j, name_j in enumerate(names):
             if i == j:
                 # Self-retention (ACF)
-                l, R = compute_acf(observables[name_i], max_lag=max_lag)
+                l, R = compute_acf(processed[name_i], max_lag=max_lag)
             else:
                 # Cross-retention (CCF)
-                l, R = compute_ccf(observables[name_i], observables[name_j], max_lag=max_lag)
+                l, R = compute_ccf(processed[name_i], processed[name_j], max_lag=max_lag)
             
             if l is not None and R is not None:
                 R_matrix[(i, j)] = R
@@ -291,7 +322,7 @@ def fetch_nasa_power_multi():
     """Fetch NASA POWER with multiple parameters for one location."""
     url = ('https://power.larc.nasa.gov/api/temporal/hourly/point?'
            'start=20230101&end=20231231'
-           '&parameters=ALLSKY_SFC_SW_DWN,WS10M,T2M'
+           '&parameters=ALLSKY_SFC_SW_DWN,WS10M,T2M,RH2M,PRECTOTCORR,PS'
            '&longitude=-105.0&latitude=40.0&community=RE&format=JSON')
     data = fetch_url(url, timeout=15)
     if not data:
@@ -301,12 +332,12 @@ def fetch_nasa_power_multi():
         return None
     params = obj['properties']['parameter']
     result = {}
-    for p in ['ALLSKY_SFC_SW_DWN', 'WS10M', 'T2M']:
+    for p in ['ALLSKY_SFC_SW_DWN', 'WS10M', 'T2M', 'RH2M', 'PRECTOTCORR', 'PS']:
         if p in params:
             vals = [float(v) for v in params[p].values() if v is not None and v >= 0]
             if len(vals) >= 50:
                 result[p] = vals
-    return result if len(result) >= 2 else None
+    return result if len(result) >= 3 else None
 
 
 def fetch_openmeteo_multi():
@@ -390,7 +421,13 @@ def test_coupled_retention():
     for ds_name, observables, domain in datasets:
         print(f'\n  Analyzing: {ds_name} ({len(observables)} observables)')
         
-        result = build_retention_matrix(observables, max_lag=25)
+        # Detect if data is hourly (need diurnal detrending + more lags)
+        min_len = min(len(v) for v in observables.values())
+        is_hourly = min_len > 1000
+        detrend = 24 if is_hourly else None
+        max_lag = 50 if is_hourly else 25  # hourly data needs more lags to see decay
+        
+        result = build_retention_matrix(observables, max_lag=max_lag, detrend_period=detrend)
         if result is None:
             print(f'    ✗ Could not build retention matrix')
             continue
