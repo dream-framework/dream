@@ -743,6 +743,7 @@ function computeMetaS2(){
   position:relative;
   letter-spacing:.01em;
   min-width:0;
+  overflow:hidden;
 }
 .theorem-tab:hover{
   color:var(--fg);
@@ -754,13 +755,13 @@ function computeMetaS2(){
   background:linear-gradient(180deg,rgba(142,197,232,.08) 0%,rgba(142,197,232,.02) 100%);
 }
 .tab-icon{
-  font-size:.75rem;
+  font-size:.65rem;
   opacity:.5;
   transition:opacity .15s;
 }
 .theorem-tab:hover .tab-icon{opacity:.8}
 .theorem-tab.active .tab-icon{opacity:1}
-.tab-label{font-weight:600;font-size:.68rem}
+.tab-label{font-weight:600;font-size:.65rem;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .tab-sub{
   font-size:.55rem;
   font-weight:700;
@@ -870,7 +871,7 @@ function computeMetaS2(){
 /* Responsive */
 @media(max-width:768px){
   .theorem-tab{padding:.3rem .3rem;font-size:.62rem;gap:3px}
-  .tab-icon{font-size:.7rem}
+  .tab-icon{display:none}
   .tab-sub{display:none}
   .tab-count{font-size:.52rem;padding:1px 4px;min-width:14px}
   .theorem-card{padding:.8rem 1rem}
