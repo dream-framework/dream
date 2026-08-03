@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>D.R.E.A.M — Dimensional Resonant Emergent Attractors in Manifold</title>
+  <title>DREAM Framework</title>
   <meta http-equiv="refresh" content="0;url=en/index.html">
-  <meta name="description" content="D.R.E.A.M — a 10→4 projection-first physics framework with the Retention Law as foundation. Static GitHub Pages build.">
+  <meta name="description" content="DREAM Framework — a 10→4 projection-first physics framework with the Retention Law (S2) as foundation.">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1e293b">
+  <meta name="theme-color" content="#0a1628">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
   <link rel="icon" type="image/svg+xml" href="img/icon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -15,40 +15,76 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="DREAM">
   <style>
-    /* minimal pre-CSS fallback so the redirect page isn't a blank white screen */
-    html, body { margin: 0; padding: 0; height: 100%; background: #1e293b; color: #f1f5f9; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-    body { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
-    .dot { width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #8ec5e8, #7dd3a8); box-shadow: 0 0 16px rgba(142,197,232,.6); display: inline-block; }
-    h1 { font-size: 1.4rem; font-weight: 900; margin: 0; letter-spacing: .04em; }
-    p { color: #94a3b8; margin: 0; }
-    a { color: #8ec5e8; text-decoration: none; font-weight: 600; }
-    a:hover { text-decoration: underline; }
-    .links { display: flex; gap: 18px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-    .spinner { width: 22px; height: 22px; border: 2px solid #54637a; border-top-color: #8ec5e8; border-radius: 50%; animation: spin 1s linear infinite; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: radial-gradient(ellipse at center, #0d2540 0%, #06101e 100%);
+      color: #e8f4ff;
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px; text-align: center; padding: 24px;
+    }
+    .logo {
+      width: 96px; height: 96px;
+      filter: drop-shadow(0 0 24px rgba(74, 158, 255, 0.4));
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(74, 158, 255, 0.3)); }
+      50% { filter: drop-shadow(0 0 32px rgba(74, 158, 255, 0.6)); }
+    }
+    h1 {
+      font-size: 1.6rem; font-weight: 900; margin: 0;
+      letter-spacing: .06em;
+      background: linear-gradient(135deg, #c7ecff, #4a9eff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: .75rem; font-weight: 500; letter-spacing: .3em;
+      color: #4a9eff; text-transform: uppercase; margin-top: -4px;
+    }
+    .tagline { color: #7a94b8; margin: 4px 0 0; font-size: .85rem; max-width: 360px; }
+    .links { display: flex; gap: 24px; margin-top: 12px; }
+    .links a {
+      color: #7dd3ff; text-decoration: none; font-weight: 600;
+      font-size: .9rem; padding: 8px 20px;
+      border: 1px solid rgba(74, 158, 255, 0.2); border-radius: 8px;
+      transition: all .2s;
+    }
+    .links a:hover {
+      background: rgba(74, 158, 255, 0.1);
+      border-color: rgba(74, 158, 255, 0.5);
+      box-shadow: 0 0 16px rgba(74, 158, 255, 0.2);
+    }
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2px solid rgba(74, 158, 255, 0.2);
+      border-top-color: #4a9eff;
+      border-radius: 50%; animation: spin 1s linear infinite;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-  <span class="dot" aria-hidden="true"></span>
-  <h1>D.R.E.A.M</h1>
-  <p>Dimensional Resonant Emergent Attractors in Manifold</p>
+  <img src="img/icon.svg" class="logo" alt="DREAM Framework" />
+  <h1>DREAM</h1>
+  <div class="subtitle">Framework</div>
+  <p class="tagline">Dimensional Resonant Emergent Attractors in Manifold — a 10→4 projection-first physics framework</p>
   <div class="spinner" aria-hidden="true"></div>
-  <p>Redirecting…</p>
   <div class="links">
     <a href="en/index.html">English</a>
     <a href="ru/index.html">Русский</a>
   </div>
   <script>
-    // Auto-pick based on browser language, falling back to English.
     (function () {
       var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
       var target = nav.indexOf('ru') === 0 ? 'ru/index.html' : 'en/index.html';
-      // honor hash if user explicitly clicked a lang link
       if (!location.hash) location.replace(target);
     })();
   </script>
   <script>
-    // Register service worker for PWA offline support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('sw.js').then(function(reg) {
@@ -61,4 +97,3 @@
   </script>
 </body>
 </html>
-<!-- trigger build -->
