@@ -253,7 +253,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "3 Aug 2026 00:01 EST";
+const LAST_REFRESH = "3 Aug 2026 03:53 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -361,6 +361,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Simulation Data and Experimental Results for Contr",domain:"scouting",D:1.5370,r2:0.9955,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-230.8800,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-230.88).",narrative:"D=1.5370, R²=0.9955. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-230.88).",source:"auto-scan 2026-08-01",date:"2026-08-01",url:"10.5281/zenodo.21747268",image:null}
   ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D=0.5553, R²=0.9885. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.00, within ±2).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
   ,{id:"",name:"CoinGecko: dogecoin (ACF retention)",domain:"crypto",D:1.6637,r2:0.9981,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-119.9500,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-119.95).",narrative:"D=1.6637, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-119.95).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:1.0156,r2:0.9766,verdict:"EXTRACTION",model_verdict:"S2_TIES",delta_aicc:1.8100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.81, within ±2).",narrative:"D=1.0156, R²=0.9766. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.81, within ±2).",source:"auto-scan 2026-08-03",date:"2026-08-03",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
 
 ];
 
@@ -643,27 +644,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 84,
-  "d_mle": 1.8441,
-  "lam_mle": 1.3769,
-  "ks_p": 0.146,
-  "d_direct": 2.3145,
-  "r2_direct": 0.9604,
-  "d_linear": 1.8446,
-  "r2_linear": 0.9431,
+  "n": 85,
+  "d_mle": 1.8513,
+  "lam_mle": 1.3744,
+  "ks_p": 0.1431,
+  "d_direct": 2.3425,
+  "r2_direct": 0.9629,
+  "d_linear": 1.858,
+  "r2_linear": 0.9443,
   "natural": 26,
-  "extraction": 58,
-  "mean": 1.2229,
-  "median": 1.2935,
-  "total": 84,
-  "compared": 82,
-  "ad_stat": 1.941,
+  "extraction": 59,
+  "mean": 1.2205,
+  "median": 1.2701,
+  "total": 85,
+  "compared": 83,
+  "ad_stat": 1.9104,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.07,
-  "delta_aic_lognormal": 11.2,
-  "silverman_p": 0.425,
-  "boot_lo": 1.459,
-  "boot_hi": 2.756,
+  "delta_aic_gamma": 0.98,
+  "delta_aic_lognormal": 11.19,
+  "silverman_p": 0.43,
+  "boot_lo": 1.47,
+  "boot_hi": 2.759,
   "date": "2026-08-03"
 };
 
