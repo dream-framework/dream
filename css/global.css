@@ -972,6 +972,8 @@ table.registry-table tr.pending td{ opacity: .75; }
    ============================================================ */
 
 .nav-mobile-btn{ display: none; }
+.nav-mobile-panel{ display: none; }
+.nav-mobile-backdrop{ display: none; }
 
 @media (max-width: 900px){
   /* Hide the horizontal nav row entirely on mobile */
