@@ -1222,11 +1222,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- ═══ THEOREM TABS (cosmology, spectral_ratios, topology, etc.) ═══ -->
   <div id="tab-cosmology" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">T5/S3 — Cosmology: Fractal Dimension Flow</h2>
+      <h2 style="margin:0 0 .5rem">T5/S3 — Космология: поток фрактальной размерности</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether D_eff flows toward 3 (homogeneity) at large scales, as predicted by T5/S3.
-        At small scales (r&lt;10 Mpc/h), galaxy clustering is fractal with D_eff≈1.2. At large scales,
-        D_eff should approach 3 (homogeneous universe). Uses SDSS, 2dFGRS correlation function data.
+        Проверяет, течёт ли \( D_{\mathrm{eff}} \) к 3 (однородности) на больших масштабах, как предсказывает T5/S3.
+        На малых масштабах (r&lt;10 Мпк/ч) кластеризация галактик фрактальна с \( D_{\mathrm{eff}}\approx 1.2 \).
+        На больших масштабах \( D_{\mathrm{eff}} \) должна приближаться к 3 (однородная Вселенная).
+        Использует данные корреляционной функции SDSS, 2dFGRS.
       </p>
       <div id="theoremGridCosmology"></div>
     </div>
@@ -1234,11 +1235,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="tab-spectral_ratios" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">T6 — Spectral Ratios: Ranked Mass/Energy Law</h2>
+      <h2 style="margin:0 0 .5rem">T6 — Спектральные отношения: ранговый закон масс/энергий</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether ranked masses/energies follow m_n/m_1 = n^(1/D_eff), as predicted by T6.
-        Uses PDG particle mass tables (mesons, baryons) and NIST atomic spectra (hydrogen levels).
-        The ratio law should hold across domains with domain-specific D_eff.
+        Проверяет, следуют ли ранжированные массы/энергии закону \( m_n/m_1 = n^{1/D_{\mathrm{eff}}} \), как предсказывает T6.
+        Использует таблицы масс частиц PDG (мезоны, барионы) и атомные спектры NIST (уровни водорода).
+        Ранговый закон должен выполняться во всех доменах с домен-специфичным \( D_{\mathrm{eff}} \).
       </p>
       <div id="theoremGridSpectral"></div>
     </div>
@@ -1246,11 +1247,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="tab-topology" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">T1/A5 — Topology: Charge Quantization</h2>
+      <h2 style="margin:0 0 .5rem">T1/A5 — Топология: квантование заряда</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether U(1) charge is integer-quantized, as predicted by T1/A5 (topological quantization
-        of the Meta-Manifold). Uses ACME electron EDM bounds, milli-charge particle searches, and
-        quark confinement data. No fractional charges should be observable in the 4D projection.
+        Проверяет, является ли U(1)-заряд целочисленно квантованным, как предсказывает T1/A5
+        (топологическое квантование Мета-Многообразия). Использует ограничения ACME на ЭДМ электрона,
+        поиск миллизаряженных частиц и данные о конфайнменте кварков. В 4D-проекции не должно
+        наблюдаться дробных зарядов.
       </p>
       <div id="theoremGridTopology"></div>
     </div>
@@ -1258,11 +1260,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="tab-symmetry" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">T2 — Symmetry: Conservation Law Precision</h2>
+      <h2 style="margin:0 0 .5rem">T2 — Симметрия: точность законов сохранения</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether Noether currents are exactly conserved under the kernel projection, as predicted by T2.
-        Uses LHC energy-momentum conservation, Oklo natural reactor (2 Gyr charge stability), and
-        AMS-02 Lorentz invariance bounds. Any non-conservation would challenge kernel equivariance.
+        Проверяет, точно ли сохраняются нётеровские токи при проектировании ядром, как предсказывает T2.
+        Использует сохранение энергии-импульса на LHC, природный реактор Окло (стабильность заряда
+        на 2 млрд лет) и ограничения AMS-02 на лоренц-инвариантность. Любое нарушение сохранения
+        поставило бы под вопрос эквивариантность ядра.
       </p>
       <div id="theoremGridSymmetry"></div>
     </div>
@@ -1270,11 +1273,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="tab-structure" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">T4 — Structure Focusing: CPI Persistence</h2>
+      <h2 style="margin:0 0 .5rem">T4 — Фокусировка структуры: устойчивость CPI</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether high-CPI regions (hubs, filaments) retain structure under smoothing, as predicted by T4.
-        Uses SDSS cosmic web catalogs and BAO peak persistence. The skeleton (connectivity) should
-        survive smoothing that washes out HF detail — R_HF(λ) ≺ R_corr²(λ).
+        Проверяет, сохраняют ли высоко-CPI-области (хабы, филаменты) структуру при сглаживании,
+        как предсказывает T4. Использует каталоги космической паутины SDSS и устойчивость пиков БАО.
+        Скелет (связность) должен выдерживать сглаживание, смывающее ВЧ-детали —
+        \( R_{HF}(\lambda) \prec R_{\mathrm{corr}}^2(\lambda) \).
       </p>
       <div id="theoremGridStructure"></div>
     </div>
@@ -1282,11 +1286,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="tab-lensing" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .5rem">S5 — Strong Lensing: Two-Channel Retention</h2>
+      <h2 style="margin:0 0 .5rem">S5 — Сильное линзирование: двухканальное удержание</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether strong lensing images show two-channel retention (HF power decays faster than
-        structural correlation), as predicted by S5. Uses Hubble Frontier Fields multi-band imaging.
-        Arc/ring skeletons should persist across smoothing scales while HF texture decays.
+        Проверяет, показывают ли изображения сильного линзирования двухканальное удержание
+        (ВЧ-мощность затухает быстрее структурной корреляции), как предсказывает S5. Использует
+        мультиспектральную съёмку Hubble Frontier Fields. Скелеты дуг/колец должны сохраняться
+        на разных масштабах сглаживания, пока ВЧ-текстура затухает.
       </p>
       <div id="theoremGridLensing"></div>
     </div>
@@ -1296,137 +1301,139 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="tab-adversarial" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
 
-      <h2 style="margin:0 0 .4rem">⚖ Adversarial Reconstruction: Can Alternatives Reproduce DREAM's Invariants?</h2>
+      <h2 style="margin:0 0 .4rem">⚖ Адверсариальная реконструкция: могут ли альтернативы воспроизвести инварианты DREAM?</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        DREAM's evidence matrix establishes <strong>observational adequacy</strong> (Level 1): its predictions
-        agree with data. But that's only half the argument. The deeper question is
-        <strong>explanatory compression</strong> (Level 2): can a different ontology reproduce the <em>same collection</em>
-        of invariants with comparable or fewer assumptions? And ultimately, <strong>ontological uniqueness</strong>
-        (Level 3): does the invariant structure force us toward something mathematically equivalent to a lossy
-        projection, regardless of what we call it?
+        Матрица доказательств DREAM устанавливает <strong>наблюдательную достаточность</strong> (Уровень 1): её
+        предсказания согласуются с данными. Но это лишь половина аргумента. Более глубокий вопрос —
+        <strong>объяснительная компрессия</strong> (Уровень 2): может ли иная онтология воспроизвести <em>тот же
+        набор</em> инвариантов с сопоставимым или меньшим числом допущений? И в конечном счёте —
+        <strong>онтологическая уникальность</strong> (Уровень 3): заставляет ли структура инвариантов перейти
+        к чему-то, математически эквивалентному потере-проекции, независимо от того, как мы её называем?
       </p>
 
       <div style="background:rgba(180,130,255,.06);border:1px solid rgba(180,130,255,.15);border-radius:8px;padding:.8rem 1rem;margin-bottom:1.2rem;font-size:.82rem;color:var(--muted);line-height:1.5">
-        <strong style="color:#b482ff">The compression question:</strong><br>
-        Which ontology gives the shortest coherent description of the observed invariants?<br>
-        DREAM claims: 6 axioms + 1 kernel → S2 retention, spectral ratios, coherence cliff, charge quantization,
-        constant-fixity, Meta-S2 recurrence. Can an alternative match this with fewer assumptions?
+        <strong style="color:#b482ff">Вопрос компрессии:</strong><br>
+        Какая онтология даёт самое короткое связное описание наблюдаемых инвариантов?<br>
+        DREAM утверждает: 6 аксиом + 1 ядро → удержание S2, спектральные отношения, когерентный обрыв,
+        квантование заряда, постоянство-фиксация, рекурренция Meta-S2. Может ли альтернатива сравняться
+        с этим при меньшем числе допущений?
       </div>
 
-      <!-- ═══ THE DREAM ALTERNATIVE TEST ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">The DREAM Alternative Test</h3>
+      <!-- ═══ ТЕСТ АЛЬТЕРНАТИВЫ DREAM ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Альтернативный тест DREAM</h3>
       <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:.8rem">
-        The alternative is not constrained by dimensionality. It can be 4D, 5D, 10D, string theory,
-        brane-world, interacting universes, hidden sectors, emergent spacetime, information-theoretic,
-        or something unnamed. The criterion is <strong>mechanism, not dimensionality</strong>.
+        Альтернатива не ограничена размерностью. Это может быть 4D, 5D, 10D, теория струн, браны,
+        взаимодействующие вселенные, скрытые сектора, эмерджентное пространство-время,
+        информации-теоретический подход или что-то безымянное. Критерий — <strong>механизм, а не размерность</strong>.
       </p>
       <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--muted);line-height:1.5">
-        <strong style="color:#ef4444">Key exclusion:</strong> The alternative must not simply rename the DREAM machinery.
-        "There is another hidden space, and our universe is a non-invertible projection of it" is not an alternative —
-        it's DREAM under different terminology. If the alternative independently produces an S2-type retention law,
-        we must ask whether it has actually eliminated the projection/kernel concept or merely derived an equivalent
-        mathematical structure from different starting assumptions.
+        <strong style="color:#ef4444">Ключевое исключение:</strong> Альтернатива не должна быть простым переименованием
+        механизмов DREAM. «Существует иное скрытое пространство, и наша Вселенная — необратимая проекция его» — это не
+        альтернатива, а DREAM под другой терминологией. Если альтернатива независимо производит закон удержания типа S2,
+        мы должны спросить, действительно ли она устранила концепцию проекции/ядра или просто вывела эквивалентную
+        математическую структуру из других исходных допущений.
       </div>
       <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:.8rem">
-        Give every competing framework the same observational target:
+        Дайте каждой конкурирующей теории одну и ту же наблюдательную цель:
       </p>
       <div style="background:rgba(142,197,232,.04);border:1px solid rgba(142,197,232,.1);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;font-family:monospace;font-size:.78rem;color:var(--accent);overflow-x:auto">
-        O_DREAM = { S2, D_eff, λ_q, T1…T6, cosmological structure, spectral ratios, lensing behavior, topological constraints, symmetry constraints, Meta-S2 recurrence }
+        \( \mathcal{O}_{\mathrm{DREAM}} \) = { S2, \( D_{\mathrm{eff}} \), \( \lambda_q \), T1…T6, космологическая структура, спектральные отношения, линзирование, топологические ограничения, ограничения симметрии, рекурренция Meta-S2 }
       </div>
       <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:.4rem">
-        Then ask of each alternative:
+        Затем задайте каждой альтернативе вопрос:
       </p>
       <div id="alternativeQuestions"></div>
 
-      <!-- ═══ THE UNIVERSALITY CLASS INSIGHT ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">The universality class of projections</h3>
+      <!-- ═══ КЛАСС УНИВЕРСАЛЬНОСТИ ПРОЕКЦИЙ ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Класс универсальности проекций</h3>
       <div style="background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.12);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem">
         <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">
-          If several apparently different frameworks converge on the same effective mathematics —
-          DREAM (higher-dim → non-invertible kernel → S2), a hidden-sector model
-          (interacting universes → decoherence → same S2), and a string model
-          (compactification → effective 4D → same scaling) — the conclusion may be that
-          we've discovered a <strong style="color:#64b4ff">universality class of projections</strong>.
+          Если несколько, казалось бы, разных теорий сходятся к одной и той же эффективной математике —
+          DREAM (высшие размерности → необратимое ядро → S2), модель скрытого сектора
+          (взаимодействующие вселенные → декогеренция → та же S2) и струнная модель
+          (компактификация → эффективное 4D → тот же скейлинг) — заключением может быть, что
+          мы открыли <strong style="color:#64b4ff">класс универсальности проекций</strong>.
           <br><br>
-          "Meta-Manifold" might eventually turn out to be an interpretation of something deeper:
-          <em>observable reality behaves as though information has passed through a non-invertible
-          dimensional reduction, regardless of what the underlying ontology actually is.</em>
+          «Мета-Многообразие» в итоге может оказаться интерпретацией чего-то более глубокого:
+          <em>наблюдаемая реальность ведёт себя так, как будто информация прошла через необратимую
+          размерностную редукцию, независимо от того, какова её действительная онтология.</em>
           <br><br>
-          That would be an extremely interesting result — and arguably more fundamental than
-          proving any particular ontology.
+          Это был бы чрезвычайно интересный результат — и, возможно, более фундаментальный, чем
+          доказательство какой-либо конкретной онтологии.
         </p>
       </div>
 
-      <!-- ═══ INVARIANT TABLE ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Invariant-by-invariant comparison</h3>
+      <!-- ═══ ТАБЛИЦА ИНВАРИАНТОВ ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Сравнение по каждому инварианту</h3>
       <p style="color:var(--muted-2);font-size:.78rem;margin-bottom:.8rem">
-        Each row is an observable invariant that DREAM derives from its axioms. For each, we ask:
-        what would an alternative framework need to do to reproduce it?
+        Каждая строка — наблюдаемый инвариант, который DREAM выводит из своих аксиом. Для каждого
+        мы спрашиваем: что должна сделать альтернативная теория, чтобы воспроизвести его?
       </p>
 
       <div style="overflow-x:auto">
       <table class="data-table" style="width:100%;font-size:.78rem">
         <thead>
           <tr>
-            <th style="text-align:left;width:18%">Invariant</th>
-            <th style="text-align:left;width:15%">DREAM derivation</th>
-            <th style="text-align:left;width:22%">4D-only (SM+GR, no extra dim)</th>
-            <th style="text-align:left;width:22%">String/M-theory (higher-dim)</th>
-            <th style="text-align:left;width:23%">Effective/RG/Info-theory</th>
+            <th style="text-align:left;width:18%">Инвариант</th>
+            <th style="text-align:left;width:15%">Вывод в DREAM</th>
+            <th style="text-align:left;width:22%">Только 4D (СМ+ОТО, без доп. размерностей)</th>
+            <th style="text-align:left;width:22%">Теория струн/M-теория (высшие размерности)</th>
+            <th style="text-align:left;width:23%">Эффективная/РГ/Инфо-теория</th>
           </tr>
         </thead>
         <tbody id="adversarialTable"></tbody>
       </table>
       </div>
 
-      <!-- ═══ COMPRESSION COMPARISON ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Descriptive complexity comparison</h3>
+      <!-- ═══ СРАВНЕНИЕ КОМПРЕССИИ ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Сравнение дескриптивной сложности</h3>
       <div id="compressionComparison"></div>
 
-      <!-- ═══ DREAM'S MOST DISTINCTIVE PREDICTION ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">DREAM's most distinctive prediction: Meta-S2 recurrence</h3>
+      <!-- ═══ САМОЕ ХАРАКТЕРНОЕ ПРЕДСКАЗАНИЕ DREAM ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Самое характерное предсказание DREAM: рекурренция Meta-S2</h3>
       <div style="background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.15);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem">
         <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">
-          The distribution of S2 exponents (D_eff) across 84 unrelated systems is <strong>itself</strong>
-          well-described by a Weibull (stretched-exponential) distribution — the same functional family as S2.
-          This is a <strong>recursive</strong> prediction: S2 governs individual systems, and S2 also
-          governs the distribution of S2 parameters.
+          Распределение экспонент S2 (\( D_{\mathrm{eff}} \)) по 84 несвязанным системам <strong>само по себе</strong>
+          хорошо описывается распределением Вейбулла (растянутая экспонента) — тем же функциональным
+          семейством, что и S2. Это <strong>рекурсивное</strong> предсказание: S2 управляет отдельными
+          системами, и S2 также управляет распределением параметров S2.
           <br><br>
-          <strong style="color:#64b4ff">No known alternative framework predicts this.</strong>
-          Neither the Standard Model, string theory, nor renormalization group methods predict that
-          fitting exponents across unrelated domains should themselves follow a stretched exponential.
-          This is DREAM's most distinctive structural prediction — the one that would be hardest for
-          an alternative to reproduce without something projection-like.
+          <strong style="color:#64b4ff">Ни одна известная альтернативная теория этого не предсказывает.</strong>
+          Ни Стандартная модель, ни теория струн, ни методы ренормгруппы не предсказывают, что подгоночные
+          экспоненты по несвязанным доменам сами должны следовать растянутой экспоненте. Это самое
+          характерное структурное предсказание DREAM — то, которое альтернативе было бы труднее всего
+          воспроизвести без чего-то проекционно-подобного.
           <br><br>
-          Current status: D_meta = 1.844, KS p = 0.146, n = 84. Weibull is best by AIC (ΔAIC vs Gamma = +0.82).
-          The recurrence is <strong>supported but not yet confirmed</strong> — the clean prospective
-          test (does D_meta remain stable as genuinely new independent families are added?) is ongoing.
+          Текущий статус: D_meta = 1.844, KS p = 0.146, n = 84. Вейбулл лучший по AIC (ΔAIC vs Gamma = +0.82).
+          Рекурренция <strong>поддержана, но ещё не подтверждена</strong> — чистое проспективное
+          испытание (остаётся ли D_meta стабильным при добавлении действительно новых независимых
+          семейств?) продолжается.
         </p>
       </div>
 
-      <!-- ═══ THE EQUIVALENCE CLASS ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">The equivalence class [Φ]_K</h3>
+      <!-- ═══ КЛАСС ЭКВИВАЛЕНТНОСТИ ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Класс эквивалентности \( [\Phi]_K \)</h3>
       <div style="background:rgba(142,197,232,.04);border:1px solid rgba(142,197,232,.1);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem">
         <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">
-          DREAM's projection is non-invertible: K(Φ₁) = K(Φ₂) can occur even when Φ₁ ≠ Φ₂.
-          From inside the 4D projection, we can only recover the equivalence class
-          [Φ]_K = {Φ' : K(Φ') = K(Φ)} — the set of all higher-dimensional structures that
-          project to the same observables.
+          Проекция DREAM необратима: \( K(\Phi_1) = K(\Phi_2) \) может выполняться даже когда
+          \( \Phi_1 \neq \Phi_2 \). Изнутри 4D-проекции мы можем восстановить только класс
+          эквивалентности \( [\Phi]_K = \{\Phi' : K(\Phi') = K(\Phi)\} \) — множество всех
+          структур высшей размерности, проецирующихся в одни и те же наблюдаемые.
           <br><br>
-          This means an alternative theory might remove the words "Meta-Manifold" and "kernel"
-          but if it mathematically reconstructs the same non-invertible mapping and the same
-          information-retention structure, it has discovered something equivalent to DREAM —
-          regardless of the ontology used to describe it.
+          Это означает, что альтернативная теория может убрать слова «Мета-Многообразие» и «ядро»,
+          но если она математически реконструирует то же необратимое отображение и ту же структуру
+          удержания информации, она открыла нечто, эквивалентное DREAM — независимо от онтологии,
+          использованной для описания.
           <br><br>
-          <strong>The ultimate question is not "Does the Meta-Manifold exist?"</strong>
-          (that may be inaccessible from within the projection). It is:
-          <em>"Does the kernel-invariant structure force us toward something mathematically
-          equivalent to a higher-dimensional lossy projection, regardless of the ontology?"</em>
+          <strong>Окончательный вопрос не в том, «существует ли Мета-Многообразие?»</strong>
+          (это может быть недоступно изнутри проекции). Он таков:
+          <em>«Заставляет ли ядро-инвариантная структура перейти к чему-то, математически
+          эквивалентному высшей размерностной потере-проекции, независимо от онтологии?»</em>
         </p>
       </div>
 
-      <!-- ═══ OPEN CHALLENGES ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Open challenges for alternative frameworks</h3>
+      <!-- ═══ ОТКРЫТЫЕ ВЫЗОВЫ ═══ -->
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">Открытые вызовы для альтернативных теорий</h3>
       <div id="openChallenges"></div>
 
     </div>
@@ -1435,24 +1442,25 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- ═══ COUPLED RETENTION TAB (T7) ═══ -->
   <div id="tab-coupled" class="tab-content" style="display:none">
     <div class="card" style="padding:1.5rem">
-      <h2 style="margin:0 0 .4rem">⧉ T7 — Coupled Retention: The Snake Pit</h2>
+      <h2 style="margin:0 0 .4rem">⧉ T7 — Связанное удержание: Змеиная яма</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        S2 as currently formulated treats each observable as isolated: one φ(x,t) → one R(λ).
-        But reality is a <strong>coupled dynamical system of retention processes</strong>.
-        Every point in spacetime has multiple overlapping retention curves — solar radiation,
-        soil moisture, vegetation, temperature — all interacting. The single R(λ) we measure
-        is a projection of this entangled system onto one dimension.
+        S2 в нынешней формулировке рассматривает каждую наблюдаемую как изолированную: один φ(x,t) →
+        один \( R(\lambda) \). Но реальность — это <strong>связанная динамическая система процессов
+        удержания</strong>. В каждой точке пространства-времени есть несколько перекрывающихся кривых
+        удержания — солнечная радиация, влажность почвы, растительность, температура — все они
+        взаимодействуют. Один \( R(\lambda) \), который мы измеряем, есть проекция этой запутанной
+        системы на одно измерение.
         <br><br>
-        T7 tests whether the <strong>principal eigenmode</strong> of the cross-retention matrix
-        R<sub>ij</sub>(λ) fits S2 better than individual single curves. If yes, S2 governs the
-        dominant retention mode — not individual observables. Poor single-curve fits are not
-        S2 failures but <strong>coupling signatures</strong>.
+        T7 проверяет, лучше ли <strong>главная собственная мода</strong> матрицы перекрёстного удержания
+        \( R_{ij}(\lambda) \) соответствует S2, чем отдельные одиночные кривые. Если да, S2 управляет
+        доминантной модой удержания — а не отдельными наблюдаемыми. Плохие подгонки одиночных кривых —
+        это не сбои S2, а <strong>сигнатуры связывания</strong>.
       </p>
       <div style="background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.12);border-radius:8px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--muted);line-height:1.5">
-        <strong style="color:#64b4ff">The coupling matrix:</strong><br>
-        R<sub>ij</sub>(λ) = A<sub>ij</sub> · exp[−(λ/λ<sub>qij</sub>)^D<sub>ij</sub>]<br>
-        Diagonal (i=j): self-retention (current S2) · Off-diagonal: cross-retention (new)<br>
-        Principal eigenvalue = dominant retention mode = what survives the coupling entanglement
+        <strong style="color:#64b4ff">Матрица связывания:</strong><br>
+        \( R_{ij}(\lambda) = A_{ij} \cdot \exp[-(\lambda/\lambda_{qij})^{D_{ij}}] \)<br>
+        Диагональ (i=j): самостоятельное удержание (текущий S2) · Внедиагональ: перекрёстное удержание (новое)<br>
+        Главное собственное значение = доминантная мода удержания = то, что выживает в запутанности связывания
       </div>
       <div id="theoremGridCoupled"></div>
     </div>

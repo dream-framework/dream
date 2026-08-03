@@ -1236,9 +1236,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="card" style="padding:1.5rem">
       <h2 style="margin:0 0 .5rem">T5/S3 — Cosmology: Fractal Dimension Flow</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether D_eff flows toward 3 (homogeneity) at large scales, as predicted by T5/S3.
-        At small scales (r&lt;10 Mpc/h), galaxy clustering is fractal with D_eff≈1.2. At large scales,
-        D_eff should approach 3 (homogeneous universe). Uses SDSS, 2dFGRS correlation function data.
+        Tests whether \( D_{\mathrm{eff}} \) flows toward 3 (homogeneity) at large scales, as predicted by T5/S3.
+        At small scales (r&lt;10 Mpc/h), galaxy clustering is fractal with \( D_{\mathrm{eff}}\approx 1.2 \). At large scales,
+        \( D_{\mathrm{eff}} \) should approach 3 (homogeneous universe). Uses SDSS, 2dFGRS correlation function data.
       </p>
       <div id="theoremGridCosmology"></div>
     </div>
@@ -1248,9 +1248,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="card" style="padding:1.5rem">
       <h2 style="margin:0 0 .5rem">T6 — Spectral Ratios: Ranked Mass/Energy Law</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        Tests whether ranked masses/energies follow m_n/m_1 = n^(1/D_eff), as predicted by T6.
+        Tests whether ranked masses/energies follow \( m_n/m_1 = n^{1/D_{\mathrm{eff}}} \), as predicted by T6.
         Uses PDG particle mass tables (mesons, baryons) and NIST atomic spectra (hydrogen levels).
-        The ratio law should hold across domains with domain-specific D_eff.
+        The ratio law should hold across domains with domain-specific \( D_{\mathrm{eff}} \).
       </p>
       <div id="theoremGridSpectral"></div>
     </div>
@@ -1286,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
         Tests whether high-CPI regions (hubs, filaments) retain structure under smoothing, as predicted by T4.
         Uses SDSS cosmic web catalogs and BAO peak persistence. The skeleton (connectivity) should
-        survive smoothing that washes out HF detail — R_HF(λ) ≺ R_corr²(λ).
+        survive smoothing that washes out HF detail — \( R_{HF}(\lambda) \prec R_{\mathrm{corr}}^2(\lambda) \).
       </p>
       <div id="theoremGridStructure"></div>
     </div>
@@ -1298,7 +1298,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
         Tests whether strong lensing images show two-channel retention (HF power decays faster than
         structural correlation), as predicted by S5. Uses Hubble Frontier Fields multi-band imaging.
-        Arc/ring skeletons should persist across smoothing scales while HF texture decays.
+        Arc/ring skeletons should persist across smoothing scales while HF texture decays. \( R_{HF}(\lambda) \prec R_{\mathrm{corr}}^2(\lambda) \).
       </p>
       <div id="theoremGridLensing"></div>
     </div>
@@ -1323,6 +1323,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Which ontology gives the shortest coherent description of the observed invariants?<br>
         DREAM claims: 6 axioms + 1 kernel → S2 retention, spectral ratios, coherence cliff, charge quantization,
         constant-fixity, Meta-S2 recurrence. Can an alternative match this with fewer assumptions?
+        \( D_{\mathrm{eff}}, \lambda_q \), locality, scaling laws — all from one mechanism.
       </div>
 
       <!-- ═══ THE DREAM ALTERNATIVE TEST ═══ -->
@@ -1343,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Give every competing framework the same observational target:
       </p>
       <div style="background:rgba(142,197,232,.04);border:1px solid rgba(142,197,232,.1);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;font-family:monospace;font-size:.78rem;color:var(--accent);overflow-x:auto">
-        O_DREAM = { S2, D_eff, λ_q, T1…T6, cosmological structure, spectral ratios, lensing behavior, topological constraints, symmetry constraints, Meta-S2 recurrence }
+        \( \mathcal{O}_{\mathrm{DREAM}} \) = { S2, \( D_{\mathrm{eff}} \), \( \lambda_q \), T1…T6, cosmological structure, spectral ratios, lensing behavior, topological constraints, symmetry constraints, Meta-S2 recurrence }
       </div>
       <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:.4rem">
         Then ask of each alternative:
@@ -1399,7 +1400,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">DREAM's most distinctive prediction: Meta-S2 recurrence</h3>
       <div style="background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.15);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem">
         <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">
-          The distribution of S2 exponents (D_eff) across 84 unrelated systems is <strong>itself</strong>
+          The distribution of S2 exponents (\( D_{\mathrm{eff}} \)) across 84 unrelated systems is <strong>itself</strong>
           well-described by a Weibull (stretched-exponential) distribution — the same functional family as S2.
           This is a <strong>recursive</strong> prediction: S2 governs individual systems, and S2 also
           governs the distribution of S2 parameters.
@@ -1417,12 +1418,12 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <!-- ═══ THE EQUIVALENCE CLASS ═══ -->
-      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">The equivalence class [Φ]_K</h3>
+      <h3 style="font-size:1rem;margin:1.5rem 0 .6rem">The equivalence class \( [\Phi]_K \)</h3>
       <div style="background:rgba(142,197,232,.04);border:1px solid rgba(142,197,232,.1);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem">
         <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">
-          DREAM's projection is non-invertible: K(Φ₁) = K(Φ₂) can occur even when Φ₁ ≠ Φ₂.
+          DREAM's projection is non-invertible: \( K(\Phi_1) = K(\Phi_2) \) can occur even when \( \Phi_1 \neq \Phi_2 \).
           From inside the 4D projection, we can only recover the equivalence class
-          [Φ]_K = {Φ' : K(Φ') = K(Φ)} — the set of all higher-dimensional structures that
+          \( [\Phi]_K = \{\Phi' : K(\Phi') = K(\Phi)\} \) — the set of all higher-dimensional structures that
           project to the same observables.
           <br><br>
           This means an alternative theory might remove the words "Meta-Manifold" and "kernel"
@@ -1449,20 +1450,20 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="card" style="padding:1.5rem">
       <h2 style="margin:0 0 .4rem">⧉ T7 — Coupled Retention: The Snake Pit</h2>
       <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem">
-        S2 as currently formulated treats each observable as isolated: one φ(x,t) → one R(λ).
+        S2 as currently formulated treats each observable as isolated: one φ(x,t) → one \( R(\lambda) \).
         But reality is a <strong>coupled dynamical system of retention processes</strong>.
         Every point in spacetime has multiple overlapping retention curves — solar radiation,
-        soil moisture, vegetation, temperature — all interacting. The single R(λ) we measure
+        soil moisture, vegetation, temperature — all interacting. The single \( R(\lambda) \) we measure
         is a projection of this entangled system onto one dimension.
         <br><br>
         T7 tests whether the <strong>principal eigenmode</strong> of the cross-retention matrix
-        R<sub>ij</sub>(λ) fits S2 better than individual single curves. If yes, S2 governs the
+        \( R_{ij}(\lambda) \) fits S2 better than individual single curves. If yes, S2 governs the
         dominant retention mode — not individual observables. Poor single-curve fits are not
         S2 failures but <strong>coupling signatures</strong>.
       </p>
       <div style="background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.12);border-radius:8px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--muted);line-height:1.5">
         <strong style="color:#64b4ff">The coupling matrix:</strong><br>
-        R<sub>ij</sub>(λ) = A<sub>ij</sub> · exp[−(λ/λ<sub>qij</sub>)^D<sub>ij</sub>]<br>
+        \( R_{ij}(\lambda) = A_{ij} \cdot \exp[-(\lambda/\lambda_{qij})^{D_{ij}}] \)<br>
         Diagonal (i=j): self-retention (current S2) · Off-diagonal: cross-retention (new)<br>
         Principal eigenvalue = dominant retention mode = what survives the coupling entanglement
       </div>
