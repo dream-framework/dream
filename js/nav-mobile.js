@@ -70,7 +70,7 @@
     closeBtn.type = 'button';
     closeBtn.className = 'nav-mobile-close';
     closeBtn.setAttribute('aria-label', 'Close menu');
-    closeBtn.innerHTML = '&times;';
+    closeBtn.innerHTML = '';
 
     const linksWrap = document.createElement('nav');
     linksWrap.className = 'nav-mobile-links';
