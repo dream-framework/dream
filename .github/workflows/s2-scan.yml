@@ -46,7 +46,9 @@ jobs:
           git config user.email "dream-bot@users.noreply.github.com"
           git add en/tests.html ru/tests.html en/tests.json ru/tests.json \
                   en/articles/meta-s2.html ru/articles/meta-s2.html \
-                  meta_s2_snapshot.json scripts/meta_s2_article.py 2>/dev/null || true
+                  meta_s2_snapshot.json scripts/meta_s2_article.py \
+                  scripts/rerun_losses_on_s2_dust.py scripts/flip_dust_wins.py \
+                  scripts/recover_lost_ci_entries.py 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new S2_WINS entries today — skipping commit."
           else

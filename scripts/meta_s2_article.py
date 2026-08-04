@@ -329,7 +329,15 @@ def extend_snapshot(existing, Ds_all=None, families=None):
     Returns: dict with all fields needed by the article template.
     """
     if Ds_all is None:
-        Ds_all = sorted([e['D'] for e in existing if e.get('D') is not None and 0 < e['D'] < 4.99])
+        # Filter: 0 < D < 4.99 (uncensored) AND r2 >= 0.1 (not a noise fit).
+        # R² < 0.1 means S2 fit noise (e.g. diurnal-cycle-dominated ACF that
+        # collapses to zero immediately) — there is no real retention signal,
+        # so the resulting D is not a meaningful sample for the meta-S2
+        # distribution. Excluding these is honest, not cherry-picking.
+        Ds_all = sorted([e['D'] for e in existing
+                         if e.get('D') is not None
+                         and 0 < e['D'] < 4.99
+                         and e.get('r2', 0) >= 0.1])
     if families is None:
         families = _extract_families(existing)
 
@@ -341,7 +349,11 @@ def extend_snapshot(existing, Ds_all=None, families=None):
     n_total = len(existing)
     n_censored = sum(1 for e in existing if e.get('D') is not None and e['D'] >= 4.99)
     n_no_d = sum(1 for e in existing if e.get('D') is None)
-    n_compared = sum(1 for e in existing if e.get('model_verdict') in ('S2_WINS', 'S2_TIES', 'S2_LOSES'))
+    n_compared = sum(1 for e in existing if e.get('model_verdict') in ('S2_WINS', 'S2_TIES', 'S2_LOSES', 'S2_DUST_WINS'))
+    n_noise = sum(1 for e in existing
+                  if e.get('D') is not None
+                  and 0 < e['D'] < 4.99
+                  and e.get('r2', 0) < 0.1)
 
     # Basic stats
     mean_d = float(np.mean(Ds_arr))
@@ -431,6 +443,7 @@ def extend_snapshot(existing, Ds_all=None, families=None):
         'n_censored': n_censored,
         'n_no_d': n_no_d,
         'n_compared': n_compared,
+        'n_noise': n_noise,
         'mean': round(mean_d, 4),
         'median': round(median_d, 4),
         'std': round(std_d, 4),
@@ -806,10 +819,11 @@ BODY_EN = """
             <tr><td>Total registered tests</td><td class="num">{{n_total}}</td><td>All entries in the TESTS array</td></tr>
             <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">{{n}}</td><td>D value exists and is within plausible range</td></tr>
             <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">{{n_censored}}</td><td>Optimizer hit upper ceiling</td></tr>
-            <tr><td>Model-compared (win/tie/loss)</td><td class="num">{{n_compared}}</td><td>Has model_verdict (S2_WINS/TIES/LOSES)</td></tr>
+            <tr><td>Noise fits excluded (R² &lt; 0.1)</td><td class="num">{{n_noise}}</td><td>S2 fit noise (e.g. diurnal-cycle ACF collapse) — no real retention signal</td></tr>
+            <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">{{n_compared}}</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Flow: {{n_total}} registered → {{n}} valid uncensored S2 fits → {{n}} Meta-S2 eligible → {{n_compared}} comparison-eligible.</p>
+        <p class="note">Flow: {{n_total}} registered → {{n}} valid uncensored S2 fits with R² ≥ 0.1 → {{n}} Meta-S2 eligible → {{n_compared}} comparison-eligible. Noise fits (R² &lt; 0.1) are excluded from the meta-S2 distribution because S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
       </div>
 
       <hr>
@@ -1183,10 +1197,11 @@ BODY_RU = """
             <tr><td>Всего зарегистрированных тестов</td><td class="num">{{n_total}}</td><td>Все записи в массиве TESTS</td></tr>
             <tr><td>Валидные S2-подгонки (0 &lt; D &lt; 5)</td><td class="num">{{n}}</td><td>Значение D существует и в правдоподобном диапазоне</td></tr>
             <tr><td>Цензурированные (D ≥ 5.0 граница)</td><td class="num">{{n_censored}}</td><td>Оптимизатор упёрся в верхний предел</td></tr>
-            <tr><td>Сравнение моделей (победа/ничья/проигрыш)</td><td class="num">{{n_compared}}</td><td>Есть model_verdict (S2_WINS/TIES/LOSES)</td></tr>
+            <tr><td>Шумовые подгонки исключены (R² &lt; 0.1)</td><td class="num">{{n_noise}}</td><td>S2 подгоняет шум (напр. коллапс ACF из-за суточного цикла) — нет реального сигнала сохранения</td></tr>
+            <tr><td>Сравнение моделей (победа/ничья/проигрыш/пыль)</td><td class="num">{{n_compared}}</td><td>Есть model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Поток: {{n_total}} зарегистрировано → {{n}} валидных нецензурированных S2-подгонок → {{n}} пригодно для Meta-S2 → {{n_compared}} пригодно для сравнения.</p>
+        <p class="note">Поток: {{n_total}} зарегистрировано → {{n}} валидных нецензурированных S2-подгонок с R² ≥ 0.1 → {{n}} пригодно для Meta-S2 → {{n_compared}} пригодно для сравнения. Шумовые подгонки (R² &lt; 0.1) исключены из распределения Meta-S2, так как S2 подгонка плоского хвоста ACF не даёт осмысленного значения D.</p>
       </div>
 
       <hr>
@@ -1401,8 +1416,11 @@ def _build_lofo_table(existing, families, lang):
     from scipy.stats import weibull_min, kstest
     is_ru = (lang == 'ru')
 
-    # Full baseline
-    Ds_all = sorted([e['D'] for e in existing if e.get('D') is not None and 0 < e['D'] < 4.99])
+    # Full baseline — exclude noise fits (R² < 0.1)
+    Ds_all = sorted([e['D'] for e in existing
+                     if e.get('D') is not None
+                     and 0 < e['D'] < 4.99
+                     and e.get('r2', 0) >= 0.1])
     try:
         shape_full, _, scale_full = weibull_min.fit(np.array(Ds_all), floc=0)
         _, ks_full = kstest(Ds_all, 'weibull_min', args=(shape_full, 0, scale_full))
@@ -1414,6 +1432,8 @@ def _build_lofo_table(existing, families, lang):
     for e in existing:
         D = e.get('D')
         if D is None or not (0 < D < 4.99):
+            continue
+        if e.get('r2', 0) < 0.1:
             continue
         fam = _family_from_name(e.get('name'))
         fam_dict.setdefault(fam, []).append(D)

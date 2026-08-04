@@ -2047,6 +2047,16 @@ def main():
     except Exception as e:
         print(f'  ⚠ S2+dust rerun failed: {e}')
 
+    # 10b4. FLIP entries where best_alt=S2_DUST but verdict still S2_LOSES
+    # These were already fitted (S2_DUST is the best model) but fit_s2() labels
+    # them S2_LOSES because S2 itself isn't the best. Flip them to S2_DUST_WINS.
+    print('\n🔄 Flipping S2_LOSES with best_alt=S2_DUST → S2_DUST_WINS...')
+    try:
+        import flip_dust_wins as _flip
+        _flip.main()
+    except Exception as e:
+        print(f'  ⚠ Flip failed: {e}')
+
     # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):
         update_tests_html(kept_results, tests_html)
