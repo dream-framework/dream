@@ -70,6 +70,8 @@ def derive_narrative_en(entry):
         model_text = f'S2 beats {best_alt} (ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_TIES' and best_alt and delta_aicc is not None:
         model_text = f'S2 ties {best_alt} (ΔAICc={delta_aicc:.2f}, within ±2).'
+    elif model_verdict == 'S2_DUST_WINS' and best_alt and delta_aicc is not None:
+        model_text = f'S2 loses to {best_alt} (ΔAICc={delta_aicc:.2f}), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.'
     elif model_verdict == 'S2_LOSES' and best_alt and delta_aicc is not None:
         model_text = f'S2 loses to {best_alt} (ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'NO_FIT':
@@ -101,6 +103,8 @@ def derive_narrative_ru(entry):
         model_text = f'S2 превосходит {best_alt} (ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_TIES' and best_alt and delta_aicc is not None:
         model_text = f'S2 сравнима с {best_alt} (ΔAICc={delta_aicc:.2f}, в пределах ±2).'
+    elif model_verdict == 'S2_DUST_WINS' and best_alt and delta_aicc is not None:
+        model_text = f'S2 уступает {best_alt} (ΔAICc={delta_aicc:.2f}), но S2+пыль побеждает — пылевая структура подтверждена, не провал DREAM.'
     elif model_verdict == 'S2_LOSES' and best_alt and delta_aicc is not None:
         model_text = f'S2 уступает {best_alt} (ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'NO_FIT':

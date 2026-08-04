@@ -2031,6 +2031,22 @@ def main():
     else:
         print(f'  (no no-comparison entries with downloadable URLs found)')
 
+    # 10b3. RERUN S2_LOSES entries on S2+dust model
+    # If S2 loses to BIEXP but S2+dust (two-component S2) beats BIEXP, that's
+    # dust contamination — predicted by DREAM, not a failure. Flip the verdict
+    # to S2_DUST_WINS and record D1/D2/R²/delta.
+    print('\n🔄 Rerunning S2_LOSES entries on S2+dust model...')
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import rerun_losses_on_s2_dust as _dust_rerun
+        redeemed = _dust_rerun.main()
+        if redeemed:
+            print(f'  ✓ {redeemed} entries redeemed via S2+dust decomposition')
+        else:
+            print(f'  (no entries redeemed this run)')
+    except Exception as e:
+        print(f'  ⚠ S2+dust rerun failed: {e}')
+
     # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):
         update_tests_html(kept_results, tests_html)
