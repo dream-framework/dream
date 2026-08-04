@@ -31,7 +31,9 @@ os.makedirs(OUT_DIR, exist_ok=True)
 # includes the verdict ('S2_WINS' | 'S2_TIES' | 'S2_LOSES' | 'NO_FIT')
 # plus the full AICc ranking. The caller decides whether to promote
 # the entry to tests.html based on the verdict.
-def fit_s2(t, R, label='', require_wins=True):
+def fit_s2(t, R, label='', require_wins=False):
+    """Fit S2 + model comparison. Returns result dict for ALL outcomes
+    (wins, ties, AND losses). No filtering — the registry records everything."""
     t = np.array(t, dtype=float)
     R = np.array(R, dtype=float)
     if len(t) < 5: return None
@@ -43,28 +45,32 @@ def fit_s2(t, R, label='', require_wins=True):
     if not cmp or cmp['verdict'] == 'NO_FIT' or cmp.get('s2') is None:
         return None
 
-    # If S2 doesn't beat the alternatives, skip — don't pollute the registry
-    if require_wins and cmp['verdict'] == 'S2_LOSES':
-        print(f'    ✗ S2 loses to {cmp["best_alt_name"]} '
-              f'(ΔAICc={cmp["delta_aicc"]}) — skipping {label[:40]}')
-        return None
-
+    # NO MORE FILTERING — record wins, ties, AND losses
     D = cmp['s2']['D']
     s2_verdict = 'EXTRACTION' if D > 1 else ('NATURAL' if D < 0.8 else 'THRESHOLD')
 
-    # Build the human narrative — include the model comparison result
-    # so the registry card shows why S2 was promoted.
+    # Build narrative for ALL outcomes
     if cmp['verdict'] == 'S2_WINS':
         model_note = f'S2 beats {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}).'
-    else:  # S2_TIES
+    elif cmp['verdict'] == 'S2_TIES':
         model_note = f'S2 ties {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}, within ±2).'
+    else:  # S2_LOSES — record honestly
+        # Check if BIEXP won — this indicates dust contamination (predicted by DREAM)
+        if cmp['best_alt_name'] == 'BIEXP':
+            model_note = (f'S2 loses to BIEXP (ΔAICc={cmp["delta_aicc"]}). '
+                         f'Dust-contaminated: two-scale structure. S2+dust decomposition '
+                         f'(predicted by DREAM) should recover the fit. Not a DREAM failure.')
+        else:
+            model_note = f'S2 loses to {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}).'
+        print(f'    ⚠ S2 loses to {cmp["best_alt_name"]} '
+              f'(ΔAICc={cmp["delta_aicc"]}) — {label[:40]} (RECORDED, not hidden)')
 
     return {
         'D': D,
         'lambda_q': cmp['s2']['lambda_q'],
         'r2': cmp['s2']['r2'],
         'verdict': s2_verdict,
-        'model_verdict': cmp['verdict'],      # S2_WINS | S2_TIES
+        'model_verdict': cmp['verdict'],      # S2_WINS | S2_TIES | S2_LOSES
         'model_note': model_note,
         'best_alt': cmp['best_alt_name'],
         'delta_aicc': cmp['delta_aicc'],

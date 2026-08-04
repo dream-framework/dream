@@ -254,7 +254,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "3 Aug 2026 17:35 EST";
+const LAST_REFRESH = "3 Aug 2026 23:43 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -362,6 +362,25 @@ const TESTS = [
   ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D=0.5553, R²=0.9885. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=0.00, в пределах ±2).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
   ,{id:"",name:"CoinGecko: dogecoin (ACF retention)",domain:"crypto",D:1.6637,r2:0.9981,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-119.9500,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-119.95).",narrative:"D=1.6637, R²=0.9981. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит GAUSS (ΔAICc=-119.95).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:1.0156,r2:0.9766,verdict:"EXTRACTION",model_verdict:"S2_TIES",delta_aicc:1.8100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.81, within ±2).",narrative:"D=1.0156, R²=0.9766. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с EXP (ΔAICc=1.81, в пределах ±2).",source:"auto-scan 2026-08-03",date:"2026-08-03",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
+  ,{id:"",name:"FRED VIX (VIX Volatility Index) (АСФ сохранение)",domain:"financial",D:0.5629,r2:0.9957,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:375.6900,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=375.69). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.5629, R²=0.9957. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=375.69).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
+  ,{id:"",name:"FRED T10YIE (10-Year Breakeven Inflation) (АСФ сохранение)",domain:"financial",D:1.0106,r2:0.9963,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:12.3300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.33). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=1.0106, R²=0.9963. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает BIEXP (ΔAICc=12.33).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=T10YIE",image:null}
+  ,{id:"",name:"FRED DGS10 (10-Year Treasury Rate) (АСФ сохранение)",domain:"financial",D:0.9594,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:9.6300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=9.63). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.9594, R²=0.9999. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает BIEXP (ΔAICc=9.63).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",image:null}
+  ,{id:"",name:"COVID-19 confirmed (daily new, global) (ACF retention)",domain:"ecological",D:1.0071,r2:0.9548,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:38.2900,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=38.29). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=1.0071, R²=0.9548. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает BIEXP (ΔAICc=38.29).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",image:null}
+  ,{id:"",name:"COVID-19 deaths (daily new, global) (ACF retention)",domain:"ecological",D:0.8010,r2:0.9063,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:24.9100,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=24.91). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.8010, R²=0.9063. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает BIEXP (ΔAICc=24.91).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",image:null}
+  ,{id:"",name:"NDBC Buoy 41001 (E Hatteras) wave height (ACF retention)",domain:"oceanography",D:0.6038,r2:0.8261,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:28.7900,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=28.79). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.6038, R²=0.8261. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=28.79).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://www.ndbc.noaa.gov/data/realtime2/41001.txt",image:null}
+  ,{id:"",name:"Energy-Charts Germany-Luxembourg electricity spot price (ACF retention)",domain:"energy",D:0.3453,r2:0.5201,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:-0.1200,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=-0.12, within ±2).",narrative:"D=0.3453, R²=0.5201. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 сравнима с BIEXP (ΔAICc=-0.12, в пределах ±2).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=DE-LU&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts France electricity spot price (ACF retention)",domain:"energy",D:0.2208,r2:0.4507,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:9.2700,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=9.27). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.2208, R²=0.4507. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=9.27).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=FR&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts Netherlands electricity spot price (ACF retention)",domain:"energy",D:0.2021,r2:0.3005,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:4.4700,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=4.47). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.2021, R²=0.3005. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=4.47).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=NL&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts Switzerland electricity spot price (ACF retention)",domain:"energy",D:0.1242,r2:0.3034,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:17.3800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.38). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.1242, R²=0.3034. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=17.38).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Wikipedia: COVID-19 pandemic pageviews (ACF retention)",domain:"cultural",D:0.5333,r2:0.9624,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:378.3500,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=378.35). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.5333, R²=0.9624. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=378.35).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/COVID-19_pandemic/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"Wikipedia: Climate change pageviews (ACF retention)",domain:"cultural",D:1.0499,r2:0.9614,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:363.5000,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=363.5). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=1.0499, R²=0.9614. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает BIEXP (ΔAICc=363.50).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Climate_change/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"Wikipedia: Artificial intelligence pageviews (ACF retention)",domain:"cultural",D:0.6142,r2:0.8608,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:2.6200,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=2.62). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.6142, R²=0.8608. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=2.62).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Artificial_intelligence/daily/2020010100/2025123100",image:null}
+  ,{id:"",name:"NASA POWER Colorado solar irradiance (ACF retention)",domain:"solar_energy",D:0.1049,r2:0.0179,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:9.3200,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=9.32).",narrative:"D=0.1049, R²=0.0179. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает LOGNORM (ΔAICc=9.32).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=-105.0&latitude=40.0&community=RE&format=JSON",image:null}
+  ,{id:"",name:"NASA POWER Berlin solar irradiance (ACF retention)",domain:"solar_energy",D:0.0725,r2:0.0170,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:3.9200,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=3.92). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.0725, R²=0.0170. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=3.92).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=13.4&latitude=52.5&community=RE&format=JSON",image:null}
+  ,{id:"",name:"NASA POWER Cape Town solar irradiance (ACF retention)",domain:"solar_energy",D:0.0964,r2:0.0155,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:8.0400,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=8.04).",narrative:"D=0.0964, R²=0.0155. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает LOGNORM (ΔAICc=8.04).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=18.4&latitude=-33.9&community=RE&format=JSON",image:null}
+  ,{id:"",name:"Water Quality Portal: Nitrate at USGS-01594440 (ACF retention)",domain:"chemistry",D:0.0750,r2:0.0296,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:2.0900,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.09).",narrative:"D=0.0750, R²=0.0296. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает POWER (ΔAICc=2.09).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://www.waterqualitydata.us/data/Result/search?siteid=USGS-01594440&characteristicName=Nitrate&mimeType=csv&zip=no",image:null}
+  ,{id:"",name:"SWPC GOES X-ray Flux (0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:0.6263,r2:0.9646,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:4.9600,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=4.96). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.6263, R²=0.9646. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=4.96).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
+  ,{id:"",name:"World Bank: USA Unemployment (annual) (ACF retention)",domain:"financial",D:1.8618,r2:0.9485,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:5.5200,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.52).",narrative:"D=1.8618, R²=0.9485. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает GAUSS (ΔAICc=5.52).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.worldbank.org/v2/country/US/indicator/SL.UEM.TOTL.ZS?format=json&per_page=100",image:null}
 
 ];
 
@@ -635,28 +654,28 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 85,
-  "d_mle": 1.8513,
-  "lam_mle": 1.3744,
-  "ks_p": 0.1431,
-  "d_direct": 2.3425,
-  "r2_direct": 0.9629,
-  "d_linear": 1.858,
-  "r2_linear": 0.9443,
-  "natural": 26,
-  "extraction": 59,
-  "mean": 1.2205,
-  "median": 1.2701,
-  "total": 85,
-  "compared": 83,
-  "ad_stat": 1.9104,
+  "n": 104,
+  "d_mle": 1.5971,
+  "lam_mle": 1.2262,
+  "ks_p": 0.0911,
+  "d_direct": 1.7175,
+  "r2_direct": 0.9723,
+  "d_linear": 1.4993,
+  "r2_linear": 0.9753,
+  "natural": 41,
+  "extraction": 63,
+  "mean": 1.102,
+  "median": 1.104,
+  "total": 104,
+  "compared": 102,
+  "ad_stat": 1.5777,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 0.98,
-  "delta_aic_lognormal": 11.19,
-  "silverman_p": 0.43,
-  "boot_lo": 1.47,
-  "boot_hi": 2.759,
-  "date": "2026-08-03"
+  "delta_aic_gamma": 3.48,
+  "delta_aic_lognormal": 22.77,
+  "silverman_p": 0.505,
+  "boot_lo": 1.208,
+  "boot_hi": 2.259,
+  "date": "2026-08-04"
 };
 
 function computeMetaS2(){
