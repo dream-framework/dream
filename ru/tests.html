@@ -254,7 +254,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "4 Aug 2026 14:09 EST";
+const LAST_REFRESH = "4 Aug 2026 17:42 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -404,7 +404,12 @@ const TESTS = [
   ,{id:"",name:"Open-Meteo: Delhi precipitation_sum (ACF retention)",domain:"environmental",D:0.4251,r2:0.7261,verdict:"NATURAL",model_verdict:"S2_DUST_WINS",delta_aicc:45.5300,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=45.53). S2+dust is the best overall model: D1=0.4639, D2=9.9892, R²=0.8131, AICc=-744.91. Dust decomposition confirmed — not a DREAM failure.",narrative:"D=0.4251, R²=0.7261. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает S2_DUST (ΔAICc=45.53), но S2+пыль побеждает — пылевая структура подтверждена, не провал DREAM.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
   ,{id:"",name:"USGS: Potomac River at Point of Rocks, MD (daily discharge) (ACF retention)",domain:"hydrology",D:0.6759,r2:0.6421,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:12.2100,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.21). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.6759, R²=0.6421. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=12.21).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"Zenodo: Quantitative Data from a Mixed-Methods Case Study ",domain:"scouting",D:4.4128,r2:0.7188,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D=4.4128, R²=0.7188. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает EXP (ΔAICc=20.00).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21792075",image:null}
-  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust decomposition: D1=0.6438, D2=7.246, R²=0.493, AICc=-979.08. S2+dust does not beat BIEXP. Needs investigation.",narrative:"D=0.1861, R²=0.4325. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=17.03).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D=0.1861, R²=0.4325. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=17.03).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D=1.9486, R²=0.1644. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает LOGNORM (ΔAICc=7.20).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
+  ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.0004,r2:1.0000,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:1330.4400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1330.44).",narrative:"D=1.0004, R²=1.0000. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает S2_DUST (ΔAICc=1330.44).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
+  ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D=1.9486, R²=0.1644. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает LOGNORM (ΔAICc=7.20).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
+  ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.2540,r2:0.9994,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:1248.0300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1248.03).",narrative:"D=1.2540, R²=0.9994. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает S2_DUST (ΔAICc=1248.03).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
+  ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:2.0696,r2:0.9353,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:28.1100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=28.11).",narrative:"D=2.0696, R²=0.9353. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает S2_DUST (ΔAICc=28.11).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
 
 ];
 
@@ -682,27 +687,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 128,
-  "d_mle": 1.3545,
-  "lam_mle": 1.1315,
-  "ks_p": 0.0795,
-  "d_direct": 1.3973,
-  "r2_direct": 0.9783,
-  "d_linear": 1.2906,
-  "r2_linear": 0.9788,
+  "n": 133,
+  "d_mle": 1.3789,
+  "lam_mle": 1.1591,
+  "ks_p": 0.0573,
+  "d_direct": 1.4287,
+  "r2_direct": 0.9791,
+  "d_linear": 1.2998,
+  "r2_linear": 0.9791,
   "natural": 59,
-  "extraction": 69,
-  "mean": 1.0384,
-  "median": 1.0089,
-  "total": 128,
-  "compared": 104,
-  "ad_stat": 1.4683,
+  "extraction": 74,
+  "mean": 1.0611,
+  "median": 1.0114,
+  "total": 133,
+  "compared": 109,
+  "ad_stat": 1.4755,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.91,
-  "delta_aic_lognormal": 25.13,
-  "silverman_p": 0.675,
+  "delta_aic_gamma": 2.6,
+  "delta_aic_lognormal": 28.27,
+  "silverman_p": 0.66,
   "boot_lo": 1.054,
-  "boot_hi": 1.74,
+  "boot_hi": 1.769,
   "date": "2026-08-04"
 };
 
