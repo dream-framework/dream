@@ -253,7 +253,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "3 Aug 2026 23:43 EST";
+const LAST_REFRESH = "4 Aug 2026 08:07 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -381,6 +381,7 @@ const TESTS = [
   ,{id:"",name:"Water Quality Portal: Nitrate at USGS-01594440 (ACF retention)",domain:"chemistry",D:0.0750,r2:0.0296,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:2.0900,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.09).",narrative:"D=0.0750, R²=0.0296. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to POWER (ΔAICc=2.09).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://www.waterqualitydata.us/data/Result/search?siteid=USGS-01594440&characteristicName=Nitrate&mimeType=csv&zip=no",image:null}
   ,{id:"",name:"SWPC GOES X-ray Flux (0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:0.6263,r2:0.9646,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:4.9600,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=4.96). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D=0.6263, R²=0.9646. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=4.96).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
   ,{id:"",name:"World Bank: USA Unemployment (annual) (ACF retention)",domain:"financial",D:1.8618,r2:0.9485,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:5.5200,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.52).",narrative:"D=1.8618, R²=0.9485. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=5.52).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.worldbank.org/v2/country/US/indicator/SL.UEM.TOTL.ZS?format=json&per_page=100",image:null}
+  ,{id:"",name:"Wikipedia: Albert Einstein pageviews (ACF retention)",domain:"cultural",D:0.4017,r2:0.9111,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:320.9300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=320.93).",narrative:"D=0.4017, R²=0.9111. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=320.93).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Albert_Einstein/daily/2020010100/2025123100",image:null}
 
 ];
 
@@ -426,11 +427,11 @@ function fitQuality(t){
   if(t.verdict === "CONFIRMED") return {label:"CONFIRMED", cls:"fit-confirmed"};
   if(t.model_verdict === "S2_WINS") return {label:"CONFIRMED", cls:"fit-confirmed"};
   if(t.model_verdict === "S2_TIES") return {label:"TENTATIVE", cls:"fit-tentative"};
-  if(t.model_verdict === "S2_LOSES") return {label:"REJECTED", cls:"fit-rejected"};
+  if(t.model_verdict === "S2_LOSES") return {label:"DUST-DOMINATED", cls:"fit-dust"};
   const narr = t.narrative || "";
   if(/S2 beats/i.test(narr)) return {label:"CONFIRMED", cls:"fit-confirmed"};
   if(/S2 ties/i.test(narr)) return {label:"TENTATIVE", cls:"fit-tentative"};
-  if(/S2 loses/i.test(narr)) return {label:"REJECTED", cls:"fit-rejected"};
+  if(/S2 loses/i.test(narr)) return {label:"DUST-DOMINATED", cls:"fit-dust"};
   return {label:"UNDETERMINED", cls:"fit-undetermined"};
 }
 
@@ -503,7 +504,7 @@ function summaryPills(){
   const fitConfirmed = TESTS.filter(t => fitQuality(t).label === "CONFIRMED").length;
   const fitTentative = TESTS.filter(t => fitQuality(t).label === "TENTATIVE").length;
   const fitUndetermined = TESTS.filter(t => fitQuality(t).label === "UNDETERMINED").length;
-  const fitRejected = TESTS.filter(t => fitQuality(t).label === "REJECTED").length;
+  const fitDust = TESTS.filter(t => fitQuality(t).label === "DUST-DOMINATED").length;
   // S2 present = S2 was fitted (has a D value), regardless of whether it's the best model
   const s2Present = TESTS.filter(t => t.D !== null && t.D !== undefined && t.D === t.D).length;
   const natural = TESTS.filter(t => regimeLabel(t) === "NATURAL").length;
@@ -518,7 +519,7 @@ function summaryPills(){
     <div class="summary-pill mut pill-filter" data-filter="all" style="cursor:pointer"><span class="n">${total}</span> <span class="l">Total</span></div>
     <div class="summary-pill good pill-filter" data-filter="fit:CONFIRMED" style="cursor:pointer" title="S2 beats all alternative models on AICc"><span class="n">${fitConfirmed}</span> <span class="l">S2 wins</span></div>
     <div class="summary-pill warn pill-filter" data-filter="fit:TENTATIVE" style="cursor:pointer" title="S2 ties with alternatives (ΔAICc < 2)"><span class="n">${fitTentative}</span> <span class="l">S2 ties</span></div>
-    <div class="summary-pill bad pill-filter" data-filter="fit:REJECTED" style="cursor:pointer" title="S2 loses to an alternative model"><span class="n">${fitRejected}</span> <span class="l">S2 loses</span></div>
+    <div class="summary-pill bad pill-filter" data-filter="fit:DUST-DOMINATED" style="cursor:pointer" title="S2 loses to an alternative model"><span class="n">${fitDust}</span> <span class="l">S2 loses</span></div>
     <div class="summary-pill mut pill-filter" data-filter="fit:UNDETERMINED" style="cursor:pointer" title="No model comparison performed yet"><span class="n">${fitUndetermined}</span> <span class="l">No comparison</span></div>
     <div class="summary-pill" style="cursor:default;background:rgba(125,211,168,.10);color:var(--good);border-color:rgba(125,211,168,.3);" title="${s2Present} of ${total} tests have S2 fitted (have a D value), regardless of whether S2 is the best model"><span class="n">${s2Present}</span> <span class="l">S2 fitted (${s2Pct}%)</span></div>
     <div class="summary-pill good pill-filter" data-filter="regime:NATURAL" style="cursor:pointer"><span class="n">${natural}</span> <span class="l">Natural</span></div>
@@ -663,27 +664,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 104,
-  "d_mle": 1.5971,
-  "lam_mle": 1.2262,
-  "ks_p": 0.0911,
-  "d_direct": 1.7175,
-  "r2_direct": 0.9723,
-  "d_linear": 1.4993,
-  "r2_linear": 0.9753,
-  "natural": 41,
+  "n": 105,
+  "d_mle": 1.5894,
+  "lam_mle": 1.2186,
+  "ks_p": 0.0968,
+  "d_direct": 1.6842,
+  "r2_direct": 0.9727,
+  "d_linear": 1.5012,
+  "r2_linear": 0.9763,
+  "natural": 42,
   "extraction": 63,
-  "mean": 1.102,
-  "median": 1.104,
-  "total": 104,
-  "compared": 102,
-  "ad_stat": 1.5777,
+  "mean": 1.0954,
+  "median": 1.0953,
+  "total": 105,
+  "compared": 103,
+  "ad_stat": 1.5417,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.48,
-  "delta_aic_lognormal": 22.77,
-  "silverman_p": 0.505,
-  "boot_lo": 1.208,
-  "boot_hi": 2.259,
+  "delta_aic_gamma": 3.25,
+  "delta_aic_lognormal": 22.08,
+  "silverman_p": 0.49,
+  "boot_lo": 1.204,
+  "boot_hi": 2.238,
   "date": "2026-08-04"
 };
 

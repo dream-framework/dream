@@ -51,6 +51,13 @@ def m_lognormal(t, A, mu, sigma):
 def m_gaussian(t, A, sigma):
     return A * np.exp(-0.5 * (t / max(sigma, 1e-6)) ** 2)
 
+def m_s2_dust(t, A1, lambda_q1, D1, A2, lambda_q2, D2):
+    """S2+dust decomposition: two stretched exponentials.
+    R(λ) = A1·exp[-(λ/λq1)^D1] + A2·exp[-(λ/λq2)^D2]
+    First component = ridge retention, second = dust."""
+    return (A1 * np.exp(-np.power(np.maximum(t, 1e-6) / max(lambda_q1, 1e-6), D1)) +
+            A2 * np.exp(-np.power(np.maximum(t, 1e-6) / max(lambda_q2, 1e-6), D2)))
+
 # ── AICc ─────────────────────────────────────────────────────────────
 
 def aicc(rss, n, k):
@@ -169,6 +176,26 @@ def fit_all_models(t, R):
                             'aicc': aicc(rss, n, k), 'bic': bic(rss, n, k),
                             'r2': 1 - rss / ss_tot}
 
+    # 7. S2+dust (two-component S2) — 6 parameters
+    fit = _safe_fit(m_s2_dust, t, R,
+                    p0_list=[
+                        [0.7, t_mid * 0.3, 1.5, 0.3, t_mid * 2, 0.5],
+                        [0.6, t_mid * 0.5, 1.0, 0.4, t_mid, 0.6],
+                        [0.5, t_mid, 1.2, 0.5, t_mid * 3, 0.4],
+                        [0.8, t_mid * 0.2, 2.0, 0.2, t_mid * 5, 0.3],
+                    ],
+                    bounds=([0.0, 1e-3, 0.01, 0.0, 1e-3, 0.01],
+                            [2.0, 1e6, 10.0, 2.0, 1e6, 10.0]),
+                    maxfev=30000)
+    if fit:
+        popt, rss = fit
+        k = 6
+        results['S2_DUST'] = {'popt': popt, 'rss': rss, 'k': k,
+                              'aicc': aicc(rss, n, k), 'bic': bic(rss, n, k),
+                              'r2': 1 - rss / ss_tot,
+                              'D1': float(popt[2]), 'D2': float(popt[5]),
+                              'lambda_q1': float(popt[1]), 'lambda_q2': float(popt[4])}
+
     return results
 
 # ── Verdict ──────────────────────────────────────────────────────────
@@ -226,6 +253,13 @@ def compare(t, R, label=''):
         's2': {'D': round(fits['S2']['D'], 4),
                'lambda_q': round(fits['S2']['lambda_q'], 2),
                'r2': round(fits['S2']['r2'], 4)},
+        's2_dust': ({'D1': round(fits['S2_DUST']['D1'], 4),
+                     'D2': round(fits['S2_DUST']['D2'], 4),
+                     'lambda_q1': round(fits['S2_DUST']['lambda_q1'], 2),
+                     'lambda_q2': round(fits['S2_DUST']['lambda_q2'], 2),
+                     'r2': round(fits['S2_DUST']['r2'], 4),
+                     'aicc': round(fits['S2_DUST']['aicc'], 2)}
+                    if 'S2_DUST' in fits else None),
         'label': label,
         'n': len(t),
     }

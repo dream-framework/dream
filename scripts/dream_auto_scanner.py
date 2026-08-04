@@ -56,10 +56,25 @@ def fit_s2(t, R, label='', require_wins=False):
         model_note = f'S2 ties {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}, within ±2).'
     else:  # S2_LOSES — record honestly
         # Check if BIEXP won — this indicates dust contamination (predicted by DREAM)
+        s2_dust = cmp.get('s2_dust')
         if cmp['best_alt_name'] == 'BIEXP':
-            model_note = (f'S2 loses to BIEXP (ΔAICc={cmp["delta_aicc"]}). '
-                         f'Dust-contaminated: two-scale structure. S2+dust decomposition '
-                         f'(predicted by DREAM) should recover the fit. Not a DREAM failure.')
+            if s2_dust:
+                # Check if S2+dust beats BIEXP
+                biexp_aicc = None
+                for name, aicc_val, _, _ in cmp.get('rank', []):
+                    if name == 'BIEXP':
+                        biexp_aicc = aicc_val
+                        break
+                dust_beats_biexp = s2_dust['aicc'] < biexp_aicc if biexp_aicc else False
+                model_note = (f'S2 loses to BIEXP (ΔAICc={cmp["delta_aicc"]}). '
+                             f'S2+dust decomposition: D1={s2_dust["D1"]}, D2={s2_dust["D2"]}, '
+                             f'R²={s2_dust["r2"]}, AICc={s2_dust["aicc"]}. '
+                             f'{"S2+dust BEATS BIEXP — dust structure confirmed." if dust_beats_biexp else "S2+dust does not beat BIEXP."} '
+                             f'{"Not a DREAM failure." if dust_beats_biexp else "Needs investigation."}')
+            else:
+                model_note = (f'S2 loses to BIEXP (ΔAICc={cmp["delta_aicc"]}). '
+                             f'Dust-contaminated: two-scale structure. S2+dust fit failed. '
+                             f'Not necessarily a DREAM failure.')
         else:
             model_note = f'S2 loses to {cmp["best_alt_name"]} (ΔAICc={cmp["delta_aicc"]}).'
         print(f'    ⚠ S2 loses to {cmp["best_alt_name"]} '

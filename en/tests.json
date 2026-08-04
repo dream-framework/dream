@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-04T03:43:10Z",
-  "total_tests": 104,
+  "exported_at": "2026-08-04T12:07:58Z",
+  "total_tests": 105,
   "fields": [
     "id",
     "name",
@@ -1543,6 +1543,22 @@
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://api.worldbank.org/v2/country/US/indicator/SL.UEM.TOTL.ZS?format=json&per_page=100"
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Albert Einstein pageviews (ACF retention)",
+      "domain": "cultural",
+      "D": 0.4017,
+      "r2": 0.9111,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 320.93,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=320.93).",
+      "narrative": "D=0.4017, R²=0.9111. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=320.93).",
+      "source": "auto-scan 2026-08-04",
+      "date": "2026-08-04",
+      "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Albert_Einstein/daily/2020010100/2025123100"
     }
   ]
 }
