@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-03T21:35:22.549197+00:00",
+  "initialized": "2026-08-04T14:45:18.689069+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -1399,11 +1399,11 @@
       "family": "covid",
       "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
       "registry_date": "2026-07-29",
-      "D": 1.0953,
-      "r2": 0.964,
+      "D": 1.0071,
+      "r2": 0.9548,
       "verdict": "EXTRACTION",
-      "model_verdict": "S2_LOSES",
-      "narrative": "D=1.0953, R²=0.9640. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=2.18).",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0071, R²=0.9548. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=145.14), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
       "prospective": false,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -1433,11 +1433,11 @@
       "family": "covid",
       "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
       "registry_date": "2026-07-29",
-      "D": 0.3566,
-      "r2": 0.7916,
-      "verdict": "NATURAL",
-      "model_verdict": "S2_LOSES",
-      "narrative": "D=0.3566, R²=0.7916. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to EXP (ΔAICc=2.18).",
+      "D": 0.801,
+      "r2": 0.9063,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.8010, R²=0.9063. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=60.79), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
       "prospective": false,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -2900,6 +2900,1434 @@
       "verdict": "EXTRACTION",
       "model_verdict": "S2_TIES",
       "narrative": "D=1.0156, R²=0.9766. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.81, within ±2).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",
+      "registry_date": "2026-08-04",
+      "D": 0.5629,
+      "r2": 0.9957,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=382.73), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED T10YIE (10-Year Breakeven Inflation) (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=T10YIE",
+      "registry_date": "2026-08-04",
+      "D": 1.0106,
+      "r2": 0.9963,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0106, R²=0.9963. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=932.86), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "FRED DGS10 (10-Year Treasury Rate) (ACF retention)",
+      "family": "fred",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
+      "registry_date": "2026-08-04",
+      "D": 0.9594,
+      "r2": 0.9999,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.9594, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.63).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "COVID-19 confirmed (daily new, global) (ACF retention)",
+      "family": "covid",
+      "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+      "registry_date": "2026-08-04",
+      "D": 1.0071,
+      "r2": 0.9548,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0071, R²=0.9548. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=145.14), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "COVID-19 deaths (daily new, global) (ACF retention)",
+      "family": "covid",
+      "source_url": "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+      "registry_date": "2026-08-04",
+      "D": 0.801,
+      "r2": 0.9063,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.8010, R²=0.9063. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=60.79), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NDBC Buoy 41001 (E Hatteras) wave height (ACF retention)",
+      "family": "ndbc",
+      "source_url": "https://www.ndbc.noaa.gov/data/realtime2/41001.txt",
+      "registry_date": "2026-08-04",
+      "D": 0.6038,
+      "r2": 0.8261,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.6038, R²=0.8261. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=157.45), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts Germany-Luxembourg electricity spot price (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=DE-LU&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.3453,
+      "r2": 0.5201,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.3453, R²=0.5201. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=-0.12, within ±2).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts France electricity spot price (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=FR&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.2208,
+      "r2": 0.4507,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2208, R²=0.4507. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=9.48), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts Netherlands electricity spot price (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=NL&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.2021,
+      "r2": 0.3005,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.2021, R²=0.3005. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=4.47).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts Switzerland electricity spot price (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-06-30T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.1242,
+      "r2": 0.3034,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.1242, R²=0.3034. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=17.75), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: COVID-19 pandemic pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/COVID-19_pandemic/daily/2020010100/2025123100",
+      "registry_date": "2026-08-04",
+      "D": 0.5333,
+      "r2": 0.9624,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.5333, R²=0.9624. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=457.90), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Climate change pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Climate_change/daily/2020010100/2025123100",
+      "registry_date": "2026-08-04",
+      "D": 1.0499,
+      "r2": 0.9614,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0499, R²=0.9614. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=418.65), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Artificial intelligence pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Artificial_intelligence/daily/2020010100/2025123100",
+      "registry_date": "2026-08-04",
+      "D": 0.6142,
+      "r2": 0.8608,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.6142, R²=0.8608. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=15.07), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER Colorado solar irradiance (ACF retention)",
+      "family": "nasa",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=-105.0&latitude=40.0&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0741,
+      "r2": 0.1062,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0741, R²=0.1062. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=17.68).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER Berlin solar irradiance (ACF retention)",
+      "family": "nasa",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=13.4&latitude=52.5&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0485,
+      "r2": 0.046,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0485, R²=0.0460. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=8.58).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER Cape Town solar irradiance (ACF retention)",
+      "family": "nasa",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN&longitude=18.4&latitude=-33.9&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0473,
+      "r2": 0.04,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0473, R²=0.0400. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=7.60).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Water Quality Portal: Nitrate at USGS-01594440 (ACF retention)",
+      "family": "water quality portal",
+      "source_url": "https://www.waterqualitydata.us/data/Result/search?siteid=USGS-01594440&characteristicName=Nitrate&mimeType=csv&zip=no",
+      "registry_date": "2026-08-04",
+      "D": 0.075,
+      "r2": 0.0296,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0750, R²=0.0296. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to POWER (ΔAICc=2.09).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "SWPC GOES X-ray Flux (0.1-0.8nm band) (ACF retention)",
+      "family": "swpc",
+      "source_url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",
+      "registry_date": "2026-08-04",
+      "D": 1.0011,
+      "r2": 0.9875,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0011, R²=0.9875. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=312.70), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "World Bank: USA Unemployment (annual) (ACF retention)",
+      "family": "world bank",
+      "source_url": "https://api.worldbank.org/v2/country/US/indicator/SL.UEM.TOTL.ZS?format=json&per_page=100",
+      "registry_date": "2026-08-04",
+      "D": 1.8618,
+      "r2": 0.9485,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=1.8618, R²=0.9485. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=5.52).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Wikipedia: Albert Einstein pageviews (ACF retention)",
+      "family": "wikipedia",
+      "source_url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Albert_Einstein/daily/2020010100/2025123100",
+      "registry_date": "2026-08-04",
+      "D": 0.4017,
+      "r2": 0.9111,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.4017, R²=0.9111. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=320.93), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data files for Fluorescence lifetime imaging of ap",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21766287",
+      "registry_date": "2026-08-04",
+      "D": 1.3824,
+      "r2": 0.9985,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.3824, R²=0.9985. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-201.57).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data files for Fluorescence lifetime imaging of ap",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21766287",
+      "registry_date": "2026-08-04",
+      "D": 1.1688,
+      "r2": 0.9998,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_WINS",
+      "narrative": "D=1.1688, R²=0.9998. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-523.80).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Berlin wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.4993,
+      "r2": 0.7709,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.4993, R²=0.7709. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=13.73), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Tokyo wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.2073,
+      "r2": 0.8317,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2073, R²=0.8317. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=18.36), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Tokyo precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.68&longitude=139.69&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-08-04",
+      "D": 0.2198,
+      "r2": 0.8639,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2198, R²=0.8639. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=16.73), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: NYC wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.2991,
+      "r2": 0.7953,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2991, R²=0.7953. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=27.01), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: NYC precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-08-04",
+      "D": 2.9027,
+      "r2": 0.7908,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=2.9027, R²=0.7908. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=2.09).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: London wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=51.51&longitude=-0.13&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.9421,
+      "r2": 0.8205,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.9421, R²=0.8205. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=2.44).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Sydney wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.2227,
+      "r2": 0.7322,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2227, R²=0.7322. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=71.90), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Sydney precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-33.87&longitude=151.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-08-04",
+      "D": 1.0384,
+      "r2": 0.8078,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=1.0384, R²=0.8078. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=2.06).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Rio wind_speed_10m_max (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=wind_speed_10m_max",
+      "registry_date": "2026-08-04",
+      "D": 0.2844,
+      "r2": 0.7712,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2844, R²=0.7712. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=34.65), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Rio precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-08-04",
+      "D": 0.9399,
+      "r2": 0.7473,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.9399, R²=0.7473. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=25.27), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "USGS: Cuyahoga River at Independence, OH (daily discharge) (ACF retention)",
+      "family": "usgs",
+      "source_url": "https://waterservices.usgs.gov/nwis/dv/?sites=04213500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",
+      "registry_date": "2026-08-04",
+      "D": 0.5076,
+      "r2": 0.6283,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.5076, R²=0.6283. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=20.15).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts: Germany-Luxembourg electricity spot price (hourly) (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=DE-LU&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.3216,
+      "r2": 0.4781,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.3216, R²=0.4781. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=4.45), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts: France electricity spot price (hourly) (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=FR&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.2322,
+      "r2": 0.4585,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.2322, R²=0.4585. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=12.38).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Energy-Charts: Netherlands electricity spot price (hourly) (ACF retention)",
+      "family": "energy-charts",
+      "source_url": "https://api.energy-charts.info/price?bzn=NL&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",
+      "registry_date": "2026-08-04",
+      "D": 0.2333,
+      "r2": 0.3288,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.2333, R²=0.3288. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=4.13), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER: Colorado USA solar irradiance (hourly) (ACF retention)",
+      "family": "nasa power",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=-105.0&latitude=40.0&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0741,
+      "r2": 0.1062,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0741, R²=0.1062. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=17.68).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER: Berlin DE solar irradiance (hourly) (ACF retention)",
+      "family": "nasa power",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=13.4&latitude=52.5&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0485,
+      "r2": 0.046,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0485, R²=0.0460. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=8.58).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "NASA POWER: Cape Town ZA solar irradiance (hourly) (ACF retention)",
+      "family": "nasa power",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=18.4&latitude=-33.9&community=RE&format=JSON",
+      "registry_date": "2026-08-04",
+      "D": 0.0473,
+      "r2": 0.04,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.0473, R²=0.0400. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=7.60).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Open-Meteo: Delhi precipitation_sum (ACF retention)",
+      "family": "open-meteo",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
+      "registry_date": "2026-08-04",
+      "D": 0.4251,
+      "r2": 0.7261,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=0.4251, R²=0.7261. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=45.53), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "USGS: Potomac River at Point of Rocks, MD (daily discharge) (ACF retention)",
+      "family": "usgs",
+      "source_url": "https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",
+      "registry_date": "2026-08-04",
+      "D": 0.6759,
+      "r2": 0.6421,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.6759, R²=0.6421. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to BIEXP (ΔAICc=12.21).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Quantitative Data from a Mixed-Methods Case Study ",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21792075",
+      "registry_date": "2026-08-04",
+      "D": 4.4128,
+      "r2": 0.7188,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=4.4128, R²=0.7188. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=20.00).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
