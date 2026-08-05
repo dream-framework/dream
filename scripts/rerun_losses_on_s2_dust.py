@@ -293,20 +293,44 @@ def rerun_one(entry):
     r2 = fit['r2']
     regime = fit['verdict']  # EXTRACTION/NATURAL/THRESHOLD
 
-    # Decide verdict
+    # Decide verdict — with STRICT physical validation
+    # S2_DUST (6 params) almost always beats S2 (3) and BIEXP (4) on AICc
+    # just from parameter flexibility. A legitimate dust decomposition must
+    # satisfy ALL of:
+    #   1. D1 > 0 and D2 > 0 (no degenerate zeros)
+    #   2. R²_dust >= 0.5 (dust model must actually fit)
+    #   3. 0.05 < D1, D2 < 9.0 (not at optimizer boundary)
+    #   4. |log(D1/D2)| > 0.5 (distinct scales — ratio > 1.65x)
     new_mv = 'S2_LOSES'
     if s2_dust and best_alt_aicc is not None:
-        if best_alt_name == 'S2_DUST':
-            # S2_DUST is the BEST model overall — that IS the redemption.
-            # S2_DUST is part of the DREAM framework (two-component S2),
-            # so this is dust contamination confirmed, not a DREAM failure.
-            new_mv = 'S2_DUST_WINS'
-        else:
-            # S2 lost to something else (BIEXP, GAUSS, etc.) — does S2_DUST
-            # beat THAT alternative?
-            delta_dust_vs_alt = s2_dust['aicc'] - best_alt_aicc
-            if delta_dust_vs_alt <= -2:
+        import math as _math
+        d1_val = s2_dust.get('D1', 0)
+        d2_val = s2_dust.get('D2', 0)
+        r2_dust_val = s2_dust.get('r2', 0)
+        issues = []
+        if d1_val <= 0 or d2_val <= 0:
+            issues.append('degenerate D')
+        if r2_dust_val < 0.5:
+            issues.append(f'R²_dust={r2_dust_val:.3f}<0.5')
+        if d1_val > 0 and not (0.05 < d1_val < 9.0):
+            issues.append(f'D1={d1_val:.3f} at boundary')
+        if d2_val > 0 and not (0.05 < d2_val < 9.0):
+            issues.append(f'D2={d2_val:.3f} at boundary')
+        if d1_val > 0 and d2_val > 0:
+            ratio = abs(_math.log(d1_val / d2_val))
+            if ratio < 0.5:
+                issues.append(f'D1≈D2 (|log|={ratio:.2f}<0.5)')
+
+        if not issues:
+            if best_alt_name == 'S2_DUST':
                 new_mv = 'S2_DUST_WINS'
+            else:
+                # S2_DUST must beat the best non-S2 alternative by ΔAICc <= -4
+                # (stringent, since S2_DUST has 2 extra params vs BIEXP)
+                delta_dust_vs_alt = s2_dust['aicc'] - best_alt_aicc
+                if delta_dust_vs_alt <= -4:
+                    new_mv = 'S2_DUST_WINS'
+        # else: stays S2_LOSES even if S2_DUST has lowest AICc — overfitting
 
     # Build model_note
     if new_mv == 'S2_DUST_WINS':

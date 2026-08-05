@@ -1,75 +1,88 @@
 #!/usr/bin/env python3
 """
-Flip S2_LOSES → S2_DUST_WINS for entries where best_alt is already S2_DUST.
+Flip S2_LOSES → S2_DUST_WINS ONLY for entries where:
+  1. best_alt = S2_DUST (the fit already ran, S2_DUST is the best model)
+  2. The original model_note contains D1=/D2=/R²= values (fit was validated)
+  3. The dust decomposition passes physical validation:
+     - D1 > 0 and D2 > 0 (no degenerate zeros)
+     - R²_dust >= 0.5
+     - 0.05 < D1, D2 < 9.0 (not at boundary)
+     - |log(D1/D2)| > 0.5 (distinct scales)
 
-These entries were fitted by the auto-scanner, which found S2_DUST to be the
-best overall model. But fit_s2() in dream_auto_scanner.py sets model_verdict
-based on whether S2 beats the best NON-S2 alternative — so when S2_DUST itself
-is the best, it incorrectly labels the entry as S2_LOSES.
-
-This script flips those entries to S2_DUST_WINS without refetching, since the
-fit was already done. It also handles entries where the model_note already
-contains 'S2+dust' indicating a dust decomposition was performed.
+Entries where best_alt=S2_DUST but the fit wasn't validated (no D1/D2 in
+model_note) are LEFT as S2_LOSES — we can't confirm the dust decomposition
+is real, not just 6-parameter overfitting.
 """
-import os, sys, json, re
+import os, sys, json, re, math
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+def validate_dust_from_note(note):
+    """Extract D1, D2, R² from model_note and validate. Returns (is_legit, issues)."""
+    m = re.search(r'D1=([\d.]+),\s*D2=([\d.]+),\s*R²=([\d.]+)', note)
+    if not m:
+        return False, ['no D1/D2/R² in model_note (fit not validated)']
+    d1, d2, r2 = float(m.group(1)), float(m.group(2)), float(m.group(3))
+    issues = []
+    if d1 <= 0 or d2 <= 0:
+        issues.append(f'degenerate (D1={d1}, D2={d2})')
+    if r2 < 0.5:
+        issues.append(f'R²_dust={r2:.3f} < 0.5')
+    if d1 > 0 and not (0.05 < d1 < 9.0):
+        issues.append(f'D1={d1:.3f} at boundary')
+    if d2 > 0 and not (0.05 < d2 < 9.0):
+        issues.append(f'D2={d2:.3f} at boundary')
+    if d1 > 0 and d2 > 0:
+        ratio = abs(math.log(d1 / d2))
+        if ratio < 0.5:
+            issues.append(f'D1≈D2 (|log|={ratio:.2f}<0.5)')
+    return (len(issues) == 0), issues
+
 def flip_entries(html_path):
-    """Flip S2_LOSES with best_alt=S2_DUST to S2_DUST_WINS in tests.html."""
+    """Flip S2_LOSES with best_alt=S2_DUST to S2_DUST_WINS in tests.html,
+    but ONLY if the dust decomposition passes physical validation."""
     with open(html_path, encoding='utf-8') as f:
         html = f.read()
 
-    # Find all entries with model_verdict:"S2_LOSES" and best_alt:"S2_DUST"
-    # Pattern: {id:"...",name:"...",...,model_verdict:"S2_LOSES",...,best_alt:"S2_DUST",...}
     flips = 0
-    # Use regex to find entry blocks containing both model_verdict:"S2_LOSES" and best_alt:"S2_DUST"
+    skipped = 0
     pattern = re.compile(
         r'(\{[^{}]*?model_verdict:"S2_LOSES"[^{}]*?best_alt:"S2_DUST"[^{}]*?\})',
         re.DOTALL
     )
 
     def flip_one(m):
-        nonlocal flips
+        nonlocal flips, skipped
         entry = m.group(1)
+        # Extract model_note to validate
+        nm = re.search(r'model_note:"((?:[^"\\]|\\.)*)"', entry)
+        if not nm:
+            skipped += 1
+            return entry  # don't flip
+        note = nm.group(1).replace('\\"', '"').replace('\\\\', '\\')
+
+        is_legit, issues = validate_dust_from_note(note)
+        if not is_legit:
+            skipped += 1
+            return entry  # don't flip — keep as S2_LOSES
+
         # Flip model_verdict
         new_entry = entry.replace('model_verdict:"S2_LOSES"', 'model_verdict:"S2_DUST_WINS"')
-        # Update model_note if it's the generic "S2 loses to S2_DUST" — make it clear this is dust-resolved
-        # Don't overwrite if model_note already has dust decomposition info
-        if 'model_note:"S2 loses to S2_DUST' in new_entry and 'S2+dust' not in new_entry.split('model_note:"')[1].split('"')[0]:
-            # Generic note — replace with dust-resolved note
-            # Extract delta_aicc
-            dm = re.search(r'delta_aicc:([\d.]+)', new_entry)
-            delta = float(dm.group(1)) if dm else 0.0
-            new_note = f'S2 loses to S2+dust (ΔAICc={delta:.2f}). S2+dust is the best overall model. Dust decomposition confirmed — not a DREAM failure.'
-            new_note_escaped = new_note.replace('\\', '\\\\').replace('"', '\\"')
-            # Replace existing model_note (or add if not present)
-            if 'model_note:"' in new_entry:
-                new_entry = re.sub(
-                    r'model_note:"(?:[^"\\]|\\.)*"',
-                    f'model_note:"{new_note_escaped}"',
-                    new_entry, count=1
-                )
-            else:
-                new_entry = new_entry.replace(
-                    'best_alt:"S2_DUST"',
-                    f'best_alt:"S2_DUST",model_note:"{new_note_escaped}"'
-                )
         flips += 1
         return new_entry
 
     new_html = pattern.sub(flip_one, html)
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(new_html)
-    return flips
+    return flips, skipped
 
 def main():
     print('=== Flipping S2_LOSES → S2_DUST_WINS where best_alt=S2_DUST ===\n')
 
-    en_flips = flip_entries(os.path.join(REPO, 'en/tests.html'))
-    print(f'EN: flipped {en_flips} entries')
-    ru_flips = flip_entries(os.path.join(REPO, 'ru/tests.html'))
-    print(f'RU: flipped {ru_flips} entries')
+    en_flips, en_skipped = flip_entries(os.path.join(REPO, 'en/tests.html'))
+    print(f'EN: flipped {en_flips} entries, skipped {en_skipped} (failed validation)')
+    ru_flips, ru_skipped = flip_entries(os.path.join(REPO, 'ru/tests.html'))
+    print(f'RU: flipped {ru_flips} entries, skipped {ru_skipped} (failed validation)')
 
     # Re-export tests.json
     import subprocess

@@ -2050,12 +2050,24 @@ def main():
     # 10b4. FLIP entries where best_alt=S2_DUST but verdict still S2_LOSES
     # These were already fitted (S2_DUST is the best model) but fit_s2() labels
     # them S2_LOSES because S2 itself isn't the best. Flip them to S2_DUST_WINS.
+    # NOTE: flip_dust_wins.py validates the dust decomposition physically
+    # (D1>0, D2>0, R²>=0.5, not at boundary, distinct scales) before flipping.
     print('\n🔄 Flipping S2_LOSES with best_alt=S2_DUST → S2_DUST_WINS...')
     try:
         import flip_dust_wins as _flip
         _flip.main()
     except Exception as e:
         print(f'  ⚠ Flip failed: {e}')
+
+    # 10b5. RE-AUDIT all S2_DUST_WINS entries with strict physical validation
+    # Catches any that slipped through with degenerate/boundary/non-distinct
+    # dust parameters. Reverts them back to S2_LOSES.
+    print('\n🔍 Re-auditing S2_DUST_WINS for overfitting...')
+    try:
+        import reaudit_dust_wins as _reaudit
+        _reaudit.main()
+    except Exception as e:
+        print(f'  ⚠ Re-audit failed: {e}')
 
     # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):
