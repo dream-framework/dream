@@ -253,7 +253,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "4 Aug 2026 23:42 EST";
+const LAST_REFRESH = "5 Aug 2026 02:49 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -412,7 +412,11 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:2.0696,r2:0.9353,verdict:"EXTRACTION",model_verdict:"S2_DUST_WINS",delta_aicc:28.1100,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=28.11). S2+dust is the best overall model. Dust decomposition confirmed — not a DREAM failure.",narrative:"D=2.0696, R²=0.9353. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=28.11), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
   ,{id:"",name:"Zenodo: Supporting data for \"JUMP Cell Painting chemical d",domain:"scouting",D:1.8027,r2:0.9738,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.06).",narrative:"D=1.8027, R²=0.9738. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=2.06).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21800106",image:null}
   ,{id:"",name:"Zenodo: Supporting data for \"JUMP Cell Painting chemical d",domain:"scouting",D:0.2650,r2:0.8391,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:0.3600,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=0.36, within ±2).",narrative:"D=0.2650, R²=0.8391. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=0.36, within ±2).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21800106",image:null}
-  ,{id:"",name:"Zenodo: R Code for Regional Analysis: GTFS shapes.txt Gene",domain:"scouting",D:2.5953,r2:0.8890,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:9.6500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=9.65).",narrative:"D=2.5953, R²=0.8890. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=9.65).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21799975",image:null}
+  ,{id:"",name:"Zenodo: R Code for Regional Analysis: GTFS shapes.txt Gene",domain:"scouting",D:2.5953,r2:0.8890,verdict:"EXTRACTION",model_verdict:"S2_DUST_WINS",delta_aicc:9.6500,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=9.65). S2+dust is the best overall model. Dust decomposition confirmed — not a DREAM failure.",narrative:"D=2.5953, R²=0.8890. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=9.65), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21799975",image:null}
+  ,{id:"",name:"Zenodo: AutoGERD",domain:"scouting",D:0.6451,r2:0.9966,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:5.1600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=5.16).",narrative:"D=0.6451, R²=0.9966. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to EXP (ΔAICc=5.16).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21799511",image:null}
+  ,{id:"",name:"Zenodo: Ipseity Daily Data",domain:"scouting",D:1.9851,r2:0.8376,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:7.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=7.0).",narrative:"D=1.9851, R²=0.8376. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=7.00).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802448",image:null}
+  ,{id:"",name:"Zenodo: Ipseity Daily Data",domain:"scouting",D:0.1288,r2:0.7036,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:39.8100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=39.81).",narrative:"D=0.1288, R²=0.7036. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=39.81).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802448",image:null}
+  ,{id:"",name:"Zenodo: Ipseity Daily Data",domain:"scouting",D:2.1826,r2:0.9866,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:164.4900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=164.49).",narrative:"D=2.1826, R²=0.9866. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=164.49).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802448",image:null}
 
 ];
 
@@ -699,27 +703,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 130,
-  "d_mle": 1.5089,
-  "lam_mle": 1.2397,
-  "ks_p": 0.1423,
-  "d_direct": 1.5703,
-  "r2_direct": 0.9814,
-  "d_linear": 1.5236,
-  "r2_linear": 0.976,
-  "natural": 54,
-  "extraction": 76,
-  "mean": 1.1171,
+  "n": 134,
+  "d_mle": 1.4991,
+  "lam_mle": 1.2422,
+  "ks_p": 0.1531,
+  "d_direct": 1.5388,
+  "r2_direct": 0.9834,
+  "d_linear": 1.5026,
+  "r2_linear": 0.9787,
+  "natural": 56,
+  "extraction": 78,
+  "mean": 1.1206,
   "median": 1.0336,
-  "total": 136,
-  "compared": 134,
-  "ad_stat": 1.2389,
+  "total": 140,
+  "compared": 138,
+  "ad_stat": 1.1268,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 0.47,
-  "delta_aic_lognormal": 15.22,
-  "silverman_p": 0.795,
+  "delta_aic_gamma": 0.92,
+  "delta_aic_lognormal": 16.82,
+  "silverman_p": 0.835,
   "boot_lo": 1.054,
-  "boot_hi": 1.755,
+  "boot_hi": 1.733,
   "date": "2026-08-05"
 };
 

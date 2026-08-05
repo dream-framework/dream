@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-05T03:42:48.381344+00:00",
+  "initialized": "2026-08-05T06:49:40.888874+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -4632,8 +4632,144 @@
       "D": 2.5953,
       "r2": 0.889,
       "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=2.5953, R²=0.8890. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=9.65), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: AutoGERD",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21799511",
+      "registry_date": "2026-08-05",
+      "D": 0.6451,
+      "r2": 0.9966,
+      "verdict": "NATURAL",
       "model_verdict": "S2_LOSES",
-      "narrative": "D=2.5953, R²=0.8890. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=9.65).",
+      "narrative": "D=0.6451, R²=0.9966. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to EXP (ΔAICc=5.16).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ipseity Daily Data",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21802448",
+      "registry_date": "2026-08-05",
+      "D": 1.9851,
+      "r2": 0.8376,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=1.9851, R²=0.8376. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=7.00).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ipseity Daily Data",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21802448",
+      "registry_date": "2026-08-05",
+      "D": 0.1288,
+      "r2": 0.7036,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=0.1288, R²=0.7036. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=39.81).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ipseity Daily Data",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21802448",
+      "registry_date": "2026-08-05",
+      "D": 2.1826,
+      "r2": 0.9866,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=2.1826, R²=0.9866. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=164.49).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
