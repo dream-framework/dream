@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-04T21:42:45.724278+00:00",
+  "initialized": "2026-08-05T03:42:48.381344+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -4428,8 +4428,8 @@
       "D": 1.0004,
       "r2": 1.0,
       "verdict": "EXTRACTION",
-      "model_verdict": "S2_LOSES",
-      "narrative": "D=1.0004, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=1330.44).",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.0004, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=1330.44), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -4496,8 +4496,8 @@
       "D": 1.254,
       "r2": 0.9994,
       "verdict": "EXTRACTION",
-      "model_verdict": "S2_LOSES",
-      "narrative": "D=1.2540, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=1248.03).",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=1.2540, R²=0.9994. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=1248.03), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -4530,8 +4530,110 @@
       "D": 2.0696,
       "r2": 0.9353,
       "verdict": "EXTRACTION",
+      "model_verdict": "S2_DUST_WINS",
+      "narrative": "D=2.0696, R²=0.9353. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=28.11), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Supporting data for \"JUMP Cell Painting chemical d",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21800106",
+      "registry_date": "2026-08-05",
+      "D": 1.8027,
+      "r2": 0.9738,
+      "verdict": "EXTRACTION",
       "model_verdict": "S2_LOSES",
-      "narrative": "D=2.0696, R²=0.9353. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=28.11).",
+      "narrative": "D=1.8027, R²=0.9738. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=2.06).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Supporting data for \"JUMP Cell Painting chemical d",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21800106",
+      "registry_date": "2026-08-05",
+      "D": 0.265,
+      "r2": 0.8391,
+      "verdict": "NATURAL",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=0.2650, R²=0.8391. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties EXP (ΔAICc=0.36, within ±2).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: R Code for Regional Analysis: GTFS shapes.txt Gene",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21799975",
+      "registry_date": "2026-08-05",
+      "D": 2.5953,
+      "r2": 0.889,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=2.5953, R²=0.8890. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=9.65).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
