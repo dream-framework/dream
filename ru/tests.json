@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-05T14:41:39Z",
+  "exported_at": "2026-08-05T18:01:36Z",
   "total_tests": 144,
   "fields": [
     "id",
@@ -1394,7 +1394,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.75,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust decomposition REJECTED: R²_dust=0.382 < 0.5. Likely overfitting (6-param model). Treated as S2_LOSES.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3426, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D=0.1242, R²=0.3034. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает S2_DUST (ΔAICc=17.75).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -1746,7 +1746,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 25.27,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=25.27). S2+dust decomposition REJECTED: D2=10.000 at boundary. Likely overfitting (6-param model). Treated as S2_LOSES.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=25.27). S2+dust fit: D1=1.0848, D2=10.0, R²=0.7999, AICc=-822.93. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D=0.9399, R²=0.7473. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает S2_DUST (ΔAICc=25.27).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -1922,7 +1922,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.03,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.225, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D=0.1861, R²=0.4325. D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание. S2 уступает BIEXP (ΔAICc=17.03).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
