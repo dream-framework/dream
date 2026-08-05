@@ -721,6 +721,7 @@ const META_S2_SNAPSHOT = {
   "median": 1.0531,
   "total": 144,
   "compared": 142,
+  "noise": 6,
   "ad_stat": 1.2796,
   "delta_aic_weibull": 0.0,
   "delta_aic_gamma": 1.51,
@@ -750,11 +751,12 @@ function computeMetaS2(){
       <div><span style="color:var(--muted-2)">D&gt;1</span> <b style="color:var(--bad);font-family:monospace">${m.extraction} (${(100*m.extraction/m.n).toFixed(0)}%)</b></div>
     </div>
     <div style="font-size:10px;color:var(--muted-2);margin-top:4px;line-height:1.4">
-      <b>Eligibility:</b> ${m.total} registered → ${m.n} uncensored → ${m.compared} model-compared (${m.n - m.compared} awaiting).<br>
+      <b>Eligibility:</b> ${m.total} registered → ${m.n} valid S2 fits (R² ≥ 0.1) → ${m.compared} model-compared (${m.total - m.compared} awaiting comparison${m.noise ? `, ${m.noise} noise fits excluded` : ''}).<br>
       Diagnostics: direct-d D=${m.d_direct.toFixed(3)} (R²=${m.r2_direct.toFixed(3)}), linearized D=${m.d_linear.toFixed(3)} (R²=${m.r2_linear.toFixed(3)}).
       Estimator range: [${Math.min(m.d_mle, m.d_direct, m.d_linear).toFixed(2)}, ${Math.max(m.d_mle, m.d_direct, m.d_linear).toFixed(2)}].
       ${m.ks_p > 0.05 ? 'KS p > 0.05 (cannot reject Weibull).' : 'KS p < 0.05 (Weibull rejected!).'}
       <br><span style="color:var(--accent-2)">⚠ Estimator-sensitive: D_meta moves 0.3+ depending on method. Canonical = Weibull MLE. See <a href="articles/meta-s2.html" style="color:var(--accent)">full analysis</a>.</span>
+      <br><span style="color:var(--muted-3);font-size:9px">Snapshot: ${m.date} · n=${m.n} · ${m.total} registered</span>
     </div>
   `;
   

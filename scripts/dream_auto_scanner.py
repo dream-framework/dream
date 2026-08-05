@@ -2305,6 +2305,7 @@ def update_meta_s2_article(tests_html_path, is_ru=False):
             # tests.html uses 'total' and 'compared' (not n_total / n_compared)
             'total': snapshot['n_total'],
             'compared': snapshot['n_compared'],
+            'noise': snapshot.get('n_noise', 0),
             # Also include the extended stats so the readout can show them later
             'ad_stat': snapshot['ad_stat'],
             'delta_aic_weibull': snapshot['delta_aic_weibull'],
