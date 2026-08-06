@@ -31,19 +31,40 @@ os.makedirs(OUT_DIR, exist_ok=True)
 # includes the verdict ('S2_WINS' | 'S2_TIES' | 'S2_LOSES' | 'NO_FIT')
 # plus the full AICc ranking. The caller decides whether to promote
 # the entry to tests.html based on the verdict.
-def fit_s2(t, R, label='', require_wins=False):
+def fit_s2(t, R, label='', require_wins=False, source_url='', source_name=''):
     """Fit S2 + model comparison. Returns result dict for ALL outcomes
-    (wins, ties, AND losses). No filtering — the registry records everything."""
+    (wins, ties, losses, AND total failures). No filtering — the registry
+    records everything, including datasets where S2 couldn't be fit at all.
+
+    Total failures return a dict with D=None and model_verdict='S2_NO_FIT'
+    so the caller can still record the dataset's existence in the registry.
+    The rejection_reason field documents WHY S2 failed."""
     t = np.array(t, dtype=float)
     R = np.array(R, dtype=float)
-    if len(t) < 5: return None
+    if len(t) < 5:
+        return {
+            'D': None, 'r2': None, 'verdict': 'REJECTED',
+            'model_verdict': 'S2_NO_FIT',
+            'model_note': f'S2 fit rejected: only {len(t)} lags (need ≥5).',
+            'rejection_reason': f'insufficient_lags ({len(t)}<5)',
+            'best_alt': None, 'delta_aicc': None,
+            'n': len(t), 'label': label,
+        }
     t = t - t[0]
     if R[0] > 0: R_norm = R / R[0]
     else: R_norm = R
 
     cmp = s2_compare(t, R_norm, label)
     if not cmp or cmp['verdict'] == 'NO_FIT' or cmp.get('s2') is None:
-        return None
+        reason = 'curve_fit_failed' if not cmp else cmp.get('verdict', 'unknown')
+        return {
+            'D': None, 'r2': None, 'verdict': 'REJECTED',
+            'model_verdict': 'S2_NO_FIT',
+            'model_note': f'S2 fit rejected: optimizer did not converge ({reason}).',
+            'rejection_reason': f'no_fit ({reason})',
+            'best_alt': None, 'delta_aicc': None,
+            'n': len(t), 'label': label,
+        }
 
     # NO MORE FILTERING — record wins, ties, AND losses
     D = cmp['s2']['D']
@@ -1175,14 +1196,21 @@ def scan_open_power_system():
 # ANALYZE
 # ═══════════════════════════════════════════════════════════════════════
 
-def analyze_csv_timeseries(filepath, title):
-    """Load CSV, find numeric column, compute retention curve, fit S2."""
+def analyze_csv_timeseries(filepath, title, source_url=''):
+    """Load CSV, find numeric column, compute retention curve, fit S2.
+    Returns a fit dict (with D=None and model_verdict='S2_NO_FIT' on failure)
+    so the caller can record the dataset in the registry even when S2 fails."""
     try:
         with open(filepath) as f:
             reader = csv.reader(f)
             rows = list(reader)
-        if len(rows) < 20: return None
-        
+        if len(rows) < 20:
+            return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                    'model_verdict': 'S2_NO_FIT',
+                    'model_note': f'S2 fit rejected: only {len(rows)} rows in CSV (need ≥20).',
+                    'rejection_reason': f'insufficient_rows ({len(rows)}<20)',
+                    'label': title}
+
         # Find first numeric column (skip date columns)
         header = rows[0] if rows else []
         for col_idx in range(len(header)):
@@ -1197,19 +1225,44 @@ def analyze_csv_timeseries(filepath, title):
             if len(values) >= 20:
                 taus, acf = retention_curve(values)
                 if taus is not None and acf is not None:
-                    fit = fit_s2(taus, acf, title)
-                    if fit and 'D' in fit:
-                        return fit
-        return None
+                    return fit_s2(taus, acf, title, source_url=source_url)
+                # ACF failed (var=0 or too short)
+                return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                        'model_verdict': 'S2_NO_FIT',
+                        'model_note': f'S2 fit rejected: ACF computation failed (constant series or insufficient variance).',
+                        'rejection_reason': 'acf_failed',
+                        'n': len(values), 'label': title}
+        # No numeric column with ≥20 values found
+        return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                'model_verdict': 'S2_NO_FIT',
+                'model_note': f'S2 fit rejected: no numeric column with ≥20 valid values found in CSV.',
+                'rejection_reason': 'no_numeric_column',
+                'n': len(rows)-1, 'label': title}
     except Exception as e:
-        return {'error': str(e), 'label': title}
+        return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                'model_verdict': 'S2_NO_FIT',
+                'model_note': f'S2 fit rejected: CSV parse error ({e}).',
+                'rejection_reason': f'csv_parse_error ({e})',
+                'label': title}
 
-def analyze_json_values(values, title):
-    """Fit S2 to ACF of a numeric array."""
-    if not values or len(values) < 20: return None
+def analyze_json_values(values, title, source_url=''):
+    """Fit S2 to ACF of a numeric array.
+    Returns a fit dict (with D=None on failure) so the caller can record
+    the dataset in the registry even when S2 fails."""
+    if not values or len(values) < 20:
+        return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                'model_verdict': 'S2_NO_FIT',
+                'model_note': f'S2 fit rejected: only {len(values) if values else 0} values (need ≥20).',
+                'rejection_reason': f'insufficient_values ({len(values) if values else 0}<20)',
+                'label': title}
     taus, acf = retention_curve(values)
-    if taus is None: return None
-    return fit_s2(taus, acf, title)
+    if taus is None:
+        return {'D': None, 'r2': None, 'verdict': 'REJECTED',
+                'model_verdict': 'S2_NO_FIT',
+                'model_note': f'S2 fit rejected: ACF computation failed (constant series or insufficient variance).',
+                'rejection_reason': 'acf_failed',
+                'n': len(values), 'label': title}
+    return fit_s2(taus, acf, title, source_url=source_url)
 
 # ═══════════════════════════════════════════════════════════════════════
 # GROQ NARRATION (optional — works without Groq)
@@ -1570,6 +1623,9 @@ def update_tests_html(new_entries, html_path, is_ru=False):
         if entry.get('model_note'):
             mn = js_str(entry['model_note'])
             model_verdict_val += f',model_note:"{mn}"'
+        if entry.get('rejection_reason'):
+            rr = js_str(entry['rejection_reason'])
+            model_verdict_val += f',rejection_reason:"{rr}"'
         
         new_js += f'\n  ,{{id:\"auto-{today}-{eid}\",name:\"{name}\",domain:\"{domain}\",D:{D_val},r2:{r2_val},verdict:\"{verdict}\"{model_verdict_val},narrative:\"{narr}\",source:\"auto-scan {today}\",date:\"{today}\",url:{url_val},image:null}}'
     
@@ -1834,23 +1890,27 @@ def main():
                 filepath = os.path.join(OUT_DIR, f'zenodo_{item["filename"]}')
                 with open(filepath, 'wb') as f:
                     f.write(data)
-                fit = analyze_csv_timeseries(filepath, item['title'][:60])
-                if fit and 'D' in fit:
+                fit = analyze_csv_timeseries(filepath, item['title'][:60], source_url=item.get('doi', item.get('url', '')))
+                if fit:
                     narrative = groq_narrate(fit, groq_url if groq_url else None)
                     all_results.append({
                         'id': f'zenodo-{len(all_results)}',
                         'name': f'Zenodo: {item["title"][:50]}',
                         'domain': 'scouting',
-                        'D': fit['D'], 'r2': fit['r2'],
+                        'D': fit.get('D'), 'r2': fit.get('r2'),
                         'verdict': fit['verdict'],
                         'model_verdict': fit.get('model_verdict'),
                         'model_note': fit.get('model_note', ''),
                         'delta_aicc': fit.get('delta_aicc'),
                         'best_alt': fit.get('best_alt'),
+                        'rejection_reason': fit.get('rejection_reason'),
                         'narrative': narrative,
                         'url': item.get('doi', item.get('url', '')),
                     })
-                    print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} — {item["title"][:40]}')
+                    if fit.get('D') is not None:
+                        print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} — {item["title"][:40]}')
+                    else:
+                        print(f'  ✗ REJECTED — {item["title"][:40]}: {fit.get("rejection_reason","?")}')
     
     # 4. Analyze arXiv papers (just record as pending — can't fit without data)
     print('\n📄 Recording arXiv papers...')
@@ -1869,72 +1929,84 @@ def main():
     # 5. Analyze FRED economic data
     print('\n📊 Analyzing FRED economic data...')
     for item in fred_results:
-        fit = analyze_csv_timeseries(item['filename'], f'FRED: {item["series_id"]}')
-        if fit and 'D' in fit:
+        fit = analyze_csv_timeseries(item['filename'], f'FRED: {item["series_id"]}', source_url=item.get('url', ''))
+        if fit:
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': f'fred-{item["series_id"]}',
                 'name': f'FRED {item["series_id"]} (ACF retention)',
                 'domain': 'financial',
-                'D': fit['D'], 'r2': fit['r2'],
+                'D': fit.get('D'), 'r2': fit.get('r2'),
                 'verdict': fit['verdict'],
                         'model_verdict': fit.get('model_verdict'),
                         'model_note': fit.get('model_note', ''),
                         'delta_aicc': fit.get('delta_aicc'),
                         'best_alt': fit.get('best_alt'),
+                        'rejection_reason': fit.get('rejection_reason'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
-            print(f'  ✓ {item["series_id"]}: D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            if fit.get('D') is not None:
+                print(f'  ✓ {item["series_id"]}: D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            else:
+                print(f'  ✗ {item["series_id"]}: REJECTED — {fit.get("rejection_reason","?")}')
     
     # 6. Analyze USGS
     print('\n📊 Analyzing USGS earthquakes...')
     for item in usgs_results:
-        fit = analyze_csv_timeseries(item['filename'], 'USGS Earthquakes')
-        if fit and 'D' in fit:
+        fit = analyze_csv_timeseries(item['filename'], 'USGS Earthquakes', source_url=item.get('url', ''))
+        if fit:
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': 'usgs-quakes',
                 'name': 'USGS Earthquakes (30d, ACF)',
                 'domain': 'live',
-                'D': fit['D'], 'r2': fit['r2'],
+                'D': fit.get('D'), 'r2': fit.get('r2'),
                 'verdict': fit['verdict'],
                         'model_verdict': fit.get('model_verdict'),
                         'model_note': fit.get('model_note', ''),
                         'delta_aicc': fit.get('delta_aicc'),
                         'best_alt': fit.get('best_alt'),
+                        'rejection_reason': fit.get('rejection_reason'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
-            print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            if fit.get('D') is not None:
+                print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            else:
+                print(f'  ✗ REJECTED — {fit.get("rejection_reason","?")}')
     
     # 7. Analyze World Bank
     print('\n📊 Analyzing World Bank data...')
     for item in wb_results:
-        fit = analyze_json_values(item.get('values', []), f'World Bank: {item["title"]}')
-        if fit and 'D' in fit:
+        fit = analyze_json_values(item.get('values', []), f'World Bank: {item["title"]}', source_url=item.get('url', ''))
+        if fit:
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': f'wb-{item["title"].split(": ")[1].lower()[:10]}',
                 'name': f'{item["title"]} (ACF retention)',
                 'domain': 'financial',
-                'D': fit['D'], 'r2': fit['r2'],
+                'D': fit.get('D'), 'r2': fit.get('r2'),
                 'verdict': fit['verdict'],
                         'model_verdict': fit.get('model_verdict'),
                         'model_note': fit.get('model_note', ''),
                         'delta_aicc': fit.get('delta_aicc'),
                         'best_alt': fit.get('best_alt'),
+                        'rejection_reason': fit.get('rejection_reason'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
-            print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            if fit.get('D') is not None:
+                print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]}')
+            else:
+                print(f'  ✗ REJECTED — {fit.get("rejection_reason","?")}')
     
     # 7b. Analyze new meta-sources (CoinGecko, Binance, Open-Meteo, NOAA, GISS, COVID, Global Temp, Eurostat)
     print('\n📊 Analyzing new meta-sources...')
     for item in json_sources:
         if item in wb_results: continue  # already analyzed above
-        fit = analyze_json_values(item.get('values', []), item['title'][:60])
-        if fit and 'D' in fit:
+        fit = analyze_json_values(item.get('values', []), item['title'][:60], source_url=item.get('url', ''))
+        if fit:
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             source_name = item.get('source', 'unknown')
             domain_map = {
@@ -1959,16 +2031,20 @@ def main():
                 'id': entry_id,
                 'name': f'{item["title"]} (ACF retention)',
                 'domain': domain,
-                'D': fit['D'], 'r2': fit['r2'],
+                'D': fit.get('D'), 'r2': fit.get('r2'),
                 'verdict': fit['verdict'],
                         'model_verdict': fit.get('model_verdict'),
                         'model_note': fit.get('model_note', ''),
                         'delta_aicc': fit.get('delta_aicc'),
                         'best_alt': fit.get('best_alt'),
+                        'rejection_reason': fit.get('rejection_reason'),
                 'narrative': narrative,
                 'url': item.get('url', ''),
             })
-            print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]} — {item["title"][:40]}')
+            if fit.get('D') is not None:
+                print(f'  ✓ D={fit["D"]:.3f} R²={fit["r2"]:.4f} {fit["verdict"]} — {item["title"][:40]}')
+            else:
+                print(f'  ✗ REJECTED — {item["title"][:40]}: {fit.get("rejection_reason","?")}')
     
     # 8. Summary
     print(f'\n{"="*60}')
@@ -2306,6 +2382,7 @@ def update_meta_s2_article(tests_html_path, is_ru=False):
             'total': snapshot['n_total'],
             'compared': snapshot['n_compared'],
             'noise': snapshot.get('n_noise', 0),
+            'rejected': snapshot.get('n_rejected', 0),
             # Also include the extended stats so the readout can show them later
             'ad_stat': snapshot['ad_stat'],
             'delta_aic_weibull': snapshot['delta_aic_weibull'],

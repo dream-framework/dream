@@ -35,9 +35,12 @@ Usage:
 
 import os, sys, re, json, argparse
 
-def derive_regime(D):
+def derive_regime(D, model_verdict=None):
     """Derive the regime label from D."""
     if D is None:
+        # If S2 couldn't be fit at all, mark as REJECTED (not just PENDING)
+        if model_verdict == 'S2_NO_FIT':
+            return 'REJECTED'
         return 'PENDING'
     if D < 0.8:
         return 'NATURAL'
@@ -55,6 +58,9 @@ def derive_narrative_en(entry):
     best_alt = entry.get('best_alt', '')
     
     if D is None:
+        if model_verdict == 'S2_NO_FIT':
+            reason = entry.get('rejection_reason', 'unknown')
+            return f'S2 fit rejected: {reason}. Dataset recorded for transparency — no D value produced.'
         return 'S2 fit pending — data acquired but not yet analyzed.'
     
     # Regime text
@@ -90,6 +96,9 @@ def derive_narrative_ru(entry):
     best_alt = entry.get('best_alt', '')
     
     if D is None:
+        if model_verdict == 'S2_NO_FIT':
+            reason = entry.get('rejection_reason', 'unknown')
+            return f'Подгонка S2 отклонена: {reason}. Набор данных записан для прозрачности — значение D не получено.'
         return 'S2-подгонка ожидается — данные получены, но не проанализированы.'
     
     if D > 1.0:
@@ -169,7 +178,7 @@ def parse_tests_html(html_path):
         # Parse fields
         entry = {}
         for field in ['id', 'name', 'domain', 'verdict', 'model_verdict', 'narrative',
-                       'source', 'date', 'url', 'image', 'kind', 'best_alt', 'model_note']:
+                       'source', 'date', 'url', 'image', 'kind', 'best_alt', 'model_note', 'rejection_reason']:
             fm = re.search(r'(?:^|,)\s*' + field + r'\s*:\s*"((?:[^"\\]|\\.)*)"', entry_str)
             if fm:
                 entry[field] = fm.group(1).replace('\\"', '"').replace('\\\\', '\\')
@@ -202,6 +211,9 @@ def rebuild_entry_string(entry, is_ru=False):
     D = entry.get('D')
     if D is not None:
         entry['verdict'] = derive_regime(D)
+    else:
+        # D is None — derive regime from model_verdict (REJECTED vs PENDING)
+        entry['verdict'] = derive_regime(D, entry.get('model_verdict'))
     
     # Regenerate narrative
     if is_ru:
@@ -243,6 +255,8 @@ def rebuild_entry_string(entry, is_ru=False):
         parts.append(f'best_alt:"{js_str(entry["best_alt"])}"')
     if entry.get('model_note'):
         parts.append(f'model_note:"{js_str(entry["model_note"])}"')
+    if entry.get('rejection_reason'):
+        parts.append(f'rejection_reason:"{js_str(entry["rejection_reason"])}"')
     parts.append(f'narrative:"{js_str(entry.get("narrative", ""))}"')
     parts.append(f'source:"{js_str(entry.get("source", ""))}"')
     parts.append(f'date:"{js_str(entry.get("date", ""))}"')
@@ -279,7 +293,7 @@ def reconcile(html_path, is_ru=False, dry_run=False):
             continue
         
         issues = []
-        expected_verdict = derive_regime(D)
+        expected_verdict = derive_regime(D, parsed.get('model_verdict'))
         if verdict != expected_verdict:
             issues.append(f'verdict: {verdict} → {expected_verdict}')
         

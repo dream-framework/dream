@@ -350,6 +350,7 @@ def extend_snapshot(existing, Ds_all=None, families=None):
     n_censored = sum(1 for e in existing if e.get('D') is not None and e['D'] >= 4.99)
     n_no_d = sum(1 for e in existing if e.get('D') is None)
     n_compared = sum(1 for e in existing if e.get('model_verdict') in ('S2_WINS', 'S2_TIES', 'S2_LOSES', 'S2_DUST_WINS'))
+    n_rejected = sum(1 for e in existing if e.get('model_verdict') == 'S2_NO_FIT')
     n_noise = sum(1 for e in existing
                   if e.get('D') is not None
                   and 0 < e['D'] < 4.99
@@ -444,6 +445,7 @@ def extend_snapshot(existing, Ds_all=None, families=None):
         'n_no_d': n_no_d,
         'n_compared': n_compared,
         'n_noise': n_noise,
+        'n_rejected': n_rejected,
         'mean': round(mean_d, 4),
         'median': round(median_d, 4),
         'std': round(std_d, 4),
@@ -820,10 +822,11 @@ BODY_EN = """
             <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">{{n}}</td><td>D value exists and is within plausible range</td></tr>
             <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">{{n_censored}}</td><td>Optimizer hit upper ceiling</td></tr>
             <tr><td>Noise fits excluded (R² &lt; 0.1)</td><td class="num">{{n_noise}}</td><td>S2 fit noise (e.g. diurnal-cycle ACF collapse) — no real retention signal</td></tr>
+            <tr><td>Total S2 failures (S2_NO_FIT)</td><td class="num">{{n_rejected}}</td><td>S2 could not be fit at all — optimizer failed, ACF failed, or insufficient data</td></tr>
             <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">{{n_compared}}</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Flow: {{n_total}} registered → {{n}} valid uncensored S2 fits with R² ≥ 0.1 → {{n}} Meta-S2 eligible → {{n_compared}} comparison-eligible. Noise fits (R² &lt; 0.1) are excluded from the meta-S2 distribution because S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
+        <p class="note">Flow: {{n_total}} registered → {{n}} valid uncensored S2 fits with R² ≥ 0.1 → {{n}} Meta-S2 eligible → {{n_compared}} comparison-eligible. {{n_rejected}} datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
       </div>
 
       <hr>
@@ -1198,10 +1201,11 @@ BODY_RU = """
             <tr><td>Валидные S2-подгонки (0 &lt; D &lt; 5)</td><td class="num">{{n}}</td><td>Значение D существует и в правдоподобном диапазоне</td></tr>
             <tr><td>Цензурированные (D ≥ 5.0 граница)</td><td class="num">{{n_censored}}</td><td>Оптимизатор упёрся в верхний предел</td></tr>
             <tr><td>Шумовые подгонки исключены (R² &lt; 0.1)</td><td class="num">{{n_noise}}</td><td>S2 подгоняет шум (напр. коллапс ACF из-за суточного цикла) — нет реального сигнала сохранения</td></tr>
+            <tr><td>Полные отказы S2 (S2_NO_FIT)</td><td class="num">{{n_rejected}}</td><td>S2 не удалось подогнать вообще — оптимизатор не сошёлся, ACF не вычислился, или недостаточно данных</td></tr>
             <tr><td>Сравнение моделей (победа/ничья/проигрыш/пыль)</td><td class="num">{{n_compared}}</td><td>Есть model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Поток: {{n_total}} зарегистрировано → {{n}} валидных нецензурированных S2-подгонок с R² ≥ 0.1 → {{n}} пригодно для Meta-S2 → {{n_compared}} пригодно для сравнения. Шумовые подгонки (R² &lt; 0.1) исключены из распределения Meta-S2, так как S2 подгонка плоского хвоста ACF не даёт осмысленного значения D.</p>
+        <p class="note">Поток: {{n_total}} зарегистрировано → {{n}} валидных нецензурированных S2-подгонок с R² ≥ 0.1 → {{n}} пригодно для Meta-S2 → {{n_compared}} пригодно для сравнения. {{n_rejected}} наборов данных, где S2 не удалось подогнать вообще, записаны в реестр как REJECTED (с rejection_reason), но исключены из распределения Meta-S2, так как не имеют значения D. Шумовые подгонки (R² &lt; 0.1) также исключены — S2 подгонка плоского хвоста ACF не даёт осмысленного значения D.</p>
       </div>
 
       <hr>

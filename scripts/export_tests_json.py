@@ -96,7 +96,10 @@ def parse_entry(text):
     
     m = re.search(r'best_alt:"([^"]*)"', text)
     if m: result['best_alt'] = m.group(1)
-    
+
+    m = re.search(r'rejection_reason:"((?:[^"\\]|\\.)*)"', text)
+    if m: result['rejection_reason'] = m.group(1).replace('\\"', '"').replace('\\\\', '\\')
+
     m = re.search(r'model_note:"((?:[^"\\]|\\.)*)"', text)
     if m: result['model_note'] = m.group(1).replace('\\"', '"').replace('\\\\', '\\')
     
@@ -145,7 +148,7 @@ def export_json(html_path, json_path):
         'exported_at': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
         'total_tests': len(tests),
         'fields': ['id', 'name', 'domain', 'groups', 'D', 'r2', 'verdict',
-                   'model_verdict', 'delta_aicc', 'best_alt', 'model_note',
+                   'model_verdict', 'delta_aicc', 'best_alt', 'model_note', 'rejection_reason',
                    'kind', 'narrative', 'source', 'date', 'url', 'phases'],
         'tests': tests,
     }
