@@ -115,6 +115,46 @@ def fit_s2(t, R, label='', require_wins=False, source_url='', source_name=''):
         'label': label,
     }
 
+def should_record_fit(fit, min_n=100):
+    """Decide whether a fit result should be recorded in the registry.
+
+    Policy (per user):
+    - Always record successful S2 fits (D is not None)
+    - Always record S2_WINS, S2_TIES, S2_LOSES, S2_DUST_WINS
+    - Only record S2_NO_FIT (total S2 failure) when the dataset was solid:
+        * n >= min_n (default 100 observations)
+        * rejection_reason indicates the optimizer failed on real data,
+          NOT a fetch/parse/insufficient-data issue
+    - Skip recording for:
+        * fetch_failed, insufficient_rows, insufficient_values, insufficient_lags
+        * no_numeric_column, csv_parse_error
+        * acf_failed with n < min_n (degenerate small series)
+
+    Fetch failures and low-n datasets are retried on the next scout
+    but NOT shown in the registry — they're not evidence of S2 failure.
+    """
+    if fit is None:
+        return False
+    mv = fit.get('model_verdict', '')
+    if mv != 'S2_NO_FIT':
+        return True  # real fit (win/tie/lose) — always record
+    # S2_NO_FIT — check if it's a real failure on solid data
+    reason = fit.get('rejection_reason', '')
+    HIDDEN_REASONS = {
+        'fetch_failed', 'insufficient_rows', 'insufficient_values',
+        'insufficient_lags', 'no_numeric_column', 'csv_parse_error',
+    }
+    if reason in HIDDEN_REASONS:
+        return False
+    if reason.startswith('insufficient'):
+        return False
+    # For acf_failed, require solid n
+    n = fit.get('n', 0) or 0
+    if reason == 'acf_failed' and n < min_n:
+        return False
+    # no_fit on solid data — record it
+    return True
+
 def retention_curve(values, max_lag=None):
     """ACF of |demeaned values| — the retention curve."""
     v = np.array(values, dtype=float)
@@ -1891,7 +1931,7 @@ def main():
                 with open(filepath, 'wb') as f:
                     f.write(data)
                 fit = analyze_csv_timeseries(filepath, item['title'][:60], source_url=item.get('doi', item.get('url', '')))
-                if fit:
+                if should_record_fit(fit):
                     narrative = groq_narrate(fit, groq_url if groq_url else None)
                     all_results.append({
                         'id': f'zenodo-{len(all_results)}',
@@ -1930,7 +1970,7 @@ def main():
     print('\n📊 Analyzing FRED economic data...')
     for item in fred_results:
         fit = analyze_csv_timeseries(item['filename'], f'FRED: {item["series_id"]}', source_url=item.get('url', ''))
-        if fit:
+        if should_record_fit(fit):
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': f'fred-{item["series_id"]}',
@@ -1955,7 +1995,7 @@ def main():
     print('\n📊 Analyzing USGS earthquakes...')
     for item in usgs_results:
         fit = analyze_csv_timeseries(item['filename'], 'USGS Earthquakes', source_url=item.get('url', ''))
-        if fit:
+        if should_record_fit(fit):
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': 'usgs-quakes',
@@ -1980,7 +2020,7 @@ def main():
     print('\n📊 Analyzing World Bank data...')
     for item in wb_results:
         fit = analyze_json_values(item.get('values', []), f'World Bank: {item["title"]}', source_url=item.get('url', ''))
-        if fit:
+        if should_record_fit(fit):
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             all_results.append({
                 'id': f'wb-{item["title"].split(": ")[1].lower()[:10]}',
@@ -2006,7 +2046,7 @@ def main():
     for item in json_sources:
         if item in wb_results: continue  # already analyzed above
         fit = analyze_json_values(item.get('values', []), item['title'][:60], source_url=item.get('url', ''))
-        if fit:
+        if should_record_fit(fit):
             narrative = groq_narrate(fit, groq_url if groq_url else None)
             source_name = item.get('source', 'unknown')
             domain_map = {
@@ -2144,6 +2184,17 @@ def main():
         _reaudit.main()
     except Exception as e:
         print(f'  ⚠ Re-audit failed: {e}')
+
+    # 10b6. FIND REAL S2 FAILURES on solid datasets (n >= 100)
+    # Only records S2_NO_FIT when data was successfully fetched, ACF computed,
+    # but S2 curve_fit failed to converge. Fetch failures and low-n datasets
+    # are NOT recorded — they're internal retry candidates, not S2 evidence.
+    print('\n🔍 Scanning for real S2 failures on solid datasets...')
+    try:
+        import find_real_s2_failures as _find_failures
+        _find_failures.main()
+    except Exception as e:
+        print(f'  ⚠ Find-real-failures failed: {e}')
 
     # 10c. Update tests.html with ONLY new (non-duplicate) entries
     if os.path.exists(tests_html):

@@ -421,12 +421,6 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Dataset for Influence of PTFE content in catalyst ",domain:"scouting",D:1.7314,r2:0.9971,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:47.4100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=47.41).",narrative:"D=1.7314, R²=0.9971. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=47.41).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802600",image:null}
   ,{id:"",name:"Zenodo: Dataset for Influence of PTFE content in catalyst ",domain:"scouting",D:1.5309,r2:0.9969,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:17.8500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=17.85).",narrative:"D=1.5309, R²=0.9969. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=17.85).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802600",image:null}
   ,{id:"",name:"Zenodo: Dataset for Influence of PTFE content in catalyst ",domain:"scouting",D:1.0562,r2:0.9848,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:211.6600,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=211.66).",narrative:"D=1.0562, R²=0.9848. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=211.66).",source:"auto-scan 2026-08-05",date:"2026-08-05",url:"10.5281/zenodo.21802600",image:null}
-  ,{id:"",name:"ECB EUR/USD FX rate (ACF retention)",domain:"economic_eu",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: data fetch failed (URL unreachable or unsupported format).",rejection_reason:"fetch_failed",narrative:"S2 fit rejected: fetch_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://sdw-wsrest.ecb.europa.eu/service/data/EXR/D.EUR.USD.SP.A?format=csvdata",image:null}
-  ,{id:"",name:"OECD leading indicator (ACF retention)",domain:"economic_intl",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: data fetch failed (URL unreachable or unsupported format).",rejection_reason:"fetch_failed",narrative:"S2 fit rejected: fetch_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://stats.oecd.org/sdmx-json/data/MEI_CLI/LOLITOAA.USA.M/all?startTime=2020-01&endTime=2026-07",image:null}
-  ,{id:"",name:"Water Quality Portal: pH at USGS-01594440 (ACF retention)",domain:"chemistry",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: data fetch failed (URL unreachable or unsupported format).",rejection_reason:"fetch_failed",narrative:"S2 fit rejected: fetch_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://www.waterqualitydata.us/data/Result/search?siteid=USGS-01594440&characteristicName=pH&mimeType=csv&zip=no",image:null}
-  ,{id:"",name:"arXiv 2301.00001 (theoretical, no data) (ACF retention)",domain:"scouting",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: data fetch failed (URL unreachable or unsupported format).",rejection_reason:"fetch_failed",narrative:"S2 fit rejected: fetch_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://arxiv.org/abs/2301.00001",image:null}
-  ,{id:"",name:"Wikipedia: rare page (low traffic) (ACF retention)",domain:"cultural",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: data fetch failed (URL unreachable or unsupported format).",rejection_reason:"fetch_failed",narrative:"S2 fit rejected: fetch_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Quantum_gravastar/daily/2024010100/2024123100",image:null}
-  ,{id:"",name:"USGS: small stream gauge (7d discharge) (ACF retention)",domain:"hydrology",D:null,r2:null,verdict:"REJECTED",model_verdict:"S2_NO_FIT",model_note:"S2 fit rejected: ACF computation failed (constant series, var=0, or insufficient variance).",rejection_reason:"acf_failed",narrative:"S2 fit rejected: acf_failed. Dataset recorded for transparency — no D value produced.",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2026-07-01&endDT=2026-07-07&format=rdb",image:null}
 
 ];
 
@@ -729,10 +723,10 @@ const META_S2_SNAPSHOT = {
   "extraction": 82,
   "mean": 1.1309,
   "median": 1.0531,
-  "total": 150,
+  "total": 144,
   "compared": 142,
   "noise": 6,
-  "rejected": 6,
+  "rejected": 0,
   "ad_stat": 1.2796,
   "delta_aic_weibull": 0.0,
   "delta_aic_gamma": 1.51,

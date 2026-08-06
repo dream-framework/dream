@@ -352,15 +352,15 @@
             <tr><th>Eligibility tier</th><th class="num">Count</th><th>Criterion</th></tr>
           </thead>
           <tbody>
-            <tr><td>Total registered tests</td><td class="num">150</td><td>All entries in the TESTS array</td></tr>
+            <tr><td>Total registered tests</td><td class="num">144</td><td>All entries in the TESTS array</td></tr>
             <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">138</td><td>D value exists and is within plausible range</td></tr>
             <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">0</td><td>Optimizer hit upper ceiling</td></tr>
             <tr><td>Noise fits excluded (R² &lt; 0.1)</td><td class="num">6</td><td>S2 fit noise (e.g. diurnal-cycle ACF collapse) — no real retention signal</td></tr>
-            <tr><td>Total S2 failures (S2_NO_FIT)</td><td class="num">6</td><td>S2 could not be fit at all — optimizer failed, ACF failed, or insufficient data</td></tr>
+            <tr><td>Total S2 failures (S2_NO_FIT)</td><td class="num">0</td><td>S2 could not be fit at all — optimizer failed, ACF failed, or insufficient data</td></tr>
             <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">142</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Flow: 150 registered → 138 valid uncensored S2 fits with R² ≥ 0.1 → 138 Meta-S2 eligible → 142 comparison-eligible. 6 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
+        <p class="note">Flow: 144 registered → 138 valid uncensored S2 fits with R² ≥ 0.1 → 138 Meta-S2 eligible → 142 comparison-eligible. 0 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
       </div>
 
       <hr>
@@ -560,7 +560,7 @@
         <p>The wide bootstrap CI means more <em>independent</em> families are needed, not just more rows from existing families. Adding 10 more crypto or weather series will not narrow the CI meaningfully. Adding a genuinely new domain (e.g., biological aging, linguistic decay, archaeological dating) would.</p>
 
         <p class="article-footnote">
-          Analysis performed 2026-08-06. Data: <a href="../tests.html">DREAM Test Registry</a> (138 Meta-S2-eligible uncensored systems, of 150 total registered).<br>
+          Analysis performed 2026-08-06. Data: <a href="../tests.html">DREAM Test Registry</a> (138 Meta-S2-eligible uncensored systems, of 144 total registered).<br>
           This page is speculative. The recursive S2 property is an empirical observation on a non-random, partially dependent sample, not a proven theorem. It is offered as a direction for investigation.<br><br>
           <strong>Update protocol:</strong> This article is regenerated with each scanner run. The live Meta-S2 readout on the <a href="../tests.html">Test Registry</a> page always reflects the current TESTS array.
         </p>
