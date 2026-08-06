@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-06T11:02:54.490697+00:00",
+  "initialized": "2026-08-06T14:44:24.314140+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9957,
       "verdict": "NATURAL",
       "model_verdict": "S2_LOSES",
-      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.46).",
+      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.79).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

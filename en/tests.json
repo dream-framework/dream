@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-06T11:02:45Z",
+  "exported_at": "2026-08-06T14:44:15Z",
   "total_tests": 146,
   "fields": [
     "id",
@@ -1249,10 +1249,10 @@
       "r2": 0.9957,
       "verdict": "NATURAL",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 383.46,
+      "delta_aicc": 383.79,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=383.46). S2+dust fit: D1=1.0892, D2=0.7153, R²=0.9994, AICc=-2173.71. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.46).",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=383.79). S2+dust fit: D1=1.0886, D2=0.7153, R²=0.9994, AICc=-2173.88. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.79).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
