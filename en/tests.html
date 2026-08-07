@@ -253,7 +253,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "7 Aug 2026 05:22 EST";
+const LAST_REFRESH = "7 Aug 2026 09:48 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -362,7 +362,7 @@ const TESTS = [
   ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"NATURAL",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D=0.5553, R²=0.9885. D<1 confirms natural retention — heavy-tailed, slow decay. S2 ties BIEXP (ΔAICc=0.00, within ±2).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
   ,{id:"",name:"CoinGecko: dogecoin (ACF retention)",domain:"crypto",D:1.6637,r2:0.9981,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-119.9500,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-119.95).",narrative:"D=1.6637, R²=0.9981. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats GAUSS (ΔAICc=-119.95).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:1.0156,r2:0.9766,verdict:"EXTRACTION",model_verdict:"S2_TIES",delta_aicc:1.8100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.81, within ±2).",narrative:"D=1.0156, R²=0.9766. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=1.81, within ±2).",source:"auto-scan 2026-08-03",date:"2026-08-03",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
-  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5629,r2:0.9957,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:383.7900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=383.79). S2+dust fit: D1=1.0886, D2=0.7153, R²=0.9994, AICc=-2173.88. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.79).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
+  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5628,r2:0.9957,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:384.1200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=384.12). S2+dust fit: D1=1.0877, D2=0.7154, R²=0.9994, AICc=-2174.03. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D=0.5628, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=384.12).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
   ,{id:"",name:"FRED T10YIE (10-Year Breakeven Inflation) (ACF retention)",domain:"financial",D:1.0106,r2:0.9963,verdict:"EXTRACTION",model_verdict:"S2_DUST_WINS",delta_aicc:932.8600,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=932.86). S2+dust is the best overall model: D1=2.3066, D2=0.9741, R²=1.0000, AICc=-2679.84. Dust decomposition confirmed — not a DREAM failure.",narrative:"D=1.0106, R²=0.9963. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=932.86), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=T10YIE",image:null}
   ,{id:"",name:"FRED DGS10 (10-Year Treasury Rate) (ACF retention)",domain:"financial",D:0.9595,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:9.5800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=9.58). S2+dust fit: D1=1.0159, D2=2.2141, R²=0.9999, AICc=-3378.24. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D=0.9595, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.58).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",image:null}
   ,{id:"",name:"COVID-19 confirmed (daily new, global) (ACF retention)",domain:"ecological",D:1.0071,r2:0.9548,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:145.1400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=145.14). S2+dust fit: D1=1.6636, D2=0.0402, R²=0.9788, AICc=-1301.03. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D=1.0071, R²=0.9548. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=145.14).",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",image:null}
@@ -425,6 +425,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data and R code for \"Spatial mismatch between ende",domain:"scouting",D:0.6739,r2:0.9965,verdict:"NATURAL",model_verdict:"S2_LOSES",delta_aicc:713.9900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=713.99).",narrative:"D=0.6739, R²=0.9965. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=713.99).",source:"auto-scan 2026-08-06",date:"2026-08-06",url:"10.5281/zenodo.20539445",image:null}
   ,{id:"",name:"CoinGecko: polkadot (ACF retention)",domain:"crypto",D:1.6307,r2:0.9979,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:229.9800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=229.98).",narrative:"D=1.6307, R²=0.9979. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=229.98).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"https://api.coingecko.com/api/v3/coins/polkadot/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"Zenodo: Tandem-GMAW: advanced pulsed and short circuiting ",domain:"scouting",D:1.2948,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-8.2600,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-8.26).",narrative:"D=1.2948, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.26).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21824586",image:null}
+  ,{id:"",name:"Zenodo: Late-successional and old-growth forest across the",domain:"scouting",D:5.7935,r2:0.8665,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:10.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=10.0).",narrative:"D=5.7935, R²=0.8665. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=10.00).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21830327",image:null}
+  ,{id:"",name:"Zenodo: Late-successional and old-growth forest across the",domain:"scouting",D:1.3788,r2:0.9611,verdict:"EXTRACTION",model_verdict:"S2_TIES",delta_aicc:-0.6200,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=-0.62, within ±2).",narrative:"D=1.3788, R²=0.9611. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21830327",image:null}
 
 ];
 
@@ -715,29 +717,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 142,
-  "d_mle": 1.546,
-  "lam_mle": 1.26,
-  "ks_p": 0.0973,
-  "d_direct": 1.6205,
-  "r2_direct": 0.9815,
-  "d_linear": 1.533,
-  "r2_linear": 0.9784,
+  "n": 143,
+  "d_mle": 1.5528,
+  "lam_mle": 1.2624,
+  "ks_p": 0.0886,
+  "d_direct": 1.6342,
+  "r2_direct": 0.9806,
+  "d_linear": 1.5368,
+  "r2_linear": 0.978,
   "natural": 57,
-  "extraction": 85,
-  "mean": 1.1334,
-  "median": 1.0757,
-  "total": 148,
-  "compared": 146,
+  "extraction": 86,
+  "mean": 1.1351,
+  "median": 1.0952,
+  "total": 150,
+  "compared": 148,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.3693,
+  "ad_stat": 1.4413,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.79,
-  "delta_aic_lognormal": 20.65,
-  "silverman_p": 0.88,
+  "delta_aic_gamma": 1.94,
+  "delta_aic_lognormal": 21.25,
+  "silverman_p": 0.905,
   "boot_lo": 1.057,
-  "boot_hi": 1.79,
+  "boot_hi": 1.793,
   "date": "2026-08-07"
 };
 

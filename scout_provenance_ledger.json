@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-07T09:22:21.954991+00:00",
+  "initialized": "2026-08-07T13:48:40.932572+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2929,11 +2929,11 @@
       "family": "fred",
       "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",
       "registry_date": "2026-08-04",
-      "D": 0.5629,
+      "D": 0.5628,
       "r2": 0.9957,
       "verdict": "NATURAL",
       "model_verdict": "S2_LOSES",
-      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.79).",
+      "narrative": "D=0.5628, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=384.12).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -5042,6 +5042,74 @@
       "verdict": "EXTRACTION",
       "model_verdict": "S2_WINS",
       "narrative": "D=1.2948, R²=0.9984. D>1 indicates extraction regime — retention collapses super-exponentially. S2 beats EXP (ΔAICc=-8.26).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Late-successional and old-growth forest across the",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21830327",
+      "registry_date": "2026-08-07",
+      "D": 5.7935,
+      "r2": 0.8665,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D=5.7935, R²=0.8665. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=10.00).",
+      "prospective": true,
+      "eligibility": "censored",
+      "exclusion_reason": "optimizer boundary",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Late-successional and old-growth forest across the",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21830327",
+      "registry_date": "2026-08-07",
+      "D": 1.3788,
+      "r2": 0.9611,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "narrative": "D=1.3788, R²=0.9611. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

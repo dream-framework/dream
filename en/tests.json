@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-07T09:22:14Z",
-  "total_tests": 148,
+  "exported_at": "2026-08-07T13:48:31Z",
+  "total_tests": 150,
   "fields": [
     "id",
     "name",
@@ -1245,14 +1245,14 @@
       "id": "",
       "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
       "domain": "financial",
-      "D": 0.5629,
+      "D": 0.5628,
       "r2": 0.9957,
       "verdict": "NATURAL",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 383.79,
+      "delta_aicc": 384.12,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=383.79). S2+dust fit: D1=1.0886, D2=0.7153, R²=0.9994, AICc=-2173.88. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D=0.5629, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=383.79).",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=384.12). S2+dust fit: D1=1.0877, D2=0.7154, R²=0.9994, AICc=-2174.03. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D=0.5628, R²=0.9957. D<1 confirms natural retention — heavy-tailed, slow decay. S2 loses to S2_DUST (ΔAICc=384.12).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -2248,6 +2248,38 @@
       "source": "auto-scan 2026-08-07",
       "date": "2026-08-07",
       "url": "10.5281/zenodo.21824586"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Late-successional and old-growth forest across the",
+      "domain": "scouting",
+      "D": 5.7935,
+      "r2": 0.8665,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 10.0,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=10.0).",
+      "narrative": "D=5.7935, R²=0.8665. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to EXP (ΔAICc=10.00).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21830327"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Late-successional and old-growth forest across the",
+      "domain": "scouting",
+      "D": 1.3788,
+      "r2": 0.9611,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": -0.62,
+      "best_alt": "EXP",
+      "model_note": "S2 ties EXP (ΔAICc=-0.62, within ±2).",
+      "narrative": "D=1.3788, R²=0.9611. D>1 indicates extraction regime — retention collapses super-exponentially. S2 ties EXP (ΔAICc=-0.62, within ±2).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21830327"
     }
   ]
 }
