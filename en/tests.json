@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-06T14:44:15Z",
+  "exported_at": "2026-08-07T01:01:53Z",
   "total_tests": 146,
   "fields": [
     "id",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "THRESHOLD",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.6,
+      "delta_aicc": 9.58,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.60). S2+dust fit: D1=1.0159, D2=2.2143, R²=0.9999, AICc=-3378.72. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D=0.9595, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.60).",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.58). S2+dust fit: D1=1.0159, D2=2.2141, R²=0.9999, AICc=-3378.24. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D=0.9595, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.58).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
