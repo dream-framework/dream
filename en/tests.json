@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-07T17:17:51Z",
-  "total_tests": 150,
+  "exported_at": "2026-08-07T21:08:53Z",
+  "total_tests": 152,
   "fields": [
     "id",
     "name",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "THRESHOLD",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.58,
+      "delta_aicc": 9.57,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.58). S2+dust fit: D1=1.0159, D2=2.2141, R²=0.9999, AICc=-3378.24. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D=0.9595, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.58).",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.57). S2+dust fit: D1=1.0159, D2=2.2137, R²=0.9999, AICc=-3377.80. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D=0.9595, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to BIEXP (ΔAICc=9.57).",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -2280,6 +2280,38 @@
       "source": "auto-scan 2026-08-07",
       "date": "2026-08-07",
       "url": "10.5281/zenodo.21830327"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",
+      "domain": "scouting",
+      "D": 0.9862,
+      "r2": 0.9999,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 282.62,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=282.62).",
+      "narrative": "D=0.9862, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=282.62).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21843288"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",
+      "domain": "scouting",
+      "D": 0.9862,
+      "r2": 0.9999,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 282.62,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=282.62).",
+      "narrative": "D=0.9862, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=282.62).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21843288"
     }
   ]
 }

@@ -245,7 +245,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "7 Aug 2026 13:17 EST";
+const LAST_REFRESH = "7 Aug 2026 17:08 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -418,6 +418,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Tandem-GMAW: advanced pulsed and short circuiting ",domain:"scouting",D:1.2948,r2:0.9984,verdict:"EXTRACTION",model_verdict:"S2_WINS",delta_aicc:-8.2600,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-8.26).",narrative:"D=1.2948, R²=0.9984. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 превосходит EXP (ΔAICc=-8.26).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21824586",image:null}
   ,{id:"",name:"Zenodo: Late-successional and old-growth forest across the",domain:"scouting",D:5.7935,r2:0.8665,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:10.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=10.0).",narrative:"D=5.7935, R²=0.8665. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает EXP (ΔAICc=10.00).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21830327",image:null}
   ,{id:"",name:"Zenodo: Late-successional and old-growth forest across the",domain:"scouting",D:1.3788,r2:0.9611,verdict:"EXTRACTION",model_verdict:"S2_TIES",delta_aicc:-0.6200,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=-0.62, within ±2).",narrative:"D=1.3788, R²=0.9611. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 сравнима с EXP (ΔAICc=-0.62, в пределах ±2).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21830327",image:null}
+  ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D=0.9862, R²=0.9999. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает S2_DUST (ΔAICc=282.62).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
+  ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D=0.9862, R²=0.9999. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает S2_DUST (ΔAICc=282.62).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
 
 ];
 
@@ -699,29 +701,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 143,
-  "d_mle": 1.5528,
-  "lam_mle": 1.2624,
-  "ks_p": 0.0886,
-  "d_direct": 1.6342,
-  "r2_direct": 0.9806,
-  "d_linear": 1.5368,
-  "r2_linear": 0.978,
-  "natural": 57,
+  "n": 145,
+  "d_mle": 1.5624,
+  "lam_mle": 1.261,
+  "ks_p": 0.0866,
+  "d_direct": 1.6629,
+  "r2_direct": 0.9815,
+  "d_linear": 1.5485,
+  "r2_linear": 0.9785,
+  "natural": 59,
   "extraction": 86,
-  "mean": 1.1351,
-  "median": 1.0952,
-  "total": 150,
-  "compared": 148,
+  "mean": 1.133,
+  "median": 1.0562,
+  "total": 152,
+  "compared": 150,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.4412,
+  "ad_stat": 1.4228,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.94,
-  "delta_aic_lognormal": 21.25,
-  "silverman_p": 0.905,
+  "delta_aic_gamma": 1.92,
+  "delta_aic_lognormal": 21.64,
+  "silverman_p": 0.89,
   "boot_lo": 1.057,
-  "boot_hi": 1.793,
+  "boot_hi": 1.801,
   "date": "2026-08-07"
 };
 

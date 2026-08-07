@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-07T17:17:51Z",
-  "total_tests": 150,
+  "exported_at": "2026-08-07T21:08:54Z",
+  "total_tests": 152,
   "fields": [
     "id",
     "name",
@@ -2280,6 +2280,38 @@
       "source": "auto-scan 2026-08-07",
       "date": "2026-08-07",
       "url": "10.5281/zenodo.21830327"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",
+      "domain": "scouting",
+      "D": 0.9862,
+      "r2": 0.9999,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 282.62,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=282.62).",
+      "narrative": "D=0.9862, R²=0.9999. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает S2_DUST (ΔAICc=282.62).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21843288"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",
+      "domain": "scouting",
+      "D": 0.9862,
+      "r2": 0.9999,
+      "verdict": "THRESHOLD",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 282.62,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=282.62).",
+      "narrative": "D=0.9862, R²=0.9999. D≈1 — пороговый режим, около-экспоненциальное затухание. S2 уступает S2_DUST (ΔAICc=282.62).",
+      "source": "auto-scan 2026-08-07",
+      "date": "2026-08-07",
+      "url": "10.5281/zenodo.21843288"
     }
   ]
 }
