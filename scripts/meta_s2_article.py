@@ -531,6 +531,11 @@ def extend_snapshot(existing, Ds_all=None, families=None):
         'ks_stat_obs': round(ks_stat_obs, 4) if not np.isnan(ks_stat_obs) else None,
         'ks_boot_mean': round(ks_boot_mean, 4) if not np.isnan(ks_boot_mean) else None,
         'ks_boot_95': round(ks_boot_95, 4) if not np.isnan(ks_boot_95) else None,
+        'ks_p_lilliefors_note': (
+            'Weibull is rejected at 5% — but it remains the best available parametric fit by AIC (ΔAIC vs Gamma = +1.9, vs Lognormal = +21.6).'
+            if (not np.isnan(ks_p_lilliefors) and ks_p_lilliefors < 0.05)
+            else 'Weibull fit cannot be rejected at 5%.'
+        ),
         'd_direct': round(d_direct, 4),
         'lam_direct': round(lam_direct, 4),
         'r2_direct': round(r2_direct, 4),
@@ -786,20 +791,21 @@ BODY_EN = """
           </tbody>
         </table>
 
-        <h4>Goodness-of-fit: two KS tests</h4>
+        <h4>Goodness-of-fit: Lilliefors-corrected KS test</h4>
+        <p class="note" style="margin-bottom:.6rem">The standard KS test (e.g. scipy's <code>kstest</code>) assumes the distribution parameters are <em>known a priori</em>. When parameters are <em>estimated from the data</em> (as we do via Weibull MLE), the standard test uses the wrong reference distribution and gives p-values that are too large — it almost never rejects, even on non-Weibull data. The <strong>Lilliefors correction</strong> fixes this by refitting parameters inside each bootstrap sample, building the correct null distribution for the "fit-then-test" procedure.</p>
         <table class="data-table" style="margin-bottom:1rem">
-          <thead><tr><th>Test</th><th class="num">KS stat</th><th class="num">p-value</th><th>Interpretation</th></tr></thead>
+          <thead><tr><th>Test</th><th class="num">KS stat</th><th class="num">p-value</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td>Standard KS (assumes known params)</td><td class="num">{{ks_stat_obs}}</td><td class="num">{{ks_p}}</td><td>Conservative — p-values too large when params estimated from data</td></tr>
-            <tr><td>Lilliefors-corrected (parametric bootstrap, B=5000)</td><td class="num">{{ks_stat_obs}}</td><td class="num">{{ks_p_lilliefors}}</td><td>Statistically correct — refits params inside each bootstrap sample. Formula: (count+1)/(B+1)</td></tr>
-            <tr><td>Bootstrap mean KS (null distribution)</td><td class="num">{{ks_boot_mean}}</td><td class="num">—</td><td>Expected KS if data truly Weibull</td></tr>
-            <tr><td>Bootstrap 95th percentile</td><td class="num">{{ks_boot_95}}</td><td class="num">—</td><td>Reject if observed KS exceeds this</td></tr>
+            <tr><td><strong>Lilliefors-corrected KS</strong> (canonical)</td><td class="num">{{ks_stat_obs}}</td><td class="num">{{ks_p_lilliefors}}</td><td>Parametric bootstrap, B=5000, refits params inside each sample. <strong>This is the correct test.</strong></td></tr>
+            <tr><td>Standard KS (scipy asymptotic)</td><td class="num">{{ks_stat_obs}}</td><td class="num">{{ks_p}}</td><td>Wrong reference distribution — p-values inflated, almost never rejects. Shown only for comparison.</td></tr>
+            <tr><td>Bootstrap mean KS (Lilliefors null)</td><td class="num">{{ks_boot_mean}}</td><td class="num">—</td><td>Expected KS if data truly Weibull (with estimated params)</td></tr>
+            <tr><td>Bootstrap 95th percentile</td><td class="num">{{ks_boot_95}}</td><td class="num">—</td><td>Reject at 5% if observed KS exceeds this</td></tr>
           </tbody>
         </table>
 
         <p>All three shape estimators agree: D_meta ≈ {{d_mle}} (MLE), {{d_direct}} (direct), {{d_linear}} (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = {{delta_aic_gamma}}, vs Lognormal = {{delta_aic_lognormal}}, vs Exponential = {{delta_aic_weibull}}. No alternative distribution fits better.</p>
 
-        <p><strong>Standard KS test</strong> gives p = {{ks_p}} — cannot reject Weibull at 5%. However, this test assumes known parameters and is too conservative when shape and scale are estimated from the data. The <strong>Lilliefors-corrected KS test</strong> (parametric bootstrap, B=5000, refitting parameters inside each bootstrap sample) gives p = {{ks_p_lilliefors}}. This is the statistically correct test. The p-value uses the standard bootstrap formula (count+1)/(B+1), ensuring p &gt; 0 always. If corrected p &lt; 0.05, Weibull is an approximation, not an exact fit — but it remains the best available parametric distribution (lowest AIC). The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme).</p>
+        <p><strong>Lilliefors KS test</strong> gives p = {{ks_p_lilliefors}}. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
         <blockquote class="callout warn">
           <strong>Prospective update — {{date}} (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = {{d_mle}}. The estimator range is [{{d_direct}}, {{d_linear}}]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near {{d_mle}} as genuinely new, independent systems are added?

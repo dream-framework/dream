@@ -24,6 +24,7 @@
   "ks_stat_obs": 0.1029,
   "ks_boot_mean": 0.0517,
   "ks_boot_95": 0.0732,
+  "ks_p_lilliefors_note": "Weibull is rejected at 5% \u2014 but it remains the best available parametric fit by AIC (\u0394AIC vs Gamma = +1.9, vs Lognormal = +21.6).",
   "d_direct": 1.6629,
   "lam_direct": 1.2942,
   "r2_direct": 0.9815,

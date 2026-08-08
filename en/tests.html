@@ -761,8 +761,7 @@ function computeMetaS2(){
     <div style="display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:6px;align-items:baseline">
       <div><span style="color:var(--muted-2)">D_meta (MLE) <span style="font-size:8px;color:var(--good)">canonical</span></span> <b style="color:var(--accent);font-family:monospace">${m.d_mle.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">λ_meta</span> <b style="color:var(--accent);font-family:monospace">${m.lam_mle.toFixed(3)}</b></div>
-      <div><span style="color:var(--muted-2)">KS p</span> <b style="font-family:monospace">${m.ks_p.toFixed(3)}</b> <span style="font-size:9px;color:var(--muted-3)">(standard)</span></div>
-      ${m.ks_p_lilliefors != null ? `<div><span style="color:var(--muted-2)">KS p<sub>Lilliefors</sub></span> <b style="font-family:monospace;color:${m.ks_p_lilliefors > 0.05 ? 'var(--good)' : 'var(--bad)'}">${m.ks_p_lilliefors.toFixed(3)}</b> <span style="font-size:9px;color:var(--muted-3)">(corrected)</span></div>` : ''}
+      <div><span style="color:var(--muted-2)">KS p</span> <b style="font-family:monospace;color:${(m.ks_p_lilliefors != null ? m.ks_p_lilliefors : m.ks_p) > 0.05 ? 'var(--good)' : 'var(--bad)'}">${(m.ks_p_lilliefors != null ? m.ks_p_lilliefors : m.ks_p).toFixed(3)}</b> <span style="font-size:9px;color:var(--muted-3)">(Lilliefors)</span></div>
       <div><span style="color:var(--muted-2)">n</span> <b style="font-family:monospace">${m.n}</b></div>
       <div><span style="color:var(--muted-2)">mean D</span> <b style="font-family:monospace">${m.mean.toFixed(3)}</b></div>
       <div><span style="color:var(--muted-2)">median D</span> <b style="font-family:monospace">${m.median.toFixed(3)}</b></div>
@@ -773,8 +772,7 @@ function computeMetaS2(){
       <b>Eligibility:</b> ${m.total} registered → ${m.n} valid S2 fits (R² ≥ 0.1) → ${m.compared} model-compared (${m.total - m.compared - (m.rejected||0)} awaiting comparison${m.noise ? `, ${m.noise} noise fits excluded` : ''}${m.rejected ? `, ${m.rejected} total S2 failures (NO FIT)` : ''}).<br>
       Diagnostics: direct-d D=${m.d_direct.toFixed(3)} (R²=${m.r2_direct.toFixed(3)}), linearized D=${m.d_linear.toFixed(3)} (R²=${m.r2_linear.toFixed(3)}).
       Estimator range: [${Math.min(m.d_mle, m.d_direct, m.d_linear).toFixed(2)}, ${Math.max(m.d_mle, m.d_direct, m.d_linear).toFixed(2)}].
-      ${m.ks_p > 0.05 ? 'Standard KS p > 0.05 (cannot reject Weibull).' : 'Standard KS p < 0.05 (Weibull rejected!).'}
-      ${m.ks_p_lilliefors != null ? (m.ks_p_lilliefors > 0.05 ? 'Lilliefors-corrected p > 0.05 (Weibull holds even with proper test).' : '<span style="color:var(--bad)">Lilliefors-corrected p < 0.05 — Weibull is best approximation but not exact fit. See full analysis.</span>') : ''}
+      ${m.ks_p_lilliefors != null ? (m.ks_p_lilliefors > 0.05 ? 'Lilliefors KS p > 0.05 — Weibull fit holds.' : '<span style="color:var(--bad)">Lilliefors KS p < 0.05 — Weibull rejected (best approximation, not exact). AIC still favors Weibull over Gamma/Lognormal.</span>') : (m.ks_p > 0.05 ? 'KS p > 0.05 (cannot reject Weibull).' : 'KS p < 0.05 (Weibull rejected!).')}
       <br><span style="color:var(--accent-2)">⚠ Estimator-sensitive: D_meta moves 0.3+ depending on method. Canonical = Weibull MLE. See <a href="articles/meta-s2.html" style="color:var(--accent)">full analysis</a>.</span>
       <br><span style="color:var(--muted-3);font-size:9px">Snapshot: ${m.date} · n=${m.n} · ${m.total} registered</span>
     </div>
