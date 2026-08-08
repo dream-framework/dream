@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-08T09:09:25.029469+00:00",
+  "initialized": "2026-08-08T13:19:27.815560+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3813,11 +3813,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "EXTRACTION",
       "model_verdict": "S2_LOSES",
-      "narrative": "D=2.9027, R²=0.7908. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=2.09).",
+      "narrative": "D=2.9028, R²=0.7908. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to GAUSS (ΔAICc=2.09).",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
