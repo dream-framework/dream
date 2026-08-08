@@ -197,7 +197,8 @@
         <option value="confirmed">Confirmed Domains</option>
       </select>
       <span class="registry-count" id="count">—</span>
-      <button class="pill-download" onclick="downloadJson()" title="Download all 88 tests as JSON">⬇ JSON</button>
+      <button class="pill-download" onclick="downloadJson()" title="Download all tests as JSON">⬇ JSON</button>
+      <button id="scan-alert-btn" class="pill-download" aria-pressed="false" title="Get notified on iPhone/Android when the scan updates (every ~6h)">🔔 Scan alerts</button>
     </div>
   </div>
 
@@ -1683,6 +1684,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- ===== Bot (chat bubble) ===== -->
   <script defer src="../js/nav-mobile.js"></script>
   <script defer src="../js/pull-to-refresh.js"></script>
+  <script defer src="../js/scan-notifications.js"></script>
   <script defer src="../js/nav-dropdown.js"></script>
   <script defer src="../js/nav-autoscroll.js"></script>
   <script defer src="../js/bot.js"></script>

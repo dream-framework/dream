@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v2';
+const CACHE_VERSION = 'dream-v3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -21,6 +21,7 @@ const PRECACHE_URLS = [
   './js/nav-dropdown.js',
   './js/nav-autoscroll.js',
   './js/pull-to-refresh.js',
+  './js/scan-notifications.js',
 ];
 
 // Install — pre-cache the app shell
@@ -100,4 +101,98 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+});
+
+// ═══ PERIODIC SYNC — for scan notifications (Android Chrome/Edge) ═══
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'dream-scan-check') {
+    event.waitUntil(checkForScanUpdates());
+  }
+});
+
+// Check for tests.json changes and notify
+async function checkForScanUpdates() {
+  try {
+    const resp = await fetch('/dream/en/tests.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const tests = data.tests || [];
+    const counts = { S2_WINS: 0, S2_TIES: 0, S2_LOSES: 0, S2_DUST_WINS: 0, S2_NO_FIT: 0 };
+    for (const t of tests) {
+      const mv = t.model_verdict || 'unknown';
+      counts[mv] = (counts[mv] || 0) + 1;
+    }
+    const curr = {
+      total: data.total_tests || tests.length,
+      exported_at: data.exported_at,
+      counts,
+      hash: `${data.total_tests || tests.length}-${data.exported_at || ''}`,
+    };
+
+    // Read previous state from cache (since SW can't access localStorage)
+    const cache = await caches.open('dream-scan-state-v2');
+    const stateResp = await cache.match('/dream-scan-state');
+    let prev = null;
+    if (stateResp) {
+      try { prev = await stateResp.json(); } catch {}
+    }
+
+    if (!prev) {
+      // First check — just store
+      await cache.put('/dream-scan-state', new Response(JSON.stringify(curr)));
+      return;
+    }
+
+    if (prev.hash === curr.hash) return;  // no change
+
+    // Compute diff
+    const sign = n => n > 0 ? `+${n}` : `${n}`;
+    const dTotal = curr.total - prev.total;
+    const dWins = (curr.counts.S2_WINS || 0) - (prev.counts.S2_WINS || 0);
+    const dTies = (curr.counts.S2_TIES || 0) - (prev.counts.S2_TIES || 0);
+    const dLoses = (curr.counts.S2_LOSES || 0) - (prev.counts.S2_LOSES || 0);
+    const dDust = (curr.counts.S2_DUST_WINS || 0) - (prev.counts.S2_DUST_WINS || 0);
+
+    const lines = [];
+    if (dTotal !== 0) lines.push(`Total: ${sign(dTotal)}`);
+    if (dWins) lines.push(`S2 wins: ${sign(dWins)}`);
+    if (dDust) lines.push(`Dust-resolved: ${sign(dDust)}`);
+    if (dLoses) lines.push(`S2 loses: ${sign(dLoses)}`);
+
+    const title = `DREAM scan: ${curr.total} tests`;
+    const body = lines.length > 0 ? lines.join(', ') : 'Registry updated';
+
+    await self.registration.showNotification(title, {
+      body,
+      icon: '/dream/img/icon-192.png',
+      badge: '/dream/img/icon-192.png',
+      tag: 'dream-scan-update',
+      renotify: true,
+      data: { url: '/dream/en/tests.html' },
+      vibrate: [80, 40, 80],
+    });
+
+    // Update stored state
+    await cache.put('/dream-scan-state', new Response(JSON.stringify(curr)));
+  } catch (e) {
+    console.warn('DREAM SW: scan check failed', e);
+  }
+}
+
+// ═══ NOTIFICATION CLICK — open tests page ═══
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = (event.notification.data && event.notification.data.url) || '/dream/en/tests.html';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Focus existing window if open
+      for (const client of clientList) {
+        if (client.url.includes('/dream/') && 'focus' in client) {
+          return client.navigate(url).then(c => c.focus());
+        }
+      }
+      // Open new window
+      if (clients.openWindow) return clients.openWindow(url);
+    })
+  );
 });

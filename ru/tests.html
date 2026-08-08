@@ -188,7 +188,8 @@
         <option value="confirmed">Подтверждённые домены</option>
       </select>
       <span class="registry-count" id="count">—</span>
-      <button class="pill-download" onclick="downloadJson()" title="Скачать все 88 тестов в JSON">⬇ JSON</button>
+      <button class="pill-download" onclick="downloadJson()" title="Скачать все тесты в JSON">⬇ JSON</button>
+      <button id="scan-alert-btn" class="pill-download" aria-pressed="false" title="Оповещения на iPhone/Android при обновлении сканирования (~каждые 6ч)">🔔 Оповещения сканирования</button>
     </div>
   </div>
 
@@ -1773,6 +1774,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- ===== Бот (чат-пузырь) ===== -->
   <script defer src="../js/nav-mobile.js"></script>
   <script defer src="../js/pull-to-refresh.js"></script>
+  <script defer src="../js/scan-notifications.js"></script>
   <script defer src="../js/nav-dropdown.js"></script>
   <script defer src="../js/nav-autoscroll.js"></script>
   <script defer src="../js/bot.js"></script>
