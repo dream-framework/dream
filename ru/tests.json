@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-08T02:30:52Z",
-  "total_tests": 153,
+  "exported_at": "2026-08-08T05:18:22Z",
+  "total_tests": 155,
   "fields": [
     "id",
     "name",
@@ -2328,6 +2328,38 @@
       "source": "auto-scan 2026-08-08",
       "date": "2026-08-08",
       "url": "10.5281/zenodo.21845028"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: SARS-CoV-2 Infektionen in Deutschland",
+      "domain": "scouting",
+      "D": 1.0611,
+      "r2": 0.9996,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2844.68,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2844.68).",
+      "narrative": "D=1.0611, R²=0.9996. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает S2_DUST (ΔAICc=2844.68).",
+      "source": "auto-scan 2026-08-08",
+      "date": "2026-08-08",
+      "url": "10.5281/zenodo.21846414"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Synthesis Data for Gig Workers Full Dataset",
+      "domain": "scouting",
+      "D": 1.0539,
+      "r2": 1.0,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2715.06,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2715.06).",
+      "narrative": "D=1.0539, R²=1.0000. D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально. S2 уступает S2_DUST (ΔAICc=2715.06).",
+      "source": "auto-scan 2026-08-08",
+      "date": "2026-08-08",
+      "url": "10.5281/zenodo.21846326"
     }
   ]
 }

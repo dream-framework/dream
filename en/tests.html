@@ -254,7 +254,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "7 Aug 2026 22:30 EST";
+const LAST_REFRESH = "8 Aug 2026 01:18 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -431,6 +431,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D=0.9862, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=282.62).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
   ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"THRESHOLD",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D=0.9862, R²=0.9999. D≈1 — threshold regime, near-exponential decay. S2 loses to S2_DUST (ΔAICc=282.62).",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
   ,{id:"",name:"Zenodo: 2024-04-08 Total Solar Eclipse ESID#266",domain:"scouting",D:1.4800,r2:0.7615,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:35.5100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=35.51).",narrative:"D=1.4800, R²=0.7615. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=35.51).",source:"auto-scan 2026-08-08",date:"2026-08-08",url:"10.5281/zenodo.21845028",image:null}
+  ,{id:"",name:"Zenodo: SARS-CoV-2 Infektionen in Deutschland",domain:"scouting",D:1.0611,r2:0.9996,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:2844.6800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2844.68).",narrative:"D=1.0611, R²=0.9996. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=2844.68).",source:"auto-scan 2026-08-08",date:"2026-08-08",url:"10.5281/zenodo.21846414",image:null}
+  ,{id:"",name:"Zenodo: Synthesis Data for Gig Workers Full Dataset",domain:"scouting",D:1.0539,r2:1.0000,verdict:"EXTRACTION",model_verdict:"S2_LOSES",delta_aicc:2715.0600,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2715.06).",narrative:"D=1.0539, R²=1.0000. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=2715.06).",source:"auto-scan 2026-08-08",date:"2026-08-08",url:"10.5281/zenodo.21846326",image:null}
 
 ];
 
@@ -721,29 +723,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 146,
-  "d_mle": 1.5691,
-  "lam_mle": 1.2639,
-  "ks_p": 0.0817,
-  "d_direct": 1.6756,
-  "r2_direct": 0.9808,
-  "d_linear": 1.5517,
+  "n": 148,
+  "d_mle": 1.5798,
+  "lam_mle": 1.2636,
+  "ks_p": 0.0608,
+  "d_direct": 1.7078,
+  "r2_direct": 0.9811,
+  "d_linear": 1.5626,
   "r2_linear": 0.9782,
   "natural": 59,
-  "extraction": 87,
-  "mean": 1.1354,
-  "median": 1.0757,
-  "total": 153,
-  "compared": 151,
+  "extraction": 89,
+  "mean": 1.1344,
+  "median": 1.0587,
+  "total": 155,
+  "compared": 153,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.4888,
+  "ad_stat": 1.5122,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.1,
-  "delta_aic_lognormal": 22.3,
-  "silverman_p": 0.88,
+  "delta_aic_gamma": 2.15,
+  "delta_aic_lognormal": 22.87,
+  "silverman_p": 0.79,
   "boot_lo": 1.057,
-  "boot_hi": 1.811,
+  "boot_hi": 1.82,
   "date": "2026-08-08"
 };
 
