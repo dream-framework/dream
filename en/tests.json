@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-07T21:08:53Z",
-  "total_tests": 152,
+  "exported_at": "2026-08-08T02:30:52Z",
+  "total_tests": 153,
   "fields": [
     "id",
     "name",
@@ -2312,6 +2312,22 @@
       "source": "auto-scan 2026-08-07",
       "date": "2026-08-07",
       "url": "10.5281/zenodo.21843288"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 2024-04-08 Total Solar Eclipse ESID#266",
+      "domain": "scouting",
+      "D": 1.48,
+      "r2": 0.7615,
+      "verdict": "EXTRACTION",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 35.51,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=35.51).",
+      "narrative": "D=1.4800, R²=0.7615. D>1 indicates extraction regime — retention collapses super-exponentially. S2 loses to S2_DUST (ΔAICc=35.51).",
+      "source": "auto-scan 2026-08-08",
+      "date": "2026-08-08",
+      "url": "10.5281/zenodo.21845028"
     }
   ]
 }
