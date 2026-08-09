@@ -358,7 +358,10 @@ main.container{
 .badge.no-dot::before{ display: none; }
 .badge.ok{   background: rgba(125,211,168,.10); color: var(--good); border-color: rgba(125,211,168,.35); }
 .badge.warn{ background: rgba(240,200,120,.10); color: var(--warn); border-color: rgba(240,200,120,.35); }
+.badge.bad{  background: rgba(240,100,100,.12); color: #f06464; border-color: rgba(240,100,100,.35); }
 .badge.spec{ background: rgba(240,160,160,.10); color: var(--spec); border-color: rgba(240,160,160,.35); }
+.derivation{ margin:.6rem 0; padding-left:1.4rem; }
+.derivation li{ margin-bottom:.5rem; line-height:1.5; }
 .badge.sm{ padding: .12rem .45rem; font-size: .62rem; }
 .badge.lg{ padding: .28rem .75rem; font-size: .78rem; }
 .badges{ display: flex; flex-wrap: wrap; gap: .35rem; }
