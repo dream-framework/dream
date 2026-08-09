@@ -1,37 +1,43 @@
 {
-  "verdict": "SUPPORTED",
-  "predictions_confirmed": 4,
-  "predictions_total": 4,
+  "verdict": "PARTIALLY SUPPORTED",
+  "n_strong_predictions": 1,
+  "total_testable_predictions": 3,
   "P1": {
-    "pass": true,
-    "n_tested": 20,
-    "n_pass": 20,
-    "pct_pass": 100.0,
-    "mean_d_range": 4.984,
-    "description": "Scale-dependent D_eff \u2014 100% of datasets show D variation > 0.3 across scales"
+    "test": "null_model_control",
+    "real_median_delta_D": 5.7,
+    "null_median_delta_D": 7.938,
+    "null_95th_pct": null,
+    "ratio_real_to_null": 0.7,
+    "mann_whitney_p": 0.761464,
+    "pass": false,
+    "n_null": 500,
+    "n_real": 20,
+    "interpretation": "COLLAPSED: Real \u0394D (5.7) is LESS than null median (7.9). The D-variation observed across scales is consistent with what pure single-S2 produces under the same fitting procedure. The 3-scale fitting pipeline itself introduces spurious D-variation. P1 does NOT support T7."
   },
   "P2": {
-    "pass": true,
-    "n_tested": 20,
-    "n_pass": 8,
-    "pct_pass": 40.0,
-    "mean_improvement": -140.96,
-    "description": "Multi-component fits improve at finer resolution \u2014 40% show S2+dust more favored at fine scale"
+    "test": "wilcoxon_signed_rank",
+    "n": 20,
+    "median_diff": -40.61,
+    "mean_diff": -140.97,
+    "p_value": 0.9709,
+    "significant": false,
+    "direction": "dust LESS favored at fine scale (opposite of T7 prediction)",
+    "interpretation": "NOT SUPPORTED: The paired Wilcoxon test shows multi-component fits are NOT more favored at finer resolution. In fact, the direction is opposite \u2014 dust is LESS favored at fine scale. T7 prediction P2 is not confirmed."
   },
   "P3": {
+    "test": "hierarchical_variance",
+    "n_systems": 20,
+    "V_within_system": 10.4647,
+    "V_between_system": 3.3439,
+    "ratio_within_to_between": 3.129,
     "pass": true,
-    "n": 136,
-    "mean": 1.105,
-    "std": 0.692,
-    "cv": 0.626,
-    "threshold": 0.3,
-    "description": "No universal D \u2014 CV=0.626 (broad distribution, not peaked)"
+    "interpretation": "SUPPORTED: Within-system (between-scale) variance is 3.1x the between-system variance. This means D varies more across probe scales within the same system than it varies across different systems. This is consistent with T7 (D is scale-dependent, not system-invariant). CAVEAT: part of this within-system variance may be fitting artifact (see P1 null result)."
   },
   "P4": {
-    "pass": true,
-    "p_lilliefors": 0.0006,
-    "threshold": 0.05,
-    "description": "Meta-S2 exploratory \u2014 Lilliefors rejects Weibull (effective params, not invariants)"
+    "test": "meta_s2_falsification",
+    "lilliefors_p": 0.0006,
+    "interpretation": "Meta-S2 (Weibull law for D distribution) is FALSIFIED. This supports dropping Meta-S2 as a foundational claim, but does NOT independently confirm T7. The D distribution being non-Weibull is consistent with many hypotheses, not uniquely T7."
   },
-  "summary": "T7 INTERFERENCE HYPOTHESIS: SUPPORTED. All 4 falsifiable predictions confirmed by the 152-test registry. The 10D \u2192 4D compression inevitably produces interference of S2s, making aggregate measurements superpositions of local retention processes."
+  "honest_summary": "T7 INTERFERENCE HYPOTHESIS \u2014 PARTIALLY SUPPORTED. The decisive null-model control test (P1) COLLAPSED: real D-variation across scales (median \u0394D=5.7) is LESS than what synthetic single-S2 data produces under the identical fitting procedure (null median \u0394D=7.9, Mann-Whitney p=0.76). The observed scale-dependence of D is consistent with a fitting artifact, not evidence of interference. P2 (multi-component at fine scale) is NOT supported \u2014 paired Wilcoxon p=0.97, direction opposite to T7 prediction. P3 (hierarchical variance) is nominally supported (within/between=3.1), but this may also reflect the fitting artifact identified in P1. P4 (Meta-S2 falsified) removes an alternative but does not confirm T7. CONCLUSION: The interference hypothesis remains theoretically motivated by the 10D\u21924D compression axioms, but the current registry does NOT provide empirical support beyond what single-S2 plus fitting effects would produce. Distinguishing genuine interference from fitting artifacts requires a more refined experimental design.",
+  "critical_finding": "The 3-scale fitting procedure itself introduces substantial D-variation even on pure single-S2 data. This means the original P1 result (100% of datasets showing D variation) was measuring the fitting procedures sensitivity to sub-range selection, not genuine scale-dependent interference. This is exactly the control test that was needed."
 }
