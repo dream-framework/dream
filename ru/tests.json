@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-09T09:17:31Z",
-  "total_tests": 152,
+  "exported_at": "2026-08-09T13:31:26Z",
+  "total_tests": 153,
   "fields": [
     "id",
     "name",
@@ -2312,6 +2312,22 @@
       "source": "auto-scan 2026-08-07",
       "date": "2026-08-07",
       "url": "10.5281/zenodo.21843288"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Analysis code and data for \"Temperature Anomalies ",
+      "domain": "scouting",
+      "D": 1.0981,
+      "r2": 0.9984,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 204.14,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=204.14).",
+      "narrative": "D_eff=1.0981, R²=0.9984. D_eff=1.098 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=204.14). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-09",
+      "date": "2026-08-09",
+      "url": "10.5281/zenodo.21861135"
     }
   ]
 }
