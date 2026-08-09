@@ -256,7 +256,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "9 Aug 2026 09:31 EST";
+const LAST_REFRESH = "9 Aug 2026 13:09 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -433,6 +433,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D_eff=0.9862, R²=0.9999. D_eff=0.986 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=282.62). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
   ,{id:"",name:"Zenodo: Extracted Data from: CEQ CEJST, versions 1 and 2",domain:"scouting",D:0.9862,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:282.6200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=282.62).",narrative:"D_eff=0.9862, R²=0.9999. D_eff=0.986 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=282.62). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-07",date:"2026-08-07",url:"10.5281/zenodo.21843288",image:null}
   ,{id:"",name:"Zenodo: Analysis code and data for \"Temperature Anomalies ",domain:"scouting",D:1.0981,r2:0.9984,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:204.1400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=204.14).",narrative:"D_eff=1.0981, R²=0.9984. D_eff=1.098 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=204.14). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-09",date:"2026-08-09",url:"10.5281/zenodo.21861135",image:null}
+  ,{id:"",name:"Zenodo: 2024-04-08 Partial Solar Eclipse ESID#446",domain:"scouting",D:1.7258,r2:0.7422,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.9100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=20.91).",narrative:"D_eff=1.7258, R²=0.7422. D_eff=1.726 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=20.91). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-09",date:"2026-08-09",url:"10.5281/zenodo.21862415",image:null}
 
 ];
 
@@ -730,33 +731,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 146,
-  "d_mle": 1.5681,
-  "lam_mle": 1.2611,
-  "ks_p": 0.0754,
-  "ks_p_lilliefors": 0.0004,
-  "ks_stat_obs": 0.1048,
-  "ks_boot_mean": 0.0515,
-  "ks_boot_95": 0.0738,
-  "d_direct": 1.6796,
-  "r2_direct": 0.9815,
-  "d_linear": 1.5538,
-  "r2_linear": 0.9785,
+  "n": 147,
+  "d_mle": 1.5741,
+  "lam_mle": 1.2658,
+  "ks_p": 0.0743,
+  "ks_p_lilliefors": 0.0008,
+  "ks_stat_obs": 0.1046,
+  "ks_boot_mean": 0.0513,
+  "ks_boot_95": 0.0731,
+  "d_direct": 1.6871,
+  "r2_direct": 0.9814,
+  "d_linear": 1.5556,
+  "r2_linear": 0.9784,
   "natural": 59,
-  "extraction": 87,
-  "mean": 1.1328,
-  "median": 1.0757,
-  "total": 153,
-  "compared": 151,
+  "extraction": 88,
+  "mean": 1.1368,
+  "median": 1.0952,
+  "total": 154,
+  "compared": 152,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.4401,
+  "ad_stat": 1.4714,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.96,
-  "delta_aic_lognormal": 21.97,
+  "delta_aic_gamma": 2.19,
+  "delta_aic_lognormal": 22.7,
   "silverman_p": 0.88,
   "boot_lo": 1.057,
-  "boot_hi": 1.809,
+  "boot_hi": 1.815,
   "date": "2026-08-09"
 };
 
