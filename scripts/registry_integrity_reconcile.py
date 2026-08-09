@@ -36,18 +36,20 @@ Usage:
 import os, sys, re, json, argparse
 
 def derive_regime(D, model_verdict=None):
-    """Derive the regime label from D."""
+    """Derive the D_eff descriptor from D.
+    NOTE: Under the interference model, D_eff > 1 does NOT necessarily mean
+    "extraction" — it could emerge from mixing several local S2 curves.
+    We return a neutral D descriptor, not a regime interpretation."""
     if D is None:
-        # If S2 couldn't be fit at all, mark as REJECTED (not just PENDING)
         if model_verdict == 'S2_NO_FIT':
             return 'REJECTED'
         return 'PENDING'
     if D < 0.8:
-        return 'NATURAL'
-    elif D > 1.0:
-        return 'EXTRACTION'
+        return 'D_LT_1'
+    elif D > 1.2:
+        return 'D_GT_1'
     else:
-        return 'THRESHOLD'
+        return 'D_NEAR_1'
 
 def derive_narrative_en(entry):
     """Derive the English narrative from immutable numeric fields."""
@@ -60,32 +62,35 @@ def derive_narrative_en(entry):
     if D is None:
         if model_verdict == 'S2_NO_FIT':
             reason = entry.get('rejection_reason', 'unknown')
-            return f'S2 fit rejected: {reason}. Dataset recorded for transparency — no D value produced.'
+            return f'No S2-like component detected: {reason}.'
         return 'S2 fit pending — data acquired but not yet analyzed.'
-    
-    # Regime text
-    if D > 1.0:
-        regime_text = 'D>1 indicates extraction regime — retention collapses super-exponentially.'
+
+    # D_eff descriptor — NOT extraction/natural regime interpretation
+    # Under the interference model, D_eff is a probe-scale effective parameter.
+    # D>1 does NOT necessarily mean "extraction" — it could emerge from mixing
+    # several local S2 curves.
+    if D > 1.2:
+        regime_text = f'D_eff={D:.3f} > 1 (probe-scale effective parameter).'
     elif D < 0.8:
-        regime_text = 'D<1 confirms natural retention — heavy-tailed, slow decay.'
+        regime_text = f'D_eff={D:.3f} < 1 (probe-scale effective parameter).'
     else:
-        regime_text = 'D≈1 — threshold regime, near-exponential decay.'
-    
-    # Model comparison text
+        regime_text = f'D_eff={D:.3f} ≈ 1 (probe-scale effective parameter).'
+
+    # Model comparison text — interference-aware vocabulary
     if model_verdict == 'S2_WINS' and best_alt and delta_aicc is not None:
-        model_text = f'S2 beats {best_alt} (ΔAICc={delta_aicc:.2f}).'
+        model_text = f'Single-scale S2 adequate (beats {best_alt}, ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_TIES' and best_alt and delta_aicc is not None:
-        model_text = f'S2 ties {best_alt} (ΔAICc={delta_aicc:.2f}, within ±2).'
+        model_text = f'Single-scale S2 marginal (ties {best_alt}, ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_DUST_WINS' and best_alt and delta_aicc is not None:
-        model_text = f'S2 loses to {best_alt} (ΔAICc={delta_aicc:.2f}), but S2+dust decomposition wins — dust structure confirmed, not a DREAM failure.'
+        model_text = f'Multi-scale: S2+dust reveals additional structure (ΔAICc={delta_aicc:.2f} vs single S2). Not necessarily the underlying physical model.'
     elif model_verdict == 'S2_LOSES' and best_alt and delta_aicc is not None:
-        model_text = f'S2 loses to {best_alt} (ΔAICc={delta_aicc:.2f}).'
+        model_text = f'Interference: single-scale S2 insufficient, {best_alt} absorbs overlapping processes (ΔAICc={delta_aicc:.2f}). Not "S2 false" — additional structure detected.'
     elif model_verdict == 'NO_FIT':
-        model_text = 'No model fits adequately.'
+        model_text = 'No S2-like component detected.'
     else:
         model_text = ''
-    
-    return f'D={D:.4f}, R²={r2:.4f}. {regime_text} {model_text}'.strip()
+
+    return f'D_eff={D:.4f}, R²={r2:.4f}. {regime_text} {model_text}'.strip()
 
 def derive_narrative_ru(entry):
     """Derive the Russian narrative from immutable numeric fields."""
@@ -98,30 +103,31 @@ def derive_narrative_ru(entry):
     if D is None:
         if model_verdict == 'S2_NO_FIT':
             reason = entry.get('rejection_reason', 'unknown')
-            return f'Подгонка S2 отклонена: {reason}. Набор данных записан для прозрачности — значение D не получено.'
+            return f'S2-компонент не обнаружен: {reason}.'
         return 'S2-подгонка ожидается — данные получены, но не проанализированы.'
-    
-    if D > 1.0:
-        regime_text = 'D>1 указывает на режим извлечения — сохранение коллапсирует сверхэкспоненциально.'
+
+    # D_eff — эффективный параметр масштаба зонда, не индикатор режима
+    if D > 1.2:
+        regime_text = f'D_eff={D:.3f} > 1 (эффективный параметр масштаба зонда).'
     elif D < 0.8:
-        regime_text = 'D<1 подтверждает естественное сохранение — тяжёлый хвост, медленное угасание.'
+        regime_text = f'D_eff={D:.3f} < 1 (эффективный параметр масштаба зонда).'
     else:
-        regime_text = 'D≈1 — пороговый режим, около-экспоненциальное затухание.'
-    
+        regime_text = f'D_eff={D:.3f} ≈ 1 (эффективный параметр масштаба зонда).'
+
     if model_verdict == 'S2_WINS' and best_alt and delta_aicc is not None:
-        model_text = f'S2 превосходит {best_alt} (ΔAICc={delta_aicc:.2f}).'
+        model_text = f'Одномасштабная S2 адекватна (превосходит {best_alt}, ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_TIES' and best_alt and delta_aicc is not None:
-        model_text = f'S2 сравнима с {best_alt} (ΔAICc={delta_aicc:.2f}, в пределах ±2).'
+        model_text = f'Одномасштабная S2 маргинальна (сравнима с {best_alt}, ΔAICc={delta_aicc:.2f}).'
     elif model_verdict == 'S2_DUST_WINS' and best_alt and delta_aicc is not None:
-        model_text = f'S2 уступает {best_alt} (ΔAICc={delta_aicc:.2f}), но S2+пыль побеждает — пылевая структура подтверждена, не провал DREAM.'
+        model_text = f'Многомасштабная: S2+пыль выявляет дополнительную структуру (ΔAICc={delta_aicc:.2f}). Не обязательно физическая модель.'
     elif model_verdict == 'S2_LOSES' and best_alt and delta_aicc is not None:
-        model_text = f'S2 уступает {best_alt} (ΔAICc={delta_aicc:.2f}).'
+        model_text = f'Интерференция: одномасштабная S2 недостаточна, {best_alt} поглощает перекрывающиеся процессы (ΔAICc={delta_aicc:.2f}). Не "S2 ложна" — обнаружена дополнительная структура.'
     elif model_verdict == 'NO_FIT':
-        model_text = 'Ни одна модель не подгоняется адекватно.'
+        model_text = 'S2-компонент не обнаружен.'
     else:
         model_text = ''
-    
-    return f'D={D:.4f}, R²={r2:.4f}. {regime_text} {model_text}'.strip()
+
+    return f'D_eff={D:.4f}, R²={r2:.4f}. {regime_text} {model_text}'.strip()
 
 
 def parse_tests_html(html_path):

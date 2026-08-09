@@ -906,10 +906,16 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 .verdict-NATURAL{ background: rgba(125,211,168,.12); color: var(--good); border-color: rgba(125,211,168,.4); }
 .verdict-INCONCLUSIVE{ background: rgba(240,200,120,.12); color: var(--warn); border-color: rgba(240,200,120,.4); }
 .verdict-PENDING{ background: rgba(148,163,184,.12); color: var(--muted); border-color: rgba(148,163,184,.4); }
-/* Fit-quality pills (second badge on each card) */
+/* Fit-quality pills (interference-aware S2 interpretation) */
+.fit-single-scale{ background: rgba(125,211,168,.18); color: var(--good); border-color: rgba(125,211,168,.5); font-weight:700; }
+.fit-marginal{ background: rgba(240,200,120,.14); color: var(--warn); border-color: rgba(240,200,120,.4); }
+.fit-undetermined{ background: rgba(148,163,184,.10); color: var(--muted); border-color: rgba(148,163,184,.3); font-style:italic; }
+.fit-interference{ background: rgba(240,160,160,.10); color: var(--bad); border-color: rgba(240,160,160,.3); font-style:italic; }
+.fit-multi-scale{ background: rgba(167,139,250,.14); color: #a78bfa; border-color: rgba(167,139,250,.5); font-weight:600; }
+.fit-no-component{ background: rgba(100,100,100,.18); color: #6b7280; border-color: rgba(100,100,100,.4); font-style:italic; text-decoration:line-through; }
+/* Legacy classes (kept for backward compat with cached pages) */
 .fit-confirmed{ background: rgba(125,211,168,.18); color: var(--good); border-color: rgba(125,211,168,.5); font-weight:700; }
 .fit-tentative{ background: rgba(240,200,120,.14); color: var(--warn); border-color: rgba(240,200,120,.4); }
-.fit-undetermined{ background: rgba(148,163,184,.10); color: var(--muted); border-color: rgba(148,163,184,.3); font-style:italic; }
 .fit-dust{ background: rgba(240,160,160,.10); color: var(--bad); border-color: rgba(240,160,160,.3); font-style:italic; }
 .fit-dust-resolved{ background: rgba(167,139,250,.14); color: #a78bfa; border-color: rgba(167,139,250,.5); font-weight:600; }
 .fit-rejected{ background: rgba(100,100,100,.18); color: #6b7280; border-color: rgba(100,100,100,.4); font-style:italic; text-decoration:line-through; }
