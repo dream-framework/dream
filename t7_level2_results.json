@@ -1,0 +1,27 @@
+{
+  "experiment": "T7 Level-2: Does S2 survive aggregation? (RECALC with model comparison)",
+  "verdict": "REFUTED \u2014 S2 is NOT an emergent fixed point of aggregation",
+  "methodological_correction": "Original R\u00b2=0.997 was misleading. R\u00b2 inflates for monotonic decay curves. AICc model comparison is the correct metric.",
+  "key_finding": {
+    "N_5000_broad_distribution": {
+      "S2_R2": 0.99692,
+      "S2_DUST_R2": 0.99993,
+      "BIEXP_R2": 0.99986,
+      "S2_AICc": -1772.98,
+      "S2_DUST_AICc": -2517.34,
+      "BIEXP_AICc": -2390.55,
+      "delta_AICc_S2_vs_S2_DUST": 744.36,
+      "delta_AICc_S2_vs_BIEXP": 617.57,
+      "interpretation": "S2_DUST beats S2 by \u0394AICc=744. The aggregate is definitively NOT closed under single S2. It is better described as a two-component mixture."
+    }
+  },
+  "residual_analysis": {
+    "max_abs_residual_S2": 0.076453,
+    "RMS_residual_S2": 0.011705,
+    "location_of_max_residual": "\u03bb=0.01 (small-\u03bb regime)",
+    "interpretation": "Systematic deviation at small \u03bb. The mixture is dominated by fast-decaying components at small \u03bb, then slow ones at large \u03bb. Single S2 cannot capture this two-regime structure."
+  },
+  "why_R2_was_misleading": "Any smooth monotonic function from 1 to 0 will fit R\u00b2 > 0.99 against any other smooth monotonic function from 1 to 0. R\u00b2 is not a meaningful metric for decay curves. AICc (which penalizes parameter count) is the correct metric for model comparison.",
+  "honest_conclusion": "The three-level hierarchy collapses to two: Level 0 (local S2, confirmed) and Level 1 (interference, confirmed \u2014 mixtures do NOT simplify back to single S2). Level 2 (emergence) is refuted: aggregates of local S2s do not converge back to a single S2. They remain mixtures, better described by S2_DUST or BIEXP.",
+  "what_this_means_for_T7": "T7 (interference) is the right picture. The aggregate is a mixture, not an emergent single S2. The original claim that S2 is an emergent fixed point of aggregation was wrong \u2014 it was an artifact of using R\u00b2 instead of AICc."
+}
