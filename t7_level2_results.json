@@ -1,27 +1,116 @@
 {
-  "experiment": "T7 Level-2: Does S2 survive aggregation? (RECALC with model comparison)",
-  "verdict": "REFUTED \u2014 S2 is NOT an emergent fixed point of aggregation",
-  "methodological_correction": "Original R\u00b2=0.997 was misleading. R\u00b2 inflates for monotonic decay curves. AICc model comparison is the correct metric.",
-  "key_finding": {
-    "N_5000_broad_distribution": {
-      "S2_R2": 0.99692,
-      "S2_DUST_R2": 0.99993,
-      "BIEXP_R2": 0.99986,
-      "S2_AICc": -1772.98,
-      "S2_DUST_AICc": -2517.34,
-      "BIEXP_AICc": -2390.55,
-      "delta_AICc_S2_vs_S2_DUST": 744.36,
-      "delta_AICc_S2_vs_BIEXP": 617.57,
-      "interpretation": "S2_DUST beats S2 by \u0394AICc=744. The aggregate is definitively NOT closed under single S2. It is better described as a two-component mixture."
-    }
+  "experiment": "T7 Level-2 recalc: multi-trial AICc verification",
+  "verdict": "REFUTED: S2 is NOT closed under aggregation. S2_DUST consistently and decisively beats S2 across all tested distributions and N values.",
+  "n_seeds": 5,
+  "distributions": {
+    "narrow": [
+      {
+        "N": 100,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 1966.3183933488294,
+        "std_delta_aicc": 160.98594477863554,
+        "mean_delta_aicc_S2_vs_BIEXP": 522.4548398556514,
+        "mean_S2_r2": 0.9999751317034409,
+        "mean_S2_DUST_r2": 0.9999999982292745,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 1000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 1935.069024218256,
+        "std_delta_aicc": 32.61580578068932,
+        "mean_delta_aicc_S2_vs_BIEXP": 628.1078471332961,
+        "mean_S2_r2": 0.9999784903530206,
+        "mean_S2_DUST_r2": 0.9999999986635804,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 5000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 1908.7886003688545,
+        "std_delta_aicc": 23.739815111121708,
+        "mean_delta_aicc_S2_vs_BIEXP": 653.8497571591156,
+        "mean_S2_r2": 0.9999789821903162,
+        "mean_S2_DUST_r2": 0.9999999985358248,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      }
+    ],
+    "broad": [
+      {
+        "N": 100,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 776.5380470938615,
+        "std_delta_aicc": 134.9278470666408,
+        "mean_delta_aicc_S2_vs_BIEXP": 642.66114719212,
+        "mean_S2_r2": 0.9952932216587239,
+        "mean_S2_DUST_r2": 0.9998920283606078,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 1000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 780.2644884752859,
+        "std_delta_aicc": 81.21776546700089,
+        "mean_delta_aicc_S2_vs_BIEXP": 622.427649630867,
+        "mean_S2_r2": 0.996783271907922,
+        "mean_S2_DUST_r2": 0.9999372374250626,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 5000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 826.1394580434493,
+        "std_delta_aicc": 60.12815818089473,
+        "mean_delta_aicc_S2_vs_BIEXP": 677.418651435571,
+        "mean_S2_r2": 0.9967000770693945,
+        "mean_S2_DUST_r2": 0.9999466418626876,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      }
+    ],
+    "registry_like": [
+      {
+        "N": 100,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 833.4901657577809,
+        "std_delta_aicc": 105.29870278042475,
+        "mean_delta_aicc_S2_vs_BIEXP": 458.54088652767587,
+        "mean_S2_r2": 0.9968075416885227,
+        "mean_S2_DUST_r2": 0.9999477506407211,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 1000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 903.8224160978358,
+        "std_delta_aicc": 57.86139611558611,
+        "mean_delta_aicc_S2_vs_BIEXP": 337.9702236237842,
+        "mean_S2_r2": 0.9976588977287888,
+        "mean_S2_DUST_r2": 0.9999750176176597,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      },
+      {
+        "N": 5000,
+        "n_trials": 5,
+        "mean_delta_aicc_S2_vs_S2_DUST": 951.0078893727666,
+        "std_delta_aicc": 32.276470869025744,
+        "mean_delta_aicc_S2_vs_BIEXP": 403.39861264563126,
+        "mean_S2_r2": 0.9973004185509116,
+        "mean_S2_DUST_r2": 0.9999771935030175,
+        "s2_dust_wins": 5,
+        "s2_dust_wins_decisive": 5
+      }
+    ]
   },
-  "residual_analysis": {
-    "max_abs_residual_S2": 0.076453,
-    "RMS_residual_S2": 0.011705,
-    "location_of_max_residual": "\u03bb=0.01 (small-\u03bb regime)",
-    "interpretation": "Systematic deviation at small \u03bb. The mixture is dominated by fast-decaying components at small \u03bb, then slow ones at large \u03bb. Single S2 cannot capture this two-regime structure."
-  },
-  "why_R2_was_misleading": "Any smooth monotonic function from 1 to 0 will fit R\u00b2 > 0.99 against any other smooth monotonic function from 1 to 0. R\u00b2 is not a meaningful metric for decay curves. AICc (which penalizes parameter count) is the correct metric for model comparison.",
-  "honest_conclusion": "The three-level hierarchy collapses to two: Level 0 (local S2, confirmed) and Level 1 (interference, confirmed \u2014 mixtures do NOT simplify back to single S2). Level 2 (emergence) is refuted: aggregates of local S2s do not converge back to a single S2. They remain mixtures, better described by S2_DUST or BIEXP.",
-  "what_this_means_for_T7": "T7 (interference) is the right picture. The aggregate is a mixture, not an emergent single S2. The original claim that S2 is an emergent fixed point of aggregation was wrong \u2014 it was an artifact of using R\u00b2 instead of AICc."
+  "overall_mean_delta_aicc": 1209.0487203085465,
+  "overall_min_delta_aicc": 776.5380470938615,
+  "interpretation": "S2 closure under aggregation: REFUTED for the tested mixture model. The tested aggregation mechanism does not produce an approximately single-S2 aggregate under the tested distributions. A different \u03c1(D,\u03bb_q), weighting, or aggregation mechanism could theoretically produce approximate S2 closure \u2014 but the simple averaging of local S2s does not.",
+  "methodological_lesson": "High R\u00b2 alone is insufficient evidence for S2 in monotonic retention curves. Model selection must examine residual structure and penalized likelihood criteria such as AICc. The difference between R\u00b2=0.997 and R\u00b2=0.9999 looks trivial, while \u0394AICc=744 says the models are dramatically different."
 }

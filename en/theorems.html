@@ -239,11 +239,26 @@ document.addEventListener('DOMContentLoaded', () => {
           <tr><td>P2: Multi-component at finer resolution</td><td>Paired Wilcoxon (n=20)</td><td>p = 0.97, direction opposite to prediction</td><td><span class="badge bad sm">Not supported</span></td></tr>
           <tr><td>P3: No universal \(D\)</td><td>Hierarchical variance (n=20 systems)</td><td>Within/between ratio = 3.1</td><td><span class="badge warn sm">Nominally supported</span></td></tr>
           <tr><td>P4: Meta-S2 exploratory</td><td>Lilliefors KS test</td><td>p = 0.0006 (Weibull rejected)</td><td><span class="badge ok sm">Meta-S2 falsified</span></td></tr>
+          <tr><td><strong>Level-2: S2 closure under aggregation</strong></td><td>Multi-trial AICc (45 trials: 3 distributions × 3 N × 5 seeds)</td><td>S2_DUST beats S2 in 45/45 trials, min ΔAICc = 776</td><td><span class="badge bad sm">Refuted (tested mixture)</span></td></tr>
         </tbody>
       </table>
-      <p class="note">P3 is nominally supported but may reflect the P1 fitting artifact. P4 removes an alternative hypothesis but does not independently confirm T7. See <a href="tests.html" style="color:var(--accent)">tests registry</a> for the full 152-test dataset and <a href="articles/meta-s2.html" style="color:var(--accent)">exploratory distributional analysis</a>.</p>
+      <p class="note">P3 is nominally supported but may reflect the P1 fitting artifact. P4 removes an alternative hypothesis but does not independently confirm T7. Level-2 refuted for the tested mixture model — a different \(\rho(D,\lambda_q)\) or aggregation mechanism could theoretically produce approximate S2 closure, but the simple averaging of local S2s does not. See <a href="tests.html" style="color:var(--accent)">tests registry</a> for the full 152-test dataset and <a href="articles/meta-s2.html" style="color:var(--accent)">exploratory distributional analysis</a>.</p>
 
-      <p><strong>Operational.</strong> Test for scale-dependent \(D_{\mathrm{eff}}\) with proper null-model controls; search for multi-component structure at varying measurement resolutions; treat fitted \(D\) as a probe-scale effective parameter, not a system invariant.</p>
+      <h3>Methodological lesson</h3>
+      <p class="note"><strong>High \(R^2\) alone is insufficient evidence for S2 in monotonic retention curves.</strong> Model selection must examine residual structure and penalized likelihood criteria such as AICc. The difference between \(R^2=0.997\) and \(R^2=0.9999\) looks trivial, while \(\Delta\mathrm{AICc}=744\) says the models are dramatically different in explanatory adequacy. This lesson applies to all S2 fits in the registry — the "INTERFERENCE" verdict (where S2 loses to BIEXP/GAUSS) is meaningful only when assessed via AICc, not \(R^2\).</p>
+
+      <h3>Three-level hierarchy (corrected)</h3>
+      <p>The original three-level proposal (local → interference → emergent S2) collapses to two levels after the Level-2 refutation:</p>
+      <div class="math-block">\[
+        \underbrace{\text{Local S2}}_{\text{Level 0: confirmed}}
+        \;\longrightarrow\;
+        \underbrace{\text{Interference mixture}}_{\text{Level 1: confirmed}}
+        \;\not\longrightarrow\;
+        \underbrace{\text{Emergent S2}}_{\text{Level 2: refuted}}.
+      \]</div>
+      <p class="note">Aggregation does NOT preserve S2 form. The aggregate of many local S2s is better described as a two-component mixture (S2_DUST) than as a single S2. The failure of S2 at the aggregate level is not evidence against local S2 — it is evidence that the aggregate contains multiple S2 populations.</p>
+
+      <p><strong>Operational.</strong> Test for scale-dependent \(D_{\mathrm{eff}}\) with proper null-model controls; search for multi-component structure at varying measurement resolutions; treat fitted \(D\) as a probe-scale effective parameter, not a system invariant; always use AICc (not \(R^2\)) for model comparison on retention curves.</p>
     </div>
 
     <!-- Relegated -->
