@@ -111,8 +111,27 @@
         \]
       </div>
       <details class="exp">
-        <summary><strong>Полугруппа → Вейбулл (суть)</strong></summary>
-        <p>Если размывания прибора складываются по масштабу, \(K_\lambda\circ K_\mu\!\approx\!K_{\lambda+\mu}\), а выживаемость признаков при композиции перемножается, то \(R(\lambda+\mu)\!\approx\!R(\lambda)R(\mu)\). Лог-выпуклый, масштабно-стабильный спад с конечным «обрывом» однозначно приводит к семейству стретч-экспонент (Weibull).</p>
+        <summary><strong>Закон композиции → Вейбулл (корректный вывод)</strong></summary>
+        <p>Свойство полугруппы композиции ядер, \(K_\lambda\circ K_\mu\approx K_{\lambda+\mu}\), само по себе <strong>не</strong> влечёт \(R(\lambda+\mu)=R(\lambda)R(\mu)\) для произвольного \(D\). При условии непрерывности аддитивный закон \(R(\lambda+\mu)=R(\lambda)R(\mu)\) принуждает \(R=e^{-c\lambda}\), т.е. только \(D=1\).</p>
+        <p>Корректный вывод определяет <em>аддитивную координату удержания</em>:</p>
+        <div class="math-block math-only">
+          \[
+            s(\lambda)=\left(\frac{\lambda}{\lambda_q}\right)^D,\qquad R=e^{-s}.
+          \]
+        </div>
+        <p>Композиция тогда происходит через деформированное сложение:</p>
+        <div class="math-block math-only">
+          \[
+            \lambda_1\oplus_D\lambda_2=\left(\lambda_1^D+\lambda_2^D\right)^{1/D},
+          \]
+        </div>
+        <p>что даёт в точности:</p>
+        <div class="math-block math-only">
+          \[
+            R(\lambda_1\oplus_D\lambda_2)=R(\lambda_1)\,R(\lambda_2).
+          \]
+        </div>
+        <p>Это более сильное и чистое утверждение: семейство Вейбулла замкнуто относительно \(D\)-деформированного сложения, а не обычного сложения. Обычная полугруппа (\(D=1\)) — частный случай, в котором деформация тривиальна.</p>
       </details>
     </div>
 
@@ -131,7 +150,7 @@
           \widehat\lambda_q=\exp\!\Big(-\tfrac{\text{intercept}}{\widehat D_{\mathrm{eff}}}\Big)
         \]
       </div>
-      <p class="small">После пересчёта \( \lambda\to\lambda/\widehat\lambda_q \) разнородные домены коллапсируют к общей мастер-кривой.</p>
+      <p class="small">Различные значения \(D_{\mathrm{eff}}\) <strong>не</strong> сходятся к одной мастер-кривой при простом масштабировании \(\lambda\to\lambda/\lambda_q\). Универсальное схлопывание требует координаты удержания \(u=(\lambda/\lambda_q)^D\), давая \(R=e^{-u}\). DREAM демонстрирует универсальное <em>функциональное семейство</em> (растянутая экспонента), а не однопараметрическую мастер-кривую.</p>
     </div>
   </div>
 

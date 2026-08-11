@@ -111,8 +111,27 @@
         \]
       </div>
       <details class="exp">
-        <summary><strong>Semigroup → Weibull (gist)</strong></summary>
-        <p>If instrument blurs compose approximately by scale addition, \(K_\lambda\circ K_\mu\!\approx\!K_{\lambda+\mu}\), and survival of features multiplies under composition, then \(R(\lambda+\mu)\!\approx\!R(\lambda)R(\mu)\). Log-convex, scale-stable decay with a finite cliff uniquely selects the stretched-exponential (Weibull) family.</p>
+        <summary><strong>Composition law → Weibull (correct derivation)</strong></summary>
+        <p>The semigroup property of kernel composition, \(K_\lambda\circ K_\mu\approx K_{\lambda+\mu}\), does <strong>not</strong> by itself imply \(R(\lambda+\mu)=R(\lambda)R(\mu)\) for arbitrary \(D\). Under continuity, the additive law \(R(\lambda+\mu)=R(\lambda)R(\mu)\) forces \(R=e^{-c\lambda}\), i.e. \(D=1\) only.</p>
+        <p>The correct derivation defines an <em>additive retention coordinate</em>:</p>
+        <div class="math-block math-only">
+          \[
+            s(\lambda)=\left(\frac{\lambda}{\lambda_q}\right)^D,\qquad R=e^{-s}.
+          \]
+        </div>
+        <p>Composition then occurs through the deformed addition:</p>
+        <div class="math-block math-only">
+          \[
+            \lambda_1\oplus_D\lambda_2=\left(\lambda_1^D+\lambda_2^D\right)^{1/D},
+          \]
+        </div>
+        <p>which gives exactly:</p>
+        <div class="math-block math-only">
+          \[
+            R(\lambda_1\oplus_D\lambda_2)=R(\lambda_1)\,R(\lambda_2).
+          \]
+        </div>
+        <p>This is a stronger and cleaner statement: the Weibull family is closed under \(D\)-deformed addition, not ordinary addition. The ordinary semigroup (\(D=1\)) is the special case where the deformation is trivial.</p>
       </details>
     </div>
 
@@ -131,7 +150,7 @@
           \widehat\lambda_q=\exp\!\Big(-\tfrac{\text{intercept}}{\widehat D_{\mathrm{eff}}}\Big)
         \]
       </div>
-      <p class="small">After rescaling \( \lambda\to\lambda/\widehat\lambda_q \), disparate domains collapse to a common master curve.</p>
+      <p class="small">Different \(D_{\mathrm{eff}}\) values do <strong>not</strong> collapse onto one master curve under simple rescaling \(\lambda\to\lambda/\lambda_q\). The universal collapse requires the retention coordinate \(u=(\lambda/\lambda_q)^D\), giving \(R=e^{-u}\). DREAM therefore demonstrates a universal <em>functional family</em> (stretched exponential), not a one-parameter master curve.</p>
     </div>
   </div>
 
