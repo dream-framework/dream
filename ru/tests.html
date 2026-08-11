@@ -246,7 +246,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "11 Aug 2026 13:25 EST";
+const LAST_REFRESH = "11 Aug 2026 17:19 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -428,6 +428,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Long Read RNA Sequencing in Primary Lung Cell Type",domain:"scouting",D:0.3149,r2:0.7964,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:-0.0200,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=-0.02, within ±2).",narrative:"D_eff=0.3149, R²=0.7964. D_eff=0.315 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с BIEXP, ΔAICc=-0.02).",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21878996",image:null}
   ,{id:"",name:"Zenodo: Long Read RNA Sequencing in Primary Lung Cell Type",domain:"scouting",D:0.1710,r2:0.9846,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.2700,best_alt:"LOGNORM",model_note:"S2 ties LOGNORM (ΔAICc=1.27, within ±2).",narrative:"D_eff=0.1710, R²=0.9846. D_eff=0.171 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с LOGNORM, ΔAICc=1.27).",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21878996",image:null}
   ,{id:"",name:"Zenodo: Long Read RNA Sequencing in Primary Lung Cell Type",domain:"scouting",D:0.1710,r2:0.9846,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.2700,best_alt:"LOGNORM",model_note:"S2 ties LOGNORM (ΔAICc=1.27, within ±2).",narrative:"D_eff=0.1710, R²=0.9846. D_eff=0.171 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с LOGNORM, ΔAICc=1.27).",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21878996",image:null}
+  ,{id:"",name:"Zenodo: Data and R code supporting the development and on-",domain:"scouting",D:8.8149,r2:0.8037,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.1900,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.19).",narrative:"D_eff=8.8149, R²=0.8037. D_eff=8.815 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=2.19). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21894565",image:null}
+  ,{id:"",name:"Zenodo: Data and R code supporting the development and on-",domain:"scouting",D:0.9473,r2:0.9083,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:4.7900,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=4.79).",narrative:"D_eff=0.9473, R²=0.9083. D_eff=0.947 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=4.79). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21894565",image:null}
+  ,{id:"",name:"Zenodo: Data and R code supporting the development and on-",domain:"scouting",D:3.9659,r2:0.9683,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:4.5300,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=4.53).",narrative:"D_eff=3.9659, R²=0.9683. D_eff=3.966 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=4.53). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-11",date:"2026-08-11",url:"10.5281/zenodo.21894565",image:null}
 
 ];
 
@@ -713,33 +716,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 152,
-  "d_mle": 1.5289,
-  "lam_mle": 1.2323,
-  "ks_p": 0.0786,
-  "ks_p_lilliefors": 0.0008,
-  "ks_stat_obs": 0.1021,
-  "ks_boot_mean": 0.0504,
-  "ks_boot_95": 0.0714,
-  "d_direct": 1.5746,
-  "r2_direct": 0.9811,
-  "d_linear": 1.5193,
-  "r2_linear": 0.9763,
-  "natural": 64,
-  "extraction": 88,
-  "mean": 1.1096,
+  "n": 154,
+  "d_mle": 1.5011,
+  "lam_mle": 1.2498,
+  "ks_p": 0.074,
+  "ks_p_lilliefors": 0.001,
+  "ks_stat_obs": 0.1023,
+  "ks_boot_mean": 0.05,
+  "ks_boot_95": 0.071,
+  "d_direct": 1.579,
+  "r2_direct": 0.9823,
+  "d_linear": 1.512,
+  "r2_linear": 0.9766,
+  "natural": 65,
+  "extraction": 89,
+  "mean": 1.1271,
   "median": 1.0442,
-  "total": 159,
-  "compared": 157,
+  "total": 162,
+  "compared": 160,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.4847,
+  "ad_stat": 1.4326,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.72,
-  "delta_aic_lognormal": 20.86,
-  "silverman_p": 0.91,
+  "delta_aic_gamma": 0.73,
+  "delta_aic_lognormal": 18.69,
+  "silverman_p": 0.755,
   "boot_lo": 1.057,
-  "boot_hi": 1.745,
+  "boot_hi": 1.708,
   "date": "2026-08-11"
 };
 

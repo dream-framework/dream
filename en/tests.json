@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-11T17:25:58Z",
-  "total_tests": 159,
+  "exported_at": "2026-08-11T21:19:20Z",
+  "total_tests": 162,
   "fields": [
     "id",
     "name",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.56,
+      "delta_aicc": 9.55,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.56). S2+dust fit: D1=1.0159, D2=2.2134, R²=0.9999, AICc=-3377.39. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9596, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.56). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.55). S2+dust fit: D1=1.0159, D2=2.2132, R²=0.9999, AICc=-3377.03. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9596, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.55). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -2424,6 +2424,54 @@
       "source": "auto-scan 2026-08-11",
       "date": "2026-08-11",
       "url": "10.5281/zenodo.21878996"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "domain": "scouting",
+      "D": 8.8149,
+      "r2": 0.8037,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.19,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=2.19).",
+      "narrative": "D_eff=8.8149, R²=0.8037. D_eff=8.815 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.19). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-11",
+      "date": "2026-08-11",
+      "url": "10.5281/zenodo.21894565"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "domain": "scouting",
+      "D": 0.9473,
+      "r2": 0.9083,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.79,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=4.79).",
+      "narrative": "D_eff=0.9473, R²=0.9083. D_eff=0.947 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=4.79). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-11",
+      "date": "2026-08-11",
+      "url": "10.5281/zenodo.21894565"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "domain": "scouting",
+      "D": 3.9659,
+      "r2": 0.9683,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.53,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=4.53).",
+      "narrative": "D_eff=3.9659, R²=0.9683. D_eff=3.966 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=4.53). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-11",
+      "date": "2026-08-11",
+      "url": "10.5281/zenodo.21894565"
     }
   ]
 }

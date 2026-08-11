@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-11T17:26:39.619048+00:00",
+  "initialized": "2026-08-11T21:20:12.613233+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3001,7 +3001,7 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.9596, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.56). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.9596, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.55). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -5416,6 +5416,108 @@
       "verdict": "D_LT_1",
       "model_verdict": "S2_TIES",
       "narrative": "D_eff=0.1710, R²=0.9846. D_eff=0.171 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties LOGNORM, ΔAICc=1.27).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21894565",
+      "registry_date": "2026-08-11",
+      "D": 8.8149,
+      "r2": 0.8037,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=8.8149, R²=0.8037. D_eff=8.815 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.19). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "censored",
+      "exclusion_reason": "optimizer boundary",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21894565",
+      "registry_date": "2026-08-11",
+      "D": 0.9473,
+      "r2": 0.9083,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.9473, R²=0.9083. D_eff=0.947 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=4.79). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and R code supporting the development and on-",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.21894565",
+      "registry_date": "2026-08-11",
+      "D": 3.9659,
+      "r2": 0.9683,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=3.9659, R²=0.9683. D_eff=3.966 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=4.53). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
