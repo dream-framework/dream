@@ -362,8 +362,8 @@ main.container{
 .badge.spec{ background: rgba(240,160,160,.10); color: var(--spec); border-color: rgba(240,160,160,.35); }
 .derivation{ margin:.6rem 0; padding-left:1.4rem; }
 .derivation li{ margin-bottom:.5rem; line-height:1.5; }
-.dim-tip{ cursor:help; text-decoration: underline dotted; text-decoration-color: var(--accent); text-underline-offset: 2px; }
-.dim-tip:hover{ background:rgba(142,197,232,.10); }
+.dim-tip{ cursor:help; color:var(--accent); font-weight:600; border-bottom:1px solid rgba(142,197,232,.3); transition:all .15s; }
+.dim-tip:hover{ color:var(--fg); background:rgba(142,197,232,.12); border-radius:2px; }
 .badge.sm{ padding: .12rem .45rem; font-size: .62rem; }
 .badge.lg{ padding: .28rem .75rem; font-size: .78rem; }
 .badges{ display: flex; flex-wrap: wrap; gap: .35rem; }
