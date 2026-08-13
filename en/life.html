@@ -243,6 +243,29 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
           <p id="t_p_shadow">A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable. This demonstrates increasing morphological complexity — it does NOT yet model active retention, memory, or heredity.</p>
           <h3 id="t_h_life">What this is NOT</h3>
           <p id="t_p_life">Branching, fractality and self-organization are insufficient to distinguish life from nonlife. Flames, storms, crystal growth, river networks and lightning all show complex branching without being alive. The final regime is labeled <b>life-like morphology</b>, not <b>life</b>. A stronger DREAM-Life hypothesis would define life as <b>active, resource-driven retention and reproduction of projected invariants</b> — requiring energy throughput, internal memory, repair, and heredity. This toy does not yet model those.</p>
+
+          <h3 id="t_h_capacity">Finite-Capacity Retention Model (DREAM-Life Hypothesis)</h3>
+          <p>The S2 retention integral describes <em>fading accessibility of the past</em>, but by itself does not impose a finite storage capacity. A living system can retain only a bounded amount of usable history. DREAM-Life proposes a second constraint:</p>
+          <div class="eq">M(t) = ∫₀^∞ I(t−τ) · exp[−(τ/τ_q)^D] dτ,  M(t) ≤ C_life</div>
+          <p>where \(C_{\mathrm{life}}\) is the effective information capacity of the living system. New information enters as \(I(t)\), but previous events occupy decreasing fractions of the budget as \(R(\tau) \to 0\). Forgetting is not a defect — it is part of the architecture. If everything remained equally retrievable forever (\(R=1\)), a finite organism would face an impossible information burden.</p>
+          <div class="eq">finite organism + continuous experience ⟹ selective retention must occur</div>
+
+          <h3 id="t_h_twofilter">The Two-Filter Model</h3>
+          <p>Life does not attempt to preserve everything. There are two sequential filters:</p>
+          <div class="eq">I —S2→ I·R(τ) —𝒮→ I_useful</div>
+          <p>First, <strong>physical retention</strong>: information decays via S2. Then, <strong>biological selection</strong>: evolution preferentially retains systems that preserve information improving their continued persistence. Life preserves <em>selected structure against the general tendency toward loss</em> — in DREAM language, <strong>ridge retention</strong>:</p>
+          <div class="eq">massive information stream → dust discarded + persistent ridge retained</div>
+
+          <h3 id="t_hierarchy">Retention Hierarchy</h3>
+          <p>Technological development continually increases effective capacity, but never makes retention infinite:</p>
+          <div class="eq">C_cell < C_nervous_system < C_human+culture < C_human+external_storage</div>
+          <p>Storage media decay, formats disappear, records are discarded, attention is finite, retrieval systems have limits. At every level there is still a horizon.</p>
+
+          <h3 id="t_h_forgetting">Two Causes of Forgetting</h3>
+          <div class="eq">forgetting = retention decay + capacity/competition</div>
+          <p>Biological mechanisms — consolidation, repetition, reconstruction, external recording — act to push selected information back toward the high-retention side. <strong>S2 supplies fading; finite capacity supplies selection; life supplies active preservation.</strong></p>
+          <p class="note"><strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would have to be tested against real memory/forgetting datasets before claiming that biological forgetting actually obeys DREAM's S2 law.</p>
+          <div class="eq" style="font-weight:bold;color:var(--lt-life)">Life is a finite-capacity structure that continually extracts, compresses and renews selected information before retention erases it.</div>
         </div>
         <!-- READOUT PANE -->
         <div class="lt-pane" id="pane-readout">

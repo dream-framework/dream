@@ -172,6 +172,34 @@
     </div>
   </div>
 
+  <!-- ===== DREAM-Life connection ===== -->
+  <div class="card slate" style="margin-top:1rem">
+    <div class="card-header">DREAM-Life: Forgetting as Architecture</div>
+    <div class="card-body">
+      <p class="form-text">
+        The retention curve \(R(\tau) = \exp[-(\tau/\tau_q)^D]\) describes <em>fading accessibility</em> — but by itself does not impose a finite storage capacity. A living system can retain only a bounded amount of usable history:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+      </div>
+      <p class="form-text">
+        New information enters as \(I(t)\), but previous events occupy decreasing fractions of the budget as \(R(\tau) \to 0\). <strong>Forgetting is not a defect — it is part of the architecture.</strong> If everything remained equally retrievable forever (\(R=1\)), a finite organism would face an impossible information burden.
+      </p>
+      <p class="form-text">
+        Memory loss has two conceptually distinct causes:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        forgetting = retention decay + capacity/competition
+      </div>
+      <p class="form-text">
+        Biological mechanisms — consolidation, repetition, reconstruction, external recording — act to push selected information back toward the high-retention side. <strong>S2 supplies fading; finite capacity supplies selection; life supplies active preservation.</strong>
+      </p>
+      <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
+        <strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real forgetting datasets before claiming biological forgetting obeys DREAM's S2 law. See <a href="life.html" style="color:var(--accent)">DREAM-Life</a> for the full model.
+      </p>
+    </div>
+  </div>
+
   <!-- ===== Single card: controls + plot + fused insight ===== -->
   <div class="card transparent-card mt-1">
     <div class="card-body">
