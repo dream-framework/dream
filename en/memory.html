@@ -109,11 +109,126 @@
 </style>
 
 <div class="container my-4 plotter-wrap">
-  <h2 class="text-center section-title mb-2">D.R.E.A.M. — Memory Slice</h2>
+  <h2 class="text-center section-title mb-2">D.R.E.A.M. — Memory</h2>
 
-  <!-- ===== Memory-first cards (no theory) ===== -->
+  <!-- ===== 1. SUMMARY ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">Summary</div>
+    <div class="card-body">
+      <p class="form-text">
+        <strong>Forgetting is not a defect — it is part of the architecture.</strong> A finite organism cannot retain everything it experiences. The S2 retention law \(R(\tau)=\exp[-(\tau/\tau_q)^D]\) describes how raw information fades. But life doesn't just lose information — it <em>compresses</em> it. You forget the exact wording of a lecture but retain the concept. You forget the steps but retain the method. You forget the details but retain <em>where to find them</em>.
+      </p>
+      <p class="form-text">
+        DREAM distinguishes two kinds of retention:
+      </p>
+      <ul class="bullets-tight form-text">
+        <li><strong>Literal retention</strong> \(M_{\mathrm{literal}}\): recoverable details of previous experience. Decays via S2.</li>
+        <li><strong>Generative retention</strong> \(M_{\mathrm{gen}}\): retained structure capable of reconstructing useful information. Much smaller, much more durable.</li>
+      </ul>
+      <p class="form-text">
+        Education shifts the strategy from <em>store the answer</em> toward <em>store enough structure to reconstruct the answer</em>. That is far more information-efficient. Intelligence may be characterized as:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem;color:var(--accent)">
+        Intelligence ~ quality of compression × quality of reconstruction
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. LAYMAN EXPLANATION ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">In Plain Terms</div>
+    <div class="card-body">
+      <p class="form-text">
+        Think of your memory as a sieve, not a bucket. Information pours in constantly — every sight, sound, and thought. Most of it drains away. That's not a bug; it's the only way a finite brain can function. If you remembered every photon that hit your retina yesterday, you'd be paralyzed.
+      </p>
+      <p class="form-text">
+        What survives the sieve is not the raw data but <strong>compressed structure</strong>: concepts, relationships, methods, intuitions. You may forget every individual calculus lecture, but you retain what a derivative means, when to use calculus, and how mathematical arguments work. Years later, a book or a search can reconstruct the details you forgot — because the <em>scaffolding</em> survived.
+      </p>
+      <p class="form-text">
+        Life fights forgetting by retaining. Advanced cognition fights it by <strong>compressing</strong>. Civilization fights it by <strong>externalizing</strong> (books, libraries, the internet). Modern AI adds another stage: <strong>active reconstruction</strong> from civilization's external memory. At every level, the strategy is the same: don't store the signal — store enough structure to rebuild what you need.
+      </p>
+      <div class="mono text-center my-2" style="font-size:.9rem;color:var(--ui-sub)">
+        remember facts → remember patterns → remember methods → remember how to recover
+      </div>
+      <p class="form-text">
+        This is why an expert can appear to "remember everything" in their domain without actually doing so. They retain a dense network of organizing principles that allows missing details to be rapidly reconstructed or retrieved. The raw information was forgotten long ago — what survived is the <strong>generative structure</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== 3. MATH ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">The Mathematics of Forgetting</div>
+    <div class="card-body">
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin-bottom:.4rem">S2 retention — fading accessibility</h3>
+      <p class="form-text">Raw information decays as a stretched exponential:</p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( R(\tau) = \exp\!\left[-\left(\frac{\tau}{\tau_q}\right)^{D}\right] \)
+      </div>
+      <p class="form-text">
+        Pick a target recall \(R^*\) and schedule a review when retention falls to it:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( t^* = \frac{[-\ln R^*]^{1/D}}{\lambda_q} \)
+      </div>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Finite-capacity constraint</h3>
+      <p class="form-text">A living system can retain only a bounded amount of usable history:</p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+      </div>
+      <p class="form-text">
+        New information enters as \(I(t)\), but previous events occupy decreasing fractions of the budget as \(R(\tau) \to 0\). If everything remained equally retrievable forever (\(R=1\)), a finite organism would face an impossible information burden.
+      </p>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Two causes of forgetting</h3>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        forgetting = retention decay + capacity/competition
+      </div>
+      <p class="form-text">
+        Biological mechanisms — consolidation, repetition, reconstruction, external recording — push selected information back toward the high-retention side.
+      </p>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Literal vs. generative retention</h3>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M_{\mathrm{literal}}(t) \): recoverable details of previous experience (decays via S2)
+      </div>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M_{\mathrm{gen}}(t) \): retained structure capable of reconstructing useful information
+      </div>
+      <p class="form-text">
+        The lectures \(L_1, \ldots, L_n\) decay toward zero, but a transformation \(Z = f(L_1, \ldots, L_n)\) survives — concepts, methods, schemas. Then:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( Z + \text{book/search/AI} \longrightarrow \text{reconstructed usable knowledge} \)
+      </div>
+      <p class="form-text">
+        The effective cognitive system is not just the biological brain:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem;color:var(--accent)">
+        effective mind = biological retention + external retained structure + retrieval capability
+      </div>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Retention hierarchy</h3>
+      <div class="mono text-center my-2" style="font-size:.9rem">
+        \( C_{\mathrm{cell}} < C_{\mathrm{nervous\ system}} < C_{\mathrm{human+culture}} < C_{\mathrm{human+external\ storage}} \)
+      </div>
+      <p class="form-text">
+        Technology increases capacity but never makes retention infinite. At every level there is still a horizon.
+      </p>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Bottom line</h3>
+      <p class="form-text" style="font-weight:600;color:var(--accent)">
+        S2 supplies fading; finite capacity supplies selection; life supplies active preservation.
+      </p>
+      <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
+        <strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real forgetting datasets before claiming biological forgetting obeys DREAM's S2 law. See <a href="life.html" style="color:var(--accent)">DREAM-Life</a> for the full model.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== 4. MEMORY PLAYBOOK + HOW TO READ + WHAT THE TOY SHOWS ===== -->
   <div class="row g-3 mb-3">
-    <!-- 1) Memory Playbook for 9–5 -->
     <div class="col-lg-6">
       <div class="card slate">
         <div class="card-header">Memory Playbook (9–5)</div>
@@ -123,80 +238,40 @@
             <li><strong>Prime review (10–20 min):</strong> a short pass to stabilize details.</li>
             <li><strong>Same-day follow-up:</strong> one quick revisit later today.</li>
             <li><strong>Early spacing:</strong> 1d → 3d → 7d → then weekly/bi-weekly.</li>
-            <li><strong>Micro-reviews:</strong> 30–90s is enough; don’t re-learn from scratch.</li>
+            <li><strong>Micro-reviews:</strong> 30–90s is enough; don't re-learn from scratch.</li>
             <li><strong>Workday guardrails:</strong> batch small cards, cap to ~3–5 sessions/day.</li>
           </ul>
           <div class="form-text">Tip: turn <em>Normalize x by λ</em> on — cliffs align at x/λ≈1 so you can compare items fairly.</div>
-          <!-- NEW: dynamic 9–5 narrate line -->
           <div class="form-text mt-2 mono" id="narrate95">—</div>
         </div>
       </div>
     </div>
-
-    <!-- 2) Memory Math (cliff-based scheduling) -->
-    <div class="col-lg-3">
-      <div class="card slate">
-        <div class="card-header">Memory Math (when to review)</div>
-        <div class="card-body">
-          <div class="mono" style="font-size:.95rem">
-            \( R(t)=\exp\!\big[-(\lambda t)^{\beta}\big] \)
-          </div>
-          <div class="form-text mb-2">Pick a target recall \(R^\*\) and schedule when R falls to it:</div>
-          <div class="mono" style="font-size:.95rem">
-            \( t^\*=\dfrac{[-\ln R^\*]^{1/\beta}}{\lambda} \)
-          </div>
-          <hr class="my-2" style="border-color:var(--ui-border)">
-          <div class="form-text">
-            With <span class="mono">Normalize</span> on:
-            \( x/\lambda=t\lambda=[-\ln R^\*]^{1/\beta} \).
-            For β≈1: R*=0.60 → x/λ≈0.51; R*=1/e → x/λ=1; R*=0.20 → x/λ≈1.61.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3) How to read this plot -->
     <div class="col-lg-3">
       <div class="card slate">
         <div class="card-header">How to read this plot</div>
         <div class="card-body">
           <ul class="mb-2 bullets-tight">
             <li><strong>Curve:</strong> each slice shows retention for one item/age.</li>
-            <li><strong>β (shape):</strong> low β = steeper early drop; high β = gentler start.</li>
+            <li><strong>D (shape):</strong> low D = steeper early drop; high D = gentler start.</li>
             <li><strong>λ (cliff):</strong> larger λ → earlier cliff (review sooner).</li>
             <li><strong>Cliff line:</strong> R=1/e ≈ 0.37 marks a clear loss of detail.</li>
           </ul>
-          <div class="form-text">Use the slider to see how age (or item difficulty) shifts β and λ.</div>
+          <div class="form-text">Use the slider to see how age shifts D and λ.</div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- ===== DREAM-Life connection ===== -->
-  <div class="card slate" style="margin-top:1rem">
-    <div class="card-header">DREAM-Life: Forgetting as Architecture</div>
-    <div class="card-body">
-      <p class="form-text">
-        The retention curve \(R(\tau) = \exp[-(\tau/\tau_q)^D]\) describes <em>fading accessibility</em> — but by itself does not impose a finite storage capacity. A living system can retain only a bounded amount of usable history:
-      </p>
-      <div class="mono text-center my-2" style="font-size:.95rem">
-        \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+    <div class="col-lg-3">
+      <div class="card slate">
+        <div class="card-header">What the toy shows</div>
+        <div class="card-body">
+          <p class="form-text">
+            The 3D surface below is the <strong>literal retention</strong> landscape — how much raw detail survives at each age and time since capture. It's the adversary: the thing life fights against through compression and reconstruction.
+          </p>
+          <p class="form-text">
+            What it does <em>not</em> show is <strong>generative retention</strong> — the compressed concepts and methods that survive long after the raw curve has collapsed. That's the ridge life builds on top of the decaying signal.
+          </p>
+        </div>
       </div>
-      <p class="form-text">
-        New information enters as \(I(t)\), but previous events occupy decreasing fractions of the budget as \(R(\tau) \to 0\). <strong>Forgetting is not a defect — it is part of the architecture.</strong> If everything remained equally retrievable forever (\(R=1\)), a finite organism would face an impossible information burden.
-      </p>
-      <p class="form-text">
-        Memory loss has two conceptually distinct causes:
-      </p>
-      <div class="mono text-center my-2" style="font-size:.95rem">
-        forgetting = retention decay + capacity/competition
-      </div>
-      <p class="form-text">
-        Biological mechanisms — consolidation, repetition, reconstruction, external recording — act to push selected information back toward the high-retention side. <strong>S2 supplies fading; finite capacity supplies selection; life supplies active preservation.</strong>
-      </p>
-      <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
-        <strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real forgetting datasets before claiming biological forgetting obeys DREAM's S2 law. See <a href="life.html" style="color:var(--accent)">DREAM-Life</a> for the full model.
-      </p>
     </div>
   </div>
 
