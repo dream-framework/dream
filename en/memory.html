@@ -299,32 +299,36 @@
     </div>
   </div>
 
-  <!-- ===== THE TOY: sleeker ===== -->
-  <div class="card transparent-card" style="border:1px solid rgba(142,197,232,.15);border-radius:12px;overflow:hidden">
-    <div style="padding:.5rem 1rem;background:rgba(142,197,232,.05);border-bottom:1px solid rgba(142,197,232,.12);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-      <span style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Retention Surface</span>
-      <div class="group" style="min-width:200px">
-        <label for="ageSlider" class="form-label" style="margin:0;font-size:.85rem">Age <span id="ageValue" class="mono" style="color:var(--accent)">25</span></label>
-        <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25" style="width:180px;height:4px">
+  <!-- ===== THE TOY: jazzed ===== -->
+  <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(142,197,232,.2);box-shadow:0 4px 30px rgba(142,197,232,.08);background:rgba(6,14,24,.5)">
+    <!-- Glow header bar -->
+    <div style="padding:.6rem 1rem;background:linear-gradient(135deg,rgba(142,197,232,.08),rgba(125,211,168,.04));border-bottom:1px solid rgba(142,197,232,.15);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.4rem">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:memPulse 2s ease-in-out infinite"></span>
+        <span style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em">Retention Surface</span>
+      </div>
+      <div class="group" style="min-width:180px">
+        <label for="ageSlider" class="form-label" style="margin:0;font-size:.85rem">Age <span id="ageValue" class="mono" style="color:var(--accent);font-weight:700">25</span></label>
+        <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25" style="width:160px;height:4px;accent-color:var(--accent)">
       </div>
       <div class="form-check" style="margin:0">
-        <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
+        <input class="form-check-input" type="checkbox" id="autoLifeSwitch" style="accent-color:var(--accent)">
         <label class="form-check-label" for="autoLifeSwitch" style="font-size:.85rem">Auto life</label>
       </div>
       <div class="form-check" style="margin:0">
-        <input class="form-check-input" type="checkbox" id="normalizeSwitch">
+        <input class="form-check-input" type="checkbox" id="normalizeSwitch" style="accent-color:var(--accent)">
         <label class="form-check-label" for="normalizeSwitch" style="font-size:.85rem">Normalize</label>
       </div>
       <details class="adv" style="margin-left:auto">
-        <summary style="font-size:.8rem;color:var(--ui-sub)">Advanced</summary>
+        <summary style="font-size:.8rem;color:var(--ui-sub);cursor:pointer">Advanced</summary>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">
           <div class="group">
             <label for="lambda0Slider" class="form-label" style="font-size:.8rem;margin:0">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
-            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:120px;height:4px">
+            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:120px;height:4px;accent-color:var(--accent)">
           </div>
           <div class="group">
             <label for="tiltSlider" class="form-label" style="font-size:.8rem;margin:0">Tilt <span id="tiltValue" class="mono">0.14</span></label>
-            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:120px;height:4px">
+            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:120px;height:4px;accent-color:var(--accent)">
           </div>
           <div class="group">
             <label for="lifeStep" class="form-label" style="font-size:.8rem;margin:0">Step</label>
@@ -337,13 +341,17 @@
         </div>
       </details>
     </div>
-    <div class="card-body" style="padding:0">
-      <div id="retention3D" style="width:100%; height:580px;"></div>
-      <div id="insightLine" class="insight mono" style="padding:.4rem 1rem;font-size:.8rem">—</div>
+    <!-- Plot area with subtle glow -->
+    <div style="position:relative;padding:0">
+      <div id="retention3D" style="width:100%; height:560px;"></div>
+      <div id="insightLine" class="insight mono" style="padding:.4rem 1rem;font-size:.8rem;border-top:1px solid rgba(142,197,232,.1)">—</div>
     </div>
   </div>
 </div>
 
+<style>
+@keyframes memPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+</style>
 <!-- Scripts -->
 <script defer src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 <script>
@@ -370,15 +378,15 @@
   function rightWall(normalize){
     const y=[], z=[]; for(let a=A_MIN;a<=A_MAX;a+=5) y.push(a); for(let r=0;r<=1;r+=0.05) z.push(r);
     const X=y.map(()=> z.map(()=> normalize? 1 : T_MAX)), Y=y.map(a=> z.map(()=> a)), Z=y.map(()=> z.slice());
-    return {type:'surface',x:X,y:Y,z:Z,showscale:false,opacity:0.10,colorscale:[[0,'#9fb3cc'],[1,'#9fb3cc']],hoverinfo:'skip',name:'right wall'};
+    return {type:'surface',x:X,y:Y,z:Z,showscale:false,opacity:0.10,colorscale:[[0,'rgba(100,130,180,0.03)'],[1,'rgba(100,130,180,0.08)']],hoverinfo:'skip',name:'right wall'};
   }
   function floorGrid(normalize){
     const traces=[], yRows=[10,30,50,70,90], xCols = normalize? [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0] : Array.from({length:T_MAX+1},(_,i)=>i);
     yRows.forEach(a=>traces.push({type:'scatter3d',mode:'lines',x:xCols,y:Array(xCols.length).fill(a),z:Array(xCols.length).fill(0),
-                                  line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
+                                  line:{width:1,color:'rgba(200,210,225,0.12)'},hoverinfo:'skip',showlegend:false}));
     const ages=[10,30,50,70,90];
     xCols.forEach(tx=>traces.push({type:'scatter3d',mode:'lines',x:Array(ages.length).fill(tx),y:ages,z:Array(ages.length).fill(0),
-                                   line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
+                                   line:{width:1,color:'rgba(200,210,225,0.12)'},hoverinfo:'skip',showlegend:false}));
     return traces;
   }
 
@@ -391,9 +399,9 @@
       type:'scatter3d', mode:'markers',
       x:s.xDisp, y:s.y, z:s.z,
       marker:{
-        size:3, opacity:0.5,
+        size:4, opacity:0.7,
         color:s.z, cmin:0, cmax:1,
-        colorscale:'RdBu', reversescale:true,
+        colorscale:[[0,'rgba(240,100,100,0.4)'],[0.3,'rgba(240,200,100,0.5)'],[0.6,'rgba(100,200,150,0.6)'],[1,'rgba(45,208,122,0.9)']],
         colorbar:{
           title:'R', titleside:'right',
           x:1.22, xanchor:'left', xpad:6,
@@ -420,7 +428,7 @@
     const line = {
       type:'scatter3d', mode:'lines',
       x:s.xDisp, y:s.y, z:s.z,
-      line:{ width:6, color:'rgba(45,208,122,0.9)', shape:'spline' },
+      line:{ width:5, color:'rgba(45,208,122,0.95)', shape:'spline' },
       name:`Age a=${age.toFixed(0)} (β=${s.bet.toFixed(2)})`,
       hovertemplate:(normalize?'x/λ':'t')+`=%{x:.2f}<br>a=%{y} yrs<br>R=%{z:.3f}<extra></extra>`
     };
@@ -429,7 +437,7 @@
     const cliffY = Array.from({length:86},(_,i)=> 5+i);
     const cliffZ = Array.from({length:86},()=> 1/E);
     const cliff  = { type:'scatter3d', mode:'lines', x:cliffX, y:cliffY, z:cliffZ,
-                     line:{width:3, dash:'dash', color:'rgba(183,255,51,0.6)'}, name:'λ-cliff (R=1/e)' };
+                     line:{width:2.5, dash:'dash', color:'rgba(183,255,51,0.5)'}, name:'λ-cliff (R=1/e)' };
 
     const earlyGuide = {
       type:'scatter3d', mode:'lines',
@@ -465,7 +473,7 @@
         orientation:'h', itemwidth:60,
         bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(200,210,225,.25)', borderwidth:1, font:{color:'#e7eefb'}
       },
-      margin:{ t:40, r:180, l:0, b:0 },  /* fixed top band so legend changes don't move plot */
+      margin:{ t:30, r:160, l:0, b:0 },  /* fixed top band so legend changes don't move plot */
       paper_bgcolor:'rgba(0,0,0,0)',
       plot_bgcolor:'rgba(0,0,0,0)',
       showlegend:true,
