@@ -109,9 +109,37 @@
 </style>
 
 <div class="container my-4 plotter-wrap">
-  <h2 class="text-center section-title mb-2">D.R.E.A.M. — Memory</h2>
 
-  <!-- ===== 1. SUMMARY ===== -->
+  <!-- ===== HERO: What is memory? ===== -->
+  <div class="card slate" style="margin-bottom:1rem;overflow:hidden;position:relative">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--good),var(--accent));opacity:.5"></div>
+    <div class="card-body" style="padding:1.5rem 1.75rem">
+      <h2 style="margin:0 0 .5rem;font-size:1.4rem;color:var(--ui-text);font-weight:700">What is Memory?</h2>
+      <p style="font-size:1.05rem;line-height:1.6;color:var(--ui-text);margin:0 0 .8rem">
+        Memory is life's <strong style="color:var(--accent)">counterstream against S2</strong> — the active effort to preserve selected information against the universal tendency toward retention decay. It never defeats S2. It works <em>within</em> the decay: compressing, selecting, and rebuilding structure that can survive the fading and reconstruct what was lost.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem">
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(240,100,100,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">S2 Decay (the adversary)</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">Raw signal fades as \(R(\tau)=\exp[-(\tau/\tau_q)^D]\). Every detail drifts toward zero. This is the universal loss that projection imposes.</div>
+        </div>
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(125,211,168,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Memory (the counterstream)</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">Life fights back: <strong>compress</strong> raw signal into durable structure, <strong>select</strong> what matters, <strong>reconstruct</strong> from fragments + external memory. Never defeats S2 — builds ridges on top of it.</div>
+        </div>
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(142,197,232,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">The Result</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">You forget the lecture but remember the concept. You forget the steps but retain the method. <strong>Generative retention</strong> outlives literal retention by orders of magnitude.</div>
+        </div>
+      </div>
+      <div style="margin-top:.8rem;padding:.5rem .8rem;background:rgba(142,197,232,.06);border-radius:6px;border:1px solid rgba(142,197,232,.15)">
+        <span style="font-size:.85rem;color:var(--accent);font-weight:600">Bottom line:</span>
+        <span style="font-size:.85rem;color:var(--ui-text)"> S2 supplies fading. Finite capacity \(C_{\mathrm{life}}\) supplies selection. Life supplies active preservation — compression, reconstruction, and externalization. Forgetting is not a defect; it is the precondition for intelligence.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUMMARY ===== -->
   <div class="card slate mb-3">
     <div class="card-header">Summary</div>
     <div class="card-body">
@@ -134,7 +162,7 @@
     </div>
   </div>
 
-  <!-- ===== 2. LAYMAN EXPLANATION ===== -->
+  <!-- ===== IN PLAIN TERMS ===== -->
   <div class="card slate mb-3">
     <div class="card-header">In Plain Terms</div>
     <div class="card-body">
@@ -156,7 +184,7 @@
     </div>
   </div>
 
-  <!-- ===== 3. MATH ===== -->
+  <!-- ===== MATH ===== -->
   <div class="card slate mb-3">
     <div class="card-header">The Mathematics of Forgetting</div>
     <div class="card-body">
@@ -217,17 +245,13 @@
         Technology increases capacity but never makes retention infinite. At every level there is still a horizon.
       </p>
 
-      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Bottom line</h3>
-      <p class="form-text" style="font-weight:600;color:var(--accent)">
-        S2 supplies fading; finite capacity supplies selection; life supplies active preservation.
-      </p>
       <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
-        <strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real forgetting datasets before claiming biological forgetting obeys DREAM's S2 law. See <a href="life.html" style="color:var(--accent)">DREAM-Life</a> for the full model.
+        <strong>Caveat:</strong> This is a DREAM-Life hypothesis, not an established biological consequence of S2. See <a href="life.html" style="color:var(--accent)">DREAM-Life</a> for the full model.
       </p>
     </div>
   </div>
 
-  <!-- ===== 4. MEMORY PLAYBOOK + HOW TO READ + WHAT THE TOY SHOWS ===== -->
+  <!-- ===== PLAYBOOK + HOW TO READ ===== -->
   <div class="row g-3 mb-3">
     <div class="col-lg-6">
       <div class="card slate">
@@ -241,90 +265,81 @@
             <li><strong>Micro-reviews:</strong> 30–90s is enough; don't re-learn from scratch.</li>
             <li><strong>Workday guardrails:</strong> batch small cards, cap to ~3–5 sessions/day.</li>
           </ul>
-          <div class="form-text">Tip: turn <em>Normalize x by λ</em> on — cliffs align at x/λ≈1 so you can compare items fairly.</div>
+          <div class="form-text">Tip: turn <em>Normalize x by λ</em> on — cliffs align at x/λ≈1.</div>
           <div class="form-text mt-2 mono" id="narrate95">—</div>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="card slate">
-        <div class="card-header">How to read this plot</div>
+        <div class="card-header">How to read the surface</div>
         <div class="card-body">
           <ul class="mb-2 bullets-tight">
-            <li><strong>Curve:</strong> each slice shows retention for one item/age.</li>
-            <li><strong>D (shape):</strong> low D = steeper early drop; high D = gentler start.</li>
+            <li><strong>Curve:</strong> each slice shows literal retention for one age.</li>
+            <li><strong>D (shape):</strong> low D = steeper early drop; high D = gentler.</li>
             <li><strong>λ (cliff):</strong> larger λ → earlier cliff (review sooner).</li>
-            <li><strong>Cliff line:</strong> R=1/e ≈ 0.37 marks a clear loss of detail.</li>
+            <li><strong>Green line:</strong> R=1/e ≈ 0.37 — the retention cliff.</li>
           </ul>
-          <div class="form-text">Use the slider to see how age shifts D and λ.</div>
+          <div class="form-text">Drag to orbit. Slider changes age.</div>
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="card slate">
-        <div class="card-header">What the toy shows</div>
+        <div class="card-header">What this shows — and doesn't</div>
         <div class="card-body">
           <p class="form-text">
-            The 3D surface below is the <strong>literal retention</strong> landscape — how much raw detail survives at each age and time since capture. It's the adversary: the thing life fights against through compression and reconstruction.
+            The 3D surface is the <strong>literal retention</strong> landscape — the adversary life fights against.
           </p>
           <p class="form-text">
-            What it does <em>not</em> show is <strong>generative retention</strong> — the compressed concepts and methods that survive long after the raw curve has collapsed. That's the ridge life builds on top of the decaying signal.
+            It does <em>not</em> show <strong>generative retention</strong> — the compressed concepts and methods that survive long after the raw curve has collapsed. That ridge is what life builds <em>on top of</em> the decaying signal.
           </p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== Single card: controls + plot + fused insight ===== -->
-  <div class="card transparent-card mt-1">
-    <div class="card-body">
-      <div class="toolbar">
-        <div class="group">
-          <label class="form-label">Dataset</label>
-          <select class="form-select form-select-sm" id="datasetSelect" style="max-width:260px">
-            <option selected>Demo — 3D Age Slice (local)</option>
-          </select>
-          <button class="btn btn-outline-primary btn-sm" id="fetchBtn" type="button">Update</button>
-        </div>
-
-        <div class="group">
-          
-          <div class="form-check" style="margin-left:1.25rem">
-              <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
-              <label class="form-check-label" for="autoLifeSwitch">Auto life</label>
-            </div>
-        </div>
-
-        <div class="group" style="min-width:240px; margin-left:.75rem">
-  <label for="ageSlider" class="form-label">Age <span id="ageValue" class="mono">25</span></label>
-  <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25">
-</div>
-
-        <details class="adv">
-          <summary>Advanced</summary>
-          <div class="group" style="margin-top:.5rem">
-            <label for="lambda0Slider" class="form-label">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
-            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:150px">
-          </div>
-          <div class="group" style="margin-top:.5rem">
-            <label for="tiltSlider" class="form-label">Tilt z <span id="tiltValue" class="mono">0.14</span></label>
-            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:150px" />
-          </div>
-          <div class="group" style="margin-top:.5rem">
-            <label for="lifeStep" class="form-label">Step (yrs/tick)</label>
-            <input type="number" class="form-control form-control-sm" id="lifeStep" value="3" min="1" max="10" step="1" style="width:90px">
-            <label for="lifeTick" class="form-label" style="margin-left:.5rem">Tick (ms)</label>
-            <input type="number" class="form-control form-control-sm" id="lifeTick" value="800" min="300" max="4000" step="100" style="width:90px">
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="normalizeSwitch">
-            <label class="form-check-label" for="normalizeSwitch">Normalize x by λ</label>
-          </div>
-          </div>
-        </details>
+  <!-- ===== THE TOY: sleeker ===== -->
+  <div class="card transparent-card" style="border:1px solid rgba(142,197,232,.15);border-radius:12px;overflow:hidden">
+    <div style="padding:.5rem 1rem;background:rgba(142,197,232,.05);border-bottom:1px solid rgba(142,197,232,.12);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <span style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Retention Surface</span>
+      <div class="group" style="min-width:200px">
+        <label for="ageSlider" class="form-label" style="margin:0;font-size:.85rem">Age <span id="ageValue" class="mono" style="color:var(--accent)">25</span></label>
+        <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25" style="width:180px;height:4px">
       </div>
-
-      <div id="retention3D" style="width:100%; height:720px;"></div>
-      <div id="insightLine" class="insight mono">—</div>
+      <div class="form-check" style="margin:0">
+        <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
+        <label class="form-check-label" for="autoLifeSwitch" style="font-size:.85rem">Auto life</label>
+      </div>
+      <div class="form-check" style="margin:0">
+        <input class="form-check-input" type="checkbox" id="normalizeSwitch">
+        <label class="form-check-label" for="normalizeSwitch" style="font-size:.85rem">Normalize</label>
+      </div>
+      <details class="adv" style="margin-left:auto">
+        <summary style="font-size:.8rem;color:var(--ui-sub)">Advanced</summary>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">
+          <div class="group">
+            <label for="lambda0Slider" class="form-label" style="font-size:.8rem;margin:0">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
+            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:120px;height:4px">
+          </div>
+          <div class="group">
+            <label for="tiltSlider" class="form-label" style="font-size:.8rem;margin:0">Tilt <span id="tiltValue" class="mono">0.14</span></label>
+            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:120px;height:4px">
+          </div>
+          <div class="group">
+            <label for="lifeStep" class="form-label" style="font-size:.8rem;margin:0">Step</label>
+            <input type="number" class="form-control form-control-sm" id="lifeStep" value="3" min="1" max="10" step="1" style="width:60px;font-size:.8rem">
+          </div>
+          <div class="group">
+            <label for="lifeTick" class="form-label" style="font-size:.8rem;margin:0">Tick ms</label>
+            <input type="number" class="form-control form-control-sm" id="lifeTick" value="800" min="300" max="4000" step="100" style="width:70px;font-size:.8rem">
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div id="retention3D" style="width:100%; height:580px;"></div>
+      <div id="insightLine" class="insight mono" style="padding:.4rem 1rem;font-size:.8rem">—</div>
     </div>
   </div>
 </div>
@@ -360,10 +375,10 @@
   function floorGrid(normalize){
     const traces=[], yRows=[10,30,50,70,90], xCols = normalize? [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0] : Array.from({length:T_MAX+1},(_,i)=>i);
     yRows.forEach(a=>traces.push({type:'scatter3d',mode:'lines',x:xCols,y:Array(xCols.length).fill(a),z:Array(xCols.length).fill(0),
-                                  line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+                                  line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
     const ages=[10,30,50,70,90];
     xCols.forEach(tx=>traces.push({type:'scatter3d',mode:'lines',x:Array(ages.length).fill(tx),y:ages,z:Array(ages.length).fill(0),
-                                   line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+                                   line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
     return traces;
   }
 
@@ -376,7 +391,7 @@
       type:'scatter3d', mode:'markers',
       x:s.xDisp, y:s.y, z:s.z,
       marker:{
-        size:2.2, opacity:0.65,
+        size:3, opacity:0.5,
         color:s.z, cmin:0, cmax:1,
         colorscale:'RdBu', reversescale:true,
         colorbar:{
@@ -405,7 +420,7 @@
     const line = {
       type:'scatter3d', mode:'lines',
       x:s.xDisp, y:s.y, z:s.z,
-      line:{ width:9, color:'#2bd07a' },
+      line:{ width:6, color:'rgba(45,208,122,0.9)', shape:'spline' },
       name:`Age a=${age.toFixed(0)} (β=${s.bet.toFixed(2)})`,
       hovertemplate:(normalize?'x/λ':'t')+`=%{x:.2f}<br>a=%{y} yrs<br>R=%{z:.3f}<extra></extra>`
     };
@@ -414,7 +429,7 @@
     const cliffY = Array.from({length:86},(_,i)=> 5+i);
     const cliffZ = Array.from({length:86},()=> 1/E);
     const cliff  = { type:'scatter3d', mode:'lines', x:cliffX, y:cliffY, z:cliffZ,
-                     line:{width:5, dash:'dash', color:'#b7ff33'}, name:'λ-cliff (R=1/e)' };
+                     line:{width:3, dash:'dash', color:'rgba(183,255,51,0.6)'}, name:'λ-cliff (R=1/e)' };
 
     const earlyGuide = {
       type:'scatter3d', mode:'lines',
@@ -442,7 +457,7 @@
                 gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
         camera: cameraFacade(tiltZ),
         projection:{ type:'perspective' },
-        aspectratio:{ x:2.1, y:0.28, z:0.55 },
+        aspectratio:{ x:2.3, y:0.22, z:0.5 },
         bgcolor:'rgba(0,0,0,0)'
       },
       legend:{
@@ -450,7 +465,7 @@
         orientation:'h', itemwidth:60,
         bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(200,210,225,.25)', borderwidth:1, font:{color:'#e7eefb'}
       },
-      margin:{ t:72, r:200, l:10, b:10 },  /* fixed top band so legend changes don't move plot */
+      margin:{ t:40, r:180, l:0, b:0 },  /* fixed top band so legend changes don't move plot */
       paper_bgcolor:'rgba(0,0,0,0)',
       plot_bgcolor:'rgba(0,0,0,0)',
       showlegend:true,
