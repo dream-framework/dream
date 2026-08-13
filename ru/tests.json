@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-13T14:03:37Z",
-  "total_tests": 164,
+  "exported_at": "2026-08-13T17:26:09Z",
+  "total_tests": 165,
   "fields": [
     "id",
     "name",
@@ -2504,6 +2504,22 @@
       "source": "auto-scan 2026-08-12",
       "date": "2026-08-12",
       "url": "10.5281/zenodo.21906487"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Supporting Data and Analysis Materials for \"Comple",
+      "domain": "scouting",
+      "D": 1.3882,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 537.74,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=537.74).",
+      "narrative": "D_eff=1.3882, R²=0.9985. D_eff=1.388 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=537.74). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-13",
+      "date": "2026-08-13",
+      "url": "10.5281/zenodo.21922019"
     }
   ]
 }
