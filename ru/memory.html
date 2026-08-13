@@ -172,6 +172,34 @@
     </div>
   </div>
 
+  <!-- ===== DREAM-Life connection ===== -->
+  <div class="card slate" style="margin-top:1rem">
+    <div class="card-header">DREAM-Life: забывание как архитектура</div>
+    <div class="card-body">
+      <p class="form-text">
+        Кривая удержания \(R(\tau) = \exp[-(\tau/\tau_q)^D]\) описывает <em>затухающую доступность</em> — но сама по себе не накладывает конечную ёмкость хранения. Живая система может удерживать лишь ограниченный объём пригодной к использованию истории:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+      </div>
+      <p class="form-text">
+        Новая информация поступает как \(I(t)\), но предыдущие события занимают убывающую долю бюджета при \(R(\tau) \to 0\). <strong>Забывание — не дефект, а часть архитектуры.</strong> Если бы всё оставалось одинаково доступным навсегда (\(R=1\)), конечный организм столкнулся бы с невозможной информационной нагрузкой.
+      </p>
+      <p class="form-text">
+        Потеря памяти имеет две концептуально различные причины:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        forgetting = retention decay + capacity/competition
+      </div>
+      <p class="form-text">
+        Биологические механизмы — консолидация, повторение, реконструкция, внешняя запись — подталкивают избранную информацию обратно к стороне высокого удержания. <strong>S2 обеспечивает затухание; конечная ёмкость обеспечивает отбор; жизнь обеспечивает активное сохранение.</strong>
+      </p>
+      <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
+        <strong>Оговорка:</strong> Это гипотеза DREAM-Life, а не установленное биологическое следствие S2. Растянуто-экспоненциальное ядро необходимо проверить на реальных наборах данных по забыванию, прежде чем утверждать, что биологическое забывание подчиняется закону S2 из DREAM. См. <a href="life.html" style="color:var(--accent)">DREAM-Life</a> для полной модели.
+      </p>
+    </div>
+  </div>
+
   <!-- ===== Single card: controls + plot + fused insight ===== -->
   <div class="card transparent-card mt-1">
     <div class="card-body">

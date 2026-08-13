@@ -243,6 +243,29 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
           <p id="t_p_shadow">A smooth sphere casts a circular shadow — low information, no folds. Add twirls, valleys and branching ridges <em>over the surface</em>, and the projected silhouette becomes intricate. The 3D form <em>is</em> the system, the shadow on the wall <em>is</em> the observable. This demonstrates increasing morphological complexity — it does NOT yet model active retention, memory, or heredity.</p>
           <h3 id="t_h_life">What this is NOT</h3>
           <p id="t_p_life">Branching, fractality and self-organization are insufficient to distinguish life from nonlife. Flames, storms, crystal growth, river networks and lightning all show complex branching without being alive. The final regime is labeled <b>life-like morphology</b>, not <b>life</b>. A stronger DREAM-Life hypothesis would define life as <b>active, resource-driven retention and reproduction of projected invariants</b> — requiring energy throughput, internal memory, repair, and heredity. This toy does not yet model those.</p>
+
+          <h3 id="t_h_capacity">Модель удержания с конечной ёмкостью (гипотеза DREAM-Life)</h3>
+          <p>Интеграл удержания S2 описывает <em>затухающую доступность прошлого</em>, но сам по себе не накладывает конечную ёмкость хранения. Живая система может удерживать лишь ограниченный объём пригодной к использованию истории. DREAM-Life предлагает второе ограничение:</p>
+          <div class="eq">M(t) = ∫₀^∞ I(t−τ) · exp[−(τ/τ_q)^D] dτ,  M(t) ≤ C_life</div>
+          <p>где \(C_{\mathrm{life}}\) — эффективная информационная ёмкость живой системы. Новая информация поступает как \(I(t)\), но предыдущие события занимают убывающую долю бюджета при \(R(\tau) \to 0\). Забывание — не дефект, а часть архитектуры. Если бы всё оставалось одинаково доступным навсегда (\(R=1\)), конечный организм столкнулся бы с невозможной информационной нагрузкой.</p>
+          <div class="eq">конечный организм + непрерывный опыт ⟹ должна происходить избирательная удержание</div>
+
+          <h3 id="t_h_twofilter">Двухфильтровая модель</h3>
+          <p>Жизнь не пытается сохранить всё. Действуют два последовательных фильтра:</p>
+          <div class="eq">I —S2→ I·R(τ) —𝒮→ I_useful</div>
+          <p>Сначала <strong>физическое удержание</strong>: информация затухает по S2. Затем <strong>биологический отбор</strong>: эволюция предпочтительно сохраняет системы, удерживающие информацию, улучшающую их дальнейшее существование. Жизнь сохраняет <em>избранную структуру вопреки общей тенденции к потере</em> — на языке DREAM, <strong>гребневое удержание</strong>:</p>
+          <div class="eq">massive information stream → dust discarded + persistent ridge retained</div>
+
+          <h3 id="t_hierarchy">Иерархия удержания</h3>
+          <p>Технологическое развитие непрерывно увеличивает эффективную ёмкость, но никогда не делает удержание бесконечным:</p>
+          <div class="eq">C_cell &lt; C_nervous_system &lt; C_human+culture &lt; C_human+external_storage</div>
+          <p>Носители хранения разрушаются, форматы исчезают, записи уничтожаются, внимание конечно, системы поиска имеют пределы. На каждом уровне всё равно остаётся горизонт.</p>
+
+          <h3 id="t_h_forgetting">Две причины забывания</h3>
+          <div class="eq">forgetting = retention decay + capacity/competition</div>
+          <p>Биологические механизмы — консолидация, повторение, реконструкция, внешняя запись — подталкивают избранную информацию обратно к стороне высокого удержания. <strong>S2 обеспечивает затухание; конечная ёмкость обеспечивает отбор; жизнь обеспечивает активное сохранение.</strong></p>
+          <p class="note"><strong>Оговорка:</strong> Это гипотеза DREAM-Life, а не установленное биологическое следствие S2. Растянуто-экспоненциальное ядро необходимо проверить на реальных наборах данных по памяти/забыванию, прежде чем утверждать, что биологическое забывание действительно подчиняется закону S2 из DREAM.</p>
+          <div class="eq" style="font-weight:bold;color:var(--lt-life)">Жизнь — это структура с конечной ёмкостью, которая непрерывно извлекает, сжимает и обновляет выбранную информацию до того, как удержание её сотрёт.</div>
         </div>
         <!-- READOUT PANE -->
         <div class="lt-pane" id="pane-readout">
