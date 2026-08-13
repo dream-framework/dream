@@ -90,7 +90,7 @@
   :root {
     --ui-text:#e9f1ff; --ui-sub:#b6c3d6; --ui-border:rgba(200,210,225,.25);
   }
-  .plotter-wrap{max-width:1200px;margin:4px 4px;}
+  .plotter-wrap{max-width:1400px;margin:0 auto;}
   .transparent-card,.transparent-card .card-body{background:transparent!important;border:none!important;box-shadow:none!important;}
   .section-title{color:var(--ui-text);font-weight:600;letter-spacing:.2px;}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
@@ -109,147 +109,237 @@
 </style>
 
 <div class="container my-4 plotter-wrap">
-  <h2 class="text-center section-title mb-2">D.R.E.A.M. — Срез памяти</h2>
 
-  <!-- ===== Memory-first cards (no theory) ===== -->
-  <div class="row g-3 mb-3">
-    <!-- 1) Memory Playbook for 9–5 -->
-    <!-- REPLACE the existing "Память: быстрый план (9–5)" card with this -->
-<div class="col-lg-6">
-  <div class="card slate">
-    <div class="card-header">Память: практические советы</div>
-    <div class="card-body">
-      <ul class="mb-2 bullets-tight">
-        <li><strong>Фиксируйте сразу:</strong> запишите мысль/деталь без промедления.</li>
-        <li><strong>Пробный повтор через 10–20 мин:</strong> короткий взгляд, чтобы «сцепить» детали.</li>
-        <li><strong>Ещё один повтор сегодня:</strong> быстрый проход во второй половине дня.</li>
-        <li><strong>Дальше — растяжение:</strong> 1д → 3д → 7д, затем раз в неделю/две.</li>
-        <li><strong>Микроповторы 30–90 с:</strong> достаточно освежить, не переучивайте с нуля.</li>
-        <li><strong>Гигиена рабочего дня:</strong> группируйте мелкие задачи; 3–5 коротких сессий в день.</li>
-      </ul>
-      <div class="form-text">Совет: включите <em>Нормировать x по λ</em> — «обрывы» совпадают при x/λ≈1 и элементы проще сравнивать.</div>
-      <div class="form-text mt-2 mono" id="narrate95">—</div>
-    </div>
-  </div>
-</div>
-
-    <!-- 2) Memory Math (cliff-based scheduling) -->
-    <div class="col-lg-3">
-      <div class="card slate">
-        <div class="card-header">Математика памяти (когда повторять)</div>
-        <div class="card-body">
-          <div class="mono" style="font-size:.95rem">
-            \( R(t)=\exp\!\big[-(\lambda t)^{\beta}\big] \)
-          </div>
-          <div class="form-text mb-2">Выберите целевой уровень \(R^\*\) и запланируйте момент, когда R опустится до него:</div>
-          <div class="mono" style="font-size:.95rem">
-            \( t^\*=\dfrac{[-\ln R^\*]^{1/\beta}}{\lambda} \)
-          </div>
-          <hr class="my-2" style="border-color:var(--ui-border)">
-          <div class="form-text">
-            При включённой <span class="mono">Нормировке</span>:
-            \( x/\lambda=t\lambda=[-\ln R^\*]^{1/\beta} \).
-            Для β≈1: R*=0.60 → x/λ≈0.51; R*=1/e → x/λ=1; R*=0.20 → x/λ≈1.61.
-          </div>
+  <!-- ===== HERO: What is memory? ===== -->
+  <div class="card slate" style="margin-bottom:1rem;overflow:hidden;position:relative">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--good),var(--accent));opacity:.5"></div>
+    <div class="card-body" style="padding:1.5rem 1.75rem">
+      <h2 style="margin:0 0 .5rem;font-size:1.4rem;color:var(--ui-text);font-weight:700">Что такое память?</h2>
+      <p style="font-size:1.05rem;line-height:1.6;color:var(--ui-text);margin:0 0 .8rem">
+        Память — это <strong style="color:var(--accent)">встречный поток жизни против S2</strong> — активное усилие по сохранению избранной информации перед универсальной тенденцией к затуханию удержания. Она никогда не побеждает S2. Она работает <em>внутри</em> затухания: сжимать, отбирать и реконструировать структуру, способную пережить угасание и восстановить утраченное.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem">
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(240,100,100,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Затухание S2 (противник)</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">Сырой сигнал затухает как \(R(\tau)=\exp[-(\tau/\tau_q)^D]\). Каждая деталь дрейфует к нулю. Это универсальная потеря, которую накладывает проекция.</div>
+        </div>
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(125,211,168,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Память (встречный поток)</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">Жизнь отвечает: <strong>сжимать</strong> сырой сигнал в долговечную структуру, <strong>отбирать</strong> значимое, <strong>реконструировать</strong> из фрагментов + внешней памяти. Никогда не побеждает S2 — надстраивает над ней хребты.</div>
+        </div>
+        <div style="flex:1;min-width:200px;border-left:2px solid rgba(142,197,232,.3);padding-left:.8rem">
+          <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Результат</div>
+          <div style="font-size:.9rem;color:var(--ui-text);margin-top:.2rem">Вы забываете лекцию, но помните концепцию. Забываете шаги, но сохраняете метод. <strong>Генеративное удержание</strong> переживает буквальное удержание на порядки.</div>
         </div>
       </div>
-    </div>
-
-    <!-- 3) How to read this plot -->
-    <div class="col-lg-3">
-      <div class="card slate">
-        <div class="card-header">Как читать этот график</div>
-        <div class="card-body">
-          <ul class="mb-2 bullets-tight">
-            <li><strong>Кривая:</strong> каждый срез — удержание для одного элемента/возраста.</li>
-            <li><strong>β (форма):</strong> низкая β = резкий стартовый спад; высокая β = мягкий старт.</li>
-            <li><strong>λ (обрыв):</strong> больше λ → обрыв раньше (повтор раньше).</li>
-            <li><strong>Линия обрыва:</strong> R=1/e ≈ 0.37 — заметная потеря деталей.</li>
-          </ul>
-          <div class="form-text">Используйте ползунок, чтобы увидеть, как возраст (или сложность) сдвигает β и λ.</div>
-        </div>
+      <div style="margin-top:.8rem;padding:.5rem .8rem;background:rgba(142,197,232,.06);border-radius:6px;border:1px solid rgba(142,197,232,.15)">
+        <span style="font-size:.85rem;color:var(--accent);font-weight:600">Суть:</span>
+        <span style="font-size:.85rem;color:var(--ui-text)"> S2 обеспечивает затухание. Конечная ёмкость \(C_{\mathrm{life}}\) обеспечивает отбор. Жизнь обеспечивает активное сохранение — сжатие, реконструкцию и экстернализацию. Забывание — не дефект; это предусловие интеллекта.</span>
       </div>
     </div>
   </div>
 
-  <!-- ===== DREAM-Life connection ===== -->
-  <div class="card slate" style="margin-top:1rem">
-    <div class="card-header">DREAM-Life: забывание как архитектура</div>
+  <!-- ===== SUMMARY ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">Резюме</div>
     <div class="card-body">
       <p class="form-text">
-        Кривая удержания \(R(\tau) = \exp[-(\tau/\tau_q)^D]\) описывает <em>затухающую доступность</em> — но сама по себе не накладывает конечную ёмкость хранения. Живая система может удерживать лишь ограниченный объём пригодной к использованию истории:
+        <strong>Забывание — не дефект, оно часть архитектуры.</strong> Конечный организм не может удержать всё, что переживает. Закон удержания S2 \(R(\tau)=\exp[-(\tau/\tau_q)^D]\) описывает, как затухает сырая информация. Но жизнь не просто теряет информацию — она её <em>сжимает</em>. Вы забываете точные формулировки лекции, но сохраняете концепцию. Забываете шаги, но сохраняете метод. Забываете детали, но помните, <em>где их найти</em>.
       </p>
+      <p class="form-text">
+        DREAM различает два вида удержания:
+      </p>
+      <ul class="bullets-tight form-text">
+        <li><strong>Буквальное удержание</strong> \(M_{\mathrm{literal}}\): восстанавливаемые детали прошлого опыта. Затухает по S2.</li>
+        <li><strong>Генеративное удержание</strong> \(M_{\mathrm{gen}}\): сохранённая структура, способная реконструировать полезную информацию. Гораздо меньше, гораздо долговечнее.</li>
+      </ul>
+      <p class="form-text">
+        Образование смещает стратегию от <em>«сохранить ответ»</em> к <em>«сохранить достаточно структуры, чтобы реконструировать ответ»</em>. Это куда более эффективно с точки зрения информации. Интеллект можно охарактеризовать как:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem;color:var(--accent)">
+        Интеллект ~ качество сжатия × качество реконструкции
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== IN PLAIN TERMS ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">Простыми словами</div>
+    <div class="card-body">
+      <p class="form-text">
+        Думайте о памяти как о сите, а не о ведре. Информация вливается непрерывно — каждый образ, звук и мысль. Большая часть утекает. Это не баг; это единственный способ работы конечного мозга. Если бы вы запомнили каждый фотон, попавший на сетчатку вчера, вы бы парализовались.
+      </p>
+      <p class="form-text">
+        Что переживает сито, — это не сырые данные, а <strong>сжатая структура</strong>: концепции, отношения, методы, интуиции. Вы можете забыть каждую отдельную лекцию по матанализу, но вы помните, что такое производная, когда применять матанализ и как работают математические рассуждения. Спустя годы книга или поиск могут реконструировать забытые вами детали — потому что выжил <em>каркас</em>.
+      </p>
+      <p class="form-text">
+        Жизнь борется с забыванием через удержание. Развитое познание борется через <strong>сжатие</strong>. Цивилизация борется через <strong>экстернализацию</strong> (книги, библиотеки, интернет). Современный ИИ добавляет ещё одну стадию: <strong>активную реконструкцию</strong> из внешней памяти цивилизации. На каждом уровне стратегия одна: не хранить сигнал — хранить достаточно структуры, чтобы перестроить нужное.
+      </p>
+      <div class="mono text-center my-2" style="font-size:.9rem;color:var(--ui-sub)">
+        помнить факты → помнить паттерны → помнить методы → помнить, как восстановить
+      </div>
+      <p class="form-text">
+        Поэтому эксперт может казаться «помнящим всё» в своей области, не делая этого на самом деле. Он удерживает плотную сеть организующих принципов, позволяющих быстро реконструировать или извлечь недостающие детали. Сырая информация была забыта давно — выжила <strong>генеративная структура</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== MATH ===== -->
+  <div class="card slate mb-3">
+    <div class="card-header">Математика забывания</div>
+    <div class="card-body">
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin-bottom:.4rem">Удержание S2 — угасающая доступность</h3>
+      <p class="form-text">Сырая информация затухает как растянутая экспонента:</p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( R(\tau) = \exp\!\left[-\left(\frac{\tau}{\tau_q}\right)^{D}\right] \)
+      </div>
+      <p class="form-text">
+        Выберите целевой уровень воспроизведения \(R^*\) и запланируйте повтор, когда удержание упадёт до него:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( t^* = \frac{[-\ln R^*]^{1/D}}{\lambda_q} \)
+      </div>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Ограничение конечной ёмкости</h3>
+      <p class="form-text">Живая система может удержать лишь ограниченный объём пригодной истории:</p>
       <div class="mono text-center my-2" style="font-size:.95rem">
         \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
       </div>
       <p class="form-text">
-        Новая информация поступает как \(I(t)\), но предыдущие события занимают убывающую долю бюджета при \(R(\tau) \to 0\). <strong>Забывание — не дефект, а часть архитектуры.</strong> Если бы всё оставалось одинаково доступным навсегда (\(R=1\)), конечный организм столкнулся бы с невозможной информационной нагрузкой.
+        Новая информация поступает как \(I(t)\), но предыдущие события занимают убывающую долю бюджета при \(R(\tau) \to 0\). Если бы всё оставалось одинаково восстанавливаемым навсегда (\(R=1\)), конечный организм столкнулся бы с невозможной информационной нагрузкой.
       </p>
-      <p class="form-text">
-        Потеря памяти имеет две концептуально различные причины:
-      </p>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Две причины забывания</h3>
       <div class="mono text-center my-2" style="font-size:.95rem">
-        forgetting = retention decay + capacity/competition
+        забывание = затухание удержания + ёмкость/конкуренция
       </div>
       <p class="form-text">
-        Биологические механизмы — консолидация, повторение, реконструкция, внешняя запись — подталкивают избранную информацию обратно к стороне высокого удержания. <strong>S2 обеспечивает затухание; конечная ёмкость обеспечивает отбор; жизнь обеспечивает активное сохранение.</strong>
+        Биологические механизмы — консолидация, повторение, реконструкция, внешняя запись — подталкивают избранную информацию обратно к стороне высокого удержания.
       </p>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Буквальное и генеративное удержание</h3>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M_{\mathrm{literal}}(t) \): восстанавливаемые детали прошлого опыта (затухает по S2)
+      </div>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( M_{\mathrm{gen}}(t) \): сохранённая структура, способная реконструировать полезную информацию
+      </div>
+      <p class="form-text">
+        Лекции \(L_1, \ldots, L_n\) затухают к нулю, но преобразование \(Z = f(L_1, \ldots, L_n)\) выживает — концепции, методы, схемы. Тогда:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem">
+        \( Z + \text{книга/поиск/ИИ} \longrightarrow \text{реконструированное полезное знание} \)
+      </div>
+      <p class="form-text">
+        Эффективная когнитивная система — это не только биологический мозг:
+      </p>
+      <div class="mono text-center my-2" style="font-size:.95rem;color:var(--accent)">
+        эффективный ум = биологическое удержание + внешняя сохранённая структура + способность извлечения
+      </div>
+
+      <h3 style="font-size:.95rem;color:var(--ui-text);margin:.6rem 0 .4rem">Иерархия удержания</h3>
+      <div class="mono text-center my-2" style="font-size:.9rem">
+        \( C_{\mathrm{cell}} < C_{\mathrm{nervous\ system}} < C_{\mathrm{human+culture}} < C_{\mathrm{human+external\ storage}} \)
+      </div>
+      <p class="form-text">
+        Технологии увеличивают ёмкость, но никогда не делают удержание бесконечным. На каждом уровне остаётся горизонт.
+      </p>
+
       <p class="form-text" style="font-style:italic;color:var(--ui-sub)">
-        <strong>Оговорка:</strong> Это гипотеза DREAM-Life, а не установленное биологическое следствие S2. Растянуто-экспоненциальное ядро необходимо проверить на реальных наборах данных по забыванию, прежде чем утверждать, что биологическое забывание подчиняется закону S2 из DREAM. См. <a href="life.html" style="color:var(--accent)">DREAM-Life</a> для полной модели.
+        <strong>Оговорка:</strong> Это гипотеза DREAM-Life, а не установленное биологическое следствие S2. См. <a href="life.html" style="color:var(--accent)">DREAM-Life</a> для полной модели.
       </p>
     </div>
   </div>
 
-  <!-- ===== Single card: controls + plot + fused insight ===== -->
-  <div class="card transparent-card mt-1">
-    <div class="card-body">
-      <div class="toolbar">
-        <div class="group">
-          <label class="form-label">Набор данных</label>
-          <select class="form-select form-select-sm" id="datasetSelect" style="max-width:260px">
-            <option selected>Демо — 3D срез по возрасту (локально)</option>
-          </select>
-          <button class="btn btn-outline-primary btn-sm" id="fetchBtn" type="button">Обновить</button>
+  <!-- ===== PLAYBOOK + HOW TO READ ===== -->
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="card slate">
+        <div class="card-header">Память: практика (9–5)</div>
+        <div class="card-body">
+          <ul class="mb-2 bullets-tight">
+            <li><strong>Быстрый захват:</strong> немедленно зафиксируйте элемент в своей системе.</li>
+            <li><strong>Пробный повтор (10–20 мин):</strong> короткий проход для стабилизации деталей.</li>
+            <li><strong>Повтор в тот же день:</strong> один быстрый возврат позже сегодня.</li>
+            <li><strong>Раннее растяжение:</strong> 1д → 3д → 7д → затем раз в неделю/две.</li>
+            <li><strong>Микроповторы:</strong> 30–90 с достаточно; не переучивайтесь с нуля.</li>
+            <li><strong>Гигиена рабочего дня:</strong> группируйте мелкие карточки, держитесь ~3–5 сессий в день.</li>
+          </ul>
+          <div class="form-text">Совет: включите <em>Нормализация по λ</em> — обрывы совпадут при x/λ≈1.</div>
+          <div class="form-text mt-2 mono" id="narrate95">—</div>
         </div>
-
-        <div class="group">
-          
-          <div class="form-check" style="margin-left:1.25rem">
-              <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
-              <label class="form-check-label" for="autoLifeSwitch">Авто-анимация</label>
-            </div>
-        </div>
-
-        <div class="group" style="min-width:240px; margin-left:.75rem">
-  <label for="ageSlider" class="form-label">Возраст <span id="ageValue" class="mono">25</span></label>
-  <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25">
-</div>
-
-        <details class="adv">
-          <summary>Расширенные настройки</summary>
-          <div class="group" style="margin-top:.5rem">
-            <label for="lambda0Slider" class="form-label">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
-            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:150px">
-          </div>
-          <div class="group" style="margin-top:.5rem">
-            <label for="tiltSlider" class="form-label">Наклон z <span id="tiltValue" class="mono">0.14</span></label>
-            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:150px" />
-          </div>
-          <div class="group" style="margin-top:.5rem">
-            <label for="lifeStep" class="form-label">Шаг (лет/тик)</label>
-            <input type="number" class="form-control form-control-sm" id="lifeStep" value="3" min="1" max="10" step="1" style="width:90px">
-            <label for="lifeTick" class="form-label" style="margin-left:.5rem">Тик (мс)</label>
-            <input type="number" class="form-control form-control-sm" id="lifeTick" value="800" min="300" max="4000" step="100" style="width:90px">
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="normalizeSwitch">
-            <label class="form-check-label" for="normalizeSwitch">Нормировать x по λ</label>
-          </div>
-          </div>
-        </details>
       </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card slate">
+        <div class="card-header">Как читать поверхность</div>
+        <div class="card-body">
+          <ul class="mb-2 bullets-tight">
+            <li><strong>Кривая:</strong> каждый срез показывает буквальное удержание для одного возраста.</li>
+            <li><strong>D (форма):</strong> низкое D = резкий ранний спад; высокое D = мягче.</li>
+            <li><strong>λ (обрыв):</strong> больше λ → обрыв раньше (повтор раньше).</li>
+            <li><strong>Зелёная линия:</strong> R=1/e ≈ 0.37 — обрыв удержания.</li>
+          </ul>
+          <div class="form-text">Перетаскивайте для орбиты. Ползунок меняет возраст.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card slate">
+        <div class="card-header">Что показывает — и что нет</div>
+        <div class="card-body">
+          <p class="form-text">
+            3D-поверхность — это ландшафт <strong>буквального удержания</strong>, противник, с которым борется жизнь.
+          </p>
+          <p class="form-text">
+            Она <em>не</em> показывает <strong>генеративное удержание</strong> — сжатые концепции и методы, которые выживают спустя долгое время после коллапса сырой кривой. Этот хребет жизнь надстраивает <em>поверх</em> затухающего сигнала.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <div id="retention3D" style="width:100%; height:720px;"></div>
-      <div id="insightLine" class="insight mono">—</div>
+  <!-- ===== THE TOY: sleeker ===== -->
+  <div class="card transparent-card" style="border:1px solid rgba(142,197,232,.15);border-radius:12px;overflow:hidden">
+    <div style="padding:.5rem 1rem;background:rgba(142,197,232,.05);border-bottom:1px solid rgba(142,197,232,.12);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <span style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Поверхность удержания</span>
+      <div class="group" style="min-width:200px">
+        <label for="ageSlider" class="form-label" style="margin:0;font-size:.85rem">Возраст <span id="ageValue" class="mono" style="color:var(--accent)">25</span></label>
+        <input type="range" class="form-range" min="5" max="90" step="1" id="ageSlider" value="25" style="width:180px;height:4px">
+      </div>
+      <div class="form-check" style="margin:0">
+        <input class="form-check-input" type="checkbox" id="autoLifeSwitch">
+        <label class="form-check-label" for="autoLifeSwitch" style="font-size:.85rem">Авто жизнь</label>
+      </div>
+      <div class="form-check" style="margin:0">
+        <input class="form-check-input" type="checkbox" id="normalizeSwitch">
+        <label class="form-check-label" for="normalizeSwitch" style="font-size:.85rem">Нормализация</label>
+      </div>
+      <details class="adv" style="margin-left:auto">
+        <summary style="font-size:.8rem;color:var(--ui-sub)">Дополнительно</summary>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">
+          <div class="group">
+            <label for="lambda0Slider" class="form-label" style="font-size:.8rem;margin:0">λ₀ <span id="lambda0Value" class="mono">0.15</span></label>
+            <input type="range" class="form-range" min="0.05" max="1" step="0.05" id="lambda0Slider" value="0.15" style="width:120px;height:4px">
+          </div>
+          <div class="group">
+            <label for="tiltSlider" class="form-label" style="font-size:.8rem;margin:0">Наклон <span id="tiltValue" class="mono">0.14</span></label>
+            <input type="range" class="form-range" min="0.08" max="0.22" step="0.02" id="tiltSlider" value="0.14" style="width:120px;height:4px">
+          </div>
+          <div class="group">
+            <label for="lifeStep" class="form-label" style="font-size:.8rem;margin:0">Шаг</label>
+            <input type="number" class="form-control form-control-sm" id="lifeStep" value="3" min="1" max="10" step="1" style="width:60px;font-size:.8rem">
+          </div>
+          <div class="group">
+            <label for="lifeTick" class="form-label" style="font-size:.8rem;margin:0">Тик мс</label>
+            <input type="number" class="form-control form-control-sm" id="lifeTick" value="800" min="300" max="4000" step="100" style="width:70px;font-size:.8rem">
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div id="retention3D" style="width:100%; height:580px;"></div>
+      <div id="insightLine" class="insight mono" style="padding:.4rem 1rem;font-size:.8rem">—</div>
     </div>
   </div>
 </div>
@@ -273,7 +363,7 @@
     const tCliff = 1/lam;
     const xEarly = 0.2;                         // 20% of axis
     const tEarly = normalize ? xEarly/lam : xEarly*T_MAX;
-    const rEarly = Math.exp(-(Math.pow(lam*tEarly, bet)));
+    const rEarly = Math.exp(-Math.pow(lam*tEarly, bet));
     return {xDisp, y, z, lam, bet, tCliff, xEarly, rEarly};
   }
 
@@ -285,10 +375,10 @@
   function floorGrid(normalize){
     const traces=[], yRows=[10,30,50,70,90], xCols = normalize? [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0] : Array.from({length:T_MAX+1},(_,i)=>i);
     yRows.forEach(a=>traces.push({type:'scatter3d',mode:'lines',x:xCols,y:Array(xCols.length).fill(a),z:Array(xCols.length).fill(0),
-                                  line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+                                  line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
     const ages=[10,30,50,70,90];
     xCols.forEach(tx=>traces.push({type:'scatter3d',mode:'lines',x:Array(ages.length).fill(tx),y:ages,z:Array(ages.length).fill(0),
-                                   line:{width:1,color:'rgba(200,210,225,0.14)'},hoverinfo:'skip',showlegend:false}));
+                                   line:{width:1,color:'rgba(200,210,225,0.08)'},hoverinfo:'skip',showlegend:false}));
     return traces;
   }
 
@@ -301,14 +391,14 @@
       type:'scatter3d', mode:'markers',
       x:s.xDisp, y:s.y, z:s.z,
       marker:{
-        size:2.2, opacity:0.65,
+        size:3, opacity:0.5,
         color:s.z, cmin:0, cmax:1,
         colorscale:'RdBu', reversescale:true,
         colorbar:{
           title:'R', titleside:'right',
-          x: 0.96, xanchor: 'left',   // wider scene → park bar in slim gutter
-          y:0.5, yanchor:'middle',
-          len:0.35, thickness:16,
+          x:1.22, xanchor:'left', xpad:6,
+            y:0.5, yanchor:'middle',
+            len:0.35, thickness:16,
           outlinecolor:'rgba(230,240,255,0.25)',
           tickcolor:'rgba(230,240,255,0.5)',
           tickfont:{color:'#e6f0ff'},
@@ -330,16 +420,16 @@
     const line = {
       type:'scatter3d', mode:'lines',
       x:s.xDisp, y:s.y, z:s.z,
-      line:{ width:9, color:'#2bd07a' },
-      name:`Возраст a=${age.toFixed(0)} (β=${s.bet.toFixed(2)})`,
-      hovertemplate:(normalize?'x/λ':'t')+`=%{x:.2f}<br>a=%{y} лет<br>R=%{z:.3f}<extra></extra>`
+      line:{ width:6, color:'rgba(45,208,122,0.9)', shape:'spline' },
+      name:`Age a=${age.toFixed(0)} (β=${s.bet.toFixed(2)})`,
+      hovertemplate:(normalize?'x/λ':'t')+`=%{x:.2f}<br>a=%{y} yrs<br>R=%{z:.3f}<extra></extra>`
     };
 
     const cliffX = normalize ? Array.from({length:86},()=>1) : Array.from({length:86},()=> s.tCliff);
     const cliffY = Array.from({length:86},(_,i)=> 5+i);
     const cliffZ = Array.from({length:86},()=> 1/E);
     const cliff  = { type:'scatter3d', mode:'lines', x:cliffX, y:cliffY, z:cliffZ,
-                     line:{width:5, dash:'dash', color:'#b7ff33'}, name:'λ-обрыв (R=1/e)' };
+                     line:{width:3, dash:'dash', color:'rgba(183,255,51,0.6)'}, name:'λ-cliff (R=1/e)' };
 
     const earlyGuide = {
       type:'scatter3d', mode:'lines',
@@ -351,50 +441,41 @@
     return [ rightWall(normalize) ].concat( floorGrid(normalize) ).concat([ cliff, line, colorDotsTrace(s, normalize), earlyGuide ]);
   }
 
-  // REPLACE your figureLayout(...) with this inline version (scene shorter + tight under legend)
-function figureLayout(age, tiltZ, normalize){
-  const axisTitle={color:'#e7eefb', size:16}, tick={color:'#c6cfde', size:12};
-  const xTitle = normalize ? 'x / λ' : 'Время после фиксации t';
-  const xRange = normalize ? [0,1] : [0,T_MAX];
-  const xDtick = normalize ? 0.05 : 1;
+  function figureLayout(age, tiltZ, normalize){
+    const axisTitle={color:'#e7eefb', size:16}, tick={color:'#c6cfde', size:12};
+    const xTitle = normalize ? 'x / λ' : 'Time since capture t';
+    const xRange = normalize ? [0,1] : [0,T_MAX];
+    const xDtick = normalize ? 0.05 : 1;
 
-  // scene height + position (bridges the gap to the legend)
-  const sceneTop = 0.93;     // top of scene
-  const sceneBottom = 0.22;  // raise bottom to make scene less tall
-
-  return {
-    scene:{
-      domain:{ x:[0.02, 0.92], y:[sceneBottom, sceneTop] },
-      xaxis:{ title:{text:xTitle, font:axisTitle}, range:xRange, tickfont:tick, dtick:xDtick,
-              gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
-      yaxis:{
-        title:{text:'Возраст a (лет)', font:axisTitle},
-        dtick:10, showticklabels:true, tickfont:tick,
-        gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false
+    return {
+      scene:{
+        xaxis:{ title:{text:xTitle, font:axisTitle}, range:xRange, tickfont:tick, dtick:xDtick,
+                gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
+        yaxis:{ range:[A_MIN,A_MAX], tickfont:tick,
+                gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
+        zaxis:{ title:{text:'Retention R', font:axisTitle}, range:[0,1], tickfont:tick,
+                gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
+        camera: cameraFacade(tiltZ),
+        projection:{ type:'perspective' },
+        aspectratio:{ x:2.3, y:0.22, z:0.5 },
+        bgcolor:'rgba(0,0,0,0)'
       },
-      zaxis:{ title:{text:'Удержание R', font:axisTitle}, range:[0,1], tickfont:tick,
-              gridcolor:'rgba(200,210,225,0.18)', zerolinecolor:'rgba(200,210,225,0.18)', showbackground:false },
-      camera: cameraFacade(tiltZ),
-      projection:{ type:'perspective' },
-      aspectratio:{ x:2.1, y:0.28, z:0.55 },
-      bgcolor:'rgba(0,0,0,0)'
-    },
-    legend:{
-      x:0.02, xanchor:'left',
-      y: sceneTop + 0.006, yanchor:'bottom',   // legend sits just above scene (tiny gap)
-      orientation:'h', itemwidth:60,
-      bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(200,210,225,.25)', borderwidth:1, font:{color:'#e7eefb'}
-    },
-    margin:{ t:24, r:120, l:48, b:44 },       // slimmer top band
-    paper_bgcolor:'rgba(0,0,0,0)',
-    plot_bgcolor:'rgba(0,0,0,0)',
-    showlegend:true,
-    dragmode:'orbit'
-  };
-}
+      legend:{
+        x:0.02, y:1.00, xanchor:'left', yanchor:'top',
+        orientation:'h', itemwidth:60,
+        bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(200,210,225,.25)', borderwidth:1, font:{color:'#e7eefb'}
+      },
+      margin:{ t:40, r:180, l:0, b:0 },  /* fixed top band so legend changes don't move plot */
+      paper_bgcolor:'rgba(0,0,0,0)',
+      plot_bgcolor:'rgba(0,0,0,0)',
+      showlegend:true,
+      dragmode:'orbit'
+    };
+  }
+
   function flash(age){
     const trace={ type:'scatter3d', mode:'markers', x:[0], y:[age], z:[1],
-                  marker:{ size:9, color:'#caa9ff' }, name:'Новая память' };
+                  marker:{ size:9, color:'#caa9ff' }, name:'New memory' };
     Plotly.addTraces('retention3D',[trace]);
     setTimeout(()=> Plotly.deleteTraces('retention3D',-1), 500);
   }
@@ -403,16 +484,16 @@ function figureLayout(age, tiltZ, normalize){
   function updateInsight(age, lambda0, normalize){
     const lam=lambdaOfAge(lambda0, age), bet=betaOfAge(age), cliff=1/lam;
     const rEarly = Math.exp(-Math.pow(lam*(normalize? 0.2/lam : 0.2*T_MAX), bet));
-    const startTag = bet>1.05?'мягкий старт':(bet<0.95?'резкий старт':'почти экспоненциальный старт');
-    const tip = lam > 0.7 ? 'Запланируйте второй короткий повтор сегодня.' : 'Можно немного увеличить интервал после сегодняшнего дня.';
+    const startTag = bet>1.05?'gentle start':(bet<0.95?'steep start':'near-exp start');
+    const tip = lam > 0.7 ? 'Plan a sooner 2nd review (same day).' : 'You can space a bit more after today.';
     document.getElementById('insightLine').textContent =
-      `a=${age.toFixed(0)} · β=${bet.toFixed(2)} (${startTag}) · λ=${lam.toFixed(2)} · обрыв≈${normalize?'x=1':'t='+cliff.toFixed(2)} · R@x${normalize?'/λ':''}=0.2≈${rEarly.toFixed(2)} — Совет: ${tip}`;
+      `a=${age.toFixed(0)} · β=${bet.toFixed(2)} (${startTag}) · λ=${lam.toFixed(2)} · cliff≈${normalize?'x=1':'t='+cliff.toFixed(2)} · R@x${normalize?'/λ':''}=0.2≈${rEarly.toFixed(2)} — Tip: ${tip}`;
 
     // NEW: live narrate for 9–5 card
     const earlyWhere = normalize ? 'x/λ=0.2' : `t=${(0.2*T_MAX).toFixed(1)}`;
     const narr = lam > 0.7
-      ? `Обрыв раньше; закрепите второй быстрый повтор сегодня. При ${earlyWhere} R≈${rEarly.toFixed(2)}.`
-      : `Обрыв позже; можно чуть отодвинуть второй повтор. При ${earlyWhere} R≈${rEarly.toFixed(2)}.`;
+      ? `Cliff earlier; lock a second quick review today. At ${earlyWhere}, R≈${rEarly.toFixed(2)}.`
+      : `Cliff later; you can push the second review slightly. At ${earlyWhere}, R≈${rEarly.toFixed(2)}.`;
     const n95 = document.getElementById('narrate95');
     if (n95) n95.textContent = narr;
   }
@@ -465,23 +546,6 @@ function figureLayout(age, tiltZ, normalize){
     if(window.Plotly){ wire(); }
     else { const i=setInterval(()=>{ if(window.Plotly){ clearInterval(i); wire(); }}, 30); setTimeout(()=> clearInterval(i), 8000); }
     if (window.MathJax && typeof window.MathJax.typesetPromise==='function'){ window.MathJax.typesetPromise().catch(()=>{}); }
-  });
-})();
-</script>
-<script>
-(function bridgeLegendGap(){
-  const el = document.getElementById('retention3D');
-  if (!el || !window.Plotly) return;
-
-  // Make the scene shorter and align its top to the legend's bottom
-  const sceneTop = 0.985;              // top of scene (fraction of figure height)
-  const sceneBottom = 0.22;            // raise bottom to reduce scene height
-
-  window.Plotly.relayout(el, {
-    'legend.yanchor': 'bottom',        // anchor legend by its bottom edge
-    'legend.y': sceneTop + 0.003,      // ~3px gap above the scene
-    'scene.domain.y': [sceneBottom, sceneTop],
-    'margin.t': 24                     // shrink the top band outside the plot
   });
 })();
 </script>
