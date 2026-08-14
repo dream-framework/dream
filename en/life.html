@@ -296,6 +296,175 @@ main.container{padding:6px 8px !important;max-width:1600px !important}
 
 
 
+
+<!-- ===== S2 RETENTION VISUALIZER ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.2);border-radius:12px;overflow:hidden">
+  <div style="padding:.6rem 1rem;background:linear-gradient(135deg,rgba(125,211,168,.08),rgba(142,197,232,.04));border-bottom:1px solid rgba(125,211,168,.12);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:.4rem">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 8px var(--good);animation:s2pulse 2s ease-in-out infinite"></span>
+      <span style="font-size:.8rem;font-weight:700;color:var(--good);text-transform:uppercase;letter-spacing:.06em">S2 Retention vs. Life Counterstream</span>
+    </div>
+    <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-left:auto">
+      <label style="font-size:.8rem;color:var(--muted-2);display:flex;align-items:center;gap:.3rem">D <input type="range" id="s2dSlider" min="0.2" max="3" step="0.05" value="0.8" style="width:80px;accent-color:var(--good)"><span class="mono" id="s2dVal" style="color:var(--good);font-weight:700;min-width:30px">0.80</span></label>
+      <label style="font-size:.8rem;color:var(--muted-2);display:flex;align-items:center;gap:.3rem">τ_q <input type="range" id="s2tqSlider" min="1" max="20" step="0.5" value="5" style="width:80px;accent-color:var(--good)"><span class="mono" id="s2tqVal" style="color:var(--good);font-weight:700;min-width:30px">5.0</span></label>
+      <label style="font-size:.8rem;color:var(--muted-2);display:flex;align-items:center;gap:.3rem">C_life <input type="range" id="s2clifeSlider" min="0.5" max="5" step="0.1" value="2" style="width:80px;accent-color:var(--good)"><span class="mono" id="s2clifeVal" style="color:var(--good);font-weight:700;min-width:30px">2.0</span></label>
+      <label style="font-size:.8rem;color:var(--muted-2);display:flex;align-items:center;gap:.3rem;cursor:pointer"><input type="checkbox" id="s2generative" style="accent-color:var(--good)"> Show generative ridge</label>
+    </div>
+  </div>
+  <div style="padding:0;position:relative">
+    <div id="s2retentionPlot" style="width:100%;height:420px"></div>
+    <div id="s2insight" style="padding:.4rem 1rem;font-size:.8rem;color:var(--muted);border-top:1px solid rgba(125,211,168,.08);font-family:ui-monospace,monospace">—</div>
+  </div>
+</div>
+
+<style>
+@keyframes s2pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+</style>
+
+<script defer src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+<script>
+(function(){
+  function s2R(tau, tq, D){ return Math.exp(-Math.pow(tau/tq, D)); }
+  function generativeR(tau, tq, D){
+    // Generative retention decays slower — compressed structure outlasts raw signal
+    var dGen = D * 0.4; // much gentler shape
+    var tqGen = tq * 3;  // longer retention scale
+    return Math.exp(-Math.pow(tau/tqGen, dGen));
+  }
+
+  function computeM(tauMax, tq, D, dt){
+    // M(t) = integral of I(t-tau)*R(tau) dtau, with I=1 (constant input)
+    // This is the total accessible memory at time t
+    var M = 0;
+    for(var tau=0; tau<tauMax; tau+=dt){
+      M += s2R(tau, tq, D) * dt;
+    }
+    return M;
+  }
+
+  function computeMgen(tauMax, tq, D, dt){
+    var M = 0;
+    for(var tau=0; tau<tauMax; tau+=dt){
+      M += generativeR(tau, tq, D) * dt;
+    }
+    return M;
+  }
+
+  function draw(){
+    var D = parseFloat(document.getElementById('s2dSlider').value);
+    var tq = parseFloat(document.getElementById('s2tqSlider').value);
+    var Clife = parseFloat(document.getElementById('s2clifeSlider').value);
+    var showGen = document.getElementById('s2generative').checked;
+
+    document.getElementById('s2dVal').textContent = D.toFixed(2);
+    document.getElementById('s2tqVal').textContent = tq.toFixed(1);
+    document.getElementById('s2clifeVal').textContent = Clife.toFixed(1);
+
+    var tauMax = 40, dt = 0.05;
+    var tau = [], R = [], Rgen = [], Mrunning = [], MgenRunning = [];
+    var M = 0, Mgen = 0;
+
+    for(var t=0; t<=tauMax; t+=dt){
+      var r = s2R(t, tq, D);
+      var rg = generativeR(t, tq, D);
+      tau.push(t);
+      R.push(r);
+      Rgen.push(rg);
+      M += r * dt;
+      Mgen += rg * dt;
+      Mrunning.push(M);
+      MgenRunning.push(Mgen);
+    }
+
+    // Cap at C_life
+    var Mcapped = Mrunning.map(m => Math.min(m, Clife));
+    var MgenCapped = MgenRunning.map(m => Math.min(m, Clife));
+
+    var traces = [
+      // S2 decay curve (the adversary)
+      {
+        x: tau, y: R, type: 'scatter', mode: 'lines',
+        name: 'S2 R(τ) — literal decay',
+        line: {width: 3, color: 'rgba(240,100,100,0.8)'},
+        fill: 'tozeroy', fillcolor: 'rgba(240,100,100,0.05)',
+        hovertemplate: 'τ=%{x:.1f}<br>R=%{y:.3f}<extra></extra>'
+      },
+      // C_life capacity line
+      {
+        x: [0, tauMax], y: [Clife, Clife], type: 'scatter', mode: 'lines',
+        name: 'C_life capacity',
+        line: {width: 2, dash: 'dash', color: 'rgba(183,255,51,0.5)'},
+        hoverinfo: 'skip'
+      },
+      // M(t) running integral (literal memory)
+      {
+        x: tau, y: Mcapped, type: 'scatter', mode: 'lines',
+        name: 'M(t) literal (capped)',
+        line: {width: 2.5, color: 'rgba(142,197,232,0.7)', shape: 'spline'},
+        hovertemplate: 'τ=%{x:.1f}<br>M=%{y:.2f}<extra></extra>'
+      },
+    ];
+
+    if (showGen) {
+      traces.push({
+        x: tau, y: Rgen, type: 'scatter', mode: 'lines',
+        name: 'Generative R — compressed ridge',
+        line: {width: 3, color: 'rgba(125,211,168,0.8)'},
+        fill: 'tozeroy', fillcolor: 'rgba(125,211,168,0.05)',
+        hovertemplate: 'τ=%{x:.1f}<br>R_gen=%{y:.3f}<extra></extra>'
+      });
+      traces.push({
+        x: tau, y: MgenCapped, type: 'scatter', mode: 'lines',
+        name: 'M(t) generative (capped)',
+        line: {width: 2.5, color: 'rgba(125,211,168,0.5)', dash: 'dot', shape: 'spline'},
+        hovertemplate: 'τ=%{x:.1f}<br>M_gen=%{y:.2f}<extra></extra>'
+      });
+    }
+
+    // Check if M exceeds C_life
+    var Mfinal = Mrunning[Mrunning.length-1];
+    var MgenFinal = MgenRunning[MgenRunning.length-1];
+    var overflow = Mfinal > Clife;
+    var insight = 'M_literal=' + Mfinal.toFixed(2) + ' / C_life=' + Clife.toFixed(1);
+    if (showGen) insight += ' | M_gen=' + MgenFinal.toFixed(2);
+    insight += overflow ? ' ⚠ OVERFLOW: literal memory exceeds capacity — selection forced' : ' ✓ within capacity';
+    if (showGen && MgenFinal < Mfinal) insight += ' | generative ridge outlasts literal by ' + (MgenFinal/Mfinal).toFixed(1) + 'x';
+    document.getElementById('s2insight').textContent = insight;
+
+    var layout = {
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      margin: {t: 30, r: 20, l: 50, b: 40},
+      xaxis: {title: 'Time τ', color: '#c6cfde', gridcolor: 'rgba(200,210,225,0.08)', zerolinecolor: 'rgba(200,210,225,0.08)', showbackground: false, tickfont: {color: '#c6cfde', size: 11}},
+      yaxis: {title: 'Retention R / Memory M', color: '#c6cfde', gridcolor: 'rgba(200,210,225,0.08)', zerolinecolor: 'rgba(200,210,225,0.08)', showbackground: false, tickfont: {color: '#c6cfde', size: 11}},
+      legend: {x: 0.02, y: 0.98, bgcolor: 'rgba(0,0,0,0)', bordercolor: 'rgba(200,210,225,0.15)', borderwidth: 1, font: {color: '#e7eefb', size: 10}},
+      font: {color: '#e7eefb'},
+      showlegend: true,
+      hovermode: 'closest'
+    };
+
+    Plotly.react('s2retentionPlot', traces, layout, {responsive: true, displaylogo: false});
+  }
+
+  function init(){
+    ['s2dSlider','s2tqSlider','s2clifeSlider','s2generative'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener('input', draw);
+      if(el && el.type === 'checkbox') el.addEventListener('change', draw);
+    });
+    draw();
+  }
+
+  if(window.Plotly){ init(); }
+  else {
+    var i = setInterval(function(){
+      if(window.Plotly){ clearInterval(i); init(); }
+    }, 30);
+    setTimeout(function(){ clearInterval(i); }, 8000);
+  }
+})();
+</script>
+
 <div class="life-toy">
   <div class="lt-header">
     <h1>DREAM-Life <span class="lt-speculative">projected morphogenesis</span></h1>
