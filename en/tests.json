@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-14T05:59:10Z",
+  "exported_at": "2026-08-14T09:41:25Z",
   "total_tests": 168,
   "fields": [
     "id",
@@ -1661,14 +1661,14 @@
       "id": "",
       "name": "Open-Meteo: NYC precipitation_sum (ACF retention)",
       "domain": "environmental",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "delta_aicc": 2.09,
       "best_alt": "GAUSS",
-      "model_note": "S2 loses to GAUSS (ΔAICc=2.09). S2+dust fit: D1=2.8817, D2=7.6144, R²=0.7908, AICc=-836.07. S2+dust does NOT beat GAUSS — needs investigation.",
-      "narrative": "D_eff=2.9027, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.09). S2+dust fit: D1=2.8817, D2=7.6146, R²=0.7908, AICc=-836.07. S2+dust does NOT beat GAUSS — needs investigation.",
+      "narrative": "D_eff=2.9028, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum"
