@@ -246,7 +246,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "14 Aug 2026 13:23 EST";
+const LAST_REFRESH = "14 Aug 2026 16:58 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -437,6 +437,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data in Support of Texas State Comptroller Contrac",domain:"scouting",D:1.5821,r2:0.9973,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-2.9900,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-2.99).",narrative:"D_eff=1.5821, R²=0.9973. D_eff=1.582 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит GAUSS, ΔAICc=-2.99).",source:"auto-scan 2026-08-13",date:"2026-08-13",url:"10.5281/zenodo.21893163",image:null}
   ,{id:"",name:"Zenodo: Data in Support of Texas State Comptroller Contrac",domain:"scouting",D:1.3462,r2:0.7225,verdict:"D_GT_1",model_verdict:"S2_TIES",delta_aicc:-0.5000,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=-0.5, within ±2).",narrative:"D_eff=1.3462, R²=0.7225. D_eff=1.346 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с EXP, ΔAICc=-0.50).",source:"auto-scan 2026-08-13",date:"2026-08-13",url:"10.5281/zenodo.21893163",image:null}
   ,{id:"",name:"Zenodo: Data in Support of Texas State Comptroller Contrac",domain:"scouting",D:1.2008,r2:0.9978,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:204.3300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=204.33).",narrative:"D_eff=1.2008, R²=0.9978. D_eff=1.201 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=204.33). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-13",date:"2026-08-13",url:"10.5281/zenodo.21893163",image:null}
+  ,{id:"",name:"Zenodo: Classification Models in Student Peer Review",domain:"scouting",D:1.9415,r2:0.6068,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.4900,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.49).",narrative:"D_eff=1.9415, R²=0.6068. D_eff=1.942 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.49). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-14",date:"2026-08-14",url:"10.5281/zenodo.21939276",image:null}
+  ,{id:"",name:"Zenodo: Classification Models in Student Peer Review",domain:"scouting",D:1.8828,r2:0.9086,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.6400,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.64).",narrative:"D_eff=1.8828, R²=0.9086. D_eff=1.883 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.64). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-14",date:"2026-08-14",url:"10.5281/zenodo.21939276",image:null}
 
 ];
 
@@ -722,33 +724,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 160,
-  "d_mle": 1.5335,
-  "lam_mle": 1.2641,
-  "ks_p": 0.046,
-  "ks_p_lilliefors": 0.0008,
-  "ks_stat_obs": 0.1075,
-  "ks_boot_mean": 0.0492,
-  "ks_boot_95": 0.07,
-  "d_direct": 1.6435,
-  "r2_direct": 0.9806,
-  "d_linear": 1.5313,
-  "r2_linear": 0.9761,
+  "n": 162,
+  "d_mle": 1.5427,
+  "lam_mle": 1.2752,
+  "ks_p": 0.047,
+  "ks_p_lilliefors": 0.0004,
+  "ks_stat_obs": 0.1065,
+  "ks_boot_mean": 0.0488,
+  "ks_boot_95": 0.069,
+  "d_direct": 1.6497,
+  "r2_direct": 0.981,
+  "d_linear": 1.5328,
+  "r2_linear": 0.9765,
   "natural": 66,
-  "extraction": 94,
-  "mean": 1.1377,
-  "median": 1.0757,
-  "total": 168,
-  "compared": 166,
+  "extraction": 96,
+  "mean": 1.1472,
+  "median": 1.0966,
+  "total": 170,
+  "compared": 168,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.6521,
+  "ad_stat": 1.6481,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.42,
-  "delta_aic_lognormal": 21.83,
-  "silverman_p": 0.795,
+  "delta_aic_gamma": 1.87,
+  "delta_aic_lognormal": 23.25,
+  "silverman_p": 0.725,
   "boot_lo": 1.057,
-  "boot_hi": 1.733,
+  "boot_hi": 1.747,
   "date": "2026-08-14"
 };
 

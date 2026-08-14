@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-14T17:23:58Z",
-  "total_tests": 168,
+  "exported_at": "2026-08-14T20:58:39Z",
+  "total_tests": 170,
   "fields": [
     "id",
     "name",
@@ -1283,7 +1283,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 9.55,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.55). S2+dust fit: D1=1.0159, D2=2.2126, R²=0.9999, AICc=-3376.39. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.55). S2+dust fit: D1=1.0159, D2=2.2121, R²=0.9999, AICc=-3376.12. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.9597, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.55). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -2568,6 +2568,38 @@
       "source": "auto-scan 2026-08-13",
       "date": "2026-08-13",
       "url": "10.5281/zenodo.21893163"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Classification Models in Student Peer Review",
+      "domain": "scouting",
+      "D": 1.9415,
+      "r2": 0.6068,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.49,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.49).",
+      "narrative": "D_eff=1.9415, R²=0.6068. D_eff=1.942 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.49). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-14",
+      "date": "2026-08-14",
+      "url": "10.5281/zenodo.21939276"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Classification Models in Student Peer Review",
+      "domain": "scouting",
+      "D": 1.8828,
+      "r2": 0.9086,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.64,
+      "best_alt": "POWER",
+      "model_note": "S2 loses to POWER (ΔAICc=2.64).",
+      "narrative": "D_eff=1.8828, R²=0.9086. D_eff=1.883 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=2.64). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-14",
+      "date": "2026-08-14",
+      "url": "10.5281/zenodo.21939276"
     }
   ]
 }
