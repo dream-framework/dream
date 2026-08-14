@@ -187,6 +187,100 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
     <p style="font-size:.8rem;color:var(--muted-2);font-style:italic;margin-top:.6rem">Caveat: This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real biological datasets.</p>
   </div>
 </div>
+</div>
+
+<!-- ===== SUMMARY ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">Summary</h2>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .6rem">
+      <strong>Forgetting is not a defect \u2014 it is the precondition for intelligence.</strong> A finite organism cannot retain everything. S2 decay erases raw signal; life fights back by compressing signal into durable structure. The result is two kinds of retention: <em>literal</em> (raw details, decays via S2) and <em>generative</em> (compressed concepts and methods that can reconstruct what was lost).
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .6rem">
+      Life operates through two sequential filters: <strong>physical retention</strong> (S2 decay selects what fades) then <strong>biological selection</strong> (evolution selects what persists). Together they produce <em>ridge retention</em> \u2014 massive information stream reduced to persistent ridges of useful structure. The hierarchy of retention (DNA \u2192 brain \u2192 culture \u2192 technology) increases effective capacity \(C_{\mathrm{life}}\) at each level but never escapes the horizon.
+    </p>
+    <div style="padding:.5rem .8rem;background:rgba(125,211,168,.06);border-radius:6px;border:1px solid rgba(125,211,168,.12);font-size:.9rem;color:var(--fg)">
+      <strong style="color:var(--good)">Intelligence</strong> ~ quality of compression \u00d7 quality of reconstruction. An expert doesn\'t remember everything \u2014 they retain a dense network of organizing principles that allows missing details to be rapidly reconstructed.
+    </div>
+  </div>
+</div>
+
+<!-- ===== IN PLAIN TERMS ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">In Plain Terms</h2>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      Imagine a river of information flowing through a sieve. Most water passes through \u2014 that\'s forgetting. What remains in the sieve is not the water itself but the <strong>sediment</strong>: concepts, relationships, methods. This sediment is what life builds on.
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      A flame branches like a tree, a river network, a blood vessel. Branching alone is not life. What makes life different is that it <strong>actively preserves selected information against the general tendency toward loss</strong>. It uses energy to repair, consolidate, and reproduce the structures that help it persist. Non-life branches and dissipates. Life branches and <em>retains</em>.
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      The four-stage strategy life uses to fight forgetting:
+    </p>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.5rem;background:rgba(125,211,168,.05);border-radius:6px;margin:.4rem 0">
+      retain facts \u2192 compress into patterns \u2192 externalize into culture \u2192 reconstruct from fragments + external memory
+    </div>
+    <p style="font-size:.9rem;color:var(--muted-2);font-style:italic;margin-top:.4rem">
+      The toy below shows <em>morphological</em> complexity \u2014 folds, twirls, branching. It does NOT yet model active retention, memory, or heredity. Those are the deeper DREAM-Life properties described in the math section above the toy.
+    </p>
+  </div>
+</div>
+
+<!-- ===== MATH ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">The Mathematics of Life and Forgetting</h2>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">S2 decay \u2014 the adversary</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(240,100,100,.04);border-radius:4px;margin:.3rem 0">
+      \( R(\tau) = \exp\!\left[-\left(\frac{\tau}{\tau_q}\right)^{D}\right] \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Finite-capacity constraint</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--good);text-align:center;padding:.4rem;background:rgba(125,211,168,.04);border-radius:4px;margin:.3rem 0">
+      \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+    </div>
+    <p style="font-size:.9rem;color:var(--fg);margin:.3rem 0">
+      New information enters as \(I(t)\), but previous events occupy decreasing fractions of the budget as \(R(\tau) \to 0\). If everything remained equally retrievable forever (\(R=1\)), a finite organism would face an impossible information burden.
+    </p>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Two filters</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(142,197,232,.04);border-radius:4px;margin:.3rem 0">
+      I \u2014S2\u2192 I\u00b7R(\u03c4) \u2014\u2132\u2192 I_useful
+    </div>
+    <p style="font-size:.9rem;color:var(--fg);margin:.3rem 0">
+      Physical retention (S2 decay) then biological selection (evolution retains useful structure). Ridge retention: massive information stream \u2192 dust discarded + persistent ridge retained.
+    </p>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Literal vs. generative retention</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--fg);margin:.3rem 0">
+      \( M_{\mathrm{literal}} \): recoverable details (decays via S2)<br>
+      \( M_{\mathrm{gen}} \): compressed structure capable of reconstructing useful information<br>
+      \( Z + \text{book/search/AI} \longrightarrow \text{reconstructed knowledge} \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Retention hierarchy</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.4rem;margin:.3rem 0">
+      \( C_{\mathrm{cell}} < C_{\mathrm{nervous}} < C_{\mathrm{culture}} < C_{\mathrm{external}} \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Two causes of forgetting</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--fg);text-align:center;padding:.4rem;margin:.3rem 0">
+      forgetting = retention decay + capacity/competition
+    </div>
+
+    <div style="padding:.5rem .8rem;background:rgba(125,211,168,.06);border-radius:6px;border:1px solid rgba(125,211,168,.12);margin-top:.6rem">
+      <strong style="color:var(--good);font-size:.9rem">Bottom line:</strong>
+      <span style="font-size:.9rem;color:var(--fg)"> S2 supplies fading. Finite capacity \(C_{\mathrm{life}}\) supplies selection. Life supplies active preservation \u2014 compression, reconstruction, and externalization.</span>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted-2);font-style:italic;margin-top:.4rem">
+      Caveat: This is a DREAM-Life hypothesis, not an established biological consequence of S2. The stretched-exponential kernel would need to be tested against real biological datasets.
+    </p>
+  </div>
+</div>
+
+
 
 <div class="life-toy">
   <div class="lt-header">
