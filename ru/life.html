@@ -188,6 +188,99 @@ main.container{padding:6px 8px !important;max-width:1600px !important;height:cal
   </div>
 </div>
 
+<!-- ===== SUMMARY ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">Резюме</h2>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .6rem">
+      <strong>Забывание — не дефект, а предусловие интеллекта.</strong> Конечный организм не может удержать всё. Затухание S2 стирает сырой сигнал; жизнь отвечает сжатием сигнала в прочную структуру. Результат — два вида удержания: <em>буквальное</em> (сырые детали, затухает по S2) и <em>генеративное</em> (сжатые концепции и методы, способные реконструировать утраченное).
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .6rem">
+      Жизнь действует через два последовательных фильтра: <strong>физическое удержание</strong> (затухание S2 отбирает то, что исчезает), затем <strong>биологический отбор</strong> (эволюция отбирает то, что сохраняется). Вместе они создают <em>гребневое удержание</em> — массивный информационный поток, редуцированный до устойчивых гребней полезной структуры. Иерархия удержания (ДНК → мозг → культура → технология) увеличивает эффективную ёмкость \(C_{\mathrm{life}}\) на каждом уровне, но никогда не выходит за горизонт.
+    </p>
+    <div style="padding:.5rem .8rem;background:rgba(125,211,168,.06);border-radius:6px;border:1px solid rgba(125,211,168,.12);font-size:.9rem;color:var(--fg)">
+      <strong style="color:var(--good)">Интеллект</strong> ~ качество сжатия × качество реконструкции. Эксперт помнит не всё — он удерживает плотную сеть организующих принципов, позволяющую быстро реконструировать недостающие детали.
+    </div>
+  </div>
+</div>
+
+<!-- ===== IN PLAIN TERMS ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">Простыми словами</h2>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      Представьте реку информации, протекающую через сито. Большая часть воды проходит сквозь — это и есть забывание. То, что остаётся в сите, — не сама вода, а <strong>осадок</strong>: концепции, связи, методы. Этот осадок — то, на чём строится жизнь.
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      Пламя ветвится как дерево, речная сеть, кровеносный сосуд. Само по себе ветвление — не жизнь. То, что отличает жизнь, — она <strong>активно сохраняет избранную информацию вопреки общей тенденции к потере</strong>. Она тратит энергию на восстановление, консолидацию и воспроизводство структур, помогающих ей сохраняться. Неживое ветвится и рассеивается. Жизнь ветвится и <em>удерживает</em>.
+    </p>
+    <p style="font-size:.95rem;line-height:1.55;color:var(--fg);margin:0 0 .5rem">
+      Четырёхэтапная стратегия, которую жизнь использует для борьбы с забыванием:
+    </p>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.5rem;background:rgba(125,211,168,.05);border-radius:6px;margin:.4rem 0">
+      сохранять факты → сжимать в паттерны → экстериоризовать в культуру → реконструировать из фрагментов + внешней памяти
+    </div>
+    <p style="font-size:.9rem;color:var(--muted-2);font-style:italic;margin-top:.4rem">
+      Игрушка ниже показывает <em>морфологическую</em> сложность — складки, завихрения, ветвление. Она пока НЕ моделирует активное удержание, память или наследственность. Это более глубокие свойства DREAM-Life, описанные в разделе математики над игрушкой.
+    </p>
+  </div>
+</div>
+
+<!-- ===== MATH ===== -->
+<div class="card" style="margin-bottom:1rem;background:rgba(6,14,24,.35);border:1px solid rgba(125,211,168,.15);border-radius:10px">
+  <div style="padding:1rem 1.25rem">
+    <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;color:var(--fg)">Математика жизни и забывания</h2>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Затухание S2 — противник</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(240,100,100,.04);border-radius:4px;margin:.3rem 0">
+      \( R(\tau) = \exp\!\left[-\left(\frac{\tau}{\tau_q}\right)^{D}\right] \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Ограничение конечной ёмкости</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--good);text-align:center;padding:.4rem;background:rgba(125,211,168,.04);border-radius:4px;margin:.3rem 0">
+      \( M(t) = \int_0^\infty I(t{-}\tau)\, R(\tau)\, d\tau, \quad M(t) \leq C_{\mathrm{life}} \)
+    </div>
+    <p style="font-size:.9rem;color:var(--fg);margin:.3rem 0">
+      Новая информация поступает как \(I(t)\), но предыдущие события занимают убывающую долю бюджета при \(R(\tau) \to 0\). Если бы всё оставалось одинаково доступным навсегда (\(R=1\)), конечный организм столкнулся бы с невозможной информационной нагрузкой.
+    </p>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Два фильтра</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(142,197,232,.04);border-radius:4px;margin:.3rem 0">
+      I —S2→ I·R(τ) —ℱ→ I_useful
+    </div>
+    <p style="font-size:.9rem;color:var(--fg);margin:.3rem 0">
+      Физическое удержание (затухание S2), затем биологический отбор (эволюция удерживает полезную структуру). Гребневое удержание: массивный информационный поток → пыль отбрасывается + устойчивый гребень сохраняется.
+    </p>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Буквальное и генеративное удержание</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--fg);margin:.3rem 0">
+      \( M_{\mathrm{literal}} \): восстановимые детали (затухает по S2)<br>
+      \( M_{\mathrm{gen}} \): сжатая структура, способная реконструировать полезную информацию<br>
+      \( Z + \text{book/search/AI} \longrightarrow \text{reconstructed knowledge} \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Иерархия удержания</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.4rem;margin:.3rem 0">
+      \( C_{\mathrm{cell}} < C_{\mathrm{nervous}} < C_{\mathrm{culture}} < C_{\mathrm{external}} \)
+    </div>
+
+    <h3 style="font-size:.9rem;color:var(--fg);margin:.6rem 0 .3rem">Две причины забывания</h3>
+    <div style="font-family:ui-monospace,monospace;font-size:.9rem;color:var(--fg);text-align:center;padding:.4rem;margin:.3rem 0">
+      забывание = затухание удержания + ёмкость/конкуренция
+    </div>
+
+    <div style="padding:.5rem .8rem;background:rgba(125,211,168,.06);border-radius:6px;border:1px solid rgba(125,211,168,.12);margin-top:.6rem">
+      <strong style="color:var(--good);font-size:.9rem">Суть:</strong>
+      <span style="font-size:.9rem;color:var(--fg)"> S2 обеспечивает затухание. Конечная ёмкость \(C_{\mathrm{life}}\) обеспечивает отбор. Жизнь обеспечивает активное сохранение — сжатие, реконструкцию и экстериоризацию.</span>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted-2);font-style:italic;margin-top:.4rem">
+      Оговорка: это гипотеза DREAM-Life, а не установленное биологическое следствие S2. Растянуто-экспоненциальное ядро необходимо проверить на реальных биологических наборах данных.
+    </p>
+  </div>
+</div>
+
+
+
 <div class="life-toy">
   <div class="lt-header">
     <h1>DREAM-Life <span class="lt-speculative">проективная морфогенез</span></h1>
