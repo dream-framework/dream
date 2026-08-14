@@ -33,11 +33,11 @@ window.MathJax = {
   --lt-spark:#ffd27a;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;overflow:hidden}
+html,body{margin:0}
 /* Hide the global fractal backdrop — it washes out the 3D canvas */
 #fx{display:none !important}
-.life-toy{display:flex;flex-direction:column;height:calc(100vh - 56px);padding:6px 8px;gap:6px}
-main.container{padding:6px 8px !important;max-width:1600px !important;height:calc(100vh - 56px);display:flex;flex-direction:column}
+.life-toy{display:flex;flex-direction:column;min-height:calc(100vh - 56px);padding:6px 8px;gap:6px}
+main.container{padding:6px 8px !important;max-width:1600px !important}
 
 /* Compact header strip */
 .lt-header{display:flex;align-items:center;gap:12px;padding:2px 4px;flex-shrink:0}
