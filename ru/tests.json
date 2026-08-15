@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-15T16:56:55Z",
-  "total_tests": 173,
+  "exported_at": "2026-08-15T20:55:00Z",
+  "total_tests": 174,
   "fields": [
     "id",
     "name",
@@ -2648,6 +2648,22 @@
       "source": "auto-scan 2026-08-15",
       "date": "2026-08-15",
       "url": "10.5281/zenodo.21950986"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Multimodal Neuorphysiological Response to Advertis",
+      "domain": "scouting",
+      "D": 1.1308,
+      "r2": 0.9977,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 866.2,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=866.2).",
+      "narrative": "D_eff=1.1308, R²=0.9977. D_eff=1.131 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=866.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-15",
+      "date": "2026-08-15",
+      "url": "10.5281/zenodo.21957789"
     }
   ]
 }

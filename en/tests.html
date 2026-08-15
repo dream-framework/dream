@@ -256,7 +256,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "15 Aug 2026 12:56 EST";
+const LAST_REFRESH = "15 Aug 2026 16:55 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -453,6 +453,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data for: Electrochemical formation of N-nitrosodi",domain:"scouting",D:1.1407,r2:0.8429,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2.4000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.4).",narrative:"D_eff=1.1407, R²=0.8429. D_eff=1.141 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-15",date:"2026-08-15",url:"10.5281/zenodo.21940691",image:null}
   ,{id:"",name:"Zenodo: Data for: Electrochemical formation of N-nitrosodi",domain:"scouting",D:1.3385,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:103.4800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=103.48).",narrative:"D_eff=1.3385, R²=0.9985. D_eff=1.339 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=103.48). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-15",date:"2026-08-15",url:"10.5281/zenodo.21940691",image:null}
   ,{id:"",name:"Zenodo: 15. Numerical Framework for the Quantum S‑Matrix o",domain:"scouting",D:1.2620,r2:0.9990,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.6200,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=7.62).",narrative:"D_eff=1.2620, R²=0.9990. D_eff=1.262 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=7.62). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-15",date:"2026-08-15",url:"10.5281/zenodo.21950986",image:null}
+  ,{id:"",name:"Zenodo: Multimodal Neuorphysiological Response to Advertis",domain:"scouting",D:1.1308,r2:0.9977,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:866.2000,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=866.2).",narrative:"D_eff=1.1308, R²=0.9977. D_eff=1.131 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=866.20). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-15",date:"2026-08-15",url:"10.5281/zenodo.21957789",image:null}
 
 ];
 
@@ -750,33 +751,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 165,
-  "d_mle": 1.5593,
-  "lam_mle": 1.2784,
-  "ks_p": 0.0341,
+  "n": 166,
+  "d_mle": 1.5643,
+  "lam_mle": 1.2787,
+  "ks_p": 0.0298,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.11,
+  "ks_stat_obs": 0.1115,
   "ks_boot_mean": 0.0485,
-  "ks_boot_95": 0.0687,
-  "d_direct": 1.6942,
+  "ks_boot_95": 0.0685,
+  "d_direct": 1.7099,
   "r2_direct": 0.9799,
-  "d_linear": 1.5448,
+  "d_linear": 1.5493,
   "r2_linear": 0.9758,
   "natural": 66,
-  "extraction": 99,
-  "mean": 1.149,
-  "median": 1.1127,
-  "total": 173,
-  "compared": 171,
+  "extraction": 100,
+  "mean": 1.1489,
+  "median": 1.1218,
+  "total": 174,
+  "compared": 172,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.7956,
+  "ad_stat": 1.8235,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.14,
-  "delta_aic_lognormal": 24.66,
-  "silverman_p": 0.735,
+  "delta_aic_gamma": 2.19,
+  "delta_aic_lognormal": 25.02,
+  "silverman_p": 0.73,
   "boot_lo": 1.057,
-  "boot_hi": 1.765,
+  "boot_hi": 1.771,
   "date": "2026-08-15"
 };
 
