@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-15T13:14:12Z",
-  "total_tests": 172,
+  "exported_at": "2026-08-15T16:56:55Z",
+  "total_tests": 173,
   "fields": [
     "id",
     "name",
@@ -2632,6 +2632,22 @@
       "source": "auto-scan 2026-08-15",
       "date": "2026-08-15",
       "url": "10.5281/zenodo.21940691"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 15. Numerical Framework for the Quantum S‑Matrix o",
+      "domain": "scouting",
+      "D": 1.262,
+      "r2": 0.999,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 7.62,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=7.62).",
+      "narrative": "D_eff=1.2620, R²=0.9990. D_eff=1.262 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=7.62). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-15",
+      "date": "2026-08-15",
+      "url": "10.5281/zenodo.21950986"
     }
   ]
 }
