@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-14T20:58:39Z",
-  "total_tests": 170,
+  "exported_at": "2026-08-15T02:02:46Z",
+  "total_tests": 172,
   "fields": [
     "id",
     "name",
@@ -2600,6 +2600,38 @@
       "source": "auto-scan 2026-08-14",
       "date": "2026-08-14",
       "url": "10.5281/zenodo.21939276"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data for: Electrochemical formation of N-nitrosodi",
+      "domain": "scouting",
+      "D": 1.1407,
+      "r2": 0.8429,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.4,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=2.4).",
+      "narrative": "D_eff=1.1407, R²=0.8429. D_eff=1.141 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-15",
+      "date": "2026-08-15",
+      "url": "10.5281/zenodo.21940691"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data for: Electrochemical formation of N-nitrosodi",
+      "domain": "scouting",
+      "D": 1.3385,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 103.48,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=103.48).",
+      "narrative": "D_eff=1.3385, R²=0.9985. D_eff=1.339 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=103.48). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-15",
+      "date": "2026-08-15",
+      "url": "10.5281/zenodo.21940691"
     }
   ]
 }
