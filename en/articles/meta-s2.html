@@ -240,7 +240,7 @@
         <p><strong>Lilliefors KS test</strong> gives p = 0.000. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
         <blockquote class="callout warn">
-          <strong>Prospective update — 2026-08-15 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.564. The estimator range is [1.710, 1.549]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.564 as genuinely new, independent systems are added?
+          <strong>Prospective update — 2026-08-16 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.564. The estimator range is [1.710, 1.549]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.564 as genuinely new, independent systems are added?
         </blockquote>
 
         <h4>Additional fit statistics (n = 166)</h4>
@@ -450,7 +450,7 @@
           <summary><strong>How the meta-fit was constructed</strong></summary>
 
           <div class="method-body">
-            <p><strong>Data:</strong> 166 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-08-15. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
+            <p><strong>Data:</strong> 166 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-08-16. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
 
             <p><strong>Meta-fit (direct-d, not rank):</strong> The 166 D values were sorted ascending: D_(1) ≤ D_(2) ≤ ... ≤ D_(166). The empirical survival function was computed as Ŝ(D_(i)) = (n − i) / n. Three fits were performed <strong>using the actual D values as the independent variable</strong> (not rank index):</p>
             <ol>
@@ -531,7 +531,7 @@
 
         <p>If this conjecture could eventually be demonstrated — that one projection consistently yields S2 and two independent projections consistently yield Gaussian behavior across multiple datasets — it would connect the statistical hierarchy directly to the architecture of the DREAM framework, where observables arise through a non-invertible projection kernel and S2 governs retention. That would be a much more distinctive result than simply observing Gaussian parameter estimates.</p>
 
-        <p class="note">Tested 2026-08-15 via 500-iteration bootstrap of D_meta from 166 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.001). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
+        <p class="note">Tested 2026-08-16 via 500-iteration bootstrap of D_meta from 166 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.001). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
       </div>
 
       <hr>
@@ -542,7 +542,7 @@
 
         <blockquote class="callout">
           <strong>Weibull-preferred distributional recurrence.</strong><br><br>
-          As of 2026-08-15, the 166-system registry yields Weibull MLE shape D_meta = 1.564 (KS p = 0.030). The estimator range is [1.710, 1.549]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 2.190, ΔAIC_Lognormal = 25.020). The family-level bootstrap 95% CI is [1.057, 1.771] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
+          As of 2026-08-16, the 166-system registry yields Weibull MLE shape D_meta = 1.564 (KS p = 0.030). The estimator range is [1.710, 1.549]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 2.190, ΔAIC_Lognormal = 25.020). The family-level bootstrap 95% CI is [1.057, 1.771] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
         </blockquote>
 
         <h3>What survives</h3>
@@ -574,7 +574,7 @@
         <p>The wide bootstrap CI means more <em>independent</em> families are needed, not just more rows from existing families. Adding 10 more crypto or weather series will not narrow the CI meaningfully. Adding a genuinely new domain (e.g., biological aging, linguistic decay, archaeological dating) would.</p>
 
         <p class="article-footnote">
-          Analysis performed 2026-08-15. Data: <a href="../tests.html">DREAM Test Registry</a> (166 Meta-S2-eligible uncensored systems, of 174 total registered).<br>
+          Analysis performed 2026-08-16. Data: <a href="../tests.html">DREAM Test Registry</a> (166 Meta-S2-eligible uncensored systems, of 174 total registered).<br>
           This page is speculative. The recursive S2 property is an empirical observation on a non-random, partially dependent sample, not a proven theorem. It is offered as a direction for investigation.<br><br>
           <strong>Update protocol:</strong> This article is regenerated with each scanner run. The live Meta-S2 readout on the <a href="../tests.html">Test Registry</a> page always reflects the current TESTS array.
         </p>
