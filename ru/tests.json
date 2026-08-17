@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-16T20:53:26Z",
-  "total_tests": 180,
+  "exported_at": "2026-08-17T02:09:04Z",
+  "total_tests": 181,
   "fields": [
     "id",
     "name",
@@ -2760,6 +2760,22 @@
       "source": "auto-scan 2026-08-16",
       "date": "2026-08-16",
       "url": "10.5281/zenodo.21969966"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Filtered MIG-seq SNP genotype dataset for Sonnerat",
+      "domain": "scouting",
+      "D": 1.4093,
+      "r2": 0.9989,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 108.17,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=108.17).",
+      "narrative": "D_eff=1.4093, R²=0.9989. D_eff=1.409 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=108.17). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-17",
+      "date": "2026-08-17",
+      "url": "10.5281/zenodo.21871545"
     }
   ]
 }
