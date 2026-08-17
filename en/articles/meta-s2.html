@@ -235,7 +235,7 @@
           </tbody>
         </table>
 
-        <p>All three shape estimators agree: D_meta ≈ 1.535 (MLE), 1.703 (direct), 1.539 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 1.250, vs Lognormal = 23.360, vs Exponential = 0.000. No alternative distribution fits better.</p>
+        <p>All three shape estimators agree: D_meta ≈ 1.535 (MLE), 1.703 (direct), 1.539 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 1.250, vs Lognormal = 23.350, vs Exponential = 0.000. No alternative distribution fits better.</p>
 
         <p><strong>Lilliefors KS test</strong> gives p = 0.000. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
@@ -258,7 +258,7 @@
           </tbody>
         </table>
 
-        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.0411), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (1.7591) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +1.25), which is competitive. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
+        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.041), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (1.7592) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +1.25), which is competitive. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
 
         <h4>Weibull linearization</h4>
         <p>The linearized plot ln[−ln(Ŝ(d))] vs ln(d) should be linear if the Weibull model is correct. The linear fit gives R² = 0.976, but a quadratic fit improves to R² = 0.978 (ΔR² = 0.003), with a quadratic coefficient of -0.056 — indicating <strong>slight concave curvature</strong>. This means the Weibull model is a good first approximation but not exact; the tails deviate systematically from the linear prediction.</p>
@@ -319,13 +319,13 @@
             <tr><td>crypto</td><td class="num">167</td><td class="num">1.508</td><td class="num">0.057</td><td class="num">-0.027</td></tr>
             <tr><td>earthquakes</td><td class="num">171</td><td class="num">1.534</td><td class="num">0.034</td><td class="num">-0.001</td></tr>
             <tr><td>energy-charts</td><td class="num">164</td><td class="num">1.626</td><td class="num">0.052</td><td class="num">+0.091</td></tr>
-            <tr><td>fred</td><td class="num">162</td><td class="num">1.504</td><td class="num">0.067</td><td class="num">-0.032</td></tr>
+            <tr><td>fred</td><td class="num">162</td><td class="num">1.504</td><td class="num">0.067</td><td class="num">-0.031</td></tr>
             <tr><td>nasa</td><td class="num">171</td><td class="num">1.555</td><td class="num">0.049</td><td class="num">+0.020</td></tr>
             <tr><td>nasa power</td><td class="num">171</td><td class="num">1.555</td><td class="num">0.049</td><td class="num">+0.020</td></tr>
             <tr><td>ndbc</td><td class="num">169</td><td class="num">1.532</td><td class="num">0.031</td><td class="num">-0.003</td></tr>
             <tr><td>noaa tide</td><td class="num">169</td><td class="num">1.583</td><td class="num">0.030</td><td class="num">+0.048</td></tr>
             <tr><td>open-meteo</td><td class="num">152</td><td class="num">1.582</td><td class="num">0.041</td><td class="num">+0.047</td></tr>
-            <tr><td>swpc</td><td class="num">169</td><td class="num">1.534</td><td class="num">0.051</td><td class="num">-0.002</td></tr>
+            <tr><td>swpc</td><td class="num">169</td><td class="num">1.534</td><td class="num">0.051</td><td class="num">-0.001</td></tr>
             <tr><td>usgs</td><td class="num">169</td><td class="num">1.535</td><td class="num">0.029</td><td class="num">+0.000</td></tr>
             <tr><td>weather</td><td class="num">167</td><td class="num">1.528</td><td class="num">0.037</td><td class="num">-0.007</td></tr>
             <tr><td>wikipedia</td><td class="num">165</td><td class="num">1.568</td><td class="num">0.034</td><td class="num">+0.033</td></tr>
@@ -542,7 +542,7 @@
 
         <blockquote class="callout">
           <strong>Weibull-preferred distributional recurrence.</strong><br><br>
-          As of 2026-08-17, the 172-system registry yields Weibull MLE shape D_meta = 1.535 (KS p = 0.041). The estimator range is [1.703, 1.539]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 1.250, ΔAIC_Lognormal = 23.360). The family-level bootstrap 95% CI is [1.057, 1.718] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
+          As of 2026-08-17, the 172-system registry yields Weibull MLE shape D_meta = 1.535 (KS p = 0.041). The estimator range is [1.703, 1.539]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 1.250, ΔAIC_Lognormal = 23.350). The family-level bootstrap 95% CI is [1.057, 1.718] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
         </blockquote>
 
         <h3>What survives</h3>
@@ -555,7 +555,7 @@
         <h3>What does not survive (suspended claims)</h3>
         <ul>
           <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.535 cannot be treated as a kernel invariant or universal exponent. The estimator range is [1.703, 1.539], and movement under data cleaning shows sensitivity to population and method.</li>
-          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +1.25) and Lognormal (ΔAIC = +23.36) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
+          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +1.25) and Lognormal (ΔAIC = +23.35) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
           <li><strong>Incremental stability.</strong> The "first prospective test passed" claim was based on contaminated data. The clean prospective test starts now.</li>
         </ul>
 

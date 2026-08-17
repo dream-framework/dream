@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-17T13:22:17.222225+00:00",
+  "initialized": "2026-08-17T17:01:06.984875+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2929,11 +2929,11 @@
       "family": "fred",
       "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",
       "registry_date": "2026-08-04",
-      "D": 0.5627,
-      "r2": 0.9957,
+      "D": 0.5626,
+      "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5627, R²=0.9957. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=385.09). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5626, R²=0.9956. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=385.15). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
