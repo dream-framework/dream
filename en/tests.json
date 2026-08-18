@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-17T20:58:20Z",
-  "total_tests": 181,
+  "exported_at": "2026-08-18T02:05:18Z",
+  "total_tests": 182,
   "fields": [
     "id",
     "name",
@@ -2776,6 +2776,22 @@
       "source": "auto-scan 2026-08-17",
       "date": "2026-08-17",
       "url": "10.5281/zenodo.21871545"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ensemble sufficiency for stochastic wildfire autom",
+      "domain": "scouting",
+      "D": 1.2139,
+      "r2": 0.9994,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 16.03,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=16.03).",
+      "narrative": "D_eff=1.2139, R²=0.9994. D_eff=1.214 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=16.03). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-18",
+      "date": "2026-08-18",
+      "url": "10.5281/zenodo.21986483"
     }
   ]
 }
