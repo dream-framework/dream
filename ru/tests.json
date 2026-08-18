@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-18T13:20:07Z",
-  "total_tests": 183,
+  "exported_at": "2026-08-18T17:02:09Z",
+  "total_tests": 185,
   "fields": [
     "id",
     "name",
@@ -2808,6 +2808,38 @@
       "source": "auto-scan 2026-08-18",
       "date": "2026-08-18",
       "url": "https://api.coingecko.com/api/v3/coins/chainlink/market_chart?vs_currency=usd&days=365&interval=daily"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A synthetic electronic health record dataset for t",
+      "domain": "scouting",
+      "D": 1.0037,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2343.09,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2343.09).",
+      "narrative": "D_eff=1.0037, R²=1.0000. D_eff=1.004 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2343.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-18",
+      "date": "2026-08-18",
+      "url": "10.5281/zenodo.21996636"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A synthetic electronic health record dataset for t",
+      "domain": "scouting",
+      "D": 1.0005,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 920.18,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=920.18).",
+      "narrative": "D_eff=1.0005, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=920.18). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-18",
+      "date": "2026-08-18",
+      "url": "10.5281/zenodo.21996636"
     }
   ]
 }

@@ -246,7 +246,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "18 Aug 2026 09:20 EST";
+const LAST_REFRESH = "18 Aug 2026 13:02 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -452,6 +452,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Filtered MIG-seq SNP genotype dataset for Sonnerat",domain:"scouting",D:1.4093,r2:0.9989,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:108.1700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=108.17).",narrative:"D_eff=1.4093, R²=0.9989. D_eff=1.409 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=108.17). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-17",date:"2026-08-17",url:"10.5281/zenodo.21871545",image:null}
   ,{id:"",name:"Zenodo: Ensemble sufficiency for stochastic wildfire autom",domain:"scouting",D:1.2139,r2:0.9994,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:16.0300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=16.03).",narrative:"D_eff=1.2139, R²=0.9994. D_eff=1.214 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=16.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"10.5281/zenodo.21986483",image:null}
   ,{id:"",name:"CoinGecko: chainlink (ACF retention)",domain:"crypto",D:1.4194,r2:0.9987,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:77.6000,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=77.6).",narrative:"D_eff=1.4194, R²=0.9987. D_eff=1.419 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=77.60). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"https://api.coingecko.com/api/v3/coins/chainlink/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
+  ,{id:"",name:"Zenodo: A synthetic electronic health record dataset for t",domain:"scouting",D:1.0037,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2343.0900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2343.09).",narrative:"D_eff=1.0037, R²=1.0000. D_eff=1.004 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2343.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"10.5281/zenodo.21996636",image:null}
+  ,{id:"",name:"Zenodo: A synthetic electronic health record dataset for t",domain:"scouting",D:1.0005,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:920.1800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=920.18).",narrative:"D_eff=1.0005, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=920.18). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"10.5281/zenodo.21996636",image:null}
 
 ];
 
@@ -737,33 +739,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 174,
-  "d_mle": 1.5455,
-  "lam_mle": 1.3211,
-  "ks_p": 0.0343,
+  "n": 176,
+  "d_mle": 1.5528,
+  "lam_mle": 1.3194,
+  "ks_p": 0.0246,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1071,
-  "ks_boot_mean": 0.0471,
-  "ks_boot_95": 0.0668,
-  "d_direct": 1.7315,
-  "r2_direct": 0.9805,
-  "d_linear": 1.5465,
-  "r2_linear": 0.9766,
+  "ks_stat_obs": 0.1108,
+  "ks_boot_mean": 0.047,
+  "ks_boot_95": 0.0667,
+  "d_direct": 1.7569,
+  "r2_direct": 0.981,
+  "d_linear": 1.556,
+  "r2_linear": 0.9768,
   "natural": 67,
-  "extraction": 107,
-  "mean": 1.1879,
-  "median": 1.1618,
-  "total": 183,
-  "compared": 181,
+  "extraction": 109,
+  "mean": 1.1858,
+  "median": 1.1478,
+  "total": 185,
+  "compared": 183,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.8796,
+  "ad_stat": 1.8967,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.43,
-  "delta_aic_lognormal": 24.31,
-  "silverman_p": 0.655,
+  "delta_aic_gamma": 1.36,
+  "delta_aic_lognormal": 24.57,
+  "silverman_p": 0.65,
   "boot_lo": 1.06,
-  "boot_hi": 1.733,
+  "boot_hi": 1.739,
   "date": "2026-08-18"
 };
 

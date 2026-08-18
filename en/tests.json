@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-18T13:20:07Z",
-  "total_tests": 183,
+  "exported_at": "2026-08-18T17:02:09Z",
+  "total_tests": 185,
   "fields": [
     "id",
     "name",
@@ -1251,7 +1251,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 385.15,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=385.15). S2+dust fit: D1=1.0797, D2=0.7169, R²=0.9994, AICc=-2173.93. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=385.15). S2+dust fit: D1=1.0781, D2=0.7174, R²=0.9994, AICc=-2173.73. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.5626, R²=0.9956. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=385.15). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -2808,6 +2808,38 @@
       "source": "auto-scan 2026-08-18",
       "date": "2026-08-18",
       "url": "https://api.coingecko.com/api/v3/coins/chainlink/market_chart?vs_currency=usd&days=365&interval=daily"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A synthetic electronic health record dataset for t",
+      "domain": "scouting",
+      "D": 1.0037,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2343.09,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2343.09).",
+      "narrative": "D_eff=1.0037, R²=1.0000. D_eff=1.004 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=2343.09). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-18",
+      "date": "2026-08-18",
+      "url": "10.5281/zenodo.21996636"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A synthetic electronic health record dataset for t",
+      "domain": "scouting",
+      "D": 1.0005,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 920.18,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=920.18).",
+      "narrative": "D_eff=1.0005, R²=1.0000. D_eff=1.000 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=920.18). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-18",
+      "date": "2026-08-18",
+      "url": "10.5281/zenodo.21996636"
     }
   ]
 }
