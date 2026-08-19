@@ -246,7 +246,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "19 Aug 2026 01:02 EST";
+const LAST_REFRESH = "19 Aug 2026 05:03 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -454,6 +454,8 @@ const TESTS = [
   ,{id:"",name:"CoinGecko: chainlink (ACF retention)",domain:"crypto",D:1.4194,r2:0.9987,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:77.6000,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=77.6).",narrative:"D_eff=1.4194, R²=0.9987. D_eff=1.419 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=77.60). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"https://api.coingecko.com/api/v3/coins/chainlink/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"Zenodo: A synthetic electronic health record dataset for t",domain:"scouting",D:1.0037,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2343.0900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2343.09).",narrative:"D_eff=1.0037, R²=1.0000. D_eff=1.004 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2343.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"10.5281/zenodo.21996636",image:null}
   ,{id:"",name:"Zenodo: A synthetic electronic health record dataset for t",domain:"scouting",D:1.0005,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:920.1800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=920.18).",narrative:"D_eff=1.0005, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=920.18). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-18",date:"2026-08-18",url:"10.5281/zenodo.21996636",image:null}
+  ,{id:"",name:"Zenodo: Data from \"Assisted gene flow yields Acropora palm",domain:"scouting",D:2.0689,r2:0.7090,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=7.0).",narrative:"D_eff=2.0689, R²=0.7090. D_eff=2.069 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=7.00). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-19",date:"2026-08-19",url:"10.5281/zenodo.15011239",image:null}
+  ,{id:"",name:"Zenodo: Data from \"Assisted gene flow yields Acropora palm",domain:"scouting",D:1.3898,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:603.9800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=603.98).",narrative:"D_eff=1.3898, R²=0.9985. D_eff=1.390 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=603.98). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-19",date:"2026-08-19",url:"10.5281/zenodo.15011239",image:null}
 
 ];
 
@@ -739,33 +741,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 176,
-  "d_mle": 1.5528,
-  "lam_mle": 1.3194,
-  "ks_p": 0.0246,
+  "n": 178,
+  "d_mle": 1.562,
+  "lam_mle": 1.3268,
+  "ks_p": 0.0236,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1108,
-  "ks_boot_mean": 0.047,
-  "ks_boot_95": 0.0667,
-  "d_direct": 1.7569,
-  "r2_direct": 0.981,
-  "d_linear": 1.556,
+  "ks_stat_obs": 0.1107,
+  "ks_boot_mean": 0.0466,
+  "ks_boot_95": 0.0666,
+  "d_direct": 1.7697,
+  "r2_direct": 0.9809,
+  "d_linear": 1.5596,
   "r2_linear": 0.9768,
   "natural": 67,
-  "extraction": 109,
-  "mean": 1.1858,
-  "median": 1.1478,
-  "total": 185,
-  "compared": 183,
+  "extraction": 111,
+  "mean": 1.1919,
+  "median": 1.1618,
+  "total": 187,
+  "compared": 185,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 1.8967,
+  "ad_stat": 1.9284,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 1.36,
-  "delta_aic_lognormal": 24.57,
+  "delta_aic_gamma": 1.7,
+  "delta_aic_lognormal": 25.81,
   "silverman_p": 0.65,
   "boot_lo": 1.06,
-  "boot_hi": 1.739,
+  "boot_hi": 1.746,
   "date": "2026-08-19"
 };
 

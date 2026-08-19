@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-19T05:02:10Z",
-  "total_tests": 185,
+  "exported_at": "2026-08-19T09:03:22Z",
+  "total_tests": 187,
   "fields": [
     "id",
     "name",
@@ -2840,6 +2840,38 @@
       "source": "auto-scan 2026-08-18",
       "date": "2026-08-18",
       "url": "10.5281/zenodo.21996636"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data from \"Assisted gene flow yields Acropora palm",
+      "domain": "scouting",
+      "D": 2.0689,
+      "r2": 0.709,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 7.0,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=7.0).",
+      "narrative": "D_eff=2.0689, R²=0.7090. D_eff=2.069 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=7.00). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-19",
+      "date": "2026-08-19",
+      "url": "10.5281/zenodo.15011239"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data from \"Assisted gene flow yields Acropora palm",
+      "domain": "scouting",
+      "D": 1.3898,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 603.98,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=603.98).",
+      "narrative": "D_eff=1.3898, R²=0.9985. D_eff=1.390 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=603.98). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-19",
+      "date": "2026-08-19",
+      "url": "10.5281/zenodo.15011239"
     }
   ]
 }
