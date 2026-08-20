@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-20T17:05:03Z",
+  "exported_at": "2026-08-20T20:58:30Z",
   "total_tests": 195,
   "fields": [
     "id",
@@ -1395,7 +1395,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.75,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3317, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3426, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.1242, R²=0.3034. D_eff=0.124 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=17.75). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
