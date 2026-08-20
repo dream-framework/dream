@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-20T05:02:53.817875+00:00",
+  "initialized": "2026-08-20T09:10:39.003073+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3813,11 +3813,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=2.9027, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=2.9028, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -6504,6 +6504,74 @@
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=3.1013, R²=0.8742. D_eff=3.101 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.54). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Dataset For: Gaussian Hidden Markov Model for Dete",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22024246",
+      "registry_date": "2026-08-20",
+      "D": 1.593,
+      "r2": 0.9981,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.5930, R²=0.9981. D_eff=1.593 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=976.80). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Dataset For: Gaussian Hidden Markov Model for Dete",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22024246",
+      "registry_date": "2026-08-20",
+      "D": 1.3047,
+      "r2": 0.996,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3047, R²=0.9960. D_eff=1.305 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=996.26). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
