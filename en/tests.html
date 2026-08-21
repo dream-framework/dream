@@ -256,7 +256,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "21 Aug 2026 01:08 EST";
+const LAST_REFRESH = "21 Aug 2026 05:12 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -475,6 +475,10 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Dataset For: Gaussian Hidden Markov Model for Dete",domain:"scouting",D:1.3047,r2:0.9960,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:996.2600,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=996.26).",narrative:"D_eff=1.3047, R²=0.9960. D_eff=1.305 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=996.26). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-20",date:"2026-08-20",url:"10.5281/zenodo.22024246",image:null}
   ,{id:"",name:"Zenodo: Tetracycline residues in broiler chicken gizzards ",domain:"scouting",D:6.7247,r2:0.7981,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=7.0).",narrative:"D_eff=6.7247, R²=0.7981. D_eff=6.725 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=7.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-20",date:"2026-08-20",url:"10.5281/zenodo.22031964",image:null}
   ,{id:"",name:"Zenodo: Tetracycline residues in broiler chicken gizzards ",domain:"scouting",D:1.1946,r2:0.8733,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2.0100,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.01).",narrative:"D_eff=1.1946, R²=0.8733. D_eff=1.195 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.01). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-20",date:"2026-08-20",url:"10.5281/zenodo.22031964",image:null}
+  ,{id:"",name:"Zenodo: Motor cortex rTMS modulates adult ocular dominance",domain:"scouting",D:1.9686,r2:0.1804,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.1000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.1).",narrative:"D_eff=1.9686, R²=0.1804. D_eff=1.969 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.10). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-21",date:"2026-08-21",url:"10.5281/zenodo.22042699",image:null}
+  ,{id:"",name:"Zenodo: Motor cortex rTMS modulates adult ocular dominance",domain:"scouting",D:1.9859,r2:0.1552,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:9.3600,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=9.36).",narrative:"D_eff=1.9859, R²=0.1552. D_eff=1.986 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, LOGNORM absorbs overlapping processes (ΔAICc=9.36). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-21",date:"2026-08-21",url:"10.5281/zenodo.22042699",image:null}
+  ,{id:"",name:"Zenodo: Motor cortex rTMS modulates adult ocular dominance",domain:"scouting",D:1.3595,r2:0.9978,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:8.7500,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=8.75).",narrative:"D_eff=1.3595, R²=0.9978. D_eff=1.359 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=8.75). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-21",date:"2026-08-21",url:"10.5281/zenodo.22042699",image:null}
+  ,{id:"",name:"Zenodo: Motor cortex rTMS modulates adult ocular dominance",domain:"scouting",D:6.2245,r2:0.8130,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D_eff=6.2245, R²=0.8130. D_eff=6.224 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=20.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-21",date:"2026-08-21",url:"10.5281/zenodo.22042699",image:null}
 
 ];
 
@@ -772,33 +776,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 185,
-  "d_mle": 1.5848,
-  "lam_mle": 1.3457,
-  "ks_p": 0.0157,
+  "n": 188,
+  "d_mle": 1.5985,
+  "lam_mle": 1.3564,
+  "ks_p": 0.0153,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1134,
-  "ks_boot_mean": 0.0458,
-  "ks_boot_95": 0.0655,
-  "d_direct": 1.8484,
-  "r2_direct": 0.9786,
-  "d_linear": 1.5745,
-  "r2_linear": 0.9753,
+  "ks_stat_obs": 0.1129,
+  "ks_boot_mean": 0.0454,
+  "ks_boot_95": 0.0645,
+  "d_direct": 1.8659,
+  "r2_direct": 0.9788,
+  "d_linear": 1.5796,
+  "r2_linear": 0.9754,
   "natural": 67,
-  "extraction": 118,
-  "mean": 1.2075,
-  "median": 1.1946,
-  "total": 195,
-  "compared": 193,
+  "extraction": 121,
+  "mean": 1.2165,
+  "median": 1.2058,
+  "total": 199,
+  "compared": 197,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.2675,
+  "ad_stat": 2.2949,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.21,
-  "delta_aic_lognormal": 28.52,
-  "silverman_p": 0.68,
+  "delta_aic_gamma": 2.79,
+  "delta_aic_lognormal": 30.48,
+  "silverman_p": 0.665,
   "boot_lo": 1.06,
-  "boot_hi": 1.773,
+  "boot_hi": 1.788,
   "date": "2026-08-21"
 };
 

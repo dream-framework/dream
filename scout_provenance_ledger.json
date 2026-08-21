@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-21T05:08:57.676197+00:00",
+  "initialized": "2026-08-21T09:13:41.575936+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -6643,6 +6643,142 @@
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22042699",
+      "registry_date": "2026-08-21",
+      "D": 1.9686,
+      "r2": 0.1804,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.9686, R²=0.1804. D_eff=1.969 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.10). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22042699",
+      "registry_date": "2026-08-21",
+      "D": 1.9859,
+      "r2": 0.1552,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.9859, R²=0.1552. D_eff=1.986 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, LOGNORM absorbs overlapping processes (ΔAICc=9.36). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22042699",
+      "registry_date": "2026-08-21",
+      "D": 1.3595,
+      "r2": 0.9978,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3595, R²=0.9978. D_eff=1.359 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=8.75). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22042699",
+      "registry_date": "2026-08-21",
+      "D": 6.2245,
+      "r2": 0.813,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=6.2245, R²=0.8130. D_eff=6.224 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=20.00). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "censored",
+      "exclusion_reason": "optimizer boundary",
       "data_hash": null,
       "retrieval_timestamp": null,
       "n_observations": null,

@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-21T05:08:05Z",
-  "total_tests": 195,
+  "exported_at": "2026-08-21T09:12:47Z",
+  "total_tests": 199,
   "fields": [
     "id",
     "name",
@@ -3000,6 +3000,70 @@
       "source": "auto-scan 2026-08-20",
       "date": "2026-08-20",
       "url": "10.5281/zenodo.22031964"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "domain": "scouting",
+      "D": 1.9686,
+      "r2": 0.1804,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.1,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.1).",
+      "narrative": "D_eff=1.9686, R²=0.1804. D_eff=1.969 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.10). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-21",
+      "date": "2026-08-21",
+      "url": "10.5281/zenodo.22042699"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "domain": "scouting",
+      "D": 1.9859,
+      "r2": 0.1552,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 9.36,
+      "best_alt": "LOGNORM",
+      "model_note": "S2 loses to LOGNORM (ΔAICc=9.36).",
+      "narrative": "D_eff=1.9859, R²=0.1552. D_eff=1.986 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, LOGNORM поглощает перекрывающиеся процессы (ΔAICc=9.36). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-21",
+      "date": "2026-08-21",
+      "url": "10.5281/zenodo.22042699"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "domain": "scouting",
+      "D": 1.3595,
+      "r2": 0.9978,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 8.75,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=8.75).",
+      "narrative": "D_eff=1.3595, R²=0.9978. D_eff=1.359 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=8.75). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-21",
+      "date": "2026-08-21",
+      "url": "10.5281/zenodo.22042699"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Motor cortex rTMS modulates adult ocular dominance",
+      "domain": "scouting",
+      "D": 6.2245,
+      "r2": 0.813,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 20.0,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=20.0).",
+      "narrative": "D_eff=6.2245, R²=0.8130. D_eff=6.224 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=20.00). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-21",
+      "date": "2026-08-21",
+      "url": "10.5281/zenodo.22042699"
     }
   ]
 }
