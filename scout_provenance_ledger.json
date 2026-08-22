@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-21T20:50:30.266492+00:00",
+  "initialized": "2026-08-22T02:04:39.120638+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3813,11 +3813,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=2.9027, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=2.9028, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -6779,6 +6779,108 @@
       "prospective": true,
       "eligibility": "censored",
       "exclusion_reason": "optimizer boundary",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: From turbulence to cosmic structure: a unified the",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22051255",
+      "registry_date": "2026-08-22",
+      "D": 1.3716,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3716, R²=0.9985. D_eff=1.372 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=323.08). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: From turbulence to cosmic structure: a unified the",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22051255",
+      "registry_date": "2026-08-22",
+      "D": 1.3724,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3724, R²=0.9985. D_eff=1.372 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=347.49). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: From turbulence to cosmic structure: a unified the",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22051255",
+      "registry_date": "2026-08-22",
+      "D": 1.3774,
+      "r2": 0.9984,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3774, R²=0.9984. D_eff=1.377 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=359.95). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
       "data_hash": null,
       "retrieval_timestamp": null,
       "n_observations": null,
