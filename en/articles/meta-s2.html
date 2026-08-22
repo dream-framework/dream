@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Meta-S2: Recursive Retention · DREAM</title>
-  <meta name="description" content="DREAM Meta-S2: empirical analysis showing the S2 retention exponent is itself Weibull-distributed across 191 uncensored system-level estimates — a recursive, speculative statistical hypothesis." />
+  <meta name="description" content="DREAM Meta-S2: empirical analysis showing the S2 retention exponent is itself Weibull-distributed across 192 uncensored system-level estimates — a recursive, speculative statistical hypothesis." />
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <script>
@@ -177,13 +177,13 @@
       <div class="card">
         <h2>Empirical Observation</h2>
 
-        <p>Across the current dataset of <strong>191 system-level estimates</strong> — spanning cognitive decay, financial markets, cosmological structure, quantum decoherence, environmental time series, and others — each system was fitted individually to the S2 retention law:
+        <p>Across the current dataset of <strong>192 system-level estimates</strong> — spanning cognitive decay, financial markets, cosmological structure, quantum decoherence, environmental time series, and others — each system was fitted individually to the S2 retention law:
 
         <div class="eq">
         $$R(\lambda) = \exp\!\left[-\left(\frac{\lambda}{\lambda_q}\right)^{D_{\mathrm{eff}}}\right]$$
         </div>
 
-        <p>This produced 191 system-level estimates of D_eff. These estimates are <strong>not all statistically independent</strong> because some belong to related datasets and domain families (e.g., five cryptocurrency series share a common market regime; fifteen weather series share a common data provider). The <em>distribution</em> of those D_eff values was then analyzed.</p>
+        <p>This produced 192 system-level estimates of D_eff. These estimates are <strong>not all statistically independent</strong> because some belong to related datasets and domain families (e.g., five cryptocurrency series share a common market regime; fifteen weather series share a common data provider). The <em>distribution</em> of those D_eff values was then analyzed.</p>
 
         <h3>Basic statistics</h3>
         <table class="data-table">
@@ -191,14 +191,14 @@
             <tr><th>Statistic</th><th class="num">Value</th></tr>
           </thead>
           <tbody>
-            <tr><td>Systems measured (n)</td><td class="num">191</td></tr>
-            <tr><td>Mean D_eff</td><td class="num">1.219</td></tr>
-            <tr><td>Median D_eff</td><td class="num">1.214</td></tr>
-            <tr><td>Geometric mean</td><td class="num">0.953</td></tr>
-            <tr><td>Std dev</td><td class="num">0.778</td></tr>
+            <tr><td>Systems measured (n)</td><td class="num">192</td></tr>
+            <tr><td>Mean D_eff</td><td class="num">1.222</td></tr>
+            <tr><td>Median D_eff</td><td class="num">1.221</td></tr>
+            <tr><td>Geometric mean</td><td class="num">0.956</td></tr>
+            <tr><td>Std dev</td><td class="num">0.777</td></tr>
             <tr><td>Range</td><td class="num">[0.074, 4.413]</td></tr>
-            <tr><td>D &lt; 1 (natural)</td><td class="num">67 (35.100%)</td></tr>
-            <tr><td>D &gt; 1 (extraction)</td><td class="num">124 (64.900%)</td></tr>
+            <tr><td>D &lt; 1 (natural)</td><td class="num">67 (34.900%)</td></tr>
+            <tr><td>D &gt; 1 (extraction)</td><td class="num">125 (65.100%)</td></tr>
           </tbody>
         </table>
 
@@ -217,9 +217,9 @@
             <tr><th>Method</th><th class="num">D_meta</th><th class="num">λ_q</th><th class="num">R² / p</th></tr>
           </thead>
           <tbody>
-            <tr><td>Direct-d least squares</td><td class="num">1.912</td><td class="num">1.377</td><td class="num">R²=0.977</td></tr>
-            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.589</td><td class="num">1.380</td><td class="num">R²=0.974</td></tr>
-            <tr><td>Weibull MLE (all 191)</td><td class="num">1.614</td><td class="num">1.360</td><td class="num">KS p=0.012</td></tr>
+            <tr><td>Direct-d least squares</td><td class="num">1.921</td><td class="num">1.382</td><td class="num">R²=0.977</td></tr>
+            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.591</td><td class="num">1.384</td><td class="num">R²=0.974</td></tr>
+            <tr><td>Weibull MLE (all 192)</td><td class="num">1.619</td><td class="num">1.363</td><td class="num">KS p=0.012</td></tr>
           </tbody>
         </table>
 
@@ -228,46 +228,46 @@
         <table class="data-table" style="margin-bottom:1rem">
           <thead><tr><th>Test</th><th class="num">KS stat</th><th class="num">p-value</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td><strong>Lilliefors-corrected KS</strong> (canonical)</td><td class="num">0.115</td><td class="num">0.000</td><td>Parametric bootstrap, B=5000, refits params inside each sample. <strong>This is the correct test.</strong></td></tr>
-            <tr><td>Standard KS (scipy asymptotic)</td><td class="num">0.115</td><td class="num">0.012</td><td>Wrong reference distribution — p-values inflated, almost never rejects. Shown only for comparison.</td></tr>
+            <tr><td><strong>Lilliefors-corrected KS</strong> (canonical)</td><td class="num">0.114</td><td class="num">0.000</td><td>Parametric bootstrap, B=5000, refits params inside each sample. <strong>This is the correct test.</strong></td></tr>
+            <tr><td>Standard KS (scipy asymptotic)</td><td class="num">0.114</td><td class="num">0.012</td><td>Wrong reference distribution — p-values inflated, almost never rejects. Shown only for comparison.</td></tr>
             <tr><td>Bootstrap mean KS (Lilliefors null)</td><td class="num">0.045</td><td class="num">—</td><td>Expected KS if data truly Weibull (with estimated params)</td></tr>
-            <tr><td>Bootstrap 95th percentile</td><td class="num">0.065</td><td class="num">—</td><td>Reject at 5% if observed KS exceeds this</td></tr>
+            <tr><td>Bootstrap 95th percentile</td><td class="num">0.064</td><td class="num">—</td><td>Reject at 5% if observed KS exceeds this</td></tr>
           </tbody>
         </table>
 
-        <p>All three shape estimators agree: D_meta ≈ 1.614 (MLE), 1.912 (direct), 1.589 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 3.150, vs Lognormal = 32.070, vs Exponential = 0.000. No alternative distribution fits better.</p>
+        <p>All three shape estimators agree: D_meta ≈ 1.619 (MLE), 1.921 (direct), 1.591 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 3.380, vs Lognormal = 32.790, vs Exponential = 0.000. No alternative distribution fits better.</p>
 
         <p><strong>Lilliefors KS test</strong> gives p = 0.000. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
         <blockquote class="callout warn">
-          <strong>Prospective update — 2026-08-22 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.614. The estimator range is [1.912, 1.589]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.614 as genuinely new, independent systems are added?
+          <strong>Prospective update — 2026-08-22 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.619. The estimator range is [1.921, 1.591]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.619 as genuinely new, independent systems are added?
         </blockquote>
 
-        <h4>Additional fit statistics (n = 191)</h4>
+        <h4>Additional fit statistics (n = 192)</h4>
         <table class="data-table">
           <thead>
             <tr><th>Statistic</th><th class="num">Value</th><th class="right">Interpretation</th></tr>
           </thead>
           <tbody>
             <tr><td>KS test p-value</td><td class="num">0.012</td><td class="right">Cannot reject Weibull</td></tr>
-            <tr><td>Anderson-Darling statistic</td><td class="num">2.551</td><td class="right">Marginal (5% crit ≈ 0.757)</td></tr>
-            <tr><td>Weibull AIC</td><td class="num">404.010</td><td class="right">Best fit (ΔAIC = 0.0)</td></tr>
-            <tr><td>Lognormal AIC</td><td class="num">436.080</td><td class="right">Rejected (ΔAIC = +32.1)</td></tr>
-            <tr><td>Gamma AIC</td><td class="num">407.170</td><td class="right">Rejected (ΔAIC = +3.1)</td></tr>
-            <tr><td>Exponential AIC</td><td class="num">459.650</td><td class="right">Rejected (ΔAIC = +55.630)</td></tr>
+            <tr><td>Anderson-Darling statistic</td><td class="num">2.569</td><td class="right">Marginal (5% crit ≈ 0.757)</td></tr>
+            <tr><td>Weibull AIC</td><td class="num">406.380</td><td class="right">Best fit (ΔAIC = 0.0)</td></tr>
+            <tr><td>Lognormal AIC</td><td class="num">439.170</td><td class="right">Rejected (ΔAIC = +32.8)</td></tr>
+            <tr><td>Gamma AIC</td><td class="num">409.750</td><td class="right">Rejected (ΔAIC = +3.4)</td></tr>
+            <tr><td>Exponential AIC</td><td class="num">462.920</td><td class="right">Rejected (ΔAIC = +56.550)</td></tr>
           </tbody>
         </table>
 
-        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.0121), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (2.5512) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +3.15), which is weakly inferior. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
+        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.0121), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (2.5688) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +3.38), which is weakly inferior. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
 
         <h4>Weibull linearization</h4>
-        <p>The linearized plot ln[−ln(Ŝ(d))] vs ln(d) should be linear if the Weibull model is correct. The linear fit gives R² = 0.974, but a quadratic fit improves to R² = 0.974 (ΔR² = 0.000), with a quadratic coefficient of -0.018 — indicating <strong>slight concave curvature</strong>. This means the Weibull model is a good first approximation but not exact; the tails deviate systematically from the linear prediction.</p>
+        <p>The linearized plot ln[−ln(Ŝ(d))] vs ln(d) should be linear if the Weibull model is correct. The linear fit gives R² = 0.974, but a quadratic fit improves to R² = 0.974 (ΔR² = 0.000), with a quadratic coefficient of -0.016 — indicating <strong>slight concave curvature</strong>. This means the Weibull model is a good first approximation but not exact; the tails deviate systematically from the linear prediction.</p>
 
-        <p>For comparison, a power-law fit to the same distribution gave P(D ≥ d) ~ d<sup>−0.986</sup> with R² = 0.755 — a weaker fit than S2.</p>
+        <p>For comparison, a power-law fit to the same distribution gave P(D ≥ d) ~ d<sup>−0.985</sup> with R² = 0.755 — a weaker fit than S2.</p>
 
         <h3>Finding 2: Bimodality analysis</h3>
 
-        <p><strong>Censoring:</strong> 5 values hit the optimizer boundary at D = 5.0. These are treated as right-censored and excluded from the bimodality analysis, leaving n = 191 uncensored observations.</p>
+        <p><strong>Censoring:</strong> 5 values hit the optimizer boundary at D = 5.0. These are treated as right-censored and excluded from the bimodality analysis, leaving n = 192 uncensored observations.</p>
 
         <table class="data-table">
           <thead>
@@ -276,17 +276,17 @@
           <tbody>
             <tr>
               <td>GMM ΔBIC = BIC₂ − BIC₁ (uncensored)</td>
-              <td class="num">-32.690</td>
+              <td class="num">-32.280</td>
               <td class="right">2-comp preferred</td>
             </tr>
             <tr>
               <td>GMM component means (uncensored)</td>
-              <td class="num">1.083, 3.349</td>
+              <td class="num">1.087, 3.353</td>
               <td class="right">Two clusters</td>
             </tr>
             <tr>
               <td>Silverman's bandwidth test (bootstrap, 200 reps)</td>
-              <td class="num">p = 0.675</td>
+              <td class="num">p = 0.680</td>
               <td class="right">Cannot reject unimodality</td>
             </tr>
             <tr>
@@ -297,60 +297,60 @@
           </tbody>
         </table>
 
-        <p><strong>The bimodality evidence is mixed.</strong> The GMM prefers 2 components (ΔBIC = -32.690, where ΔBIC = BIC₂ − BIC₁; negative means 2-component is preferred). The uncensored cluster means are D ≈ 1.083 (94.000%) and D ≈ 3.349 (6.000%).</p>
+        <p><strong>The bimodality evidence is mixed.</strong> The GMM prefers 2 components (ΔBIC = -32.280, where ΔBIC = BIC₂ − BIC₁; negative means 2-component is preferred). The uncensored cluster means are D ≈ 1.087 (94.100%) and D ≈ 3.353 (5.900%).</p>
 
-        <p>However, <strong>Silverman's bootstrap test cannot reject unimodality</strong> (p = 0.675). This means the apparent bimodality may be a small-sample artifact — with 191 points, the second mode is not statistically robust. The GMM result should be treated as suggestive, not confirmed.</p>
+        <p>However, <strong>Silverman's bootstrap test cannot reject unimodality</strong> (p = 0.680). This means the apparent bimodality may be a small-sample artifact — with 192 points, the second mode is not statistically robust. The GMM result should be treated as suggestive, not confirmed.</p>
 
-        <p>The uncensored Weibull MLE gives shape = 1.614, scale = 1.360, KS p = 0.012 — a good fit to a single unimodal Weibull distribution.</p>
+        <p>The uncensored Weibull MLE gives shape = 1.619, scale = 1.363, KS p = 0.012 — a good fit to a single unimodal Weibull distribution.</p>
 
         <h3>Finding 3: Leave-one-family-out robustness</h3>
 
-        <p>Because many systems are dependent (5 cryptocurrencies share a market regime, 15 weather series share a provider), the effective sample size is smaller than n = 191. To test whether any single family drives the result, each family was excluded and the meta-fit was recomputed:</p>
+        <p>Because many systems are dependent (5 cryptocurrencies share a market regime, 15 weather series share a provider), the effective sample size is smaller than n = 192. To test whether any single family drives the result, each family was excluded and the meta-fit was recomputed:</p>
 
                 <table class="data-table compact">
           <thead>
             <tr><th>Excluded family</th><th class="num">n</th><th class="num">D_meta</th><th class="num">KS p</th><th class="num">ΔD</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>None (full)</strong></td><td class="num">191</td><td class="num">1.614</td><td class="num">0.012</td><td class="num">—</td></tr>
-            <tr><td>binance</td><td class="num">186</td><td class="num">1.588</td><td class="num">0.017</td><td class="num">-0.025</td></tr>
-            <tr><td>coingecko</td><td class="num">183</td><td class="num">1.573</td><td class="num">0.019</td><td class="num">-0.041</td></tr>
-            <tr><td>covid</td><td class="num">187</td><td class="num">1.604</td><td class="num">0.011</td><td class="num">-0.009</td></tr>
-            <tr><td>crypto</td><td class="num">186</td><td class="num">1.588</td><td class="num">0.017</td><td class="num">-0.025</td></tr>
-            <tr><td>earthquakes</td><td class="num">190</td><td class="num">1.614</td><td class="num">0.010</td><td class="num">+0.000</td></tr>
-            <tr><td>energy-charts</td><td class="num">183</td><td class="num">1.708</td><td class="num">0.017</td><td class="num">+0.095</td></tr>
-            <tr><td>fred</td><td class="num">181</td><td class="num">1.588</td><td class="num">0.015</td><td class="num">-0.026</td></tr>
-            <tr><td>nasa</td><td class="num">190</td><td class="num">1.634</td><td class="num">0.015</td><td class="num">+0.021</td></tr>
-            <tr><td>nasa power</td><td class="num">190</td><td class="num">1.634</td><td class="num">0.015</td><td class="num">+0.021</td></tr>
-            <tr><td>ndbc</td><td class="num">188</td><td class="num">1.612</td><td class="num">0.009</td><td class="num">-0.002</td></tr>
-            <tr><td>noaa tide</td><td class="num">188</td><td class="num">1.663</td><td class="num">0.009</td><td class="num">+0.049</td></tr>
-            <tr><td>open-meteo</td><td class="num">171</td><td class="num">1.671</td><td class="num">0.009</td><td class="num">+0.057</td></tr>
-            <tr><td>swpc</td><td class="num">188</td><td class="num">1.613</td><td class="num">0.015</td><td class="num">-0.000</td></tr>
-            <tr><td>usgs</td><td class="num">188</td><td class="num">1.615</td><td class="num">0.008</td><td class="num">+0.002</td></tr>
-            <tr><td>weather</td><td class="num">186</td><td class="num">1.609</td><td class="num">0.011</td><td class="num">-0.005</td></tr>
-            <tr><td>wikipedia</td><td class="num">184</td><td class="num">1.651</td><td class="num">0.010</td><td class="num">+0.037</td></tr>
-            <tr><td>world bank</td><td class="num">186</td><td class="num">1.589</td><td class="num">0.014</td><td class="num">-0.025</td></tr>
-            <tr><td>zenodo</td><td class="num">92</td><td class="num">1.448</td><td class="num">0.321</td><td class="num">-0.166</td></tr>
+            <tr><td><strong>None (full)</strong></td><td class="num">192</td><td class="num">1.619</td><td class="num">0.012</td><td class="num">—</td></tr>
+            <tr><td>binance</td><td class="num">187</td><td class="num">1.593</td><td class="num">0.017</td><td class="num">-0.025</td></tr>
+            <tr><td>coingecko</td><td class="num">184</td><td class="num">1.578</td><td class="num">0.019</td><td class="num">-0.041</td></tr>
+            <tr><td>covid</td><td class="num">188</td><td class="num">1.610</td><td class="num">0.011</td><td class="num">-0.009</td></tr>
+            <tr><td>crypto</td><td class="num">187</td><td class="num">1.593</td><td class="num">0.016</td><td class="num">-0.025</td></tr>
+            <tr><td>earthquakes</td><td class="num">191</td><td class="num">1.619</td><td class="num">0.010</td><td class="num">+0.000</td></tr>
+            <tr><td>energy-charts</td><td class="num">184</td><td class="num">1.714</td><td class="num">0.017</td><td class="num">+0.095</td></tr>
+            <tr><td>fred</td><td class="num">182</td><td class="num">1.593</td><td class="num">0.015</td><td class="num">-0.026</td></tr>
+            <tr><td>nasa</td><td class="num">191</td><td class="num">1.639</td><td class="num">0.015</td><td class="num">+0.021</td></tr>
+            <tr><td>nasa power</td><td class="num">191</td><td class="num">1.639</td><td class="num">0.015</td><td class="num">+0.021</td></tr>
+            <tr><td>ndbc</td><td class="num">189</td><td class="num">1.617</td><td class="num">0.009</td><td class="num">-0.001</td></tr>
+            <tr><td>noaa tide</td><td class="num">189</td><td class="num">1.668</td><td class="num">0.009</td><td class="num">+0.049</td></tr>
+            <tr><td>open-meteo</td><td class="num">172</td><td class="num">1.677</td><td class="num">0.009</td><td class="num">+0.058</td></tr>
+            <tr><td>swpc</td><td class="num">189</td><td class="num">1.618</td><td class="num">0.015</td><td class="num">-0.000</td></tr>
+            <tr><td>usgs</td><td class="num">189</td><td class="num">1.620</td><td class="num">0.008</td><td class="num">+0.002</td></tr>
+            <tr><td>weather</td><td class="num">187</td><td class="num">1.614</td><td class="num">0.011</td><td class="num">-0.005</td></tr>
+            <tr><td>wikipedia</td><td class="num">185</td><td class="num">1.656</td><td class="num">0.010</td><td class="num">+0.037</td></tr>
+            <tr><td>world bank</td><td class="num">187</td><td class="num">1.594</td><td class="num">0.014</td><td class="num">-0.025</td></tr>
+            <tr><td>zenodo</td><td class="num">92</td><td class="num">1.448</td><td class="num">0.321</td><td class="num">-0.171</td></tr>
           </tbody>
         </table>
 
-        <p><strong>D_meta is robust to family exclusion.</strong> The largest shift is ΔD = +0.095 (excluding energy-charts) and ΔD = -0.166 (excluding zenodo). In all cases, D_meta remains stable, and the KS test never rejects Weibull. No single family drives the result.</p>
+        <p><strong>D_meta is robust to family exclusion.</strong> The largest shift is ΔD = +0.095 (excluding energy-charts) and ΔD = -0.171 (excluding zenodo). In all cases, D_meta remains stable, and the KS test never rejects Weibull. No single family drives the result.</p>
 
         <h3>Finding 4: Family-level bootstrap confidence interval</h3>
 
         <p>Because individual systems within a family are dependent, a standard bootstrap would underestimate uncertainty. Instead, families were resampled as blocks (500 iterations):</p>
         <ul>
-          <li><strong>D_meta point estimate:</strong> 1.614</li>
-          <li><strong>Bootstrap mean:</strong> 1.483</li>
-          <li><strong>95% CI:</strong> [1.060, 1.803]</li>
-          <li><strong>CI width:</strong> 0.743</li>
+          <li><strong>D_meta point estimate:</strong> 1.619</li>
+          <li><strong>Bootstrap mean:</strong> 1.486</li>
+          <li><strong>95% CI:</strong> [1.060, 1.807]</li>
+          <li><strong>CI width:</strong> 0.747</li>
         </ul>
 
-        <p>The wide CI reflects the dependence structure — the effective sample size is smaller than 191. The CI excludes D = 1 (just barely) but is too wide to distinguish between Weibull, Gamma, and Lognormal. More independent families are needed to narrow it.</p>
+        <p>The wide CI reflects the dependence structure — the effective sample size is smaller than 192. The CI excludes D = 1 (just barely) but is too wide to distinguish between Weibull, Gamma, and Lognormal. More independent families are needed to narrow it.</p>
 
         <h3>Finding 5: Selection bias</h3>
 
-        <p><strong>This is not a random sample.</strong> The 191 system-level estimates were selected because S2 fitting was attempted on them. These estimates are not all statistically independent — five cryptocurrency series share a common market regime, fifteen weather series share a data provider, and multiple FRED series share an economic system. The sample is biased toward:</p>
+        <p><strong>This is not a random sample.</strong> The 192 system-level estimates were selected because S2 fitting was attempted on them. These estimates are not all statistically independent — five cryptocurrency series share a common market regime, fifteen weather series share a data provider, and multiple FRED series share an economic system. The sample is biased toward:</p>
         <ul>
           <li>Systems with available downloadable data (FRED, World Bank, USGS, Zenodo)</li>
           <li>Systems where stretched-exponential decay was plausible</li>
@@ -366,15 +366,15 @@
             <tr><th>Eligibility tier</th><th class="num">Count</th><th>Criterion</th></tr>
           </thead>
           <tbody>
-            <tr><td>Total registered tests</td><td class="num">202</td><td>All entries in the TESTS array</td></tr>
-            <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">191</td><td>D value exists and is within plausible range</td></tr>
+            <tr><td>Total registered tests</td><td class="num">203</td><td>All entries in the TESTS array</td></tr>
+            <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">192</td><td>D value exists and is within plausible range</td></tr>
             <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">5</td><td>Optimizer hit upper ceiling</td></tr>
             <tr><td>Noise fits excluded (R² &lt; 0.1)</td><td class="num">6</td><td>S2 fit noise (e.g. diurnal-cycle ACF collapse) — no real retention signal</td></tr>
             <tr><td>Total S2 failures (S2_NO_FIT)</td><td class="num">0</td><td>S2 could not be fit at all — optimizer failed, ACF failed, or insufficient data</td></tr>
-            <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">200</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
+            <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">201</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Flow: 202 registered → 191 valid uncensored S2 fits with R² ≥ 0.1 → 191 Meta-S2 eligible → 200 comparison-eligible. 0 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
+        <p class="note">Flow: 203 registered → 192 valid uncensored S2 fits with R² ≥ 0.1 → 192 Meta-S2 eligible → 201 comparison-eligible. 0 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
       </div>
 
       <hr>
@@ -392,7 +392,7 @@
         <p>The strongest empirical finding is not philosophical — it is mathematical:</p>
 
         <blockquote class="callout emph">
-          The S2 retention law describes individual system retention. The distribution of fitted S2 exponents across 191 system-level estimates is itself well-described by a Weibull (stretched-exponential) distribution — the same functional family as S2.
+          The S2 retention law describes individual system retention. The distribution of fitted S2 exponents across 192 system-level estimates is itself well-described by a Weibull (stretched-exponential) distribution — the same functional family as S2.
         </blockquote>
 
         <p>This <em>distributional recurrence</em> — S2 describing the distribution of S2 parameters — is a weaker claim than mathematical closure under aggregation. It says: the exponents D_i are Weibull-distributed. It does <strong>not</strong> prove that the composite retention R_ensemble(λ) = A({R_i(λ)}) is itself S2. That stronger closure claim would require defining the aggregation operator A and proving that A maps S2-family functions to S2-family functions.</p>
@@ -408,17 +408,17 @@
         <p>If Meta-S2 is real:</p>
         <ul>
           <li><strong>S2 is not just a curve that fits many datasets.</strong> It is a distribution that is self-similar under aggregation. The law governs both the parts and the whole.</li>
-          <li><strong>The meta-exponent D_meta ≈ 1.614 has meaning.</strong> It describes the "retention of retention" — how quickly the property of having a particular D_eff itself degrades as you move across the space of systems.</li>
-          <li><strong>The bimodality may indicate two classes of systems.</strong> The GMM clusters at D ≈ 1.083 and D ≈ 3.349 suggest there may be two qualitatively different regimes — not "natural vs extraction" but "ordinary vs extreme." What distinguishes the extreme cluster is an open question.</li>
+          <li><strong>The meta-exponent D_meta ≈ 1.619 has meaning.</strong> It describes the "retention of retention" — how quickly the property of having a particular D_eff itself degrades as you move across the space of systems.</li>
+          <li><strong>The bimodality may indicate two classes of systems.</strong> The GMM clusters at D ≈ 1.087 and D ≈ 3.353 suggest there may be two qualitatively different regimes — not "natural vs extraction" but "ordinary vs extreme." What distinguishes the extreme cluster is an open question.</li>
         </ul>
 
         <h3>What this does NOT mean (yet)</h3>
 
         <ul>
-          <li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, 124 of 191 fitted retention curves have D > 1, corresponding to faster-than-exponential decay in the fitted S2 model," but we cannot generalize to the universe without a random sample.</li>
+          <li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, 125 of 192 fitted retention curves have D > 1, corresponding to faster-than-exponential decay in the fitted S2 model," but we cannot generalize to the universe without a random sample.</li>
           <li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided.</li>
           <li><strong>"S2 is closed under aggregation."</strong> The current analysis shows <em>distributional recurrence</em> (the parameters are Weibull-distributed), not mathematical closure (the composite retention is S2). These are conceptually distinct. Closure would require defining an aggregation operator and proving it maps S2 to S2.</li>
-          <li><strong>"The distribution is bimodal."</strong> Silverman's test cannot reject unimodality (p = 0.675). The GMM's 2-component preference (ΔBIC = -32.690) is suggestive but not conclusive. With n = 191, the second mode may be a small-sample artifact.</li>
+          <li><strong>"The distribution is bimodal."</strong> Silverman's test cannot reject unimodality (p = 0.680). The GMM's 2-component preference (ΔBIC = -32.280) is suggestive but not conclusive. With n = 192, the second mode may be a small-sample artifact.</li>
         </ul>
 
         <h3>How to test it</h3>
@@ -426,9 +426,9 @@
         <p>The hypothesis makes a testable prediction:</p>
 
         <blockquote class="callout warn">
-          As the test registry grows beyond 191 uncensored systems, the Weibull MLE shape parameter should remain in the range [1.4, 2.0] with KS p > 0.05 if the distributional recurrence is real. If D_meta(MLE) drifts systematically outside this range, or if the KS test consistently rejects Weibull across multiple independent families, the result was an artifact of the current sample.
+          As the test registry grows beyond 192 uncensored systems, the Weibull MLE shape parameter should remain in the range [1.4, 2.0] with KS p > 0.05 if the distributional recurrence is real. If D_meta(MLE) drifts systematically outside this range, or if the KS test consistently rejects Weibull across multiple independent families, the result was an artifact of the current sample.
           <br><br>
-          <strong>Clean prospective test: PENDING.</strong> The previous "PASSED" status was based on contaminated data and is suspended. The clean baseline is D_meta(MLE) = 1.614, n = 191.
+          <strong>Clean prospective test: PENDING.</strong> The previous "PASSED" status was based on contaminated data and is suspended. The clean baseline is D_meta(MLE) = 1.619, n = 192.
         </blockquote>
 
         <p>Specifically:</p>
@@ -450,16 +450,16 @@
           <summary><strong>How the meta-fit was constructed</strong></summary>
 
           <div class="method-body">
-            <p><strong>Data:</strong> 191 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-08-22. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
+            <p><strong>Data:</strong> 192 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-08-22. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
 
-            <p><strong>Meta-fit (direct-d, not rank):</strong> The 191 D values were sorted ascending: D_(1) ≤ D_(2) ≤ ... ≤ D_(191). The empirical survival function was computed as Ŝ(D_(i)) = (n − i) / n. Three fits were performed <strong>using the actual D values as the independent variable</strong> (not rank index):</p>
+            <p><strong>Meta-fit (direct-d, not rank):</strong> The 192 D values were sorted ascending: D_(1) ≤ D_(2) ≤ ... ≤ D_(192). The empirical survival function was computed as Ŝ(D_(i)) = (n − i) / n. Three fits were performed <strong>using the actual D values as the independent variable</strong> (not rank index):</p>
             <ol>
               <li><strong>Direct-d least squares:</strong> Ŝ(d) = exp[−(d/λ_q)^D] fitted directly against actual D values using scipy.optimize.curve_fit.</li>
               <li><strong>Linearized regression:</strong> ln[−ln(Ŝ(d))] = D_meta · ln(d) − D_meta · ln(λ_q), fitted as a linear regression on the log-log scale.</li>
               <li><strong>Weibull MLE:</strong> Maximum likelihood estimation of Weibull(shape=D_meta, scale=λ_q) using scipy.stats.weibull_min.fit, with loc fixed at 0. This is the statistically preferred method.</li>
             </ol>
 
-            <p><strong>Censoring:</strong> 5 values hit the optimizer boundary at D = 5.0 (the upper fitting limit). These are treated as right-censored and excluded from the uncensored analysis (n = 191).</p>
+            <p><strong>Censoring:</strong> 5 values hit the optimizer boundary at D = 5.0 (the upper fitting limit). These are treated as right-censored and excluded from the uncensored analysis (n = 192).</p>
 
             <p><strong>Bimodality tests:</strong></p>
             <ul>
@@ -472,10 +472,10 @@
 
             <p><strong>Limitations:</strong></p>
             <ul>
-              <li>The 191 systems are not independent — five cryptocurrencies share a market regime, fifteen weather series share a data provider, multiple FRED series share an economic system. Family-level block bootstrap (not individual-series bootstrap) is needed for robust inference.</li>
+              <li>The 192 systems are not independent — five cryptocurrencies share a market regime, fifteen weather series share a data provider, multiple FRED series share an economic system. Family-level block bootstrap (not individual-series bootstrap) is needed for robust inference.</li>
               <li>5 D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
-              <li>The Weibull MLE (shape=1.614) and direct-d fit (D_meta=1.912) disagree, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
-              <li>Silverman's test cannot reject unimodality (p=0.675), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
+              <li>The Weibull MLE (shape=1.619) and direct-d fit (D_meta=1.921) disagree, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
+              <li>Silverman's test cannot reject unimodality (p=0.680), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
             </ul>
           </div>
         </details>
@@ -497,17 +497,17 @@
           </thead>
           <tbody>
             <tr><td>0</td><td>Individual system retention R(λ)</td><td class="num">D_i (varies)</td><td>S2 fits individual systems</td><td>Physical / observed systems</td></tr>
-            <tr><td>1</td><td>Distribution of D_i across systems</td><td class="num">D_meta ≈ 1.614</td><td>Weibull (KS p = 0.012)</td><td>Distribution over parameters</td></tr>
-            <tr><td>2</td><td>Distribution of D_meta estimates (bootstrap)</td><td class="num">≈ 15.830 (MLE)</td><td><strong>Rejected</strong> (KS p = 0.001)</td><td>Sampling distribution of estimator</td></tr>
+            <tr><td>1</td><td>Distribution of D_i across systems</td><td class="num">D_meta ≈ 1.619</td><td>Weibull (KS p = 0.012)</td><td>Distribution over parameters</td></tr>
+            <tr><td>2</td><td>Distribution of D_meta estimates (bootstrap)</td><td class="num">≈ 15.110 (MLE)</td><td><strong>Rejected</strong> (KS p = 0.003)</td><td>Sampling distribution of estimator</td></tr>
           </tbody>
         </table>
 
-        <p>At Level 2, the bootstrap distribution of D_meta is <strong>not Weibull</strong> — it is approximately Gaussian (Weibull shape ≈ 15.830 converges toward normal). The S2 signature disappears at the second level.</p>
+        <p>At Level 2, the bootstrap distribution of D_meta is <strong>not Weibull</strong> — it is approximately Gaussian (Weibull shape ≈ 15.110 converges toward normal). The S2 signature disappears at the second level.</p>
 
         <h3>What this does and does not mean</h3>
 
         <div class="speculative-note">
-          <strong>Statistical fact (established):</strong> Under many statistical conditions, parameter estimates become approximately normal because of the Central Limit Theorem. A Gaussian at Level 2 is not surprising — it is expected for the sampling distribution of an estimator based on 191 observations. The underlying distribution (Level 1) may still be S2/Weibull; the uncertainty in estimating its parameters simply becomes Gaussian. These are compatible statements.
+          <strong>Statistical fact (established):</strong> Under many statistical conditions, parameter estimates become approximately normal because of the Central Limit Theorem. A Gaussian at Level 2 is not surprising — it is expected for the sampling distribution of an estimator based on 192 observations. The underlying distribution (Level 1) may still be S2/Weibull; the uncertainty in estimating its parameters simply becomes Gaussian. These are compatible statements.
         </div>
 
         <p><strong>The Gaussian at Level 2 does NOT prove that S2 has "disappeared physically."</strong> It could simply reflect that parameter estimates average many independent sources of uncertainty. The distinction matters:</p>
@@ -531,7 +531,7 @@
 
         <p>If this conjecture could eventually be demonstrated — that one projection consistently yields S2 and two independent projections consistently yield Gaussian behavior across multiple datasets — it would connect the statistical hierarchy directly to the architecture of the DREAM framework, where observables arise through a non-invertible projection kernel and S2 governs retention. That would be a much more distinctive result than simply observing Gaussian parameter estimates.</p>
 
-        <p class="note">Tested 2026-08-22 via 500-iteration bootstrap of D_meta from 191 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.001). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
+        <p class="note">Tested 2026-08-22 via 500-iteration bootstrap of D_meta from 192 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.003). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
       </div>
 
       <hr>
@@ -542,7 +542,7 @@
 
         <blockquote class="callout">
           <strong>Weibull-preferred distributional recurrence.</strong><br><br>
-          As of 2026-08-22, the 191-system registry yields Weibull MLE shape D_meta = 1.614 (KS p = 0.012). The estimator range is [1.912, 1.589]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 3.150, ΔAIC_Lognormal = 32.070). The family-level bootstrap 95% CI is [1.060, 1.803] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
+          As of 2026-08-22, the 192-system registry yields Weibull MLE shape D_meta = 1.619 (KS p = 0.012). The estimator range is [1.921, 1.591]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 3.380, ΔAIC_Lognormal = 32.790). The family-level bootstrap 95% CI is [1.060, 1.807] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
         </blockquote>
 
         <h3>What survives</h3>
@@ -554,8 +554,8 @@
 
         <h3>What does not survive (suspended claims)</h3>
         <ul>
-          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.614 cannot be treated as a kernel invariant or universal exponent. The estimator range is [1.912, 1.589], and movement under data cleaning shows sensitivity to population and method.</li>
-          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +3.15) and Lognormal (ΔAIC = +32.07) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
+          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.619 cannot be treated as a kernel invariant or universal exponent. The estimator range is [1.921, 1.591], and movement under data cleaning shows sensitivity to population and method.</li>
+          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +3.38) and Lognormal (ΔAIC = +32.79) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
           <li><strong>Incremental stability.</strong> The "first prospective test passed" claim was based on contaminated data. The clean prospective test starts now.</li>
         </ul>
 
@@ -574,7 +574,7 @@
         <p>The wide bootstrap CI means more <em>independent</em> families are needed, not just more rows from existing families. Adding 10 more crypto or weather series will not narrow the CI meaningfully. Adding a genuinely new domain (e.g., biological aging, linguistic decay, archaeological dating) would.</p>
 
         <p class="article-footnote">
-          Analysis performed 2026-08-22. Data: <a href="../tests.html">DREAM Test Registry</a> (191 Meta-S2-eligible uncensored systems, of 202 total registered).<br>
+          Analysis performed 2026-08-22. Data: <a href="../tests.html">DREAM Test Registry</a> (192 Meta-S2-eligible uncensored systems, of 203 total registered).<br>
           This page is speculative. The recursive S2 property is an empirical observation on a non-random, partially dependent sample, not a proven theorem. It is offered as a direction for investigation.<br><br>
           <strong>Update protocol:</strong> This article is regenerated with each scanner run. The live Meta-S2 readout on the <a href="../tests.html">Test Registry</a> page always reflects the current TESTS array.
         </p>
