@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-23T02:13:13Z",
-  "total_tests": 203,
+  "exported_at": "2026-08-23T09:02:17Z",
+  "total_tests": 205,
   "fields": [
     "id",
     "name",
@@ -3128,6 +3128,38 @@
       "source": "auto-scan 2026-08-22",
       "date": "2026-08-22",
       "url": "10.5281/zenodo.22059304"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Paleni (Samic/Gur, Burkina Faso) texts",
+      "domain": "scouting",
+      "D": 1.1515,
+      "r2": 0.9694,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.82,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=4.82).",
+      "narrative": "D_eff=1.1515, R²=0.9694. D_eff=1.151 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=4.82). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-23",
+      "date": "2026-08-23",
+      "url": "10.5281/zenodo.21905292"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Paleni (Samic/Gur, Burkina Faso) texts",
+      "domain": "scouting",
+      "D": 0.2135,
+      "r2": 0.8938,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.2,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.2).",
+      "narrative": "D_eff=0.2135, R²=0.8938. D_eff=0.213 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.20). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-23",
+      "date": "2026-08-23",
+      "url": "10.5281/zenodo.21905292"
     }
   ]
 }
