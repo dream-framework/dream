@@ -256,7 +256,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "23 Aug 2026 22:11 EST";
+const LAST_REFRESH = "24 Aug 2026 01:18 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -485,6 +485,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Angle resolved forced separation and rolling calcu",domain:"scouting",D:1.7576,r2:0.3952,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.6100,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.61).",narrative:"D_eff=1.7576, R²=0.3952. D_eff=1.758 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.61). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-22",date:"2026-08-22",url:"10.5281/zenodo.22059304",image:null}
   ,{id:"",name:"Zenodo: Paleni (Samic/Gur, Burkina Faso) texts",domain:"scouting",D:1.1515,r2:0.9694,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:4.8200,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=4.82).",narrative:"D_eff=1.1515, R²=0.9694. D_eff=1.151 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=4.82). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-23",date:"2026-08-23",url:"10.5281/zenodo.21905292",image:null}
   ,{id:"",name:"Zenodo: Paleni (Samic/Gur, Burkina Faso) texts",domain:"scouting",D:0.2135,r2:0.8938,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:2.2000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.2).",narrative:"D_eff=0.2135, R²=0.8938. D_eff=0.213 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.20). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-23",date:"2026-08-23",url:"10.5281/zenodo.21905292",image:null}
+  ,{id:"",name:"Zenodo: SARS-CoV-2 Infektionen in Deutschland",domain:"scouting",D:1.0611,r2:0.9996,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2848.2300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2848.23).",narrative:"D_eff=1.0611, R²=0.9996. D_eff=1.061 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=2848.23). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-24",date:"2026-08-24",url:"10.5281/zenodo.22075422",image:null}
 
 ];
 
@@ -782,33 +783,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 194,
-  "d_mle": 1.6116,
-  "lam_mle": 1.3568,
-  "ks_p": 0.0101,
+  "n": 195,
+  "d_mle": 1.6152,
+  "lam_mle": 1.3561,
+  "ks_p": 0.0087,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1158,
-  "ks_boot_mean": 0.0447,
-  "ks_boot_95": 0.0631,
-  "d_direct": 1.9076,
-  "r2_direct": 0.9766,
-  "d_linear": 1.5824,
-  "r2_linear": 0.9726,
+  "ks_stat_obs": 0.1172,
+  "ks_boot_mean": 0.0446,
+  "ks_boot_95": 0.0639,
+  "d_direct": 1.9219,
+  "r2_direct": 0.9769,
+  "d_linear": 1.5866,
+  "r2_linear": 0.9725,
   "natural": 68,
-  "extraction": 126,
-  "mean": 1.2162,
-  "median": 1.2123,
-  "total": 205,
-  "compared": 203,
+  "extraction": 127,
+  "mean": 1.2154,
+  "median": 1.2107,
+  "total": 206,
+  "compared": 204,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.6375,
+  "ad_stat": 2.6545,
   "delta_aic_weibull": 0.0,
   "delta_aic_gamma": 3.42,
-  "delta_aic_lognormal": 32.95,
-  "silverman_p": 0.705,
+  "delta_aic_lognormal": 33.15,
+  "silverman_p": 0.735,
   "boot_lo": 1.06,
-  "boot_hi": 1.799,
+  "boot_hi": 1.801,
   "date": "2026-08-24"
 };
 

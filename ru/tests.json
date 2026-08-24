@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-24T02:11:53Z",
-  "total_tests": 205,
+  "exported_at": "2026-08-24T05:18:42Z",
+  "total_tests": 206,
   "fields": [
     "id",
     "name",
@@ -3160,6 +3160,22 @@
       "source": "auto-scan 2026-08-23",
       "date": "2026-08-23",
       "url": "10.5281/zenodo.21905292"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: SARS-CoV-2 Infektionen in Deutschland",
+      "domain": "scouting",
+      "D": 1.0611,
+      "r2": 0.9996,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2848.23,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2848.23).",
+      "narrative": "D_eff=1.0611, R²=0.9996. D_eff=1.061 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2848.23). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-24",
+      "date": "2026-08-24",
+      "url": "10.5281/zenodo.22075422"
     }
   ]
 }
