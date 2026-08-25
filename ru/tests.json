@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-08-25T02:05:50Z",
+  "exported_at": "2026-08-25T05:06:50Z",
   "total_tests": 208,
   "fields": [
     "id",
@@ -1395,7 +1395,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.75,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3317, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3426, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.1242, R²=0.3034. D_eff=0.124 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=17.75). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -1795,7 +1795,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 12.38,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0353, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0357, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.2322, R²=0.4585. D_eff=0.232 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=12.38). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
