@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-26T13:30:00.538060+00:00",
+  "initialized": "2026-08-26T18:18:28.059749+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.45). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.12). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -7184,6 +7184,40 @@
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=1.5430, R²=0.9972. D_eff=1.543 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=592.65). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data for \"Not Just Smart, But Interactive: AI-Powe",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22116217",
+      "registry_date": "2026-08-26",
+      "D": 0.3752,
+      "r2": 0.8395,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.3752, R²=0.8395. D_eff=0.375 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=4.44). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

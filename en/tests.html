@@ -256,7 +256,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "26 Aug 2026 09:29 EST";
+const LAST_REFRESH = "26 Aug 2026 14:17 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -365,7 +365,7 @@ const TESTS = [
   ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D_eff=0.5553, R²=0.9885. D_eff=0.555 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties BIEXP, ΔAICc=0.00).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
   ,{id:"",name:"CoinGecko: dogecoin (ACF retention)",domain:"crypto",D:1.6637,r2:0.9981,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-119.9500,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-119.95).",narrative:"D_eff=1.6637, R²=0.9981. D_eff=1.664 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats GAUSS, ΔAICc=-119.95).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:1.0156,r2:0.9766,verdict:"D_NEAR_1",model_verdict:"S2_TIES",delta_aicc:1.8100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.81, within ±2).",narrative:"D_eff=1.0156, R²=0.9766. D_eff=1.016 ≈ 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=1.81).",source:"auto-scan 2026-08-03",date:"2026-08-03",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
-  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5625,r2:0.9956,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:384.4500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=384.45). S2+dust fit: D1=1.0699, D2=0.7201, R²=0.9994, AICc=-2171.97. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.45). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
+  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5625,r2:0.9956,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:384.1200,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=384.12). S2+dust fit: D1=1.0682, D2=0.7207, R²=0.9994, AICc=-2171.39. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.12). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
   ,{id:"",name:"FRED T10YIE (10-Year Breakeven Inflation) (ACF retention)",domain:"financial",D:1.0106,r2:0.9963,verdict:"D_NEAR_1",model_verdict:"S2_DUST_WINS",delta_aicc:932.8600,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=932.86). S2+dust is the best overall model: D1=2.3066, D2=0.9741, R²=1.0000, AICc=-2679.84. Dust decomposition confirmed — not a DREAM failure.",narrative:"D_eff=1.0106, R²=0.9963. D_eff=1.011 ≈ 1 (probe-scale effective parameter). Multi-scale: S2+dust reveals additional structure (ΔAICc=932.86 vs single S2). Not necessarily the underlying physical model.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=T10YIE",image:null}
   ,{id:"",name:"FRED DGS10 (10-Year Treasury Rate) (ACF retention)",domain:"financial",D:0.9600,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:9.6700,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=9.67). S2+dust fit: D1=1.0159, D2=2.2096, R²=0.9999, AICc=-3375.52. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.9600, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.67). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",image:null}
   ,{id:"",name:"COVID-19 confirmed (daily new, global) (ACF retention)",domain:"ecological",D:1.0071,r2:0.9548,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:145.1400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=145.14). S2+dust fit: D1=1.6636, D2=0.0402, R²=0.9788, AICc=-1301.03. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=1.0071, R²=0.9548. D_eff=1.007 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=145.14). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",image:null}
@@ -491,6 +491,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: AI Research Support Systems - Taxonomy",domain:"scouting",D:7.5168,r2:0.9526,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D_eff=7.5168, R²=0.9526. D_eff=7.517 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=20.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-25",date:"2026-08-25",url:"10.5281/zenodo.22093266",image:null}
   ,{id:"",name:"Zenodo: Nuclear Magnetic Resonance Synthetics Dataset from",domain:"scouting",D:0.9407,r2:0.9550,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:358.5300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=358.53).",narrative:"D_eff=0.9407, R²=0.9550. D_eff=0.941 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=358.53). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-25",date:"2026-08-25",url:"10.5281/zenodo.22097128",image:null}
   ,{id:"",name:"Zenodo: Thermally activated B--J--T mobility describes the",domain:"scouting",D:1.5430,r2:0.9972,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:592.6500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=592.65).",narrative:"D_eff=1.5430, R²=0.9972. D_eff=1.543 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=592.65). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-26",date:"2026-08-26",url:"10.5281/zenodo.22102330",image:null}
+  ,{id:"",name:"Zenodo: Data for \"Not Just Smart, But Interactive: AI-Powe",domain:"scouting",D:0.3752,r2:0.8395,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:4.4400,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=4.44). S2+dust decomposition: D1=7.9156, D2=1.3593, R²=0.8506, AICc=-609.27. S2+dust does not beat BIEXP. Needs investigation.",narrative:"D_eff=0.3752, R²=0.8395. D_eff=0.375 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=4.44). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-26",date:"2026-08-26",url:"10.5281/zenodo.22116217",image:null}
 
 ];
 
@@ -788,33 +789,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 199,
-  "d_mle": 1.6321,
-  "lam_mle": 1.3647,
-  "ks_p": 0.0071,
+  "n": 200,
+  "d_mle": 1.6262,
+  "lam_mle": 1.3597,
+  "ks_p": 0.0075,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1181,
-  "ks_boot_mean": 0.0443,
-  "ks_boot_95": 0.0634,
-  "d_direct": 1.9529,
-  "r2_direct": 0.9779,
-  "d_linear": 1.5963,
-  "r2_linear": 0.9727,
-  "natural": 69,
+  "ks_stat_obs": 0.1172,
+  "ks_boot_mean": 0.044,
+  "ks_boot_95": 0.063,
+  "d_direct": 1.9253,
+  "r2_direct": 0.9777,
+  "d_linear": 1.5946,
+  "r2_linear": 0.9731,
+  "natural": 70,
   "extraction": 130,
-  "mean": 1.2223,
-  "median": 1.2139,
-  "total": 211,
-  "compared": 209,
+  "mean": 1.2181,
+  "median": 1.2123,
+  "total": 212,
+  "compared": 210,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.6866,
+  "ad_stat": 2.6533,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.01,
-  "delta_aic_lognormal": 35.29,
-  "silverman_p": 0.675,
+  "delta_aic_gamma": 3.81,
+  "delta_aic_lognormal": 34.6,
+  "silverman_p": 0.69,
   "boot_lo": 1.06,
-  "boot_hi": 1.817,
+  "boot_hi": 1.807,
   "date": "2026-08-26"
 };
 

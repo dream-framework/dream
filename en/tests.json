@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-26T13:29:18Z",
-  "total_tests": 211,
+  "exported_at": "2026-08-26T18:17:34Z",
+  "total_tests": 212,
   "fields": [
     "id",
     "name",
@@ -1249,10 +1249,10 @@
       "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 384.45,
+      "delta_aicc": 384.12,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=384.45). S2+dust fit: D1=1.0699, D2=0.7201, R²=0.9994, AICc=-2171.97. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.45). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=384.12). S2+dust fit: D1=1.0682, D2=0.7207, R²=0.9994, AICc=-2171.39. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5625, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=384.12). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -3256,6 +3256,22 @@
       "source": "auto-scan 2026-08-26",
       "date": "2026-08-26",
       "url": "10.5281/zenodo.22102330"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data for \"Not Just Smart, But Interactive: AI-Powe",
+      "domain": "scouting",
+      "D": 0.3752,
+      "r2": 0.8395,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.44,
+      "best_alt": "BIEXP",
+      "model_note": "S2 loses to BIEXP (ΔAICc=4.44). S2+dust decomposition: D1=7.9156, D2=1.3593, R²=0.8506, AICc=-609.27. S2+dust does not beat BIEXP. Needs investigation.",
+      "narrative": "D_eff=0.3752, R²=0.8395. D_eff=0.375 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=4.44). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-26",
+      "date": "2026-08-26",
+      "url": "10.5281/zenodo.22116217"
     }
   ]
 }

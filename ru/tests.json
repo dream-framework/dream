@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-26T13:29:18Z",
-  "total_tests": 211,
+  "exported_at": "2026-08-26T18:17:34Z",
+  "total_tests": 212,
   "fields": [
     "id",
     "name",
@@ -3256,6 +3256,22 @@
       "source": "auto-scan 2026-08-26",
       "date": "2026-08-26",
       "url": "10.5281/zenodo.22102330"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data for \"Not Just Smart, But Interactive: AI-Powe",
+      "domain": "scouting",
+      "D": 0.3752,
+      "r2": 0.8395,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.44,
+      "best_alt": "BIEXP",
+      "model_note": "S2 loses to BIEXP (ΔAICc=4.44). S2+dust decomposition: D1=7.9156, D2=1.3593, R²=0.8506, AICc=-609.27. S2+dust does not beat BIEXP. Needs investigation.",
+      "narrative": "D_eff=0.3752, R²=0.8395. D_eff=0.375 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=4.44). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-26",
+      "date": "2026-08-26",
+      "url": "10.5281/zenodo.22116217"
     }
   ]
 }
