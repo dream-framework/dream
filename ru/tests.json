@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-26T02:13:19Z",
-  "total_tests": 210,
+  "exported_at": "2026-08-26T05:08:36Z",
+  "total_tests": 211,
   "fields": [
     "id",
     "name",
@@ -3240,6 +3240,22 @@
       "source": "auto-scan 2026-08-25",
       "date": "2026-08-25",
       "url": "10.5281/zenodo.22097128"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Thermally activated B--J--T mobility describes the",
+      "domain": "scouting",
+      "D": 1.543,
+      "r2": 0.9972,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 592.65,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=592.65).",
+      "narrative": "D_eff=1.5430, R²=0.9972. D_eff=1.543 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=592.65). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-26",
+      "date": "2026-08-26",
+      "url": "10.5281/zenodo.22102330"
     }
   ]
 }
