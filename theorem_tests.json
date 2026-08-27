@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-27T10:04:04.875576+00:00",
-  "total_tests": 18,
+  "exported_at": "2026-08-27T22:31:47.301401+00:00",
+  "total_tests": 19,
   "categories": [
     "cosmology",
     "structure_focusing",
@@ -84,6 +84,22 @@
       "scale": "200-500 Mpc",
       "verdict": "CONSISTENT",
       "narrative": "The Saraswati superstructure is a massive galaxy filament/wall complex spanning ~200-500 Mpc — well ABOVE the coherence cliff (~100-150 Mpc/h). Under DREAM, this is a CPI ridge: a structural skeleton that persists even as the background universe flows to homogeneity. This is PREDICTED by T4 (Structure Focusing), not contradicted by T5/S3 (which predicts the BACKGROUND becomes homogeneous, not that all structure vanishes). The coexistence of Saraswati with large-scale homogeneity is exactly what DREAM predicts: R_HF(λ) ≺ R_corr²(λ) — fine detail decays, but topological skeleton (CPI ridges) survives."
+    },
+    {
+      "theorem": "T6",
+      "category": "spectral_ratios",
+      "name": "NIST Hydrogen (H): binding energy ratio law (15 levels)",
+      "source": "NIST Atomic Spectra Database (fetched 2026-08-27)",
+      "url": "https://physics.nist.gov/cgi-bin/ASD/energy1.pl?de=0&spectrum=H",
+      "date": "2026-08-27",
+      "data_points": 15,
+      "D_eff": -0.4999,
+      "expected_D_eff": -0.5,
+      "r_squared": 1.0,
+      "p_value": 0.0,
+      "energy_type": "binding (E_bind = ionization_limit - E_excitation)",
+      "verdict": "SUPPORTED",
+      "narrative": "Hydrogen binding energies (n=15 levels): converted from NIST excitation energies using E_bind = 13.5984 - E_exc. Ranked ratios fit m_n/m_1 = n^(1/D_eff) with D_eff=-0.4999 (R²=1.000000). Exact match with expected D_eff=-0.5 (Rydberg formula E_n∝n⁻²). Slope=-2.0003±0.0000. Data fetched live from NIST ASD."
     },
     {
       "theorem": "T6",
