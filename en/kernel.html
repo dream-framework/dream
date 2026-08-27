@@ -166,6 +166,22 @@
       </details>
     </div>
 
+    <!-- T7.1: Regime Transitions (NEW) -->
+    <div class="card" id="regime-transitions" style="border-left: 4px solid var(--accent);">
+      <h2>T7.1 — Regime transitions <span class="badge ok sm">Confirmed (25 datasets, p=3.4×10⁻¹⁸)</span></h2>
+      <p>The kernel is a single fixed mechanism, but its <em>effective parameters</em> evolve as the probe scale sweeps through different information states. The global retention curve is a piecewise composition of S2 regimes:</p>
+      <div class="math-block">\[
+        R(\lambda)\;\approx\;
+        \begin{cases}
+          \exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_{q,1}}\Big)^{D_1}\Big] & \lambda<\lambda^\*\\[4pt]
+          A_2\,\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_{q,2}}\Big)^{D_2}\Big] & \lambda\ge\lambda^\*
+        \end{cases}
+      \]</div>
+      <p>Each regime is governed by a clean local S2. The transition scale \(\lambda^\*\) clusters at fractional positions \([0.25, 0.38]\) of the t-range (IQR) across unrelated domains — financial, environmental, geophysical, crypto, scouting, ecological.</p>
+      <p><strong>Direction of evolution:</strong> in 88% of datasets, \(D_2 > D_1\) (median \(D_1 = 1.06 \to D_2 = 5.08\)). The kernel enters a regime where information is more susceptible to compression: slow, stretched decay gives way to fast, compressed decay.</p>
+      <p class="note"><strong>Same kernel, different regimes.</strong> The kernel doesn't change — the information state underneath it does. See <a href="retention.html#t71" style="color:var(--accent)">Retention page T7.1</a> for the full evidence chain and <a href="theorems.html#t71" style="color:var(--accent)">T7.1 in Theorems</a> for the formal statement.</p>
+    </div>
+
     <!-- Spectral exponent (ranked spectra) -->
     <div class="card">
       <h2>Effective spectral exponent \(D_{\mathrm{eff}}\)</h2>

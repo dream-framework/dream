@@ -118,6 +118,41 @@
       <p><strong>Falsification.</strong> Persistent curvature in \(y(\lambda)\) after calibration; irreconcilable \(D_{\mathrm{eff}}\) across the two channels in the same context; failure of collapse under \(\lambda/\lambda_q\).</p>
     </div>
 
+    <!-- T7.1: Multi-Regime S2 (CONFIRMED 2026-08) -->
+    <div class="card" id="t71-prediction" style="border-left: 4px solid var(--accent);">
+      <h2>T7.1 — Multi-Regime S2 (Piecewise Composition) <span class="badge ok">Confirmed · 25 datasets · p=3.4×10⁻¹⁸</span></h2>
+      <p class="core"><strong>Claim.</strong> S2 is the local law of retention. The global retention curve is a piecewise composition of S2 regimes, with the kernel entering different regimes at reproducible fractional scale thresholds. The transition scale \(\lambda^\*\) clusters at fractional positions \([0.25, 0.38]\) of the t-range (IQR) across unrelated domains.</p>
+      <div class="math-block">\[
+        R(\lambda)\;\approx\;
+        \begin{cases}
+          \exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_{q,1}}\Big)^{D_1}\Big] & \lambda<\lambda^\*\\[4pt]
+          A_2\,\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_{q,2}}\Big)^{D_2}\Big] & \lambda\ge\lambda^\*
+        \end{cases}
+      \]</div>
+      <p><strong>Why this rating.</strong> All five falsifiable predictions confirmed on 25 real datasets (World Bank, Open-Meteo, USGS, Zenodo, CoinGecko, Binance, GitHub) covering 6 domains: financial, environmental, geophysical, crypto, scouting, ecological. 100% show strong piecewise improvement (ΔAICc &gt; 4, median ΔAICc = 92.6, max = 401.2). Binomial p = 3.4×10⁻¹⁸ vs single-S2 null. Positive control passes (98% recovery of known 2-regime t_break within 0.1).</p>
+
+      <h3 style="margin-top:.6rem;">Five predictions, all confirmed</h3>
+      <ol>
+        <li><strong>P1: Piecewise strongly beats single-S2</strong> where the kernel crosses a regime boundary (ΔAICc &gt; 4). 25/25 datasets (100%).</li>
+        <li><strong>P2: Transitions cluster at reproducible fractional positions</strong> across unrelated domains (std &lt; 0.20). Real std = 0.169, IQR = [0.251, 0.375].</li>
+        <li><strong>P3: D systematically increases</strong> from regime 1 to regime 2 (D₂ &gt; D₁ in &gt;80% of cases). Observed: 22/25 (88%), median D₁=1.06 → D₂=5.08.</li>
+        <li><strong>P4: Null-model control:</strong> pure single-S2 synthetic curves should NOT show this pattern above chance. Observed: only 20% strong improvement on null vs 100% on real; binomial p = 3.4×10⁻¹⁸.</li>
+        <li><strong>P5: Positive control:</strong> pipeline recovers known 2-regime t_break in &gt;80% of synthetic 2-regime cases. Observed: 98% within 0.1 of true value.</li>
+      </ol>
+
+      <h3 style="margin-top:.6rem;">How to test (any retention curve)</h3>
+      <ul>
+        <li>Fit single S2: \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\). Record AICc_single.</li>
+        <li>Fit piecewise S2 with searched breakpoint \(\lambda^\*\) (try 5-7 candidates spanning 25%-75% of t-range). Record AICc_piecewise and optimal \(\lambda^\*\).</li>
+        <li>Compute ΔAICc = AICc_single − AICc_piecewise. If ΔAICc &gt; 4 → strong evidence for multi-regime.</li>
+        <li>Report the regime pair (D₁, λ_{q,1}, D₂, λ_{q,2}) and the transition fraction \(\lambda^\*/(\lambda_{\max}-\lambda_{\min})\).</li>
+        <li>Flag entries where D₂ hits the upper bound (D=10) — these may need a different second-regime functional form.</li>
+      </ul>
+
+      <p><strong>Falsification.</strong> If piecewise-S2 does NOT strongly beat single-S2 on real curves (ΔAICc &lt; 4 in &lt;50% of cases), or if transition positions do NOT cluster (std &gt; 0.20 in fractional coordinates), T7.1 is falsified. Both controls (null and positive) must pass for the pipeline to be valid.</p>
+      <p class="note">See <a href="retention.html#t71">Retention page T7.1</a>, <a href="theorems.html#t71">Theorems T7.1</a>, and <a href="tests.html">tests registry</a> for the full evidence chain. All data publicly fetched, no synthetic in the real-data column.</p>
+    </div>
+
     <!-- S3: Cosmology / Fractal Spectrum (PARTIAL, STRONG SUPPORT) -->
     <div class="card" id="s3-cosmo">
       <h2>S3 — Cosmology &amp; Fractal Spectrum <span class="badge warn">Partially confirmed (strong support to S2)</span></h2>

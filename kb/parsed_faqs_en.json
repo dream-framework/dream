@@ -2,7 +2,9 @@
   "metadata": {
     "lang": "en",
     "total_faqs": 112,
-    "parsed_date": "2025-09-02T16:21:37Z"
+    "parsed_date": "2025-09-02T16:21:37Z",
+    "total": 120,
+    "updated": "2026-08-26"
   },
   "faqs": [
     {
@@ -677,6 +679,54 @@
       "answer": "DREAM predicts a layered, scale-dependent cosmic web in which the effective fractal dimension \nDh(r,z)\nD\nh\n\t​\n\n(r,z) varies with scale \nr\nr and redshift \nz\nz. Specifically, it anticipates a break near \nz≈1.2\nz≈1.2 with \nΔDh≈0.25±0.05\nΔD\nh\n\t​\n\n≈0.25±0.05. Observationally, galaxy surveys using counts-in-spheres and correlation functions reveal sheet/filament regimes with \nD≈1.7–2\nD≈1.7–2 on intermediate scales, trending toward homogeneity \nD→3\nD→3 at very large scales. This is tested by fitting \nξ(r,z)∝(r/r0)−γ(r,z)\nξ(r,z)∝(r/r\n0\n\t​\n\n)\n−γ(r,z)\n, giving \nDh(r,z)=3−γ(r,z)\nD\nh\n\t​\n\n(r,z)=3−γ(r,z), or by estimating \nN(<r)∝rD2(r,z)\nN(<r)∝r\nD\n2\n\t​\n\n(r,z)\n and the multifractal spectrum \nDq(ℓ,z)\nD\nq\n\t​\n\n(ℓ,z); the observed nonzero slope \n∂Dq/∂ln⁡ℓ≠0\n∂D\nq\n\t​\n\n/∂lnℓ\n\n=0 supports the layered, band-pass fractality expected by DREAM.",
       "source": "admin_en",
       "category": "Predictions"
+    },
+    {
+      "number": 113,
+      "category": "Foundations",
+      "question": "What is T7.1 (Multi-Regime S2)?",
+      "answer": "T7.1 is a refinement of T7, confirmed in August 2026. It says: S2 is the LOCAL law of retention, but the global retention curve is a piecewise composition of S2 regimes. The kernel enters different regimes at reproducible fractional scale thresholds. Each regime is a clean S2; the transition scale clusters at fractional positions [0.25, 0.38] of the t-range across unrelated domains. The kernel itself does not change — the information state underneath it does. T7.1 introduces NO new postulates; it is derived from existing axioms T3 + A2 + A6. It is confirmed on 25 real datasets with binomial p = 3.4e-18 vs single-S2 null, and the positive control (synthetic 2-regime data with known t_break=0.3) is recovered in 98% of trials. See retention.html#t71 and theorems.html#t71."
+    },
+    {
+      "number": 114,
+      "category": "Foundations",
+      "question": "Is T7.1 the same as \"multiple Meta-Manifolds\"?",
+      "answer": "No. T7.1 was ORIGINALLY proposed as a multi-Meta-Manifold hypothesis: maybe the 4D world is a superposition of multiple projected structures. That strong hypothesis is NOT supported by the data. Probe A (drift vs mixture discriminator on 10 real curves): 10/10 classified as DRIFT, 0/10 as discrete mixture — closure violation is consistent with a SINGLE complicated kernel whose parameters drift. Probe B (cross-domain residual correlation): 18/30 significant pairs vs 1.5 expected, but no characteristic interference lag — excess correlation is contemporaneous, not at a hidden interference scale. The empirical signature is: one complicated kernel, evolving effective parameters, NOT multiple independent kernels interfering. This is exactly the identifiability wall (A2): we cannot prove \"one Meta-Manifold\" directly, but where we can discriminate, the data is consistent with one complicated kernel."
+    },
+    {
+      "number": 115,
+      "category": "Predictions",
+      "question": "What does T7.1 predict for new datasets?",
+      "answer": "T7.1 makes five falsifiable predictions: (P1) piecewise S2 with one searched breakpoint should strongly beat single-S2 (ΔAICc > 4) on real curves where the kernel crosses a regime boundary; (P2) transition positions cluster at reproducible fractional positions across unrelated domains (std < 0.20 in fractional coordinates); (P3) D systematically increases from regime 1 to regime 2 in >80% of cases (the kernel enters a regime where information is more susceptible to compression); (P4) pure single-S2 synthetic curves should NOT show this strong-improvement pattern above chance (binomial p < 0.001); (P5) the piecewise pipeline should recover known 2-regime t_break in >80% of synthetic 2-regime cases. ALL FIVE predictions confirmed on 25 real datasets (August 2026)."
+    },
+    {
+      "number": 116,
+      "category": "Falsification",
+      "question": "How was T7.1 tested against null and positive controls?",
+      "answer": "Two controls were used. NULL 1: 60 synthetic single-S2 curves with the same n=80, t-range, and noise level as real data, run through the IDENTICAL piecewise pipeline. Result: only 20% showed strong piecewise improvement (vs 100% on real data), and the t_break fractional std was 0.178 (vs real 0.169). Binomial test: P(>= 25/25 strong improvement | null p=0.20) = 3.4e-18 — essentially impossible under single-S2 null. POSITIVE CONTROL: 60 synthetic 2-regime S2 curves with known true t_break = 0.3, run through the identical pipeline. Result: 98% of fits landed within 0.1 of the true t_break (median recovery error = 0.05). The pipeline therefore correctly identifies 2-regime structure when it exists, and correctly distinguishes single-S2 from 2-regime. Both controls pass."
+    },
+    {
+      "number": 117,
+      "category": "Kernel & Invariants",
+      "question": "How does T7.1 affect the kernel invariants (λ_q, D_eff)?",
+      "answer": "T7.1 does NOT eliminate the kernel invariants — it enriches them. Instead of a single (D_eff, λ_q) per dataset, you have a SEQUENCE of (D_k, λ_q,k) for each regime k, plus the transition scales λ*_k→k+1. The single kernel is still fixed; what evolves is its effective parameters as the probe scale sweeps through different information states. Operationally: when fitting S2 to a retention curve, ALWAYS test piecewise-S2 with a searched breakpoint as an alternative. Report ΔAICc, the optimal t_break fraction, and the regime pair (D_1, D_2). Flag entries where D_2 hits the upper bound (D=10) — these may need a different second-regime functional form (e.g., super-Gaussian). The transition scale λ* is itself a new invariant: it clusters at fractional positions [0.25, 0.38] of the t-range across domains, suggesting a universal \"regime-change geometry\" of the projection."
+    },
+    {
+      "number": 118,
+      "category": "Math & Topology",
+      "question": "What is the mathematical form of T7.1 (piecewise S2)?",
+      "answer": "R(λ) ≈ exp[-(λ/λ_{q,1})^D_1] for λ < λ*, and R(λ) ≈ A_2 · exp[-(λ/λ_{q,2})^D_2] for λ ≥ λ*. Each regime is a clean S2 law with its own (D, λ_q). A_2 is fixed by continuity at the transition: A_2 = exp[-(λ*/λ_{q,1})^D_1 + (λ*/λ_{q,2})^D_2]. The transition scale λ* is found by AICc minimization over a candidate grid (typically 20%-80% of the t-range). Generalization to N regimes: R(λ) = piecewise S2 with breakpoints λ*_1, λ*_2, ..., λ*_{N-1}. In practice 2 regimes suffice for 25/25 tested real datasets; 3-regime fits have not yet been needed. The closure-violation signal in the registry (30.3% of 208 entries show S2_DUST beats single S2 by ΔAICc ≤ -4) is now explained: those are datasets where the regime transition is sharp enough that single-S2 cannot approximate both regimes."
+    },
+    {
+      "number": 119,
+      "category": "Foundations",
+      "question": "Is T7.1 a new axiom or a derived consequence?",
+      "answer": "Derived. T7.1 introduces NO new postulates. It is the natural piecewise refinement of T7, derived from existing axioms: T3 (S2 local law), A2 (non-invertible projection — kernel cannot resolve sub-λ structure), and A6 (finite resolution implies regimes — coherence cliff separates two regimes). The derivation: at any single locality, retention is S2 with local parameters (T3). The kernel has finite resolution (A2), so as the probe scale sweeps, the kernel samples different parts of the underlying information state. A coherence cliff separates regimes (A6). When the information state changes character across the probe range, the kernel enters a new S2 regime at a characteristic transition scale λ*. The global curve is a piecewise composition. This is exactly what the Minimal-Extension Principle demands: the framework grows its consequence set (numerator) without growing its axiom set (denominator). T7.1 is a case study of the principle working as designed."
+    },
+    {
+      "number": 120,
+      "category": "Falsification",
+      "question": "What are the honest caveats of T7.1?",
+      "answer": "Four caveats. (1) 24% of datasets show D_2 hitting the upper bound (D=10), suggesting the \"second regime\" might not be S2 but a different decay law (e.g., super-Gaussian) that the S2 functional form approximates. The transition is real; the second-regime identity is partially open. (2) The clustering magnitude is modest: real std (0.169) is only 1.05x tighter than single-S2 null (0.178). Statistical significance is huge (binomial p = 3.4e-18) but the effect size is small. (3) Reproducibility is in fractional position, not absolute scale. Datasets have different t-ranges (days vs hours vs years), so \"reproducible fractional position\" might mean \"the breakpoint naturally lands in the early-to-middle of any retention curve.\" (4) Sample size is 25 real datasets. More would strengthen the claim, but the existing evidence is decisive against the single-S2 null. D_1 and D_2 are not correlated (Spearman p=0.93) — the two regimes appear to be independently drawn, not constrained to a 1D manifold in (D_1, D_2) space."
     }
   ]
 }
