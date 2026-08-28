@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-27T22:30:43.372455+00:00",
+  "initialized": "2026-08-28T11:43:33.779866+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -7252,6 +7252,40 @@
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=0.2325, R²=0.8130. D_eff=0.233 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=15.85). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: PubChemLite for Exposomics",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22143400",
+      "registry_date": "2026-08-28",
+      "D": 1.0044,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.0044, R²=1.0000. D_eff=1.004 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=840.79). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

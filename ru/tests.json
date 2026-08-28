@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-27T22:29:48Z",
-  "total_tests": 213,
+  "exported_at": "2026-08-28T11:42:40Z",
+  "total_tests": 214,
   "fields": [
     "id",
     "name",
@@ -3288,6 +3288,22 @@
       "source": "auto-scan 2026-08-27",
       "date": "2026-08-27",
       "url": "10.5281/zenodo.22106580"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: PubChemLite for Exposomics",
+      "domain": "scouting",
+      "D": 1.0044,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 840.79,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=840.79).",
+      "narrative": "D_eff=1.0044, R²=1.0000. D_eff=1.004 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=840.79). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-28",
+      "date": "2026-08-28",
+      "url": "10.5281/zenodo.22143400"
     }
   ]
 }
