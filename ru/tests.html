@@ -247,7 +247,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "29 Aug 2026 10:00 EST";
+const LAST_REFRESH = "29 Aug 2026 15:36 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -484,6 +484,10 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data for \"Not Just Smart, But Interactive: AI-Powe",domain:"scouting",D:0.3752,r2:0.8395,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:4.4400,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=4.44). S2+dust decomposition: D1=7.9156, D2=1.3593, R²=0.8506, AICc=-609.27. S2+dust does not beat BIEXP. Needs investigation.",narrative:"D_eff=0.3752, R²=0.8395. D_eff=0.375 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=4.44). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-26",date:"2026-08-26",url:"10.5281/zenodo.22116217",image:null}
   ,{id:"",name:"Zenodo: Early results of species distribution modelling",domain:"scouting",D:0.2325,r2:0.8130,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:15.8500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=15.85).",narrative:"D_eff=0.2325, R²=0.8130. D_eff=0.233 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=15.85). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-27",date:"2026-08-27",url:"10.5281/zenodo.22106580",image:null}
   ,{id:"",name:"Zenodo: PubChemLite for Exposomics",domain:"scouting",D:1.0044,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:840.7900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=840.79).",narrative:"D_eff=1.0044, R²=1.0000. D_eff=1.004 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=840.79). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-28",date:"2026-08-28",url:"10.5281/zenodo.22143400",image:null}
+  ,{id:"",name:"Zenodo: Structural heterogeneity and spatial validation of",domain:"scouting",D:1.3119,r2:0.9984,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:26.5500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=26.55).",narrative:"D_eff=1.3119, R²=0.9984. D_eff=1.312 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=26.55). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-29",date:"2026-08-29",url:"10.5281/zenodo.22164381",image:null}
+  ,{id:"",name:"Zenodo: Structural heterogeneity and spatial validation of",domain:"scouting",D:0.8615,r2:0.9658,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:10.6300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=10.63).",narrative:"D_eff=0.8615, R²=0.9658. D_eff=0.862 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=10.63). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-29",date:"2026-08-29",url:"10.5281/zenodo.22164381",image:null}
+  ,{id:"",name:"Zenodo: Structural heterogeneity and spatial validation of",domain:"scouting",D:0.3793,r2:0.9424,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:0.8200,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.82, within ±2).",narrative:"D_eff=0.3793, R²=0.9424. D_eff=0.379 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с BIEXP, ΔAICc=0.82).",source:"auto-scan 2026-08-29",date:"2026-08-29",url:"10.5281/zenodo.22164381",image:null}
+  ,{id:"",name:"Zenodo: Structural heterogeneity and spatial validation of",domain:"scouting",D:0.1555,r2:0.8293,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:2.7000,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.7).",narrative:"D_eff=0.1555, R²=0.8293. D_eff=0.155 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.70). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-29",date:"2026-08-29",url:"10.5281/zenodo.22164381",image:null}
 
 ];
 
@@ -769,33 +773,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 202,
-  "d_mle": 1.6193,
-  "lam_mle": 1.3526,
-  "ks_p": 0.0061,
+  "n": 206,
+  "d_mle": 1.6073,
+  "lam_mle": 1.3402,
+  "ks_p": 0.007,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1188,
-  "ks_boot_mean": 0.0439,
-  "ks_boot_95": 0.0625,
-  "d_direct": 1.9082,
-  "r2_direct": 0.9775,
-  "d_linear": 1.5884,
-  "r2_linear": 0.972,
-  "natural": 71,
-  "extraction": 131,
-  "mean": 1.2121,
-  "median": 1.2058,
-  "total": 214,
-  "compared": 212,
+  "ks_stat_obs": 0.1163,
+  "ks_boot_mean": 0.0432,
+  "ks_boot_95": 0.0614,
+  "d_direct": 1.8743,
+  "r2_direct": 0.9773,
+  "d_linear": 1.5768,
+  "r2_linear": 0.9719,
+  "natural": 74,
+  "extraction": 132,
+  "mean": 1.2018,
+  "median": 1.1977,
+  "total": 218,
+  "compared": 216,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.6852,
+  "ad_stat": 2.7096,
   "delta_aic_weibull": 0.0,
   "delta_aic_gamma": 3.75,
-  "delta_aic_lognormal": 34.43,
-  "silverman_p": 0.675,
+  "delta_aic_lognormal": 34.66,
+  "silverman_p": 0.695,
   "boot_lo": 1.06,
-  "boot_hi": 1.8,
+  "boot_hi": 1.78,
   "date": "2026-08-29"
 };
 

@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-29T14:00:34Z",
-  "total_tests": 214,
+  "exported_at": "2026-08-29T19:36:42Z",
+  "total_tests": 218,
   "fields": [
     "id",
     "name",
@@ -3304,6 +3304,70 @@
       "source": "auto-scan 2026-08-28",
       "date": "2026-08-28",
       "url": "10.5281/zenodo.22143400"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Structural heterogeneity and spatial validation of",
+      "domain": "scouting",
+      "D": 1.3119,
+      "r2": 0.9984,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 26.55,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=26.55).",
+      "narrative": "D_eff=1.3119, R²=0.9984. D_eff=1.312 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=26.55). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-29",
+      "date": "2026-08-29",
+      "url": "10.5281/zenodo.22164381"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Structural heterogeneity and spatial validation of",
+      "domain": "scouting",
+      "D": 0.8615,
+      "r2": 0.9658,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 10.63,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=10.63).",
+      "narrative": "D_eff=0.8615, R²=0.9658. D_eff=0.862 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=10.63). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-29",
+      "date": "2026-08-29",
+      "url": "10.5281/zenodo.22164381"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Structural heterogeneity and spatial validation of",
+      "domain": "scouting",
+      "D": 0.3793,
+      "r2": 0.9424,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 0.82,
+      "best_alt": "BIEXP",
+      "model_note": "S2 ties BIEXP (ΔAICc=0.82, within ±2).",
+      "narrative": "D_eff=0.3793, R²=0.9424. D_eff=0.379 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties BIEXP, ΔAICc=0.82).",
+      "source": "auto-scan 2026-08-29",
+      "date": "2026-08-29",
+      "url": "10.5281/zenodo.22164381"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Structural heterogeneity and spatial validation of",
+      "domain": "scouting",
+      "D": 0.1555,
+      "r2": 0.8293,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.7,
+      "best_alt": "POWER",
+      "model_note": "S2 loses to POWER (ΔAICc=2.7).",
+      "narrative": "D_eff=0.1555, R²=0.8293. D_eff=0.155 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=2.70). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-08-29",
+      "date": "2026-08-29",
+      "url": "10.5281/zenodo.22164381"
     }
   ]
 }
