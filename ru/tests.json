@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-08-30T19:31:42Z",
-  "total_tests": 219,
+  "exported_at": "2026-08-30T22:58:58Z",
+  "total_tests": 222,
   "fields": [
     "id",
     "name",
@@ -1395,7 +1395,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.75,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3317, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3426, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.1242, R²=0.3034. D_eff=0.124 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=17.75). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -3384,6 +3384,54 @@
       "source": "auto-scan 2026-08-30",
       "date": "2026-08-30",
       "url": "10.5281/zenodo.22177219"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: BOLD–INSDC record-level overlap by taxonomic class",
+      "domain": "scouting",
+      "D": 1.2819,
+      "r2": 0.9908,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 614.22,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=614.22).",
+      "narrative": "D_eff=1.2819, R²=0.9908. D_eff=1.282 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=614.22). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-30",
+      "date": "2026-08-30",
+      "url": "10.5281/zenodo.22181406"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: BOLD–INSDC record-level overlap by taxonomic class",
+      "domain": "scouting",
+      "D": 1.3443,
+      "r2": 0.9934,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 285.32,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=285.32).",
+      "narrative": "D_eff=1.3443, R²=0.9934. D_eff=1.344 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=285.32). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-30",
+      "date": "2026-08-30",
+      "url": "10.5281/zenodo.22181406"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: BOLD–INSDC record-level overlap by taxonomic class",
+      "domain": "scouting",
+      "D": 1.2885,
+      "r2": 0.9912,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 409.93,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=409.93).",
+      "narrative": "D_eff=1.2885, R²=0.9912. D_eff=1.288 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=409.93). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-08-30",
+      "date": "2026-08-30",
+      "url": "10.5281/zenodo.22181406"
     }
   ]
 }
