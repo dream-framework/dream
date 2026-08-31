@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-08-31T05:51:20.410833+00:00",
+  "initialized": "2026-08-31T16:23:05.125614+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5624, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=383.16). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5624, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=382.54). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -3813,11 +3813,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=2.9027, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=2.9028, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -7558,6 +7558,142 @@
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=1.2885, R²=0.9912. D_eff=1.288 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=409.93). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Level, Before Shape: Landscape-Dependent Control o",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22210327",
+      "registry_date": "2026-08-31",
+      "D": 5.0831,
+      "r2": 0.97,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=5.0831, R²=0.9700. D_eff=5.083 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=20.00). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "censored",
+      "exclusion_reason": "optimizer boundary",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Level, Before Shape: Landscape-Dependent Control o",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22210327",
+      "registry_date": "2026-08-31",
+      "D": 4.264,
+      "r2": 0.3803,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=4.2640, R²=0.3803. D_eff=4.264 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=4.27). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Level, Before Shape: Landscape-Dependent Control o",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22210327",
+      "registry_date": "2026-08-31",
+      "D": 0.7362,
+      "r2": 0.9359,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "narrative": "D_eff=0.7362, R²=0.9359. D_eff=0.736 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=-0.21).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Level, Before Shape: Landscape-Dependent Control o",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.22210327",
+      "registry_date": "2026-08-31",
+      "D": 0.1653,
+      "r2": 0.7628,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.1653, R²=0.7628. D_eff=0.165 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=5.41). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
