@@ -257,7 +257,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "1 Sep 2026 01:28 EST";
+const LAST_REFRESH = "1 Sep 2026 09:40 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -405,7 +405,7 @@ const TESTS = [
   ,{id:"",name:"NASA POWER: Colorado USA solar irradiance (hourly) (ACF retention)",domain:"solar_energy",D:0.0741,r2:0.1062,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.6800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.68). S2+dust fit: D1=2.3164, D2=6.1605, R²=0.2062, AICc=-688.42. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.0741, R²=0.1062. D_eff=0.074 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=17.68). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=-105.0&latitude=40.0&community=RE&format=JSON",image:null}
   ,{id:"",name:"NASA POWER: Berlin DE solar irradiance (hourly) (ACF retention)",domain:"solar_energy",D:0.0485,r2:0.0460,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:8.5800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=8.58). S2+dust fit: D1=2.8085, D2=6.5203, R²=0.1080, AICc=-573.87. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.0485, R²=0.0460. D_eff=0.049 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=8.58). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=13.4&latitude=52.5&community=RE&format=JSON",image:null}
   ,{id:"",name:"NASA POWER: Cape Town ZA solar irradiance (hourly) (ACF retention)",domain:"solar_energy",D:0.0473,r2:0.0400,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:7.6000,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=7.60). S2+dust fit: D1=2.7394, D2=6.844, R²=0.0964, AICc=-553.94. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.0473, R²=0.0400. D_eff=0.047 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=7.60). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=18.4&latitude=-33.9&community=RE&format=JSON",image:null}
-  ,{id:"",name:"Open-Meteo: Delhi precipitation_sum (ACF retention)",domain:"environmental",D:0.4251,r2:0.7261,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:45.5300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=45.53). S2+dust fit: D1=0.4639, D2=9.9892, R²=0.8131, AICc=-744.91. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.4251, R²=0.7261. D_eff=0.425 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=45.53). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
+  ,{id:"",name:"Open-Meteo: Delhi precipitation_sum (ACF retention)",domain:"environmental",D:0.4251,r2:0.7261,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:45.5300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=45.53). S2+dust fit: D1=0.4639, D2=9.9998, R²=0.8131, AICc=-744.91. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.4251, R²=0.7261. D_eff=0.425 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=45.53). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
   ,{id:"",name:"USGS: Potomac River at Point of Rocks, MD (daily discharge) (ACF retention)",domain:"hydrology",D:0.6759,r2:0.6421,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:12.2100,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.21). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D_eff=0.6759, R²=0.6421. D_eff=0.676 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=12.21). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"Zenodo: Quantitative Data from a Mixed-Methods Case Study ",domain:"scouting",D:4.4128,r2:0.7188,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D_eff=4.4128, R²=0.7188. D_eff=4.413 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=20.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21792075",image:null}
   ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=17.03). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
@@ -507,6 +507,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Level, Before Shape: Landscape-Dependent Control o",domain:"scouting",D:4.2640,r2:0.3803,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:4.2700,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=4.27).",narrative:"D_eff=4.2640, R²=0.3803. D_eff=4.264 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=4.27). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-31",date:"2026-08-31",url:"10.5281/zenodo.22210327",image:null}
   ,{id:"",name:"Zenodo: Level, Before Shape: Landscape-Dependent Control o",domain:"scouting",D:0.7362,r2:0.9359,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:-0.2100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=-0.21, within ±2).",narrative:"D_eff=0.7362, R²=0.9359. D_eff=0.736 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=-0.21).",source:"auto-scan 2026-08-31",date:"2026-08-31",url:"10.5281/zenodo.22210327",image:null}
   ,{id:"",name:"Zenodo: Level, Before Shape: Landscape-Dependent Control o",domain:"scouting",D:0.1653,r2:0.7628,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:5.4100,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=5.41).",narrative:"D_eff=0.1653, R²=0.7628. D_eff=0.165 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=5.41). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-31",date:"2026-08-31",url:"10.5281/zenodo.22210327",image:null}
+  ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:1.1132,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2030.7100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2030.71).",narrative:"D_eff=1.1132, R²=0.9999. D_eff=1.113 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=2030.71). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
+  ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:1.1035,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1386.0900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1386.09).",narrative:"D_eff=1.1035, R²=0.9999. D_eff=1.103 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=1386.09). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
+  ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:0.6970,r2:0.8723,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.4000,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.4, within ±2).",narrative:"D_eff=0.6970, R²=0.8723. D_eff=0.697 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=1.40).",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
 
 ];
 
@@ -804,33 +807,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 213,
-  "d_mle": 1.5844,
-  "lam_mle": 1.3519,
-  "ks_p": 0.0062,
+  "n": 216,
+  "d_mle": 1.5915,
+  "lam_mle": 1.3488,
+  "ks_p": 0.0057,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1155,
-  "ks_boot_mean": 0.0426,
-  "ks_boot_95": 0.0609,
-  "d_direct": 1.8852,
-  "r2_direct": 0.9771,
-  "d_linear": 1.5655,
-  "r2_linear": 0.9707,
-  "natural": 76,
-  "extraction": 137,
-  "mean": 1.2134,
-  "median": 1.2107,
-  "total": 226,
-  "compared": 224,
+  "ks_stat_obs": 0.1156,
+  "ks_boot_mean": 0.0424,
+  "ks_boot_95": 0.0606,
+  "d_direct": 1.9061,
+  "r2_direct": 0.9782,
+  "d_linear": 1.5768,
+  "r2_linear": 0.9714,
+  "natural": 77,
+  "extraction": 139,
+  "mean": 1.21,
+  "median": 1.1977,
+  "total": 229,
+  "compared": 227,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.9171,
+  "ad_stat": 2.9002,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.88,
-  "delta_aic_lognormal": 33.91,
-  "silverman_p": 0.735,
+  "delta_aic_gamma": 2.73,
+  "delta_aic_lognormal": 34.07,
+  "silverman_p": 0.745,
   "boot_lo": 1.06,
-  "boot_hi": 1.742,
+  "boot_hi": 1.745,
   "date": "2026-09-01"
 };
 

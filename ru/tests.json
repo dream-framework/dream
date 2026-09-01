@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-01T05:28:57Z",
-  "total_tests": 226,
+  "exported_at": "2026-09-01T13:40:57Z",
+  "total_tests": 229,
   "fields": [
     "id",
     "name",
@@ -1875,7 +1875,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 45.53,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=45.53). S2+dust fit: D1=0.4639, D2=9.9892, R²=0.8131, AICc=-744.91. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=45.53). S2+dust fit: D1=0.4639, D2=9.9998, R²=0.8131, AICc=-744.91. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.4251, R²=0.7261. D_eff=0.425 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=45.53). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -3496,6 +3496,54 @@
       "source": "auto-scan 2026-08-31",
       "date": "2026-08-31",
       "url": "10.5281/zenodo.22210327"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A specification screen for administrative data bef",
+      "domain": "scouting",
+      "D": 1.1132,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2030.71,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2030.71).",
+      "narrative": "D_eff=1.1132, R²=0.9999. D_eff=1.113 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2030.71). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-01",
+      "date": "2026-09-01",
+      "url": "10.5281/zenodo.22232003"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A specification screen for administrative data bef",
+      "domain": "scouting",
+      "D": 1.1035,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 1386.09,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=1386.09).",
+      "narrative": "D_eff=1.1035, R²=0.9999. D_eff=1.103 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1386.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-01",
+      "date": "2026-09-01",
+      "url": "10.5281/zenodo.22232003"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A specification screen for administrative data bef",
+      "domain": "scouting",
+      "D": 0.697,
+      "r2": 0.8723,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 1.4,
+      "best_alt": "EXP",
+      "model_note": "S2 ties EXP (ΔAICc=1.4, within ±2).",
+      "narrative": "D_eff=0.6970, R²=0.8723. D_eff=0.697 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с EXP, ΔAICc=1.40).",
+      "source": "auto-scan 2026-09-01",
+      "date": "2026-09-01",
+      "url": "10.5281/zenodo.22232003"
     }
   ]
 }
