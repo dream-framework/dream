@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-02T19:36:27Z",
-  "total_tests": 234,
+  "exported_at": "2026-09-02T22:53:04Z",
+  "total_tests": 237,
   "fields": [
     "id",
     "name",
@@ -3624,6 +3624,54 @@
       "source": "auto-scan 2026-09-02",
       "date": "2026-09-02",
       "url": "10.5281/zenodo.22260023"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Linear morphometrics fail to support strong sexual",
+      "domain": "scouting",
+      "D": 1.2719,
+      "r2": 0.9987,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -8.87,
+      "best_alt": "EXP",
+      "model_note": "S2 beats EXP (ΔAICc=-8.87).",
+      "narrative": "D_eff=1.2719, R²=0.9987. D_eff=1.272 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-8.87).",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.20128095"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Linear morphometrics fail to support strong sexual",
+      "domain": "scouting",
+      "D": 1.309,
+      "r2": 0.9982,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -3.18,
+      "best_alt": "EXP",
+      "model_note": "S2 beats EXP (ΔAICc=-3.18).",
+      "narrative": "D_eff=1.3090, R²=0.9982. D_eff=1.309 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-3.18).",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.20128095"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Linear morphometrics fail to support strong sexual",
+      "domain": "scouting",
+      "D": 1.7825,
+      "r2": 0.89,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.7,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=4.7).",
+      "narrative": "D_eff=1.7825, R²=0.8900. D_eff=1.782 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=4.70). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.20128095"
     }
   ]
 }

@@ -247,7 +247,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "2 Sep 2026 15:36 EST";
+const LAST_REFRESH = "2 Sep 2026 18:53 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -504,6 +504,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.0007,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1027.8900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1027.89).",narrative:"D_eff=1.0007, R²=1.0000. D_eff=1.001 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1027.89). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
   ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.3591,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:146.4500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=146.45).",narrative:"D_eff=1.3591, R²=0.9985. D_eff=1.359 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=146.45). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
   ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.3873,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:486.1700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=486.17).",narrative:"D_eff=1.3873, R²=0.9985. D_eff=1.387 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=486.17). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
+  ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.2719,r2:0.9987,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-8.8700,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-8.87).",narrative:"D_eff=1.2719, R²=0.9987. D_eff=1.272 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-8.87).",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
+  ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.3090,r2:0.9982,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-3.1800,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-3.18).",narrative:"D_eff=1.3090, R²=0.9982. D_eff=1.309 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-3.18).",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
+  ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.7825,r2:0.8900,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:4.7000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=4.7).",narrative:"D_eff=1.7825, R²=0.8900. D_eff=1.782 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=4.70). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
 
 ];
 
@@ -789,33 +792,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 221,
-  "d_mle": 1.6091,
-  "lam_mle": 1.3538,
-  "ks_p": 0.0036,
+  "n": 224,
+  "d_mle": 1.6216,
+  "lam_mle": 1.3581,
+  "ks_p": 0.0029,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1187,
-  "ks_boot_mean": 0.042,
-  "ks_boot_95": 0.06,
-  "d_direct": 1.9531,
-  "r2_direct": 0.9782,
-  "d_linear": 1.5904,
-  "r2_linear": 0.971,
+  "ks_stat_obs": 0.1198,
+  "ks_boot_mean": 0.0416,
+  "ks_boot_95": 0.0599,
+  "d_direct": 1.9892,
+  "r2_direct": 0.9777,
+  "d_linear": 1.5977,
+  "r2_linear": 0.9703,
   "natural": 77,
-  "extraction": 144,
-  "mean": 1.2135,
-  "median": 1.2008,
-  "total": 234,
-  "compared": 232,
+  "extraction": 147,
+  "mean": 1.2167,
+  "median": 1.2123,
+  "total": 237,
+  "compared": 235,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 3.0479,
+  "ad_stat": 3.2139,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.11,
-  "delta_aic_lognormal": 36.05,
-  "silverman_p": 0.715,
+  "delta_aic_gamma": 3.51,
+  "delta_aic_lognormal": 37.68,
+  "silverman_p": 0.72,
   "boot_lo": 1.06,
-  "boot_hi": 1.765,
+  "boot_hi": 1.781,
   "date": "2026-09-02"
 };
 
