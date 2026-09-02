@@ -247,7 +247,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "2 Sep 2026 00:52 EST";
+const LAST_REFRESH = "2 Sep 2026 09:01 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -499,6 +499,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:1.1132,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2030.7100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2030.71).",narrative:"D_eff=1.1132, R²=0.9999. D_eff=1.113 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2030.71). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
   ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:1.1035,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1386.0900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1386.09).",narrative:"D_eff=1.1035, R²=0.9999. D_eff=1.103 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1386.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
   ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:0.6970,r2:0.8723,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.4000,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.4, within ±2).",narrative:"D_eff=0.6970, R²=0.8723. D_eff=0.697 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с EXP, ΔAICc=1.40).",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
+  ,{id:"",name:"Zenodo: COVID-19-Hospitalisierungen in Deutschland",domain:"scouting",D:1.0099,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:3296.4900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=3296.49).",narrative:"D_eff=1.0099, R²=1.0000. D_eff=1.010 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=3296.49). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22245634",image:null}
+  ,{id:"",name:"Zenodo: COVID-19-Hospitalisierungen in Deutschland",domain:"scouting",D:2.0622,r2:0.1851,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.06).",narrative:"D_eff=2.0622, R²=0.1851. D_eff=2.062 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.06). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22245634",image:null}
 
 ];
 
@@ -784,33 +786,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 216,
-  "d_mle": 1.5916,
-  "lam_mle": 1.3488,
-  "ks_p": 0.0057,
+  "n": 218,
+  "d_mle": 1.5977,
+  "lam_mle": 1.3525,
+  "ks_p": 0.005,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1156,
-  "ks_boot_mean": 0.0424,
-  "ks_boot_95": 0.0606,
-  "d_direct": 1.9061,
-  "r2_direct": 0.9782,
-  "d_linear": 1.5768,
-  "r2_linear": 0.9714,
+  "ks_stat_obs": 0.1163,
+  "ks_boot_mean": 0.0423,
+  "ks_boot_95": 0.0609,
+  "d_direct": 1.9151,
+  "r2_direct": 0.9789,
+  "d_linear": 1.5811,
+  "r2_linear": 0.9718,
   "natural": 77,
-  "extraction": 139,
-  "mean": 1.21,
+  "extraction": 141,
+  "mean": 1.213,
   "median": 1.1977,
-  "total": 229,
-  "compared": 227,
+  "total": 231,
+  "compared": 229,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.8998,
+  "ad_stat": 2.8666,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.73,
-  "delta_aic_lognormal": 34.07,
-  "silverman_p": 0.745,
+  "delta_aic_gamma": 2.92,
+  "delta_aic_lognormal": 34.89,
+  "silverman_p": 0.73,
   "boot_lo": 1.06,
-  "boot_hi": 1.745,
+  "boot_hi": 1.752,
   "date": "2026-09-02"
 };
 

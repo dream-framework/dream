@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-02T04:52:26Z",
-  "total_tests": 229,
+  "exported_at": "2026-09-02T13:01:05Z",
+  "total_tests": 231,
   "fields": [
     "id",
     "name",
@@ -3544,6 +3544,38 @@
       "source": "auto-scan 2026-09-01",
       "date": "2026-09-01",
       "url": "10.5281/zenodo.22232003"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: COVID-19-Hospitalisierungen in Deutschland",
+      "domain": "scouting",
+      "D": 1.0099,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 3296.49,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=3296.49).",
+      "narrative": "D_eff=1.0099, R²=1.0000. D_eff=1.010 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=3296.49). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.22245634"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: COVID-19-Hospitalisierungen in Deutschland",
+      "domain": "scouting",
+      "D": 2.0622,
+      "r2": 0.1851,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.06,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.06).",
+      "narrative": "D_eff=2.0622, R²=0.1851. D_eff=2.062 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.06). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.22245634"
     }
   ]
 }
