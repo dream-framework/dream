@@ -257,7 +257,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "2 Sep 2026 09:01 EST";
+const LAST_REFRESH = "2 Sep 2026 15:36 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -366,7 +366,7 @@ const TESTS = [
   ,{id:"",name:"NDBC Buoy 51001 (NW Hawaiian) wave height (ACF retention)",domain:"oceanography",D:0.5553,r2:0.9885,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:0.0000,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=0.0, within ±2).",narrative:"D_eff=0.5553, R²=0.9885. D_eff=0.555 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties BIEXP, ΔAICc=0.00).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://www.ndbc.noaa.gov/data/realtime2/51001.txt",image:null}
   ,{id:"",name:"CoinGecko: dogecoin (ACF retention)",domain:"crypto",D:1.6637,r2:0.9981,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-119.9500,best_alt:"GAUSS",model_note:"S2 beats GAUSS (ΔAICc=-119.95).",narrative:"D_eff=1.6637, R²=0.9981. D_eff=1.664 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats GAUSS, ΔAICc=-119.95).",source:"auto-scan 2026-08-02",date:"2026-08-02",url:"https://api.coingecko.com/api/v3/coins/dogecoin/market_chart?vs_currency=usd&days=365&interval=daily",image:null}
   ,{id:"",name:"SWPC GOES X-ray Flux (1-day, 0.1-0.8nm band) (ACF retention)",domain:"solar_physics",D:1.0156,r2:0.9766,verdict:"D_NEAR_1",model_verdict:"S2_TIES",delta_aicc:1.8100,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.81, within ±2).",narrative:"D_eff=1.0156, R²=0.9766. D_eff=1.016 ≈ 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=1.81).",source:"auto-scan 2026-08-03",date:"2026-08-03",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",image:null}
-  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5624,r2:0.9956,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:381.9700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=381.97). S2+dust fit: D1=1.0596, D2=0.7238, R²=0.9994, AICc=-2167.96. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.5624, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=381.97). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
+  ,{id:"",name:"FRED VIXCLS (VIX Volatility Index) (ACF retention)",domain:"financial",D:0.5623,r2:0.9956,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:381.5800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=381.58). S2+dust fit: D1=1.0579, D2=0.7245, R²=0.9994, AICc=-2167.31. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.5623, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=381.58). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",image:null}
   ,{id:"",name:"FRED T10YIE (10-Year Breakeven Inflation) (ACF retention)",domain:"financial",D:1.0106,r2:0.9963,verdict:"D_NEAR_1",model_verdict:"S2_DUST_WINS",delta_aicc:932.8600,best_alt:"S2_DUST",model_note:"S2 loses to S2+dust (ΔAICc=932.86). S2+dust is the best overall model: D1=2.3066, D2=0.9741, R²=1.0000, AICc=-2679.84. Dust decomposition confirmed — not a DREAM failure.",narrative:"D_eff=1.0106, R²=0.9963. D_eff=1.011 ≈ 1 (probe-scale effective parameter). Multi-scale: S2+dust reveals additional structure (ΔAICc=932.86 vs single S2). Not necessarily the underlying physical model.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=T10YIE",image:null}
   ,{id:"",name:"FRED DGS10 (10-Year Treasury Rate) (ACF retention)",domain:"financial",D:0.9601,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:9.8500,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=9.85). S2+dust fit: D1=1.0158, D2=2.2078, R²=0.9999, AICc=-3376.66. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.9601, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.85). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",image:null}
   ,{id:"",name:"COVID-19 confirmed (daily new, global) (ACF retention)",domain:"ecological",D:1.0071,r2:0.9548,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:145.1400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=145.14). S2+dust fit: D1=1.6636, D2=0.0402, R²=0.9788, AICc=-1301.03. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=1.0071, R²=0.9548. D_eff=1.007 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=145.14). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",image:null}
@@ -512,6 +512,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: A specification screen for administrative data bef",domain:"scouting",D:0.6970,r2:0.8723,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.4000,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=1.4, within ±2).",narrative:"D_eff=0.6970, R²=0.8723. D_eff=0.697 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties EXP, ΔAICc=1.40).",source:"auto-scan 2026-09-01",date:"2026-09-01",url:"10.5281/zenodo.22232003",image:null}
   ,{id:"",name:"Zenodo: COVID-19-Hospitalisierungen in Deutschland",domain:"scouting",D:1.0099,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:3296.4900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=3296.49).",narrative:"D_eff=1.0099, R²=1.0000. D_eff=1.010 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=3296.49). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22245634",image:null}
   ,{id:"",name:"Zenodo: COVID-19-Hospitalisierungen in Deutschland",domain:"scouting",D:2.0622,r2:0.1851,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.06).",narrative:"D_eff=2.0622, R²=0.1851. D_eff=2.062 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.06). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22245634",image:null}
+  ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.0007,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1027.8900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1027.89).",narrative:"D_eff=1.0007, R²=1.0000. D_eff=1.001 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=1027.89). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
+  ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.3591,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:146.4500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=146.45).",narrative:"D_eff=1.3591, R²=0.9985. D_eff=1.359 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=146.45). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
+  ,{id:"",name:"Zenodo: Data supporting:Broadband ventilated acoustic sile",domain:"scouting",D:1.3873,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:486.1700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=486.17).",narrative:"D_eff=1.3873, R²=0.9985. D_eff=1.387 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=486.17). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.22260023",image:null}
 
 ];
 
@@ -809,33 +812,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 218,
-  "d_mle": 1.5977,
-  "lam_mle": 1.3525,
-  "ks_p": 0.005,
+  "n": 221,
+  "d_mle": 1.6091,
+  "lam_mle": 1.3538,
+  "ks_p": 0.0036,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1163,
-  "ks_boot_mean": 0.0423,
-  "ks_boot_95": 0.0609,
-  "d_direct": 1.9151,
-  "r2_direct": 0.9789,
-  "d_linear": 1.5811,
-  "r2_linear": 0.9718,
+  "ks_stat_obs": 0.1188,
+  "ks_boot_mean": 0.042,
+  "ks_boot_95": 0.06,
+  "d_direct": 1.9531,
+  "r2_direct": 0.9782,
+  "d_linear": 1.5904,
+  "r2_linear": 0.971,
   "natural": 77,
-  "extraction": 141,
-  "mean": 1.213,
-  "median": 1.1977,
-  "total": 231,
-  "compared": 229,
+  "extraction": 144,
+  "mean": 1.2135,
+  "median": 1.2008,
+  "total": 234,
+  "compared": 232,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.8671,
+  "ad_stat": 3.0483,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.92,
-  "delta_aic_lognormal": 34.89,
-  "silverman_p": 0.73,
+  "delta_aic_gamma": 3.11,
+  "delta_aic_lognormal": 36.05,
+  "silverman_p": 0.715,
   "boot_lo": 1.06,
-  "boot_hi": 1.752,
+  "boot_hi": 1.765,
   "date": "2026-09-02"
 };
 

@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-02T13:01:05Z",
-  "total_tests": 231,
+  "exported_at": "2026-09-02T19:36:27Z",
+  "total_tests": 234,
   "fields": [
     "id",
     "name",
@@ -1245,14 +1245,14 @@
       "id": "",
       "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
       "domain": "financial",
-      "D": 0.5624,
+      "D": 0.5623,
       "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 381.97,
+      "delta_aicc": 381.58,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=381.97). S2+dust fit: D1=1.0596, D2=0.7238, R²=0.9994, AICc=-2167.96. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5624, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=381.97). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=381.58). S2+dust fit: D1=1.0579, D2=0.7245, R²=0.9994, AICc=-2167.31. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5623, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=381.58). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -3576,6 +3576,54 @@
       "source": "auto-scan 2026-09-02",
       "date": "2026-09-02",
       "url": "10.5281/zenodo.22245634"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data supporting:Broadband ventilated acoustic sile",
+      "domain": "scouting",
+      "D": 1.0007,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 1027.89,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=1027.89).",
+      "narrative": "D_eff=1.0007, R²=1.0000. D_eff=1.001 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=1027.89). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.22260023"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data supporting:Broadband ventilated acoustic sile",
+      "domain": "scouting",
+      "D": 1.3591,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 146.45,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=146.45).",
+      "narrative": "D_eff=1.3591, R²=0.9985. D_eff=1.359 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=146.45). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.22260023"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data supporting:Broadband ventilated acoustic sile",
+      "domain": "scouting",
+      "D": 1.3873,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 486.17,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=486.17).",
+      "narrative": "D_eff=1.3873, R²=0.9985. D_eff=1.387 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=486.17). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-02",
+      "date": "2026-09-02",
+      "url": "10.5281/zenodo.22260023"
     }
   ]
 }
