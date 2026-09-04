@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-09-04T12:58:00Z",
+  "exported_at": "2026-09-04T19:12:27Z",
   "total_tests": 237,
   "fields": [
     "id",
@@ -1249,10 +1249,10 @@
       "r2": 0.9956,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 381.01,
+      "delta_aicc": 380.28,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=381.01). S2+dust fit: D1=1.0556, D2=0.7253, R²=0.9994, AICc=-2166.40. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5623, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=381.01). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=380.28). S2+dust fit: D1=1.0529, D2=0.7264, R²=0.9994, AICc=-2165.26. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5623, R²=0.9956. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=380.28). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -1795,7 +1795,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 12.38,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0353, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0357, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.2322, R²=0.4585. D_eff=0.232 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=12.38). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
