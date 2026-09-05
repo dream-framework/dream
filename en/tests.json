@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-05T15:30:38Z",
-  "total_tests": 237,
+  "exported_at": "2026-09-05T18:30:34Z",
+  "total_tests": 240,
   "fields": [
     "id",
     "name",
@@ -3672,6 +3672,54 @@
       "source": "auto-scan 2026-09-02",
       "date": "2026-09-02",
       "url": "10.5281/zenodo.20128095"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Recovered summary data from a three-year prometryn",
+      "domain": "scouting",
+      "D": 2.2846,
+      "r2": 0.5021,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 5.59,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=5.59).",
+      "narrative": "D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-05",
+      "date": "2026-09-05",
+      "url": "10.5281/zenodo.22370747"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Recovered summary data from a three-year prometryn",
+      "domain": "scouting",
+      "D": 0.1337,
+      "r2": 0.8448,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 10.25,
+      "best_alt": "POWER",
+      "model_note": "S2 loses to POWER (ΔAICc=10.25).",
+      "narrative": "D_eff=0.1337, R²=0.8448. D_eff=0.134 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=10.25). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-05",
+      "date": "2026-09-05",
+      "url": "10.5281/zenodo.22370747"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Recovered summary data from a three-year prometryn",
+      "domain": "scouting",
+      "D": 2.2846,
+      "r2": 0.5021,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 5.59,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=5.59).",
+      "narrative": "D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-05",
+      "date": "2026-09-05",
+      "url": "10.5281/zenodo.22370747"
     }
   ]
 }

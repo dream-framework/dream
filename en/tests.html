@@ -257,7 +257,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "5 Sep 2026 11:30 EST";
+const LAST_REFRESH = "5 Sep 2026 14:30 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -518,6 +518,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.2719,r2:0.9987,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-8.8700,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-8.87).",narrative:"D_eff=1.2719, R²=0.9987. D_eff=1.272 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats EXP, ΔAICc=-8.87).",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
   ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.3090,r2:0.9982,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-3.1800,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-3.18).",narrative:"D_eff=1.3090, R²=0.9982. D_eff=1.309 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats EXP, ΔAICc=-3.18).",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
   ,{id:"",name:"Zenodo: Linear morphometrics fail to support strong sexual",domain:"scouting",D:1.7825,r2:0.8900,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:4.7000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=4.7).",narrative:"D_eff=1.7825, R²=0.8900. D_eff=1.782 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=4.70). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-02",date:"2026-09-02",url:"10.5281/zenodo.20128095",image:null}
+  ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:2.2846,r2:0.5021,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:5.5900,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.59).",narrative:"D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
+  ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:0.1337,r2:0.8448,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:10.2500,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=10.25).",narrative:"D_eff=0.1337, R²=0.8448. D_eff=0.134 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=10.25). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
+  ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:2.2846,r2:0.5021,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:5.5900,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.59).",narrative:"D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
 
 ];
 
@@ -815,33 +818,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 224,
-  "d_mle": 1.6215,
-  "lam_mle": 1.358,
-  "ks_p": 0.0029,
+  "n": 227,
+  "d_mle": 1.6124,
+  "lam_mle": 1.3622,
+  "ks_p": 0.003,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1198,
-  "ks_boot_mean": 0.0416,
-  "ks_boot_95": 0.0599,
-  "d_direct": 1.9892,
-  "r2_direct": 0.9777,
-  "d_linear": 1.5977,
-  "r2_linear": 0.9703,
-  "natural": 77,
-  "extraction": 147,
-  "mean": 1.2167,
-  "median": 1.2123,
-  "total": 237,
-  "compared": 235,
+  "ks_stat_obs": 0.1189,
+  "ks_boot_mean": 0.0414,
+  "ks_boot_95": 0.0591,
+  "d_direct": 1.9497,
+  "r2_direct": 0.9782,
+  "d_linear": 1.5769,
+  "r2_linear": 0.9706,
+  "natural": 78,
+  "extraction": 149,
+  "mean": 1.2214,
+  "median": 1.2139,
+  "total": 240,
+  "compared": 238,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 3.2146,
+  "ad_stat": 3.0935,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.51,
-  "delta_aic_lognormal": 37.68,
-  "silverman_p": 0.72,
+  "delta_aic_gamma": 4.27,
+  "delta_aic_lognormal": 39.89,
+  "silverman_p": 0.735,
   "boot_lo": 1.06,
-  "boot_hi": 1.781,
+  "boot_hi": 1.768,
   "date": "2026-09-05"
 };
 
