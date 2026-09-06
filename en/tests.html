@@ -257,7 +257,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "6 Sep 2026 00:56 EST";
+const LAST_REFRESH = "6 Sep 2026 08:19 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -521,6 +521,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:2.2846,r2:0.5021,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:5.5900,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.59).",narrative:"D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
   ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:0.1337,r2:0.8448,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:10.2500,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=10.25).",narrative:"D_eff=0.1337, R²=0.8448. D_eff=0.134 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=10.25). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
   ,{id:"",name:"Zenodo: Recovered summary data from a three-year prometryn",domain:"scouting",D:2.2846,r2:0.5021,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:5.5900,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=5.59).",narrative:"D_eff=2.2846, R²=0.5021. D_eff=2.285 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.59). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-05",date:"2026-09-05",url:"10.5281/zenodo.22370747",image:null}
+  ,{id:"",name:"Zenodo: Snow and cloud labels for GOCI-II Local Area scene",domain:"scouting",D:1.7969,r2:0.9905,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:71.7900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=71.79).",narrative:"D_eff=1.7969, R²=0.9905. D_eff=1.797 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=71.79). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-06",date:"2026-09-06",url:"10.5281/zenodo.22532088",image:null}
 
 ];
 
@@ -818,33 +819,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 227,
-  "d_mle": 1.6124,
-  "lam_mle": 1.3622,
+  "n": 228,
+  "d_mle": 1.6166,
+  "lam_mle": 1.3653,
   "ks_p": 0.003,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1189,
-  "ks_boot_mean": 0.0414,
-  "ks_boot_95": 0.0591,
-  "d_direct": 1.9497,
-  "r2_direct": 0.9782,
-  "d_linear": 1.5769,
+  "ks_stat_obs": 0.1186,
+  "ks_boot_mean": 0.0413,
+  "ks_boot_95": 0.0582,
+  "d_direct": 1.9555,
+  "r2_direct": 0.9784,
+  "d_linear": 1.5783,
   "r2_linear": 0.9706,
   "natural": 78,
-  "extraction": 149,
-  "mean": 1.2214,
-  "median": 1.2139,
-  "total": 240,
-  "compared": 238,
+  "extraction": 150,
+  "mean": 1.2239,
+  "median": 1.2214,
+  "total": 241,
+  "compared": 239,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 3.0935,
+  "ad_stat": 3.1056,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.27,
-  "delta_aic_lognormal": 39.89,
+  "delta_aic_gamma": 4.5,
+  "delta_aic_lognormal": 40.63,
   "silverman_p": 0.735,
   "boot_lo": 1.06,
-  "boot_hi": 1.768,
+  "boot_hi": 1.773,
   "date": "2026-09-06"
 };
 

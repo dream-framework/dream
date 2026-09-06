@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-06T04:57:00Z",
-  "total_tests": 240,
+  "exported_at": "2026-09-06T12:19:50Z",
+  "total_tests": 241,
   "fields": [
     "id",
     "name",
@@ -3720,6 +3720,22 @@
       "source": "auto-scan 2026-09-05",
       "date": "2026-09-05",
       "url": "10.5281/zenodo.22370747"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Snow and cloud labels for GOCI-II Local Area scene",
+      "domain": "scouting",
+      "D": 1.7969,
+      "r2": 0.9905,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 71.79,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=71.79).",
+      "narrative": "D_eff=1.7969, R²=0.9905. D_eff=1.797 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=71.79). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-06",
+      "date": "2026-09-06",
+      "url": "10.5281/zenodo.22532088"
     }
   ]
 }
