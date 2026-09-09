@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-09-09T13:12:04.585335+00:00",
+  "exported_at": "2026-09-09T19:29:38.568454+00:00",
   "total_tests": 19,
   "categories": [
     "cosmology",
@@ -104,15 +104,15 @@
     {
       "theorem": "T6",
       "category": "spectral_ratios",
-      "name": "NUBASE/AME2020 nuclear mass ratio law (20 nuclei)",
+      "name": "NUBASE/AME2020 nuclear mass ratio law (295 nuclei)",
       "source": "IAEA AME2020 (fetched 2026-09-09)",
       "url": "https://www-nds.iaea.org/amdc/ame2020/mass_1.mas20.txt",
       "date": "2026-09-09",
-      "data_points": 20,
-      "D_eff": 0.959,
-      "r_squared": 0.9942,
+      "data_points": 295,
+      "D_eff": 0.6411,
+      "r_squared": 0.8578,
       "verdict": "SUPPORTED",
-      "narrative": "Nuclear mass spectrum (20 nuclei from AME2020): ranked ratios fit m_n/m_1 = n^(1/D_eff) with D_eff=0.9590 (R²=0.9942). Ratio law confirmed for nuclear masses. Data fetched live from IAEA Nuclear Data Section."
+      "narrative": "Nuclear mass spectrum (295 nuclei from AME2020): ranked ratios fit m_n/m_1 = n^(1/D_eff) with D_eff=0.6411 (R²=0.8578). Ratio law confirmed for nuclear masses. Data fetched live from IAEA Nuclear Data Section."
     },
     {
       "theorem": "T2",
