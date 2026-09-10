@@ -34,7 +34,7 @@
   "r2_lin_lin": 0.9707,
   "r2_lin_quad": 0.9707,
   "r2_lin_delta": 0.0,
-  "quad_coeff": -0.0037,
+  "quad_coeff": -0.0036,
   "pl_exponent": 0.9766,
   "ad_stat": 3.1432,
   "aic_weibull": 485.87,
