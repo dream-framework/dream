@@ -247,7 +247,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "11 Sep 2026 01:01 EST";
+const LAST_REFRESH = "11 Sep 2026 09:04 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -514,6 +514,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Studying intentions, not ventures: youth rural ent",domain:"scouting",D:1.3714,r2:0.9985,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:245.7700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=245.77).",narrative:"D_eff=1.3714, R²=0.9985. D_eff=1.371 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=245.77). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-09",date:"2026-09-09",url:"10.5281/zenodo.22681454",image:null}
   ,{id:"",name:"Zenodo: Studying intentions, not ventures: youth rural ent",domain:"scouting",D:7.8465,r2:0.9111,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:10.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=10.0).",narrative:"D_eff=7.8465, R²=0.9111. D_eff=7.846 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=10.00). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-09",date:"2026-09-09",url:"10.5281/zenodo.22681454",image:null}
   ,{id:"",name:"Zenodo: Studying intentions, not ventures: youth rural ent",domain:"scouting",D:0.8724,r2:0.9980,verdict:"D_NEAR_1",model_verdict:"S2_WINS",delta_aicc:-3.7500,best_alt:"BIEXP",model_note:"S2 beats BIEXP (ΔAICc=-3.75).",narrative:"D_eff=0.8724, R²=0.9980. D_eff=0.872 ≈ 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит BIEXP, ΔAICc=-3.75).",source:"auto-scan 2026-09-09",date:"2026-09-09",url:"10.5281/zenodo.22681454",image:null}
+  ,{id:"",name:"Zenodo: MetalLipoDB: a dataset of experimental octanol-wat",domain:"scouting",D:0.3790,r2:0.9380,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:153.3900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=153.39).",narrative:"D_eff=0.3790, R²=0.9380. D_eff=0.379 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=153.39). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-11",date:"2026-09-11",url:"10.5281/zenodo.22708388",image:null}
 
 ];
 
@@ -799,33 +800,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 230,
-  "d_mle": 1.6224,
-  "lam_mle": 1.3646,
-  "ks_p": 0.0036,
+  "n": 231,
+  "d_mle": 1.6175,
+  "lam_mle": 1.3604,
+  "ks_p": 0.0038,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1165,
-  "ks_boot_mean": 0.0411,
-  "ks_boot_95": 0.0583,
-  "d_direct": 1.9724,
-  "r2_direct": 0.9787,
-  "d_linear": 1.5849,
-  "r2_linear": 0.9707,
-  "natural": 79,
+  "ks_stat_obs": 0.1156,
+  "ks_boot_mean": 0.041,
+  "ks_boot_95": 0.0582,
+  "d_direct": 1.9484,
+  "r2_direct": 0.9785,
+  "d_linear": 1.5838,
+  "r2_linear": 0.9711,
+  "natural": 80,
   "extraction": 151,
-  "mean": 1.223,
-  "median": 1.2214,
-  "total": 244,
-  "compared": 242,
+  "mean": 1.2194,
+  "median": 1.2139,
+  "total": 245,
+  "compared": 243,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 3.1429,
+  "ad_stat": 3.1024,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.53,
-  "delta_aic_lognormal": 41.09,
-  "silverman_p": 0.755,
+  "delta_aic_gamma": 4.33,
+  "delta_aic_lognormal": 40.4,
+  "silverman_p": 0.735,
   "boot_lo": 1.06,
-  "boot_hi": 1.779,
+  "boot_hi": 1.771,
   "date": "2026-09-11"
 };
 

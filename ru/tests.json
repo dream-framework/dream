@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-11T05:01:30Z",
-  "total_tests": 244,
+  "exported_at": "2026-09-11T13:04:09Z",
+  "total_tests": 245,
   "fields": [
     "id",
     "name",
@@ -3784,6 +3784,22 @@
       "source": "auto-scan 2026-09-09",
       "date": "2026-09-09",
       "url": "10.5281/zenodo.22681454"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: MetalLipoDB: a dataset of experimental octanol-wat",
+      "domain": "scouting",
+      "D": 0.379,
+      "r2": 0.938,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 153.39,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=153.39).",
+      "narrative": "D_eff=0.3790, R²=0.9380. D_eff=0.379 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=153.39). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-11",
+      "date": "2026-09-11",
+      "url": "10.5281/zenodo.22708388"
     }
   ]
 }
