@@ -257,7 +257,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "15 Sep 2026 01:08 EST";
+const LAST_REFRESH = "15 Sep 2026 09:43 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -530,6 +530,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Rmarkdown code and data for Bayesian Parameter Est",domain:"scouting",D:0.5593,r2:0.8009,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.06).",narrative:"D_eff=0.5593, R²=0.8009. D_eff=0.559 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.06). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-12",date:"2026-09-12",url:"10.5281/zenodo.22718428",image:null}
   ,{id:"",name:"Zenodo: Rb-85 Rydberg transition data set and RF receiver ",domain:"scouting",D:7.2372,r2:0.9880,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:10.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=10.0).",narrative:"D_eff=7.2372, R²=0.9880. D_eff=7.237 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=10.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-12",date:"2026-09-12",url:"10.5281/zenodo.22729863",image:null}
   ,{id:"",name:"Zenodo: Digital transformation with female inclusion: oppo",domain:"scouting",D:2.9788,r2:0.8263,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=7.0).",narrative:"D_eff=2.9788, R²=0.8263. D_eff=2.979 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=7.00). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-12",date:"2026-09-12",url:"10.5281/zenodo.22730075",image:null}
+  ,{id:"",name:"Zenodo: CAMS40 VRA regional air-quality maps — ensemble EN",domain:"scouting",D:2.3233,r2:0.1033,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.4000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.4).",narrative:"D_eff=2.3233, R²=0.1033. D_eff=2.323 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-15",date:"2026-09-15",url:"10.5281/zenodo.22768587",image:null}
+  ,{id:"",name:"Zenodo: CAMS40 VRA regional air-quality maps — ensemble EN",domain:"scouting",D:2.3665,r2:0.1143,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.4000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.4).",narrative:"D_eff=2.3665, R²=0.1143. D_eff=2.366 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-09-15",date:"2026-09-15",url:"10.5281/zenodo.22768561",image:null}
 
 ];
 
@@ -827,33 +829,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 234,
-  "d_mle": 1.6116,
-  "lam_mle": 1.3632,
-  "ks_p": 0.006,
+  "n": 236,
+  "d_mle": 1.6147,
+  "lam_mle": 1.3739,
+  "ks_p": 0.0068,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1106,
-  "ks_boot_mean": 0.0407,
-  "ks_boot_95": 0.0576,
-  "d_direct": 1.9174,
-  "r2_direct": 0.9801,
-  "d_linear": 1.587,
-  "r2_linear": 0.9734,
+  "ks_stat_obs": 0.1089,
+  "ks_boot_mean": 0.0406,
+  "ks_boot_95": 0.0582,
+  "d_direct": 1.9042,
+  "r2_direct": 0.9809,
+  "d_linear": 1.586,
+  "r2_linear": 0.9743,
   "natural": 82,
-  "extraction": 152,
-  "mean": 1.222,
-  "median": 1.2123,
-  "total": 249,
-  "compared": 247,
+  "extraction": 154,
+  "mean": 1.2315,
+  "median": 1.2214,
+  "total": 251,
+  "compared": 249,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 2.8654,
+  "ad_stat": 2.714,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.89,
-  "delta_aic_lognormal": 39.38,
-  "silverman_p": 0.855,
+  "delta_aic_gamma": 4.31,
+  "delta_aic_lognormal": 40.53,
+  "silverman_p": 0.875,
   "boot_lo": 1.06,
-  "boot_hi": 1.76,
+  "boot_hi": 1.765,
   "date": "2026-09-15"
 };
 

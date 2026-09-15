@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-15T05:08:00Z",
-  "total_tests": 249,
+  "exported_at": "2026-09-15T13:43:30Z",
+  "total_tests": 251,
   "fields": [
     "id",
     "name",
@@ -3864,6 +3864,38 @@
       "source": "auto-scan 2026-09-12",
       "date": "2026-09-12",
       "url": "10.5281/zenodo.22730075"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: CAMS40 VRA regional air-quality maps — ensemble EN",
+      "domain": "scouting",
+      "D": 2.3233,
+      "r2": 0.1033,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.4,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.4).",
+      "narrative": "D_eff=2.3233, R²=0.1033. D_eff=2.323 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-15",
+      "date": "2026-09-15",
+      "url": "10.5281/zenodo.22768587"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: CAMS40 VRA regional air-quality maps — ensemble EN",
+      "domain": "scouting",
+      "D": 2.3665,
+      "r2": 0.1143,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.4,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.4).",
+      "narrative": "D_eff=2.3665, R²=0.1143. D_eff=2.366 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.40). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-15",
+      "date": "2026-09-15",
+      "url": "10.5281/zenodo.22768561"
     }
   ]
 }
