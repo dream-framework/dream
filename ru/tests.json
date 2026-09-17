@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-17T05:09:21Z",
-  "total_tests": 251,
+  "exported_at": "2026-09-17T13:45:32Z",
+  "total_tests": 253,
   "fields": [
     "id",
     "name",
@@ -3896,6 +3896,38 @@
       "source": "auto-scan 2026-09-15",
       "date": "2026-09-15",
       "url": "10.5281/zenodo.22768561"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Germanium energy spectra from a Th-228 source meas",
+      "domain": "scouting",
+      "D": 1.3816,
+      "r2": 0.9986,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 593.91,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=593.91).",
+      "narrative": "D_eff=1.3816, R²=0.9986. D_eff=1.382 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=593.91). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-17",
+      "date": "2026-09-17",
+      "url": "10.5281/zenodo.22799602"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Germanium energy spectra from a Th-228 source meas",
+      "domain": "scouting",
+      "D": 1.3816,
+      "r2": 0.9986,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 593.91,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=593.91).",
+      "narrative": "D_eff=1.3816, R²=0.9986. D_eff=1.382 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=593.91). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-17",
+      "date": "2026-09-17",
+      "url": "10.5281/zenodo.22799602"
     }
   ]
 }
