@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-18T22:51:54Z",
-  "total_tests": 256,
+  "exported_at": "2026-09-19T04:52:25Z",
+  "total_tests": 257,
   "fields": [
     "id",
     "name",
@@ -3976,6 +3976,22 @@
       "source": "auto-scan 2026-09-18",
       "date": "2026-09-18",
       "url": "10.5281/zenodo.22696632"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Who controls the data of democracy? Data and repro",
+      "domain": "scouting",
+      "D": 0.157,
+      "r2": 0.861,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.78,
+      "best_alt": "POWER",
+      "model_note": "S2 loses to POWER (ΔAICc=2.78).",
+      "narrative": "D_eff=0.1570, R²=0.8610. D_eff=0.157 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.78). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-19",
+      "date": "2026-09-19",
+      "url": "10.5281/zenodo.22840621"
     }
   ]
 }
