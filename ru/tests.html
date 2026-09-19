@@ -247,7 +247,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "19 Sep 2026 14:45 EST";
+const LAST_REFRESH = "19 Sep 2026 18:28 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -389,7 +389,7 @@ const TESTS = [
   ,{id:"",name:"Open-Meteo: Rio precipitation_sum (ACF retention)",domain:"environmental",D:0.9399,r2:0.7473,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:25.2700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=25.27). S2+dust fit: D1=1.0848, D2=10.0, R²=0.7999, AICc=-822.93. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.9399, R²=0.7473. D_eff=0.940 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=25.27). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
   ,{id:"",name:"USGS: Cuyahoga River at Independence, OH (daily discharge) (ACF retention)",domain:"hydrology",D:0.5076,r2:0.6283,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:20.1500,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=20.15). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D_eff=0.5076, R²=0.6283. D_eff=0.508 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=20.15). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://waterservices.usgs.gov/nwis/dv/?sites=04213500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"Energy-Charts: Germany-Luxembourg electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.3216,r2:0.4781,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:4.4500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=4.45). S2+dust fit: D1=0.6005, D2=0.01, R²=0.5055, AICc=-816.85. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.3216, R²=0.4781. D_eff=0.322 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=4.45). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=DE-LU&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
-  ,{id:"",name:"Energy-Charts: France electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.2322,r2:0.4585,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:12.3800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0357, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.2322, R²=0.4585. D_eff=0.232 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=12.38). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=FR&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts: France electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.2322,r2:0.4585,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:12.3800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0353, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.2322, R²=0.4585. D_eff=0.232 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=12.38). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=FR&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
   ,{id:"",name:"Energy-Charts: Netherlands electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.2333,r2:0.3288,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:4.1300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=4.13). S2+dust fit: D1=0.5337, D2=0.01, R²=0.3629, AICc=-780.61. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.2333, R²=0.3288. D_eff=0.233 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=4.13). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=NL&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
   ,{id:"",name:"NASA POWER: Colorado USA solar irradiance (hourly) (ACF retention)",domain:"solar_energy",D:0.0741,r2:0.1062,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.6800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.68). S2+dust fit: D1=2.3164, D2=5.9403, R²=0.2062, AICc=-688.42. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.0741, R²=0.1062. D_eff=0.074 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.68). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=-105.0&latitude=40.0&community=RE&format=JSON",image:null}
   ,{id:"",name:"NASA POWER: Berlin DE solar irradiance (hourly) (ACF retention)",domain:"solar_energy",D:0.0485,r2:0.0460,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:8.5800,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=8.58). S2+dust fit: D1=2.8085, D2=6.5197, R²=0.1080, AICc=-573.87. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.0485, R²=0.0460. D_eff=0.049 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=8.58). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://power.larc.nasa.gov/api/temporal/hourly/point?start=20230101&end=20231231&parameters=ALLSKY_SFC_SW_DWN,WS10M&longitude=13.4&latitude=52.5&community=RE&format=JSON",image:null}
@@ -397,7 +397,7 @@ const TESTS = [
   ,{id:"",name:"Open-Meteo: Delhi precipitation_sum (ACF retention)",domain:"environmental",D:0.4251,r2:0.7261,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:45.5300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=45.53). S2+dust fit: D1=0.4639, D2=9.9892, R²=0.8131, AICc=-744.91. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.4251, R²=0.7261. D_eff=0.425 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=45.53). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
   ,{id:"",name:"USGS: Potomac River at Point of Rocks, MD (daily discharge) (ACF retention)",domain:"hydrology",D:0.6759,r2:0.6421,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:12.2100,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.21). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D_eff=0.6759, R²=0.6421. D_eff=0.676 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=12.21). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"Zenodo: Quantitative Data from a Mixed-Methods Case Study ",domain:"scouting",D:4.4128,r2:0.7188,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D_eff=4.4128, R²=0.7188. D_eff=4.413 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=20.00). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21792075",image:null}
-  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.225, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D_eff=1.9486, R²=0.1644. D_eff=1.949 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, LOGNORM поглощает перекрывающиеся процессы (ΔAICc=7.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.0004,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1330.4400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1330.44). S2+dust decomposition REJECTED: no D1/D2/R² in model_note (fit not validated). Likely overfitting (6-param model). Treated as S2_LOSES.",narrative:"D_eff=1.0004, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1330.44). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D_eff=1.9486, R²=0.1644. D_eff=1.949 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, LOGNORM поглощает перекрывающиеся процессы (ΔAICc=7.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
@@ -529,6 +529,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Who controls the data of democracy? Data and repro",domain:"scouting",D:0.1570,r2:0.8610,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:2.7800,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.78).",narrative:"D_eff=0.1570, R²=0.8610. D_eff=0.157 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.78). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-19",date:"2026-09-19",url:"10.5281/zenodo.22840621",image:null}
   ,{id:"",name:"Zenodo: Enteric viruses in children hospitalised with acut",domain:"scouting",D:1.3607,r2:0.9983,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:114.7800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=114.78).",narrative:"D_eff=1.3607, R²=0.9983. D_eff=1.361 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=114.78). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-19",date:"2026-09-19",url:"10.5281/zenodo.22848617",image:null}
   ,{id:"",name:"Zenodo: Data and code for: A Verifiable Priority Group Lot",domain:"scouting",D:0.5056,r2:0.9709,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:740.1800,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=740.18).",narrative:"D_eff=0.5056, R²=0.9709. D_eff=0.506 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=740.18). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-19",date:"2026-09-19",url:"10.5281/zenodo.22848329",image:null}
+  ,{id:"",name:"Zenodo: Ecuador External-Cause Mortality, Population Denom",domain:"scouting",D:4.4564,r2:0.9900,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:4.8000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=4.8).",narrative:"D_eff=4.4564, R²=0.9900. D_eff=4.456 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=4.80). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-09-19",date:"2026-09-19",url:"10.5281/zenodo.22850381",image:null}
 
 ];
 
@@ -814,33 +815,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 244,
-  "d_mle": 1.6078,
-  "lam_mle": 1.3609,
-  "ks_p": 0.0037,
+  "n": 245,
+  "d_mle": 1.5803,
+  "lam_mle": 1.3741,
+  "ks_p": 0.0039,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1128,
-  "ks_boot_mean": 0.0398,
-  "ks_boot_95": 0.0566,
-  "d_direct": 1.9028,
-  "r2_direct": 0.9788,
-  "d_linear": 1.5689,
+  "ks_stat_obs": 0.1121,
+  "ks_boot_mean": 0.0399,
+  "ks_boot_95": 0.0571,
+  "d_direct": 1.8945,
+  "r2_direct": 0.9792,
+  "d_linear": 1.5599,
   "r2_linear": 0.9715,
   "natural": 85,
-  "extraction": 159,
-  "mean": 1.2206,
-  "median": 1.2123,
-  "total": 259,
-  "compared": 257,
+  "extraction": 160,
+  "mean": 1.2338,
+  "median": 1.2139,
+  "total": 260,
+  "compared": 258,
   "noise": 6,
   "rejected": 0,
-  "ad_stat": 3.0533,
+  "ad_stat": 3.0884,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.93,
-  "delta_aic_lognormal": 43.28,
-  "silverman_p": 0.88,
+  "delta_aic_gamma": 3.37,
+  "delta_aic_lognormal": 39.96,
+  "silverman_p": 0.895,
   "boot_lo": 1.06,
-  "boot_hi": 1.747,
+  "boot_hi": 1.714,
   "date": "2026-09-19"
 };
 
