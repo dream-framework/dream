@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-19T22:28:15Z",
-  "total_tests": 260,
+  "exported_at": "2026-09-20T05:06:26Z",
+  "total_tests": 262,
   "fields": [
     "id",
     "name",
@@ -4040,6 +4040,38 @@
       "source": "auto-scan 2026-09-19",
       "date": "2026-09-19",
       "url": "10.5281/zenodo.22850381"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Multi-Stage Financial Distress Warning and Risk Di",
+      "domain": "scouting",
+      "D": 1.716,
+      "r2": 0.0356,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.06,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.06).",
+      "narrative": "D_eff=1.7160, R²=0.0356. D_eff=1.716 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.06). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-20",
+      "date": "2026-09-20",
+      "url": "10.5281/zenodo.20482769"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Multi-Stage Financial Distress Warning and Risk Di",
+      "domain": "scouting",
+      "D": 4.7282,
+      "r2": 0.7733,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.21,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=2.21).",
+      "narrative": "D_eff=4.7282, R²=0.7733. D_eff=4.728 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=2.21). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-20",
+      "date": "2026-09-20",
+      "url": "10.5281/zenodo.20482769"
     }
   ]
 }
