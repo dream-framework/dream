@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-09-21T15:17:58Z",
+  "exported_at": "2026-09-21T20:34:54Z",
   "total_tests": 266,
   "fields": [
     "id",
@@ -1277,14 +1277,14 @@
       "id": "",
       "name": "FRED DGS10 (10-Year Treasury Rate) (ACF retention)",
       "domain": "financial",
-      "D": 0.9604,
+      "D": 0.9605,
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 10.33,
+      "delta_aicc": 10.36,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=10.33). S2+dust fit: D1=1.0169, D2=2.2037, R²=0.9999, AICc=-3380.63. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9604, R²=0.9999. D_eff=0.960 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.33). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=10.36). S2+dust fit: D1=1.0171, D2=2.2032, R²=0.9999, AICc=-3380.91. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9605, R²=0.9999. D_eff=0.961 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.36). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"

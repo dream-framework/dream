@@ -36,7 +36,7 @@
   "r2_lin_delta": 0.0005,
   "quad_coeff": -0.0229,
   "pl_exponent": 0.9716,
-  "ad_stat": 3.2828,
+  "ad_stat": 3.2829,
   "aic_weibull": 548.36,
   "aic_gamma": 550.49,
   "aic_lognormal": 586.56,
