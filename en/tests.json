@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-20T19:02:14Z",
-  "total_tests": 264,
+  "exported_at": "2026-09-21T05:15:59Z",
+  "total_tests": 266,
   "fields": [
     "id",
     "name",
@@ -4104,6 +4104,38 @@
       "source": "auto-scan 2026-09-20",
       "date": "2026-09-20",
       "url": "10.5281/zenodo.22862445"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Predicting and discovering novel geroprotective co",
+      "domain": "scouting",
+      "D": 1.3145,
+      "r2": 0.9984,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 46.38,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=46.38).",
+      "narrative": "D_eff=1.3145, R²=0.9984. D_eff=1.315 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=46.38). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-21",
+      "date": "2026-09-21",
+      "url": "10.5281/zenodo.22842095"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Predicting and discovering novel geroprotective co",
+      "domain": "scouting",
+      "D": 1.0138,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2435.32,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2435.32).",
+      "narrative": "D_eff=1.0138, R²=1.0000. D_eff=1.014 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=2435.32). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-21",
+      "date": "2026-09-21",
+      "url": "10.5281/zenodo.22842095"
     }
   ]
 }
