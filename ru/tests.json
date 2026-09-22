@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-22T19:55:15Z",
-  "total_tests": 266,
+  "exported_at": "2026-09-22T23:11:42Z",
+  "total_tests": 267,
   "fields": [
     "id",
     "name",
@@ -4136,6 +4136,22 @@
       "source": "auto-scan 2026-09-21",
       "date": "2026-09-21",
       "url": "10.5281/zenodo.22842095"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data from Validating elicited imitation for L2 lis",
+      "domain": "scouting",
+      "D": 4.4312,
+      "r2": 0.9319,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 3.25,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=3.25).",
+      "narrative": "D_eff=4.4312, R²=0.9319. D_eff=4.431 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=3.25). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-22",
+      "date": "2026-09-22",
+      "url": "10.5281/zenodo.22906253"
     }
   ]
 }
