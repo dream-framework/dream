@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-27T14:12:56Z",
-  "total_tests": 284,
+  "exported_at": "2026-09-27T19:59:32Z",
+  "total_tests": 285,
   "fields": [
     "id",
     "name",
@@ -4424,6 +4424,22 @@
       "source": "auto-scan 2026-09-27",
       "date": "2026-09-27",
       "url": "10.5281/zenodo.22986736"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Meteorological Data from a Basin Mangrove in North",
+      "domain": "scouting",
+      "D": 0.2369,
+      "r2": 0.0679,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 9.34,
+      "best_alt": "BIEXP",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.34). S2+dust decomposition: D1=2.8704, D2=6.11, R²=0.1353, AICc=-396.78. S2+dust does not beat BIEXP. Needs investigation.",
+      "narrative": "D_eff=0.2369, R²=0.0679. D_eff=0.237 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.34). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-27",
+      "date": "2026-09-27",
+      "url": "10.5281/zenodo.23001859"
     }
   ]
 }
