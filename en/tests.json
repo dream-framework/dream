@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-26T23:07:43Z",
-  "total_tests": 283,
+  "exported_at": "2026-09-27T05:38:27Z",
+  "total_tests": 284,
   "fields": [
     "id",
     "name",
@@ -4408,6 +4408,22 @@
       "source": "auto-scan 2026-09-26",
       "date": "2026-09-26",
       "url": "10.5281/zenodo.22977669"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Land capability, carrying capacity, and settlement",
+      "domain": "scouting",
+      "D": 9.0208,
+      "r2": 0.8117,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.29,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=4.29).",
+      "narrative": "D_eff=9.0208, R²=0.8117. D_eff=9.021 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=4.29). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-27",
+      "date": "2026-09-27",
+      "url": "10.5281/zenodo.22986736"
     }
   ]
 }

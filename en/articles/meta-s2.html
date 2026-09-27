@@ -240,7 +240,7 @@
         <p><strong>Lilliefors KS test</strong> gives p = 0.000. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
         <blockquote class="callout warn">
-          <strong>Prospective update — 2026-09-26 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.556. The estimator range is [1.948, 1.564]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.556 as genuinely new, independent systems are added?
+          <strong>Prospective update — 2026-09-27 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.556. The estimator range is [1.948, 1.564]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.556 as genuinely new, independent systems are added?
         </blockquote>
 
         <h4>Additional fit statistics (n = 264)</h4>
@@ -267,7 +267,7 @@
 
         <h3>Finding 2: Bimodality analysis</h3>
 
-        <p><strong>Censoring:</strong> 12 values hit the optimizer boundary at D = 5.0. These are treated as right-censored and excluded from the bimodality analysis, leaving n = 264 uncensored observations.</p>
+        <p><strong>Censoring:</strong> 13 values hit the optimizer boundary at D = 5.0. These are treated as right-censored and excluded from the bimodality analysis, leaving n = 264 uncensored observations.</p>
 
         <table class="data-table">
           <thead>
@@ -366,15 +366,15 @@
             <tr><th>Eligibility tier</th><th class="num">Count</th><th>Criterion</th></tr>
           </thead>
           <tbody>
-            <tr><td>Total registered tests</td><td class="num">283</td><td>All entries in the TESTS array</td></tr>
+            <tr><td>Total registered tests</td><td class="num">284</td><td>All entries in the TESTS array</td></tr>
             <tr><td>Valid S2 fits (0 &lt; D &lt; 5)</td><td class="num">264</td><td>D value exists and is within plausible range</td></tr>
-            <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">12</td><td>Optimizer hit upper ceiling</td></tr>
+            <tr><td>Censored (D ≥ 5.0 boundary)</td><td class="num">13</td><td>Optimizer hit upper ceiling</td></tr>
             <tr><td>Noise fits excluded (R² &lt; 0.1)</td><td class="num">7</td><td>S2 fit noise (e.g. diurnal-cycle ACF collapse) — no real retention signal</td></tr>
             <tr><td>Total S2 failures (S2_NO_FIT)</td><td class="num">0</td><td>S2 could not be fit at all — optimizer failed, ACF failed, or insufficient data</td></tr>
-            <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">281</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
+            <tr><td>Model-compared (win/tie/loss/dust)</td><td class="num">282</td><td>Has model_verdict (S2_WINS/TIES/LOSES/DUST_WINS)</td></tr>
           </tbody>
         </table>
-        <p class="note">Flow: 283 registered → 264 valid uncensored S2 fits with R² ≥ 0.1 → 264 Meta-S2 eligible → 281 comparison-eligible. 0 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
+        <p class="note">Flow: 284 registered → 264 valid uncensored S2 fits with R² ≥ 0.1 → 264 Meta-S2 eligible → 282 comparison-eligible. 0 datasets where S2 could not be fit at all are recorded in the registry as REJECTED (with rejection_reason) but excluded from the meta-S2 distribution since they have no D value. Noise fits (R² &lt; 0.1) are also excluded — S2 fitting a flat ACF tail does not produce a meaningful D value.</p>
       </div>
 
       <hr>
@@ -450,7 +450,7 @@
           <summary><strong>How the meta-fit was constructed</strong></summary>
 
           <div class="method-body">
-            <p><strong>Data:</strong> 264 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-09-26. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
+            <p><strong>Data:</strong> 264 D_eff values extracted from the DREAM test registry (en/tests.html) as of 2026-09-27. Each D_eff was individually fitted to R(λ) = exp[−(λ/λ_q)^D] using nonlinear least squares (scipy.optimize.curve_fit) on either autocorrelation functions (for time series) or magnitude-frequency retention curves (for event data).</p>
 
             <p><strong>Meta-fit (direct-d, not rank):</strong> The 264 D values were sorted ascending: D_(1) ≤ D_(2) ≤ ... ≤ D_(264). The empirical survival function was computed as Ŝ(D_(i)) = (n − i) / n. Three fits were performed <strong>using the actual D values as the independent variable</strong> (not rank index):</p>
             <ol>
@@ -459,7 +459,7 @@
               <li><strong>Weibull MLE:</strong> Maximum likelihood estimation of Weibull(shape=D_meta, scale=λ_q) using scipy.stats.weibull_min.fit, with loc fixed at 0. This is the statistically preferred method.</li>
             </ol>
 
-            <p><strong>Censoring:</strong> 12 values hit the optimizer boundary at D = 5.0 (the upper fitting limit). These are treated as right-censored and excluded from the uncensored analysis (n = 264).</p>
+            <p><strong>Censoring:</strong> 13 values hit the optimizer boundary at D = 5.0 (the upper fitting limit). These are treated as right-censored and excluded from the uncensored analysis (n = 264).</p>
 
             <p><strong>Bimodality tests:</strong></p>
             <ul>
@@ -473,7 +473,7 @@
             <p><strong>Limitations:</strong></p>
             <ul>
               <li>The 264 systems are not independent — five cryptocurrencies share a market regime, fifteen weather series share a data provider, multiple FRED series share an economic system. Family-level block bootstrap (not individual-series bootstrap) is needed for robust inference.</li>
-              <li>12 D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
+              <li>13 D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
               <li>The Weibull MLE (shape=1.556) and direct-d fit (D_meta=1.948) disagree, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
               <li>Silverman's test cannot reject unimodality (p=0.660), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
             </ul>
@@ -531,7 +531,7 @@
 
         <p>If this conjecture could eventually be demonstrated — that one projection consistently yields S2 and two independent projections consistently yield Gaussian behavior across multiple datasets — it would connect the statistical hierarchy directly to the architecture of the DREAM framework, where observables arise through a non-invertible projection kernel and S2 governs retention. That would be a much more distinctive result than simply observing Gaussian parameter estimates.</p>
 
-        <p class="note">Tested 2026-09-26 via 500-iteration bootstrap of D_meta from 264 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.005). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
+        <p class="note">Tested 2026-09-27 via 500-iteration bootstrap of D_meta from 264 system-level estimates. Level 2 Weibull fit rejected (KS p = 0.005). The CLT explanation is sufficient to account for the observed Gaussianity; the double-projection conjecture remains untested.</p>
       </div>
 
       <hr>
@@ -542,7 +542,7 @@
 
         <blockquote class="callout">
           <strong>Weibull-preferred distributional recurrence.</strong><br><br>
-          As of 2026-09-26, the 264-system registry yields Weibull MLE shape D_meta = 1.556 (KS p = 0.002). The estimator range is [1.948, 1.564]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 1.080, ΔAIC_Lognormal = 37.330). The family-level bootstrap 95% CI is [1.060, 1.696] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
+          As of 2026-09-27, the 264-system registry yields Weibull MLE shape D_meta = 1.556 (KS p = 0.002). The estimator range is [1.948, 1.564]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 1.080, ΔAIC_Lognormal = 37.330). The family-level bootstrap 95% CI is [1.060, 1.696] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
         </blockquote>
 
         <h3>What survives</h3>
@@ -574,7 +574,7 @@
         <p>The wide bootstrap CI means more <em>independent</em> families are needed, not just more rows from existing families. Adding 10 more crypto or weather series will not narrow the CI meaningfully. Adding a genuinely new domain (e.g., biological aging, linguistic decay, archaeological dating) would.</p>
 
         <p class="article-footnote">
-          Analysis performed 2026-09-26. Data: <a href="../tests.html">DREAM Test Registry</a> (264 Meta-S2-eligible uncensored systems, of 283 total registered).<br>
+          Analysis performed 2026-09-27. Data: <a href="../tests.html">DREAM Test Registry</a> (264 Meta-S2-eligible uncensored systems, of 284 total registered).<br>
           This page is speculative. The recursive S2 property is an empirical observation on a non-random, partially dependent sample, not a proven theorem. It is offered as a direction for investigation.<br><br>
           <strong>Update protocol:</strong> This article is regenerated with each scanner run. The live Meta-S2 readout on the <a href="../tests.html">Test Registry</a> page always reflects the current TESTS array.
         </p>
