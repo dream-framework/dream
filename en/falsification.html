@@ -123,13 +123,14 @@
 
     <!-- S2: Retention -->
     <div class="card">
-      <h2>S2 — Retention law <span class="badge ok sm">Foundation</span></h2>
+      <h2>S2 — Retention law <span class="badge ok sm">Foundation · guardrailed</span></h2>
       <p class="core">Claim: contrast and correlation follow the stretched-exponential law and exhibit a transition at \(\lambda_q\).</p>
       <div class="math-block">\[
         R(\lambda)=\exp[-(\tfrac{\lambda}{\lambda_q})^{D_{\mathrm{eff}}}],\quad
         y(\lambda)=\ln(-\ln R)=D_{\mathrm{eff}}\ln\lambda-D_{\mathrm{eff}}\ln\lambda_q.
       \]</div>
       <p><strong>Decisive null:</strong> multiple platforms show no linear window in \(y\) and no shared \(\lambda_q\) within error bars → the retention law fails.</p>
+      <p><strong>Guardrail falsification:</strong> S2 "present" requires passing all 5 formal guardrails (fit quality R² > 0.90, parameter stability CV < 30%, null destruction ratio > 2×, identifiability, AICc). A dataset where S2 fits but fails any guardrail does not count as S2-present. Current survival rate: 84.6% of eligible datasets. The 15.4% failures (trend-dominated economic aggregates, power-law seismic decay) are genuinely non-S2 — denoising does not rescue them.</p>
     </div>
 
     <!-- T7.1: Multi-Regime S2 (NEW) -->

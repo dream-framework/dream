@@ -727,6 +727,24 @@
       "category": "Falsification",
       "question": "What are the honest caveats of T7.1?",
       "answer": "Four caveats. (1) 24% of datasets show D_2 hitting the upper bound (D=10), suggesting the \"second regime\" might not be S2 but a different decay law (e.g., super-Gaussian) that the S2 functional form approximates. The transition is real; the second-regime identity is partially open. (2) The clustering magnitude is modest: real std (0.169) is only 1.05x tighter than single-S2 null (0.178). Statistical significance is huge (binomial p = 3.4e-18) but the effect size is small. (3) Reproducibility is in fractional position, not absolute scale. Datasets have different t-ranges (days vs hours vs years), so \"reproducible fractional position\" might mean \"the breakpoint naturally lands in the early-to-middle of any retention curve.\" (4) Sample size is 25 real datasets. More would strengthen the claim, but the existing evidence is decisive against the single-S2 null. D_1 and D_2 are not correlated (Spearman p=0.93) — the two regimes appear to be independently drawn, not constrained to a 1D manifold in (D_1, D_2) space."
+    },
+    {
+      "number": 121,
+      "category": "Foundations",
+      "question": "What does \"S2 is present\" actually mean? Does it just mean S2 fits?",
+      "answer": "No. \"S2 fits\" is vacuous — any optimizer returns parameters for any curve. \"S2 is present\" means S2 passes all 5 formal guardrails: (1) fit quality R² > 0.90, (2) parameter stability — bootstrap coefficient of variation < 30% for D and < 50% for λ_q, (3) null destruction — real signal is > 2× stronger than scrambled data, (4) identifiability — parameters not pinned against bounds, (5) error criterion — AICc well-defined. S2 survives all 5 guardrails in 84.6% of eligible datasets. The 15.4% failures (yearly economic aggregates like GDP/CPI, earthquake counts following Omori law) are genuinely non-S2 — confirmed by denoising not rescuing them. These are outside DREAM's domain: the projection axiom applies to retention processes, not to trend-growth or power-law processes."
+    },
+    {
+      "number": 122,
+      "category": "Falsification",
+      "question": "If S2 fails on some datasets, does that falsify DREAM?",
+      "answer": "No — it sharpens DREAM. DREAM's axioms claim a projection kernel produces S2 retention. They do not claim every observable must show S2. When the underlying process is different (exponential growth → ACF doesn't decay; Omori law → power-law aftershock decay; policy cycles → ACF has bumps), the projection axiom doesn't apply, and S2 shouldn't be expected. The guardrail framework correctly identifies these cases. The 84.6% survival rate is the calibrated scope of DREAM's applicability. A framework that claims to fit everything fits nothing. A framework that honestly fails 15.4% and explains why is stronger than one that claims universality without testing it."
+    },
+    {
+      "number": 123,
+      "category": "Foundations",
+      "question": "What is the Meta-S2 survival rate and why does it matter?",
+      "answer": "Meta-S2 survival rate = P(S2 survives all guardrails | eligible dataset) = 84.6%. This is not \"how often is S2 the best model\" (that would be a machine-learning competition). It is \"how often does a tightly constrained S2 form (3 parameters, monotonic, interpretable) remain statistically viable\" across unrelated datasets. This is a recurrence/invariance test. S2 does not have to win competitions — it has to survive admissibility. When it does, the recurrence across unrelated domains (crypto, environmental, ecological, financial) is the Meta-S2 signal."
     }
   ]
 }
