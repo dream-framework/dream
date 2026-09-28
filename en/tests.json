@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-27T23:18:06Z",
-  "total_tests": 285,
+  "exported_at": "2026-09-28T05:42:45Z",
+  "total_tests": 286,
   "fields": [
     "id",
     "name",
@@ -4440,6 +4440,22 @@
       "source": "auto-scan 2026-09-27",
       "date": "2026-09-27",
       "url": "10.5281/zenodo.23001859"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: ioc_cleanup",
+      "domain": "scouting",
+      "D": 1.1447,
+      "r2": 0.9998,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 1701.91,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=1701.91).",
+      "narrative": "D_eff=1.1447, R²=0.9998. D_eff=1.145 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=1701.91). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-09-28",
+      "date": "2026-09-28",
+      "url": "10.5281/zenodo.22181274"
     }
   ]
 }
