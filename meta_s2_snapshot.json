@@ -44,7 +44,7 @@
   "delta_aic_weibull": 0.0,
   "delta_aic_gamma": 1.06,
   "delta_aic_lognormal": 37.54,
-  "delta_aic_exponential": 69.11,
+  "delta_aic_exponential": 69.12,
   "delta_bic": -67.24,
   "gmm_mean_1": 1.088,
   "gmm_mean_2": 3.301,
