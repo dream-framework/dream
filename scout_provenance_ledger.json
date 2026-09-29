@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-09-29T18:17:16.402432+00:00",
+  "initialized": "2026-09-29T23:55:14.265441+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5622, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=373.68). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5622, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=371.53). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -3001,7 +3001,7 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.9607, R²=0.9999. D_eff=0.961 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.45). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.9607, R²=0.9999. D_eff=0.961 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.46). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
