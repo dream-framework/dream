@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "n": 265,
   "n_total": 286,
   "n_censored": 13,
@@ -36,7 +36,7 @@
   "r2_lin_delta": 0.0008,
   "quad_coeff": -0.0313,
   "pl_exponent": 0.9815,
-  "ad_stat": 3.6714,
+  "ad_stat": 3.6715,
   "aic_weibull": 588.08,
   "aic_gamma": 589.14,
   "aic_lognormal": 625.63,
