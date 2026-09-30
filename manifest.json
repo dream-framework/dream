@@ -1,14 +1,18 @@
 {
-  "name": "DREAM Framework — Dimensional Resonant Emergent Attractors in Manifold",
+  "name": "DREAM Framework \u2014 Dimensional Resonant Emergent Attractors in Manifold",
   "short_name": "DREAM",
-  "description": "A 10→4 projection-first physics framework with the Retention Law (S2) as foundation. Cross-domain test registry, Meta-S2 analysis, and interactive visualizations.",
+  "description": "A 10\u21924 projection-first physics framework. S2 retention law guardrailed in 84.6% of eligible datasets. T7.1 multi-regime S2 confirmed. Interactive visualizations, test registry, and Meta-S2 analysis.",
   "start_url": "./en/index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0f172a",
   "theme_color": "#1e293b",
-  "categories": ["science", "education", "reference"],
+  "categories": [
+    "science",
+    "education",
+    "reference"
+  ],
   "lang": "en",
   "dir": "ltr",
   "icons": [
@@ -41,6 +45,12 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "img/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -49,28 +59,72 @@
       "short_name": "Tests",
       "description": "Live S2 test registry with Meta-S2 readout",
       "url": "./en/tests.html",
-      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Meta-S2 Article",
       "short_name": "Meta-S2",
       "description": "Full Meta-S2 recursive retention analysis",
       "url": "./en/articles/meta-s2.html",
-      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Life Toy",
       "short_name": "Life",
       "description": "Interactive 3D morphogenesis visualization",
       "url": "./en/life.html",
-      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Axioms",
       "short_name": "Axioms",
       "description": "The 6 axioms of DREAM",
       "url": "./en/axioms.html",
-      "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "T7.1 Multi-Regime Toy",
+      "short_name": "T7.1 Toy",
+      "description": "Interactive multi-model comparison on live data",
+      "url": "./t71-toy.html",
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Math Recharge Course",
+      "short_name": "Math",
+      "description": "Interactive algebra-to-DREAM course",
+      "url": "./en/math-recharge.html",
+      "icons": [
+        {
+          "src": "img/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ],
   "screenshots": [],

@@ -80,7 +80,7 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
 <div class="app">
 <header class="top">
  <div class="brand"><div class="logo">ƒ</div><div><h1>Math Recharge</h1><p>Algebra → geometry → calculus → linear algebra → manifolds → gauge/topology → DREAM bridge</p></div></div>
- <div class="topRight"><div class="progressTop"><span id="coursePct">0%</span><span class="bar"><i id="courseBar"></i></span></div><button class="btn primary" id="courseHelpBtn">Teach me</button><button class="btn" id="saveBtn">Save</button><button class="btn" id="loadBtn">Load</button><button class="btn" id="restartLevelBtn">Restart level</button><button class="btn" id="resetAllBtn">Start from zero</button><input id="loadFile" type="file" accept=".json,application/json"></div>
+ <div class="topRight"><div class="progressTop"><span id="coursePct">0%</span><span class="bar"><i id="courseBar"></i></span></div><button class="btn" onclick="window.location.href='index.html'" style="border-color:#4389af;background:#183d57">⌂ Home</button><button class="btn primary" id="courseHelpBtn">Teach me</button><button class="btn" id="saveBtn">Save</button><button class="btn" id="loadBtn">Load</button><button class="btn" id="restartLevelBtn">Restart level</button><button class="btn" id="resetAllBtn">Start from zero</button><input id="loadFile" type="file" accept=".json,application/json"></div>
 </header>
 <main class="layout">
 <aside class="card guide">
@@ -514,6 +514,23 @@ window.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("helpOverlay").cla
 
 // startup
 const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels").textContent=LEVELS.length;$("sumLessons").textContent=TOTAL;$("sumProgress").textContent=Math.round(100*completedCount()/TOTAL)+'%';if(completedCount()>0)$("resumeBtn").textContent=`Resume at Level ${prog.level+1}.${prog.step+1}`;updateCourseProgress();initLesson();resize();
+})();
+
+// ─── Pull-to-refresh (mobile) ─────────────────────────────
+(function(){
+  if(!('ontouchstart'in window)&&navigator.maxTouchPoints===0)return;
+  const THRESH=70,RESIST=0.5;
+  let sy=null,pull=false,ind=null;
+  function getInd(){if(ind)return ind;ind=document.createElement('div');ind.id='ptr-ind';ind.innerHTML='<div class="ptr-sp"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 14.97 20 13.54 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 9.03 4 10.46 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" fill="currentColor"/></svg></div><div class="ptr-tx">Pull to refresh</div>';document.body.appendChild(ind);
+  if(!document.getElementById('ptr-css')){const s=document.createElement('style');s.id='ptr-css';s.textContent='#ptr-ind{position:fixed;top:0;left:0;right:0;height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;z-index:99998;pointer-events:none;transition:height .2s}#ptr-ind.ptr-act{transition:none}#ptr-ind.ptr-go{height:50px!important;transition:height .2s}.ptr-sp{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#72ddff;transform:scale(0);opacity:0;transition:transform .2s,opacity .2s}.ptr-tx{font-size:10px;color:#93b4cc;margin:2px 0 8px}#ptr-ind.ptr-go .ptr-sp{animation:ptr-rot .8s linear infinite}#ptr-ind.ptr-go .ptr-tx::before{content:"Refreshing…"}#ptr-ind.ptr-go .ptr-tx{font-size:0}body.ptr-pull{overscroll-behavior:none}@keyframes ptr-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}';document.head.appendChild(s)}
+  return ind;}
+  function ts(e){if(e.touches.length!==1)return;if(window.scrollY>0&&document.documentElement.scrollTop>0)return;sy=e.touches[0].clientY;pull=false;}
+  function tm(e){if(sy===null)return;const dy=e.touches[0].clientY-sy;if(dy<=0){if(pull){pull=false;const i=getInd();i.classList.remove('ptr-act');i.style.height='0';document.body.classList.remove('ptr-pull');}return;}if(dy<5)return;if(window.scrollY>0||document.documentElement.scrollTop>0){sy=null;return;}pull=true;document.body.classList.add('ptr-pull');const i=getInd();i.classList.add('ptr-act');const r=Math.max(0,(dy-5)*RESIST);const h=Math.min(r,THRESH*1.5);i.style.height=h+'px';const sp=i.querySelector('.ptr-sp');if(sp){const p=Math.min(1,h/THRESH);sp.style.transform='scale('+p+') rotate('+p*180+'deg)';sp.style.opacity='1';}const t=i.querySelector('.ptr-tx');if(t)t.textContent=h>=THRESH?'Release to refresh':'Pull to refresh';if(e.cancelable)e.preventDefault();}
+  function te(){if(!pull){sy=null;return;}const i=getInd();pull=false;document.body.classList.remove('ptr-pull');const h=parseFloat(i.style.height)||0;if(h>=THRESH){i.classList.remove('ptr-act');i.classList.add('ptr-go');i.style.height='50px';setTimeout(()=>window.location.reload(),400);}else{i.classList.remove('ptr-act');i.style.height='0';}sy=null;}
+  document.addEventListener('touchstart',ts,{passive:true});
+  document.addEventListener('touchmove',tm,{passive:false});
+  document.addEventListener('touchend',te,{passive:true});
+  document.addEventListener('touchcancel',te,{passive:true});
 })();
 </script>
 </body></html>
