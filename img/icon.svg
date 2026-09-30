@@ -1,96 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <!-- Dazzling steel blue gradient background -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1628"/>
-      <stop offset="40%" stop-color="#0d2847"/>
-      <stop offset="100%" stop-color="#061222"/>
-    </linearGradient>
-    
-    <!-- Vivid steel blue glow for rings -->
-    <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.9"/>
-      <stop offset="50%" stop-color="#2d7fd4" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#1a5fa8" stop-opacity="0.3"/>
-    </linearGradient>
-    
-    <linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#5cb0ff" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#2d7fd4" stop-opacity="0.4"/>
-    </linearGradient>
-    
-    <linearGradient id="ringGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6ec4ff" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#3a8fd4" stop-opacity="0.3"/>
-    </linearGradient>
-    
-    <!-- Translucent central core -->
-    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7dd3ff" stop-opacity="1"/>
-      <stop offset="40%" stop-color="#4a9eff" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#1a5fa8" stop-opacity="0"/>
-    </radialGradient>
-    
-    <!-- Outer glow filter -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <!-- Sparkle particles -->
-    <filter id="sparkle">
-      <feGaussianBlur stdDeviation="2"/>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
+  <rect width="512" height="512" rx="96" fill="#0a1a2e"/>
   
-  <!-- Background -->
-  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
-  
-  <!-- Subtle inner vignette -->
-  <rect width="512" height="512" rx="112" fill="none" stroke="#4a9eff" stroke-width="0.5" opacity="0.15"/>
-  
-  <!-- Outer translucent ring (10D → projection boundary) -->
-  <circle cx="256" cy="256" r="200" fill="none" stroke="url(#ringGrad1)" stroke-width="2.5" opacity="0.4" filter="url(#glow)"/>
+  <!-- Outer ring (filled blue band) -->
+  <circle cx="256" cy="256" r="220" fill="#2d7fd4" opacity="0.35" filter="url(#g)"/>
+  <circle cx="256" cy="256" r="190" fill="#0a1a2e"/>
   
   <!-- Middle ring -->
-  <circle cx="256" cy="256" r="155" fill="none" stroke="url(#ringGrad2)" stroke-width="2" opacity="0.55" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="190" fill="#4a9eff" opacity="0.5" filter="url(#g)"/>
+  <circle cx="256" cy="256" r="155" fill="#0a1a2e"/>
   
   <!-- Inner ring -->
-  <circle cx="256" cy="256" r="110" fill="none" stroke="url(#ringGrad3)" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="155" fill="#7dd3ff" opacity="0.65" filter="url(#g)"/>
+  <circle cx="256" cy="256" r="115" fill="#0a1a2e"/>
   
-  <!-- Core glow halo -->
-  <circle cx="256" cy="256" r="80" fill="url(#coreGrad)" opacity="0.6" filter="url(#strongGlow)"/>
+  <!-- Core -->
+  <circle cx="256" cy="256" r="115" fill="#a8e4ff" opacity="0.4" filter="url(#g)"/>
+  <circle cx="256" cy="256" r="80" fill="#7dd3ff" opacity="0.9" filter="url(#g)"/>
+  <circle cx="256" cy="256" r="55" fill="#a8e4ff" opacity="1"/>
+  <circle cx="256" cy="256" r="30" fill="#ffffff" opacity="0.95"/>
   
-  <!-- Central brilliant dot (the kernel / retention point) -->
-  <circle cx="256" cy="256" r="28" fill="#7dd3ff" opacity="0.95" filter="url(#strongGlow)"/>
-  <circle cx="256" cy="256" r="16" fill="#a8e4ff" opacity="1"/>
-  <circle cx="256" cy="256" r="6" fill="#ffffff" opacity="0.9"/>
-  
-  <!-- Sparkle particles scattered around -->
-  <circle cx="180" cy="150" r="1.5" fill="#6ec4ff" opacity="0.6" filter="url(#sparkle)"/>
-  <circle cx="340" cy="200" r="2" fill="#5cb0ff" opacity="0.5" filter="url(#sparkle)"/>
-  <circle cx="310" cy="360" r="1.5" fill="#7dd3ff" opacity="0.7" filter="url(#sparkle)"/>
-  <circle cx="160" cy="340" r="2" fill="#4a9eff" opacity="0.4" filter="url(#sparkle)"/>
-  <circle cx="380" cy="300" r="1" fill="#a8e4ff" opacity="0.5" filter="url(#sparkle)"/>
-  <circle cx="130" cy="250" r="1.5" fill="#6ec4ff" opacity="0.4" filter="url(#sparkle)"/>
-  <circle cx="390" cy="160" r="1" fill="#5cb0ff" opacity="0.6" filter="url(#sparkle)"/>
-  <circle cx="220" cy="400" r="1.5" fill="#7dd3ff" opacity="0.5" filter="url(#sparkle)"/>
-  <circle cx="290" cy="120" r="1" fill="#a8e4ff" opacity="0.7" filter="url(#sparkle)"/>
-  <circle cx="100" cy="380" r="1" fill="#4a9eff" opacity="0.4" filter="url(#sparkle)"/>
-  
-  <!-- DREAM FRAMEWORK text -->
-  <text x="256" y="448" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="800" fill="#7dd3ff" letter-spacing="4" opacity="0.95">DREAM</text>
-  <text x="256" y="475" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500" fill="#4a9eff" letter-spacing="6" opacity="0.7">FRAMEWORK</text>
+  <text x="256" y="480" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="24" font-weight="800" fill="#7dd3ff" letter-spacing="6" opacity="0.85">DREAM</text>
 </svg>
