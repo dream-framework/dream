@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-29T23:54:30Z",
-  "total_tests": 286,
+  "exported_at": "2026-09-30T05:49:11Z",
+  "total_tests": 287,
   "fields": [
     "id",
     "name",
@@ -4456,6 +4456,22 @@
       "source": "auto-scan 2026-09-28",
       "date": "2026-09-28",
       "url": "10.5281/zenodo.22181274"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Code and derived summaries for ocean–climate and c",
+      "domain": "scouting",
+      "D": 0.5115,
+      "r2": 0.9979,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.69,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=4.69).",
+      "narrative": "D_eff=0.5115, R²=0.9979. D_eff=0.511 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=4.69). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-09-30",
+      "date": "2026-09-30",
+      "url": "10.5281/zenodo.23049223"
     }
   ]
 }
