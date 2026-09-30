@@ -46,6 +46,34 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
 .overlay{position:fixed;inset:0;z-index:30;background:rgba(3,9,14,.91);backdrop-filter:blur(8px);display:grid;place-items:center;padding:20px}.overlay.hidden{display:none}.modal{width:min(780px,92vw);background:linear-gradient(180deg,#10243a,#091724);border:1px solid #395b75;border-radius:18px;padding:23px;box-shadow:0 25px 80px rgba(0,0,0,.58)}.modal h2{font-size:26px;margin:0 0 7px}.modal p{color:#bdcdd9;line-height:1.5;margin:7px 0;font-size:14px}.modalActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.sum{padding:10px;background:#081522;border:1px solid #314e66;border-radius:10px}.sum b{display:block;font-size:20px}.sum span{font-size:11px;color:#a9bac8}input[type=file]{display:none}
 @media(max-height:760px){:root{--base:11.2px;--sm:10.2px;--xs:9.2px;--hd:16px}.app{grid-template-rows:37px minmax(0,1fr);gap:6px;padding:6px}.brand p{display:none}.logo{width:30px;height:30px}.brand h1{font-size:15px}.workspace{grid-template-rows:40px minmax(230px,1fr) 104px 94px}.gHead{padding:6px 8px}.gBody{padding:6px 7px}.pane,.action{padding:5px 6px;margin-bottom:5px}.formula{margin-bottom:5px}.exercise{padding:6px}.eq{padding:4px 8px}.controls{padding:5px}.info{padding:5px 7px}.btn{padding:4px 6px}}
 @media(max-width:1100px){.layout{grid-template-columns:minmax(320px,37vw) minmax(0,1fr)}.eqHint{display:none}.bar{width:90px}.topRight .btn:nth-of-type(2){display:none}.controlGrid{grid-template-columns:repeat(2,1fr)}}
+
+/* === MOBILE: stack vertically, allow scrolling, fit viewport === */
+@media(max-width:768px){
+  html,body{overflow:auto;height:auto}
+  .app{height:auto;min-height:100dvh;overflow:visible;display:block;padding:6px}
+  .top{flex-wrap:wrap;gap:6px}
+  .brand h1{font-size:15px}.brand p{font-size:9px}
+  .topRight{flex-wrap:wrap;gap:4px}
+  .topRight .btn{padding:4px 6px;font-size:10px}
+  .bar{width:70px}
+  .layout{display:block;overflow:visible}
+  .card{margin-bottom:8px;min-height:auto;overflow:visible}
+  .guide{display:block;overflow:visible}
+  .gBody{overflow:visible;padding:8px}
+  .gFit{transform:none}
+  .workspace{display:block;overflow:visible}
+  .visual{overflow:visible}
+  .canvasWrap{position:relative;min-height:280px;overflow:hidden}
+  .controls{overflow:visible}
+  .controlGrid{grid-template-columns:repeat(2,1fr)}
+  .bottom{display:block}
+  .info{overflow:visible;margin-bottom:8px}
+  .eq{overflow:visible}
+  .eqMath{font-size:16px;white-space:normal}
+  .helpModal{width:94vw;height:88dvh;overflow:auto}
+  .helpBody{display:block;overflow:visible}
+  .helpPrimary,.helpMemory{overflow:visible;margin-bottom:8px}
+}
 </style>
 </head>
 <body>
