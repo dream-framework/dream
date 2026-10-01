@@ -26,6 +26,8 @@ const PRECACHE_URLS = [
   './t71-toy_ru.html',
   './en/math-recharge.html',
   './ru/math-recharge.html',
+  './dream-zoom.html',
+  './dream-zoom_ru.html',
 ];
 
 // Install — pre-cache the app shell

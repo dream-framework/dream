@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DREAM Zoom — Projection Scale Toy</title>
+<link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/dream/img/favicon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DREAM Zoom">
+<meta name="theme-color" content="#070b14">
+<style>
+:root{--bg:#070b14;--card:#0a0f1a;--fg:#eef2f7;--muted:#a8b3c7;--accent:#2dd4bf;--accent2:#60a5fa;--border:#223047;--good:#86efac;--warn:#fde68a;--bad:#fca5a5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+#app{display:grid;grid-template-rows:auto 1fr auto;height:100dvh;gap:0}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);background:rgba(10,15,26,.8);backdrop-filter:blur(8px);z-index:10}
+header h1{font-size:16px;font-weight:700;white-space:nowrap}
+header .kicker{color:var(--muted);font-size:12px;white-space:nowrap}
+header .badge{display:inline-block;border-radius:999px;padding:2px 8px;background:rgba(99,102,241,.16);border:1px solid rgba(99,102,241,.45);font-size:11px;color:#c7d2fe;font-weight:600}
+header .home{margin-left:auto}
+#scene-container{position:relative;overflow:hidden;min-height:0}
+#three-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#overlay{position:absolute;inset:0;pointer-events:none;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px}
+#narrative{pointer-events:none;max-width:520px;align-self:center;margin-top:20px}
+#narrative .panel{background:rgba(7,11,20,.85);backdrop-filter:blur(6px);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.5;display:none}
+#narrative .panel.visible{display:block;animation:fadeIn .4s ease}
+#narrative .panel .title{color:var(--accent);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+#narrative .panel .body{color:var(--fg)}
+#narrative .panel .math{color:var(--accent2);font-family:monospace;margin-top:6px;font-size:12px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#hud{position:absolute;top:12px;left:12px;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
+.pill{font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(7,11,20,.85);color:var(--fg);font-weight:600;pointer-events:none}
+.pill .v{color:var(--accent);font-family:monospace}
+.pill .label{color:var(--muted)}
+footer{border-top:1px solid var(--border);background:rgba(10,15,26,.9);padding:12px 16px;z-index:10}
+#scale-control{display:flex;align-items:center;gap:12px;max-width:900px;margin:0 auto}
+#scale-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,#1e3a5f,#4a9eff,#2dd4bf,#fbbf24,#ef4444);outline:none;cursor:pointer}
+#scale-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;cursor:grab;box-shadow:0 0 8px rgba(45,212,191,.5);border:2px solid var(--accent)}
+#scale-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;cursor:grab;border:2px solid var(--accent)}
+#scale-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px;max-width:900px;margin-left:auto;margin-right:auto;padding:0 16px}
+#retention-bar{width:100%;max-width:900px;margin:6px auto 0;height:4px;border-radius:4px;background:#1a2a3e;overflow:hidden}
+#retention-fill{height:100%;width:100%;background:linear-gradient(90deg,#ef4444,#fbbf24,#2dd4bf);transition:width .15s ease;border-radius:4px}
+#retention-label{text-align:center;font-size:11px;color:var(--muted);margin-top:2px}
+#retention-label .v{color:var(--accent);font-family:monospace;font-weight:700}
+#level-label{text-align:center;font-size:13px;color:var(--fg);font-weight:700;margin-top:2px}
+#level-label .sub{color:var(--muted);font-size:11px;font-weight:400}
+@media(max-width:768px){
+  header h1{font-size:14px}
+  header .kicker{display:none}
+  #narrative{max-width:90vw;margin-top:8px}
+  #narrative .panel{font-size:12px;padding:10px 12px}
+  #hud{top:6px;left:6px;gap:4px}
+  .pill{font-size:10px;padding:3px 8px}
+  footer{padding:8px 12px}
+  #scale-control{gap:8px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>DREAM Zoom — Projection Scale Toy</h1>
+    <span class="kicker">Operate the DREAM projection kernel in 3D</span>
+    <span class="badge">S2 retention controls visible structure</span>
+    <a class="home" href="/dream/en/index.html" style="font-size:13px;color:var(--accent2)">← back to DREAM</a>
+  </header>
+
+  <div id="scene-container">
+    <canvas id="three-canvas"></canvas>
+    <div id="overlay">
+      <div id="hud">
+        <span class="pill"><span class="label">Scale</span> <span class="v" id="hud-scale">10⁶ m</span></span>
+        <span class="pill"><span class="label">R(λ)</span> <span class="v" id="hud-retention">1.000</span></span>
+        <span class="pill"><span class="label">D_eff</span> <span class="v" id="hud-d">0.80</span></span>
+        <span class="pill"><span class="label">λ_q</span> <span class="v" id="hud-lq">10⁻⁸ m</span></span>
+      </div>
+      <div id="narrative">
+        <div class="panel" id="narrative-panel">
+          <div class="title" id="narr-title">Galaxy</div>
+          <div class="body" id="narr-body">At macroscopic scales, all structure is preserved. The projection kernel has no effect.</div>
+          <div class="math" id="narr-math">R(λ) = exp[-(λ/λ_q)^D] ≈ 1.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div id="scale-control">
+      <span style="font-size:11px;color:var(--muted);white-space:nowrap">MACRO</span>
+      <input type="range" id="scale-slider" min="0" max="1000" value="0" step="1">
+      <span style="font-size:11px;color:var(--muted);white-space:nowrap">λ_q</span>
+    </div>
+    <div id="level-label"><span id="level-name">Galaxy</span> <span class="sub" id="level-desc">— all structure preserved</span></div>
+    <div id="retention-bar"><div id="retention-fill"></div></div>
+    <div id="retention-label">Retention R(λ) = <span class="v" id="retention-value">1.000</span> — <span id="retention-meaning">all structure preserved</span></div>
+  </footer>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+// ═══════════════════════════════════════════════════════════════════════
+// DREAM ZOOM TOY — 3D Projection Scale Visualization
+// ═══════════════════════════════════════════════════════════════════════
+
+// --- S2 Parameters ---
+const LAMBDA_Q = 1e-8; // coherence cliff at ~10nm
+const D_EFF = 0.80;
+
+// --- Scale levels (log10 meters) ---
+const LEVELS = [
+  { name: 'Galaxy',        scale: 6,   desc: 'all structure preserved',     narr: 'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect on the observable.' },
+  { name: 'Solar System',  scale: 3,  desc: 'all structure preserved',     narr: 'Crossing from galactic to planetary scales. Retention is still essentially unity.' },
+  { name: 'Earth',         scale: 0,  desc: 'all structure preserved',     narr: 'Continental structure is fully resolved. The projection kernel is far above the coherence cliff.' },
+  { name: 'City',          scale: -2, desc: 'fine detail emerging',        narr: 'Urban-scale structure emerges. The probe is approaching the regime where finer detail will start to degrade.' },
+  { name: 'Room',         scale: -4, desc: 'objects visible',              narr: 'Human-scale objects are clearly resolved. The probe scale is still well above λ_q.' },
+  { name: 'Tabletop',     scale: -6, desc: 'surface texture emerging',     narr: 'Surface textures begin to appear. The probe is approaching the coherence cliff.' },
+  { name: 'Wood Grain',   scale: -7, desc: 'fine structure degrading',    narr: 'Wood grain is visible but beginning to lose fine detail. R(λ) is dropping — the projection kernel is now actively erasing sub-resolution structure.' },
+  { name: 'Fibers',       scale: -8, desc: 'structure collapsing',        narr: 'Cellular fiber structure is partially unresolved. The retention curve is steep here — information is being lost rapidly.' },
+  { name: 'Microstructure', scale: -9, desc: 'nearly unresolved',         narr: 'Only the coarsest features survive. The projection has not become empty, but its recoverable information has reached its limit.' },
+  { name: 'λ_q — Coherence Cliff', scale: -10, desc: 'irrecoverable',     narr: 'Below the coherence cliff, all structure is irrecoverably blurred. The kernel has averaged out everything — what remains is an unresolved field.' },
+];
+
+// --- Compute S2 retention ---
+function computeRetention(scaleLog10) {
+  // scaleLog10: current probe scale in log10 meters
+  // Map slider position to scale: slider 0→1000 maps to scale 6→-10
+  const lambda = Math.pow(10, scaleLog10);
+  const ratio = lambda / LAMBDA_Q;
+  const R = Math.exp(-Math.pow(ratio, D_EFF));
+  return Math.max(0, Math.min(1, R));
+}
+
+// --- Slider to scale ---
+function sliderToScale(sliderVal) {
+  // 0 → 6 (galaxy), 1000 → -10 (cliff)
+  return 6 - (sliderVal / 1000) * 16;
+}
+
+// --- Find current level ---
+function findLevel(scaleLog10) {
+  let best = LEVELS[0];
+  for (const lvl of LEVELS) {
+    if (scaleLog10 <= lvl.scale) best = lvl;
+  }
+  return best;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// THREE.JS SCENE
+// ═══════════════════════════════════════════════════════════════════════
+
+const container = document.getElementById('scene-container');
+const canvas = document.getElementById('three-canvas');
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x070b14, 0.008);
+
+const camera = new THREE.PerspectiveCamera(60, 1, 0.01, 5000);
+camera.position.set(0, 0, 100);
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x070b14, 1);
+
+function resize() {
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// --- Lighting ---
+const ambient = new THREE.AmbientLight(0x4060a0, 0.5);
+scene.add(ambient);
+const point = new THREE.PointLight(0x7dd3ff, 1, 500);
+point.position.set(50, 50, 50);
+scene.add(point);
+
+// --- Scene objects (created on demand, visibility controlled by scale) ---
+
+// Galaxy: particle system
+let galaxy = null;
+function createGalaxy() {
+  const count = 8000;
+  const geom = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  const col = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const r = Math.pow(Math.random(), 0.5) * 200;
+    const theta = Math.random() * Math.PI * 2;
+    const armOffset = Math.floor(Math.random() * 3) * (Math.PI * 2 / 3);
+    const spiral = theta + r * 0.02 + armOffset;
+    pos[i*3] = Math.cos(spiral) * r;
+    pos[i*3+1] = (Math.random() - 0.5) * 20 * (1 - r/200);
+    pos[i*3+2] = Math.sin(spiral) * r;
+    const c = new THREE.Color().setHSL(0.55 + Math.random() * 0.1, 0.8, 0.4 + Math.random() * 0.4);
+    col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
+  }
+  geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.PointsMaterial({ size: 1.5, vertexColors: true, transparent: true, opacity: 1, blending: THREE.AdditiveBlending, depthWrite: false });
+  galaxy = new THREE.Points(geom, mat);
+  scene.add(galaxy);
+}
+
+// Earth: sphere with procedural texture
+let earth = null;
+function createEarth() {
+  const geom = new THREE.IcosahedronGeometry(30, 4);
+  const mat = new THREE.MeshPhongMaterial({ color: 0x2255aa, emissive: 0x0a1525, shininess: 5, flatShading: true, transparent: true, opacity: 0 });
+  // Add vertex color variation for continents
+  const colors = geom.attributes.position.array;
+  const vColors = new Float32Array(colors.length);
+  for (let i = 0; i < colors.length; i += 3) {
+    const v = new THREE.Vector3(colors[i], colors[i+1], colors[i+2]);
+    const n = v.clone().normalize();
+    const noise = Math.sin(n.x * 3) * Math.cos(n.y * 4) * Math.sin(n.z * 5);
+    if (noise > 0.1) { vColors[i] = 0.2; vColors[i+1] = 0.5; vColors[i+2] = 0.15; }
+    else { vColors[i] = 0.05; vColors[i+1] = 0.2; vColors[i+2] = 0.5; }
+  }
+  geom.setAttribute('color', new THREE.BufferAttribute(vColors, 3));
+  mat.vertexColors = true;
+  earth = new THREE.Mesh(geom, mat);
+  earth.visible = false;
+  scene.add(earth);
+}
+
+// City: box buildings
+let city = null;
+function createCity() {
+  city = new THREE.Group();
+  for (let i = 0; i < 60; i++) {
+    const h = 2 + Math.random() * 8;
+    const geom = new THREE.BoxGeometry(1 + Math.random() * 2, h, 1 + Math.random() * 2);
+    const mat = new THREE.MeshPhongMaterial({ color: new THREE.Color().setHSL(0.6, 0.3, 0.2 + Math.random() * 0.2), transparent: true, opacity: 0 });
+    const box = new THREE.Mesh(geom, mat);
+    box.position.set((Math.random() - 0.5) * 40, h/2, (Math.random() - 0.5) * 40);
+    city.add(box);
+  }
+  city.visible = false;
+  scene.add(city);
+}
+
+// Room: simple walls + furniture
+let room = null;
+function createRoom() {
+  room = new THREE.Group();
+  const wallMat = new THREE.MeshPhongMaterial({ color: 0x3a3530, transparent: true, opacity: 0 });
+  // Floor
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), wallMat.clone());
+  floor.rotation.x = -Math.PI / 2;
+  room.add(floor);
+  // Walls
+  const w1 = new THREE.Mesh(new THREE.PlaneGeometry(40, 15), wallMat.clone());
+  w1.position.set(0, 7.5, -20);
+  room.add(w1);
+  const w2 = new THREE.Mesh(new THREE.PlaneGeometry(40, 15), wallMat.clone());
+  w2.position.set(-20, 7.5, 0); w2.rotation.y = Math.PI / 2;
+  room.add(w2);
+  // Table
+  const tableTop = new THREE.Mesh(new THREE.BoxGeometry(12, 0.5, 8), new THREE.MeshPhongMaterial({ color: 0x6b4220, transparent: true, opacity: 0 }));
+  tableTop.position.set(0, 5, 0);
+  room.add(tableTop);
+  // Table legs
+  for (const [x, z] of [[-5.5, -3.5], [5.5, -3.5], [-5.5, 3.5], [5.5, 3.5]]) {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.5, 5, 0.5), tableTop.material.clone());
+    leg.position.set(x, 2.5, z);
+    room.add(leg);
+  }
+  room.visible = false;
+  scene.add(room);
+}
+
+// Wood grain: curved lines on the table surface
+let woodGrain = null;
+function createWoodGrain() {
+  woodGrain = new THREE.Group();
+  for (let i = 0; i < 20; i++) {
+    const pts = [];
+    const yBase = (i - 10) * 0.4;
+    for (let x = -6; x <= 6; x += 0.1) {
+      const y = yBase + Math.sin(x * 2 + i * 0.5) * 0.15 + (Math.random() - 0.5) * 0.05;
+      pts.push(new THREE.Vector3(x, y, 0));
+    }
+    const geom = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({ color: new THREE.Color().setHSL(0.08, 0.4, 0.25 + i * 0.01), transparent: true, opacity: 0 });
+    const line = new THREE.Line(geom, mat);
+    woodGrain.add(line);
+  }
+  woodGrain.visible = false;
+  scene.add(woodGrain);
+}
+
+// Fibers: dense particle filaments
+let fibers = null;
+function createFibers() {
+  const count = 5000;
+  const geom = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  const col = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const r = Math.random() * 8;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = (Math.random() - 0.5) * 0.3;
+    pos[i*3] = r * Math.cos(theta) * Math.cos(phi);
+    pos[i*3+1] = r * Math.sin(phi) + (Math.random() - 0.5) * 2;
+    pos[i*3+2] = r * Math.sin(theta) * Math.cos(phi);
+    const c = new THREE.Color().setHSL(0.08 + Math.random() * 0.05, 0.5, 0.3 + Math.random() * 0.3);
+    col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
+  }
+  geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.PointsMaterial({ size: 0.15, vertexColors: true, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  fibers = new THREE.Points(geom, mat);
+  fibers.visible = false;
+  scene.add(fibers);
+}
+
+// Unresolved field: sparse low-contrast particles (below λ_q)
+let unresolved = null;
+function createUnresolved() {
+  const count = 200;
+  const geom = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    pos[i*3] = (Math.random() - 0.5) * 30;
+    pos[i*3+1] = (Math.random() - 0.5) * 30;
+    pos[i*3+2] = (Math.random() - 0.5) * 30;
+  }
+  geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ size: 0.5, color: 0x4a6080, transparent: true, opacity: 0, depthWrite: false });
+  unresolved = new THREE.Points(geom, mat);
+  unresolved.visible = false;
+  scene.add(unresolved);
+}
+
+// Create all
+createGalaxy();
+createEarth();
+createCity();
+createRoom();
+createWoodGrain();
+createFibers();
+createUnresolved();
+
+// ═══════════════════════════════════════════════════════════════════════
+// SCALE-DRIVEN VISIBILITY + RETENTION EFFECTS
+// ═══════════════════════════════════════════════════════════════════════
+
+function updateScene(scaleLog10, R) {
+  // R = retention [0,1]
+  // Each object's visibility and detail is controlled by R and the scale
+
+  // Galaxy: visible at scale > 3, fades out as we zoom in
+  if (galaxy) {
+    const galVis = Math.max(0, Math.min(1, (scaleLog10 - 3) / 2));
+    galaxy.material.opacity = galVis * R;
+    galaxy.rotation.y += 0.0005;
+  }
+
+  // Earth: visible at scale 0 to -2
+  if (earth) {
+    const earthVis = Math.max(0, Math.min(1, Math.min(scaleLog10 + 2, 2 - scaleLog10) / 1.5));
+    earth.material.opacity = earthVis * R;
+    earth.visible = earthVis > 0.01;
+    earth.rotation.y += 0.001;
+  }
+
+  // City: visible at scale -2 to -4
+  if (city) {
+    const cityVis = Math.max(0, Math.min(1, Math.min(scaleLog10 + 4, -2 - scaleLog10) / 1.5));
+    city.children.forEach(c => { c.material.opacity = cityVis * R; });
+    city.visible = cityVis > 0.01;
+    city.rotation.y += 0.0008;
+  }
+
+  // Room: visible at scale -4 to -6
+  if (room) {
+    const roomVis = Math.max(0, Math.min(1, Math.min(scaleLog10 + 6, -4 - scaleLog10) / 1.5));
+    room.children.forEach(c => { if (c.material) c.material.opacity = roomVis * R; });
+    room.visible = roomVis > 0.01;
+  }
+
+  // Wood grain: visible at scale -6 to -7
+  if (woodGrain) {
+    const woodVis = Math.max(0, Math.min(1, Math.min(scaleLog10 + 7, -6 - scaleLog10) / 1));
+    woodGrain.children.forEach(c => { c.material.opacity = woodVis * R; });
+    woodGrain.visible = woodVis > 0.01;
+  }
+
+  // Fibers: visible at scale -7 to -8, but DETAIL is controlled by R
+  if (fibers) {
+    const fiberVis = Math.max(0, Math.min(1, Math.min(scaleLog10 + 8, -7 - scaleLog10) / 1));
+    // Retention controls how many particles are visible
+    const detailFactor = R; // R=1 → all visible, R=0 → none
+    fibers.material.opacity = fiberVis * detailFactor;
+    // Also control particle size — lower R = blurrier (bigger, dimmer)
+    fibers.material.size = 0.15 + (1 - R) * 0.5;
+    fibers.visible = fiberVis > 0.01;
+  }
+
+  // Unresolved: visible below λ_q (scale < -8), gets denser as R→0
+  if (unresolved) {
+    const unresVis = Math.max(0, Math.min(1, (-8 - scaleLog10) / 2));
+    unresolved.material.opacity = unresVis * (1 - R) * 0.6;
+    unresolved.material.size = 0.5 + (1 - R) * 1.5;
+    unresolved.visible = unresVis > 0.01;
+    unresolved.rotation.y += 0.0003;
+  }
+
+  // Camera distance: zoom in as scale decreases
+  const camDist = Math.pow(10, (scaleLog10 + 3) * 0.4) * 50;
+  camera.position.z = Math.max(5, Math.min(2000, camDist));
+
+  // Fog: denser at small scales (less retention = more blur)
+  scene.fog.density = 0.005 + (1 - R) * 0.02;
+
+  // Point light intensity: dimmer at low R
+  point.intensity = 0.3 + R * 0.7;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// NARRATIVE + UI UPDATE
+// ═══════════════════════════════════════════════════════════════════════
+
+const slider = document.getElementById('scale-slider');
+const narrPanel = document.getElementById('narrative-panel');
+const narrTitle = document.getElementById('narr-title');
+const narrBody = document.getElementById('narr-body');
+const narrMath = document.getElementById('narr-math');
+const hudScale = document.getElementById('hud-scale');
+const hudRetention = document.getElementById('hud-retention');
+const hudD = document.getElementById('hud-d');
+const hudLq = document.getElementById('hud-lq');
+const retentionFill = document.getElementById('retention-fill');
+const retentionValue = document.getElementById('retention-value');
+const retentionMeaning = document.getElementById('retention-meaning');
+const levelName = document.getElementById('level-name');
+const levelDesc = document.getElementById('level-desc');
+
+let lastLevel = '';
+
+function updateUI(scaleLog10, R) {
+  const level = findLevel(scaleLog10);
+  const scaleStr = `10${superscript(scaleLog10)} m`;
+  
+  hudScale.textContent = scaleStr;
+  hudRetention.textContent = R.toFixed(3);
+  hudD.textContent = D_EFF.toFixed(2);
+  hudLq.textContent = `10${superscript(Math.log10(LAMBDA_Q))} m`;
+
+  retentionFill.style.width = (R * 100) + '%';
+  retentionValue.textContent = R.toFixed(3);
+
+  if (R > 0.95) {
+    retentionMeaning.textContent = 'all structure preserved';
+    retentionFill.style.background = 'linear-gradient(90deg,#2dd4bf,#2dd4bf)';
+  } else if (R > 0.7) {
+    retentionMeaning.textContent = 'fine detail emerging';
+    retentionFill.style.background = 'linear-gradient(90deg,#fbbf24,#2dd4bf)';
+  } else if (R > 0.3) {
+    retentionMeaning.textContent = 'fine structure degrading';
+    retentionFill.style.background = 'linear-gradient(90deg,#fbbf24,#fbbf24)';
+  } else if (R > 0.05) {
+    retentionMeaning.textContent = 'structure collapsing';
+    retentionFill.style.background = 'linear-gradient(90deg,#ef4444,#fbbf24)';
+  } else {
+    retentionMeaning.textContent = 'irrecoverable — below coherence cliff';
+    retentionFill.style.background = '#ef4444';
+  }
+
+  levelName.textContent = level.name;
+  levelDesc.textContent = '— ' + level.desc;
+
+  // Narrative: show when level changes
+  if (level.name !== lastLevel) {
+    lastLevel = level.name;
+    narrTitle.textContent = level.name;
+    narrBody.textContent = level.narr;
+    narrMath.textContent = `R(λ) = exp[-(λ/λ_q)^D] ≈ ${R.toFixed(3)}`;
+    narrPanel.classList.add('visible');
+    setTimeout(() => narrPanel.classList.remove('visible'), 4000);
+  }
+}
+
+function superscript(n) {
+  const map = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','.':'·'};
+  return String(n).split('').map(c => map[c] || c).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// ANIMATION LOOP
+// ═══════════════════════════════════════════════════════════════════════
+
+let autoZoom = true;
+let autoZoomSpeed = 0.3; // slider units per frame
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (autoZoom) {
+    let v = parseFloat(slider.value);
+    v += autoZoomSpeed;
+    if (v > 1000) { v = 0; } // loop
+    slider.value = v;
+  }
+
+  const sliderVal = parseFloat(slider.value);
+  const scaleLog10 = sliderToScale(sliderVal);
+  const R = computeRetention(scaleLog10);
+
+  updateScene(scaleLog10, R);
+  updateUI(scaleLog10, R);
+
+  renderer.render(scene, camera);
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════════════════════════
+
+slider.addEventListener('input', () => {
+  autoZoom = false; // user takes control
+});
+
+// Click on canvas to toggle auto-zoom
+canvas.addEventListener('click', () => {
+  autoZoom = !autoZoom;
+});
+
+// Touch: pinch to zoom camera
+let pinchDist = 0;
+canvas.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    pinchDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+  }
+});
+canvas.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2 && pinchDist > 0) {
+    e.preventDefault();
+    const newDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    const delta = (newDist - pinchDist) / pinchDist;
+    let v = parseFloat(slider.value);
+    v -= delta * 50;
+    v = Math.max(0, Math.min(1000, v));
+    slider.value = v;
+    autoZoom = false;
+    pinchDist = newDist;
+  }
+}, { passive: false });
+
+// Start animation
+animate();
+
+// Initial narrative
+setTimeout(() => {
+  narrPanel.classList.add('visible');
+  setTimeout(() => narrPanel.classList.remove('visible'), 5000);
+}, 500);
+
+</script>
+</body>
+</html>
