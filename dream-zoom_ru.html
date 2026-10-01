@@ -26,11 +26,11 @@ header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
 .pill .v{color:#2dd4bf;font-family:monospace}
 .pill .label{color:#a8b3c7}
 #narrative{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90%;max-width:600px;z-index:5;pointer-events:none}
-.narr-panel{background:rgba(7,11,20,.92);border:1px solid #223047;border-radius:12px;padding:10px 16px;font-size:13px;line-height:1.5;opacity:0;transition:opacity .4s}
+.narr-panel{background:rgba(7,11,20,.94);border:1px solid #2dd4bf;border-radius:12px;padding:12px 18px;font-size:14px;line-height:1.6;opacity:0;transition:opacity .5s}
 .narr-panel.visible{opacity:1}
-.narr-panel .ntitle{color:#2dd4bf;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.narr-panel .ntitle{color:#2dd4bf;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .narr-panel .nbody{color:#eef2f7}
-.narr-panel .nmath{color:#60a5fa;font-family:monospace;margin-top:6px;font-size:11px}
+.narr-panel .nmath{color:#60a5fa;font-family:monospace;margin-top:8px;font-size:12px}
 footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 14px;z-index:10}
 #scale-row{display:flex;align-items:center;gap:10px;max-width:900px;margin:0 auto}
 #scale-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,#2dd4bf,#60a5fa,#fbbf24,#ef4444);outline:none;cursor:pointer}
@@ -44,7 +44,7 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
 #retention-fill{height:100%;width:100%;border-radius:5px;transition:width .15s,background .3s}
 #retention-label{text-align:center;font-size:10px;color:#a8b3c7;margin-top:2px}
 #retention-label .v{color:#2dd4bf;font-family:monospace;font-weight:700}
-@media(max-width:768px){header h1{font-size:13px}header .sub{display:none}}
+@media(max-width:768px){header h1{font-size:13px}header .sub{display:none)}
 </style>
 </head>
 <body>
@@ -81,32 +81,29 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
 try {
 if(typeof THREE==='undefined') throw new Error('THREE not loaded');
 
-// S2 params
 var LQ=1e-8, DEFF=0.80;
 var LEVELS=[
-  {n:'Galaxy',s:6,d:'all structure preserved',t:'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect.'},
-  {n:'Solar System',s:3,d:'all structure preserved',t:'Crossing from galactic to planetary scales. Retention is still essentially unity.'},
-  {n:'Earth',s:0,d:'all structure preserved',t:'Continental structure is fully resolved. The kernel is far above the coherence cliff.'},
-  {n:'City',s:-2,d:'fine detail emerging',t:'Urban-scale structure emerges. The probe is approaching the regime where finer detail will degrade.'},
-  {n:'Room',s:-4,d:'objects visible',t:'Human-scale objects are clearly resolved. The probe is well above lambda_q.'},
-  {n:'Tabletop',s:-6,d:'surface texture emerging',t:'Surface textures begin to appear. The probe is approaching the coherence cliff.'},
-  {n:'Wood Grain',s:-7,d:'fine structure degrading',t:'Wood grain is visible but losing fine detail. R is dropping - the kernel is erasing sub-resolution structure.'},
-  {n:'Fibers',s:-8,d:'structure collapsing',t:'Cellular fiber structure is partially unresolved. Information is being lost rapidly.'},
-  {n:'Microstructure',s:-9,d:'nearly unresolved',t:'Only the coarsest features survive. Recoverable information has reached its limit.'},
-  {n:'Coherence Cliff',s:-10,d:'irrecoverable',t:'Below the coherence cliff, all structure is irrecoverably blurred. What remains is an unresolved field.'},
+  {n:'Galaxy',s:6,d:'all structure preserved',t:'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect on the observable.'},
+  {n:'Solar System',s:3,d:'all structure preserved',t:'Crossing from galactic to planetary scales. Retention is still essentially unity -- no information has been lost yet.'},
+  {n:'Earth',s:0,d:'all structure preserved',t:'Continental structure is fully resolved. The projection kernel is far above the coherence cliff at lambda_q.'},
+  {n:'City',s:-2,d:'fine detail emerging',t:'Urban-scale structure emerges. The probe is approaching the regime where finer detail will start to degrade.'},
+  {n:'Room',s:-4,d:'objects visible',t:'Human-scale objects are clearly resolved. The probe scale is still well above lambda_q -- retention is high.'},
+  {n:'Tabletop',s:-6,d:'surface texture emerging',t:'Surface textures begin to appear. The probe is approaching the coherence cliff -- retention is starting to drop.'},
+  {n:'Wood Grain',s:-7,d:'fine structure degrading',t:'Wood grain is visible but beginning to lose fine detail. R is dropping -- the kernel is now actively erasing sub-resolution structure.'},
+  {n:'Fibers',s:-8,d:'structure collapsing',t:'Cellular fiber structure is partially unresolved. The retention curve is steep here -- information is being lost rapidly.'},
+  {n:'Microstructure',s:-9,d:'nearly unresolved',t:'Only the coarsest features survive. The projection has not become empty, but its recoverable information has reached its limit.'},
+  {n:'Coherence Cliff',s:-10,d:'irrecoverable',t:'Below the coherence cliff, all structure is irrecoverably blurred. The kernel has averaged out everything -- what remains is an unresolved field.'},
 ];
-
 function retR(sl){return Math.max(0,Math.min(1,Math.exp(-Math.pow(Math.pow(10,sl)/LQ,DEFF))));}
 function s2sc(sv){return 6-(sv/1000)*16;}
 function findLvl(sl){var b=LEVELS[0];for(var i=0;i<LEVELS.length;i++){if(sl<=LEVELS[i].s)b=LEVELS[i];}return b;}
 function sup(n){return String(Math.round(n));}
 
-// THREE scene
 var container=document.getElementById('scene-container');
 var canvas=document.getElementById('three-canvas');
 var scene=new THREE.Scene();
 scene.background=new THREE.Color(0x0a1525);
-scene.fog=new THREE.FogExp2(0x0a1525,0.0015);
+scene.fog=new THREE.FogExp2(0x0a1525,0.001);
 var camera=new THREE.PerspectiveCamera(55,1,0.01,5000);
 camera.position.set(0,40,160);
 camera.lookAt(0,0,0);
@@ -117,36 +114,51 @@ function resize(){var w=container.clientWidth,h=container.clientHeight;renderer.
 window.addEventListener('resize',resize);resize();
 
 // BRIGHT lighting
-var ambient=new THREE.AmbientLight(0xb0c0e0,1.2);scene.add(ambient);
+var ambient=new THREE.AmbientLight(0xc0d0e0,1.4);scene.add(ambient);
 var dl1=new THREE.DirectionalLight(0xffffff,1.5);dl1.position.set(60,120,80);scene.add(dl1);
 var dl2=new THREE.DirectionalLight(0xffeecc,0.8);dl2.position.set(-60,40,-80);scene.add(dl2);
 var dl3=new THREE.DirectionalLight(0x88aaff,0.5);dl3.position.set(0,-50,100);scene.add(dl3);
 
-// ═══ GALAXY - bright glowing particles ═══
-var gPos=new Float32Array(6000*3);
-var gCol=new Float32Array(6000*3);
-for(var i=0;i<6000;i++){
-  var r=Math.pow(Math.random(),0.35)*120;
+// ═══ GALAXY - use SPHERE mesh for bright core + particle cloud for arms ═══
+var galaxyGroup=new THREE.Group();
+
+// Central bright core (sphere)
+var core=new THREE.Mesh(
+  new THREE.SphereGeometry(8,16,16),
+  new THREE.MeshBasicMaterial({color:0xffffee})
+);
+galaxyGroup.add(core);
+
+// Inner glow
+var glow=new THREE.Mesh(
+  new THREE.SphereGeometry(15,16,16),
+  new THREE.MeshBasicMaterial({color:0x88aaff,side:THREE.BackSide})
+);
+galaxyGroup.add(glow);
+
+// Spiral arms as particle clouds (brighter, bigger)
+var gPos=new Float32Array(4000*3);
+var gCol=new Float32Array(4000*3);
+for(var i=0;i<4000;i++){
+  var r=15+Math.pow(Math.random(),0.3)*100;
   var a=Math.random()*Math.PI*2;
   var arm=Math.floor(Math.random()*4)*(Math.PI*2/4);
   var sp=a+r*0.012+arm;
   gPos[i*3]=Math.cos(sp)*r;
-  gPos[i*3+1]=(Math.random()-0.5)*20*(1-r/120);
+  gPos[i*3+1]=(Math.random()-0.5)*15*(1-r/115);
   gPos[i*3+2]=Math.sin(sp)*r;
-  // Bright blue-white stars
-  var bright=Math.random();
-  var c;
-  if(bright>0.85){c=new THREE.Color(1.0,1.0,1.0);} // white stars
-  else if(bright>0.6){c=new THREE.Color(0.8,0.9,1.0);} // blue-white
-  else if(bright>0.3){c=new THREE.Color(0.5,0.7,1.0);} // blue
-  else{c=new THREE.Color(0.3,0.5,0.8);} // dim blue
-  gCol[i*3]=c.r;gCol[i*3+1]=c.g;gCol[i*3+2]=c.b;
+  // Bright stars: white, blue-white, yellow
+  var bt=Math.random();
+  if(bt>0.7){gCol[i*3]=1;gCol[i*3+1]=1;gCol[i*3+2]=0.9;}
+  else if(bt>0.4){gCol[i*3]=0.7;gCol[i*3+1]=0.8;gCol[i*3+2]=1;}
+  else{gCol[i*3]=0.5;gCol[i*3+1]=0.6;gCol[i*3+2]=0.9;}
 }
 var gGeom=new THREE.BufferGeometry();
 gGeom.setAttribute('position',new THREE.BufferAttribute(gPos,3));
 gGeom.setAttribute('color',new THREE.BufferAttribute(gCol,3));
-var galaxy=new THREE.Points(gGeom,new THREE.PointsMaterial({size:3.5,vertexColors:true,depthWrite:false,sizeAttenuation:true}));
-scene.add(galaxy);
+var galaxyPts=new THREE.Points(gGeom,new THREE.PointsMaterial({size:5,vertexColors:true,depthWrite:false,sizeAttenuation:true}));
+galaxyGroup.add(galaxyPts);
+scene.add(galaxyGroup);
 
 // ═══ EARTH - bright textured sphere ═══
 var eGeom=new THREE.IcosahedronGeometry(55,6);
@@ -155,108 +167,129 @@ for(i=0;i<eGeom.attributes.position.array.length;i+=3){
   var v=new THREE.Vector3(eGeom.attributes.position.array[i],eGeom.attributes.position.array[i+1],eGeom.attributes.position.array[i+2]);
   var n=v.clone().normalize();
   var ns=Math.sin(n.x*2.5)*Math.cos(n.y*3)*Math.sin(n.z*4)+Math.sin(n.x*7)*0.25;
-  if(ns>0.2){eCol[i]=0.25;eCol[i+1]=0.6;eCol[i+2]=0.2;} // green land
-  else if(ns>-0.05){eCol[i]=0.5;eCol[i+1]=0.45;eCol[i+2]=0.2;} // brown land
-  else{eCol[i]=0.1;eCol[i+1]=0.35;eCol[i+2]=0.6;} // blue ocean
+  if(ns>0.2){eCol[i]=0.3;eCol[i+1]=0.65;eCol[i+2]=0.25;}
+  else if(ns>-0.05){eCol[i]=0.55;eCol[i+1]=0.5;eCol[i+2]=0.25;}
+  else{eCol[i]=0.15;eCol[i+1]=0.4;eCol[i+2]=0.65;}
 }
 eGeom.setAttribute('color',new THREE.BufferAttribute(eCol,3));
-var earth=new THREE.Mesh(eGeom,new THREE.MeshLambertMaterial({vertexColors:true,emissive:0x0d2040,emissiveIntensity:0.4}));
+var earth=new THREE.Mesh(eGeom,new THREE.MeshLambertMaterial({vertexColors:true,emissive:0x102030,emissiveIntensity:0.3}));
 earth.visible=false;scene.add(earth);
-// Atmosphere glow
-var atmo=new THREE.Mesh(new THREE.SphereGeometry(58,32,32),new THREE.MeshBasicMaterial({color:0x4488ff,side:THREE.BackSide}));
+var atmo=new THREE.Mesh(new THREE.SphereGeometry(60,32,32),new THREE.MeshBasicMaterial({color:0x4488ff,side:THREE.BackSide}));
 atmo.visible=false;scene.add(atmo);
 
-// ═══ CITY - buildings with windows ═══
+// ═══ CITY - buildings as solid boxes with emissive windows ═══
 var city=new THREE.Group();
-for(i=0;i<50;i++){
-  var h=4+Math.random()*25;
-  var w=3+Math.random()*4;
-  var d=3+Math.random()*4;
-  // Building body
-  var bodyColor=new THREE.Color().setHSL(0.6,0.15,0.35+Math.random()*0.15);
-  var building=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color:bodyColor,emissive:bodyColor,emissiveIntensity:0.15}));
-  building.position.set((Math.random()-0.5)*70,h/2,(Math.random()-0.5)*70);
-  city.add(building);
-  // Window lights (small bright boxes on the building)
-  if(Math.random()>0.3){
-    var wColor=new THREE.Color().setHSL(0.1+Math.random()*0.1,0.8,0.6);
-    var windows=new THREE.Mesh(new THREE.BoxGeometry(w*0.8,h*0.9,d*0.05),new THREE.MeshBasicMaterial({color:wColor}));
-    windows.position.set(building.position.x,h/2,building.position.z+d/2+0.1);
-    city.add(windows);
+for(i=0;i<40;i++){
+  var h=5+Math.random()*28;
+  var w=4+Math.random()*5;
+  var d=4+Math.random()*5;
+  var bc=new THREE.Color().setHSL(0.6,0.1,0.4+Math.random()*0.12);
+  var bld=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color:bc,emissive:bc,emissiveIntensity:0.1}));
+  bld.position.set((Math.random()-0.5)*65,h/2,(Math.random()-0.5)*65);
+  city.add(bld);
+  // Window strip (bright emissive)
+  if(Math.random()>0.2){
+    var wc=new THREE.Color().setHSL(0.1+Math.random()*0.1,0.9,0.65);
+    var win=new THREE.Mesh(new THREE.BoxGeometry(w*0.85,h*0.85,d*0.02),new THREE.MeshBasicMaterial({color:wc}));
+    win.position.set(bld.position.x,h*0.45,bld.position.z+d/2+0.05);
+    city.add(win);
   }
 }
 city.visible=false;scene.add(city);
 
-// ═══ ROOM - bright walls, floor, table with wood texture ═══
+// ═══ ROOM - bright, recognizable furniture ═══
 var room=new THREE.Group();
-// Floor
-var floor=new THREE.Mesh(new THREE.PlaneGeometry(120,120),new THREE.MeshLambertMaterial({color:0x5a4a3a,emissive:0x2a1a0a,emissiveIntensity:0.2}));
+// Floor (wood-colored)
+var floor=new THREE.Mesh(new THREE.PlaneGeometry(130,130),new THREE.MeshLambertMaterial({color:0x6a5232,emissive:0x2a1a08,emissiveIntensity:0.2}));
 floor.rotation.x=-Math.PI/2;room.add(floor);
 // Back wall
-var bw=new THREE.Mesh(new THREE.PlaneGeometry(120,35),new THREE.MeshLambertMaterial({color:0x6a5a4a,emissive:0x3a2a1a,emissiveIntensity:0.2}));
-bw.position.set(0,17.5,-60);room.add(bw);
+var bw=new THREE.Mesh(new THREE.PlaneGeometry(130,38),new THREE.MeshLambertMaterial({color:0x7a6a52,emissive:0x3a2a1a,emissiveIntensity:0.15}));
+bw.position.set(0,19,-65);room.add(bw);
 // Left wall
-var lw=new THREE.Mesh(new THREE.PlaneGeometry(120,35),new THREE.MeshLambertMaterial({color:0x5a4a3a,emissive:0x2a1a0a,emissiveIntensity:0.2}));
-lw.position.set(-60,17.5,0);lw.rotation.y=Math.PI/2;room.add(lw);
-// Table
-var tableTop=new THREE.Mesh(new THREE.BoxGeometry(24,1,14),new THREE.MeshLambertMaterial({color:0x9b6a3b,emissive:0x3b2a1b,emissiveIntensity:0.2}));
-tableTop.position.set(0,14,0);room.add(tableTop);
+var lw=new THREE.Mesh(new THREE.PlaneGeometry(130,38),new THREE.MeshLambertMaterial({color:0x6a5a42,emissive:0x2a1a0a,emissiveIntensity:0.15}));
+lw.position.set(-65,19,0);lw.rotation.y=Math.PI/2;room.add(lw);
+// Table top (wood)
+var tableTop=new THREE.Mesh(new THREE.BoxGeometry(26,1.2,16),new THREE.MeshLambertMaterial({color:0xa0703c,emissive:0x402810,emissiveIntensity:0.2}));
+tableTop.position.set(0,15,0);room.add(tableTop);
 // Table legs
-[[-10,-6],[10,-6],[-10,6],[10,6]].forEach(function(p){
-  var leg=new THREE.Mesh(new THREE.BoxGeometry(1,14,1),new THREE.MeshLambertMaterial({color:0x7b5a2b,emissive:0x2b1a0b,emissiveIntensity:0.2}));
-  leg.position.set(p[0],7,p[1]);room.add(leg);
+[[-11,-7],[11,-7],[-11,7],[11,7]].forEach(function(p){
+  var leg=new THREE.Mesh(new THREE.BoxGeometry(1.2,15,1.2),new THREE.MeshLambertMaterial({color:0x805028,emissive:0x301810,emissiveIntensity:0.2}));
+  leg.position.set(p[0],7.5,p[1]);room.add(leg);
 });
-// Lamp on table
-var lampBase=new THREE.Mesh(new THREE.CylinderGeometry(1.5,2,1,16),new THREE.MeshBasicMaterial({color:0x444444}));
-lampBase.position.set(-8,14.5,0);room.add(lampBase);
-var lampPole=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,8,8),new THREE.MeshBasicMaterial({color:0x666666}));
-lampPole.position.set(-8,19,0);room.add(lampPole);
-var lampShade=new THREE.Mesh(new THREE.ConeGeometry(4,4,16,1,true),new THREE.MeshBasicMaterial({color:0xffeeaa,side:THREE.DoubleSide}));
-lampShade.position.set(-8,22,0);room.add(lampShade);
-var lampLight=new THREE.PointLight(0xffeeaa,2,60);lampLight.position.set(-8,21,0);room.add(lampLight);
-
+// Lamp
+var lampBase=new THREE.Mesh(new THREE.CylinderGeometry(2,2.5,1.5,20),new THREE.MeshLambertMaterial({color:0x555555}));
+lampBase.position.set(-9,15.75,0);room.add(lampBase);
+var lampPole=new THREE.Mesh(new THREE.CylinderGeometry(0.4,0.4,9,8),new THREE.MeshLambertMaterial({color:0x777777}));
+lampPole.position.set(-9,21,0);room.add(lampPole);
+var lampShade=new THREE.Mesh(new THREE.ConeGeometry(4.5,5,20,1,true),new THREE.MeshBasicMaterial({color:0xffeeaa,side:THREE.DoubleSide}));
+lampShade.position.set(-9,24.5,0);room.add(lampShade);
+var lampLight=new THREE.PointLight(0xffeeaa,2.5,80);lampLight.position.set(-9,23,0);room.add(lampLight);
+// Chair
+var chairSeat=new THREE.Mesh(new THREE.BoxGeometry(6,1,6),new THREE.MeshLambertMaterial({color:0x554433}));
+chairSeat.position.set(10,9,0);room.add(chairSeat);
+var chairBack=new THREE.Mesh(new THREE.BoxGeometry(6,10,1),new THREE.MeshLambertMaterial({color:0x554433}));
+chairBack.position.set(10,14,-2.5);room.add(chairBack);
+for(var ci=0;ci<4;ci++){
+  var cx=ci%2<1?7.5:12.5;
+  var cz=ci<2?-2.5:2.5;
+  var cl=new THREE.Mesh(new THREE.BoxGeometry(0.8,9,0.8),new THREE.MeshLambertMaterial({color:0x443322}));
+  cl.position.set(cx,4.5,cz);room.add(cl);
+}
 room.visible=false;scene.add(room);
 
 // ═══ WOOD GRAIN - bright colored lines ═══
 var woodGrain=new THREE.Group();
 for(i=0;i<25;i++){
   var pts=[];var yB=(i-12)*0.35;
-  for(var x=-10;x<=10;x+=0.06){var y=yB+Math.sin(x*1.2+i*0.3)*0.3+(Math.random()-0.5)*0.05;pts.push(new THREE.Vector3(x,y,0));}
+  for(var x=-11;x<=11;x+=0.05){var y=yB+Math.sin(x*1.2+i*0.3)*0.3+(Math.random()-0.5)*0.05;pts.push(new THREE.Vector3(x,y,0));}
   var lg=new THREE.BufferGeometry().setFromPoints(pts);
-  var lm=new THREE.LineBasicMaterial({color:new THREE.Color().setHSL(0.08,0.6,0.3+i*0.012)});
+  var lm=new THREE.LineBasicMaterial({color:new THREE.Color().setHSL(0.08,0.7,0.35+i*0.012)});
   woodGrain.add(new THREE.Line(lg,lm));
 }
 woodGrain.visible=false;scene.add(woodGrain);
 
-// ═══ FIBERS - bright particles ═══
-var fPos=new Float32Array(5000*3);var fCol=new Float32Array(5000*3);
-for(i=0;i<5000;i++){var fr=Math.random()*12;var fa=Math.random()*Math.PI*2;fPos[i*3]=fr*Math.cos(fa);fPos[i*3+1]=(Math.random()-0.5)*10;fPos[i*3+2]=fr*Math.sin(fa);var fc=new THREE.Color().setHSL(0.08+Math.random()*0.08,0.7,0.4+Math.random()*0.3);fCol[i*3]=fc.r;fCol[i*3+1]=fc.g;fCol[i*3+2]=fc.b;}
-var fGeom=new THREE.BufferGeometry();fGeom.setAttribute('position',new THREE.BufferAttribute(fPos,3));fGeom.setAttribute('color',new THREE.BufferAttribute(fCol,3));
-var fibers=new THREE.Points(fGeom,new THREE.PointsMaterial({size:0.5,vertexColors:true,depthWrite:false}));
-fibers.visible=false;scene.add(fibers);
+// ═══ FIBERS - render as LINES (strands), not points ═══
+var fiberGroup=new THREE.Group();
+for(i=0;i<150;i++){
+  var fpts=[];
+  var fa=Math.random()*Math.PI*2;
+  var fr=Math.random()*12;
+  var fh=(Math.random()-0.5)*10;
+  var flen=3+Math.random()*5;
+  var fsteps=20;
+  for(var fi=0;fi<fsteps;fi++){
+    var ft=fi/(fsteps-1);
+    var fx=fr*Math.cos(fa+ft*0.5);
+    var fz=fr*Math.sin(fa+ft*0.5);
+    var fy=fh+ft*flen+Math.sin(ft*Math.PI*3)*1;
+    fpts.push(new THREE.Vector3(fx,fy,fz));
+  }
+  var fg=new THREE.BufferGeometry().setFromPoints(fpts);
+  var fc=new THREE.Color().setHSL(0.08+Math.random()*0.08,0.7,0.4+Math.random()*0.2);
+  var fm=new THREE.LineBasicMaterial({color:fc});
+  fiberGroup.add(new THREE.Line(fg,fm));
+}
+fiberGroup.visible=false;scene.add(fiberGroup);
 
 // ═══ UNRESOLVED - sparse dim particles ═══
 var uPos=new Float32Array(300*3);
 for(i=0;i<300;i++){uPos[i*3]=(Math.random()-0.5)*50;uPos[i*3+1]=(Math.random()-0.5)*50;uPos[i*3+2]=(Math.random()-0.5)*50;}
 var uGeom=new THREE.BufferGeometry();uGeom.setAttribute('position',new THREE.BufferAttribute(uPos,3));
-var unresolved=new THREE.Points(uGeom,new THREE.PointsMaterial({size:2.5,color:0x6080a0,depthWrite:false}));
+var unresolved=new THREE.Points(uGeom,new THREE.PointsMaterial({size:3,color:0x6080a0,depthWrite:false}));
 unresolved.visible=false;scene.add(unresolved);
 
 // ═══ VISIBILITY + RETENTION ═══
 function updateScene(sl,R){
   var sv=parseFloat(slider.value);
-  // Camera: z goes from 160 to 30, y stays at 40 then drops to 15
   var targetZ=160-(sv/1000)*130;
-  camera.position.z+=(targetZ-camera.position.z)*0.1;
-  // Keep camera looking at center, raise slightly at macro, lower at micro
+  camera.position.z+=(targetZ-camera.position.z)*0.08;
   var targetY=40-(sv/1000)*25;
-  camera.position.y+=(targetY-camera.position.y)*0.1;
+  camera.position.y+=(targetY-camera.position.y)*0.08;
   camera.lookAt(0,0,0);
 
-  // Show/hide based on scale - binary, no opacity
-  galaxy.visible=(sl>0.5);
-  galaxy.rotation.y+=0.0005;
-  galaxy.material.size=3.5+(1-R)*4;
+  galaxyGroup.visible=(sl>0.5);
+  galaxyGroup.rotation.y+=0.0005;
+  galaxyPts.material.size=5+(1-R)*4;
 
   earth.visible=(sl<=0.5 && sl>-3);
   atmo.visible=earth.visible;
@@ -266,22 +299,19 @@ function updateScene(sl,R){
   city.rotation.y+=0.0005;
 
   room.visible=(sl<=-3.5 && sl>-7);
+  if(room.visible) lampLight.intensity=2+R*0.5;
 
   woodGrain.visible=(sl<=-5.5 && sl>-9);
 
-  fibers.visible=(sl<=-7 && sl>-10);
-  fibers.material.size=0.4+(1-R)*1.2;
+  fiberGroup.visible=(sl<=-7 && sl>-10);
 
   unresolved.visible=(sl<=-8);
-  unresolved.material.size=2+(1-R)*4;
+  unresolved.material.size=2.5+(1-R)*4;
   unresolved.rotation.y+=0.0003;
 
-  // Fog: mild at high R, denser at low R (blurring effect)
-  scene.fog.density=0.001+(1-R)*0.008;
-  // Lights stay bright - dim only slightly at very low R
+  scene.fog.density=0.001+(1-R)*0.006;
   dl1.intensity=1.0+R*0.5;
-  ambient.intensity=1.0+R*0.2;
-  if(lampLight) lampLight.intensity=room.visible ? (1.5+R*0.5) : 0;
+  ambient.intensity=1.2+R*0.2;
 }
 
 // ═══ UI ═══
@@ -323,20 +353,21 @@ function updateUI(sl,R){
     narrMath.textContent='R = exp[-(lambda/lambda_q)^D] = '+R.toFixed(3);
     narrPanel.classList.add('visible');
     if(narrTO)clearTimeout(narrTO);
-    narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},5000);
+    // Keep narrative visible for 8 seconds (was 5)
+    narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},8000);
   }
 }
 
 // ═══ ANIMATION ═══
-var autoZoom=true,autoSpeed=0.4;
+var autoZoom=true;
 var autoStartTime=Date.now();
+var CYCLE_SECONDS=60; // 60 second full cycle (was 25)
 
 function animate(){
   requestAnimationFrame(animate);
   if(autoZoom){
     var elapsed=(Date.now()-autoStartTime)/1000;
-    // Full cycle in ~25 seconds: 0 to 1000
-    var v=((elapsed*40)%1000);
+    var v=((elapsed/CYCLE_SECONDS)*1000)%1000;
     slider.value=v;
   }
   var sv=parseFloat(slider.value);
@@ -348,27 +379,22 @@ function animate(){
 }
 
 // ═══ INTERACTION ═══
-slider.addEventListener('input',function(){autoZoom=false;autoBtn.classList.remove('active');autoStartTime=Date.now();});
+slider.addEventListener('input',function(){autoZoom=false;autoBtn.classList.remove('active');});
 autoBtn.addEventListener('click',function(){
-  autoZoom=!autoZoom;
-  autoBtn.classList.toggle('active',autoZoom);
+  autoZoom=!autoZoom;autoBtn.classList.toggle('active',autoZoom);
   if(autoZoom) autoStartTime=Date.now();
 });
 canvas.addEventListener('click',function(){
-  autoZoom=!autoZoom;
-  autoBtn.classList.toggle('active',autoZoom);
+  autoZoom=!autoZoom;autoBtn.classList.toggle('active',autoZoom);
   if(autoZoom) autoStartTime=Date.now();
 });
-
-// Pinch
 var pD=0;
 canvas.addEventListener('touchstart',function(e){if(e.touches.length===2)pD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);},{passive:true});
 canvas.addEventListener('touchmove',function(e){if(e.touches.length===2&&pD>0){e.preventDefault();var nd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);var d=(nd-pD)/pD;var v=parseFloat(slider.value)-d*60;v=Math.max(0,Math.min(1000,v));slider.value=v;autoZoom=false;autoBtn.classList.remove('active');pD=nd;}},{passive:false});
 
-// Start
 animate();
-setTimeout(function(){narrPanel.classList.add('visible');},300);
-setTimeout(function(){narrPanel.classList.remove('visible');},5000);
+setTimeout(function(){narrPanel.classList.add('visible');},500);
+setTimeout(function(){narrPanel.classList.remove('visible');},8000);
 
 } catch(e) {
   document.body.innerHTML='<div style="padding:20px;color:#fca5a5;font-family:monospace">ERROR: '+e.message+'</div>';
