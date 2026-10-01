@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-09-30T21:01:41Z",
-  "total_tests": 292,
+  "exported_at": "2026-10-01T06:15:29Z",
+  "total_tests": 293,
   "fields": [
     "id",
     "name",
@@ -4552,6 +4552,22 @@
       "source": "auto-scan 2026-09-30",
       "date": "2026-09-30",
       "url": "10.5281/zenodo.23069711"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: The Peskin-Takeuchi S parameter and vector meson d",
+      "domain": "scouting",
+      "D": 2.206,
+      "r2": 0.909,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 5.52,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=5.52).",
+      "narrative": "D_eff=2.2060, R²=0.9090. D_eff=2.206 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.52). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-10-01",
+      "date": "2026-10-01",
+      "url": "10.5281/zenodo.21693826"
     }
   ]
 }
