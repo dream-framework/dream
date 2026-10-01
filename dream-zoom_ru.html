@@ -7,6 +7,7 @@
 <link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/dream/img/favicon.png">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="DREAM Zoom">
 <meta name="theme-color" content="#070b14">
@@ -175,7 +176,7 @@ var w1=new THREE.Mesh(new THREE.PlaneGeometry(100,30),wMat.clone());w1.position.
 var w2=new THREE.Mesh(new THREE.PlaneGeometry(100,30),wMat.clone());w2.position.set(-50,15,0);w2.rotation.y=Math.PI/2;room.add(w2);
 var tMat=new THREE.MeshPhongMaterial({color:0x8b5a2b,transparent:true,opacity:0});
 var table=new THREE.Mesh(new THREE.BoxGeometry(20,0.8,12),tMat);table.position.set(0,12,0);room.add(table);
-[[−9,−5],[9,−5],[−9,5],[9,5]].forEach(function(p){var leg=new THREE.Mesh(new THREE.BoxGeometry(0.8,12,0.8),tMat.clone());leg.position.set(p[0],6,p[1]);room.add(leg);});
+[[-9,-5],[9,-5],[-9,5],[9,5]].forEach(function(p){var leg=new THREE.Mesh(new THREE.BoxGeometry(0.8,12,0.8),tMat.clone());leg.position.set(p[0],6,p[1]);room.add(leg);});
 room.visible=false;scene.add(room);
 
 // ═══ WOOD GRAIN ═══
