@@ -6,6 +6,26 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<script>
+// ── ANTI-CACHE BOOTSTRAP ─────────────────────────────────────────────────
+// This runs BEFORE any other script. If the URL doesn't have a recent
+// ?_t=<timestamp> query, redirect to one. This guarantees every visit
+// hits a unique URL that no HTTP cache or SW precache has ever seen,
+// forcing the browser to fetch fresh from network.
+(function(){
+  var url=new URL(window.location.href);
+  var t=parseInt(url.searchParams.get('_t')||'0',10);
+  var now=Date.now();
+  // If no _t, or _t is older than 60 seconds, redirect with fresh _t
+  if(!t || (now - t) > 60000){
+    url.searchParams.set('_t', String(now));
+    window.location.replace(url.toString());
+    // Stop execution so the old page doesn't render
+    document.documentElement.innerHTML='<body style="background:#070b14;color:#2dd4bf;font-family:monospace;padding:20px">Loading fresh version…</body>';
+    throw new Error('redirecting to fresh URL');
+  }
+})();
+</script>
 <title>DREAM Zoom - Projection Scale Toy</title>
 <link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
@@ -723,7 +743,7 @@ setTimeout(function(){narrPanel.classList.remove('visible');},8000);
 // ═══ PWA SELF-CLEAN — force-out any stale service worker so the page can't be
 // held hostage by an old cached version. Runs once per page load. ═══
 if('serviceWorker' in navigator){
-  var CLEAN_KEY='dream_zoom_sw_clean_v62';
+  var CLEAN_KEY='dream_zoom_sw_clean_v63';
   if(sessionStorage.getItem(CLEAN_KEY)!=='done'){
     sessionStorage.setItem(CLEAN_KEY,'done');
     navigator.serviceWorker.getRegistrations().then(function(regs){

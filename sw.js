@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v62';
+const CACHE_VERSION = 'dream-v63';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -74,40 +74,21 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // For dream-zoom.html, ALWAYS fetch from network with no caching whatsoever.
-  // This page is under active development — the user must always see the latest
-  // version. If the network fails, show an error rather than a stale copy.
+  // For ALL HTML navigations and document requests, always fetch from
+  // network with {cache: 'no-store'}. This bypasses HTTP cache and any
+  // previously cached version. The user always gets the latest deployed
+  // HTML, no matter which page they're loading.
   const url = new URL(request.url);
-  if (url.pathname.endsWith('/dream-zoom.html') || url.pathname.endsWith('/dream-zoom_ru.html') || url.pathname.endsWith('/zoom.html') || url.pathname.endsWith('/zoom_ru.html')) {
-    if (request.mode === 'navigate' || request.destination === 'document') {
-      event.respondWith(
-        fetch(request, {cache: 'no-store'})
-      );
-      return;
-    }
+  if (request.mode === 'navigate' || request.destination === 'document') {
+    event.respondWith(
+      fetch(request, {cache: 'no-store'})
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('./en/index.html')))
+    );
+    return;
   }
 
   // Skip cross-origin requests (CDN fonts, MathJax, etc.) — let them pass through
   if (url.origin !== self.location.origin) {
-    return;
-  }
-
-  // For navigation requests (HTML pages), try network first (bypassing HTTP cache),
-  // fall back to cached version if network fails.
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request, {cache: 'no-store'})
-        .then((response) => {
-          // Cache the new page
-          const clone = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() => {
-          // Network failed — try cache, or fall back to index
-          return caches.match(request).then((cached) => cached || caches.match('./en/index.html'));
-        })
-    );
     return;
   }
 
