@@ -56,27 +56,27 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
   <div id="scene-container">
     <canvas id="three-canvas"></canvas>
     <div id="hud">
-      <span class="pill"><span class="label">Scale</span> <span class="v" id="hud-scale">10^21 m</span></span>
-      <span class="pill"><span class="label">R</span> <span class="v" id="hud-retention">1.000</span></span>
+      <span class="pill"><span class="label">Scale</span> <span class="v" id="hud-scale">10^27 m</span></span>
+      <span class="pill"><span class="label">R</span> <span class="v" id="hud-retention">0.650</span></span>
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
       <span class="pill"><span class="label">lambda_q</span> <span class="v">10^-35 m</span></span>
     </div>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
-      <div class="ntitle" id="narr-title">Galaxy</div>
-      <div class="nbody" id="narr-body">At macroscopic scales, all structure is preserved.</div>
-      <div class="nmath" id="narr-math">R = 1.000</div>
+      <div class="ntitle" id="narr-title">Cosmic Web</div>
+      <div class="nbody" id="narr-body">At the scale of the cosmic web, structure fades into the cosmological homogeneity limit.</div>
+      <div class="nmath" id="narr-math">R = 0.650</div>
     </div></div>
   </div>
   <footer>
     <div id="scale-row">
-      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">MACRO</span>
+      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">COSMOS</span>
       <input type="range" id="scale-slider" min="0" max="1000" value="0" step="1">
       <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">lambda_q</span>
       <button id="autoplay-btn" class="active">Auto</button>
     </div>
-    <div id="level-label"><span id="level-name">Galaxy</span> <span class="sub" id="level-desc">- all structure preserved</span></div>
-    <div id="retention-bar"><div id="retention-fill" style="width:100%;background:#2dd4bf"></div></div>
-    <div id="retention-label">R = <span class="v" id="retention-value">1.000</span> - <span id="retention-meaning">all structure preserved</span></div>
+    <div id="level-label"><span id="level-name">Cosmic Web</span> <span class="sub" id="level-desc">- cosmological homogeneity</span></div>
+    <div id="retention-bar"><div id="retention-fill" style="width:65%;background:linear-gradient(90deg,#fbbf24,#2dd4bf)"></div></div>
+    <div id="retention-label">R = <span class="v" id="retention-value">0.650</span> - <span id="retention-meaning">cosmological homogeneity</span></div>
   </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -85,27 +85,32 @@ try {
 if(typeof THREE==='undefined') throw new Error('THREE not loaded');
 
 // S2 params
-// R is the retention factor. R=1 when lambda >> lambda_q (macro), R->0 at the coherence cliff.
-// Per-level R targets match the narrative (Galaxy=1.000, Cliff=0.000). We interpolate smoothly
-// between adjacent levels based on the slider value, so R drops gradually across the zoom range.
+// R is the retention factor. The journey is bookended by blur at BOTH extremes:
+//   - Very large scales (10^27 m): cosmological homogeneity — filaments fade into uniformity
+//   - Very small scales (10^-35 m): coherence cliff — quantum averaging erases structure
+// In between, R=1 in the "resolved band" (Galaxy -> Room).
+// Per-level R targets match the narrative and interpolate smoothly across the zoom range.
 var LQ=1e-35, DEFF=0.80;
-// 10 levels, each with: slider value (0-1000), scale log10, name, description, narrative, R
+// 13 levels, each with: slider value (0-1000), scale log10, name, description, narrative, R
 var LEVELS=[
-  {sv:0,   sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.',                          R:1.000},
-  {sv:70,  sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.',                                                R:1.000},
-  {sv:160, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.',                                          R:1.000},
-  {sv:280, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.',                                                                R:1.000},
-  {sv:390, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.',                                       R:0.998},
-  {sv:500, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.',                                                                            R:0.995},
-  {sv:620, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Biological cells and bacteria become visible (10^-4 m). The probe is approaching the coherence cliff -- retention is starting to drop.',                                                                            R:0.970},
-  {sv:720, sl:-8,   n:'Molecular',      d:'fine structure degrading',    t:'Molecules, proteins, and DNA strands (10^-8 m) are degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.',                                                                       R:0.780},
-  {sv:830, sl:-12,  n:'Nuclear',        d:'structure collapsing',        t:'The atomic nucleus (10^-12 m) is the deepest directly imaged structure. Deep inelastic scattering experiments probe here. The retention curve is steep -- information is being lost rapidly.',                         R:0.350},
-  {sv:930, sl:-18,  n:'Quark Scale',    d:'nearly unresolved',          t:'At the QCD scale (10^-18 m), only the coarsest field structure survives. Quarks and gluons are barely distinguishable. Recoverable information has reached its limit.',                                              R:0.050},
-  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'At the Planck scale (10^-35 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved quantum field.',                                                          R:0.000},
+  {sv:0,   sl:27,   n:'Cosmic Web',      d:'cosmological homogeneity',   t:'At the scale of the cosmic web (10^27 m, ~100 billion light-years), structure fades into the cosmological homogeneity limit. Filaments and voids become statistically uniform. The probe is at the edge of what is distinguishable from the deep field -- the projection kernel cannot resolve structure at this vast scale.',                   R:0.650},
+  {sv:80,  sl:24,   n:'Supercluster',    d:'filaments resolved',         t:'At the supercluster scale (10^24 m, ~100 million light-years), Laniakea-scale structure becomes visible. Galaxy clusters connected by filaments form a web. The probe is at the largest scale where structure is still clearly distinguishable -- retention is climbing back toward unity.',                          R:0.950},
+  {sv:160, sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.',                                                                                                                R:1.000},
+  {sv:240, sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.',                                                                                                                                                R:1.000},
+  {sv:320, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.',                                                                                                                                          R:1.000},
+  {sv:410, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.',                                                                                                                                                            R:1.000},
+  {sv:490, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.',                                                                                                                                     R:0.998},
+  {sv:560, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.',                                                                                                                                                                        R:0.995},
+  {sv:640, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Biological cells and bacteria become visible (10^-4 m). The probe is approaching the coherence cliff -- retention is starting to drop.',                                                                                                                                                                      R:0.970},
+  {sv:720, sl:-8,   n:'Molecular',      d:'fine structure degrading',    t:'Molecules, proteins, and DNA strands (10^-8 m) are degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.',                                                                                                                                                                   R:0.780},
+  {sv:820, sl:-12,  n:'Nuclear',        d:'structure collapsing',        t:'The atomic nucleus (10^-12 m) is the deepest directly imaged structure. Deep inelastic scattering experiments probe here. The retention curve is steep -- information is being lost rapidly.',                                                                                                                  R:0.350},
+  {sv:910, sl:-18,  n:'Quark Scale',    d:'nearly unresolved',          t:'At the QCD scale (10^-18 m), only the coarsest field structure survives. Quarks and gluons are barely distinguishable. Recoverable information has reached its limit.',                                                                                                                                          R:0.050},
+  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'At the Planck scale (10^-35 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved quantum field.',                                                                                                                                                R:0.000},
 ];
 
 // Interpolate R across slider value (sv) using the per-level R targets.
-// This matches the narrative exactly and produces a smooth curve from R=1 at macro to R=0 at the cliff.
+// This matches the narrative exactly and produces a smooth curve: blur at very big (R=0.65),
+// unity through the resolved band (Galaxy->Room), blur at very small (cliff R=0).
 function retR(sv){
   if(sv<=LEVELS[0].sv) return LEVELS[0].R;
   for(var i=0;i<LEVELS.length-1;i++){
@@ -372,14 +377,123 @@ unresolvedGroup.add(unresolvedPts);
 unresolvedGroup.visible=false;
 scene.add(unresolvedGroup);
 
+// ═══ COSMIC WEB — deep-space fractality at the edge of homogeneity ═══
+// Sparse galaxy dots + dim filaments. Heavy fog (driven by low R=0.65) creates the
+// "blur from very big" effect: structure fades into uniformity.
+var cosmicWebGroup=new THREE.Group();
+
+// 150 tiny galaxies scattered in a large volume — distributed with mild clustering
+var cwPos=new Float32Array(150*3);
+var cwCol=new Float32Array(150*3);
+for(var cw=0;cw<150;cw++){
+  // 30% clustered near center, 70% spread across full volume
+  var cluster=Math.random()<0.3;
+  var spread=cluster?180:280;
+  cwPos[cw*3]=(Math.random()-0.5)*spread;
+  cwPos[cw*3+1]=(Math.random()-0.5)*spread;
+  cwPos[cw*3+2]=(Math.random()-0.5)*spread;
+  // Dim, slightly desaturated colors — "fading into uniformity"
+  var cwc=new THREE.Color().setHSL(0.58+Math.random()*0.06,0.25,0.35+Math.random()*0.18);
+  cwCol[cw*3]=cwc.r;cwCol[cw*3+1]=cwc.g;cwCol[cw*3+2]=cwc.b;
+}
+var cwGeom=new THREE.BufferGeometry();
+cwGeom.setAttribute('position',new THREE.BufferAttribute(cwPos,3));
+cwGeom.setAttribute('color',new THREE.BufferAttribute(cwCol,3));
+var cosmicWebPts=new THREE.Points(cwGeom,new THREE.PointsMaterial({size:2.5,vertexColors:true,depthWrite:false,transparent:true,opacity:0.75}));
+cosmicWebGroup.add(cosmicWebPts);
+
+// Filaments — connect nearby galaxies with dim lines (sparse, slow fade)
+for(var f1=0;f1<150;f1++){
+  for(var f2=f1+1;f2<150;f2++){
+    var dx=cwPos[f1*3]-cwPos[f2*3];
+    var dy=cwPos[f1*3+1]-cwPos[f2*3+1];
+    var dz=cwPos[f1*3+2]-cwPos[f2*3+2];
+    var dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
+    if(dist<70 && Math.random()<0.35){ // sparse filaments
+      var filament=new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(cwPos[f1*3],cwPos[f1*3+1],cwPos[f1*3+2]),
+        new THREE.Vector3(cwPos[f2*3],cwPos[f2*3+1],cwPos[f2*3+2])
+      ]);
+      cosmicWebGroup.add(new THREE.Line(filament,new THREE.LineBasicMaterial({color:0x223355,transparent:true,opacity:0.35})));
+    }
+  }
+}
+cosmicWebGroup.visible=false;
+scene.add(cosmicWebGroup);
+
+// ═══ SUPERCLUSTER — Laniakea-scale: galaxy clusters connected by filaments ═══
+var superclusterGroup=new THREE.Group();
+
+// 20 galaxy clusters arranged in 3D — first 5 in a tight core, rest spread out
+var clusterPos=[];
+for(var sc=0;sc<20;sc++){
+  var scx,scy,scz;
+  if(sc<5){
+    scx=(Math.random()-0.5)*100;
+    scy=(Math.random()-0.5)*100;
+    scz=(Math.random()-0.5)*100;
+  } else {
+    scx=(Math.random()-0.5)*240;
+    scy=(Math.random()-0.5)*240;
+    scz=(Math.random()-0.5)*240;
+  }
+  clusterPos.push([scx,scy,scz]);
+
+  // Galaxy cluster: bright core + halo
+  var clusterCore=new THREE.Mesh(new THREE.SphereGeometry(2.5,16,16),new THREE.MeshBasicMaterial({color:0xffeecc}));
+  clusterCore.position.set(scx,scy,scz);
+  superclusterGroup.add(clusterCore);
+
+  var clusterGlow=new THREE.Mesh(new THREE.SphereGeometry(5,16,16),new THREE.MeshBasicMaterial({color:0x4466aa,side:THREE.BackSide,transparent:true,opacity:0.35}));
+  clusterGlow.position.set(scx,scy,scz);
+  superclusterGroup.add(clusterGlow);
+
+  // Mini-spiral particles around each cluster (echoes galaxy structure — fractality)
+  var scPartPos=new Float32Array(40*3);
+  var scPartCol=new Float32Array(40*3);
+  for(var sp=0;sp<40;sp++){
+    var spr=Math.random()*12;
+    var spa=Math.random()*Math.PI*2;
+    scPartPos[sp*3]=scx+Math.cos(spa)*spr;
+    scPartPos[sp*3+1]=scy+(Math.random()-0.5)*2.5;
+    scPartPos[sp*3+2]=scz+Math.sin(spa)*spr;
+    var spc=Math.random();
+    if(spc>0.5){scPartCol[sp*3]=1;scPartCol[sp*3+1]=1;scPartCol[sp*3+2]=0.85;}
+    else{scPartCol[sp*3]=0.5;scPartCol[sp*3+1]=0.6;scPartCol[sp*3+2]=0.9;}
+  }
+  var scGeom=new THREE.BufferGeometry();
+  scGeom.setAttribute('position',new THREE.BufferAttribute(scPartPos,3));
+  scGeom.setAttribute('color',new THREE.BufferAttribute(scPartCol,3));
+  superclusterGroup.add(new THREE.Points(scGeom,new THREE.PointsMaterial({size:1.2,vertexColors:true,depthWrite:false})));
+}
+
+// Filaments connecting nearby clusters — the cosmic web at intermediate scale
+for(var cf1=0;cf1<20;cf1++){
+  for(var cf2=cf1+1;cf2<20;cf2++){
+    var dxc=clusterPos[cf1][0]-clusterPos[cf2][0];
+    var dyc=clusterPos[cf1][1]-clusterPos[cf2][1];
+    var dzc=clusterPos[cf1][2]-clusterPos[cf2][2];
+    var distC=Math.sqrt(dxc*dxc+dyc*dyc+dzc*dzc);
+    if(distC<110){
+      var filC=new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(clusterPos[cf1][0],clusterPos[cf1][1],clusterPos[cf1][2]),
+        new THREE.Vector3(clusterPos[cf2][0],clusterPos[cf2][1],clusterPos[cf2][2])
+      ]);
+      superclusterGroup.add(new THREE.Line(filC,new THREE.LineBasicMaterial({color:0x3a5577,transparent:true,opacity:0.5})));
+    }
+  }
+}
+superclusterGroup.visible=false;
+scene.add(superclusterGroup);
+
 // ═══ VISIBILITY ═══
 function updateScene(sv,sl,R){
   // Camera: each level has a distinct distance, smooth lerp
-  // 11 levels: Galaxy(200), Galactic Core(150), Solar(110), Earth(80),
-  // City(55), Room(42), Tabletop(32), Wood(26), Fibers(22), Micro(18), Cliff(15)
-  var camZBySv=[200,150,110,80,55,42,32,26,22,18,15];
+  // 13 levels: Cosmic Web(420), Supercluster(300), Galaxy(200), Galactic Core(150),
+  // Solar(110), Earth(80), City(55), Room(42), Tabletop(32), Wood(26), Fibers(22), Micro(18), Cliff(15)
+  var camZBySv=[420,300,200,150,110,80,55,42,32,26,22,18,15];
   // Interpolate between levels based on sv
-  var camZ=200;
+  var camZ=420;
   for(var ci=0;ci<LEVELS.length-1;ci++){
     if(sv>=LEVELS[ci].sv && sv<=LEVELS[ci+1].sv){
       var frac=(sv-LEVELS[ci].sv)/(LEVELS[ci+1].sv-LEVELS[ci].sv);
@@ -394,37 +508,48 @@ function updateScene(sv,sl,R){
   camera.lookAt(0,5,0);
 
   // Visibility based on SLIDER VALUE midpoints between consecutive levels
-  // 11 levels: Galaxy(0), Galactic Core(70), Solar(160), Earth(280),
-  // City(390), Room(500), Cellular(620), Molecular(720), Nuclear(830),
-  // Quark Scale(930), Cliff(1000)
-  var b=[35,115,220,335,445,560,670,775,880,965]; // 10 midpoints
-  galaxyGroup.visible=(sv<b[1]); // Galaxy + Galactic Core
+  // 13 levels: Cosmic Web(0), Supercluster(80), Galaxy(160), Galactic Core(240),
+  // Solar(320), Earth(410), City(490), Room(560), Cellular(640), Molecular(720),
+  // Nuclear(820), Quark Scale(910), Cliff(1000)
+  // 12 midpoints (b[0]..b[11])
+  var b=[40,120,200,280,365,450,525,600,680,770,865,955];
+
+  // Cosmic Web — level 0 only (sv < b[0])
+  cosmicWebGroup.visible=(sv<b[0]);
+  if(cosmicWebGroup.visible) cosmicWebGroup.rotation.y+=0.0001;
+
+  // Supercluster — level 1 (b[0] <= sv < b[1])
+  superclusterGroup.visible=(sv>=b[0] && sv<b[1]);
+  if(superclusterGroup.visible) superclusterGroup.rotation.y+=0.00015;
+
+  // Galaxy + Galactic Core — levels 2-3 (b[1] <= sv < b[3])
+  galaxyGroup.visible=(sv>=b[1] && sv<b[3]);
   galaxyGroup.rotation.y+=0.0003;
 
-  solarGroup.visible=(sv>=b[1] && sv<b[2]);
+  solarGroup.visible=(sv>=b[3] && sv<b[4]);
   if(solarGroup.visible){
     for(i=0;i<planets.length;i++){planets[i].mesh.position.x=Math.cos(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;planets[i].mesh.position.z=Math.sin(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;}
     solarGroup.rotation.y+=0.0002;
   }
 
-  earth.visible=(sv>=b[2] && sv<b[3]);
+  earth.visible=(sv>=b[4] && sv<b[5]);
   atmo.visible=earth.visible;
   clouds.visible=earth.visible;
   earth.rotation.y+=0.0008;
   clouds.rotation.y+=0.0005;
 
-  city.visible=(sv>=b[3] && sv<b[4]);
+  city.visible=(sv>=b[5] && sv<b[6]);
   city.rotation.y+=0.0003;
 
-  room.visible=(sv>=b[4] && sv<b[5]);
+  room.visible=(sv>=b[6] && sv<b[7]);
   if(room.visible) lampLight.intensity=2+R*0.5;
 
   // Wood grain + fibers show for Cellular + Molecular levels
-  woodGrain.visible=(sv>=b[5] && sv<b[7]);
-  fiberGroup.visible=(sv>=b[6] && sv<b[8]);
+  woodGrain.visible=(sv>=b[7] && sv<b[9]);
+  fiberGroup.visible=(sv>=b[8] && sv<b[10]);
 
   // Unresolved field for Nuclear + Quark + Cliff
-  unresolvedGroup.visible=(sv>=b[8]);
+  unresolvedGroup.visible=(sv>=b[10]);
   if(unresolvedGroup.visible){
     unresolvedPts.material.size=2+(1-R)*3;
     unresolvedGroup.rotation.y+=0.0002;
@@ -463,7 +588,9 @@ function updateUI(sv,sl,R){
   retVal.textContent=R.toFixed(3);
   var m,c;
   if(R>0.95){m='all structure preserved';c='#2dd4bf';}
+  else if(R>0.85){m='filaments resolved';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
   else if(R>0.7){m='fine detail emerging';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
+  else if(R>0.5){m='cosmological homogeneity - structure fading';c='linear-gradient(90deg,#fbbf24,#60a5fa)';}
   else if(R>0.3){m='fine structure degrading';c='#fbbf24';}
   else if(R>0.05){m='structure collapsing';c='linear-gradient(90deg,#ef4444,#fbbf24)';}
   else{m='irrecoverable - below coherence cliff';c='#ef4444';}
@@ -473,7 +600,7 @@ function updateUI(sv,sl,R){
     lastLvl=lvl.n;
     narrTitle.textContent=lvl.n;
     narrBody.textContent=lvl.t;
-    narrMath.textContent='R = exp[-(lambda/lambda_q)^D] = '+R.toFixed(3);
+    narrMath.textContent='R = '+R.toFixed(3)+'  (blur at both ends of the spectrum)';
     narrPanel.classList.add('visible');
     if(narrTO)clearTimeout(narrTO);
     narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},8000);
