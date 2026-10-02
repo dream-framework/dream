@@ -416,7 +416,7 @@ function updateUI(sv,sl,R){
     narrMath.textContent='R = exp[-(lambda/lambda_q)^D] = '+R.toFixed(3);
     narrPanel.classList.add('visible');
     if(narrTO)clearTimeout(narrTO);
-    narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},9000);
+    narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},8000);
   }
 }
 
@@ -445,11 +445,14 @@ function animate(){
       accumMs+=dwell+TRANSITION_MS;
     }
     var dwell=levelIdx===LEVELS.length-1?LAST_DWELL_MS:DWELL_MS;
-    currentLevelIdx=levelIdx; // track for UI sync
     if(inLevel<dwell){
+      // DWELL phase: show this level's object + narrative
+      currentLevelIdx=levelIdx;
       slider.value=LEVELS[levelIdx].sv;
     } else {
+      // TRANSITION phase: move slider, narrative already fading
       var t=(inLevel-dwell)/TRANSITION_MS;
+      currentLevelIdx=levelIdx; // keep current narrative until transition ends
       if(levelIdx<LEVELS.length-1){
         slider.value=LEVELS[levelIdx].sv+(LEVELS[levelIdx+1].sv-LEVELS[levelIdx].sv)*t;
       } else {
@@ -484,7 +487,7 @@ canvas.addEventListener('touchmove',function(e){if(e.touches.length===2&&pD>0){e
 
 animate();
 setTimeout(function(){narrPanel.classList.add('visible');},500);
-setTimeout(function(){narrPanel.classList.remove('visible');},9000);
+setTimeout(function(){narrPanel.classList.remove('visible');},8000);
 
 } catch(e) {
   document.body.innerHTML='<div style="padding:20px;color:#fca5a5;font-family:monospace">ERROR: '+e.message+'</div>';
