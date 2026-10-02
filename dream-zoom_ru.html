@@ -86,15 +86,16 @@ function retR(sl){return Math.max(0,Math.min(1,Math.exp(-Math.pow(Math.pow(10,sl
 
 // 10 levels, each with: slider value (0-1000), scale log10, name, description, narrative
 var LEVELS=[
-  {sv:0,   sl:6,   n:'Galaxy',          d:'all structure preserved',    t:'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect on the observable.'},
-  {sv:120, sl:4.1, n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales. The Sun and planets are clearly resolved. Retention is still essentially unity.'},
-  {sv:250, sl:2.0, n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved. Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.'},
-  {sv:370, sl:0.1, n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges. Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.'},
-  {sv:490, sl:-1.8,n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved. Furniture, walls, a table with a lamp. The probe is still well above lambda_q.'},
-  {sv:620, sl:-3.9,n:'Tabletop',       d:'surface texture emerging',    t:'The table surface fills the view. Wood grain begins to appear. The probe is approaching the coherence cliff -- retention is starting to drop.'},
-  {sv:720, sl:-5.5,n:'Wood Grain',     d:'fine structure degrading',    t:'Wood grain is clearly visible but fine detail is degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.'},
-  {sv:830, sl:-7.3,n:'Fibers',         d:'structure collapsing',        t:'Cellular fiber strands are partially unresolved. The retention curve is steep here. Information is being lost rapidly. Fine fibers blur into each other.'},
-  {sv:930, sl:-8.9,n:'Microstructure', d:'nearly unresolved',          t:'Only the coarsest fiber bundles survive. The projection has not become empty, but its recoverable information has reached its limit.'},
+  {sv:0,   sl:6,   n:'Galaxy',          d:'all structure preserved',    t:'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect on the observable. The spiral galaxy fills the view with its bright core and four arms.'},
+  {sv:70,  sl:5.0, n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core. Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.'},
+  {sv:160, sl:3.8, n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales. The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.'},
+  {sv:280, sl:1.8, n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved. Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.'},
+  {sv:390, sl:-0.2,n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges. Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.'},
+  {sv:500, sl:-1.8,n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved. Furniture, walls, a table with a lamp. The probe is still well above lambda_q.'},
+  {sv:620, sl:-3.5,n:'Tabletop',       d:'surface texture emerging',    t:'The table surface fills the view. Wood grain begins to appear. The probe is approaching the coherence cliff -- retention is starting to drop.'},
+  {sv:720, sl:-5.0,n:'Wood Grain',     d:'fine structure degrading',    t:'Wood grain is clearly visible but fine detail is degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.'},
+  {sv:830, sl:-7.0,n:'Fibers',         d:'structure collapsing',        t:'Cellular fiber strands are partially unresolved. The retention curve is steep here. Information is being lost rapidly. Fine fibers blur into each other.'},
+  {sv:930, sl:-8.5,n:'Microstructure', d:'nearly unresolved',          t:'Only the coarsest fiber bundles survive. The projection has not become empty, but its recoverable information has reached its limit.'},
   {sv:1000,sl:-10, n:'Coherence Cliff',d:'irrecoverable',             t:'Below the coherence cliff, all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved field.'},
 ];
 
@@ -335,10 +336,9 @@ scene.add(unresolvedGroup);
 // ═══ VISIBILITY ═══
 function updateScene(sv,sl,R){
   // Camera: each level has a distinct distance, smooth lerp
-  // Galaxy: z=200, Solar: z=120, Earth: z=90, City: z=60,
-  // Room: z=45, Tabletop: z=35, Wood: z=28, Fibers: z=22,
-  // Micro: z=18, Cliff: z=15
-  var camZBySv=[200,120,90,60,45,35,28,22,18,15];
+  // 11 levels: Galaxy(200), Galactic Core(150), Solar(110), Earth(80),
+  // City(55), Room(42), Tabletop(32), Wood(26), Fibers(22), Micro(18), Cliff(15)
+  var camZBySv=[200,150,110,80,55,42,32,26,22,18,15];
   // Interpolate between levels based on sv
   var camZ=200;
   for(var ci=0;ci<LEVELS.length-1;ci++){
@@ -354,35 +354,37 @@ function updateScene(sv,sl,R){
   camera.position.y+=(targetY-camera.position.y)*0.08;
   camera.lookAt(0,5,0);
 
-  // Visibility based on SLIDER VALUE, not scale — exact match with level boundaries
-  // Level boundaries at midpoints between consecutive level sv values
-  // Galaxy: sv 0-60, Solar: 60-185, Earth: 185-310, City: 310-430,
-  // Room: 430-555, Tabletop: 555-670, Wood: 670-775, Fibers: 775-880,
-  // Micro: 880-965, Cliff: 965-1000
-  galaxyGroup.visible=(sv<60);
+  // Visibility based on SLIDER VALUE midpoints between consecutive levels
+  // Level boundaries: midpoint of each consecutive pair
+  // 11 levels now: Galaxy(0), Galactic Core(70), Solar(160), Earth(280),
+  // City(390), Room(500), Tabletop(620), Wood(720), Fibers(830),
+  // Micro(930), Cliff(1000)
+  var b=[35,115,220,335,445,560,670,775,880,965]; // 10 midpoints for 11 levels
+  // Galaxy and Galactic Core both show the galaxy group
+  galaxyGroup.visible=(sv<b[1]); // visible for Galaxy AND Galactic Core
   galaxyGroup.rotation.y+=0.0003;
 
-  solarGroup.visible=(sv>=60 && sv<185);
+  solarGroup.visible=(sv>=b[1] && sv<b[2]);
   if(solarGroup.visible){
     for(i=0;i<planets.length;i++){planets[i].mesh.position.x=Math.cos(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;planets[i].mesh.position.z=Math.sin(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;}
     solarGroup.rotation.y+=0.0002;
   }
 
-  earth.visible=(sv>=185 && sv<310);
+  earth.visible=(sv>=b[2] && sv<b[3]);
   atmo.visible=earth.visible;
   earth.rotation.y+=0.0008;
 
-  city.visible=(sv>=310 && sv<430);
+  city.visible=(sv>=b[3] && sv<b[4]);
   city.rotation.y+=0.0003;
 
-  room.visible=(sv>=430 && sv<555);
+  room.visible=(sv>=b[4] && sv<b[5]);
   if(room.visible) lampLight.intensity=2+R*0.5;
 
-  woodGrain.visible=(sv>=555 && sv<670);
+  woodGrain.visible=(sv>=b[5] && sv<b[6]);
 
-  fiberGroup.visible=(sv>=670 && sv<880);
+  fiberGroup.visible=(sv>=b[6] && sv<b[8]);
 
-  unresolvedGroup.visible=(sv>=880);
+  unresolvedGroup.visible=(sv>=b[8]);
   if(unresolvedGroup.visible){
     unresolvedPts.material.size=2+(1-R)*3;
     unresolvedGroup.rotation.y+=0.0002;
