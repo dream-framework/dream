@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-01T21:14:59Z",
+  "exported_at": "2026-10-02T05:55:58Z",
   "total_tests": 293,
   "fields": [
     "id",
@@ -1923,7 +1923,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.03,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.225, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=17.03). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
