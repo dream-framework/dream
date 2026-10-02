@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>DREAM Zoom - Projection Scale Toy</title>
 <link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
@@ -82,23 +85,39 @@ try {
 if(typeof THREE==='undefined') throw new Error('THREE not loaded');
 
 // S2 params
+// R is the retention factor. R=1 when lambda >> lambda_q (macro), R->0 at the coherence cliff.
+// Per-level R targets match the narrative (Galaxy=1.000, Cliff=0.000). We interpolate smoothly
+// between adjacent levels based on the slider value, so R drops gradually across the zoom range.
 var LQ=1e-35, DEFF=0.80;
-function retR(sl){return Math.max(0,Math.min(1,Math.exp(-Math.pow(Math.pow(10,sl)/LQ,DEFF))));}
-
-// 10 levels, each with: slider value (0-1000), scale log10, name, description, narrative
+// 10 levels, each with: slider value (0-1000), scale log10, name, description, narrative, R
 var LEVELS=[
-  {sv:0,   sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.'},
-  {sv:70,  sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.'},
-  {sv:160, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.'},
-  {sv:280, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.'},
-  {sv:390, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.'},
-  {sv:500, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.'},
-  {sv:620, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Biological cells and bacteria become visible (10^-4 m). The probe is approaching the coherence cliff -- retention is starting to drop.'},
-  {sv:720, sl:-8,   n:'Molecular',      d:'fine structure degrading',    t:'Molecules, proteins, and DNA strands (10^-8 m) are degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.'},
-  {sv:830, sl:-12,  n:'Nuclear',        d:'structure collapsing',        t:'The atomic nucleus (10^-12 m) is the deepest directly imaged structure. Deep inelastic scattering experiments probe here. The retention curve is steep -- information is being lost rapidly.'},
-  {sv:930, sl=-18,  n:'Quark Scale',    d:'nearly unresolved',          t:'At the QCD scale (10^-18 m), only the coarsest field structure survives. Quarks and gluons are barely distinguishable. Recoverable information has reached its limit.'},
-  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'At the Planck scale (10^-35 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved quantum field.'},
+  {sv:0,   sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.',                          R:1.000},
+  {sv:70,  sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.',                                                R:1.000},
+  {sv:160, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.',                                          R:1.000},
+  {sv:280, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.',                                                                R:1.000},
+  {sv:390, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.',                                       R:0.998},
+  {sv:500, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.',                                                                            R:0.995},
+  {sv:620, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Biological cells and bacteria become visible (10^-4 m). The probe is approaching the coherence cliff -- retention is starting to drop.',                                                                            R:0.970},
+  {sv:720, sl:-8,   n:'Molecular',      d:'fine structure degrading',    t:'Molecules, proteins, and DNA strands (10^-8 m) are degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.',                                                                       R:0.780},
+  {sv:830, sl:-12,  n:'Nuclear',        d:'structure collapsing',        t:'The atomic nucleus (10^-12 m) is the deepest directly imaged structure. Deep inelastic scattering experiments probe here. The retention curve is steep -- information is being lost rapidly.',                         R:0.350},
+  {sv:930, sl:-18,  n:'Quark Scale',    d:'nearly unresolved',          t:'At the QCD scale (10^-18 m), only the coarsest field structure survives. Quarks and gluons are barely distinguishable. Recoverable information has reached its limit.',                                              R:0.050},
+  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'At the Planck scale (10^-35 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved quantum field.',                                                          R:0.000},
 ];
+
+// Interpolate R across slider value (sv) using the per-level R targets.
+// This matches the narrative exactly and produces a smooth curve from R=1 at macro to R=0 at the cliff.
+function retR(sv){
+  if(sv<=LEVELS[0].sv) return LEVELS[0].R;
+  for(var i=0;i<LEVELS.length-1;i++){
+    if(sv>=LEVELS[i].sv && sv<=LEVELS[i+1].sv){
+      var frac=(sv-LEVELS[i].sv)/(LEVELS[i+1].sv-LEVELS[i].sv);
+      // Smoothstep for organic transition
+      var s=frac*frac*(3-2*frac);
+      return LEVELS[i].R+(LEVELS[i+1].R-LEVELS[i].R)*s;
+    }
+  }
+  return LEVELS[LEVELS.length-1].R;
+}
 
 function s2sc(sv){
   // Non-linear mapping: dwell at each level, smooth transitions between
@@ -504,7 +523,7 @@ function animate(){
   }
   var sv=parseFloat(slider.value);
   var sl=s2sc(sv);
-  var R=retR(sl);
+  var R=retR(sv);
   // If manual mode, find level by midpoint boundaries
   if(!autoZoom){
     currentLevelIdx=0;

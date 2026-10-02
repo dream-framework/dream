@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v56';
+const CACHE_VERSION = 'dream-v58';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -26,8 +26,8 @@ const PRECACHE_URLS = [
   './t71-toy_ru.html',
   './en/math-recharge.html',
   './ru/math-recharge.html',
-  './dream-zoom.html?v=5',
-  './dream-zoom_ru.html?v=5',
+  './dream-zoom.html?v=7',
+  './dream-zoom_ru.html?v=7',
 ];
 
 // Install — pre-cache the app shell
@@ -66,10 +66,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For navigation requests (HTML pages), try network first, fall back to cache
+  // For navigation requests (HTML pages), try network first (bypassing HTTP cache),
+  // fall back to cached version if network fails.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetch(request, {cache: 'no-store'})
         .then((response) => {
           // Cache the new page
           const clone = response.clone();
