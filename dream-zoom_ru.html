@@ -334,37 +334,55 @@ scene.add(unresolvedGroup);
 
 // ═══ VISIBILITY ═══
 function updateScene(sv,sl,R){
-  // Camera: smooth lerp, centered
-  var targetZ=160-(sv/1000)*130;
-  camera.position.z+=(targetZ-camera.position.z)*0.06;
-  var targetY=40-(sv/1000)*25;
-  camera.position.y+=(targetY-camera.position.y)*0.06;
-  camera.lookAt(0,5,0); // look slightly above center
+  // Camera: each level has a distinct distance, smooth lerp
+  // Galaxy: z=200, Solar: z=120, Earth: z=90, City: z=60,
+  // Room: z=45, Tabletop: z=35, Wood: z=28, Fibers: z=22,
+  // Micro: z=18, Cliff: z=15
+  var camZBySv=[200,120,90,60,45,35,28,22,18,15];
+  // Interpolate between levels based on sv
+  var camZ=200;
+  for(var ci=0;ci<LEVELS.length-1;ci++){
+    if(sv>=LEVELS[ci].sv && sv<=LEVELS[ci+1].sv){
+      var frac=(sv-LEVELS[ci].sv)/(LEVELS[ci+1].sv-LEVELS[ci].sv);
+      camZ=camZBySv[ci]+(camZBySv[ci+1]-camZBySv[ci])*frac;
+      break;
+    }
+  }
+  if(sv>=LEVELS[LEVELS.length-1].sv) camZ=camZBySv[camZBySv.length-1];
+  camera.position.z+=(camZ-camera.position.z)*0.08;
+  var targetY=40-(sv/1000)*30;
+  camera.position.y+=(targetY-camera.position.y)*0.08;
+  camera.lookAt(0,5,0);
 
-  galaxyGroup.visible=(sl>3.5);
+  // Visibility based on SLIDER VALUE, not scale — exact match with level boundaries
+  // Level boundaries at midpoints between consecutive level sv values
+  // Galaxy: sv 0-60, Solar: 60-185, Earth: 185-310, City: 310-430,
+  // Room: 430-555, Tabletop: 555-670, Wood: 670-775, Fibers: 775-880,
+  // Micro: 880-965, Cliff: 965-1000
+  galaxyGroup.visible=(sv<60);
   galaxyGroup.rotation.y+=0.0003;
 
-  solarGroup.visible=(sl<=3.5 && sl>0.8);
+  solarGroup.visible=(sv>=60 && sv<185);
   if(solarGroup.visible){
     for(i=0;i<planets.length;i++){planets[i].mesh.position.x=Math.cos(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;planets[i].mesh.position.z=Math.sin(Date.now()*0.0005*planets[i].speed+planetData[i].r)*planetData[i].r;}
     solarGroup.rotation.y+=0.0002;
   }
 
-  earth.visible=(sl<=0.8 && sl>-2.5);
+  earth.visible=(sv>=185 && sv<310);
   atmo.visible=earth.visible;
   earth.rotation.y+=0.0008;
 
-  city.visible=(sl<=-1.5 && sl>-4.5);
+  city.visible=(sv>=310 && sv<430);
   city.rotation.y+=0.0003;
 
-  room.visible=(sl<=-3.5 && sl>-6.5);
+  room.visible=(sv>=430 && sv<555);
   if(room.visible) lampLight.intensity=2+R*0.5;
 
-  woodGrain.visible=(sl<=-5.5 && sl>-8.5);
+  woodGrain.visible=(sv>=555 && sv<670);
 
-  fiberGroup.visible=(sl<=-7 && sl>-10);
+  fiberGroup.visible=(sv>=670 && sv<880);
 
-  unresolvedGroup.visible=(sl<=-8);
+  unresolvedGroup.visible=(sv>=880);
   if(unresolvedGroup.visible){
     unresolvedPts.material.size=2+(1-R)*3;
     unresolvedGroup.rotation.y+=0.0002;
