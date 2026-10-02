@@ -392,8 +392,10 @@ var lvlName=document.getElementById('level-name');
 var lvlDesc=document.getElementById('level-desc');
 var lastLvl='',narrTO=null;
 
+var currentLevelIdx=0; // tracked by animate(), used by updateUI
+
 function updateUI(sv,sl,R){
-  var lvl=findLvl(sv);
+  var lvl=LEVELS[currentLevelIdx];
   hudScale.textContent='10^'+sup(sl)+' m';
   hudR.textContent=R.toFixed(3);
   hudD.textContent=DEFF.toFixed(2);
@@ -443,6 +445,7 @@ function animate(){
       accumMs+=dwell+TRANSITION_MS;
     }
     var dwell=levelIdx===LEVELS.length-1?LAST_DWELL_MS:DWELL_MS;
+    currentLevelIdx=levelIdx; // track for UI sync
     if(inLevel<dwell){
       slider.value=LEVELS[levelIdx].sv;
     } else {
@@ -458,6 +461,14 @@ function animate(){
   var sv=parseFloat(slider.value);
   var sl=s2sc(sv);
   var R=retR(sl);
+  // If manual mode, find level by midpoint boundaries
+  if(!autoZoom){
+    currentLevelIdx=0;
+    for(var mi=0;mi<LEVELS.length-1;mi++){
+      var mid=(LEVELS[mi].sv+LEVELS[mi+1].sv)/2;
+      if(sv>mid) currentLevelIdx=mi+1;
+    }
+  }
   updateScene(sv,sl,R);
   updateUI(sv,sl,R);
   renderer.render(scene,camera);
