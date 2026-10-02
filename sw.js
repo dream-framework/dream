@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v54';
+const CACHE_VERSION = 'dream-v55';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -26,8 +26,8 @@ const PRECACHE_URLS = [
   './t71-toy_ru.html',
   './en/math-recharge.html',
   './ru/math-recharge.html',
-  './dream-zoom.html?v=3',
-  './dream-zoom_ru.html?v=3',
+  './dream-zoom.html?v=4',
+  './dream-zoom_ru.html?v=4',
 ];
 
 // Install — pre-cache the app shell
