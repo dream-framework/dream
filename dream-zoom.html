@@ -86,17 +86,17 @@ function retR(sl){return Math.max(0,Math.min(1,Math.exp(-Math.pow(Math.pow(10,sl
 
 // 10 levels, each with: slider value (0-1000), scale log10, name, description, narrative
 var LEVELS=[
-  {sv:0,   sl:6,   n:'Galaxy',          d:'all structure preserved',    t:'At macroscopic scales, all structure is preserved. The projection kernel has no measurable effect on the observable. The spiral galaxy fills the view with its bright core and four arms.'},
-  {sv:70,  sl:5.0, n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core. Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.'},
-  {sv:160, sl:3.8, n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales. The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.'},
-  {sv:280, sl:1.8, n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved. Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.'},
-  {sv:390, sl:-0.2,n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges. Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.'},
-  {sv:500, sl:-1.8,n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved. Furniture, walls, a table with a lamp. The probe is still well above lambda_q.'},
-  {sv:620, sl:-3.5,n:'Tabletop',       d:'surface texture emerging',    t:'The table surface fills the view. Wood grain begins to appear. The probe is approaching the coherence cliff -- retention is starting to drop.'},
-  {sv:720, sl:-5.0,n:'Wood Grain',     d:'fine structure degrading',    t:'Wood grain is clearly visible but fine detail is degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.'},
-  {sv:830, sl:-7.0,n:'Fibers',         d:'structure collapsing',        t:'Cellular fiber strands are partially unresolved. The retention curve is steep here. Information is being lost rapidly. Fine fibers blur into each other.'},
-  {sv:930, sl:-8.5,n:'Microstructure', d:'nearly unresolved',          t:'Only the coarsest fiber bundles survive. The projection has not become empty, but its recoverable information has reached its limit.'},
-  {sv:1000,sl:-10, n:'Coherence Cliff',d:'irrecoverable',             t:'Below the coherence cliff, all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved field.'},
+  {sv:0,   sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At macroscopic scales (10^21 m), all structure is preserved. The projection kernel has no measurable effect on the observable. The spiral galaxy fills the view with its bright core and four arms.'},
+  {sv:70,  sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.'},
+  {sv:160, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.'},
+  {sv:280, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~10,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.'},
+  {sv:390, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.'},
+  {sv:500, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.'},
+  {sv:620, sl:-3,   n:'Tabletop',       d:'surface texture emerging',    t:'The table surface fills the view (10^-3 m, ~1 mm). Wood grain begins to appear. The probe is approaching the coherence cliff -- retention is starting to drop.'},
+  {sv:720, sl:-5,   n:'Wood Grain',     d:'fine structure degrading',    t:'Wood grain is clearly visible (10^-5 m, ~10 um) but fine detail is degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.'},
+  {sv:830, sl:-7,   n:'Fibers',         d:'structure collapsing',        t:'Cellular fiber strands (10^-7 m, ~100 nm) are partially unresolved. The retention curve is steep here. Information is being lost rapidly. Fine fibers blur into each other.'},
+  {sv:930, sl=-8.5, n:'Microstructure', d:'nearly unresolved',          t:'Only the coarsest fiber bundles survive (10^-8.5 m). The projection has not become empty, but its recoverable information has reached its limit.'},
+  {sv:1000,sl:-10,  n:'Coherence Cliff',d:'irrecoverable',             t:'Below the coherence cliff (10^-10 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved field.'},
 ];
 
 function s2sc(sv){
@@ -209,20 +209,39 @@ for(i=0;i<planetData.length;i++){
 solarGroup.visible=false;
 scene.add(solarGroup);
 
-// ═══ EARTH ═══
-var eGeom=new THREE.IcosahedronGeometry(55,6);
+// ═══ EARTH - realistic sphere with continents, oceans, clouds ═══
+var eGeom=new THREE.SphereGeometry(55,64,64);
 var eCol=new Float32Array(eGeom.attributes.position.array.length);
 for(i=0;i<eGeom.attributes.position.array.length;i+=3){
   var v=new THREE.Vector3(eGeom.attributes.position.array[i],eGeom.attributes.position.array[i+1],eGeom.attributes.position.array[i+2]);
   var n=v.clone().normalize();
-  var ns=Math.sin(n.x*2.5)*Math.cos(n.y*3)*Math.sin(n.z*4)+Math.sin(n.x*7)*0.25;
-  if(ns>0.2){eCol[i]=0.3;eCol[i+1]=0.65;eCol[i+2]=0.25;}
-  else if(ns>-0.05){eCol[i]=0.55;eCol[i+1]=0.5;eCol[i+2]=0.25;}
-  else{eCol[i]=0.15;eCol[i+1]=0.4;eCol[i+2]=0.65;}
+  // Multi-octave noise for continents
+  var ns=Math.sin(n.x*2.5)*Math.cos(n.y*3)*Math.sin(n.z*4)+Math.sin(n.x*7)*0.25+Math.cos(n.y*12)*0.12+Math.sin(n.z*20)*0.06;
+  if(ns>0.3){eCol[i]=0.2;eCol[i+1]=0.55;eCol[i+2]=0.15;} // green forest
+  else if(ns>0.1){eCol[i]=0.4;eCol[i+1]=0.5;eCol[i+2]=0.2;} // green-brown
+  else if(ns>-0.05){eCol[i]=0.5;eCol[i+1]=0.4;eCol[i+2]=0.25;} // tan desert
+  else if(ns>-0.2){eCol[i]=0.1;eCol[i+1]=0.3;eCol[i+2]=0.5;} // shallow ocean
+  else{eCol[i]=0.05;eCol[i+1]=0.15;eCol[i+2]=0.4;} // deep ocean
 }
 eGeom.setAttribute('color',new THREE.BufferAttribute(eCol,3));
-var earth=new THREE.Mesh(eGeom,new THREE.MeshLambertMaterial({vertexColors:true,emissive:0x102030,emissiveIntensity:0.3}));
+var earth=new THREE.Mesh(eGeom,new THREE.MeshLambertMaterial({vertexColors:true,emissive:0x081830,emissiveIntensity:0.2,shininess:8,specular:0x333355}));
 earth.visible=false;scene.add(earth);
+
+// Cloud layer (separate sphere, slightly larger)
+var cGeom=new THREE.SphereGeometry(57,48,48);
+var cCol=new Float32Array(cGeom.attributes.position.array.length);
+var cPos=cGeom.attributes.position.array;
+for(i=0;i<cPos.length;i+=3){
+  var cv=new THREE.Vector3(cPos[i],cPos[i+1],cPos[i+2]);
+  var cn=cv.clone().normalize();
+  var cns=Math.sin(cn.x*4)*Math.cos(cn.y*5)*Math.sin(cn.z*3)+Math.cos(cn.x*9)*0.15;
+  if(cns>0.2){cCol[i]=0.9;cCol[i+1]=0.92;cCol[i+2]=0.95;}
+  else{cCol[i]=0;cCol[i+1]=0;cCol[i+2]=0;} // transparent (black = invisible on dark bg)
+}
+cGeom.setAttribute('color',new THREE.BufferAttribute(cCol,3));
+var clouds=new THREE.Points(cGeom,new THREE.PointsMaterial({size:1.5,vertexColors:true,depthWrite:false}));
+clouds.visible=false;scene.add(clouds);
+
 var atmo=new THREE.Mesh(new THREE.SphereGeometry(60,32,32),new THREE.MeshBasicMaterial({color:0x4488ff,side:THREE.BackSide}));
 atmo.visible=false;scene.add(atmo);
 
@@ -372,7 +391,9 @@ function updateScene(sv,sl,R){
 
   earth.visible=(sv>=b[2] && sv<b[3]);
   atmo.visible=earth.visible;
+  clouds.visible=earth.visible;
   earth.rotation.y+=0.0008;
+  clouds.rotation.y+=0.0005;
 
   city.visible=(sv>=b[3] && sv<b[4]);
   city.rotation.y+=0.0003;
