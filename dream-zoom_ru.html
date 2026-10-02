@@ -293,12 +293,44 @@ for(i=0;i<150;i++){
 }
 fiberGroup.visible=false;scene.add(fiberGroup);
 
-// ═══ UNRESOLVED ═══
-var uPos=new Float32Array(300*3);
-for(i=0;i<300;i++){uPos[i*3]=(Math.random()-0.5)*50;uPos[i*3+1]=(Math.random()-0.5)*50;uPos[i*3+2]=(Math.random()-0.5)*50;}
-var uGeom=new THREE.BufferGeometry();uGeom.setAttribute('position',new THREE.BufferAttribute(uPos,3));
-var unresolved=new THREE.Points(uGeom,new THREE.PointsMaterial({size:3,color:0x6080a0,depthWrite:false}));
-unresolved.visible=false;scene.add(unresolved);
+// ═══ UNRESOLVED FIELD — homogeneous slightly-discolored field ═══
+// This is what you see BELOW the coherence cliff.
+// Use a large sphere with a subtle gradient + many tiny particles to fill the view.
+var unresolvedGroup=new THREE.Group();
+
+// Large sphere that fills the view with a homogeneous slightly-discolored surface
+var unresSphere=new THREE.Mesh(
+  new THREE.SphereGeometry(80,32,32),
+  new THREE.MeshBasicMaterial({color:0x1a2a3e})
+);
+unresolvedGroup.add(unresSphere);
+
+// Inner glow sphere — slightly different color, like a uniform field
+var unresGlow=new THREE.Mesh(
+  new THREE.SphereGeometry(75,32,32),
+  new THREE.MeshBasicMaterial({color:0x2a3a50,side:THREE.BackSide})
+);
+unresolvedGroup.add(unresGlow);
+
+// Dense particle field filling the view — like a homogeneous unresolved field
+var uPos=new Float32Array(2000*3);
+var uCol=new Float32Array(2000*3);
+for(i=0;i<2000;i++){
+  uPos[i*3]=(Math.random()-0.5)*100;
+  uPos[i*3+1]=(Math.random()-0.5)*100;
+  uPos[i*3+2]=(Math.random()-0.5)*100;
+  // Very subtle color variation — slightly discolored, not bright
+  var uc=new THREE.Color().setHSL(0.58+Math.random()*0.04,0.15,0.2+Math.random()*0.06);
+  uCol[i*3]=uc.r;uCol[i*3+1]=uc.g;uCol[i*3+2]=uc.b;
+}
+var uGeom=new THREE.BufferGeometry();
+uGeom.setAttribute('position',new THREE.BufferAttribute(uPos,3));
+uGeom.setAttribute('color',new THREE.BufferAttribute(uCol,3));
+var unresolvedPts=new THREE.Points(uGeom,new THREE.PointsMaterial({size:2,vertexColors:true,depthWrite:false}));
+unresolvedGroup.add(unresolvedPts);
+
+unresolvedGroup.visible=false;
+scene.add(unresolvedGroup);
 
 // ═══ VISIBILITY ═══
 function updateScene(sv,sl,R){
@@ -332,9 +364,11 @@ function updateScene(sv,sl,R){
 
   fiberGroup.visible=(sl<=-7 && sl>-10);
 
-  unresolved.visible=(sl<=-8);
-  unresolved.material.size=2.5+(1-R)*4;
-  unresolved.rotation.y+=0.0002;
+  unresolvedGroup.visible=(sl<=-8);
+  if(unresolvedGroup.visible){
+    unresolvedPts.material.size=2+(1-R)*3;
+    unresolvedGroup.rotation.y+=0.0002;
+  }
 
   scene.fog.density=0.0008+(1-R)*0.005;
   dl1.intensity=1.0+R*0.5;
@@ -388,24 +422,34 @@ function updateUI(sv,sl,R){
 var autoZoom=true;
 var autoStartTime=Date.now();
 var DWELL_MS=9000; // 9 seconds per level
+var LAST_DWELL_MS=15000; // 15 seconds for the final coherence cliff level
 var TRANSITION_MS=2000; // 2 second transition
-var TOTAL_MS=(DWELL_MS+TRANSITION_MS)*LEVELS.length; // ~110 seconds total
+var TOTAL_MS=(DWELL_MS+TRANSITION_MS)*(LEVELS.length-1)+LAST_DWELL_MS+TRANSITION_MS; // longer for final level
 
 function animate(){
   requestAnimationFrame(animate);
   if(autoZoom){
     var elapsed=(Date.now()-autoStartTime)%TOTAL_MS;
-    var levelIdx=Math.floor(elapsed/(DWELL_MS+TRANSITION_MS));
-    var inLevel=elapsed-levelIdx*(DWELL_MS+TRANSITION_MS);
-    // Dwell for 9s, then transition for 2s
-    if(inLevel<DWELL_MS){
+    var accumMs=0;
+    var levelIdx=0;
+    var inLevel=0;
+    for(var li=0;li<LEVELS.length;li++){
+      var dwell=li===LEVELS.length-1?LAST_DWELL_MS:DWELL_MS;
+      if(elapsed<accumMs+dwell+TRANSITION_MS){
+        levelIdx=li;
+        inLevel=elapsed-accumMs;
+        break;
+      }
+      accumMs+=dwell+TRANSITION_MS;
+    }
+    var dwell=levelIdx===LEVELS.length-1?LAST_DWELL_MS:DWELL_MS;
+    if(inLevel<dwell){
       slider.value=LEVELS[levelIdx].sv;
     } else {
-      var t=(inLevel-DWELL_MS)/TRANSITION_MS;
+      var t=(inLevel-dwell)/TRANSITION_MS;
       if(levelIdx<LEVELS.length-1){
         slider.value=LEVELS[levelIdx].sv+(LEVELS[levelIdx+1].sv-LEVELS[levelIdx].sv)*t;
       } else {
-        // Loop back to start
         if(t>0.5){autoStartTime=Date.now();}
         slider.value=0;
       }
