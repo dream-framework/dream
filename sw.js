@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v61';
+const CACHE_VERSION = 'dream-v62';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -39,8 +39,9 @@ const PRECACHE_URLS = [
   './t71-toy_ru.html',
   './en/math-recharge.html',
   './ru/math-recharge.html',
-  './dream-zoom.html?v=10',
-  './dream-zoom_ru.html?v=10',
+  // NOTE: dream-zoom.html is intentionally NOT precached — it changes
+  // frequently and we always want the freshest version. It will be fetched
+  // network-first by the navigation handler below.
 ];
 
 // Install — pre-cache the app shell
@@ -73,8 +74,20 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Skip cross-origin requests (CDN fonts, MathJax, etc.) — let them pass through
+  // For dream-zoom.html, ALWAYS fetch from network with no caching whatsoever.
+  // This page is under active development — the user must always see the latest
+  // version. If the network fails, show an error rather than a stale copy.
   const url = new URL(request.url);
+  if (url.pathname.endsWith('/dream-zoom.html') || url.pathname.endsWith('/dream-zoom_ru.html') || url.pathname.endsWith('/zoom.html') || url.pathname.endsWith('/zoom_ru.html')) {
+    if (request.mode === 'navigate' || request.destination === 'document') {
+      event.respondWith(
+        fetch(request, {cache: 'no-store'})
+      );
+      return;
+    }
+  }
+
+  // Skip cross-origin requests (CDN fonts, MathJax, etc.) — let them pass through
   if (url.origin !== self.location.origin) {
     return;
   }

@@ -500,6 +500,17 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('../sw.js').then(function(reg) {
         console.log('SW registered:', reg.scope);
+        // Force-update the SW immediately on every page load — bypass the
+        // 24h update-check throttle so the user always gets the latest sw.js
+        reg.update();
+        // If a new SW takes over, reload all open tabs to use it
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          // Avoid reload loop with a small debounce via sessionStorage
+          if (!sessionStorage.getItem('sw_reloaded')) {
+            sessionStorage.setItem('sw_reloaded', '1');
+            window.location.reload();
+          }
+        });
       }).catch(function(err) {
         console.log('SW registration failed:', err);
       });
