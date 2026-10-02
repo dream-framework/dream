@@ -740,30 +740,23 @@ animate();
 setTimeout(function(){narrPanel.classList.add('visible');},500);
 setTimeout(function(){narrPanel.classList.remove('visible');},8000);
 
-// ═══ PWA SELF-CLEAN — force-out any stale service worker so the page can't be
-// held hostage by an old cached version. Runs once per page load. ═══
+// ═══ PWA SELF-CLEAN — ALWAYS unregister ALL service workers + clear ALL caches
+// on EVERY page load. Runs unconditionally so even if a stale SW was holding an
+// old cached version, it gets evicted immediately. ═══
 if('serviceWorker' in navigator){
-  var CLEAN_KEY='dream_zoom_sw_clean_v63';
-  if(sessionStorage.getItem(CLEAN_KEY)!=='done'){
-    sessionStorage.setItem(CLEAN_KEY,'done');
-    navigator.serviceWorker.getRegistrations().then(function(regs){
-      if(regs.length===0) return;
-      // Old service workers found — unregister all of them, then clear caches, then reload
-      console.log('DREAM Zoom: unregistering '+regs.length+' stale service worker(s)');
-      Promise.all(regs.map(function(r){return r.unregister();}))
-        .then(function(){
-          if('caches' in window){
-            return caches.keys().then(function(keys){
-              return Promise.all(keys.map(function(k){return caches.delete(k);}));
-            });
-          }
-        })
-        .then(function(){
-          // Hard reload to drop any in-memory state from the old SW
-          window.location.reload();
-        });
-    });
-  }
+  navigator.serviceWorker.getRegistrations().then(function(regs){
+    if(regs.length===0) return;
+    console.log('DREAM Zoom: unregistering '+regs.length+' stale service worker(s)');
+    Promise.all(regs.map(function(r){return r.unregister();}))
+      .then(function(){
+        if('caches' in window){
+          return caches.keys().then(function(keys){
+            return Promise.all(keys.map(function(k){return caches.delete(k);}));
+          });
+        }
+      });
+    // Don't reload automatically — the page is already fresh from anti-cache bootstrap
+  });
 }
 
 } catch(e) {
