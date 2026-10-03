@@ -43,8 +43,13 @@ header h1{font-size:15px;font-weight:700}
 header .sub{color:#a8b3c7;font-size:11px}
 header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
 #scene-container{position:relative;overflow:hidden;min-height:0;background:#070b14}
-#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,background-position}
+#backdrop{position:absolute;inset:-5%;width:110%;height:110%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,transform;transform-origin:center center}
 #backdrop.active{opacity:1}
+/* Cinematic vignette overlay */
+#vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.45) 100%);transition:opacity .5s ease}
+/* Cinematic letterbox bars (top/bottom) */
+#letterbox-top,#letterbox-bottom{position:absolute;left:0;right:0;height:0;background:#000;z-index:3;pointer-events:none;transition:height .8s ease}
+#letterbox-top{top:0}#letterbox-bottom{bottom:0}
 #three-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #hud{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:5;pointer-events:none}
 .pill{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #223047;background:rgba(7,11,20,.88);font-weight:600}
@@ -77,6 +82,9 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
   <header><h1>DREAM Zoom</h1><span class="sub">- operate the projection kernel in 3D</span><a class="home" href="/dream/en/index.html">DREAM</a></header>
   <div id="scene-container">
     <div id="backdrop"></div>
+    <div id="vignette"></div>
+    <div id="letterbox-top"></div>
+    <div id="letterbox-bottom"></div>
     <canvas id="three-canvas"></canvas>
     <div id="hud">
       <span class="pill"><span class="label">Scale</span> <span class="v" id="hud-scale">10^27 m</span></span>
@@ -84,6 +92,7 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
       <span class="pill"><span class="label">lambda_q</span> <span class="v">10^-35 m</span></span>
     </div>
+    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:8px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
       <div class="ntitle" id="narr-title">Cosmic Web</div>
       <div class="nbody" id="narr-body">At the scale of the cosmic web, structure fades into the cosmological homogeneity limit.</div>
@@ -120,7 +129,7 @@ var LEVELS=[
   {sv:80,  sl:24,   n:'Supercluster',    d:'filaments resolved',         t:'At the supercluster scale (10^24 m, ~100 million light-years), Laniakea-scale structure becomes visible. Galaxy clusters connected by filaments form a web. The probe is at the largest scale where structure is still clearly distinguishable -- retention is climbing back toward unity.',                          R:0.950, img:'img/zoom_real/supercluster.png'},
   {sv:160, sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.',                                                                                                                R:1.000, img:'img/zoom_real/galaxy.png'},
   {sv:240, sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.',                                                                                                                                                R:1.000, img:'img/zoom_real/galactic_core.png'},
-  {sv:320, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.',                                                                                                                                          R:1.000, img:'img/zoom_real/solar_system.png'},
+  {sv:320, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). Cassini\'s farewell portrait of Saturn, its rings, and the moons Mimas, Enceladus, and Tethys orbiting in their distinct paths. The probe is far above lambda_q -- retention is still essentially unity.',                                                                                                                                                                                                                                                       R:1.000, img:'img/zoom_real/solar_system.png'},
   {sv:410, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.',                                                                                                                                                            R:1.000, img:'img/zoom_real/earth.png'},
   {sv:490, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.',                                                                                                                                     R:0.998, img:'img/zoom_real/city.png'},
   {sv:560, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.',                                                                                                                                                                        R:0.995, img:'img/zoom_real/room.png'},
@@ -511,11 +520,14 @@ superclusterGroup.visible=false;
 scene.add(superclusterGroup);
 
 // ═══ VISIBILITY ═══
-// IMPORTANT: 3D procedural scenes are now HIDDEN — only photographic backdrops
-// are shown. Camera slowly pans (Ken Burns effect) for a cinematic feel,
-// and the backdrop div scrolls in sync so the photo pans too.
+// IMPORTANT: 3D procedural scenes are HIDDEN — only photographic backdrops
+// are shown. Cinematic "slow fly-in" effect: backdrop slowly zooms in over
+// ~20 seconds, with subtle handheld micro-drift + slight rotation for life.
+// Letterbox bars + vignette complete the documentary feel.
+// At Cosmic Web (R=0.65) and Coherence Cliff (R=0), a side-by-side comparison
+// panel shows the sharp (R=1) version next to the blurred version.
 function updateScene(sv,sl,R){
-  // Keep camera movement + lighting (harmless, but no 3D objects render)
+  // Camera Z still computes (harmless; keeps the 3D scene graph alive but invisible)
   var camZBySv=[420,300,200,150,110,80,55,42,32,26,22,18,15];
   var camZ=420;
   for(var ci=0;ci<LEVELS.length-1;ci++){
@@ -526,34 +538,64 @@ function updateScene(sv,sl,R){
     }
   }
   if(sv>=LEVELS[LEVELS.length-1].sv) camZ=camZBySv[camZBySv.length-1];
+  camera.position.z += (camZ - camera.position.z)*0.08;
+  camera.position.y += (40-(sv/1000)*30 - camera.position.y)*0.08;
+  camera.lookAt(0,5,0);
 
-  // ─── CINEMATIC CAMERA PAN (Ken Burns effect) ─────────────────────────────
-  // Slow continuous drift in X and Y, plus a gentle Z breathing.
-  // Periods are intentionally non-harmonic so the pattern doesn't loop visibly.
-  // Drift amplitude scales with camZ (zoomed-out levels pan further).
-  var t=Date.now()*0.001; // seconds
-  var driftAmp=Math.min(camZ*0.06, 25);
-  var panX=Math.sin(t*0.07)*driftAmp + Math.sin(t*0.013)*driftAmp*0.4;
-  var panY=Math.cos(t*0.05)*driftAmp*0.7 + Math.sin(t*0.019)*driftAmp*0.3;
-  var breatheZ=Math.sin(t*0.04)*camZ*0.02; // gentle in-out zoom
+  // ─── CINEMATIC SLOW FLY-IN (transform on backdrop) ──────────────────────
+  // Cycle: start at scale 1.0, slowly zoom to scale 1.18 over 20s, then snap back.
+  // Plus tiny handheld micro-drift (amplitude ~0.5%) and 0.3deg rotation.
+  // Phase is per-level so transitions reset the cycle and read as fresh motion.
+  var t=Date.now()*0.001;
+  var cycleSec=20;
+  var phase=(currentLevelIdx*1.7); // each level starts at a different point in cycle
+  var cyclePhase=((t+phase) % cycleSec)/cycleSec; // 0..1
+  // Ease in: slow at start, faster toward end (cubic)
+  var zoom=1.0 + cyclePhase*cyclePhase*cyclePhase*0.18; // 1.0 -> 1.18
 
-  // Lerp camera toward target + drift (smoother than direct assignment)
-  camera.position.x += (panX - camera.position.x)*0.04;
-  camera.position.z += ((camZ + breatheZ) - camera.position.z)*0.08;
-  var targetY=40-(sv/1000)*30 + panY;
-  camera.position.y += (targetY - camera.position.y)*0.05;
-  // Look slightly off-center so the pan reads as motion, not just orbit
-  var lookOffsetX=Math.sin(t*0.06)*driftAmp*0.3;
-  var lookOffsetY=Math.cos(t*0.04)*driftAmp*0.2;
-  camera.lookAt(lookOffsetX, 5+lookOffsetY, 0);
+  // Handheld micro-drift: low-amplitude noise via summed sines
+  var driftX=Math.sin(t*0.7)*0.4 + Math.sin(t*0.31)*0.25 + Math.sin(t*1.13)*0.15;
+  var driftY=Math.cos(t*0.5)*0.35 + Math.sin(t*0.27)*0.2;
+  // Very slight rotation: handheld cameras are never perfectly level
+  var rotZ=Math.sin(t*0.13)*0.15; // ±0.15 degrees
 
-  // ─── BACKDROP PAN (mirror camera pan so the photo pans with the 3D scene) ─
-  // Translate the backdrop's background-position by an amount proportional to panX.
-  // Background-position is in % (50% = centered). Move ±15% max.
-  var bgX=50 + (camera.position.x / driftAmp) * 15;
-  var bgY=50 - (camera.position.y - 25) / driftAmp * 8;
-  if(isFinite(bgX) && isFinite(bgY)){
-    backdrop.style.backgroundPosition = bgX.toFixed(2)+'% '+bgY.toFixed(2)+'%';
+  backdrop.style.transform='translate('+driftX.toFixed(2)+'%,'+driftY.toFixed(2)+'%) scale('+zoom.toFixed(4)+') rotate('+rotZ.toFixed(3)+'deg)';
+
+  // ─── LETTERBOX + VIGNETTE: always on, scaled subtly with R ───────────────
+  // At extreme R (blur at both ends), letterbox is taller for "documentary" feel.
+  var letterboxH = 4 + (1-R)*4; // 4-8% of container height
+  if(letterboxTop) letterboxTop.style.height = letterboxH+'%';
+  if(letterboxBottom) letterboxBottom.style.height = letterboxH+'%';
+  if(vignette) vignette.style.opacity = (0.5 + (1-R)*0.4).toFixed(2);
+
+  // ─── SIDE-BY-SIDE COMPARISON: at Cosmic Web (level 0) and Coherence Cliff (level 12) ──
+  // These two levels bookend the journey. Show the sharp version (R=1) next to
+  // the blurred version so the "blur at both ends" symmetry is unmistakable.
+  var isEndLevel = (currentLevelIdx===0 || currentLevelIdx===LEVELS.length-1);
+  if(compareLeft){
+    if(isEndLevel){
+      compareLeft.style.opacity='1';
+      compareLeft.style.pointerEvents='auto';
+      // Left half: sharp version of the same image
+      compareLeft.style.backgroundImage = "url('"+LEVELS[currentLevelIdx].img+"')";
+      compareLeft.style.filter = 'blur(0px) brightness(1)';
+      compareLeft.style.transform = 'translate(0,0) scale('+(zoom*1.0).toFixed(4)+') rotate(0deg)';
+      // Show labels
+      compareLabel.style.opacity='1';
+      compareRightLabel.style.opacity='1';
+      // Resize the main backdrop to right half so we see blurred version next to sharp
+      backdrop.style.width='50%';
+      backdrop.style.left='50%';
+      backdrop.style.inset='auto';
+    } else {
+      compareLeft.style.opacity='0';
+      compareLeft.style.pointerEvents='none';
+      compareLabel.style.opacity='0';
+      compareRightLabel.style.opacity='0';
+      backdrop.style.width='110%';
+      backdrop.style.left='0';
+      backdrop.style.inset='-5% 0';
+    }
   }
 
   // ─── ALL 3D SCENES HIDDEN — only photographic backdrop is visible ───
@@ -590,11 +632,32 @@ var retMeaning=document.getElementById('retention-meaning');
 var lvlName=document.getElementById('level-name');
 var lvlDesc=document.getElementById('level-desc');
 var backdrop=document.getElementById('backdrop');
+var vignette=document.getElementById('vignette');
+var letterboxTop=document.getElementById('letterbox-top');
+var letterboxBottom=document.getElementById('letterbox-bottom');
+var rgraph=document.getElementById('rgraph');
+var rgraphCtx=rgraph.getContext('2d');
 // Two backdrop slots enable crossfade between adjacent level images.
 // We use a single backdrop div but swap its background-image when the level changes;
 // CSS transition:opacity on the parent + a fade-out/fade-in cycle does the crossfade.
 var currentBackdropIdx=-1;
 var lastLvl='',narrTO=null;
+
+// Side-by-side comparison panel for Cosmic Web + Coherence Cliff
+var compareLeft=document.createElement('div');
+compareLeft.id='compare-left';
+compareLeft.style.cssText='position:absolute;top:0;left:0;width:50%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity .6s ease;z-index:1;pointer-events:none;transform-origin:center center';
+var sceneContainer=document.getElementById('scene-container');
+sceneContainer.appendChild(compareLeft);
+// Add a label on the comparison panel
+var compareLabel=document.createElement('div');
+compareLabel.style.cssText='position:absolute;top:50%;left:25%;transform:translate(-50%,-50%);background:rgba(7,11,20,.9);color:#2dd4bf;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid #2dd4bf;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace';
+compareLabel.textContent='SHARP — R=1.000';
+sceneContainer.appendChild(compareLabel);
+var compareRightLabel=document.createElement('div');
+compareRightLabel.style.cssText='position:absolute;top:50%;right:25%;transform:translate(50%,-50%);background:rgba(7,11,20,.9);color:#fbbf24;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid #fbbf24;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace';
+compareRightLabel.textContent='BLURRED — same image';
+sceneContainer.appendChild(compareRightLabel);
 
 var currentLevelIdx=0; // tracked by animate(), used by updateUI
 
@@ -639,6 +702,68 @@ function updateUI(sv,sl,R){
   var blurPx=Math.round((1-R)*16);
   var brightness=(0.45+R*0.55).toFixed(2);
   backdrop.style.filter='blur('+blurPx+'px) brightness('+brightness+')';
+
+  // ── Mini retention curve R(λ) graph (top-right corner) ───────────────────
+  // Plots the retention curve across all 13 levels and marks the current
+  // position with a moving dot. Shows the "blur at both ends" shape.
+  if(rgraphCtx){
+    var W=200,H=120, pad=10;
+    rgraphCtx.clearRect(0,0,W,H);
+    // Background already set via CSS. Draw axes.
+    rgraphCtx.strokeStyle='#223047';
+    rgraphCtx.lineWidth=1;
+    rgraphCtx.beginPath();
+    rgraphCtx.moveTo(pad,pad); rgraphCtx.lineTo(pad,H-pad); rgraphCtx.lineTo(W-pad,H-pad);
+    rgraphCtx.stroke();
+    // Grid lines
+    rgraphCtx.strokeStyle='#1a2a3e';
+    for(var g=1;g<5;g++){
+      var y=pad+g*(H-2*pad)/5;
+      rgraphCtx.beginPath(); rgraphCtx.moveTo(pad,y); rgraphCtx.lineTo(W-pad,y); rgraphCtx.stroke();
+    }
+    // Compute R curve across all 13 levels
+    rgraphCtx.strokeStyle='#2dd4bf';
+    rgraphCtx.lineWidth=2;
+    rgraphCtx.beginPath();
+    for(var li=0; li<LEVELS.length; li++){
+      var lx=pad + (LEVELS[li].sv/1000)*(W-2*pad);
+      var ly=pad + (1-LEVELS[li].R)*(H-2*pad);
+      if(li===0) rgraphCtx.moveTo(lx,ly);
+      else rgraphCtx.lineTo(lx,ly);
+    }
+    rgraphCtx.stroke();
+    // Fill under the curve (resolved band) — translucent teal
+    rgraphCtx.fillStyle='rgba(45,212,191,0.15)';
+    rgraphCtx.beginPath();
+    rgraphCtx.moveTo(pad,H-pad);
+    for(var li=0; li<LEVELS.length; li++){
+      var lx=pad + (LEVELS[li].sv/1000)*(W-2*pad);
+      var ly=pad + (1-LEVELS[li].R)*(H-2*pad);
+      rgraphCtx.lineTo(lx,ly);
+    }
+    rgraphCtx.lineTo(W-pad,H-pad);
+    rgraphCtx.closePath();
+    rgraphCtx.fill();
+    // Current position marker (big dot)
+    var curX=pad + (sv/1000)*(W-2*pad);
+    var curY=pad + (1-R)*(H-2*pad);
+    rgraphCtx.fillStyle='#fbbf24';
+    rgraphCtx.beginPath();
+    rgraphCtx.arc(curX,curY,5,0,Math.PI*2);
+    rgraphCtx.fill();
+    rgraphCtx.strokeStyle='#fbbf24';
+    rgraphCtx.lineWidth=1;
+    rgraphCtx.beginPath();
+    rgraphCtx.arc(curX,curY,9,0,Math.PI*2);
+    rgraphCtx.stroke();
+    // Label
+    rgraphCtx.fillStyle='#a8b3c7';
+    rgraphCtx.font='9px monospace';
+    rgraphCtx.fillText('R(λ)', pad+2, pad+9);
+    rgraphCtx.fillText('λ', W-pad-10, H-pad-2);
+    rgraphCtx.fillStyle='#fbbf24';
+    rgraphCtx.fillText('R='+R.toFixed(3), W-pad-44, pad+10);
+  }
 
   if(lvl.n!==lastLvl){
     lastLvl=lvl.n;

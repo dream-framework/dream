@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,7 +26,7 @@
   }
 })();
 </script>
-<title>DREAM Zoom - Projection Scale Toy</title>
+<title>DREAM Zoom — Масштабный тур по проекционному ядру</title>
 <link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/dream/img/favicon.png">
@@ -43,8 +43,13 @@ header h1{font-size:15px;font-weight:700}
 header .sub{color:#a8b3c7;font-size:11px}
 header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
 #scene-container{position:relative;overflow:hidden;min-height:0;background:#070b14}
-#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,background-position}
+#backdrop{position:absolute;inset:-5%;width:110%;height:110%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,transform;transform-origin:center center}
 #backdrop.active{opacity:1}
+/* Cinematic vignette overlay */
+#vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.45) 100%);transition:opacity .5s ease}
+/* Cinematic letterbox bars (top/bottom) */
+#letterbox-top,#letterbox-bottom{position:absolute;left:0;right:0;height:0;background:#000;z-index:3;pointer-events:none;transition:height .8s ease}
+#letterbox-top{top:0}#letterbox-bottom{bottom:0}
 #three-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #hud{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:5;pointer-events:none}
 .pill{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #223047;background:rgba(7,11,20,.88);font-weight:600}
@@ -74,30 +79,34 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
 </head>
 <body>
 <div id="app">
-  <header><h1>DREAM Zoom</h1><span class="sub">- operate the projection kernel in 3D</span><a class="home" href="/dream/en/index.html">DREAM</a></header>
+  <header><h1>DREAM Zoom</h1><span class="sub">— управляйте проекционным ядром в 3D</span><a class="home" href="/dream/en/index.html">DREAM</a></header>
   <div id="scene-container">
     <div id="backdrop"></div>
+    <div id="vignette"></div>
+    <div id="letterbox-top"></div>
+    <div id="letterbox-bottom"></div>
     <canvas id="three-canvas"></canvas>
     <div id="hud">
-      <span class="pill"><span class="label">Scale</span> <span class="v" id="hud-scale">10^27 m</span></span>
+      <span class="pill"><span class="label">Масштаб</span> <span class="v" id="hud-scale">10^27 m</span></span>
       <span class="pill"><span class="label">R</span> <span class="v" id="hud-retention">0.650</span></span>
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
-      <span class="pill"><span class="label">lambda_q</span> <span class="v">10^-35 m</span></span>
+      <span class="pill"><span class="label">λ_q</span> <span class="v">10^-35 m</span></span>
     </div>
+    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:8px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
-      <div class="ntitle" id="narr-title">Cosmic Web</div>
-      <div class="nbody" id="narr-body">At the scale of the cosmic web, structure fades into the cosmological homogeneity limit.</div>
+      <div class="ntitle" id="narr-title">Космическая паутина</div>
+      <div class="nbody" id="narr-body">На масштабе космической паутины структура растворяется в космологическом пределе однородности.</div>
       <div class="nmath" id="narr-math">R = 0.650</div>
     </div></div>
   </div>
   <footer>
     <div id="scale-row">
-      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">COSMOS</span>
+      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">КОСМОС</span>
       <input type="range" id="scale-slider" min="0" max="1000" value="0" step="1">
-      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">lambda_q</span>
-      <button id="autoplay-btn" class="active">Auto</button>
+      <span style="font-size:10px;color:#a8b3c7;white-space:nowrap">λ_q</span>
+      <button id="autoplay-btn" class="active">Авто</button>
     </div>
-    <div id="level-label"><span id="level-name">Cosmic Web</span> <span class="sub" id="level-desc">- cosmological homogeneity</span></div>
+    <div id="level-label"><span id="level-name">Космическая паутина</span> <span class="sub" id="level-desc">— космологическая однородность</span></div>
     <div id="retention-bar"><div id="retention-fill" style="width:65%;background:linear-gradient(90deg,#fbbf24,#2dd4bf)"></div></div>
     <div id="retention-label">R = <span class="v" id="retention-value">0.650</span> - <span id="retention-meaning">cosmological homogeneity</span></div>
   </footer>
@@ -116,19 +125,19 @@ if(typeof THREE==='undefined') throw new Error('THREE not loaded');
 var LQ=1e-35, DEFF=0.80;
 // 13 levels, each with: slider value (0-1000), scale log10, name, description, narrative, R, backdrop image
 var LEVELS=[
-  {sv:0,   sl:27,   n:'Cosmic Web',      d:'cosmological homogeneity',   t:'At the scale of the cosmic web (10^27 m, ~100 billion light-years), structure fades into the cosmological homogeneity limit. Filaments and voids become statistically uniform. The probe is at the edge of what is distinguishable from the deep field -- the projection kernel cannot resolve structure at this vast scale.',                   R:0.650, img:'img/zoom_real/cosmic_web.png'},
-  {sv:80,  sl:24,   n:'Supercluster',    d:'filaments resolved',         t:'At the supercluster scale (10^24 m, ~100 million light-years), Laniakea-scale structure becomes visible. Galaxy clusters connected by filaments form a web. The probe is at the largest scale where structure is still clearly distinguishable -- retention is climbing back toward unity.',                          R:0.950, img:'img/zoom_real/supercluster.png'},
-  {sv:160, sl:21,   n:'Galaxy',          d:'all structure preserved',    t:'At the galactic scale (10^21 m, ~100,000 light-years), all structure is preserved. The projection kernel has no measurable effect. The spiral galaxy fills the view with its bright core and four arms.',                                                                                                                R:1.000, img:'img/zoom_real/galaxy.png'},
-  {sv:240, sl:18,   n:'Galactic Core',   d:'all structure preserved',    t:'Zooming toward the galactic core (10^18 m). Individual star clusters become distinguishable. The probe is still far above the coherence cliff -- no information is lost.',                                                                                                                                                R:1.000, img:'img/zoom_real/galactic_core.png'},
-  {sv:320, sl:13,   n:'Solar System',    d:'all structure preserved',    t:'Crossing from galactic to planetary scales (10^13 m). The Sun and its planets are clearly resolved, orbiting in their distinct paths. Retention is still essentially unity.',                                                                                                                                          R:1.000, img:'img/zoom_real/solar_system.png'},
-  {sv:410, sl:7,    n:'Earth',          d:'all structure preserved',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above lambda_q.',                                                                                                                                                            R:1.000, img:'img/zoom_real/earth.png'},
-  {sv:490, sl:4,    n:'City',           d:'fine detail emerging',       t:'Urban-scale structure emerges (10^4 m, ~10 km). Buildings, streets, and districts are visible. The probe is approaching the regime where finer detail will start to degrade.',                                                                                                                                     R:0.998, img:'img/zoom_real/city.png'},
-  {sv:560, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above lambda_q.',                                                                                                                                                                        R:0.995, img:'img/zoom_real/room.png'},
-  {sv:640, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Biological cells and bacteria become visible (10^-4 m). The probe is approaching the coherence cliff -- retention is starting to drop.',                                                                                                                                                                      R:0.970, img:'img/zoom_real/cellular.png'},
-  {sv:720, sl:-8,   n:'Molecular',      d:'fine structure degrading',    t:'Molecules, proteins, and DNA strands (10^-8 m) are degrading. R is dropping. The kernel is now actively erasing sub-resolution structure.',                                                                                                                                                                   R:0.780, img:'img/zoom_real/molecular.png'},
-  {sv:820, sl:-12,  n:'Nuclear',        d:'structure collapsing',        t:'The atomic nucleus (10^-12 m) is the deepest directly imaged structure. Deep inelastic scattering experiments probe here. The retention curve is steep -- information is being lost rapidly.',                                                                                                                  R:0.350, img:'img/zoom_real/nuclear.png'},
-  {sv:910, sl:-18,  n:'Quark Scale',    d:'nearly unresolved',          t:'At the QCD scale (10^-18 m), only the coarsest field structure survives. Quarks and gluons are barely distinguishable. Recoverable information has reached its limit.',                                                                                                                                          R:0.050, img:'img/zoom_real/quark.png'},
-  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'At the Planck scale (10^-35 m), all structure is irrecoverably blurred. The kernel has averaged out everything. What remains is an unresolved quantum field.',                                                                                                                                                R:0.000, img:'img/zoom_real/cliff.png'},
+  {sv:0,   sl:27,   n:'Космическая паутина',      d:'cosmological homogeneity',   t:'На масштабе космической паутины (10^27 м, ~100 миллиардов световых лет) структура растворяется в космологическом пределе однородности. Волокна и пустоты становятся статистически однородными. Зонд находится на грани различимости с глубокого поля — проекционное ядро не может разрешить структуру на этом необъятном масштабе.',                   R:0.650, img:'img/zoom_real/cosmic_web.png'},
+  {sv:80,  sl:24,   n:'Supercluster',    d:'волокна разрешены',         t:'На масштабе сверхскоплений (10^24 м, ~100 миллионов световых лет) становится видна структура масштаба Ланиакеи. Скопления галактик, связанные волокнами, образуют паутину. Зонд находится на самом крупном масштабе, где структура ещё чётко различима — удержание возвращается к единице.',                          R:0.950, img:'img/zoom_real/supercluster.png'},
+  {sv:160, sl:21,   n:'Galaxy',          d:'вся структура сохранена',    t:'На галактическом масштабе (10^21 м, ~100 000 световых лет) вся структура сохранена. Проекционное ядро не оказывает измеримого влияния. Спиральная галактика заполняет обзор своим ярким ядром и четырьмя рукавами.',                                                                                                                R:1.000, img:'img/zoom_real/galaxy.png'},
+  {sv:240, sl:18,   n:'Galactic Core',   d:'вся структура сохранена',    t:'Приближение к галактическому ядру (10^18 м). Отдельные звёздные скопления становятся различимыми. Зонд всё ещё далеко от обрыва когерентности — никакая информация не теряется.',                                                                                                                                                R:1.000, img:'img/zoom_real/galactic_core.png'},
+  {sv:320, sl:13,   n:'Solar System',    d:'вся структура сохранена',    t:'Crossing from galactic to planetary scales (10^13 m). Cassini\'s farewell portrait of Saturn, its rings, and the moons Mimas, Enceladus, and Tethys orbiting in their distinct paths. The probe is far above λ_q -- retention is still essentially unity.',                                                                                                                                                                                                                                                       R:1.000, img:'img/zoom_real/solar_system.png'},
+  {sv:410, sl:7,    n:'Earth',          d:'вся структура сохранена',    t:'Continental structure is fully resolved (10^7 m, ~12,000 km). Oceans, land masses, and cloud patterns are visible. The kernel is far above λ_q.',                                                                                                                                                            R:1.000, img:'img/zoom_real/earth.png'},
+  {sv:490, sl:4,    n:'City',           d:'проявляется тонкая детализация',       t:'Возникает городская структура (10^4 м, ~10 км). Видны здания, улицы и районы. Зонд приближается к режиму, в котором более тонкие детали начнут разрушаться.',                                                                                                                                     R:0.998, img:'img/zoom_real/city.png'},
+  {sv:560, sl:0,    n:'Room',           d:'objects visible',            t:'Human-scale objects are clearly resolved (10^0 m, ~1 m). Furniture, walls, a table with a lamp. The probe is still well above λ_q.',                                                                                                                                                                        R:0.995, img:'img/zoom_real/room.png'},
+  {sv:640, sl:-4,   n:'Cellular',       d:'fine structure emerging',    t:'Биологические клетки и бактерии становятся видимыми (10^-4 м). Зонд приближается к обрыву когерентности — удержание начинает снижаться.',                                                                                                                                                                      R:0.970, img:'img/zoom_real/cellular.png'},
+  {sv:720, sl:-8,   n:'Molecular',      d:'тонкая структура разрушается',    t:'Молекулы, белки и нити ДНК (10^-8 м) разрушаются. R снижается. Ядро теперь активно стирает субразрешимую структуру.',                                                                                                                                                                   R:0.780, img:'img/zoom_real/molecular.png'},
+  {sv:820, sl:-12,  n:'Nuclear',        d:'структура коллапсирует',        t:'Атомное ядро (10^-12 м) — глубочайшая непосредственно наблюдаемая структура. Эксперименты по глубоконеупругому рассеянию исследуют здесь. Кривая удержания крутая — информация быстро теряется.',                                                                                                                  R:0.350, img:'img/zoom_real/nuclear.png'},
+  {sv:910, sl:-18,  n:'Quark Масштаб',    d:'nearly unresolved',          t:'На масштабе КХД (10^-18 м) выживает только самая грубая полевая структура. Кварки и глюконы едва различимы. Восстановимая информация достигла своего предела.',                                                                                                                                          R:0.050, img:'img/zoom_real/quark.png'},
+  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'На планковском масштабе (10^-35 м) вся структура необратимо размыта. Ядро усреднило всё. Осталось неразрешённое квантовое поле.',                                                                                                                                                R:0.000, img:'img/zoom_real/cliff.png'},
 ];
 
 // Interpolate R across slider value (sv) using the per-level R targets.
@@ -511,11 +520,14 @@ superclusterGroup.visible=false;
 scene.add(superclusterGroup);
 
 // ═══ VISIBILITY ═══
-// IMPORTANT: 3D procedural scenes are now HIDDEN — only photographic backdrops
-// are shown. Camera slowly pans (Ken Burns effect) for a cinematic feel,
-// and the backdrop div scrolls in sync so the photo pans too.
+// IMPORTANT: 3D procedural scenes are HIDDEN — only photographic backdrops
+// are shown. Cinematic "slow fly-in" effect: backdrop slowly zooms in over
+// ~20 seconds, with subtle handheld micro-drift + slight rotation for life.
+// Letterbox bars + vignette complete the documentary feel.
+// At Космическая паутина (R=0.65) and Coherence Cliff (R=0), a side-by-side comparison
+// panel shows the sharp (R=1) version next to the blurred version.
 function updateScene(sv,sl,R){
-  // Keep camera movement + lighting (harmless, but no 3D objects render)
+  // Camera Z still computes (harmless; keeps the 3D scene graph alive but invisible)
   var camZBySv=[420,300,200,150,110,80,55,42,32,26,22,18,15];
   var camZ=420;
   for(var ci=0;ci<LEVELS.length-1;ci++){
@@ -526,34 +538,64 @@ function updateScene(sv,sl,R){
     }
   }
   if(sv>=LEVELS[LEVELS.length-1].sv) camZ=camZBySv[camZBySv.length-1];
+  camera.position.z += (camZ - camera.position.z)*0.08;
+  camera.position.y += (40-(sv/1000)*30 - camera.position.y)*0.08;
+  camera.lookAt(0,5,0);
 
-  // ─── CINEMATIC CAMERA PAN (Ken Burns effect) ─────────────────────────────
-  // Slow continuous drift in X and Y, plus a gentle Z breathing.
-  // Periods are intentionally non-harmonic so the pattern doesn't loop visibly.
-  // Drift amplitude scales with camZ (zoomed-out levels pan further).
-  var t=Date.now()*0.001; // seconds
-  var driftAmp=Math.min(camZ*0.06, 25);
-  var panX=Math.sin(t*0.07)*driftAmp + Math.sin(t*0.013)*driftAmp*0.4;
-  var panY=Math.cos(t*0.05)*driftAmp*0.7 + Math.sin(t*0.019)*driftAmp*0.3;
-  var breatheZ=Math.sin(t*0.04)*camZ*0.02; // gentle in-out zoom
+  // ─── CINEMATIC SLOW FLY-IN (transform on backdrop) ──────────────────────
+  // Cycle: start at scale 1.0, slowly zoom to scale 1.18 over 20s, then snap back.
+  // Plus tiny handheld micro-drift (amplitude ~0.5%) and 0.3deg rotation.
+  // Phase is per-level so transitions reset the cycle and read as fresh motion.
+  var t=Date.now()*0.001;
+  var cycleSec=20;
+  var phase=(currentLevelIdx*1.7); // each level starts at a different point in cycle
+  var cyclePhase=((t+phase) % cycleSec)/cycleSec; // 0..1
+  // Ease in: slow at start, faster toward end (cubic)
+  var zoom=1.0 + cyclePhase*cyclePhase*cyclePhase*0.18; // 1.0 -> 1.18
 
-  // Lerp camera toward target + drift (smoother than direct assignment)
-  camera.position.x += (panX - camera.position.x)*0.04;
-  camera.position.z += ((camZ + breatheZ) - camera.position.z)*0.08;
-  var targetY=40-(sv/1000)*30 + panY;
-  camera.position.y += (targetY - camera.position.y)*0.05;
-  // Look slightly off-center so the pan reads as motion, not just orbit
-  var lookOffsetX=Math.sin(t*0.06)*driftAmp*0.3;
-  var lookOffsetY=Math.cos(t*0.04)*driftAmp*0.2;
-  camera.lookAt(lookOffsetX, 5+lookOffsetY, 0);
+  // Handheld micro-drift: low-amplitude noise via summed sines
+  var driftX=Math.sin(t*0.7)*0.4 + Math.sin(t*0.31)*0.25 + Math.sin(t*1.13)*0.15;
+  var driftY=Math.cos(t*0.5)*0.35 + Math.sin(t*0.27)*0.2;
+  // Very slight rotation: handheld cameras are never perfectly level
+  var rotZ=Math.sin(t*0.13)*0.15; // ±0.15 degrees
 
-  // ─── BACKDROP PAN (mirror camera pan so the photo pans with the 3D scene) ─
-  // Translate the backdrop's background-position by an amount proportional to panX.
-  // Background-position is in % (50% = centered). Move ±15% max.
-  var bgX=50 + (camera.position.x / driftAmp) * 15;
-  var bgY=50 - (camera.position.y - 25) / driftAmp * 8;
-  if(isFinite(bgX) && isFinite(bgY)){
-    backdrop.style.backgroundPosition = bgX.toFixed(2)+'% '+bgY.toFixed(2)+'%';
+  backdrop.style.transform='translate('+driftX.toFixed(2)+'%,'+driftY.toFixed(2)+'%) scale('+zoom.toFixed(4)+') rotate('+rotZ.toFixed(3)+'deg)';
+
+  // ─── LETTERBOX + VIGNETTE: always on, scaled subtly with R ───────────────
+  // At extreme R (blur at both ends), letterbox is taller for "documentary" feel.
+  var letterboxH = 4 + (1-R)*4; // 4-8% of container height
+  if(letterboxTop) letterboxTop.style.height = letterboxH+'%';
+  if(letterboxBottom) letterboxBottom.style.height = letterboxH+'%';
+  if(vignette) vignette.style.opacity = (0.5 + (1-R)*0.4).toFixed(2);
+
+  // ─── SIDE-BY-SIDE COMPARISON: at Космическая паутина (level 0) and Coherence Cliff (level 12) ──
+  // These two levels bookend the journey. Show the sharp version (R=1) next to
+  // the blurred version so the "blur at both ends" symmetry is unmistakable.
+  var isEndLevel = (currentLevelIdx===0 || currentLevelIdx===LEVELS.length-1);
+  if(compareLeft){
+    if(isEndLevel){
+      compareLeft.style.opacity='1';
+      compareLeft.style.pointerEvents='auto';
+      // Left half: sharp version of the same image
+      compareLeft.style.backgroundImage = "url('"+LEVELS[currentLevelIdx].img+"')";
+      compareLeft.style.filter = 'blur(0px) brightness(1)';
+      compareLeft.style.transform = 'translate(0,0) scale('+(zoom*1.0).toFixed(4)+') rotate(0deg)';
+      // Show labels
+      compareLabel.style.opacity='1';
+      compareRightLabel.style.opacity='1';
+      // Resize the main backdrop to right half so we see blurred version next to sharp
+      backdrop.style.width='50%';
+      backdrop.style.left='50%';
+      backdrop.style.inset='auto';
+    } else {
+      compareLeft.style.opacity='0';
+      compareLeft.style.pointerEvents='none';
+      compareLabel.style.opacity='0';
+      compareRightLabel.style.opacity='0';
+      backdrop.style.width='110%';
+      backdrop.style.left='0';
+      backdrop.style.inset='-5% 0';
+    }
   }
 
   // ─── ALL 3D SCENES HIDDEN — only photographic backdrop is visible ───
@@ -581,7 +623,7 @@ var narrPanel=document.getElementById('narr-panel');
 var narrTitle=document.getElementById('narr-title');
 var narrBody=document.getElementById('narr-body');
 var narrMath=document.getElementById('narr-math');
-var hudScale=document.getElementById('hud-scale');
+var hudМасштаб=document.getElementById('hud-scale');
 var hudR=document.getElementById('hud-retention');
 var hudD=document.getElementById('hud-d');
 var retFill=document.getElementById('retention-fill');
@@ -590,29 +632,50 @@ var retMeaning=document.getElementById('retention-meaning');
 var lvlName=document.getElementById('level-name');
 var lvlDesc=document.getElementById('level-desc');
 var backdrop=document.getElementById('backdrop');
+var vignette=document.getElementById('vignette');
+var letterboxTop=document.getElementById('letterbox-top');
+var letterboxBottom=document.getElementById('letterbox-bottom');
+var rgraph=document.getElementById('rgraph');
+var rgraphCtx=rgraph.getContext('2d');
 // Two backdrop slots enable crossfade between adjacent level images.
 // We use a single backdrop div but swap its background-image when the level changes;
 // CSS transition:opacity on the parent + a fade-out/fade-in cycle does the crossfade.
 var currentBackdropIdx=-1;
 var lastLvl='',narrTO=null;
 
+// Side-by-side comparison panel for Космическая паутина + Coherence Cliff
+var compareLeft=document.createElement('div');
+compareLeft.id='compare-left';
+compareLeft.style.cssText='position:absolute;top:0;left:0;width:50%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity .6s ease;z-index:1;pointer-events:none;transform-origin:center center';
+var sceneContainer=document.getElementById('scene-container');
+sceneContainer.appendChild(compareLeft);
+// Add a label on the comparison panel
+var compareLabel=document.createElement('div');
+compareLabel.style.cssText='position:absolute;top:50%;left:25%;transform:translate(-50%,-50%);background:rgba(7,11,20,.9);color:#2dd4bf;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid #2dd4bf;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace';
+compareLabel.textContent='РЕЗКО — R=1.000';
+sceneContainer.appendChild(compareLabel);
+var compareRightLabel=document.createElement('div');
+compareRightLabel.style.cssText='position:absolute;top:50%;right:25%;transform:translate(50%,-50%);background:rgba(7,11,20,.9);color:#fbbf24;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid #fbbf24;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace';
+compareRightLabel.textContent='РАЗМЫТО — то же изображение';
+sceneContainer.appendChild(compareRightLabel);
+
 var currentLevelIdx=0; // tracked by animate(), used by updateUI
 
 function updateUI(sv,sl,R){
   var lvl=LEVELS[currentLevelIdx];
-  hudScale.textContent='10^'+sup(sl)+' m';
+  hudМасштаб.textContent='10^'+sup(sl)+' m';
   hudR.textContent=R.toFixed(3);
   hudD.textContent=DEFF.toFixed(2);
   retFill.style.width=(R*100)+'%';
   retVal.textContent=R.toFixed(3);
   var m,c;
-  if(R>0.95){m='all structure preserved';c='#2dd4bf';}
-  else if(R>0.85){m='filaments resolved';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
-  else if(R>0.7){m='fine detail emerging';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
-  else if(R>0.5){m='cosmological homogeneity - structure fading';c='linear-gradient(90deg,#fbbf24,#60a5fa)';}
-  else if(R>0.3){m='fine structure degrading';c='#fbbf24';}
-  else if(R>0.05){m='structure collapsing';c='linear-gradient(90deg,#ef4444,#fbbf24)';}
-  else{m='irrecoverable - below coherence cliff';c='#ef4444';}
+  if(R>0.95){m='вся структура сохранена';c='#2dd4bf';}
+  else if(R>0.85){m='волокна разрешены';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
+  else if(R>0.7){m='проявляется тонкая детализация';c='linear-gradient(90deg,#fbbf24,#2dd4bf)';}
+  else if(R>0.5){m='космологическая однородность — структура исчезает';c='linear-gradient(90deg,#fbbf24,#60a5fa)';}
+  else if(R>0.3){m='тонкая структура разрушается';c='#fbbf24';}
+  else if(R>0.05){m='структура коллапсирует';c='linear-gradient(90deg,#ef4444,#fbbf24)';}
+  else{m='необратимо — за пределом когерентности';c='#ef4444';}
   retMeaning.textContent=m;retFill.style.background=c;
   lvlName.textContent=lvl.n;lvlDesc.textContent='- '+lvl.d;
 
@@ -640,11 +703,73 @@ function updateUI(sv,sl,R){
   var brightness=(0.45+R*0.55).toFixed(2);
   backdrop.style.filter='blur('+blurPx+'px) brightness('+brightness+')';
 
+  // ── Mini retention curve R(λ) graph (top-right corner) ───────────────────
+  // Plots the retention curve across all 13 levels and marks the current
+  // position with a moving dot. Shows the "blur at both ends" shape.
+  if(rgraphCtx){
+    var W=200,H=120, pad=10;
+    rgraphCtx.clearRect(0,0,W,H);
+    // Background already set via CSS. Draw axes.
+    rgraphCtx.strokeStyle='#223047';
+    rgraphCtx.lineWidth=1;
+    rgraphCtx.beginPath();
+    rgraphCtx.moveTo(pad,pad); rgraphCtx.lineTo(pad,H-pad); rgraphCtx.lineTo(W-pad,H-pad);
+    rgraphCtx.stroke();
+    // Grid lines
+    rgraphCtx.strokeStyle='#1a2a3e';
+    for(var g=1;g<5;g++){
+      var y=pad+g*(H-2*pad)/5;
+      rgraphCtx.beginPath(); rgraphCtx.moveTo(pad,y); rgraphCtx.lineTo(W-pad,y); rgraphCtx.stroke();
+    }
+    // Compute R curve across all 13 levels
+    rgraphCtx.strokeStyle='#2dd4bf';
+    rgraphCtx.lineWidth=2;
+    rgraphCtx.beginPath();
+    for(var li=0; li<LEVELS.length; li++){
+      var lx=pad + (LEVELS[li].sv/1000)*(W-2*pad);
+      var ly=pad + (1-LEVELS[li].R)*(H-2*pad);
+      if(li===0) rgraphCtx.moveTo(lx,ly);
+      else rgraphCtx.lineTo(lx,ly);
+    }
+    rgraphCtx.stroke();
+    // Fill under the curve (resolved band) — translucent teal
+    rgraphCtx.fillStyle='rgba(45,212,191,0.15)';
+    rgraphCtx.beginPath();
+    rgraphCtx.moveTo(pad,H-pad);
+    for(var li=0; li<LEVELS.length; li++){
+      var lx=pad + (LEVELS[li].sv/1000)*(W-2*pad);
+      var ly=pad + (1-LEVELS[li].R)*(H-2*pad);
+      rgraphCtx.lineTo(lx,ly);
+    }
+    rgraphCtx.lineTo(W-pad,H-pad);
+    rgraphCtx.closePath();
+    rgraphCtx.fill();
+    // Current position marker (big dot)
+    var curX=pad + (sv/1000)*(W-2*pad);
+    var curY=pad + (1-R)*(H-2*pad);
+    rgraphCtx.fillStyle='#fbbf24';
+    rgraphCtx.beginPath();
+    rgraphCtx.arc(curX,curY,5,0,Math.PI*2);
+    rgraphCtx.fill();
+    rgraphCtx.strokeStyle='#fbbf24';
+    rgraphCtx.lineWidth=1;
+    rgraphCtx.beginPath();
+    rgraphCtx.arc(curX,curY,9,0,Math.PI*2);
+    rgraphCtx.stroke();
+    // Label
+    rgraphCtx.fillStyle='#a8b3c7';
+    rgraphCtx.font='9px monospace';
+    rgraphCtx.fillText('R(λ)', pad+2, pad+9);
+    rgraphCtx.fillText('λ', W-pad-10, H-pad-2);
+    rgraphCtx.fillStyle='#fbbf24';
+    rgraphCtx.fillText('R='+R.toFixed(3), W-pad-44, pad+10);
+  }
+
   if(lvl.n!==lastLvl){
     lastLvl=lvl.n;
     narrTitle.textContent=lvl.n;
     narrBody.textContent=lvl.t;
-    narrMath.textContent='R = '+R.toFixed(3)+'  (blur at both ends of the spectrum)';
+    narrMath.textContent='R = '+R.toFixed(3)+'  (размытие на обоих концах спектра)';
     narrPanel.classList.add('visible');
     if(narrTO)clearTimeout(narrTO);
     narrTO=setTimeout(function(){narrPanel.classList.remove('visible');},8000);
@@ -722,7 +847,7 @@ var pD=0;
 canvas.addEventListener('touchstart',function(e){if(e.touches.length===2)pD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);},{passive:true});
 canvas.addEventListener('touchmove',function(e){if(e.touches.length===2&&pD>0){e.preventDefault();var nd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);var d=(nd-pD)/pD;var v=parseFloat(slider.value)-d*60;v=Math.max(0,Math.min(1000,v));slider.value=v;autoZoom=false;autoBtn.classList.remove('active');pD=nd;}},{passive:false});
 
-// Pre-load the initial backdrop (Cosmic Web) so it's visible on first paint,
+// Pre-load the initial backdrop (Космическая паутина) so it's visible on first paint,
 // not after a 400ms fade.
 backdrop.style.backgroundImage="url('"+LEVELS[0].img+"')";
 backdrop.classList.add('active');
