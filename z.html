@@ -92,7 +92,7 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
       <span class="pill"><span class="label">lambda_q</span> <span class="v">10^-35 m</span></span>
     </div>
-    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:8px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
+    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:50px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px;transform:translateY(-50%)"></canvas>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
       <div class="ntitle" id="narr-title">Cosmic Web</div>
       <div class="nbody" id="narr-body">At the scale of the cosmic web, structure fades into the cosmological homogeneity limit.</div>
@@ -542,28 +542,41 @@ function updateScene(sv,sl,R){
   camera.position.y += (40-(sv/1000)*30 - camera.position.y)*0.08;
   camera.lookAt(0,5,0);
 
-  // ─── CINEMATIC SLOW FLY-IN (transform on backdrop) ──────────────────────
-  // Smooth sinusoidal cycle: scale 1.0 -> 1.08 -> 1.0 over 30 seconds.
-  // The sine wave eases in AND out — no snap at cycle boundaries.
-  // Plus tiny handheld micro-drift and slight rotation for life.
-  // Phase is per-level so transitions reset the cycle and read as fresh motion.
+  // ─── CINEMATIC MOTION (transform on backdrop) ──────────────────────────
+  // Three layers of motion for a living documentary feel:
+  // 1) Slow zoom "breathing" cycle (smooth sinusoidal, no snap)
+  // 2) Handheld micro-drift (parallax via summed sines)
+  // 3) Slow background-position pan (parallax across the image)
+  // 4) Very slight rotation (handheld cameras are never level)
+  // All motion amplitudes scale with (1-R) so blur-endpoint levels move MORE
+  // (they're more abstract — motion reads as "energy of the kernel") while
+  // resolved-band levels (R=1) move LESS (grounded, photographic).
   var t=Date.now()*0.001;
-  var cycleSec=30;
+  var cycleSec=24;
   var phase=(currentLevelIdx*2.3); // each level starts at a different point in cycle
-  // sin wave: (1 - cos(2π * phase))/2 produces 0 -> 1 -> 0 smoothly
   var cyclePos=((t+phase) % cycleSec)/cycleSec; // 0..1
   var smoothWave=(1 - Math.cos(cyclePos*Math.PI*2))/2; // 0 -> 1 -> 0 (smooth)
-  // Ease the wave further (gentle cubic) so most of the motion is mid-cycle
   var easedWave = smoothWave*smoothWave*(3-2*smoothWave); // smoothstep
-  var zoom=1.0 + easedWave*0.08; // 1.0 -> 1.08 -> 1.0 (smooth in AND out)
+  // Zoom range scales with blur: R=1 -> 1.0->1.06 (subtle); R=0 -> 1.0->1.15 (dramatic)
+  var zoomAmp = 0.06 + (1-R)*0.09;
+  var zoom=1.0 + easedWave*zoomAmp;
 
-  // Handheld micro-drift: very low-amplitude noise via summed sines (±0.15%)
-  var driftX=Math.sin(t*0.7)*0.15 + Math.sin(t*0.31)*0.08;
-  var driftY=Math.cos(t*0.5)*0.12 + Math.sin(t*0.27)*0.06;
-  // Very slight rotation: handheld cameras are never perfectly level
-  var rotZ=Math.sin(t*0.13)*0.08; // ±0.08 degrees
+  // Handheld micro-drift amplitude scales with blur too
+  var driftAmp = 0.2 + (1-R)*0.5; // 0.2% at R=1, 0.7% at R=0
+  var driftX=Math.sin(t*0.7)*driftAmp + Math.sin(t*0.31)*driftAmp*0.5 + Math.sin(t*1.13)*driftAmp*0.3;
+  var driftY=Math.cos(t*0.5)*driftAmp*0.8 + Math.sin(t*0.27)*driftAmp*0.5 + Math.cos(t*0.91)*driftAmp*0.25;
+  // Slight rotation: more at blur endpoints (chaotic), less in resolved band (stable)
+  var rotAmp = 0.05 + (1-R)*0.20; // 0.05deg at R=1, 0.25deg at R=0
+  var rotZ=Math.sin(t*0.13)*rotAmp + Math.cos(t*0.07)*rotAmp*0.4;
+
+  // Slow background-position pan (parallax across image) — adds depth without
+  // distorting the image the way scale does
+  var panAmp = 4 + (1-R)*6; // 4% at R=1, 10% at R=0
+  var bgPosX = 50 + Math.sin(t*0.04)*panAmp + Math.cos(t*0.017)*panAmp*0.3;
+  var bgPosY = 50 + Math.cos(t*0.05)*panAmp*0.7 + Math.sin(t*0.023)*panAmp*0.25;
 
   backdrop.style.transform='translate('+driftX.toFixed(2)+'%,'+driftY.toFixed(2)+'%) scale('+zoom.toFixed(4)+') rotate('+rotZ.toFixed(3)+'deg)';
+  backdrop.style.backgroundPosition = bgPosX.toFixed(2)+'% '+bgPosY.toFixed(2)+'%';
 
   // ─── LETTERBOX + VIGNETTE: always on, scaled subtly with R ───────────────
   // Vignette stays subtle even at extreme R so it doesn't darken the
@@ -573,49 +586,38 @@ function updateScene(sv,sl,R){
   if(letterboxBottom) letterboxBottom.style.height = letterboxH+'%';
   if(vignette) vignette.style.opacity = (0.3 + (1-R)*0.2).toFixed(2); // 0.3-0.5 max
 
-  // ─── SHARP REFERENCE THUMBNAIL (PIP): at Cosmic Web and Coherence Cliff ──
-  // Main backdrop stays full-size with proper aspect ratio (background-size:contain).
-  // A small sharp (R=1) thumbnail appears in the bottom-right corner so the
-  // viewer can compare: "this is what the image looks like sharp vs what the
-  // kernel does at this scale". The thumbnail preserves aspect ratio.
+  // ─── NO SHARP REFERENCE AT BLUR ENDPOINTS ──────────────────────────────
+  // User's insight: at Cosmic Web (R=0.65) and Coherence Cliff (R=0), detail
+  // is NOT recoverable in principle. Showing a sharp version would imply
+  // the structure is "really there but blurred" — which contradicts the
+  // claim. The blur IS the truth at these scales. There is no sharp version
+  // to compare against; what you see is what is recoverable.
+  // So: no PIP thumbnail, no side-by-side comparison, no "sharp reference".
+  // The blurred image stands alone — that's the honest representation.
   var isEndLevel = (currentLevelIdx===0 || currentLevelIdx===LEVELS.length-1);
   if(compareLeft){
-    if(isEndLevel){
-      // Show the PIP thumbnail
-      compareLeft.style.opacity='1';
-      compareLeft.style.pointerEvents='none';
-      // PIP: small thumbnail in bottom-right corner
-      compareLeft.style.backgroundImage = "url('"+LEVELS[currentLevelIdx].img+"')";
-      compareLeft.style.filter = 'blur(0px) brightness(1) saturate(1.1)';
-      compareLeft.style.transform = 'none';
-      // Show label
-      compareLabel.style.opacity='1';
-      compareRightLabel.style.opacity='0'; // not used in PIP mode
-      if(compareDivider) compareDivider.style.opacity='0';
-      if(compareCaption) compareCaption.style.opacity='1';
-      // Main backdrop stays full-size (don't shrink to 50%)
-      backdrop.style.width='100%';
-      backdrop.style.height='100%';
-      backdrop.style.left='0';
-      backdrop.style.top='0';
-      backdrop.style.inset='0';
-      // Re-apply the blur+compensation filter on the main backdrop
-      var endBlurPx = (currentLevelIdx===0) ? Math.round((1-0.65)*16) : 16;
-      var endCompensation = (currentLevelIdx===0) ? 1.10 : 1.30;
-      backdrop.style.filter = 'blur('+endBlurPx+'px) brightness('+endCompensation.toFixed(2)+') saturate(1.1)';
-    } else {
-      compareLeft.style.opacity='0';
-      compareLeft.style.pointerEvents='none';
-      compareLabel.style.opacity='0';
-      compareRightLabel.style.opacity='0';
-      if(compareDivider) compareDivider.style.opacity='0';
-      if(compareCaption) compareCaption.style.opacity='0';
-      backdrop.style.width='100%';
-      backdrop.style.height='100%';
-      backdrop.style.left='0';
-      backdrop.style.top='0';
-      backdrop.style.inset='0';
+    // Always hide the comparison panel — even at end levels.
+    compareLeft.style.opacity='0';
+    compareLeft.style.pointerEvents='none';
+    compareLabel.style.opacity='0';
+    compareRightLabel.style.opacity='0';
+    if(compareDivider) compareDivider.style.opacity='0';
+    // Show caption ONLY at end levels to make the conceptual point:
+    // "This is what is recoverable at this scale — there is no sharper version."
+    if(isEndLevel && compareCaption){
+      compareCaption.style.opacity='1';
+      compareCaption.textContent = (currentLevelIdx===0)
+        ? 'At the cosmic web scale, this is all that is recoverable — there is no sharper version'
+        : 'At the Planck scale, this is all that is recoverable — there is no sharper version';
+    } else if(compareCaption){
+      compareCaption.style.opacity='0';
     }
+    // Main backdrop stays full-size at all levels
+    backdrop.style.width='100%';
+    backdrop.style.height='100%';
+    backdrop.style.left='0';
+    backdrop.style.top='0';
+    backdrop.style.inset='0';
   }
 
   // ─── ALL 3D SCENES HIDDEN — only photographic backdrop is visible ───
