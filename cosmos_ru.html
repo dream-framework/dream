@@ -42,7 +42,7 @@ header{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1
 header h1{font-size:15px;font-weight:700}
 header .sub{color:#a8b3c7;font-size:11px}
 header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
-#scene-container{position:relative;overflow:hidden;min-height:0;background:#070b14}
+#scene-container{position:relative;overflow:hidden;min-height:0;background:radial-gradient(ellipse at center,#0a1525 0%,#070b14 70%)}
 #backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,transform;transform-origin:center center}
 #backdrop.active{opacity:1}
 /* Cinematic vignette overlay — very subtle so it doesn't darken the comparison */
@@ -720,22 +720,10 @@ function updateUI(sv,sl,R){
       backdrop.style.opacity='0';
       setTimeout(function(){
         backdrop.style.backgroundImage="url('"+lvl.img+"')";
-        // Smart sizing: if the image is much wider than the viewport aspect
-        // (landscape image on portrait screen, or vice versa), use cover with
-        // center positioning so it fills the screen with minimal cropping.
-        // If the image is roughly square or matches viewport aspect, use
-        // contain so the full image is visible (especially important for
-        // Earth which is a full disc).
-        var imgAR=newImg.naturalWidth/newImg.naturalHeight;
-        var vpW=container.clientWidth, vpH=container.clientHeight;
-        var vpAR=vpW/vpH;
-        // If aspect ratios differ by more than 1.4x, use cover to fill the screen.
-        // Otherwise use contain to preserve the full image.
-        if(imgAR > vpAR*1.4 || imgAR*1.4 < vpAR){
-          backdrop.style.backgroundSize='cover';
-        } else {
-          backdrop.style.backgroundSize='contain';
-        }
+        // Always use contain — preserves the FULL image at its natural aspect
+        // ratio. Letterbox bars are filled by the scene-container's gradient
+        // background (defined in CSS) so they look intentional, not jarring.
+        backdrop.style.backgroundSize='contain';
         backdrop.classList.add('active');
         backdrop.style.opacity='1';
       },400); // wait for fade-out before swapping src
@@ -909,25 +897,11 @@ canvas.addEventListener('touchstart',function(e){if(e.touches.length===2)pD=Math
 canvas.addEventListener('touchmove',function(e){if(e.touches.length===2&&pD>0){e.preventDefault();var nd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);var d=(nd-pD)/pD;var v=parseFloat(slider.value)-d*60;v=Math.max(0,Math.min(1000,v));slider.value=v;autoZoom=false;autoBtn.classList.remove('active');pD=nd;}},{passive:false});
 
 // Pre-load the initial backdrop (Космическая паутина) so it's visible on first paint,
-// not after a 400ms fade. Also apply smart sizing based on image aspect vs
-// viewport aspect.
+// not after a 400ms fade. Use 'contain' to preserve full image aspect ratio.
 backdrop.style.backgroundImage="url('"+LEVELS[0].img+"')";
+backdrop.style.backgroundSize='contain';
 backdrop.classList.add('active');
 currentBackdropIdx=0;
-// Smart sizing for initial Космическая паутина image
-(function(){
-  var initImg=new Image();
-  initImg.onload=function(){
-    var imgAR=initImg.naturalWidth/initImg.naturalHeight;
-    var vpAR=container.clientWidth/container.clientHeight;
-    if(imgAR > vpAR*1.4 || imgAR*1.4 < vpAR){
-      backdrop.style.backgroundSize='cover';
-    } else {
-      backdrop.style.backgroundSize='contain';
-    }
-  };
-  initImg.src=LEVELS[0].img;
-})();
 // Apply initial blur for R=0.65 (blur at very big)
 var initBlurPx=Math.round((1-LEVELS[0].R)*16);
 var initBrightnessCompensation=1 + (1-LEVELS[0].R)*0.3;
