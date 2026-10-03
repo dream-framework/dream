@@ -125,7 +125,7 @@ if(typeof THREE==='undefined') throw new Error('THREE not loaded');
 var LQ=1e-35, DEFF=0.80;
 // 13 levels, each with: slider value (0-1000), scale log10, name, description, narrative, R, backdrop image
 var LEVELS=[
-  {sv:0,   sl:27,   n:'Космическая паутина',      d:'cosmological homogeneity',   t:'На масштабе космической паутины (10^27 м, ~100 миллиардов световых лет) структура растворяется в космологическом пределе однородности. Волокна и пустоты становятся статистически однородными. Зонд находится на грани различимости с глубокого поля — проекционное ядро не может разрешить структуру на этом необъятном масштабе. Compare the SHARP (left) and BLURRED (right) versions of this same image -- the blur is what the kernel does at this scale.',                   R:0.650, img:'img/zoom_real/cosmic_web.png'},
+  {sv:0,   sl:27,   n:'Космическая паутина',      d:'cosmological homogeneity',   t:'На масштабе космической паутины (10^27 м, ~100 миллиардов световых лет) структура растворяется в космологическом пределе однородности. Волокна и пустоты становятся статистически однородными. Зонд находится на грани различимости с глубокого поля — проекционное ядро не может разрешить структуру на этом необъятном масштабе. The sharp reference thumbnail shows what this image looks like at R=1.',                   R:0.650, img:'img/zoom_real/cosmic_web.png'},
   {sv:80,  sl:24,   n:'Saraswati Supercluster',    d:'волокна разрешены',         t:'At the supercluster scale (10^24 m, ~650 million light-years), the Saraswati supercluster comes into view -- a vast filamentary web of galaxy clusters stretching across the constellation Pisces. The probe is at the largest scale where structure is still clearly distinguishable -- retention is climbing back toward unity.',                          R:0.950, img:'img/zoom_real/supercluster.png'},
   {sv:160, sl:21,   n:'Galaxy',          d:'вся структура сохранена',    t:'На галактическом масштабе (10^21 м, ~100 000 световых лет) вся структура сохранена. Проекционное ядро не оказывает измеримого влияния. Спиральная галактика заполняет обзор своим ярким ядром и четырьмя рукавами.',                                                                                                                R:1.000, img:'img/zoom_real/galaxy.png'},
   {sv:240, sl:18,   n:'Galactic Core',   d:'вся структура сохранена',    t:'Приближение к галактическому ядру (10^18 м). Отдельные звёздные скопления становятся различимыми. Зонд всё ещё далеко от обрыва когерентности — никакая информация не теряется.',                                                                                                                                                R:1.000, img:'img/zoom_real/galactic_core.png'},
@@ -137,7 +137,7 @@ var LEVELS=[
   {sv:720, sl:-8,   n:'Molecular',      d:'тонкая структура разрушается',    t:'Молекулы, белки и нити ДНК (10^-8 м) разрушаются. R снижается. Ядро теперь активно стирает субразрешимую структуру.',                                                                                                                                                                   R:0.780, img:'img/zoom_real/molecular.png'},
   {sv:820, sl:-12,  n:'Nuclear',        d:'структура коллапсирует',        t:'Атомное ядро (10^-12 м) — глубочайшая непосредственно наблюдаемая структура. Эксперименты по глубоконеупругому рассеянию исследуют здесь. Кривая удержания крутая — информация быстро теряется.',                                                                                                                  R:0.350, img:'img/zoom_real/nuclear.png'},
   {sv:910, sl:-18,  n:'Quark Масштаб',    d:'nearly unresolved',          t:'На масштабе КХД (10^-18 м) выживает только самая грубая полевая структура. Кварки и глюконы едва различимы. Восстановимая информация достигла своего предела.',                                                                                                                                          R:0.050, img:'img/zoom_real/quark.png'},
-  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'На планковском масштабе (10^-35 м) вся структура необратимо размыта. Ядро усреднило всё. Осталось неразрешённое квантовое поле. Compare the SHARP (left) and BLURRED (right) versions of this same image -- this is the same blur the Космическая паутина showed at the opposite end of the spectrum.',                                                                                                                                                R:0.000, img:'img/zoom_real/cliff.png'},
+  {sv:1000,sl:-35,  n:'Coherence Cliff',d:'irrecoverable',             t:'На планковском масштабе (10^-35 м) вся структура необратимо размыта. Ядро усреднило всё. Осталось неразрешённое квантовое поле. The sharp reference thumbnail shows what this image looks like at R=1 — the same blur the Космическая паутина showed at the opposite end of the spectrum.',                                                                                                                                                R:0.000, img:'img/zoom_real/cliff.png'},
 ];
 
 // Interpolate R across slider value (sv) using the per-level R targets.
@@ -569,35 +569,36 @@ function updateScene(sv,sl,R){
   if(letterboxBottom) letterboxBottom.style.height = letterboxH+'%';
   if(vignette) vignette.style.opacity = (0.3 + (1-R)*0.2).toFixed(2); // 0.3-0.5 max
 
-  // ─── SIDE-BY-SIDE COMPARISON: at Космическая паутина (level 0) and Coherence Cliff (level 12) ──
-  // Both halves show the SAME image at the SAME brightness. The ONLY difference
-  // is the blur: left = sharp (R=1), right = blurred (R=current). The message
-  // is "this is what the kernel does to the same image at this scale."
+  // ─── SHARP REFERENCE THUMBNAIL (PIP): at Космическая паутина and Coherence Cliff ──
+  // Main backdrop stays full-size with proper aspect ratio (background-size:contain).
+  // A small sharp (R=1) thumbnail appears in the bottom-right corner so the
+  // viewer can compare: "this is what the image looks like sharp vs what the
+  // kernel does at this scale". The thumbnail preserves aspect ratio.
   var isEndLevel = (currentLevelIdx===0 || currentLevelIdx===LEVELS.length-1);
   if(compareLeft){
     if(isEndLevel){
+      // Show the PIP thumbnail
       compareLeft.style.opacity='1';
-      compareLeft.style.pointerEvents='auto';
-      // Left half: sharp version of the SAME image — no dimming, just sharp
+      compareLeft.style.pointerEvents='none';
+      // PIP: small thumbnail in bottom-right corner
       compareLeft.style.backgroundImage = "url('"+LEVELS[currentLevelIdx].img+"')";
-      compareLeft.style.filter = 'blur(0px) brightness(1)';
-      // Match the same zoom/transform as the right (so the comparison is fair)
-      compareLeft.style.transform = 'translate('+driftX.toFixed(2)+'%,'+driftY.toFixed(2)+'%) scale('+zoom.toFixed(4)+') rotate('+rotZ.toFixed(3)+'deg)';
-      // Show labels + divider + caption
+      compareLeft.style.filter = 'blur(0px) brightness(1) saturate(1.1)';
+      compareLeft.style.transform = 'none';
+      // Show label
       compareLabel.style.opacity='1';
-      compareRightLabel.style.opacity='1';
-      if(compareDivider) compareDivider.style.opacity='1';
+      compareRightLabel.style.opacity='0'; // not used in PIP mode
+      if(compareDivider) compareDivider.style.opacity='0';
       if(compareCaption) compareCaption.style.opacity='1';
-      // Resize the main backdrop to right half so we see blurred version next to sharp
-      backdrop.style.width='50%';
-      backdrop.style.left='50%';
-      backdrop.style.top='0';
+      // Main backdrop stays full-size (don't shrink to 50%)
+      backdrop.style.width='100%';
       backdrop.style.height='100%';
-      backdrop.style.inset='auto';
-      // OVERRIDE the brightness on the blurred side to be 1.0 — we want the
-      // viewer to see ONLY the blur, not a dim photo. Same brightness as left.
+      backdrop.style.left='0';
+      backdrop.style.top='0';
+      backdrop.style.inset='0';
+      // Re-apply the blur+compensation filter on the main backdrop
       var endBlurPx = (currentLevelIdx===0) ? Math.round((1-0.65)*16) : 16;
-      backdrop.style.filter = 'blur('+endBlurPx+'px) brightness(1)';
+      var endCompensation = (currentLevelIdx===0) ? 1.10 : 1.30;
+      backdrop.style.filter = 'blur('+endBlurPx+'px) brightness('+endCompensation.toFixed(2)+') saturate(1.1)';
     } else {
       compareLeft.style.opacity='0';
       compareLeft.style.pointerEvents='none';
@@ -658,24 +659,24 @@ var rgraphCtx=rgraph.getContext('2d');
 var currentBackdropIdx=-1;
 var lastLvl='',narrTO=null;
 
-// Side-by-side comparison panel for Космическая паутина + Coherence Cliff
+// PIP thumbnail (sharp reference) for Космическая паутина + Coherence Cliff
 var compareLeft=document.createElement('div');
 compareLeft.id='compare-left';
-compareLeft.style.cssText='position:absolute;top:0;left:0;width:50%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity .6s ease;z-index:1;pointer-events:none;transform-origin:center center';
+compareLeft.style.cssText='position:absolute;bottom:14px;right:14px;width:120px;height:80px;background-size:contain;background-repeat:no-repeat;background-position:50% 50%;opacity:0;transition:opacity .6s ease;z-index:4;pointer-events:none;border:2px solid #2dd4bf;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.5);background-color:#070b14';
 var sceneContainer=document.getElementById('scene-container');
 sceneContainer.appendChild(compareLeft);
-// Add a label on the comparison panel
+// Label for the PIP thumbnail
 var compareLabel=document.createElement('div');
-compareLabel.style.cssText='position:absolute;top:14px;left:25%;transform:translate(-50%,0);background:rgba(7,11,20,.95);color:#2dd4bf;font-size:12px;font-weight:800;padding:7px 14px;border-radius:6px;border:1px solid #2dd4bf;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace;letter-spacing:.05em';
-compareLabel.textContent='РЕЗКО — R=1.000';
+compareLabel.style.cssText='position:absolute;bottom:96px;right:14px;background:rgba(7,11,20,.95);color:#2dd4bf;font-size:10px;font-weight:800;padding:4px 8px;border-radius:4px;border:1px solid #2dd4bf;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace;letter-spacing:.04em;white-space:nowrap';
+compareLabel.textContent='SHARP REFERENCE';
 sceneContainer.appendChild(compareLabel);
+// (Right label and divider not used in PIP mode — keep elements to avoid breaking refs)
 var compareRightLabel=document.createElement('div');
-compareRightLabel.style.cssText='position:absolute;top:14px;right:25%;transform:translate(50%,0);background:rgba(7,11,20,.95);color:#fbbf24;font-size:12px;font-weight:800;padding:7px 14px;border-radius:6px;border:1px solid #fbbf24;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease;font-family:monospace;letter-spacing:.05em';
-compareRightLabel.textContent='РАЗМЫТО — то же изображение';
+compareRightLabel.style.cssText='position:absolute;display:none';
+compareRightLabel.textContent='';
 sceneContainer.appendChild(compareRightLabel);
-// Vertical divider line down the center
 var compareDivider=document.createElement('div');
-compareDivider.style.cssText='position:absolute;top:0;left:50%;width:2px;height:100%;background:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,0.6);z-index:4;pointer-events:none;opacity:0;transition:opacity .6s ease';
+compareDivider.style.cssText='position:absolute;display:none';
 sceneContainer.appendChild(compareDivider);
 // Explanatory caption
 var compareCaption=document.createElement('div');
