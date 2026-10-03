@@ -543,15 +543,19 @@ function updateScene(sv,sl,R){
   camera.lookAt(0,5,0);
 
   // ─── CINEMATIC SLOW FLY-IN (transform on backdrop) ──────────────────────
-  // Cycle: start at scale 1.0, slowly zoom to scale 1.08 over 25s (gentle, no over-crop).
-  // Plus tiny handheld micro-drift and 0.15deg rotation for life.
+  // Smooth sinusoidal cycle: scale 1.0 -> 1.08 -> 1.0 over 30 seconds.
+  // The sine wave eases in AND out — no snap at cycle boundaries.
+  // Plus tiny handheld micro-drift and slight rotation for life.
   // Phase is per-level so transitions reset the cycle and read as fresh motion.
   var t=Date.now()*0.001;
-  var cycleSec=25;
-  var phase=(currentLevelIdx*1.7); // each level starts at a different point in cycle
-  var cyclePhase=((t+phase) % cycleSec)/cycleSec; // 0..1
-  // Ease in: slow at start, faster toward end (cubic)
-  var zoom=1.0 + cyclePhase*cyclePhase*cyclePhase*0.08; // 1.0 -> 1.08 (gentle)
+  var cycleSec=30;
+  var phase=(currentLevelIdx*2.3); // each level starts at a different point in cycle
+  // sin wave: (1 - cos(2π * phase))/2 produces 0 -> 1 -> 0 smoothly
+  var cyclePos=((t+phase) % cycleSec)/cycleSec; // 0..1
+  var smoothWave=(1 - Math.cos(cyclePos*Math.PI*2))/2; // 0 -> 1 -> 0 (smooth)
+  // Ease the wave further (gentle cubic) so most of the motion is mid-cycle
+  var easedWave = smoothWave*smoothWave*(3-2*smoothWave); // smoothstep
+  var zoom=1.0 + easedWave*0.08; // 1.0 -> 1.08 -> 1.0 (smooth in AND out)
 
   // Handheld micro-drift: very low-amplitude noise via summed sines (±0.15%)
   var driftX=Math.sin(t*0.7)*0.15 + Math.sin(t*0.31)*0.08;
@@ -716,6 +720,22 @@ function updateUI(sv,sl,R){
       backdrop.style.opacity='0';
       setTimeout(function(){
         backdrop.style.backgroundImage="url('"+lvl.img+"')";
+        // Smart sizing: if the image is much wider than the viewport aspect
+        // (landscape image on portrait screen, or vice versa), use cover with
+        // center positioning so it fills the screen with minimal cropping.
+        // If the image is roughly square or matches viewport aspect, use
+        // contain so the full image is visible (especially important for
+        // Earth which is a full disc).
+        var imgAR=newImg.naturalWidth/newImg.naturalHeight;
+        var vpW=container.clientWidth, vpH=container.clientHeight;
+        var vpAR=vpW/vpH;
+        // If aspect ratios differ by more than 1.4x, use cover to fill the screen.
+        // Otherwise use contain to preserve the full image.
+        if(imgAR > vpAR*1.4 || imgAR*1.4 < vpAR){
+          backdrop.style.backgroundSize='cover';
+        } else {
+          backdrop.style.backgroundSize='contain';
+        }
         backdrop.classList.add('active');
         backdrop.style.opacity='1';
       },400); // wait for fade-out before swapping src
@@ -889,10 +909,25 @@ canvas.addEventListener('touchstart',function(e){if(e.touches.length===2)pD=Math
 canvas.addEventListener('touchmove',function(e){if(e.touches.length===2&&pD>0){e.preventDefault();var nd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);var d=(nd-pD)/pD;var v=parseFloat(slider.value)-d*60;v=Math.max(0,Math.min(1000,v));slider.value=v;autoZoom=false;autoBtn.classList.remove('active');pD=nd;}},{passive:false});
 
 // Pre-load the initial backdrop (Космическая паутина) so it's visible on first paint,
-// not after a 400ms fade.
+// not after a 400ms fade. Also apply smart sizing based on image aspect vs
+// viewport aspect.
 backdrop.style.backgroundImage="url('"+LEVELS[0].img+"')";
 backdrop.classList.add('active');
 currentBackdropIdx=0;
+// Smart sizing for initial Космическая паутина image
+(function(){
+  var initImg=new Image();
+  initImg.onload=function(){
+    var imgAR=initImg.naturalWidth/initImg.naturalHeight;
+    var vpAR=container.clientWidth/container.clientHeight;
+    if(imgAR > vpAR*1.4 || imgAR*1.4 < vpAR){
+      backdrop.style.backgroundSize='cover';
+    } else {
+      backdrop.style.backgroundSize='contain';
+    }
+  };
+  initImg.src=LEVELS[0].img;
+})();
 // Apply initial blur for R=0.65 (blur at very big)
 var initBlurPx=Math.round((1-LEVELS[0].R)*16);
 var initBrightnessCompensation=1 + (1-LEVELS[0].R)*0.3;
