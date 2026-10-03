@@ -43,7 +43,7 @@ header h1{font-size:15px;font-weight:700}
 header .sub{color:#a8b3c7;font-size:11px}
 header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
 #scene-container{position:relative;overflow:hidden;min-height:0;background:#070b14}
-#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.5s ease,filter .3s ease;will-change:opacity,filter}
+#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,background-position}
 #backdrop.active{opacity:1}
 #three-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #hud{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:5;pointer-events:none}
@@ -512,7 +512,8 @@ scene.add(superclusterGroup);
 
 // ═══ VISIBILITY ═══
 // IMPORTANT: 3D procedural scenes are now HIDDEN — only photographic backdrops
-// are shown. This was the user's explicit request: real photos, not 3D renders.
+// are shown. Camera slowly pans (Ken Burns effect) for a cinematic feel,
+// and the backdrop div scrolls in sync so the photo pans too.
 function updateScene(sv,sl,R){
   // Keep camera movement + lighting (harmless, but no 3D objects render)
   var camZBySv=[420,300,200,150,110,80,55,42,32,26,22,18,15];
@@ -525,10 +526,35 @@ function updateScene(sv,sl,R){
     }
   }
   if(sv>=LEVELS[LEVELS.length-1].sv) camZ=camZBySv[camZBySv.length-1];
-  camera.position.z+=(camZ-camera.position.z)*0.08;
-  var targetY=40-(sv/1000)*30;
-  camera.position.y+=(targetY-camera.position.y)*0.08;
-  camera.lookAt(0,5,0);
+
+  // ─── CINEMATIC CAMERA PAN (Ken Burns effect) ─────────────────────────────
+  // Slow continuous drift in X and Y, plus a gentle Z breathing.
+  // Periods are intentionally non-harmonic so the pattern doesn't loop visibly.
+  // Drift amplitude scales with camZ (zoomed-out levels pan further).
+  var t=Date.now()*0.001; // seconds
+  var driftAmp=Math.min(camZ*0.06, 25);
+  var panX=Math.sin(t*0.07)*driftAmp + Math.sin(t*0.013)*driftAmp*0.4;
+  var panY=Math.cos(t*0.05)*driftAmp*0.7 + Math.sin(t*0.019)*driftAmp*0.3;
+  var breatheZ=Math.sin(t*0.04)*camZ*0.02; // gentle in-out zoom
+
+  // Lerp camera toward target + drift (smoother than direct assignment)
+  camera.position.x += (panX - camera.position.x)*0.04;
+  camera.position.z += ((camZ + breatheZ) - camera.position.z)*0.08;
+  var targetY=40-(sv/1000)*30 + panY;
+  camera.position.y += (targetY - camera.position.y)*0.05;
+  // Look slightly off-center so the pan reads as motion, not just orbit
+  var lookOffsetX=Math.sin(t*0.06)*driftAmp*0.3;
+  var lookOffsetY=Math.cos(t*0.04)*driftAmp*0.2;
+  camera.lookAt(lookOffsetX, 5+lookOffsetY, 0);
+
+  // ─── BACKDROP PAN (mirror camera pan so the photo pans with the 3D scene) ─
+  // Translate the backdrop's background-position by an amount proportional to panX.
+  // Background-position is in % (50% = centered). Move ±15% max.
+  var bgX=50 + (camera.position.x / driftAmp) * 15;
+  var bgY=50 - (camera.position.y - 25) / driftAmp * 8;
+  if(isFinite(bgX) && isFinite(bgY)){
+    backdrop.style.backgroundPosition = bgX.toFixed(2)+'% '+bgY.toFixed(2)+'%';
+  }
 
   // ─── ALL 3D SCENES HIDDEN — only photographic backdrop is visible ───
   cosmicWebGroup.visible=false;
