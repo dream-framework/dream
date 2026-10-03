@@ -43,10 +43,10 @@ header h1{font-size:15px;font-weight:700}
 header .sub{color:#a8b3c7;font-size:11px}
 header .home{margin-left:auto;font-size:12px;color:#60a5fa;text-decoration:none}
 #scene-container{position:relative;overflow:hidden;min-height:0;background:#070b14}
-#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,transform;transform-origin:center center}
+#backdrop{position:absolute;inset:0;width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:50% 50%;opacity:0;transition:opacity 1.5s ease,filter .3s ease,background-image 0s linear;will-change:opacity,filter,transform;transform-origin:center center}
 #backdrop.active{opacity:1}
-/* Cinematic vignette overlay */
-#vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,0.30) 100%);transition:opacity .5s ease}
+/* Cinematic vignette overlay — very subtle so it doesn't darken the comparison */
+#vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 70%,rgba(0,0,0,0.20) 100%);transition:opacity .5s ease}
 /* Cinematic letterbox bars (top/bottom) */
 #letterbox-top,#letterbox-bottom{position:absolute;left:0;right:0;height:0;background:#000;z-index:3;pointer-events:none;transition:height .8s ease}
 #letterbox-top{top:0}#letterbox-bottom{bottom:0}
@@ -562,11 +562,12 @@ function updateScene(sv,sl,R){
   backdrop.style.transform='translate('+driftX.toFixed(2)+'%,'+driftY.toFixed(2)+'%) scale('+zoom.toFixed(4)+') rotate('+rotZ.toFixed(3)+'deg)';
 
   // ─── LETTERBOX + VIGNETTE: always on, scaled subtly with R ───────────────
-  // At extreme R (blur at both ends), letterbox is slightly taller for "documentary" feel.
+  // Vignette stays subtle even at extreme R so it doesn't darken the
+  // side-by-side comparison. The blur itself conveys the loss of structure.
   var letterboxH = 3 + (1-R)*3; // 3-6% of container height
   if(letterboxTop) letterboxTop.style.height = letterboxH+'%';
   if(letterboxBottom) letterboxBottom.style.height = letterboxH+'%';
-  if(vignette) vignette.style.opacity = (0.4 + (1-R)*0.3).toFixed(2);
+  if(vignette) vignette.style.opacity = (0.3 + (1-R)*0.2).toFixed(2); // 0.3-0.5 max
 
   // ─── SIDE-BY-SIDE COMPARISON: at Космическая паутина (level 0) and Coherence Cliff (level 12) ──
   // Both halves show the SAME image at the SAME brightness. The ONLY difference
@@ -721,18 +722,25 @@ function updateUI(sv,sl,R){
     newImg.src=lvl.img;
   }
   // Blur radius scales with (1-R). At R=1: 0px. At R=0.65: ~5px. At R=0: 16px.
-  // Brightness floor is 0.75 so even at R=0 the photo is still clearly visible
-  // (only blurred, not dimmed into darkness).
-  // EXCEPTION: when the side-by-side comparison is active (Космическая паутина or Cliff),
-  // force brightness=1 on the blurred side so the comparison is fair (only
-  // the blur differs between left and right — no brightness confound).
+  // IMPORTANT: CSS blur() averages pixels, so a bright photo on dark space
+  // gets darkened by the blur itself (dark background bleeds into bright
+  // subject). To keep the photo looking the same brightness before/after blur,
+  // we boost brightness proportionally to blur amount.
+  // At 16px blur (R=0): boost brightness by 30% (1.30) to compensate.
+  // At 5px blur (R=0.65): boost by ~10% (1.10).
+  // At 0px blur (R=1): no boost (1.00).
+  // In comparison mode (Космическая паутина + Cliff), we still apply the boost so the
+  // blurred side matches the sharp side's perceived brightness — the only
+  // visible difference is the blur, not a brightness confound.
   var blurPx=Math.round((1-R)*16);
-  var brightness=(0.75+R*0.25).toFixed(2); // 0.75 (R=0) -> 1.00 (R=1)
+  var blurCompensation = 1 + (1-R)*0.3; // 1.0 (R=1) -> 1.30 (R=0)
   var isEndLevel = (currentLevelIdx===0 || currentLevelIdx===LEVELS.length-1);
   if(isEndLevel){
-    backdrop.style.filter='blur('+blurPx+'px) brightness(1)';
+    // Comparison mode: apply blur + brightness compensation only (no dimming)
+    backdrop.style.filter='blur('+blurPx+'px) brightness('+blurCompensation.toFixed(2)+') saturate(1.1)';
   } else {
-    backdrop.style.filter='blur('+blurPx+'px) brightness('+brightness+')';
+    // Normal mode: blur + brightness compensation (no extra dimming)
+    backdrop.style.filter='blur('+blurPx+'px) brightness('+blurCompensation.toFixed(2)+') saturate(1.1)';
   }
 
   // ── Mini retention curve R(λ) graph (top-right corner) ───────────────────
@@ -886,8 +894,8 @@ backdrop.classList.add('active');
 currentBackdropIdx=0;
 // Apply initial blur for R=0.65 (blur at very big)
 var initBlurPx=Math.round((1-LEVELS[0].R)*16);
-var initBrightness=(0.45+LEVELS[0].R*0.55).toFixed(2);
-backdrop.style.filter='blur('+initBlurPx+'px) brightness('+initBrightness+')';
+var initBrightnessCompensation=1 + (1-LEVELS[0].R)*0.3;
+backdrop.style.filter='blur('+initBlurPx+'px) brightness('+initBrightnessCompensation.toFixed(2)+') saturate(1.1)';
 
 animate();
 setTimeout(function(){narrPanel.classList.add('visible');},500);
