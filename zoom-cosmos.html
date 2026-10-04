@@ -92,8 +92,8 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
       <span class="pill"><span class="label">lambda_q</span> <span class="v">10^-35 m</span></span>
     </div>
-    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:90px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
-    <canvas id="bgraph" width="200" height="140" style="position:absolute;top:230px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
+    <canvas id="rgraph" width="170" height="100" style="position:absolute;top:90px;left:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
+    <canvas id="bgraph" width="170" height="100" style="position:absolute;top:90px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
       <div class="ntitle" id="narr-title">Cosmic Web</div>
       <div class="nbody" id="narr-body">At the scale of the cosmic web, structure fades into the cosmological homogeneity limit.</div>
@@ -785,7 +785,7 @@ function updateUI(sv,sl,R){
   // Plots the retention curve across all 13 levels and marks the current
   // position with a moving dot. Shows the "blur at both ends" shape.
   if(rgraphCtx){
-    var W=200,H=120, pad=10;
+    var W=170,H=100, pad=10;
     rgraphCtx.clearRect(0,0,W,H);
     // Background already set via CSS. Draw axes.
     rgraphCtx.strokeStyle='#223047';
@@ -849,7 +849,7 @@ function updateUI(sv,sl,R){
   // high-k modes more, reshaping the bispectrum — confirming the kernel
   // acts on the full field, not just on S2.
   if(bgraphCtx){
-    var W=200,H=140, pad=18;
+    var W=170,H=100, pad=15;
     bgraphCtx.clearRect(0,0,W,H);
     // Axes
     bgraphCtx.strokeStyle='#223047';
