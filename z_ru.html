@@ -92,7 +92,8 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
       <span class="pill"><span class="label">D</span> <span class="v" id="hud-d">0.80</span></span>
       <span class="pill"><span class="label">λ_q</span> <span class="v">10^-35 m</span></span>
     </div>
-    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:50px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px;transform:translateY(-50%)"></canvas>
+    <canvas id="rgraph" width="200" height="120" style="position:absolute;top:90px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
+    <canvas id="bgraph" width="200" height="140" style="position:absolute;top:230px;right:8px;z-index:5;pointer-events:none;background:rgba(7,11,20,.85);border:1px solid #223047;border-radius:6px"></canvas>
     <div id="narrative"><div class="narr-panel" id="narr-panel">
       <div class="ntitle" id="narr-title">Космическая паутина</div>
       <div class="nbody" id="narr-body">На масштабе космической паутины структура растворяется в космологическом пределе однородности.</div>
@@ -659,6 +660,32 @@ var letterboxTop=document.getElementById('letterbox-top');
 var letterboxBottom=document.getElementById('letterbox-bottom');
 var rgraph=document.getElementById('rgraph');
 var rgraphCtx=rgraph.getContext('2d');
+// Test A panel: bispectrum shape transformation
+var bgraph=document.getElementById('bgraph');
+var bgraphCtx=bgraph.getContext('2d');
+// Hardcoded upstream bispectrum B_up(k) for a Local-fNL field, from the
+// 100-realization 3D ensemble in Test A v3 (saved to test_a_v3_results.json).
+// These are the 9 k bins (FFT indices 2..26) for the equilateral triangle B(k,k,k).
+// We display this as the upstream bispectrum that the kernel acts on.
+var B_UP_LOCAL = [6.90e10, 5.02e10, 5.94e9, -5.60e9, 1.07e10, -4.79e9, -1.09e10, 6.17e9, 5.01e9];
+var B_K_BINS = [2, 4, 6, 8, 10, 14, 18, 22, 26]; // FFT indices
+// Kernel Fourier transform (per-mode attenuation). Same formula as Test A v3:
+// K̃(k) = exp(-2 π² σ² k² / N²) where σ is in pixels, k is FFT index, N=64.
+// In the toy, σ = (1-R) * 16 px (matches the CSS blur on the backdrop).
+function kernelFourierToy(kIdx, R){
+  var sigma = (1-R) * 16;
+  if (sigma === 0) return 1.0;
+  var N = 64;
+  return Math.exp(-2 * Math.PI * Math.PI * sigma * sigma * kIdx * kIdx / (N*N));
+}
+function predictBDown(B_up, kBins, R){
+  var out = new Array(B_up.length);
+  for (var i=0; i<B_up.length; i++){
+    var K3 = Math.pow(kernelFourierToy(kBins[i], R), 3);
+    out[i] = K3 * B_up[i];
+  }
+  return out;
+}
 // Two backdrop slots enable crossfade between adjacent level images.
 // We use a single backdrop div but swap its background-image when the level changes;
 // CSS transition:opacity on the parent + a fade-out/fade-in cycle does the crossfade.
@@ -814,6 +841,84 @@ function updateUI(sv,sl,R){
     rgraphCtx.fillText('λ', W-pad-10, H-pad-2);
     rgraphCtx.fillStyle='#fbbf24';
     rgraphCtx.fillText('R='+R.toFixed(3), W-pad-44, pad+10);
+  }
+
+  // ── Test A panel: kernel action on bispectrum B(k,k,k) ───────────────────
+  // Shows the predicted downstream bispectrum (amber) vs upstream (teal) for
+  // a Local-fNL field. As R decreases (slider right), the kernel attenuates
+  // high-k modes more, reshaping the bispectrum — confirming the kernel
+  // acts on the full field, not just on S2.
+  if(bgraphCtx){
+    var W=200,H=140, pad=18;
+    bgraphCtx.clearRect(0,0,W,H);
+    // Axes
+    bgraphCtx.strokeStyle='#223047';
+    bgraphCtx.lineWidth=1;
+    bgraphCtx.beginPath();
+    bgraphCtx.moveTo(pad,pad); bgraphCtx.lineTo(pad,H-pad); bgraphCtx.lineTo(W-pad,H-pad);
+    bgraphCtx.stroke();
+    // Zero line (since bispectrum has negative values)
+    var yZero = pad + 0.5*(H-2*pad);
+    bgraphCtx.strokeStyle='#1a2a3e';
+    bgraphCtx.setLineDash([2,3]);
+    bgraphCtx.beginPath();
+    bgraphCtx.moveTo(pad, yZero); bgraphCtx.lineTo(W-pad, yZero);
+    bgraphCtx.stroke();
+    bgraphCtx.setLineDash([]);
+    // Plot B_up (teal) and B_down (amber)
+    var B_up = B_UP_LOCAL;
+    var B_dn = predictBDown(B_UP_LOCAL, B_K_BINS, R);
+    // Y-scale: normalize to max abs of B_up
+    var maxAbs = 0;
+    for (var i=0; i<B_up.length; i++) maxAbs = Math.max(maxAbs, Math.abs(B_up[i]));
+    if (maxAbs === 0) maxAbs = 1;
+    function yFor(val){
+      return yZero - (val / maxAbs) * 0.4 * (H - 2*pad);
+    }
+    function xFor(idx){
+      // B_K_BINS ranges 2..26, map to [pad, W-pad]
+      var kMin = B_K_BINS[0], kMax = B_K_BINS[B_K_BINS.length-1];
+      return pad + (B_K_BINS[idx] - kMin)/(kMax - kMin) * (W - 2*pad);
+    }
+    // B_up (teal, semi-transparent — reference)
+    bgraphCtx.strokeStyle='#2dd4bf';
+    bgraphCtx.lineWidth=1.5;
+    bgraphCtx.beginPath();
+    for (var i=0; i<B_up.length; i++){
+      var x = xFor(i), y = yFor(B_up[i]);
+      if (i===0) bgraphCtx.moveTo(x,y); else bgraphCtx.lineTo(x,y);
+    }
+    bgraphCtx.stroke();
+    // B_down (amber, full opacity — current state)
+    bgraphCtx.strokeStyle='#fbbf24';
+    bgraphCtx.lineWidth=2;
+    bgraphCtx.beginPath();
+    for (var i=0; i<B_dn.length; i++){
+      var x = xFor(i), y = yFor(B_dn[i]);
+      if (i===0) bgraphCtx.moveTo(x,y); else bgraphCtx.lineTo(x,y);
+    }
+    bgraphCtx.stroke();
+    // Dots on B_down
+    bgraphCtx.fillStyle='#fbbf24';
+    for (var i=0; i<B_dn.length; i++){
+      var x = xFor(i), y = yFor(B_dn[i]);
+      bgraphCtx.beginPath();
+      bgraphCtx.arc(x,y,2.5,0,Math.PI*2);
+      bgraphCtx.fill();
+    }
+    // Labels
+    bgraphCtx.fillStyle='#a8b3c7';
+    bgraphCtx.font='9px monospace';
+    bgraphCtx.fillText('B(k,k,k)', pad+2, pad+9);
+    bgraphCtx.fillText('k', W-pad-8, H-pad-2);
+    bgraphCtx.fillStyle='#2dd4bf';
+    bgraphCtx.fillText('B_up', W-pad-32, pad+9);
+    bgraphCtx.fillStyle='#fbbf24';
+    bgraphCtx.fillText('B_down', pad+2, H-pad-12);
+    // Title
+    bgraphCtx.fillStyle='#eef2f7';
+    bgraphCtx.font='10px sans-serif';
+    bgraphCtx.fillText('Test A: K̃³·B_up', pad+2, 11);
   }
 
   if(lvl.n!==lastLvl){
