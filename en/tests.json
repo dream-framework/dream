@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-04T23:25:48Z",
-  "total_tests": 300,
+  "exported_at": "2026-10-05T05:59:49Z",
+  "total_tests": 302,
   "fields": [
     "id",
     "name",
@@ -4680,6 +4680,38 @@
       "source": "auto-scan 2026-10-04",
       "date": "2026-10-04",
       "url": "10.5281/zenodo.23143985"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: CNit Model Calibration and Results",
+      "domain": "scouting",
+      "D": 0.4993,
+      "r2": 0.909,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 0.95,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 ties S2_DUST (ΔAICc=0.95, within ±2).",
+      "narrative": "D_eff=0.4993, R²=0.9090. D_eff=0.499 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties S2_DUST, ΔAICc=0.95).",
+      "source": "auto-scan 2026-10-05",
+      "date": "2026-10-05",
+      "url": "10.5281/zenodo.23151574"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: CNit Model Calibration and Results",
+      "domain": "scouting",
+      "D": 0.5916,
+      "r2": 0.851,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.18,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=2.18).",
+      "narrative": "D_eff=0.5916, R²=0.8510. D_eff=0.592 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.18). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-10-05",
+      "date": "2026-10-05",
+      "url": "10.5281/zenodo.23151574"
     }
   ]
 }
