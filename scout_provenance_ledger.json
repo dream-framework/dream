@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-07T00:03:42.950471+00:00",
+  "initialized": "2026-10-07T06:19:31.890195+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
