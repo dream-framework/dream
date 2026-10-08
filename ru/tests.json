@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-07T06:18:36Z",
-  "total_tests": 305,
+  "exported_at": "2026-10-08T06:26:55Z",
+  "total_tests": 306,
   "fields": [
     "id",
     "name",
@@ -4760,6 +4760,22 @@
       "source": "auto-scan 2026-10-06",
       "date": "2026-10-06",
       "url": "10.5281/zenodo.23021686"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: AKTIN - Daten zur Aufenthaltsdauer in Notaufnahmen",
+      "domain": "scouting",
+      "D": 1.604,
+      "r2": 0.996,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 336.92,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=336.92).",
+      "narrative": "D_eff=1.6040, R²=0.9960. D_eff=1.604 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=336.92). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-08",
+      "date": "2026-10-08",
+      "url": "10.5281/zenodo.23230769"
     }
   ]
 }

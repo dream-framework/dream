@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-07T06:18:36Z",
-  "total_tests": 305,
+  "exported_at": "2026-10-08T06:26:55Z",
+  "total_tests": 306,
   "fields": [
     "id",
     "name",
@@ -1245,14 +1245,14 @@
       "id": "",
       "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
       "domain": "financial",
-      "D": 0.5623,
+      "D": 0.5624,
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 369.86,
+      "delta_aicc": 369.55,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=369.86). S2+dust fit: D1=1.0144, D2=0.7438, R²=0.9993, AICc=-2149.86. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5623, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.86). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=369.55). S2+dust fit: D1=1.0127, D2=0.7447, R²=0.9993, AICc=-2149.47. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5624, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.55). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -1277,14 +1277,14 @@
       "id": "",
       "name": "FRED DGS10 (10-Year Treasury Rate) (ACF retention)",
       "domain": "financial",
-      "D": 0.9609,
+      "D": 0.961,
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 10.44,
+      "delta_aicc": 10.43,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=10.44). S2+dust fit: D1=1.0193, D2=2.2015, R²=0.9999, AICc=-3382.99. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9609, R²=0.9999. D_eff=0.961 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.44). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=10.43). S2+dust fit: D1=1.0196, D2=2.2015, R²=0.9999, AICc=-3383.13. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9610, R²=0.9999. D_eff=0.961 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.43). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -4760,6 +4760,22 @@
       "source": "auto-scan 2026-10-06",
       "date": "2026-10-06",
       "url": "10.5281/zenodo.23021686"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: AKTIN - Daten zur Aufenthaltsdauer in Notaufnahmen",
+      "domain": "scouting",
+      "D": 1.604,
+      "r2": 0.996,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 336.92,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=336.92).",
+      "narrative": "D_eff=1.6040, R²=0.9960. D_eff=1.604 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=336.92). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-10-08",
+      "date": "2026-10-08",
+      "url": "10.5281/zenodo.23230769"
     }
   ]
 }
