@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "n": 289,
   "n_total": 312,
   "n_censored": 15,
@@ -37,7 +37,7 @@
   "quad_coeff": -0.0147,
   "pl_exponent": 1.0006,
   "ad_stat": 3.943,
-  "aic_weibull": 636.97,
+  "aic_weibull": 636.98,
   "aic_gamma": 639.39,
   "aic_lognormal": 682.03,
   "aic_exponential": 722.95,
