@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "n": 290,
   "n_total": 313,
   "n_censored": 15,
@@ -28,7 +28,7 @@
   "d_direct": 2.0235,
   "lam_direct": 1.4251,
   "r2_direct": 0.9795,
-  "d_linear": 1.6102,
+  "d_linear": 1.6103,
   "lam_linear": 1.4497,
   "r2_linear": 0.9716,
   "r2_lin_lin": 0.9716,
