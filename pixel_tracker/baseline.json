@@ -1,0 +1,22 @@
+{
+  "description": "Historical baseline of optical probing limits — manually curated. The DREAM 'pixel is real' claim predicts the curve should saturate at the kernel's λ_q (a structural cutoff that no engineering can push lower). Standard physics predicts the boundary keeps moving with engineering progress. The tracker tests which is right.",
+  "baseline_records": [
+    {"year": 1873, "scale_m": 2e-7, "scale_str": "200 nm", "technique": "Abbe diffraction limit (optical microscope)", "source": "Abbe, E. (1873) Beiträge zur Theorie des Mikroskops"},
+    {"year": 1980, "scale_m": 5e-8, "scale_str": "50 nm", "technique": "Near-field scanning optical microscope (NSOM)", "source": "Pohl et al. (1984) — first NSOM demonstrations"},
+    {"year": 1994, "scale_m": 3e-8, "scale_str": "30 nm", "technique": "STED microscopy (concept)", "source": "Hell & Wichmann (1994) Opt Lett 19, 780"},
+    {"year": 2006, "scale_m": 2e-8, "scale_str": "20 nm", "technique": "PALM/STORM localization microscopy", "source": "Betzig et al., Rust et al. (2006) — Nobel 2014"},
+    {"year": 2010, "scale_m": 1e-8, "scale_str": "10 nm", "technique": "Localization microscopy (refined)", "source": "Various — sub-10nm localization achieved"},
+    {"year": 2014, "scale_m": 5e-9, "scale_str": "5 nm", "technique": "DNA-PAINT", "source": "Jungmann et al. (2014) Nat Methods 11, 313"},
+    {"year": 2018, "scale_m": 1e-9, "scale_str": "1 nm", "technique": "MINSTED / MINSTED fluorescence nanoscopy", "source": "Balzarotti et al. (2017/2018) — Hell lab"},
+    {"year": 2020, "scale_m": 1.5e-10, "scale_str": "1.5 Å", "technique": "Cryo-EM (single-particle reconstruction)", "source": "Nobel 2017; ~1.5 Å achieved 2020"},
+    {"year": 2022, "scale_m": 4e-11, "scale_str": "0.4 Å", "technique": "Electron ptychography", "source": "Chen et al. (2022) Science 377, eabn2235"},
+    {"year": 2024, "scale_m": 1e-14, "scale_str": "10 fm", "technique": "Quantum-enhanced interferometry (LIGO-class displacement sensitivity)", "source": "LIGO O4 sensitivity ~10^-19 m / sqrt(Hz), 10^-14 m cumulative"},
+    {"year": 2024, "scale_m": 1e-20, "scale_str": "10 am", "technique": "Theoretical 'pixel sees field discolouration' limit (DREAM kernel pixel)", "source": "DREAM A6 — claimed structural cutoff of the projection kernel"}
+  ],
+  "dream_prediction": {
+    "claim": "The pixel is real — λ_q is a structural property of the projection kernel, not an engineering limit",
+    "falsifiable_prediction": "Resolution curve flattens (saturates at the kernel's λ_q) — no amount of engineering pushes λ_q lower",
+    "standard_physics_prediction": "Resolution curve keeps dropping with engineering improvements — no structural floor",
+    "current_status": "Untested — daily scout tracks new published limits to detect whether saturation occurs"
+  }
+}

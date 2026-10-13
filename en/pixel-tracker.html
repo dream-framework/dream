@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Boundary Tracker · D.R.E.A.M</title>
+<meta name="description" content="Daily live tracker of optical probing limits — testing DREAM's 'pixel is real' claim that λ_q is a structural cutoff, not an engineering limit.">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  body{ background:var(--bg); color:var(--fg); }
+  .tracker-wrap{ max-width:1200px; margin:2rem auto; padding:0 1rem; }
+  .chart-card{ background:rgba(15,23,42,.45); border:1px solid var(--border-2); border-radius:14px; padding:1rem; margin:1rem 0; }
+  .chart-card h2{ margin-top:0; color:var(--fg); font-size:1.1rem; }
+  #tracker-chart{ width:100%; height:500px; }
+  .stat-row{ display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0; }
+  .stat-card{ background:rgba(15,23,42,.55); border:1px solid var(--border-2); border-radius:10px; padding:.8rem 1rem; flex:1; min-width:200px; }
+  .stat-card .label{ font-size:.75rem; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; font-weight:600; }
+  .stat-card .value{ font-size:1.4rem; font-weight:700; color:var(--fg); margin-top:.2rem; font-family:ui-monospace,SFMono-Regular,monospace; }
+  .stat-card .desc{ font-size:.82rem; color:var(--muted); margin-top:.2rem; }
+  .record-list{ max-height:400px; overflow-y:auto; padding-right:.4rem; }
+  .record-item{ padding:.5rem .7rem; border-left:3px solid var(--accent); background:rgba(15,23,42,.35); border-radius:0 6px 6px 0; margin-bottom:.4rem; font-size:.85rem; }
+  .record-item .date{ color:var(--muted-2); font-size:.78rem; }
+  .record-item .scale{ color:var(--accent); font-weight:700; }
+  .record-item a{ color:var(--accent); text-decoration:none; }
+  .record-item a:hover{ text-decoration:underline; }
+  .prediction-card{ background:rgba(142,197,232,.06); border-left:4px solid var(--accent); padding:.8rem 1rem; border-radius:0 10px 10px 0; margin:1rem 0; }
+  .prediction-card h3{ margin-top:0; color:var(--accent); }
+  .live-badge{ display:inline-block; background:rgba(125,211,168,.18); color:var(--good); border:1px solid rgba(125,211,168,.4); border-radius:999px; padding:2px 10px; font-size:.78rem; font-weight:700; margin-left:.5rem; vertical-align:middle; animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1 } 50%{ opacity:.7 } }
+</style>
+</head>
+<body data-lang="en" class="">
+
+<header class="site-header">
+  <div class="brand"><span class="dot" aria-hidden="true"></span><a href="index.html">D.R.E.A.M</a></div>
+  <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+    <a class="nav-link" href="retention.html">Retention Law</a>
+    <a class="nav-link" href="axioms.html">Axioms</a>
+    <a class="nav-link" href="kernel.html">Kernel</a>
+    <a class="nav-link active" href="pixel-tracker.html">Pixel Tracker</a>
+    <a class="nav-link" href="falsification.html">Falsification</a>
+    <a class="nav-link" href="tests.html">Tests</a>
+    <a class="nav-link" href="faq.html">FAQ</a>
+  </div></nav>
+</header>
+
+<main class="container">
+<div class="tracker-wrap">
+
+  <!-- Hero -->
+  <div class="card hero">
+    <h1>Pixel Boundary Tracker <span class="live-badge">● LIVE — daily scout</span></h1>
+    <p class="kicker">Tracking the smallest length scales resolved by optical probing, daily. Testing DREAM's claim that <strong>λ<sub>q</sub> is a real pixel</strong> — a structural cutoff of the projection kernel, not an engineering limit.</p>
+    <p class="note" id="last-run">Loading last scout run…</p>
+  </div>
+
+  <!-- The claim -->
+  <div class="prediction-card">
+    <h3>The Claim Being Tracked</h3>
+    <p>DREAM (axiom A6) predicts: the micro-macro abyss IS the λ<sub>q</sub> cliff, and λ<sub>q</sub> is a structural property of the projection kernel. <strong>No amount of engineering improvement can push λ<sub>q</sub> lower</strong> — the pixel is real.</p>
+    <p>Standard physics predicts: the boundary keeps moving with engineering progress. No structural floor.</p>
+    <p><strong>Falsifiable test:</strong> if the resolution curve flattens (saturates) at some scale, DREAM is supported. If it keeps dropping with engineering improvements, DREAM is falsified.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stat-row" id="stat-row">
+    <div class="stat-card"><div class="label">Smallest scale today</div><div class="value" id="stat-smallest">—</div><div class="desc">From the most recent arXiv scan</div></div>
+    <div class="stat-card"><div class="label">Total records tracked</div><div class="value" id="stat-total">—</div><div class="desc">Cumulative across all runs</div></div>
+    <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">10⁻²⁰ m</div><div class="desc">Theoretical λ_q floor</div></div>
+    <div class="stat-card"><div class="label">Today's best toolkit</div><div class="value">10⁻¹⁴ m</div><div class="desc">Quantum-enhanced interferometry</div></div>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-card">
+    <h2>Smallest resolved scale over time <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— log scale (lower = better resolution)</span></h2>
+    <div id="tracker-chart"></div>
+    <p class="note">Lower (smaller meters) = finer resolution. <span style="color:var(--accent)">Blue dots</span> = arXiv records from daily scout. <span style="color:var(--accent-2)">Gold dots</span> = historical baseline (curated). Dashed line = DREAM's predicted floor at λ_q ≈ 10⁻²⁰ m. <strong>If the curve flattens near the dashed line, the pixel is real.</strong> If it keeps dropping, standard physics wins.</p>
+  </div>
+
+  <!-- Recent records -->
+  <div class="chart-card">
+    <h2>Recent scout records</h2>
+    <div class="record-list" id="record-list">Loading…</div>
+  </div>
+
+  <!-- Method -->
+  <div class="card">
+    <h2>How the tracker works</h2>
+    <p>The scout (at <code>pixel_tracker/scout.py</code>) queries the <a href="https://arxiv.org/" style="color:var(--accent)">arXiv API</a> daily for recent papers in <code>physics.optics</code> and <code>quant-ph</code> with terms like "optical resolution", "nanoscopy", "interferometry", "displacement sensitivity". It extracts the smallest length-scale mentioned in each abstract and appends to a timeline.</p>
+    <p>A GitHub Actions workflow runs the scout daily and commits updates to <code>pixel_tracker/records.json</code>. The chart on this page reads that JSON and plots the timeline.</p>
+    <p class="note"><strong>Caveats:</strong> scale extraction is heuristic (regex over abstract text) — false positives are possible. The DREAM kernel pixel at 10⁻²⁰ m is a theoretical claim, not a measured value. The tracker's job is to see whether published resolution records saturate, not to assert they do.</p>
+  </div>
+
+</div>
+</main>
+
+<script>
+const ARXIV_RECORDS_URL = '../pixel_tracker/records.json';
+const BASELINE_URL = '../pixel_tracker/baseline.json';
+
+async function loadJSON(url){
+  const r = await fetch(url + '?t=' + Date.now());
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  return r.json();
+}
+
+function formatScale(m){
+  if (m >= 1e-9) return (m*1e9).toExponential(1) + ' nm';
+  if (m >= 1e-12) return (m*1e12).toExponential(1) + ' pm';
+  if (m >= 1e-15) return (m*1e15).toExponential(1) + ' fm';
+  if (m >= 1e-18) return (m*1e18).toExponential(1) + ' am';
+  return m.toExponential(1) + ' m';
+}
+
+function formatDate(iso){
+  // Parse YYYY-MM-DD or full ISO
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('en-CA', {year:'numeric', month:'short', day:'numeric'});
+}
+
+async function main(){
+  try {
+    const [records, baseline] = await Promise.all([
+      loadJSON(ARXIV_RECORDS_URL),
+      loadJSON(BASELINE_URL),
+    ]);
+
+    // Last run
+    document.getElementById('last-run').textContent =
+      `Last scout run: ${records.last_run || 'unknown'}`;
+
+    // Stats
+    const recs = records.records || [];
+    if (recs.length){
+      const smallest = Math.min(...recs.map(r => r.smallest_scale_m));
+      document.getElementById('stat-smallest').textContent = formatScale(smallest);
+    }
+    document.getElementById('stat-total').textContent = String(recs.length);
+
+    // Build chart data
+    const baselineRecs = baseline.baseline_records || [];
+    const baselineData = baselineRecs.map(r => ({
+      value: [`${r.year}-06-01`, r.scale_m],
+      name: r.technique + ' (' + r.scale_str + ')',
+      itemStyle: { color: '#f0c878' },
+    }));
+    const arxivData = recs.map(r => ({
+      value: [r.published, r.smallest_scale_m],
+      name: r.title + ' (' + r.smallest_scale_str + ')',
+      itemStyle: { color: '#8ec5e8' },
+    }));
+
+    // DREAM predicted floor
+    const floorData = [
+      ['1900-01-01', 1e-20],
+      ['2030-12-31', 1e-20],
+    ];
+
+    // Initialize chart
+    const chart = echarts.init(document.getElementById('tracker-chart'), 'dark');
+    chart.setOption({
+      backgroundColor: 'transparent',
+      textStyle: { color: '#cfd4ff', fontFamily: 'Inter, system-ui, sans-serif' },
+      title: { text: 'Smallest resolved scale over time (log scale)',
+        left: 'center', top: 8, textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: 'rgba(15,23,42,.95)',
+        borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+        formatter: function(p){
+          if (p.seriesName === 'DREAM predicted floor'){
+            return '<b>DREAM kernel pixel</b><br/>λ<sub>q</sub> ≈ 10⁻²⁰ m<br/>Structural cutoff — no engineering moves it';
+          }
+          return '<b>' + (p.data.name || '') + '</b><br/>' +
+                 'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
+                 'Scale: ' + formatScale(p.data.value[1]);
+        }
+      },
+      legend: { top: 32, textStyle: { color: '#cfd4ff' },
+        data: ['arXiv daily scout', 'Historical baseline', 'DREAM predicted floor'] },
+      grid: { left: 80, right: 30, top: 80, bottom: 50 },
+      xAxis: { type: 'time', name: 'Year',
+        nameTextStyle: { color: '#94a3b8' },
+        axisLabel: { color: '#94a3b8' },
+        axisLine: { lineStyle: { color: '#3b4f7a' } } },
+      yAxis: {
+        type: 'log', name: 'Smallest resolved scale (m)',
+        min: 1e-22, max: 1e-4,
+        nameTextStyle: { color: '#94a3b8' },
+        axisLabel: {
+          color: '#94a3b8',
+          formatter: function(v){ return v.toExponential(0); }
+        },
+        axisLine: { lineStyle: { color: '#3b4f7a' } },
+        splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
+      },
+      series: [
+        { name: 'DREAM predicted floor', type: 'line', data: floorData,
+          symbol: 'none', lineStyle: { color: '#7dd3a8', width: 2, type: 'dashed' },
+          tooltip: { trigger: 'item' } },
+        { name: 'Historical baseline', type: 'scatter', data: baselineData,
+          symbolSize: 12, itemStyle: { color: '#f0c878', borderColor: '#fff', borderWidth: 1 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0c878' } } },
+        { name: 'arXiv daily scout', type: 'scatter', data: arxivData,
+          symbolSize: 9, itemStyle: { color: '#8ec5e8', opacity: 0.85 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#8ec5e8' } } },
+      ],
+      animationDuration: 1000,
+    });
+    window.addEventListener('resize', () => chart.resize());
+
+    // Records list
+    const list = document.getElementById('record-list');
+    if (recs.length === 0){
+      list.innerHTML = '<div class="record-item">No records yet — scout will populate this.</div>';
+    } else {
+      // Show most recent 20
+      const sorted = recs.slice().sort((a,b) => (b.scouted || '').localeCompare(a.scouted || ''));
+      list.innerHTML = sorted.slice(0, 20).map(r => `
+        <div class="record-item">
+          <span class="date">${formatDate(r.published)}</span> ·
+          <span class="scale">${r.smallest_scale_str}</span> ·
+          <a href="${r.link}" target="_blank" rel="noopener">${r.title.substring(0,100)}${r.title.length>100?'…':''}</a>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    console.error('Tracker failed to load:', e);
+    document.getElementById('last-run').textContent = 'Error loading tracker: ' + e.message;
+  }
+}
+
+main();
+</script>
+
+<footer class="site-footer" style="margin-top:3rem;padding:1rem;text-align:center;color:var(--muted-2);font-size:.82rem">
+  Pixel Boundary Tracker — daily scout via GitHub Actions on arXiv API. Updated automatically.
+</footer>
+
+</body>
+</html>

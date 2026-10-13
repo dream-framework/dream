@@ -1,0 +1,74 @@
+name: DREAM Pixel Boundary Scout
+
+on:
+  schedule:
+    # Daily at 12:00 UTC (7am Toronto / 8am Toronto DST)
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+    # Allow manual triggering from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run pixel boundary scout
+        run: |
+          cd pixel_tracker
+          python3 scout.py > scout_output.log 2>&1
+          echo "=== Scout output ==="
+          cat scout_output.log
+
+      - name: Check for new records
+        id: check
+        run: |
+          if grep -q "NEW_RECORDS_JSON" pixel_tracker/scout_output.log; then
+            COUNT=$(grep "NEW_RECORDS_JSON" pixel_tracker/scout_output.log | sed 's/.*"count":\([0-9]*\).*/\1/')
+            echo "new_count=$COUNT" >> "$GITHUB_OUTPUT"
+            echo "Found $COUNT new records"
+          else
+            echo "new_count=0" >> "$GITHUB_OUTPUT"
+            echo "No new records"
+          fi
+
+      - name: Commit & push if new records
+        if: steps.check.outputs.new_count != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pixel_tracker/records.json
+          if git diff --cached --quiet; then
+            echo "No changes to records.json — skip commit"
+          else
+            git commit -m "pixel scout: ${{ steps.check.outputs.new_count }} new record(s) — $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+            echo "Pushed ${{ steps.check.outputs.new_count }} new records"
+          fi
+
+      - name: Always commit if scout ran (even with 0 new, to update last_run timestamp)
+        if: steps.check.outputs.new_count == '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pixel_tracker/records.json
+          if git diff --cached --quiet; then
+            echo "No changes — skip commit"
+          else
+            git commit -m "pixel scout: daily heartbeat — $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
