@@ -128,19 +128,28 @@
     <p class="note">All five tests use real data (SDSS DR16 LRG, DESI DR1 LRG, Bitcoin, Ethereum, cognitive reaction times) and synthetic controls. Scripts and JSON outputs linked from each section.</p>
   </div>
 
-  <!-- Probe-Invariance Test -->
-  <div class="card" id="probe-invariance" style="margin-top:.5rem">
-    <h3>① Probe-Invariance Test <span class="badge warn sm">Falsified 2026 · D varies across probes</span></h3>
+  <!-- Probe-Invariance Test (collapsible) -->
+  <details class="card" id="probe-invariance" style="margin-top:.5rem;padding:0">
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ① Probe-Invariance Test <span class="badge warn sm">Falsified 2026 · D varies across probes</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">D varies 2–10× across 5 probes (Gaussian, Fourier, Box, Wavelet, PCA) on same data. Form survives (r²&gt;0.96); invariance claim falsified.</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
     <p><strong>Question:</strong> if R(λ) = exp[−(λ/λ_q)^D] describes an <em>intrinsic</em> property of the data (MM's structure), then D and λ_q should be the same across different coarse-graining methods. If R(λ) is just the transfer function of a specific probe (Gaussian blur), different probes give different D and λ_q — the "law" is an artifact of the probe.</p>
     <p><strong>Method:</strong> apply five probes — Gaussian blur, Fourier mode cutoff, Box (moving average), Wavelet decomposition (Daubechies), PCA truncation — to the same five datasets: SDSS, DESI, Bitcoin (365 daily returns), Ethereum (365 daily returns), Cognitive (2000 reaction times). For each probe, compute R(λ) = std(coarsened)/std(original) at multiple scales, fit the stretched exponential, extract D and λ_q.</p>
     <p><strong>Result:</strong> D varies across probes by factors of 2–10 on every dataset. On SDSS: D = 1.16 (Gaussian), 1.95 (Fourier), 1.31 (Box), 2.09 (Wavelet), 10.0 (PCA-bound). The form fits all five probes with r² > 0.96, but the parameters are probe-dependent. <strong>Conclusion:</strong> the stretched-exponential <em>form</em> is a probe-dependent coarse-graining regularity, not an intrinsic law of MM. The form survives; the invariance claim is falsified.</p>
-    <img src="../img/tests/probe_invariance_test.png" alt="Probe-invariance test: D across 5 probes × 5 datasets" style="max-width:100%;border-radius:8px;margin:.5rem 0">
+    <iframe src="../charts/probe_invariance.html" style="width:100%;height:480px;border:0;border-radius:8px;background:rgba(15,23,42,.3);margin:.5rem 0" loading="lazy" title="Probe-Invariance Test — interactive chart"></iframe>
     <p class="note">Script: <code>scripts/probe_invariance_test.py</code>. JSON: <code>download/probe_invariance_test.json</code>. Linked from <a href="falsification.html#f1-probe-invariance" style="color:var(--accent)">F1 in Falsification</a>.</p>
-  </div>
+    </div>
+  </details>
 
-  <!-- S2 vs P(k)+Filter Test -->
-  <div class="card" id="s2-vs-pk" style="margin-top:.5rem">
-    <h3>② S2 vs P(k)+Filter Test <span class="badge ok sm">Mixed · S2 Beats Baseline on Cosmology</span></h3>
+  <!-- S2 vs P(k)+Filter Test (collapsible) -->
+  <details class="card" id="s2-vs-pk" style="margin-top:.5rem;padding:0">
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ② S2 vs P(k)+Filter Test <span class="badge ok sm">Mixed · S2 Beats Baseline on Cosmology</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">SDSS: S2 r²=0.999 vs P(k)+filter 0.908 (Δr²=+0.09). DESI: +0.14. Financial: P(k)+filter slightly better. Cognitive: P(k)+filter has no equivalent — S2 only.</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
     <p><strong>Question:</strong> does the stretched exponential add information beyond what the power spectrum P(k) and the filter transfer function already predict? If not, S2 is a reparameterization of P(k)+filter.</p>
     <p><strong>Method — three experiments:</strong></p>
     <ul>
@@ -156,13 +165,18 @@
       <li><strong>Exp 3 (out-of-sample):</strong> S2 and P(k)+filter perform comparably on financial data; S2 retains its advantage on cosmological data.</li>
     </ul>
     <p><strong>Conclusion:</strong> S2 is not redundant with P(k)+filter. It is a useful summary that <em>beats</em> the standard pipeline on cosmological fields by a meaningful margin and reaches domains (cognitive) where P(k)+filter has no natural formulation. The honest reading: S2 perseveres and often beats the baseline.</p>
-    <img src="../img/tests/s2_vs_pk_test.png" alt="S2 vs P(k)+filter test results" style="max-width:100%;border-radius:8px;margin:.5rem 0">
+    <iframe src="../charts/s2_vs_pk.html" style="width:100%;height:480px;border:0;border-radius:8px;background:rgba(15,23,42,.3);margin:.5rem 0" loading="lazy" title="S2 vs P(k)+Filter Test — interactive chart"></iframe>
     <p class="note">Script: <code>scripts/s2_vs_pk_test.py</code>. JSON: <code>download/s2_vs_pk_test.json</code>. Linked from <a href="falsification.html#f2-s2-vs-pk" style="color:var(--accent)">F2 in Falsification</a>.</p>
-  </div>
+    </div>
+  </details>
 
-  <!-- Scale-Dependence Test -->
-  <div class="card" id="scale-dep" style="margin-top:.5rem">
-    <h3>③ Scale-Dependence Test <span class="badge warn sm">Probe Systematics, Not Scale Law</span></h3>
+  <!-- Scale-Dependence Test (collapsible) -->
+  <details class="card" id="scale-dep" style="margin-top:.5rem;padding:0">
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ③ Scale-Dependence Test <span class="badge warn sm">Probe Systematics, Not Scale Law</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">17 synthetic + 6 real SDSS/DESI z-slices. L_max NULL, L_min synthetic-strong (sign flip = artifact), L_ratio NULL, V_eff NULL, z_depth real-strong (slope −0.36/z, r²=0.75).</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
     <p><strong>Question:</strong> does D vary predictably with a measurable scale property of the probe? Candidates: L_max (largest scale probed / depth), L_min (smallest scale / resolution), L_max/L_min (dynamic range), V_eff (effective volume), z_depth (cosmological redshift). A predictable relationship would be the kernel-as-manifestation proposal's first empirical hook.</p>
     <p><strong>Method — two experiments:</strong></p>
     <ul>
@@ -178,13 +192,18 @@
       <li><strong>z_depth (redshift):</strong> synthetic N/A; real STRONG negative (slope = −0.36/z, r² = 0.75).</li>
     </ul>
     <p><strong>Conclusion:</strong> the only scale measure showing a strong real-data trend is z_depth. The synthetic L_min effect, while strong, has the opposite sign in real data — confirming it is a probe transfer function. The z_depth trend survives; see ④ for its attribution.</p>
-    <img src="../img/tests/scale_dependence_test.png" alt="Scale-dependence test: D vs 5 scale measures in synthetic + real data" style="max-width:100%;border-radius:8px;margin:.5rem 0">
+    <iframe src="../charts/scale_dependence.html" style="width:100%;height:500px;border:0;border-radius:8px;background:rgba(15,23,42,.3);margin:.5rem 0" loading="lazy" title="Scale-Dependence Test — interactive chart"></iframe>
     <p class="note">Script: <code>scripts/scale_dependence_test.py</code>. JSON: <code>download/scale_dependence_test.json</code>. Linked from <a href="falsification.html#f3-scale-dependence" style="color:var(--accent)">F3 in Falsification</a>.</p>
-  </div>
+    </div>
+  </details>
 
-  <!-- z-Depth vs LCDM Test -->
-  <div class="card" id="z-depth" style="margin-top:.5rem">
-    <h3>④ z-Depth vs LCDM Test <span class="badge warn sm">Survey Systematics, Not Kernel</span></h3>
+  <!-- z-Depth vs LCDM Test (collapsible) -->
+  <details class="card" id="z-depth" style="margin-top:.5rem;padding:0">
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ④ z-Depth vs LCDM Test <span class="badge warn sm">Survey Systematics, Not Kernel</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">Real: slope −0.36/z (r²=0.75). LCDM (linear+nonlinear): slope ≈ +0.001 (essentially flat). Opposite signs → z_depth trend is survey systematics (bias, RSD, selection), not a kernel signal.</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
     <p><strong>Question:</strong> the ③ z_depth trend (D decreases with redshift) is real — but is it the kernel signature predicted by the probe-as-manifestation proposal, or standard cosmological evolution (more small-scale power at higher z) plus survey systematics?</p>
     <p><strong>Method:</strong> generate LCDM Gaussian random fields at z = 0.4, 0.5, 0.65, 0.8, 0.95, 1.1 using the Eisenstein-Hu 1998 transfer function (linear) and the Smith 2003 / Takahashi 2012 Halofit (nonlinear correction). Apply the DREAM Gaussian coarse-graining probe at scales 4–100 Mpc/h. Fit D at each z. Compare the predicted D-vs-z slope to the real SDSS+DESI slope (−0.36/z, r² = 0.75).</p>
     <p><strong>Results:</strong></p>
@@ -196,13 +215,18 @@
     </ul>
     <p><strong>Interpretation:</strong> pure LCDM with a Gaussian probe does not reproduce the z_depth trend. The mismatch is most plausibly attributable to standard survey-level effects not included in the LCDM field: (a) <em>tracer bias evolution</em> — high-z LRGs are more biased tracers of the matter field, modifying the effective small-scale P(k); (b) <em>redshift-space distortions</em> — Kaiser effect and Fingers-of-God modify P(k) at the relevant scales with z-dependent amplitude; (c) <em>selection function evolution</em> — different z-slices have different mask geometries, target density, completeness. Each of these is standard cosmology, not DREAM kernel physics.</p>
     <p><strong>Conclusion:</strong> the z_depth trend is real-data retention, not MM retention. The probe-as-manifestation proposal loses its last empirical hook and survives only as a philosophical re-interpretation. See <a href="kernel.html#manifestation" style="color:var(--accent)">Probe-as-Manifestation Interpretation</a> for the philosophical reframe.</p>
-    <img src="../img/tests/z_depth_vs_lcdm_test.png" alt="D vs redshift: real data vs LCDM prediction" style="max-width:100%;border-radius:8px;margin:.5rem 0">
+    <iframe src="../charts/z_depth_vs_lcdm.html" style="width:100%;height:480px;border:0;border-radius:8px;background:rgba(15,23,42,.3);margin:.5rem 0" loading="lazy" title="z-Depth vs LCDM Test — interactive chart"></iframe>
     <p class="note">Script: <code>scripts/z_depth_vs_lcdm_test.py</code>. JSON: <code>download/z_depth_vs_lcdm_test.json</code>. Linked from <a href="falsification.html#f4-z-depth-lcdm" style="color:var(--accent)">F4 in Falsification</a>.</p>
-  </div>
+    </div>
+  </details>
 
-  <!-- Snake-Pit Analysis -->
-  <div class="card" id="snake-pit" style="margin-top:.5rem">
-    <h3>⑤ Snake-Pit Proposal Analysis <span class="badge warn sm">Rejected — Adds DOFs, No Predictive Power</span></h3>
+  <!-- Snake-Pit Analysis (collapsible) -->
+  <details class="card" id="snake-pit" style="margin-top:.5rem;padding:0">
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ⑤ Snake-Pit Proposal Analysis <span class="badge warn sm">Rejected — Adds DOFs, No Predictive Power</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">Multi-S2 field "rescue" — fails F1 (post-hoc), contradicts white-noise cognition match, doesn't predict z_depth sign. Adds DOFs without predictive power. Rejected per Minimal-Extension Principle.</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
     <p><strong>Proposed rescue:</strong> relocate dynamics onto a multi-valued S2 field — "many S2 components at every spacetime point, possibly interacting" — so that the kernel manifests locally rather than globally. Tested against each falsification.</p>
     <p><strong>Analysis:</strong></p>
     <ul>
@@ -212,7 +236,8 @@
       <li><strong>Against F2–F4:</strong> adding S2 components per point does not change probe math, does not change how D varies with survey parameters, does not reproduce the z_depth sign.</li>
     </ul>
     <p><strong>Conclusion:</strong> the snake pit adds degrees of freedom without adding predictive power. It is the wrong direction — the framework should narrow its claims to what the data supports, not broaden them to evade falsification. Per Minimal-Extension Principle, this rescue is not adopted. Linked from <a href="falsification.html#f5-snake-pit" style="color:var(--accent)">F5 in Falsification</a>.</p>
-  </div>
+    </div>
+  </details>
 
   <!-- Summary table -->
   <div class="card" style="margin-top:.5rem">

@@ -1213,3 +1213,40 @@ table.registry-table tr.pending td{ opacity: .75; }
     .nav-mobile-panel{ padding: 8px 16px 16px; }
   }
 }
+
+/* ---- 2026 Falsification collapsible cards (details.card) ---- */
+/* Make details.card look like a regular card but with collapsible body */
+details.card{
+  background: rgba(15,23,42,.45);
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+details.card > summary{
+  background: rgba(23,32,51,.5);
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  padding: .8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+  list-style: none;
+  transition: background .15s;
+}
+details.card > summary:hover{ background: rgba(142,197,232,.08); }
+details.card > summary::-webkit-details-marker{ display: none; }
+details.card > summary::before{
+  content: '▸';
+  color: var(--accent);
+  display: inline-block;
+  margin-right: .5rem;
+  transition: transform .2s ease;
+}
+details.card[open] > summary::before{ transform: rotate(90deg); }
+details.card[open] > summary{
+  border-bottom: 1px solid var(--border-2);
+  margin-bottom: 0;
+}
+/* When details.card is open, the body (div inside) handles padding */
+details.card > div{ padding: 1rem; }

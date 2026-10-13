@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Probe Invariance Test (F1) · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:rgba(15,23,42,.3);font-family:Inter,system-ui,sans-serif}
+  .chart-wrap{position:relative;width:100%;height:480px;padding:8px;box-sizing:border-box}
+  .chart-btn{position:absolute;top:12px;right:12px;z-index:10;
+    background:rgba(15,23,42,.8);color:#8ec5e8;border:1px solid #3b4f7a;
+    border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;
+    transition:all .15s}
+  .chart-btn:hover{background:rgba(142,197,232,.2);border-color:#8ec5e8}
+  #chart{width:100%;height:100%}
+  :-webkit-full-screen .chart-wrap{height:100vh;padding:20px}
+  :-webkit-full-screen #chart{height:calc(100vh - 40px)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart-wrap" id="chartWrap">
+  <button class="chart-btn" onclick="toggleFs()">⛶ Maximize</button>
+  <div id="chart"></div>
+</div>
+<script>
+function toggleFs(){
+  const el = document.getElementById('chartWrap');
+  if (!document.fullscreenElement) {
+    el.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+document.addEventListener('fullscreenchange', () => {
+  setTimeout(() => window.myChart && window.myChart.resize(), 100);
+  document.querySelector('.chart-btn').textContent = document.fullscreenElement ? '✕ Restore' : '⛶ Maximize';
+});
+window.addEventListener('resize', () => window.myChart && window.myChart.resize());
+
+const datasets = ["SDSS", "DESI", "Bitcoin", "Ethereum", "Cognitive"];
+const probes = ["Gaussian", "Fourier", "Box (MA)", "Wavelet", "PCA"];
+const D_values = {"SDSS": [1.16, 1.95, 1.31, 2.09, 10.0], "DESI": [1.06, 1.03, 1.18, 0.11, 0.73], "Bitcoin": [0.38, 0.77, 0.48, 0.09, 0.77], "Ethereum": [0.44, 0.83, 0.54, 0.09, 0.77], "Cognitive": [0.37, 0.76, 0.47, 0.08, 0.79]};
+const colors = ['#8ec5e8', '#7dd3a8', '#f0c878', '#f0a0a0', '#c4b5fd'];
+const series = probes.map((probe, i) => ({
+  name: probe, type: 'bar',
+  data: datasets.map(ds => D_values[ds][i]),
+  itemStyle: { color: colors[i], borderRadius: [4, 4, 0, 0] },
+  emphasis: { itemStyle: { shadowBlur: 10, shadowColor: colors[i] + '80' } },
+  animationDelay: () => i * 100
+}));
+
+const option1 = {
+  backgroundColor: 'transparent',
+  textStyle: { color: '#cfd4ff' },
+  title: { text: 'D varies across probes (F1 — Probe Invariance Falsified)', left: 'center', top: 36, textStyle: { color: '#e2e8f0', fontSize: 14, fontWeight: 600 } },
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+    backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+    formatter: function(params){
+      let s = '<b>' + params[0].name + '</b><br/>';
+      params.forEach(p => s += p.marker + p.seriesName + ': <b>' + p.value.toFixed(3) + '</b><br/>');
+      return s;
+    }
+  },
+  legend: { top: 70, textStyle: { color: '#cfd4ff' }, data: probes },
+  grid: { left: 60, right: 20, top: 110, bottom: 50 },
+  xAxis: { type: 'category', data: datasets, name: 'Dataset', nameLocation: 'middle', nameGap: 30,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8' },
+    nameTextStyle: { color: '#94a3b8' } },
+  yAxis: { type: 'value', name: 'D (stretched-exponent)', nameLocation: 'middle', nameGap: 40,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8' },
+    nameTextStyle: { color: '#94a3b8' }, splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } } },
+  series: series,
+  color: colors,
+  animationDuration: 1200,
+  animationEasing: 'elasticOut'
+};
+
+window.myChart = echarts.init(document.getElementById('chart'), 'dark');
+window.myChart.setOption(option1);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>z_depth vs LCDM (F4) · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:rgba(15,23,42,.3);font-family:Inter,system-ui,sans-serif}
+  .chart-wrap{position:relative;width:100%;height:480px;padding:8px;box-sizing:border-box}
+  .chart-btn{position:absolute;top:12px;right:12px;z-index:10;
+    background:rgba(15,23,42,.8);color:#8ec5e8;border:1px solid #3b4f7a;
+    border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;
+    transition:all .15s}
+  .chart-btn:hover{background:rgba(142,197,232,.2);border-color:#8ec5e8}
+  #chart{width:100%;height:100%}
+  :-webkit-full-screen .chart-wrap{height:100vh;padding:20px}
+  :-webkit-full-screen #chart{height:calc(100vh - 40px)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart-wrap" id="chartWrap">
+  <button class="chart-btn" onclick="toggleFs()">⛶ Maximize</button>
+  <div id="chart"></div>
+</div>
+<script>
+function toggleFs(){
+  const el = document.getElementById('chartWrap');
+  if (!document.fullscreenElement) {
+    el.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+document.addEventListener('fullscreenchange', () => {
+  setTimeout(() => window.myChart && window.myChart.resize(), 100);
+  document.querySelector('.chart-btn').textContent = document.fullscreenElement ? '✕ Restore' : '⛶ Maximize';
+});
+window.addEventListener('resize', () => window.myChart && window.myChart.resize());
+
+const real_data = [["SDSS", 0.665, 0.9319], ["SDSS", 0.8, 0.8764], ["SDSS", 0.935, 0.7951], ["DESI", 0.515, 0.9908], ["DESI", 0.75, 0.9576], ["DESI", 0.985, 0.8642]];
+const lcdm_lin = [[0.4, 0.4986], [0.5, 0.5553], [0.65, 0.5156], [0.8, 0.5415], [0.95, 0.5307], [1.1, 0.5132]];
+const lcdm_nl = [[0.4, 0.4986], [0.5, 0.5553], [0.65, 0.5156], [0.8, 0.5415], [0.95, 0.5307], [1.1, 0.5132]];
+const slope = -0.358;
+const intercept = 0.93 - slope * 0.66;
+const real_fit = [[0.4, intercept + slope * 0.4], [1.1, intercept + slope * 1.1]];
+
+const option4 = {
+  backgroundColor: 'transparent',
+  textStyle: { color: '#cfd4ff' },
+  title: { text: 'D vs Redshift: Real Data vs LCDM (F4)', left: 'center', top: 36,
+    textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
+  tooltip: { trigger: 'item',
+    backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+    formatter: function(p){
+      let s = '<b>' + p.seriesName + '</b><br/>';
+      if (p.seriesName === 'Real data') {
+        s += real_data[p.dataIndex][0] + ' · z=' + p.value[0].toFixed(2) + '<br/>';
+      } else {
+        s += 'z = ' + p.value[0].toFixed(2) + '<br/>';
+      }
+      s += 'D = ' + p.value[1].toFixed(3);
+      return s;
+    }
+  },
+  legend: { top: 70, textStyle: { color: '#cfd4ff' },
+    data: ['Real data', 'Real fit (slope -0.36/z)', 'LCDM linear', 'LCDM nonlinear'] },
+  grid: { left: 60, right: 20, top: 110, bottom: 50 },
+  xAxis: { type: 'value', name: 'z (redshift)', nameLocation: 'middle', nameGap: 30, min: 0.35, max: 1.15,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8' }, nameTextStyle: { color: '#94a3b8' } },
+  yAxis: { type: 'value', name: 'D', nameLocation: 'middle', nameGap: 40, min: 0.3, max: 1.05,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8' }, nameTextStyle: { color: '#94a3b8' },
+    splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } } },
+  series: [
+    { name: 'Real data', type: 'scatter', data: real_data.map(r => [r[1], r[2]]), symbolSize: 14,
+       itemStyle: { color: '#f0a0a0', borderColor: '#fff', borderWidth: 1 },
+       label: { show: true, formatter: p => real_data[p.dataIndex][0], position: 'top', fontSize: 10, color: '#94a3b8' },
+       emphasis: { scale: 1.4, itemStyle: { shadowBlur: 12, shadowColor: '#f0a0a0' } } },
+    { name: 'Real fit (slope -0.36/z)', type: 'line', data: real_fit, symbol: 'none',
+       lineStyle: { color: '#f0a0a0', width: 2, type: 'dashed' }, tooltip: { show: false } },
+    { name: 'LCDM linear', type: 'line', data: lcdm_lin, symbol: 'circle', symbolSize: 8,
+       lineStyle: { color: '#8ec5e8', width: 2 }, itemStyle: { color: '#8ec5e8' } },
+    { name: 'LCDM nonlinear', type: 'line', data: lcdm_nl, symbol: 'triangle', symbolSize: 8,
+       lineStyle: { color: '#7dd3a8', width: 2, type: 'dotted' }, itemStyle: { color: '#7dd3a8' } }
+  ],
+  animationDuration: 1200,
+  animationEasing: 'cubicOut'
+};
+window.myChart = echarts.init(document.getElementById('chart'), 'dark');
+window.myChart.setOption(option4);
+
+</script>
+</body>
+</html>

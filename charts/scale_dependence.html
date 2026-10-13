@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scale Dependence (F3) · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:rgba(15,23,42,.3);font-family:Inter,system-ui,sans-serif}
+  .chart-wrap{position:relative;width:100%;height:500px;padding:8px;box-sizing:border-box}
+  .chart-btn{position:absolute;top:12px;right:12px;z-index:10;
+    background:rgba(15,23,42,.8);color:#8ec5e8;border:1px solid #3b4f7a;
+    border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;
+    transition:all .15s}
+  .chart-btn:hover{background:rgba(142,197,232,.2);border-color:#8ec5e8}
+  #chart{width:100%;height:100%}
+  :-webkit-full-screen .chart-wrap{height:100vh;padding:20px}
+  :-webkit-full-screen #chart{height:calc(100vh - 40px)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart-wrap" id="chartWrap">
+  <button class="chart-btn" onclick="toggleFs()">⛶ Maximize</button>
+  <div id="chart"></div>
+</div>
+<script>
+function toggleFs(){
+  const el = document.getElementById('chartWrap');
+  if (!document.fullscreenElement) {
+    el.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+document.addEventListener('fullscreenchange', () => {
+  setTimeout(() => window.myChart && window.myChart.resize(), 100);
+  document.querySelector('.chart-btn').textContent = document.fullscreenElement ? '✕ Restore' : '⛶ Maximize';
+});
+window.addEventListener('resize', () => window.myChart && window.myChart.resize());
+
+const synth = [[64, 2, 32.0, 262144, 1.27], [32, 2, 16.0, 32768, 1.27], [21, 2, 10.5, 9261, 1.27], [16, 2, 8.0, 4096, 1.27], [12, 2, 6.0, 1728, 1.27], [64, 2, 32.0, 262144, 1.23], [64, 3, 21.3, 262144, 1.42], [64, 4, 16.0, 262144, 1.56], [64, 6, 10.7, 262144, 1.85], [64, 8, 8.0, 262144, 2.0], [32, 3, 10.7, 32768, 1.49], [21, 3, 7.0, 9261, 1.49], [16, 4, 4.0, 4096, 1.65], [12, 4, 3.0, 1728, 1.65], [12, 6, 2.0, 1728, 1.92]];
+const real = [["SDSS", 0.665, 2421.9, 130.92, 18.5, 114000000000.0, 0.9319], ["SDSS", 0.8, 2761.4, 156.37, 17.7, 168000000000.0, 0.8764], ["SDSS", 0.935, 3067.5, 262.36, 11.7, 231000000000.0, 0.7951], ["DESI", 0.515, 2258.8, 158.52, 14.2, 92200000000.0, 0.9908], ["DESI", 0.75, 2900.9, 174.24, 16.6, 195000000000.0, 0.9576], ["DESI", 0.985, 3452.4, 251.95, 13.7, 329000000000.0, 0.8642]];
+const measures = ["L_max", "L_min", "L_max/L_min", "V_eff", "z_depth"];
+
+function measure(idx) {
+  if (idx === 0) return synth.map(s => [s[0], s[4]]);
+  if (idx === 1) return synth.map(s => [s[1], s[4]]);
+  if (idx === 2) return synth.map(s => [s[2], s[4]]);
+  if (idx === 3) return synth.map(s => [s[3], s[4]]);
+  return [];
+}
+function measureReal(idx) {
+  if (idx === 0) return real.map(r => [r[2], r[6]]);
+  if (idx === 1) return real.map(r => [r[3], r[6]]);
+  if (idx === 2) return real.map(r => [r[4], r[6]]);
+  if (idx === 3) return real.map(r => [r[5], r[6]]);
+  if (idx === 4) return real.map(r => [r[1], r[6]]);
+  return [];
+}
+
+const grids = [
+  { left: '7%',  top: '20%', width: '26%', height: '30%' },
+  { left: '40%', top: '20%', width: '26%', height: '30%' },
+  { left: '73%', top: '20%', width: '24%', height: '30%' },
+  { left: '20%', top: '62%', width: '26%', height: '30%' },
+  { left: '53%', top: '62%', width: '26%', height: '30%' }
+];
+
+const option3 = {
+  backgroundColor: 'transparent',
+  textStyle: { color: '#cfd4ff' },
+  title: { text: 'D vs Scale Measures (F3 — Probe Systematics)', left: 'center', top: 10, textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
+  tooltip: { backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+    formatter: function(p){
+      return '<b>' + p.seriesName + '</b><br/>' +
+             measures[Math.floor(p.seriesIndex / 2)] + ' = ' + p.value[0].toExponential(2) + '<br/>' +
+             'D = ' + p.value[1].toFixed(3);
+    }
+  },
+  grid: grids,
+  xAxis: grids.map((g, i) => ({ type: 'value', gridIndex: i, name: measures[i], nameLocation: 'middle', nameGap: 24,
+    nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#94a3b8', fontSize: 9 },
+    axisLine: { lineStyle: { color: '#3b4f7a' } } })),
+  yAxis: grids.map((g, i) => ({ type: 'value', gridIndex: i, name: 'D', nameLocation: 'middle', nameGap: 32,
+    nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#94a3b8', fontSize: 9 },
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, splitLine: { lineStyle: { color: 'rgba(59,79,122,.15)' } } })),
+  series: [],
+  animationDuration: 1000
+};
+
+measures.forEach((m, i) => {
+  option3.series.push({
+    name: 'Synthetic ' + m, type: 'scatter', xAxisIndex: i, yAxisIndex: i,
+    data: measure(i), symbolSize: 9, itemStyle: { color: '#8ec5e8', opacity: .7 },
+    emphasis: { scale: 1.5, itemStyle: { shadowBlur: 8, shadowColor: '#8ec5e8' } }
+  });
+  option3.series.push({
+    name: 'Real ' + m, type: 'scatter', xAxisIndex: i, yAxisIndex: i,
+    data: measureReal(i), symbolSize: 12, itemStyle: { color: '#f0a0a0', opacity: .9 },
+    emphasis: { scale: 1.5, itemStyle: { shadowBlur: 8, shadowColor: '#f0a0a0' } },
+    label: { show: true, formatter: p => real[p.dataIndex][0], position: 'top', fontSize: 9, color: '#94a3b8' }
+  });
+});
+
+window.myChart = echarts.init(document.getElementById('chart'), 'dark');
+window.myChart.setOption(option3);
+
+</script>
+</body>
+</html>

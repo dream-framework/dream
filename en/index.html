@@ -131,9 +131,17 @@
   <!-- ============================== -->
   <div data-mode="public">
 
-    <!-- FOUNDATION STATUS (General) -->
-    <div class="card" style="margin-top:1rem">
-      <h2>Foundation Status — 2026</h2>
+    <!-- FOUNDATION STATUS (General) — collapsible -->
+    <details class="card" style="margin-top:1rem" open>
+      <summary>
+        <h2 style="margin:0;display:inline">Foundation Status — 2026</h2>
+        <span style="display:block;margin-top:.4rem;font-size:.92rem;font-weight:400;color:var(--muted)">
+          <strong>Survives:</strong> stretched-exponential form across 5 domains (r²&gt;0.96); T7.1 piecewise refinement (25 datasets, p=3.4×10⁻¹⁸); S2 beats P(k)+filter on cosmology (Δr² +0.09 to +0.14).
+          <strong>Falsified:</strong> D invariance across probes; "S2 is intrinsic law of MM"; snake-pit rescue; z_depth kernel interpretation.
+          <em style="display:block;margin-top:.3rem;font-size:.85rem">Click to collapse / expand full breakdown.</em>
+        </span>
+      </summary>
+      <div>
       <p class="core">
         <strong>S2 — Retention Law (Stretched-Exponential Form)</strong> <span class="badge ok sm">Multidomain Survival</span>:
         The stretched-exponential form \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\) fits five wildly different domains — SDSS cosmological fields, DESI cosmological fields, Bitcoin and Ethereum time series, and human cognitive reaction-time distributions — with \(r^2 > 0.96\) in every case. The same two-parameter form describes domains that the standard \(P(k)\)+filter pipeline cannot reach. This is the multidomain survival: S2 perseveres where standard pipelines have no equivalent.
@@ -164,7 +172,8 @@
         <li><strong>Open:</strong> whether the probe-as-manifestation interpretation can generate a sign prediction for the z-depth trend that survives contact with survey systematics.</li>
       </ul>
       <p class="note">See <a href="retention.html">Retention</a> for the live demo and T7.1 refinement, <a href="predictions.html">Predictions</a> / <a href="falsification.html">Falsification</a> for gates and timelines, and <a href="tests.html">Tests</a> for the full registry including 2026 additions.</p>
-    </div>
+      </div>
+    </details>
 
     <!-- Plain-language abstract -->
     <div class="grid two" style="margin-top:1rem">
@@ -227,13 +236,13 @@
       <div class="card">
         <h2>Scale-Dependence Test (2026)</h2>
         <p class="core">D measured at 17 synthetic scale configurations and 6 real SDSS+DESI redshift slices. Strong synthetic L_min dependence (probe transfer function) does not survive in real data; the z_depth trend in real data does survive but is attributable to survey systematics.</p>
-        <img src="../img/tests/scale_dependence_test.png" alt="Scale dependence test results across 5 scale measures" style="width:100%;border-radius:8px;margin:.5rem 0">
+        <iframe src="../charts/scale_dependence.html" style="width:100%;height:500px;border:0;border-radius:8px;background:rgba(15,23,42,.3)" loading="lazy" title="Scale Dependence Test — interactive chart"></iframe>
         <p class="note">Verdict per measure: L_max NULL/WEAK, L_min STRONG synthetic but WEAK real (sign flip = artifact), L_ratio NULL, V_eff NULL/WEAK, z_depth STRONG real only. See <a href="tests.html#scale-dep">Scale-Dependence Test</a>.</p>
       </div>
       <div class="card">
         <h2>z-Depth vs LCDM Test (2026)</h2>
         <p class="core">Real SDSS+DESI D vs z gives slope \(-0.36\)/z (r²=0.75). A controlled LCDM field with the same Gaussian probe predicts slope \(\approx 0\)/z — opposite sign. The trend is consistent with tracer bias + RSD + survey selection rather than a kernel signal.</p>
-        <img src="../img/tests/z_depth_vs_lcdm_test.png" alt="D vs redshift: real data vs LCDM prediction" style="width:100%;border-radius:8px;margin:.5rem 0">
+        <iframe src="../charts/z_depth_vs_lcdm.html" style="width:100%;height:480px;border:0;border-radius:8px;background:rgba(15,23,42,.3)" loading="lazy" title="z-depth vs LCDM Test — interactive chart"></iframe>
         <p class="note">Linear and nonlinear LCDM both fail to reproduce the sign. The z_depth "signal" is real-data retention, not MM retention. See <a href="tests.html#z-depth">z-Depth vs LCDM Test</a>.</p>
       </div>
     </div>

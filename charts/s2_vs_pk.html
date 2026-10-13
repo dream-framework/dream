@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>S2 vs P(k)+Filter (F2) · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:rgba(15,23,42,.3);font-family:Inter,system-ui,sans-serif}
+  .chart-wrap{position:relative;width:100%;height:480px;padding:8px;box-sizing:border-box}
+  .chart-btn{position:absolute;top:12px;right:12px;z-index:10;
+    background:rgba(15,23,42,.8);color:#8ec5e8;border:1px solid #3b4f7a;
+    border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;
+    transition:all .15s}
+  .chart-btn:hover{background:rgba(142,197,232,.2);border-color:#8ec5e8}
+  #chart{width:100%;height:100%}
+  :-webkit-full-screen .chart-wrap{height:100vh;padding:20px}
+  :-webkit-full-screen #chart{height:calc(100vh - 40px)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart-wrap" id="chartWrap">
+  <button class="chart-btn" onclick="toggleFs()">⛶ Maximize</button>
+  <div id="chart"></div>
+</div>
+<script>
+function toggleFs(){
+  const el = document.getElementById('chartWrap');
+  if (!document.fullscreenElement) {
+    el.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+document.addEventListener('fullscreenchange', () => {
+  setTimeout(() => window.myChart && window.myChart.resize(), 100);
+  document.querySelector('.chart-btn').textContent = document.fullscreenElement ? '✕ Restore' : '⛶ Maximize';
+});
+window.addEventListener('resize', () => window.myChart && window.myChart.resize());
+
+const data = {"datasets": ["SDSS", "DESI", "Bitcoin", "Ethereum", "Cognitive"], "s2_r2": [0.999, 0.997, 0.983, 0.974, 0.968], "pk_r2": [0.908, 0.857, 0.997, 0.999, 1.0], "delta": [0.092, 0.14, -0.015, -0.025, -0.032]};
+const option2 = {
+  backgroundColor: 'transparent',
+  textStyle: { color: '#cfd4ff' },
+  title: { text: 'S2 vs P(k)+Filter — Δr² by domain (F2)', left: 'center', top: 36, textStyle: { color: '#e2e8f0', fontSize: 14, fontWeight: 600 } },
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+    backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+    formatter: function(params){
+      let s = '<b>' + params[0].name + '</b><br/>';
+      let delta = data.delta[params[0].dataIndex];
+      params.forEach(p => { if (p.seriesName !== 'Δr² marker') s += p.marker + p.seriesName + ': <b>' + p.value.toFixed(4) + '</b><br/>'; });
+      s += '<span style="color:' + (delta>0?'#7dd3a8':'#f0a0a0') + '">Δr² = ' + (delta>0?'+':'') + delta.toFixed(4) + '</span><br/>';
+      s += '<span style="color:#94a3b8;font-size:11px">' + (delta>0?'S2 wins by ' + delta.toFixed(3) + ' — stretched exponential is the better summary':'P(k)+filter wins by ' + (-delta).toFixed(3)) + '</span>';
+      return s;
+    }
+  },
+  legend: { top: 70, textStyle: { color: '#cfd4ff' }, data: ['S2 fit (r²)', 'P(k)+filter (r²)'] },
+  grid: { left: 60, right: 20, top: 110, bottom: 50 },
+  xAxis: { type: 'category', data: data.datasets, name: 'Dataset', nameLocation: 'middle', nameGap: 30,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8' },
+    nameTextStyle: { color: '#94a3b8' } },
+  yAxis: { type: 'value', name: 'r²', min: 0.8, max: 1.005, nameLocation: 'middle', nameGap: 40,
+    axisLine: { lineStyle: { color: '#3b4f7a' } }, axisLabel: { color: '#94a3b8', formatter: v => v.toFixed(2) },
+    nameTextStyle: { color: '#94a3b8' }, splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } } },
+  series: [
+    { name: 'S2 fit (r²)', type: 'bar', data: data.s2_r2, itemStyle: { color: '#8ec5e8', borderRadius: [4,4,0,0] },
+       emphasis: { itemStyle: { shadowBlur: 10, shadowColor: '#8ec5e8' } }, animationDelay: 0 },
+    { name: 'P(k)+filter (r²)', type: 'bar', data: data.pk_r2, itemStyle: { color: '#f0c878', borderRadius: [4,4,0,0] },
+       emphasis: { itemStyle: { shadowBlur: 10, shadowColor: '#f0c878' } }, animationDelay: 100 },
+    { type: 'scatter', name: 'Δr² marker',
+       data: data.delta.map((d,i) => [i, 0.81 + (Math.abs(d)>0.05?0.005:0.005)]),
+       symbolSize: 0, label: { show: true,
+         formatter: function(p){ const d=data.delta[p.dataIndex]; return (d>0?'+':'')+d.toFixed(3); },
+         color: function(p){ return data.delta[p.dataIndex]>0?'#7dd3a8':'#f0a0a0'; },
+         fontSize: 11, fontWeight: 600 }, tooltip: { show: false } }
+  ],
+  animationDuration: 1200,
+  animationEasing: 'cubicOut'
+};
+window.myChart = echarts.init(document.getElementById('chart'), 'dark');
+window.myChart.setOption(option2);
+
+</script>
+</body>
+</html>

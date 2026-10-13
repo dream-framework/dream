@@ -204,18 +204,27 @@
       <p class="note">Below each card states the claim, the test, the result, and the disposition. See <a href="tests.html">Tests</a> for full registry entries with figures and code pointers.</p>
     </div>
 
-    <!-- F1: Probe Invariance -->
-    <div class="card" id="f1-probe-invariance">
-      <h2>F1 — Probe-Invariance of D <span class="badge warn sm">Falsified 2026</span></h2>
+    <!-- F1: Probe Invariance (collapsible) -->
+    <details class="card" id="f1-probe-invariance">
+      <summary>
+        <strong>F1 — Probe-Invariance of D</strong> <span class="badge warn sm">Falsified 2026</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">D varies 2–10× across 5 probes on same data. Form survives (r²&gt;0.96); invariance claim falsified. Click for details.</span>
+      </summary>
+      <div>
       <p class="core"><strong>Original claim (A3 in its strongest form):</strong> S2 is an intrinsic law of MM, so D and λ_q should be invariant across probes applied to the same data.</p>
       <p><strong>Test:</strong> apply five probes — Gaussian blur, Fourier cutoff, Box (moving average), Wavelet decomposition, PCA truncation — to the same five datasets (SDSS, DESI, Bitcoin, Ethereum, Cognitive reaction times) and extract D and λ_q from each. If S2 is intrinsic, D should match within error.</p>
       <p><strong>Result:</strong> D varies across probes by factors of 2–10 on every dataset. Examples on SDSS: D = 1.16 (Gaussian), 1.95 (Fourier), 1.31 (Box), 2.09 (Wavelet), 10.0 (PCA-bound). The form \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\) fits all five probes (r² > 0.96) — the form survives — but the parameters are probe-dependent.</p>
       <p><strong>Disposition:</strong> FALSIFIED. "S2 is an intrinsic law of MM" is rejected. The surviving claim is "the stretched-exponential is a probe-dependent coarse-graining regularity" — a weaker but multidomain claim. See <a href="tests.html#probe-invariance">Probe-Invariance Test</a>.</p>
-    </div>
+      </div>
+    </details>
 
-    <!-- F2: S2 vs P(k)+Filter -->
-    <div class="card" id="f2-s2-vs-pk">
-      <h2>F2 — S2 vs P(k)+Filter <span class="badge ok sm">Mixed — S2 Wins on Cosmology</span></h2>
+    <!-- F2: S2 vs P(k)+Filter (collapsible) -->
+    <details class="card" id="f2-s2-vs-pk">
+      <summary>
+        <strong>F2 — S2 vs P(k)+Filter</strong> <span class="badge ok sm">Mixed — S2 Wins on Cosmology</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">SDSS: S2 r²=0.999 vs P(k)+filter 0.908 (Δr²=+0.09). DESI: +0.14. Financial: P(k)+filter slightly better. Click for details.</span>
+      </summary>
+      <div>
       <p class="core"><strong>Tested claim:</strong> does the stretched exponential add information beyond what the power spectrum + filter transfer function already predict?</p>
       <p><strong>Test design (three experiments):</strong> (1) Synthetic control — generate fields with known P(k), compute the exact analytical R(λ) from \(\int P(k)|H(k,\lambda)|^2 dk / \int P(k) dk\), fit the Weibull to the same R(λ), ask how much information the Weibull loses vs the exact integral. (2) Real data — for each real dataset, compare r² of S2 fit vs r² of exact P(k)+Gaussian prediction. (3) Out-of-sample prediction — split data, fit S2 on half 1, predict R(λ) on half 2; compare to P(k)+filter pipeline.</p>
       <p><strong>Results:</strong></p>
@@ -225,11 +234,16 @@
         <li><strong>Exp 3 (out-of-sample):</strong> S2 and P(k)+filter perform comparably on financial data; S2 retains its advantage on cosmological data.</li>
       </ul>
       <p><strong>Disposition:</strong> MIXED. S2 is a useful summary that <em>beats</em> the standard pipeline on cosmological fields by a meaningful margin; the standard pipeline is competitive or superior on financial time series. S2 is not "redundant with P(k)+filter" — it is sometimes the better summary. See <a href="tests.html#s2-vs-pk">S2 vs P(k)+Filter Test</a>.</p>
-    </div>
+      </div>
+    </details>
 
-    <!-- F3: Scale Dependence -->
-    <div class="card" id="f3-scale-dependence">
-      <h2>F3 — Scale-Dependence of D <span class="badge warn sm">Probe Systematics, Not Law</span></h2>
+    <!-- F3: Scale Dependence (collapsible) -->
+    <details class="card" id="f3-scale-dependence">
+      <summary>
+        <strong>F3 — Scale-Dependence of D</strong> <span class="badge warn sm">Probe Systematics, Not Law</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">5 scale measures tested. Only z_depth shows strong real-data trend (slope −0.36/z, r²=0.75). Synthetic L_min effect has sign flip = probe artifact. Click for details.</span>
+      </summary>
+      <div>
       <p class="core"><strong>Tested claim:</strong> D varies predictably with a measurable scale property of the probe (L_max, L_min, L_max/L_min, V_eff, or z_depth). A predictable relationship would be the kernel-as-manifestation proposal's first empirical hook.</p>
       <p><strong>Test design:</strong> two experiments. (1) Synthetic controlled fields — 17 (L_max, L_min) configurations on a 64³ grid with a known P(k) ~ k^-2 power law; compute D from the Gaussian coarse-graining retention curve. (2) Real cosmological data — slice SDSS DR16 LRG and DESI DR1 LRG into 6 redshift shells; compute D, L_max, L_min, V_eff, z_depth per shell. Test slope of D vs each measure in both experiments.</p>
       <p><strong>Results:</strong></p>
@@ -241,21 +255,31 @@
         <li><strong>z_depth (redshift):</strong> synthetic N/A; real STRONG negative (slope = −0.36/z, r² = 0.75).</li>
       </ul>
       <p><strong>Disposition:</strong> the only scale measure that shows a strong real-data trend is z_depth. The synthetic L_min effect, while strong, has the opposite sign in real data — confirming it is a probe transfer function. The z_depth trend is the one survivor; see F4 below for its attribution. See <a href="tests.html#scale-dep">Scale-Dependence Test</a>.</p>
-    </div>
+      </div>
+    </details>
 
-    <!-- F4: z_depth vs LCDM -->
-    <div class="card" id="f4-z-depth-lcdm">
-      <h2>F4 — z_depth Trend vs Standard LCDM <span class="badge warn sm">Survey Systematics, Not Kernel</span></h2>
+    <!-- F4: z_depth vs LCDM (collapsible) -->
+    <details class="card" id="f4-z-depth-lcdm">
+      <summary>
+        <strong>F4 — z_depth Trend vs Standard LCDM</strong> <span class="badge warn sm">Survey Systematics, Not Kernel</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">Real slope −0.36/z (r²=0.75); LCDM linear+nonlinear ≈ +0.001 (flat). Opposite signs → z_depth is survey systematics, not kernel. Click for details.</span>
+      </summary>
+      <div>
       <p class="core"><strong>Question:</strong> the F3 z_depth trend (D decreases with redshift) is real — but is it the kernel signature predicted by the probe-as-manifestation proposal, or standard cosmological evolution (more small-scale power at higher z) plus survey systematics?</p>
       <p><strong>Test design:</strong> generate LCDM Gaussian random fields at z = 0.4, 0.5, 0.65, 0.8, 0.95, 1.1 using the Eisenstein-Hu transfer function (linear) and the Smith-Takahashi Halofit (nonlinear correction). Apply the DREAM Gaussian coarse-graining probe at scales 4–100 Mpc/h. Fit D at each z. Compare the predicted D-vs-z slope to the real SDSS+DESI slope (−0.36/z, r² = 0.75).</p>
       <p><strong>Results:</strong> LCDM predicts slope ≈ +0.001/z (essentially flat, slightly positive) for both linear and nonlinear cases. Real data slope = −0.36/z (strongly negative). The slopes have opposite signs — pure LCDM with a Gaussian probe does not reproduce the trend.</p>
       <p><strong>Interpretation:</strong> the z_depth signal is not a kernel signature. It is most plausibly a survey-level retention effect — tracer bias evolution (high-z LRGs are more biased), redshift-space distortions (Kaiser + Fingers-of-God), and selection function evolution. Each of these is standard cosmology, not DREAM kernel physics. The probe-as-manifestation proposal does not generate a sign prediction that survives contact with the data.</p>
       <p><strong>Disposition:</strong> the z_depth trend is real-data retention, not MM retention. The probe-as-manifestation proposal loses its last empirical hook and survives only as a philosophical re-interpretation. See <a href="tests.html#z-depth">z-Depth vs LCDM Test</a>.</p>
-    </div>
+      </div>
+    </details>
 
-    <!-- F5: Snake-Pit -->
-    <div class="card" id="f5-snake-pit">
-      <h2>F5 — Snake-Pit Proposal <span class="badge warn sm">Does Not Resolve Falsifications</span></h2>
+    <!-- F5: Snake-Pit (collapsible) -->
+    <details class="card" id="f5-snake-pit">
+      <summary>
+        <strong>F5 — Snake-Pit Proposal</strong> <span class="badge warn sm">Does Not Resolve Falsifications</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">Multi-S2 field "rescue" — fails F1 (post-hoc), contradicts white-noise cognition match, doesn't predict z_depth sign. Rejected per Minimal-Extension Principle. Click for details.</span>
+      </summary>
+      <div>
       <p class="core"><strong>Proposed rescue:</strong> relocate dynamics onto a multi-valued S2 field — "many S2 components at every spacetime point, possibly interacting" — so that the kernel manifests locally rather than globally. Would this resolve the F1–F4 falsifications?</p>
       <p><strong>Analysis against each falsification:</strong></p>
       <ul>
@@ -265,7 +289,8 @@
         <li><strong>F2–F4:</strong> adding S2 components per point does not change probe math, does not change how D varies with survey parameters, does not reproduce the z_depth sign.</li>
       </ul>
       <p><strong>Disposition:</strong> REJECTED. The snake pit adds degrees of freedom without adding predictive power. It is the wrong direction — the framework should narrow its claims to what the data supports, not broaden them to evade falsification. Per Minimal-Extension Principle, this rescue is not adopted.</p>
-    </div>
+      </div>
+    </details>
 
     <!-- Decision tree -->
     <div class="card">
