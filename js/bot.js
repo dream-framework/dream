@@ -229,7 +229,11 @@
           MathJax.typesetPromise([el]).then(() => scrollToBottomOf(el)).catch(() => scrollToBottomOf(el));
         }
       } else {
-        const el = appendMsg(lastError || T.error, 'bot');
+        // All models failed — show friendly message + last error for transparency
+        const friendly = lang === 'ru'
+          ? '⚠️ Все модели Groq сейчас перегружены. Попробуйте ещё раз через несколько секунд.'
+          : '⚠️ All Groq models are currently over capacity. Please try again in a few seconds.';
+        const el = appendMsg(friendly + (lastError ? ' <span style="color:var(--muted-2);font-size:.85rem">(' + lastError + ')</span>' : ''), 'bot', true);
         scrollToBottomOf(el);
       }
     } catch (e) {
