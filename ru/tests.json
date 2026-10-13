@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-13T19:26:24Z",
-  "total_tests": 313,
+  "exported_at": "2026-10-13T23:53:34Z",
+  "total_tests": 317,
   "fields": [
     "id",
     "name",
@@ -1395,7 +1395,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.75,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3426, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=17.75). S2+dust fit: D1=0.6243, D2=7.3317, R²=0.3824, AICc=-1000.81. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.1242, R²=0.3034. D_eff=0.124 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=17.75). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -4888,6 +4888,70 @@
       "source": "auto-scan 2026-10-12",
       "date": "2026-10-12",
       "url": "10.5281/zenodo.23309964"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Declining growth-related work contributes to hypom",
+      "domain": "scouting",
+      "D": 0.8339,
+      "r2": 0.9544,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 3.24,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=3.24).",
+      "narrative": "D_eff=0.8339, R²=0.9544. D_eff=0.834 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=3.24). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-13",
+      "date": "2026-10-13",
+      "url": "10.5281/zenodo.23353259"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Declining growth-related work contributes to hypom",
+      "domain": "scouting",
+      "D": 1.3029,
+      "r2": 0.9991,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 1140.2,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=1140.2).",
+      "narrative": "D_eff=1.3029, R²=0.9991. D_eff=1.303 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1140.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-13",
+      "date": "2026-10-13",
+      "url": "10.5281/zenodo.23353259"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Declining growth-related work contributes to hypom",
+      "domain": "scouting",
+      "D": 1.013,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2133.36,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=2133.36).",
+      "narrative": "D_eff=1.0130, R²=1.0000. D_eff=1.013 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2133.36). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-13",
+      "date": "2026-10-13",
+      "url": "10.5281/zenodo.23353259"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Declining growth-related work contributes to hypom",
+      "domain": "scouting",
+      "D": 1.262,
+      "r2": 0.999,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 7.62,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=7.62).",
+      "narrative": "D_eff=1.2620, R²=0.9990. D_eff=1.262 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=7.62). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-13",
+      "date": "2026-10-13",
+      "url": "10.5281/zenodo.23353259"
     }
   ]
 }
