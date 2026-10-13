@@ -94,7 +94,7 @@
   <div class="card hero">
     <h1>Core Axioms</h1>
     <p class="kicker">Six assumptions define the posture; everything else is derived or tested at the level of <em>invariants</em>.</p>
-    <p class="note">This page states the axioms plainly, gives their operational meaning, and shows where the math enters. Math is hidden by default—use the “Math” toggle in the header.</p>
+    <p class="note">This page states the axioms plainly, gives their operational meaning, and shows where the math enters. The axioms themselves are unchanged since inception; the 2026 falsification program clarified which <em>derived claims</em> survive and which were falsified — see the <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a> for those results. Math is hidden by default—use the “Math” toggle in the header.</p>
   </div>
 
   <div class="grid two" style="margin-top:1rem">
@@ -158,10 +158,12 @@
         R(\lambda)=\exp\!\Big[-\big(\tfrac{\lambda}{\lambda_q}\big)^{D_{\mathrm{eff}}}\Big].
       \]</div>
       <p>Two readouts track the same law with their own \(\lambda_q, D_{\mathrm{eff}}\): high-frequency power \(R_{\mathrm{HF}}(\lambda)\) and structural correlation \(R_{\mathrm{struct}}(\lambda)=\mathrm{corr}^2(e_4|_{\lambda\to0},\,e_4|_{\lambda})\). Fractal-like signatures live only <em>below</em> \(\lambda_q\); homogeneity emerges above.</p>
+      <p style="margin-top:.6rem"><strong>2026 status:</strong> the stretched-exponential <em>form</em> survives across five unrelated domains (cosmological, financial, cognitive) with r² > 0.96 in every case — see <a href="tests.html#probe-invariance" style="color:var(--accent)">Probe-Invariance Test</a>. The original derived claim that "D and λ_q are invariant across probes applied to the same data" was <em>falsified</em>: different probes (Gaussian, Fourier, Box, Wavelet, PCA) on the same data give different D values — see <a href="falsification.html#f1-probe-invariance" style="color:var(--accent)">F1</a>. The surviving claim is "the stretched-exponential is a probe-dependent coarse-graining regularity across domains" — a weaker but multidomain claim. On real cosmological data (SDSS, DESI), S2 <em>beats</em> the standard P(k)+Gaussian-filter pipeline by Δr² ≈ +0.09 to +0.14 — see <a href="falsification.html#f2-s2-vs-pk" style="color:var(--accent)">F2</a>.</p>
       <details class="more">
         <summary aria-label="Read more"><span class="sr-only">Read more</span></summary>
         <div class="expander-body prose">
           <p><strong>Operationally.</strong> Fit log-linear \( \ln(-\ln R) = D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q \) across platforms.</p>
+          <p><strong>2026 operational note.</strong> Report D and λ_q as <em>probe-dependent</em> summaries, not as invariants. Compare to P(k)+filter baselines explicitly. The form is the foundation; the parameter values are descriptive.</p>
         </div>
       </details>
     </div>
@@ -248,6 +250,30 @@
         <li><strong>Against invariant posture:</strong> Failure of the ranked-spectrum ratio law \(m_n/m_1=n^{1/D_{\mathrm{eff}}}\) where applicable.</li>
       </ul>
       <p class="note">These are <em>clean</em> nulls: we do not rescue the framework by unconstrained kernel tweaks.</p>
+    </div>
+
+    <!-- 2026 Falsification Summary -->
+    <div class="card" id="axioms-2026-summary" style="border-left: 4px solid var(--accent);">
+      <h2>2026 Falsification Status (per axiom)</h2>
+      <p class="core">The 2026 program targeted the strongest derived claim under each axiom. The axioms themselves are unchanged; the derived claims have the following status.</p>
+      <table class="data-table" style="width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0">
+        <thead>
+          <tr style="background:rgba(23,32,51,.6)">
+            <th style="padding:.5rem .7rem;text-align:left">Axiom</th>
+            <th style="padding:.5rem .7rem;text-align:left">Strongest derived claim</th>
+            <th style="padding:.5rem .7rem;text-align:left">2026 status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem">A1 (MM exists)</td><td style="padding:.4rem .7rem">10D MM is the source domain</td><td style="padding:.4rem .7rem">Untestable directly; consistent with all observations. 10D remains a modeling choice.</td></tr>
+          <tr><td style="padding:.4rem .7rem">A2 (Projection kernel)</td><td style="padding:.4rem .7rem">Single fixed non-invertible kernel</td><td style="padding:.4rem .7rem">Consistent; kernel form is not identified by data (only its invariants are).</td></tr>
+          <tr><td style="padding:.4rem .7rem">A3 (S2 Retention)</td><td style="padding:.4rem .7rem">Stretched-exponential form is intrinsic law of MM with probe-invariant D</td><td style="padding:.4rem .7rem"><strong>Form survives; D-invariance falsified (F1).</strong> Form fits 5 domains with r² &gt; 0.96.</td></tr>
+          <tr><td style="padding:.4rem .7rem">A4 (Constants kernel-fixed)</td><td style="padding:.4rem .7rem">Constants are kernel parameters, not derived</td><td style="padding:.4rem .7rem">Untestable; ontological placement only.</td></tr>
+          <tr><td style="padding:.4rem .7rem">A5 (Topology↔classes)</td><td style="padding:.4rem .7rem">Topological quantization survives projection</td><td style="padding:.4rem .7rem">Not tested in 2026 program; remains a structural prediction.</td></tr>
+          <tr><td style="padding:.4rem .7rem">A6 (Finite resolution)</td><td style="padding:.4rem .7rem">Coherence cliff at λ_q; regimes above and below</td><td style="padding:.4rem .7rem">T7.1 confirms piecewise-regime structure (25 datasets, p=3.4×10⁻¹⁸). z_depth trend is survey systematics, not kernel.</td></tr>
+        </tbody>
+      </table>
+      <p class="note">For test-by-test details, see <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a> and <a href="tests.html" style="color:var(--accent)">Test Registry</a>.</p>
     </div>
 
     <!-- Minimal-Extension Principle (methodological rule, NOT an axiom) -->

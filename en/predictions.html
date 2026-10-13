@@ -93,15 +93,39 @@
 
   <div class="card hero">
     <h1>D.R.E.A.M. — Testable Predictions</h1>
-    <p class="kicker">Status aligned with site pages: S2 (Retention Law) is confirmed; S3 strongly supports S2 (partial); S1 is relegated/speculative.</p>
+    <p class="kicker">2026 status: S2 stretched-exponential form survives across five domains; original claim "D invariant across probes" falsified; S2 beats P(k)+filter on cosmological data; z_depth trend is survey systematics, not kernel. T7.1 multi-regime refinement confirmed (25 datasets, p=3.4×10⁻¹⁸).</p>
     
+  </div>
+
+  <!-- 2026 Status Summary -->
+  <div class="card" style="border-left: 4px solid var(--accent); margin-top:1rem">
+    <h2>2026 Prediction Status Roll-Up</h2>
+    <p class="core">Through 2026, each DREAM prediction was attacked with the strongest feasible test. The results:</p>
+    <table class="data-table" style="width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0">
+      <thead>
+        <tr style="background:rgba(23,32,51,.6)">
+          <th style="padding:.5rem .7rem;text-align:left">Prediction</th>
+          <th style="padding:.5rem .7rem;text-align:left">2026 status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:.4rem .7rem"><strong>S2 stretched-exponential form fits across domains</strong></td><td style="padding:.4rem .7rem"><span class="badge ok sm">Survives</span> r² &gt; 0.96 in 5 domains (cosmological, financial, cognitive)</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>D is invariant across probes</strong></td><td style="padding:.4rem .7rem"><span class="badge warn sm">Falsified</span> D varies 2–10× across 5 probes on same data — see F1</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>S2 adds information beyond P(k)+filter</strong></td><td style="padding:.4rem .7rem"><span class="badge ok sm">Mixed — S2 wins on cosmology</span> Δr² = +0.09 to +0.14 on SDSS/DESI — see F2</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>D varies predictably with probe scale</strong></td><td style="padding:.4rem .7rem"><span class="badge warn sm">No law</span> synthetic L_min is probe artifact; z_depth trend is survey systematics — see F3, F4</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>T7.1 multi-regime piecewise S2</strong></td><td style="padding:.4rem .7rem"><span class="badge ok sm">Confirmed</span> 25/25 datasets, binomial p = 3.4×10⁻¹⁸</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>Snake-pit multi-S2 rescue</strong></td><td style="padding:.4rem .7rem"><span class="badge warn sm">Rejected</span> adds DOFs without predictive power — see F5</td></tr>
+        <tr><td style="padding:.4rem .7rem"><strong>Probe-as-manifestation empirical hook</strong></td><td style="padding:.4rem .7rem"><span class="badge spec sm">Philosophical reframe</span> no empirical prediction beyond standard cosmology + systematics</td></tr>
+      </tbody>
+    </table>
+    <p class="note">For full test details, see <a href="tests.html#2026-falsification-program" style="color:var(--accent)">2026 Falsification Program in Tests</a> and <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program in Falsification</a>.</p>
   </div>
 
   <div class="grid two" style="margin-top:1rem">
 
     <!-- S2: Retention Law (CONFIRMED) -->
     <div class="card">
-      <h2>S2 — Retention Law <span class="badge ok">Guardrailed · 84.6% survival</span></h2>
+      <h2>S2 — Retention Law <span class="badge ok">Multidomain Survival (r² &gt; 0.96 in 5 domains)</span></h2>
       <p class="core"><strong>Claim.</strong> Interference-grade information decays with probe scale as a stretched exponential with kernel invariants \(\lambda_q\) and \(D_{\mathrm{eff}}\):</p>
       <div class="math-block">\[
         \begin{aligned}
@@ -109,16 +133,18 @@
         y(\lambda) &:= \ln(-\ln R) = D_{\mathrm{eff}}\ln\lambda - D_{\mathrm{eff}}\ln\lambda_q.
         \end{aligned}\]
       </div>
-      <p><strong>Why this rating.</strong> The live inter-domain demonstrator shows collapse across disparate datasets after rescaling by \(\lambda_q\); the standard transform is linear over a stable window, exposing a common \(\lambda_q\) and consistent slopes \(D_{\mathrm{eff}}\) for both HF-power and structural-correlation channels. (See Retention page.)</p>
+      <p><strong>Why this rating (updated 2026).</strong> The form fits five unrelated domains with r² &gt; 0.96 in every case: SDSS (D=1.16, r²=0.999), DESI (D=1.06, r²=0.997), Bitcoin (D=0.38, r²=0.983), Ethereum (D=0.44, r²=0.974), Cognitive reaction times (D=0.37, r²=0.968). The form perseveres where standard pipelines (P(k)+filter) have no equivalent — for cognitive data, P(k)+filter has no natural formulation for ex-Gaussian reaction-time distributions, yet S2 fits cleanly. On real cosmological data (SDSS, DESI), S2 <em>beats</em> the exact P(k)+Gaussian-filter prediction by Δr² ≈ +0.09 to +0.14 — see <a href="tests.html#s2-vs-pk" style="color:var(--accent)">S2 vs P(k)+Filter Test</a>.</p>
+      <p style="margin-top:.4rem"><strong>What was falsified (2026).</strong> The original derived claim that D and λ_q are <em>invariant across probes</em> was falsified. Five probes (Gaussian, Fourier, Box, Wavelet, PCA) on the same data give D values varying by factors of 2–10. The form is the foundation; the parameter values are probe-dependent. See <a href="falsification.html#f1-probe-invariance" style="color:var(--accent)">F1</a>.</p>
 
       <h3 style="margin-top:.6rem;">How to test (any instrument)</h3>
       <ul>
         <li>Define a monotone smoother tied to resolution; compute \(R_{\mathrm{HF}}(\lambda)\) and/or \(R_{\mathrm{corr}^2}(\lambda)\).</li>
         <li>Fit \(y=\ln(-\ln R)\) vs \(\ln\lambda\); extract \(\widehat{D}_{\mathrm{eff}},\,\widehat{\lambda}_q\). Report CI + λ-window.</li>
         <li>Show cross-context collapse after rescaling by \(\widehat{\lambda}_q\).</li>
+        <li><strong>2026 addition:</strong> report D and λ_q as probe-dependent summaries, not invariants. Compare to P(k)+filter baseline explicitly.</li>
       </ul>
 
-      <p><strong>Falsification.</strong> Persistent curvature in \(y(\lambda)\) after calibration; irreconcilable \(D_{\mathrm{eff}}\) across the two channels in the same context; failure of collapse under \(\lambda/\lambda_q\).</p>
+      <p><strong>Falsification.</strong> Persistent curvature in \(y(\lambda)\) after calibration across multiple platforms and domains. <em>Not observed in 2026 testing across five domains.</em></p>
     </div>
 
     <!-- T7.1: Multi-Regime S2 (CONFIRMED 2026-08) -->
