@@ -93,7 +93,7 @@
   <div class="card hero">
     <h1>AI Assessment (0–10) — Quick compare</h1>
     <p class="kicker">ChatGPT-5 Deep Research verdict distilled into a compact 0–10 matrix. Higher is better.</p>
-    <p class="note">Numbers are heuristic and should be refreshed as new theorems and data arrive.</p>
+    <p class="note">Numbers are heuristic and should be refreshed as new theorems and data arrive. <strong>2026 update:</strong> the empirical status row (S2 Retention) has been refined — the stretched-exponential form survives across five domains with r² &gt; 0.96, but the original claim of D-invariance across probes was falsified. See <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a>.</p>
   </div>
 
   <style>
@@ -276,20 +276,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

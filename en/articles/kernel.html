@@ -202,7 +202,7 @@
 <section class="content-section article-shell">
   <div class="section-header">
     <h1 class="section-title">The Projection Kernel</h1>
-    <p class="muted">Basics first: push-forward, fibers, constants-as-settings, retention, and invariants</p>
+    <p class="muted">Basics first: push-forward, fibers, constants-as-settings, retention, and invariants. <strong>2026 update:</strong> the kernel invariants (\(\lambda_q, D_{\mathrm{eff}}\)) are now understood to be <em>probe-dependent</em> rather than invariant across probes — see <a href="../falsification.html#f1-probe-invariance" style="color:var(--accent)">F1 Probe Invariance</a>. The probe-as-manifestation interpretation is retained as a philosophical reframe in <a href="../kernel.html#manifestation" style="color:var(--accent)">Kernel page</a>.</p>
   </div>
 
 
@@ -465,20 +465,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

@@ -94,6 +94,11 @@
   <section class="content-section">
     <div class="section-header">
       <h1 class="section-title">Статьи</h1>
+
+      <p style="background:rgba(142,197,232,.06);border-left:3px solid var(--accent);padding:.5rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;margin:.5rem 0;color:var(--ui-text)">
+        <strong>Статус 2026:</strong> Форма S2 \(R(\lambda)=\exp[-(\lambda/\lambda_q)^D]\) выживает на 5 доменах (SDSS, DESI, Bitcoin, Ethereum, когнитивные ВР) с r²&gt;0.96. На космологических данных S2 превосходит P(k)+filter на Δr² +0.09 (SDSS), +0.14 (DESI). D <em>не</em> инвариант относительно зондов (варьирует 2–10×). «Змеиная яма» отвергнута. z_depth — систематика обзора. Подробнее: <a href="falsification.html#falsification-2026" style="color:var(--accent)">Программа фальсификации 2026</a>.
+      </p>
+
       <p class="muted">Просмотрите статьи ниже.</p>
     </div>
     <div class="cards-grid">
@@ -162,20 +167,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

@@ -114,11 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <h1>Main Theorems</h1>
       <p class="kicker">Key results derived from DREAM axioms, formulated as testable relationships between invariants.</p>
       <p class="note">
-        Math hidden by default — toggle “Math” in header. Status:
+        Math is now visible by default — toggle "Math" in header to hide. Status:
         <span class="badge ok sm">Confirmed</span>
         <span class="badge warn sm">Partial</span>
         <span class="badge spec sm">Speculative</span>.
       </p>
+      <p class="note" style="margin-top:.4rem"><strong>2026 falsification program:</strong> the theorems below remain formally derived from the axioms. The empirical status of T3 (Retention Law) was clarified in 2026: the stretched-exponential <em>form</em> survives across five domains (r² &gt; 0.96), but the original claim that D is invariant across probes (a stronger form of T3) was falsified. See <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a>.</p>
     </div>
 
     <!-- Capsule -->
@@ -414,20 +415,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

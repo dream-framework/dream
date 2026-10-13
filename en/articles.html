@@ -94,7 +94,7 @@
   <section class="content-section">
     <div class="section-header">
       <h1 class="section-title">Articles</h1>
-      <p class="muted">Browse the articles below.</p>
+      <p class="muted">Browse the articles below. <strong>2026 update:</strong> the articles have been updated to reflect the 2026 falsification program — the stretched-exponential form survives across five domains, the original "D invariant across probes" claim is falsified, and the snake-pit rescue is rejected. See <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a> for full details.</p>
     </div>
     <div class="cards-grid">
     <a class="card doc-card" href="articles/introduction.html">
@@ -162,20 +162,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

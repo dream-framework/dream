@@ -203,8 +203,12 @@
 
     <!-- INTRO CARD -->
     <div class="card">
-      <span class="kicker">DREAM — Retention</span>
+      <span class="kicker">DREAM — Retention (2026 status)</span>
       <h1>The Retention Cliff: How Finite Resolution Shapes Reality</h1>
+
+      <p style="background:rgba(142,197,232,.06);border-left:3px solid var(--accent);padding:.6rem 1rem;border-radius:0 8px 8px 0;font-size:.92rem;margin:1rem 0">
+        <strong>2026 falsification summary:</strong> The stretched-exponential form \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\) survives across five unrelated domains (SDSS r²=0.999, DESI r²=0.997, Bitcoin r²=0.983, Ethereum r²=0.974, Cognitive r²=0.968). On real cosmological data, S2 <em>beats</em> the standard P(k)+Gaussian-filter pipeline by Δr² ≈ +0.09 (SDSS) and +0.14 (DESI). The original claim "D invariant across probes" was falsified — D varies 2–10× across 5 probes on the same data. D and λ_q are now understood as <em>probe-dependent summaries</em>, not kernel invariants in the strong sense. The snake-pit multi-S2 rescue was rejected; the z_depth trend was traced to standard survey systematics. See <a href="../falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a> for full details.
+      </p>
 
       <div data-mode="science">
         <p>
@@ -215,7 +219,7 @@
           \alpha(\lambda)=\exp\!\Big[-\Big(\tfrac{\lambda}{\lambda_q}\Big)^{D_{\mathrm{eff}}}\Big],
         \]
         <p>
-          where \( \lambda_q \) marks the coherence threshold (the “cliff”) and \( D_{\mathrm{eff}} \) is an effective spectral exponent that governs how swiftly information decays with scale. Everything below explains how this law arises from the push-forward, how it couples to focusing geometry, and how it organizes the spectrum of retained modes.
+          where \( \lambda_q \) marks the coherence threshold (the "cliff") and \( D_{\mathrm{eff}} \) is an effective spectral exponent that governs how swiftly information decays with scale. Everything below explains how this law arises from the push-forward, how it couples to focusing geometry, and how it organizes the spectrum of retained modes.
         </p>
       </div>
 
@@ -527,20 +531,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

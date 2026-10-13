@@ -93,9 +93,10 @@
 
   <!-- HERO -->
   <div class="card hero" style="margin-bottom:1rem;">
-    <h1>Retention Law (S2) <span class="badge ok sm">Guardrailed · 84.6% survival</span></h1>
-    <p class="kicker">The same stretched-exponential loss of contrast and correlation with probe scale across disparate domains — surviving formal guardrails in 84.6% of eligible datasets.</p>
+    <h1>Retention Law (S2) <span class="badge ok sm">Multidomain Survival · r² &gt; 0.96 in 5 domains</span></h1>
+    <p class="kicker">The same stretched-exponential form fits cosmological (SDSS, DESI), financial (Bitcoin, Ethereum), and cognitive (reaction times) domains. The form survives; the original "D invariant across probes" claim was falsified in the 2026 program — see <a href="falsification.html#falsification-2026" style="color:var(--accent)">2026 Falsification Program</a>.</p>
     <p class="note" style="margin-top:.6rem"><strong>Refinement (T7.1):</strong> S2 is the <em>local</em> law of retention. The kernel enters different regimes at reproducible scale thresholds, and the global curve is a piecewise composition of S2 regimes — see <a href="#t71" style="color:var(--accent)">T7.1 below</a>. Confirmed on 25 real datasets (binomial p = 3.4×10⁻¹⁸ vs single-S2 null).</p>
+    <p class="note" style="margin-top:.6rem"><strong>2026 falsification summary:</strong> the form fits five domains with r² &gt; 0.96 in every case. On real cosmological data (SDSS, DESI), S2 <em>beats</em> the standard P(k)+Gaussian-filter pipeline by Δr² ≈ +0.09 to +0.14. D and λ_q are probe-dependent summaries, not invariants. The "snake pit" multi-S2 rescue was rejected; the z_depth trend was traced to standard survey systematics.</p>
   </div>
 
   <!-- ============================ -->
@@ -616,20 +617,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

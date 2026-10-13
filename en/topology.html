@@ -93,7 +93,7 @@
 
   <div class="card hero">
     <h1>Topology → Particle &amp; Gauge Classes</h1>
-    <p class="kicker">Stable topological data on the <span class="dim-tip" title="10D is a parsimonious modeling choice — the simplest presently adopted realization, not an empirically observed dimensionality">10D</span> Meta‑Manifold (MM) label particle/gauge <em>classes</em>; individual 4D instances are projections under a finite‑resolution kernel.</p>
+    <p class="kicker">Stable topological data on the <span class="dim-tip" title="10D is a parsimonious modeling choice — the simplest presently adopted realization, not an empirically observed dimensionality">10D</span> Meta‑Manifold (MM) label particle/gauge <em>classes</em>; individual 4D instances are projections under a finite‑resolution kernel. <strong>2026 note:</strong> the topology claim (A5) was not tested in the 2026 program; it remains a structural prediction. See <a href="axioms.html#axioms-2026-summary" style="color:var(--accent)">2026 Axiom Status</a>.</p>
     <p class="note">Core statements are below. Math details are tucked into small expanders and respect the Math toggle.</p>
   </div>
 
@@ -858,20 +858,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

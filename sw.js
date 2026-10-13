@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v66-rewrite-2026';
+const CACHE_VERSION = 'dream-v67-mathfix-2026';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

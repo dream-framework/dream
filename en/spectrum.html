@@ -95,7 +95,7 @@
     <!-- HERO in-grid (no layout shifts) -->
     <div class="card hero">
   <h1>Fractal Spectrum & D<sub>eff</sub></h1>
-  <p class="kicker">The effective spectral exponent \(D_{\mathrm{eff}}\) controls mode counting and density of states. Forecasts rely only on kernel invariants.</p>
+  <p class="kicker">The effective spectral exponent \(D_{\mathrm{eff}}\) controls mode counting and density of states. Forecasts rely only on kernel invariants. <strong>2026 note:</strong> D<sub>eff</sub> is now understood as a probe-dependent summary, not an invariant across probes — see <a href="falsification.html#f1-probe-invariance" style="color:var(--accent)">F1 Probe Invariance</a>.</p>
   <p class="note">Math is hidden by default. Use the “Math” toggle to reveal formulas.</p>
 </div>
 
@@ -519,20 +519,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

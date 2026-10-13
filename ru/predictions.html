@@ -96,6 +96,20 @@
     <p class="kicker">Статус в соответствии со страницами сайта: S2 (Закон сохранения информации) подтверждён; S3 сильно поддерживает S2 (частично); S1 отнесён к спекулятивным.</p>
   </div>
 
+  <!-- 2026 Falsification Status Banner (RU) -->
+  <div class="card" style="border-left: 4px solid var(--accent); margin-top:1rem">
+    <h2>Статус 2026 — Программа фальсификации</h2>
+    <p class="core">В 2026 году выполнены пять мета-тестов против самого утверждения S2. Результаты:</p>
+    <ul>
+      <li><strong>Что выжило:</strong> растянуто-экспоненциальная форма \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\) аппроксимирует пять разных доменов (SDSS, DESI, Bitcoin, Ethereum, когнитивные времена реакций) с r² &gt; 0.96 в каждом. На реальных космологических данных S2 <em>превосходит</em> стандартный пайплайн P(k)+filter на Δr² ≈ +0.09 (SDSS) и +0.14 (DESI). T7.1 (мульти-режимный S2) подтверждён: 25 датасетов, p = 3.4×10⁻¹⁸.</li>
+      <li><strong>Что фальсифицировано:</strong> утверждение «D инвариантен относительно зондов» — D варьирует в 2–10 раз между пятью зондами (Гаусс, Фурье, Бокс, Вейвлет, PCA) на одних и тех же данных. Утверждение «S2 — внутренний закон MM» в сильном смысле — форма зависит от зонда, а не от MM.</li>
+      <li><strong>Что отвергнуто:</strong> «змеиная яма» (много-S2 поле в каждой точке пространства-времени) — добавляет степени свободы без увеличения предсказательной силы.</li>
+      <li><strong>Что объяснено стандартной космологией:</strong> тренд z_depth (D уменьшается с красным смещением) реален, но объясняется эволюцией bias трейсеров, RSD и функцией отбора, а не сигналом ядра.</li>
+    </ul>
+    <p class="note">Полные детали: <a href="falsification.html#falsification-2026" style="color:var(--accent)">Программа фальсификации 2026</a>, <a href="tests.html#2026-falsification-program" style="color:var(--accent)">Реестр тестов</a>, <a href="kernel.html#manifestation" style="color:var(--accent)">Интерпретация зонд-как-проявление</a>.</p>
+  </div>
+
+
   <div class="grid two" style="margin-top:1rem">
 
     <!-- S2 -->
@@ -317,20 +331,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

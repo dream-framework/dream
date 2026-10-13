@@ -121,6 +121,9 @@
       <p style="font-size:1.05rem;line-height:1.6;color:var(--ui-text);margin:0 0 .8rem">
         Память — это <strong style="color:var(--accent)">встречный поток жизни против S2</strong> — активное усилие по сохранению избранной информации перед универсальной тенденцией к затуханию удержания. Она никогда не побеждает S2. Она работает <em>внутри</em> затухания: сжимать, отбирать и реконструировать структуру, способную пережить угасание и восстановить утраченное.
       </p>
+      <p style="background:rgba(142,197,232,.06);border-left:3px solid var(--accent);padding:.5rem .9rem;border-radius:0 6px 6px 0;font-size:.85rem;margin:.5rem 0;color:var(--ui-text)">
+        <strong>Статус 2026:</strong> Форма S2, против которой направлена память, выживает на 5 доменах (космологические, финансовые, когнитивные) с r²&gt;0.96. На космологических данных S2 превосходит пайплайн P(k)+filter на Δr² +0.09 до +0.14. D зависит от зонда, не инвариант. Каркас «памяти как встречного потока» не изменился — память остаётся активным встречным потоком против (теперь лучше охарактеризованного) затухания S2. Подробнее: <a href="falsification.html#falsification-2026" style="color:var(--accent)">Программа фальсификации 2026</a>.
+      </p>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem">
         <div style="flex:1;min-width:200px;border-left:2px solid rgba(240,100,100,.3);padding-left:.8rem">
           <div style="font-size:.75rem;color:var(--ui-sub);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Затухание S2 (противник)</div>
@@ -602,20 +605,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const typeset = nodes =>
     (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-  if (document.body.classList.contains('show-math')) typeset();
+  typeset(); // math visible by default; always typeset
   // Math toggle: show/hide math content + persist + re-typeset
   const mt = document.getElementById('mathToggle');
   const MATH_KEY = 'math:on';
-  const MATH_FLAG = 'show-math';
+  const MATH_FLAG = 'hide-math';
   const mathSaved = localStorage.getItem(MATH_KEY);
   if (mathSaved !== null) {
     const on = mathSaved === '1';
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     if (mt) mt.checked = on;
   }
   mt && mt.addEventListener('change', () => {
     const on = mt.checked;
-    document.body.classList.toggle(MATH_FLAG, on);
+    document.body.classList.toggle(MATH_FLAG, !on);
     localStorage.setItem(MATH_KEY, on ? '1' : '0');
     setTimeout(() => typeset(), 0);
   });

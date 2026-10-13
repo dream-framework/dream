@@ -167,8 +167,11 @@
 
       <!-- ===== Title card ===== -->
       <div class="card">
-        <p class="kicker">Speculative · Statistical observation + hypothesis</p>
+        <p class="kicker">Speculative · Statistical observation + hypothesis · 2026 status note added</p>
         <h1>Meta-S2: Recursive Retention</h1>
+        <p style="background:rgba(240,200,120,.06);border-left:3px solid var(--accent-2);padding:.6rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;margin-top:.5rem">
+          <strong>2026 context:</strong> The 2026 falsification program (specifically <a href="../falsification.html#f1-probe-invariance" style="color:var(--accent)">F1 — Probe Invariance</a>) showed that D varies 2–10× across probes on the same data. The distribution of D values analyzed below therefore partly reflects probe variation, not only system variation. The meta-S2 observation (D distribution follows S2 with D_meta ≈ 1.6, R² = 0.978) remains empirically valid, but its interpretation is now more conservative: it describes the spread of D across (system × probe) combinations, not just across systems. The "recursive retention" hypothesis survives as an observation; whether it reflects a true recursion or probe-dependent dispersion is an open question.
+        </p>
       </div>
 
       <hr>
@@ -623,19 +626,19 @@
     });
     const typeset = nodes =>
       (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
-    if (document.body.classList.contains('show-math')) typeset();
+    typeset(); // math visible by default; always typeset
     const mt = document.getElementById('mathToggle');
     const MATH_KEY = 'math:on';
-    const MATH_FLAG = 'show-math';
+    const MATH_FLAG = 'hide-math';
     const mathSaved = localStorage.getItem(MATH_KEY);
     if (mathSaved !== null) {
       const on = mathSaved === '1';
-      document.body.classList.toggle(MATH_FLAG, on);
+      document.body.classList.toggle(MATH_FLAG, !on);
       if (mt) mt.checked = on;
     }
     mt && mt.addEventListener('change', () => {
       const on = mt.checked;
-      document.body.classList.toggle(MATH_FLAG, on);
+      document.body.classList.toggle(MATH_FLAG, !on);
       localStorage.setItem(MATH_KEY, on ? '1' : '0');
       setTimeout(() => typeset(), 0);
     });

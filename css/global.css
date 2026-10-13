@@ -369,13 +369,24 @@ main.container{
 .badges{ display: flex; flex-wrap: wrap; gap: .35rem; }
 
 /* ---- Math toggles ---- */
+/* Math visible by default on all pages. The header "Math" switch is
+   an opt-out for users who want plain-text rendering. When the switch
+   is OFF, the body has class="hide-math" which hides math wrappers. */
 .math-block{
-  display: none;
+  display: block;
   margin: .45rem 0;
   overflow-x: auto;
   overflow-y: hidden;
 }
-.math-inline{ display: none; }
+.math-inline{ display: inline; }
+/* User-disabled math: hide wrapper divs/spans. MathJax inline output
+   (mjx-container) inside paragraphs is hidden by the .hide-math body
+   class via the rule below. */
+body.hide-math .math-block,
+body.hide-math .math-inline{ display: none; }
+body.hide-math mjx-container{ display: none !important; }
+/* Backward compat: if a page sets class="show-math" on body, math
+   stays visible (no-op since it's already visible by default). */
 .show-math .math-block{ display: block; }
 .show-math .math-inline{ display: inline; }
 
