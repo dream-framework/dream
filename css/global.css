@@ -11,7 +11,7 @@
   --card-2:    rgba(59, 74, 95, 0.55);   /* glassmorphism */
   --fg:        #f1f5f9;
   --muted:     #c4d0df;
-  --muted-2:   #94a3b8;
+  --muted-2:   #b0c4d0;
   --border:    #54637a;
   --border-2:  rgba(142, 197, 232, 0.18);
 
@@ -558,9 +558,12 @@ details[open] > summary{ margin-bottom: .4rem; }
 .faq-close{
   background: transparent; border: 0; color: var(--fg);
   font-size: 19px; cursor: pointer; line-height: 1;
-  padding: 0 4px; border-radius: 6px; transition: var(--transition);
+  padding: 6px 10px; border-radius: 6px; transition: var(--transition);
+  min-width: 32px; min-height: 32px;
+  display: flex; align-items: center; justify-content: center;
 }
 .faq-close:hover{ background: rgba(255,255,255,.10); }
+.faq-close:active{ background: rgba(255,255,255,.18); transform: scale(.96); }
 
 .faq-body{ display: flex; flex-direction: column; gap: 10px; padding: 12px; height: 100%; }
 .faq-main{ display: flex; flex-direction: column; gap: 12px; min-height: 0; flex: 1; }
@@ -748,7 +751,21 @@ tr:hover td{ background: rgba(142,197,232,.04); }
 @media print{
   #fx, #chat-container, .faq-dock, .site-header, .site-footer{ display: none !important; }
   body{ background: white; color: black; }
-  .card{ background: white; border: 1px solid #ccc; box-shadow: none; }
+  .card{ background: white; border: 1px solid #ccc; box-shadow: none; color: black; }
+  /* Force all text colors to black/dark in print — many inline-styled
+     elements use light colors (e.g. #cfd4ff, var(--muted)) that are
+     invisible on white. */
+  .card *, .card, .container *, .container,
+  p, h1, h2, h3, h4, h5, li, td, th, span, strong, em, code, pre, a, blockquote,
+  details, summary, table, .note, .kicker, .core, .badge{
+    color: black !important;
+    background: transparent !important;
+    border-color: #999 !important;
+  }
+  a{ text-decoration: underline; }
+  a[href]::after{ content: " (" attr(href) ")"; font-size: .8em; color: #444 !important; }
+  .badge{ border: 1px solid #999 !important; padding: 2px 6px; font-size: .8em; }
+  .badge.ok, .badge.warn, .badge.spec{ background: #eee !important; color: black !important; }
 }
 
 /* ---- Hide OAI citation tags (defensive) ---- */

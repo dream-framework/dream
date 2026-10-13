@@ -52,7 +52,7 @@
     <div id="faqDock" class="faq-dock" aria-hidden="true" role="dialog" aria-modal="false" aria-label="${T.title}">
       <div class="faq-header">
         <h3 id="faqTitle" class="faq-title">${T.title}</h3>
-        <button class="faq-close" id="faqCloseBtn" aria-label="Close"></button>
+        <button class="faq-close" id="faqCloseBtn" aria-label="Close" title="Close">✕</button>
       </div>
       <div class="faq-body">
         <div class="faq-main">
@@ -112,6 +112,12 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && dock.classList.contains('show')) closeDock();
   });
+  // Click outside the dock to close
+  document.addEventListener('click', (e) => {
+    if (!dock.classList.contains('show')) return;
+    if (dock.contains(e.target) || bubble.contains(e.target)) return;
+    closeDock();
+  }, true);  // capture phase to fire before bubble's click handler
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => (
