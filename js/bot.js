@@ -194,7 +194,7 @@
       const r = await fetch(BACKEND_URL + '/groq-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: q, lang }),
+        body: JSON.stringify({ message: q, lang, model: 'qwen/qwen3.8-27b' }),
       });
       const j = await r.json().catch(() => ({ ok: false, reply: T.error }));
       typingOff();
