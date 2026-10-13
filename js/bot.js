@@ -191,12 +191,35 @@
         return;
       }
 
-      const r = await fetch(BACKEND_URL + '/groq-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: q, lang, model: 'qwen/qwen3.8-27b' }),
-      });
-      const j = await r.json().catch(() => ({ ok: false, reply: T.error }));
+      // Model fallback chain — primary may be over capacity (503), so try alternates.
+      // Order chosen for: DREAM-grounded answers first (qwen3.8-27b is best at S2 talk),
+      // then equivalent-size model (gpt-oss-120b), then small fast fallback.
+      const MODELS = ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b'];
+      let j = null;
+      let lastError = null;
+      for (let i = 0; i < MODELS.length; i++) {
+        const model = MODELS[i];
+        try {
+          const r = await fetch(BACKEND_URL + '/groq-chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: q, lang, model }),
+          });
+          j = await r.json().catch(() => ({ ok: false, reply: T.error }));
+          if (j && (j.ok === true || j.reply)) {
+            // Success — show reply
+            break;
+          }
+          lastError = (j && j.error) || T.error;
+          // If 503/over-capacity/rate-limit, try next model. If 404 (model doesn't exist),
+          // also try next. Otherwise (e.g., 500 from Groq), still try next — we have nothing to lose.
+        } catch (e) {
+          lastError = T.error;
+          // network error — try next model
+        }
+        // Small backoff between model attempts
+        if (i < MODELS.length - 1) await new Promise(r => setTimeout(r, 200));
+      }
       typingOff();
 
       if (j && (j.ok === true || j.reply)) {
@@ -206,7 +229,7 @@
           MathJax.typesetPromise([el]).then(() => scrollToBottomOf(el)).catch(() => scrollToBottomOf(el));
         }
       } else {
-        const el = appendMsg((j && j.error) || T.error, 'bot');
+        const el = appendMsg(lastError || T.error, 'bot');
         scrollToBottomOf(el);
       }
     } catch (e) {
