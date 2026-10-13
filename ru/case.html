@@ -97,10 +97,18 @@
     <p class="kicker">Единая проекция и гардрайловый закон сохранения — выживая формальные тесты на допустимость в 84.6% подходящих датасетов, обеспечивая онтологию, парсимонию и ближайшие тесты.</p>
   </div>
 
-  <!-- 2026 Falsification Status Banner (RU) -->
-  <div class="card" style="border-left: 4px solid var(--accent); margin-top:1rem">
-    <h2>Статус 2026 — Программа фальсификации</h2>
-    <p class="core">В 2026 году выполнены пять мета-тестов против самого утверждения S2. Результаты:</p>
+  <!-- 2026 Falsification Status Banner (RU) — collapsible -->
+<details class="card" style="border-left: 4px solid var(--accent); margin-top:1rem" open>
+<summary>
+  <h2 style="margin:0;display:inline">Статус 2026 — Программа фальсификации</h2>
+  <span style="display:block;margin-top:.4rem;font-size:.92rem;font-weight:400;color:var(--muted)">
+    <strong>Выжило:</strong> форма S2 на 5 доменах (r²&gt;0.96); T7.1 (25 датасетов, p=3.4×10⁻¹⁸); S2 превосходит P(k)+filter на космологии (Δr² +0.09 to +0.14).
+    <strong>Фальсифицировано:</strong> D-инвариантность; «S2 — внутренний закон MM»; «змеиная яма»; z_depth как сигнал ядра.
+    <em style="display:block;margin-top:.3rem;font-size:.85rem">Нажмите, чтобы свернуть / развернуть.</em>
+  </span>
+</summary>
+<div>
+<p class="core">В 2026 году выполнены пять мета-тестов против самого утверждения S2. Результаты:</p>
     <ul>
       <li><strong>Что выжило:</strong> растянуто-экспоненциальная форма \(R(\lambda) = \exp[-(\lambda/\lambda_q)^D]\) аппроксимирует пять разных доменов (SDSS, DESI, Bitcoin, Ethereum, когнитивные времена реакций) с r² &gt; 0.96 в каждом. На реальных космологических данных S2 <em>превосходит</em> стандартный пайплайн P(k)+filter на Δr² ≈ +0.09 (SDSS) и +0.14 (DESI). T7.1 (мульти-режимный S2) подтверждён: 25 датасетов, p = 3.4×10⁻¹⁸.</li>
       <li><strong>Что фальсифицировано:</strong> утверждение «D инвариантен относительно зондов» — D варьирует в 2–10 раз между пятью зондами (Гаусс, Фурье, Бокс, Вейвлет, PCA) на одних и тех же данных. Утверждение «S2 — внутренний закон MM» в сильном смысле — форма зависит от зонда, а не от MM.</li>
@@ -108,7 +116,8 @@
       <li><strong>Что объяснено стандартной космологией:</strong> тренд z_depth (D уменьшается с красным смещением) реален, но объясняется эволюцией bias трейсеров, RSD и функцией отбора, а не сигналом ядра.</li>
     </ul>
     <p class="note">Полные детали: <a href="falsification.html#falsification-2026" style="color:var(--accent)">Программа фальсификации 2026</a>, <a href="tests.html#2026-falsification-program" style="color:var(--accent)">Реестр тестов</a>, <a href="kernel.html#manifestation" style="color:var(--accent)">Интерпретация зонд-как-проявление</a>.</p>
-  </div>
+</div>
+</details>
 
 
   <!-- INTRO -->
