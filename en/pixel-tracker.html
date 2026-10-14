@@ -24,10 +24,10 @@
   .stat-card .value{ font-size:1.4rem; font-weight:700; color:var(--fg); margin-top:.2rem; font-family:ui-monospace,SFMono-Regular,monospace; }
   .stat-card .desc{ font-size:.82rem; color:var(--muted); margin-top:.2rem; }
   .record-list{ max-height:400px; overflow-y:auto; padding-right:.4rem; }
-  .record-item{ padding:.5rem .7rem; border-left:3px solid var(--accent); background:rgba(15,23,42,.35); border-radius:0 6px 6px 0; margin-bottom:.4rem; font-size:.85rem; }
+  .record-item{ padding:.5rem .7rem; border-left:3px solid var(--accent); background:rgba(15,23,42,.35); border-radius:0 6px 6px 0; margin-bottom:.4rem; font-size:.85rem; word-break:break-word; overflow-wrap:anywhere; }
   .record-item .date{ color:var(--muted-2); font-size:.78rem; }
   .record-item .scale{ color:var(--accent); font-weight:700; }
-  .record-item a{ color:var(--accent); text-decoration:none; }
+  .record-item a{ color:var(--accent); text-decoration:none; word-break:break-all; }
   .record-item a:hover{ text-decoration:underline; }
   .prediction-card{ background:rgba(142,197,232,.06); border-left:4px solid var(--accent); padding:.8rem 1rem; border-radius:0 10px 10px 0; margin:1rem 0; }
   .prediction-card h3{ margin-top:0; color:var(--accent); }
@@ -218,11 +218,14 @@ async function main(){
       tooltip: {
         trigger: 'item',
         backgroundColor: 'rgba(15,23,42,.95)',
-        borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+        borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0', fontSize: 11, width: 250 },
+        extraCssText: 'max-width:280px; word-break:break-word; white-space:normal;',
         formatter: function(p){
-          return '<b>' + (p.data.name || '') + '</b><br/>' +
+          return '<div style="max-width:260px;word-break:break-word;white-space:normal;font-size:11px;line-height:1.4">' +
+                 '<b>' + (p.data.name || '') + '</b><br/>' +
                  'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
-                 'Scale: ' + formatScale(Math.pow(10, p.data.value[1]));
+                 'Scale: ' + formatScale(Math.pow(10, p.data.value[1])) +
+                 '</div>';
         }
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
@@ -233,7 +236,7 @@ async function main(){
         min: new Date('1860-01-01').getTime(),
         max: new Date().getTime(),  // always end at current date
         nameTextStyle: { color: '#94a3b8' },
-        axisLabel: { color: '#94a3b8' },
+        axisLabel: { color: '#94a3b8', interval: 0 },  // show ALL year labels
         axisLine: { lineStyle: { color: '#3b4f7a' } },
         splitLine: { show: true, lineStyle: { color: 'rgba(120,140,200,.3)', width: 1, type: 'dashed' } },
       },
