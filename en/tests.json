@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-13T23:53:34Z",
+  "exported_at": "2026-10-14T13:58:17Z",
   "total_tests": 317,
   "fields": [
     "id",
@@ -1249,10 +1249,10 @@
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 368.87,
+      "delta_aicc": 368.84,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=368.87). S2+dust fit: D1=1.0063, D2=0.7482, R²=0.9993, AICc=-2148.70. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5625, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.87). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=368.84). S2+dust fit: D1=1.0049, D2=0.7491, R²=0.9993, AICc=-2148.70. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5625, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.84). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
