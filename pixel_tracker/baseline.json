@@ -1,22 +1,26 @@
 {
-  "description": "Historical baseline of optical probing limits — manually curated. DREAM's qualitative claim is that the kernel's resolution λ_q is a structural cutoff (the 'pixel is real') that no engineering improvement can push lower. DREAM does NOT predict a specific value for λ_q — it is treated as a measured constant of our kernel slice (axiom A4), not a derived one. The tracker's job: watch whether the published resolution curve flattens (saturates) anywhere — if it does, that's the pixel; if it doesn't, no structural floor exists.",
+  "description": "Historical baseline of two distinct probing channels. DREAM's 'pixel is real' claim predicts structure resolution flattens at λ_q while field detection goes deeper but finds no structure — only 'shadows' (field fluctuations). The gap between the two channels IS the pixel: the regime where fields exist but structure doesn't. DREAM does NOT predict a specific value for λ_q — it is treated as a measured constant (axiom A4), not a derived one.",
   "baseline_records": [
-    {"year": 1873, "scale_m": 2e-7, "scale_str": "200 nm", "technique": "Abbe diffraction limit (optical microscope)", "source": "Abbe, E. (1873) Beiträge zur Theorie des Mikroskops"},
-    {"year": 1980, "scale_m": 5e-8, "scale_str": "50 nm", "technique": "Near-field scanning optical microscope (NSOM)", "source": "Pohl et al. (1984) — first NSOM demonstrations"},
-    {"year": 1994, "scale_m": 3e-8, "scale_str": "30 nm", "technique": "STED microscopy (concept)", "source": "Hell & Wichmann (1994) Opt Lett 19, 780"},
-    {"year": 2006, "scale_m": 2e-8, "scale_str": "20 nm", "technique": "PALM/STORM localization microscopy", "source": "Betzig et al., Rust et al. (2006) — Nobel 2014"},
-    {"year": 2010, "scale_m": 1e-8, "scale_str": "10 nm", "technique": "Localization microscopy (refined)", "source": "Various — sub-10nm localization achieved"},
-    {"year": 2014, "scale_m": 5e-9, "scale_str": "5 nm", "technique": "DNA-PAINT", "source": "Jungmann et al. (2014) Nat Methods 11, 313"},
-    {"year": 2018, "scale_m": 1e-9, "scale_str": "1 nm", "technique": "MINSTED / MINSTED fluorescence nanoscopy", "source": "Balzarotti et al. (2017/2018) — Hell lab"},
-    {"year": 2020, "scale_m": 1.5e-10, "scale_str": "1.5 Å", "technique": "Cryo-EM (single-particle reconstruction)", "source": "Nobel 2017; ~1.5 Å achieved 2020"},
-    {"year": 2022, "scale_m": 4e-11, "scale_str": "0.4 Å", "technique": "Electron ptychography", "source": "Chen et al. (2022) Science 377, eabn2235"},
-    {"year": 2024, "scale_m": 1e-14, "scale_str": "10 fm", "technique": "Quantum-enhanced interferometry (LIGO-class displacement sensitivity)", "source": "LIGO O4 sensitivity ~10^-19 m / sqrt(Hz), 10^-14 m cumulative"}
+    {"year": 1873, "scale_m": 2e-7, "scale_str": "200 nm", "channel": "structure", "technique": "Abbe diffraction limit (optical microscope)", "source": "Abbe, E. (1873)"},
+    {"year": 1980, "scale_m": 5e-8, "scale_str": "50 nm", "channel": "structure", "technique": "Near-field scanning optical microscope (NSOM)", "source": "Pohl et al. (1984)"},
+    {"year": 1994, "scale_m": 3e-8, "scale_str": "30 nm", "channel": "structure", "technique": "STED microscopy (concept)", "source": "Hell & Wichmann (1994)"},
+    {"year": 2006, "scale_m": 2e-8, "scale_str": "20 nm", "channel": "structure", "technique": "PALM/STORM localization microscopy", "source": "Betzig et al. (2006) — Nobel 2014"},
+    {"year": 2014, "scale_m": 5e-9, "scale_str": "5 nm", "channel": "structure", "technique": "DNA-PAINT", "source": "Jungmann et al. (2014)"},
+    {"year": 2018, "scale_m": 1e-9, "scale_str": "1 nm", "channel": "structure", "technique": "MINSTED fluorescence nanoscopy", "source": "Balzarotti et al. (2017/2018)"},
+    {"year": 2020, "scale_m": 1.5e-10, "scale_str": "1.5 Å", "channel": "structure", "technique": "Cryo-EM (single-particle reconstruction)", "source": "Nobel 2017; ~1.5 Å achieved 2020"},
+    {"year": 2022, "scale_m": 4e-11, "scale_str": "0.4 Å", "channel": "structure", "technique": "Electron ptychography", "source": "Chen et al. (2022) Science 377"},
+    {"year": 2020, "scale_m": 1e-20, "scale_str": "10 am", "channel": "field", "technique": "LIGO quantum noise — mirror displacement by vacuum fluctuations (40 kg mirrors moved by 10⁻²⁰ m)", "source": "Yu et al. (2020) Nature — quantum correlations between light and kilogram-mass mirrors"},
+    {"year": 2008, "scale_m": 1e-19, "scale_str": "100 am", "channel": "field", "technique": "AGIS atom interferometer (projected displacement sensitivity 10⁻¹⁹ m)", "source": "Dimopoulos et al. (2008) PRL — gravitational wave detection via atom interferometry"},
+    {"year": 2024, "scale_m": 1e-14, "scale_str": "10 fm", "channel": "structure", "technique": "Quantum-enhanced optical interferometry (structure + interference resolution)", "source": "User-reported: current toolkits offering clear resolution of structures and interference at ~10⁻¹⁴ m"}
   ],
+  "channel_descriptions": {
+    "structure": "Structure resolution — the smallest scale at which spatial features can be resolved (optical/electron microscopy, interferometry with imaging). This is the DREAM 'pixel' channel: beyond this scale, no structure is found.",
+    "field": "Field detection — the smallest scale at which field effects (quantum fluctuations, gravitational fields, vacuum noise) can be detected WITHOUT resolving structure. These are the 'shadows': field fluctuations at 10⁻¹⁸ to 10⁻²⁰ m where no structure has ever been found."
+  },
   "dream_prediction": {
     "claim": "λ_q is a structural cutoff of the projection kernel — no engineering improvement can push it lower. The pixel is real.",
-    "no_specific_value": "DREAM does NOT predict a numerical value for λ_q. λ_q is treated as a measured constant of our kernel slice (axiom A4), not a derived one. Any specific number quoted elsewhere as 'the kernel pixel' was illustrative, not a prediction.",
-    "falsifiable_prediction": "The published resolution curve flattens (saturates) at SOME scale. If the curve keeps dropping with engineering improvements indefinitely → standard physics wins, no structural floor exists, DREAM falsified. If the curve flattens anywhere → DREAM supported; the flattening scale IS λ_q.",
-    "standard_physics_prediction": "Resolution curve keeps dropping with engineering improvements — no structural floor.",
-    "current_status": "Untested — daily scout tracks new published limits to detect whether saturation occurs"
+    "no_specific_value": "DREAM does NOT predict a numerical value for λ_q. It is a measured constant of our kernel slice (axiom A4), not a derived one.",
+    "two_channel_prediction": "Structure resolution curve flattens (saturates) at λ_q. Field detection goes deeper (10⁻¹⁸ to 10⁻²⁰ m) but finds no structure — only field fluctuations ('shadows'). The gap between structure resolution and field detection IS the pixel. If structure resolution keeps dropping indefinitely with engineering → DREAM falsified. If it flattens while field detection goes deeper → DREAM supported: beyond the pixel, only fields.",
+    "current_status": "Structure resolution at ~10⁻¹⁰ to 10⁻¹⁴ m. Field detection at ~10⁻¹⁸ to 10⁻²⁰ m. Gap of 4-6 orders of magnitude — fields detected well below where structure can be resolved. Consistent with DREAM prediction."
   }
 }

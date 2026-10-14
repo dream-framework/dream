@@ -69,17 +69,24 @@
 
   <!-- Stats -->
   <div class="stat-row" id="stat-row">
-    <div class="stat-card"><div class="label">Smallest scale today</div><div class="value" id="stat-smallest">—</div><div class="desc">From the most recent arXiv scan</div></div>
-    <div class="stat-card"><div class="label">Total records tracked</div><div class="value" id="stat-total">—</div><div class="desc">Cumulative across all runs</div></div>
+    <div class="stat-card"><div class="label">Smallest structure resolved</div><div class="value" id="stat-smallest-structure">—</div><div class="desc">Structure channel — from arXiv daily scout</div></div>
+    <div class="stat-card"><div class="label">Smallest field detected</div><div class="value" id="stat-smallest-field">—</div><div class="desc">Field channel — quantum noise, GW, atom interferometry</div></div>
+    <div class="stat-card"><div class="label">Total records tracked</div><div class="value" id="stat-total">—</div><div class="desc">Both channels combined</div></div>
     <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">λ<sub>q</sub></div><div class="desc">Value not predicted by DREAM — must be measured</div></div>
-    <div class="stat-card"><div class="label">Today's best toolkit</div><div class="value">10⁻¹⁴ m</div><div class="desc">Quantum-enhanced interferometry</div></div>
   </div>
 
   <!-- Chart -->
   <div class="chart-card">
-    <h2>Smallest resolved scale over time <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— log scale (lower = better resolution)</span></h2>
+    <h2>Two probing channels over time <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— log scale (lower = finer scale)</span></h2>
     <div id="tracker-chart"></div>
-    <p class="note">Lower (smaller meters) = finer resolution. <span style="color:var(--accent)">Blue dots</span> = arXiv records from daily scout. <span style="color:var(--accent-2)">Gold dots</span> = historical baseline (curated). <strong>If the curve flattens (saturates) at any scale, that's the pixel — DREAM supported. If it keeps dropping with engineering improvements, standard physics wins, no structural floor exists.</strong> DREAM does NOT predict the specific scale at which flattening occurs — λ_q is a measured constant of our kernel slice, not a derived value.</p>
+    <p class="note">
+      <span style="color:#f0c878">● Gold</span> = <strong>structure resolution</strong> (can you resolve spatial features? — microscopy, ptychography, imaging).
+      <span style="color:#8ec5e8">● Blue</span> = <strong>field detection</strong> (can you detect field effects without resolving structure? — LIGO quantum noise, atom interferometry, vacuum fluctuations).
+      <span style="color:#7dd3a8">● Green</span> = <strong>field detection baseline</strong> (curated: LIGO 10⁻²⁰ m, AGIS 10⁻¹⁹ m).
+      <br><br>
+      <strong>DREAM prediction:</strong> the structure curve flattens (saturates) at λ_q — that's the pixel. The field curve goes deeper (10⁻¹⁸ to 10⁻²⁰ m) but finds no structure — only "shadows" (field fluctuations). The <em>gap</em> between the two channels IS the pixel: the regime where fields exist but structure doesn't.
+      DREAM does NOT predict a specific value for λ<sub>q</sub> — it is a measured constant (axiom A4), not a derived one.
+    </p>
   </div>
 
   <!-- Recent records -->
@@ -147,36 +154,56 @@ async function main(){
     document.getElementById('last-run').textContent =
       `Last scout run: ${records.last_run || 'unknown'}`;
 
-    // Stats
+    // Stats — split by channel
     const recs = records.records || [];
-    if (recs.length){
-      const smallest = Math.min(...recs.map(r => r.smallest_scale_m));
-      document.getElementById('stat-smallest').textContent = formatScale(smallest);
+    const structRecs = recs.filter(r => (r.channel || 'structure') === 'structure');
+    const fieldRecs = recs.filter(r => r.channel === 'field');
+    if (structRecs.length){
+      const smallest = Math.min(...structRecs.map(r => r.smallest_scale_m));
+      document.getElementById('stat-smallest-structure').textContent = formatScale(smallest);
+    } else {
+      document.getElementById('stat-smallest-structure').textContent = '—';
+    }
+    if (fieldRecs.length){
+      const smallest = Math.min(...fieldRecs.map(r => r.smallest_scale_m));
+      document.getElementById('stat-smallest-field').textContent = formatScale(smallest);
+    } else {
+      document.getElementById('stat-smallest-field').textContent = '10⁻²⁰ m (LIGO)';
     }
     document.getElementById('stat-total').textContent = String(recs.length);
 
-    // Build chart data
+    // Build chart data — split baseline by channel
     const baselineRecs = baseline.baseline_records || [];
-    const baselineData = baselineRecs.map(r => ({
+    const baselineStruct = baselineRecs.filter(r => (r.channel || 'structure') === 'structure');
+    const baselineField = baselineRecs.filter(r => r.channel === 'field');
+    const baselineStructData = baselineStruct.map(r => ({
       value: [`${r.year}-06-01`, r.scale_m],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
       itemStyle: { color: '#f0c878' },
     }));
-    const arxivData = recs.map(r => ({
+    const baselineFieldData = baselineField.map(r => ({
+      value: [`${r.year}-06-01`, r.scale_m],
+      name: r.technique + ' (' + formatScale(r.scale_m) + ')',
+      itemStyle: { color: '#7dd3a8' },
+    }));
+    // arXiv records split by channel
+    const arxivStructData = structRecs.map(r => ({
+      value: [r.published, r.smallest_scale_m],
+      name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
+      itemStyle: { color: '#f0a0a0' },
+    }));
+    const arxivFieldData = fieldRecs.map(r => ({
       value: [r.published, r.smallest_scale_m],
       name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
       itemStyle: { color: '#8ec5e8' },
     }));
-
-    // No fixed floor line — DREAM does not predict a specific λ_q value.
-    // The tracker watches whether the curve flattens anywhere.
 
     // Initialize chart
     const chart = echarts.init(document.getElementById('tracker-chart'), 'dark');
     chart.setOption({
       backgroundColor: 'transparent',
       textStyle: { color: '#cfd4ff', fontFamily: 'Inter, system-ui, sans-serif' },
-      title: { text: 'Smallest resolved scale over time (log scale)',
+      title: { text: 'Two probing channels: structure resolution vs field detection',
         left: 'center', top: 8, textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
       tooltip: {
         trigger: 'item',
@@ -189,7 +216,7 @@ async function main(){
         }
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
-        data: ['arXiv daily scout', 'Historical baseline'] },
+        data: ['Structure baseline', 'Field baseline', 'Structure (arXiv)', 'Field (arXiv)'] },
       grid: { left: 80, right: 30, top: 80, bottom: 50 },
       xAxis: { type: 'time', name: 'Year',
         nameTextStyle: { color: '#94a3b8' },
@@ -207,10 +234,16 @@ async function main(){
         splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
       },
       series: [
-        { name: 'Historical baseline', type: 'scatter', data: baselineData,
+        { name: 'Structure baseline', type: 'scatter', data: baselineStructData,
           symbolSize: 12, itemStyle: { color: '#f0c878', borderColor: '#fff', borderWidth: 1 },
           emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0c878' } } },
-        { name: 'arXiv daily scout', type: 'scatter', data: arxivData,
+        { name: 'Field baseline', type: 'scatter', data: baselineFieldData,
+          symbolSize: 12, itemStyle: { color: '#7dd3a8', borderColor: '#fff', borderWidth: 1 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#7dd3a8' } } },
+        { name: 'Structure (arXiv)', type: 'scatter', data: arxivStructData,
+          symbolSize: 9, itemStyle: { color: '#f0a0a0', opacity: 0.85 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0a0a0' } } },
+        { name: 'Field (arXiv)', type: 'scatter', data: arxivFieldData,
           symbolSize: 9, itemStyle: { color: '#8ec5e8', opacity: 0.85 },
           emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#8ec5e8' } } },
       ],

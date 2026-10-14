@@ -37,15 +37,23 @@ ARXIV_BASE = "http://export.arxiv.org/api/query"
 RECORDS_FILE = Path(__file__).parent / "records.json"
 BASELINE_FILE = Path(__file__).parent / "baseline.json"
 
-# Search terms targeting optical-probing limits
+# Search terms targeting two distinct probing channels:
+# 1. Structure resolution — can you resolve spatial features? (optical, electron, etc.)
+# 2. Field detection — can you detect field effects without resolving structure? (LIGO, atom interferometry, quantum noise)
 QUERIES = [
+    # Channel 1: Structure resolution
     'all:"optical resolution" AND cat:physics.optics',
     'all:"nanoscopy" AND cat:physics.optics',
     'all:"super-resolution microscopy" AND cat:physics.optics',
-    'all:"displacement sensitivity" AND cat:quant-ph',
     'all:"interferometry" AND all:"sensitivity" AND cat:physics.optics',
-    'all:"quantum metrology" AND all:"length"',
     'all:"wavefront sensing" AND all:"resolution"',
+    # Channel 2: Field detection (quantum fluctuations, gravitational fields, vacuum noise)
+    'all:"quantum noise" AND all:"displacement" AND cat:quant-ph',
+    'all:"displacement sensitivity" AND cat:quant-ph',
+    'all:"atom interferometry" AND all:"sensitivity"',
+    'all:"quantum metrology" AND all:"length"',
+    'all:"gravitational wave" AND all:"sensitivity" AND all:"strain"',
+    'all:"vacuum fluctuation" AND all:"measurement"',
 ]
 
 # Scale regex — capture length-scale mentions in abstracts
@@ -148,6 +156,10 @@ def main():
         print(f"\nQuery: {q}")
         papers = query_arxiv(q, max_results=15)
         print(f"  got {len(papers)} results")
+        # Classify channel based on query
+        is_field_channel = any(kw in q for kw in ['quantum noise', 'displacement sensitivity', 'atom interferometry',
+                                                     'gravitational wave', 'vacuum fluctuation', 'quantum metrology'])
+        channel = 'field' if is_field_channel else 'structure'
         for p in papers:
             if p['arxiv_id'] in seen_ids:
                 continue
@@ -156,9 +168,23 @@ def main():
             if not scales:
                 continue
             smallest = min(scales)
-            # Skip obvious false positives (scales way outside optical probing regime)
+            # Skip obvious false positives (scales way outside probing regime)
             if smallest > 1e-3 or smallest < 1e-22:
                 continue
+            # Refine channel classification using abstract text
+            field_keywords = ['quantum noise', 'displacement sensitivity', 'gravitational wave',
+                             'atom interferometer', 'vacuum fluctuation', 'strain sensitivity',
+                             'mirror displacement', 'quantum fluctuation', 'squeezed state',
+                             'shot noise', 'radiation pressure']
+            structure_keywords = ['resolution', 'microscopy', 'nanoscopy', 'imaging', 'ptychography',
+                                'localization', 'super-resolution', 'wavefront', 'structural']
+            text_lc = text
+            field_score = sum(1 for kw in field_keywords if kw in text_lc)
+            struct_score = sum(1 for kw in structure_keywords if kw in text_lc)
+            if field_score > struct_score:
+                channel = 'field'
+            elif struct_score > 0:
+                channel = 'structure'
             rec = {
                 'arxiv_id': p['arxiv_id'],
                 'title': p['title'],
@@ -166,12 +192,13 @@ def main():
                 'link': p['link'],
                 'smallest_scale_m': smallest,
                 'smallest_scale_str': format_scale(smallest),
+                'channel': channel,
                 'query': q,
                 'scouted': datetime.datetime.now().isoformat(timespec='seconds'),
             }
             new_records.append(rec)
             seen_ids.add(p['arxiv_id'])
-            print(f"  + {p['arxiv_id']} ({p['published']}) {format_scale(smallest)} — {p['title'][:70]}")
+            print(f"  + [{channel}] {p['arxiv_id']} ({p['published']}) {format_scale(smallest)} — {p['title'][:70]}")
         # Be polite to arXiv API
         time.sleep(3)
 
