@@ -227,11 +227,16 @@ async function main(){
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
         data: ['Structure baseline', 'Field baseline', 'Structure (arXiv)', 'Field (arXiv)'] },
-      grid: { left: 80, right: 30, top: 80, bottom: 50 },
-      xAxis: { type: 'time', name: 'Year',
+      grid: { left: 20, right: 20, top: 80, bottom: 50, containLabel: true },
+      xAxis: {
+        type: 'time', name: 'Year',
+        min: new Date('1860-01-01').getTime(),
+        max: new Date().getTime(),  // always end at current date
         nameTextStyle: { color: '#94a3b8' },
         axisLabel: { color: '#94a3b8' },
-        axisLine: { lineStyle: { color: '#3b4f7a' } } },
+        axisLine: { lineStyle: { color: '#3b4f7a' } },
+        splitLine: { show: true, lineStyle: { color: 'rgba(120,140,200,.3)', width: 1, type: 'dashed' } },
+      },
       yAxis: {
         type: 'value', name: 'Scale (m) — log scale',
         min: -22, max: -4,  // log10 of the range: -22 to -4
