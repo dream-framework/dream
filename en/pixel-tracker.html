@@ -231,7 +231,7 @@ async function main(){
           formatter: function(v){ return v.toExponential(0); }
         },
         axisLine: { lineStyle: { color: '#3b4f7a' } },
-        splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
+        splitLine: { lineStyle: { color: 'rgba(100,120,180,.5)', width: 1, type: 'dashed' } },
       },
       series: [
         { name: 'Structure baseline', type: 'scatter', data: baselineStructData,
