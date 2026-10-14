@@ -86,6 +86,32 @@ def extract_scales(text):
                 pass
     return scales
 
+# Temperature regex — capture temperature mentions in abstracts
+TEMP_PATTERNS = [
+    (re.compile(r'(\d+\.?\d*)\s*(mK|millikelvin)\b', re.I), lambda m: float(m.group(1)) * 0.001),
+    (re.compile(r'(\d+\.?\d*)\s*(μK|uK|microkelvin)\b', re.I), lambda m: float(m.group(1)) * 0.000001),
+    (re.compile(r'(\d+\.?\d*)\s*(nK|nanokelvin)\b', re.I), lambda m: float(m.group(1)) * 0.000000001),
+    (re.compile(r'(\d+\.?\d*)\s*(K|kelvin)\b(?!\w)'), lambda m: float(m.group(1))),
+    (re.compile(r'room\s*temp(?:erature)?\b', re.I), lambda m: 300.0),
+    (re.compile(r'liquid\s*helium\b', re.I), lambda m: 4.0),
+    (re.compile(r'liquid\s*nitrogen\b', re.I), lambda m: 77.0),
+    (re.compile(r'dilution\s*refrigerator\b', re.I), lambda m: 0.01),
+    (re.compile(r'cryogen(?:ic)?\b', re.I), lambda m: 4.0),  # assume ~4K if just "cryogenic"
+]
+
+def extract_temperature(text):
+    """Return the coldest temperature mentioned (in Kelvin), or None."""
+    temps = []
+    for pat, conv in TEMP_PATTERNS:
+        for m in pat.finditer(text):
+            try:
+                v = conv(m)
+                if 0 <= v <= 500:  # sane range
+                    temps.append(v)
+            except Exception:
+                pass
+    return min(temps) if temps else None
+
 def query_arxiv(query, max_results=20):
     """Query arXiv API for recent papers."""
     params = {
@@ -193,6 +219,7 @@ def main():
                 'smallest_scale_m': smallest,
                 'smallest_scale_str': format_scale(smallest),
                 'channel': channel,
+                'temperature_k': extract_temperature(text),
                 'query': q,
                 'scouted': datetime.datetime.now().isoformat(timespec='seconds'),
             }
