@@ -63,14 +63,15 @@
     <h3>Отслеживаемое утверждение</h3>
     <p>DREAM (аксиома A6) предсказывает: микро-макро пропасть ЕСТЬ обрыв λ<sub>q</sub>, а λ<sub>q</sub> — структурное свойство проекционного ядра. <strong>Никакое инженерное улучшение не может сдвинуть λ<sub>q</sub> ниже</strong> — пиксель реален.</p>
     <p>Стандартная физика предсказывает: граница продолжает двигаться с инженерным прогрессом. Никакого структурного пола нет.</p>
-    <p><strong>Фальсифицируемый тест:</strong> если кривая разрешения выравнивается (насыщается) на каком-то масштабе — DREAM подтверждается. Если продолжает падать — DREAM фальсифицирован.</p>
+    <p><strong>Фальсифицируемый тест:</strong> если кривая разрешения выравнивается (насыщается) на каком-то масштабе — DREAM подтверждается, и масштаб выравнивания и есть λ<sub>q</sub>. Если продолжает падать с инженерными улучшениями бесконечно — DREAM фальсифицирован (никакого структурного пола нет).</p>
+    <p style="background:rgba(240,200,120,.06);border-left:3px solid var(--accent-2);padding:.4rem .8rem;border-radius:0 6px 6px 0;font-size:.85rem"><strong>DREAM НЕ предсказывает конкретное значение λ<sub>q</sub>.</strong> λ<sub>q</sub> — измеренная константа нашего среза ядра (аксиома A4), а не выведенная. Трекер следит, выравнивается ли кривая <em>где-то</em> — а не на заранее объявленном значении.</p>
   </div>
 
   <!-- Stats -->
   <div class="stat-row" id="stat-row">
     <div class="stat-card"><div class="label">Наименьший масштаб сегодня</div><div class="value" id="stat-smallest">—</div><div class="desc">Из последнего сканирования arXiv</div></div>
     <div class="stat-card"><div class="label">Всего записей</div><div class="value" id="stat-total">—</div><div class="desc">Накопительно по всем запускам</div></div>
-    <div class="stat-card"><div class="label">Пиксель ядра DREAM</div><div class="value">10⁻²⁰ m</div><div class="desc">Теоретический пол λ_q</div></div>
+    <div class="stat-card"><div class="label">Пиксель ядра DREAM</div><div class="value">λ<sub>q</sub></div><div class="desc">Значение не предсказывается DREAM — должно быть измерено</div></div>
     <div class="stat-card"><div class="label">Лучший инструментарий сегодня</div><div class="value">10⁻¹⁴ m</div><div class="desc">Квантово-улучшенная интерферометрия</div></div>
   </div>
 
@@ -78,7 +79,7 @@
   <div class="chart-card">
     <h2>Наименьший разрешённый масштаб во времени <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— лог. шкала (ниже = лучшее разрешение)</span></h2>
     <div id="tracker-chart"></div>
-    <p class="note">Ниже (меньше метров) = тоньше разрешение. <span style="color:var(--accent)">Синие точки</span> = записи arXiv из ежедневного поиска. <span style="color:var(--accent-2)">Золотые точки</span> = исторический базлайн. Пунктир = предсказанный DREAM пол при λ_q ≈ 10⁻²⁰ м. <strong>Если кривая выравнивается около пунктира — пиксель реален.</strong> Если продолжает падать — стандартная физика побеждает.</p>
+    <p class="note">Ниже (меньше метров) = тоньше разрешение. <span style="color:var(--accent)">Синие точки</span> = записи arXiv из ежедневного поиска. <span style="color:var(--accent-2)">Золотые точки</span> = исторический базлайн. <strong>Если кривая выравнивается (насыщается) на каком-то масштабе — это и есть пиксель, DREAM подтверждается. Если продолжает падать с инженерными улучшениями — стандартная физика побеждает, никакого структурного пола нет.</strong> DREAM НЕ предсказывает конкретный масштаб выравнивания — λ<sub>q</sub> — измеренная константа нашего среза ядра, а не выведенное значение.</p>
   </div>
 
   <!-- Recent records -->
@@ -92,7 +93,7 @@
     <h2>Как работает трекер</h2>
     <p>Поисковик (<code>pixel_tracker/scout.py</code>) ежедневно запрашивает <a href="https://arxiv.org/" style="color:var(--accent)">API arXiv</a> о недавних статьях в <code>physics.optics</code> и <code>quant-ph</code> с терминами вроде «оптическое разрешение», «наноскопия», «интерферометрия», «чувствительность к смещению». Извлекает наименьший масштаб из аннотации и добавляет в таймлайн.</p>
     <p>GitHub Actions запускает поиск ежедневно и коммитит обновления в <code>pixel_tracker/records.json</code>. График читает этот JSON и строит таймлайн.</p>
-    <p class="note"><strong>Caveats:</strong> scale extraction is heuristic (regex over abstract text) — false positives are possible. The Пиксель ядра DREAM at 10⁻²⁰ m is a theoretical claim, not a measured value. The tracker's job is to see whether published resolution records saturate, not to assert they do.</p>
+    <p class="note"><strong>Оговорки:</strong> извлечение масштаба эвристическое (регулярные выражения по тексту) — возможны ложные срабатывания. DREAM не предсказывает конкретное числовое значение λ<sub>q</sub> — рамка рассматривает его как измеренную константу (аксиома A4), а не выведенную. Работа трекера — увидеть, насыщаются ли опубликованные рекорды <em>где-то</em>, а не на заранее объявленном значении.</p>
   </div>
 
 </div>
@@ -109,8 +110,8 @@ async function loadJSON(url){
 }
 
 function formatScale(m){
-  // Show both the named-unit form (fm, am, etc.) AND the m-with-exponent form (10⁻¹⁵ m)
-  // so the connection to DREAM's 10⁻²⁰ m floor is always visible.
+  // Показываем обе формы: именованный юнит (fm, am, и т.д.) и метры с экспонентой (10⁻¹⁵ m)
+  // так чтобы абсолютный масштаб всегда был виден рядом с именем юнита.
   var unit;
   if (m >= 1e-9)       unit = (m*1e9).toExponential(1)  + ' nm';
   else if (m >= 1e-12) unit = (m*1e12).toExponential(1) + ' pm';
@@ -166,34 +167,28 @@ async function main(){
       itemStyle: { color: '#8ec5e8' },
     }));
 
-    // Предсказанный пол DREAM
-    const floorData = [
-      ['1900-01-01', 1e-20],
-      ['2030-12-31', 1e-20],
-    ];
+    // Без фиксированной линии пола — DREAM не предсказывает конкретное значение λ_q.
+    // Трекер следит, выравнивается ли кривая где-то.
 
     // Initialize chart
     const chart = echarts.init(document.getElementById('tracker-chart'), 'dark');
     chart.setOption({
       backgroundColor: 'transparent',
       textStyle: { color: '#cfd4ff', fontFamily: 'Inter, system-ui, sans-serif' },
-      title: { text: 'Наименьший разрешённый масштаб во времени (log scale)',
+      title: { text: 'Наименьший разрешённый масштаб во времени (лог. шкала)',
         left: 'center', top: 8, textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
       tooltip: {
         trigger: 'item',
         backgroundColor: 'rgba(15,23,42,.95)',
         borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
         formatter: function(p){
-          if (p.seriesName === 'Предсказанный пол DREAM'){
-            return '<b>Пиксель ядра DREAM</b><br/>λ<sub>q</sub> ≈ 10⁻²⁰ m<br/>Структурный предел — никакая инженерия его не сдвинет';
-          }
           return '<b>' + (p.data.name || '') + '</b><br/>' +
-                 'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
-                 'Scale: ' + formatScale(p.data.value[1]);
+                 'Дата: ' + formatDate(p.data.value[0]) + '<br/>' +
+                 'Масштаб: ' + formatScale(p.data.value[1]);
         }
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
-        data: ['Ежедневный поиск arXiv', 'Исторический базлайн', 'Предсказанный пол DREAM'] },
+        data: ['Ежедневный поиск arXiv', 'Исторический базлайн'] },
       grid: { left: 80, right: 30, top: 80, bottom: 50 },
       xAxis: { type: 'time', name: 'Год',
         nameTextStyle: { color: '#94a3b8' },
@@ -211,9 +206,6 @@ async function main(){
         splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
       },
       series: [
-        { name: 'Предсказанный пол DREAM', type: 'line', data: floorData,
-          symbol: 'none', lineStyle: { color: '#7dd3a8', width: 2, type: 'dashed' },
-          tooltip: { trigger: 'item' } },
         { name: 'Исторический базлайн', type: 'scatter', data: baselineData,
           symbolSize: 12, itemStyle: { color: '#f0c878', borderColor: '#fff', borderWidth: 1 },
           emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0c878' } } },

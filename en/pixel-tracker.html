@@ -63,14 +63,15 @@
     <h3>The Claim Being Tracked</h3>
     <p>DREAM (axiom A6) predicts: the micro-macro abyss IS the λ<sub>q</sub> cliff, and λ<sub>q</sub> is a structural property of the projection kernel. <strong>No amount of engineering improvement can push λ<sub>q</sub> lower</strong> — the pixel is real.</p>
     <p>Standard physics predicts: the boundary keeps moving with engineering progress. No structural floor.</p>
-    <p><strong>Falsifiable test:</strong> if the resolution curve flattens (saturates) at some scale, DREAM is supported. If it keeps dropping with engineering improvements, DREAM is falsified.</p>
+    <p><strong>Falsifiable test:</strong> if the resolution curve flattens (saturates) at some scale, DREAM is supported — the flattening scale IS λ<sub>q</sub>. If it keeps dropping with engineering improvements indefinitely, DREAM is falsified (no structural floor exists).</p>
+    <p style="background:rgba(240,200,120,.06);border-left:3px solid var(--accent-2);padding:.4rem .8rem;border-radius:0 6px 6px 0;font-size:.85rem"><strong>DREAM does NOT predict a specific value for λ<sub>q</sub>.</strong> λ<sub>q</sub> is treated as a measured constant of our kernel slice (axiom A4), not a derived one. The tracker watches whether the curve flattens <em>somewhere</em> — not at any pre-announced value.</p>
   </div>
 
   <!-- Stats -->
   <div class="stat-row" id="stat-row">
     <div class="stat-card"><div class="label">Smallest scale today</div><div class="value" id="stat-smallest">—</div><div class="desc">From the most recent arXiv scan</div></div>
     <div class="stat-card"><div class="label">Total records tracked</div><div class="value" id="stat-total">—</div><div class="desc">Cumulative across all runs</div></div>
-    <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">10⁻²⁰ m</div><div class="desc">Theoretical λ_q floor</div></div>
+    <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">λ<sub>q</sub></div><div class="desc">Value not predicted by DREAM — must be measured</div></div>
     <div class="stat-card"><div class="label">Today's best toolkit</div><div class="value">10⁻¹⁴ m</div><div class="desc">Quantum-enhanced interferometry</div></div>
   </div>
 
@@ -78,7 +79,7 @@
   <div class="chart-card">
     <h2>Smallest resolved scale over time <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— log scale (lower = better resolution)</span></h2>
     <div id="tracker-chart"></div>
-    <p class="note">Lower (smaller meters) = finer resolution. <span style="color:var(--accent)">Blue dots</span> = arXiv records from daily scout. <span style="color:var(--accent-2)">Gold dots</span> = historical baseline (curated). Dashed line = DREAM's predicted floor at λ_q ≈ 10⁻²⁰ m. <strong>If the curve flattens near the dashed line, the pixel is real.</strong> If it keeps dropping, standard physics wins.</p>
+    <p class="note">Lower (smaller meters) = finer resolution. <span style="color:var(--accent)">Blue dots</span> = arXiv records from daily scout. <span style="color:var(--accent-2)">Gold dots</span> = historical baseline (curated). <strong>If the curve flattens (saturates) at any scale, that's the pixel — DREAM supported. If it keeps dropping with engineering improvements, standard physics wins, no structural floor exists.</strong> DREAM does NOT predict the specific scale at which flattening occurs — λ_q is a measured constant of our kernel slice, not a derived value.</p>
   </div>
 
   <!-- Recent records -->
@@ -92,7 +93,7 @@
     <h2>How the tracker works</h2>
     <p>The scout (at <code>pixel_tracker/scout.py</code>) queries the <a href="https://arxiv.org/" style="color:var(--accent)">arXiv API</a> daily for recent papers in <code>physics.optics</code> and <code>quant-ph</code> with terms like "optical resolution", "nanoscopy", "interferometry", "displacement sensitivity". It extracts the smallest length-scale mentioned in each abstract and appends to a timeline.</p>
     <p>A GitHub Actions workflow runs the scout daily and commits updates to <code>pixel_tracker/records.json</code>. The chart on this page reads that JSON and plots the timeline.</p>
-    <p class="note"><strong>Caveats:</strong> scale extraction is heuristic (regex over abstract text) — false positives are possible. The DREAM kernel pixel at 10⁻²⁰ m is a theoretical claim, not a measured value. The tracker's job is to see whether published resolution records saturate, not to assert they do.</p>
+    <p class="note"><strong>Caveats:</strong> scale extraction is heuristic (regex over abstract text) — false positives are possible. DREAM does not predict a specific numerical value for λ_q — the framework treats it as a measured constant (axiom A4), not a derived one. The tracker's job is to see whether published resolution records saturate <em>somewhere</em>, not at any pre-announced value.</p>
   </div>
 
 </div>
@@ -110,7 +111,7 @@ async function loadJSON(url){
 
 function formatScale(m){
   // Show both the named-unit form (fm, am, etc.) AND the m-with-exponent form (10⁻¹⁵ m)
-  // so the connection to DREAM's 10⁻²⁰ m floor is always visible.
+  // so the absolute scale is always visible alongside the named unit.
   var unit;
   if (m >= 1e-9)       unit = (m*1e9).toExponential(1)  + ' nm';
   else if (m >= 1e-12) unit = (m*1e12).toExponential(1) + ' pm';
@@ -167,11 +168,8 @@ async function main(){
       itemStyle: { color: '#8ec5e8' },
     }));
 
-    // DREAM predicted floor
-    const floorData = [
-      ['1900-01-01', 1e-20],
-      ['2030-12-31', 1e-20],
-    ];
+    // No fixed floor line — DREAM does not predict a specific λ_q value.
+    // The tracker watches whether the curve flattens anywhere.
 
     // Initialize chart
     const chart = echarts.init(document.getElementById('tracker-chart'), 'dark');
@@ -185,16 +183,13 @@ async function main(){
         backgroundColor: 'rgba(15,23,42,.95)',
         borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
         formatter: function(p){
-          if (p.seriesName === 'DREAM predicted floor'){
-            return '<b>DREAM kernel pixel</b><br/>λ<sub>q</sub> ≈ 10⁻²⁰ m<br/>Structural cutoff — no engineering moves it';
-          }
           return '<b>' + (p.data.name || '') + '</b><br/>' +
                  'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
                  'Scale: ' + formatScale(p.data.value[1]);
         }
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
-        data: ['arXiv daily scout', 'Historical baseline', 'DREAM predicted floor'] },
+        data: ['arXiv daily scout', 'Historical baseline'] },
       grid: { left: 80, right: 30, top: 80, bottom: 50 },
       xAxis: { type: 'time', name: 'Year',
         nameTextStyle: { color: '#94a3b8' },
@@ -212,9 +207,6 @@ async function main(){
         splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
       },
       series: [
-        { name: 'DREAM predicted floor', type: 'line', data: floorData,
-          symbol: 'none', lineStyle: { color: '#7dd3a8', width: 2, type: 'dashed' },
-          tooltip: { trigger: 'item' } },
         { name: 'Historical baseline', type: 'scatter', data: baselineData,
           symbolSize: 12, itemStyle: { color: '#f0c878', borderColor: '#fff', borderWidth: 1 },
           emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0c878' } } },

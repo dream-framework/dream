@@ -1,5 +1,5 @@
 {
-  "description": "Historical baseline of optical probing limits — manually curated. The DREAM 'pixel is real' claim predicts the curve should saturate at the kernel's λ_q (a structural cutoff that no engineering can push lower). Standard physics predicts the boundary keeps moving with engineering progress. The tracker tests which is right.",
+  "description": "Historical baseline of optical probing limits — manually curated. DREAM's qualitative claim is that the kernel's resolution λ_q is a structural cutoff (the 'pixel is real') that no engineering improvement can push lower. DREAM does NOT predict a specific value for λ_q — it is treated as a measured constant of our kernel slice (axiom A4), not a derived one. The tracker's job: watch whether the published resolution curve flattens (saturates) anywhere — if it does, that's the pixel; if it doesn't, no structural floor exists.",
   "baseline_records": [
     {"year": 1873, "scale_m": 2e-7, "scale_str": "200 nm", "technique": "Abbe diffraction limit (optical microscope)", "source": "Abbe, E. (1873) Beiträge zur Theorie des Mikroskops"},
     {"year": 1980, "scale_m": 5e-8, "scale_str": "50 nm", "technique": "Near-field scanning optical microscope (NSOM)", "source": "Pohl et al. (1984) — first NSOM demonstrations"},
@@ -10,13 +10,13 @@
     {"year": 2018, "scale_m": 1e-9, "scale_str": "1 nm", "technique": "MINSTED / MINSTED fluorescence nanoscopy", "source": "Balzarotti et al. (2017/2018) — Hell lab"},
     {"year": 2020, "scale_m": 1.5e-10, "scale_str": "1.5 Å", "technique": "Cryo-EM (single-particle reconstruction)", "source": "Nobel 2017; ~1.5 Å achieved 2020"},
     {"year": 2022, "scale_m": 4e-11, "scale_str": "0.4 Å", "technique": "Electron ptychography", "source": "Chen et al. (2022) Science 377, eabn2235"},
-    {"year": 2024, "scale_m": 1e-14, "scale_str": "10 fm", "technique": "Quantum-enhanced interferometry (LIGO-class displacement sensitivity)", "source": "LIGO O4 sensitivity ~10^-19 m / sqrt(Hz), 10^-14 m cumulative"},
-    {"year": 2024, "scale_m": 1e-20, "scale_str": "10 am", "technique": "Theoretical 'pixel sees field discolouration' limit (DREAM kernel pixel)", "source": "DREAM A6 — claimed structural cutoff of the projection kernel"}
+    {"year": 2024, "scale_m": 1e-14, "scale_str": "10 fm", "technique": "Quantum-enhanced interferometry (LIGO-class displacement sensitivity)", "source": "LIGO O4 sensitivity ~10^-19 m / sqrt(Hz), 10^-14 m cumulative"}
   ],
   "dream_prediction": {
-    "claim": "The pixel is real — λ_q is a structural property of the projection kernel, not an engineering limit",
-    "falsifiable_prediction": "Resolution curve flattens (saturates at the kernel's λ_q) — no amount of engineering pushes λ_q lower",
-    "standard_physics_prediction": "Resolution curve keeps dropping with engineering improvements — no structural floor",
+    "claim": "λ_q is a structural cutoff of the projection kernel — no engineering improvement can push it lower. The pixel is real.",
+    "no_specific_value": "DREAM does NOT predict a numerical value for λ_q. λ_q is treated as a measured constant of our kernel slice (axiom A4), not a derived one. Any specific number quoted elsewhere as 'the kernel pixel' was illustrative, not a prediction.",
+    "falsifiable_prediction": "The published resolution curve flattens (saturates) at SOME scale. If the curve keeps dropping with engineering improvements indefinitely → standard physics wins, no structural floor exists, DREAM falsified. If the curve flattens anywhere → DREAM supported; the flattening scale IS λ_q.",
+    "standard_physics_prediction": "Resolution curve keeps dropping with engineering improvements — no structural floor.",
     "current_status": "Untested — daily scout tracks new published limits to detect whether saturation occurs"
   }
 }
