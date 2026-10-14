@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Трекер границы пикселя · D.R.E.A.M</title>
+<meta name="description" content="Daily live tracker of optical probing limits — testing DREAM's 'pixel is real' claim that λ_q is a structural cutoff, not an engineering limit.">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  body{ background:var(--bg); color:var(--fg); }
+  .tracker-wrap{ max-width:1200px; margin:2rem auto; padding:0 1rem; }
+  .chart-card{ background:rgba(15,23,42,.45); border:1px solid var(--border-2); border-radius:14px; padding:1rem; margin:1rem 0; }
+  .chart-card h2{ margin-top:0; color:var(--fg); font-size:1.1rem; }
+  #tracker-chart{ width:100%; height:500px; }
+  .stat-row{ display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0; }
+  .stat-card{ background:rgba(15,23,42,.55); border:1px solid var(--border-2); border-radius:10px; padding:.8rem 1rem; flex:1; min-width:200px; }
+  .stat-card .label{ font-size:.75rem; color:var(--muted-2); text-transform:uppercase; letter-spacing:.04em; font-weight:600; }
+  .stat-card .value{ font-size:1.4rem; font-weight:700; color:var(--fg); margin-top:.2rem; font-family:ui-monospace,SFMono-Regular,monospace; }
+  .stat-card .desc{ font-size:.82rem; color:var(--muted); margin-top:.2rem; }
+  .record-list{ max-height:400px; overflow-y:auto; padding-right:.4rem; }
+  .record-item{ padding:.5rem .7rem; border-left:3px solid var(--accent); background:rgba(15,23,42,.35); border-radius:0 6px 6px 0; margin-bottom:.4rem; font-size:.85rem; }
+  .record-item .date{ color:var(--muted-2); font-size:.78rem; }
+  .record-item .scale{ color:var(--accent); font-weight:700; }
+  .record-item a{ color:var(--accent); text-decoration:none; }
+  .record-item a:hover{ text-decoration:underline; }
+  .prediction-card{ background:rgba(142,197,232,.06); border-left:4px solid var(--accent); padding:.8rem 1rem; border-radius:0 10px 10px 0; margin:1rem 0; }
+  .prediction-card h3{ margin-top:0; color:var(--accent); }
+  .live-badge{ display:inline-block; background:rgba(125,211,168,.18); color:var(--good); border:1px solid rgba(125,211,168,.4); border-radius:999px; padding:2px 10px; font-size:.78rem; font-weight:700; margin-left:.5rem; vertical-align:middle; animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1 } 50%{ opacity:.7 } }
+</style>
+</head>
+<body data-lang="ru" class="">
+
+<header class="site-header">
+  <div class="brand"><span class="dot" aria-hidden="true"></span><a href="index.html">D.R.E.A.M</a></div>
+  <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+    <a class="nav-link" href="retention.html">Retention Law</a>
+    <a class="nav-link" href="axioms.html">Axioms</a>
+    <a class="nav-link" href="kernel.html">Kernel</a>
+    <a class="nav-link active" href="pixel-tracker.html">Pixel Tracker</a>
+    <a class="nav-link" href="falsification.html">Falsification</a>
+    <a class="nav-link" href="tests.html">Tests</a>
+    <a class="nav-link" href="faq.html">FAQ</a>
+  </div></nav>
+</header>
+
+<main class="container">
+<div class="tracker-wrap">
+
+  <!-- Hero -->
+  <div class="card hero">
+    <h1>Трекер границы пикселя <span class="live-badge">● В РЕАЛЬНОМ ВРЕМЕНИ — ежедневный поиск</span></h1>
+    <p class="kicker">Ежедневно отслеживаем наименьшие масштабы, разрешённые оптическим зондированием. Проверяем утверждение DREAM о том, что <strong>λ<sub>q</sub> — реальный пиксель</strong> — структурный предел проекционного ядра, а не инженерное ограничение.</p>
+    <p class="note" id="last-run">Загрузка последнего запуска…</p>
+  </div>
+
+  <!-- The claim -->
+  <div class="prediction-card">
+    <h3>Отслеживаемое утверждение</h3>
+    <p>DREAM (аксиома A6) предсказывает: микро-макро пропасть ЕСТЬ обрыв λ<sub>q</sub>, а λ<sub>q</sub> — структурное свойство проекционного ядра. <strong>Никакое инженерное улучшение не может сдвинуть λ<sub>q</sub> ниже</strong> — пиксель реален.</p>
+    <p>Стандартная физика предсказывает: граница продолжает двигаться с инженерным прогрессом. Никакого структурного пола нет.</p>
+    <p><strong>Фальсифицируемый тест:</strong> если кривая разрешения выравнивается (насыщается) на каком-то масштабе — DREAM подтверждается. Если продолжает падать — DREAM фальсифицирован.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stat-row" id="stat-row">
+    <div class="stat-card"><div class="label">Наименьший масштаб сегодня</div><div class="value" id="stat-smallest">—</div><div class="desc">Из последнего сканирования arXiv</div></div>
+    <div class="stat-card"><div class="label">Всего записей</div><div class="value" id="stat-total">—</div><div class="desc">Накопительно по всем запускам</div></div>
+    <div class="stat-card"><div class="label">Пиксель ядра DREAM</div><div class="value">10⁻²⁰ m</div><div class="desc">Теоретический пол λ_q</div></div>
+    <div class="stat-card"><div class="label">Лучший инструментарий сегодня</div><div class="value">10⁻¹⁴ m</div><div class="desc">Квантово-улучшенная интерферометрия</div></div>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-card">
+    <h2>Наименьший разрешённый масштаб во времени <span style="font-size:.78rem;color:var(--muted-2);font-weight:400">— лог. шкала (ниже = лучшее разрешение)</span></h2>
+    <div id="tracker-chart"></div>
+    <p class="note">Ниже (меньше метров) = тоньше разрешение. <span style="color:var(--accent)">Синие точки</span> = записи arXiv из ежедневного поиска. <span style="color:var(--accent-2)">Золотые точки</span> = исторический базлайн. Пунктир = предсказанный DREAM пол при λ_q ≈ 10⁻²⁰ м. <strong>Если кривая выравнивается около пунктира — пиксель реален.</strong> Если продолжает падать — стандартная физика побеждает.</p>
+  </div>
+
+  <!-- Recent records -->
+  <div class="chart-card">
+    <h2>Недавние записи</h2>
+    <div class="record-list" id="record-list">Загрузка…</div>
+  </div>
+
+  <!-- Method -->
+  <div class="card">
+    <h2>Как работает трекер</h2>
+    <p>Поисковик (<code>pixel_tracker/scout.py</code>) ежедневно запрашивает <a href="https://arxiv.org/" style="color:var(--accent)">API arXiv</a> о недавних статьях в <code>physics.optics</code> и <code>quant-ph</code> с терминами вроде «оптическое разрешение», «наноскопия», «интерферометрия», «чувствительность к смещению». Извлекает наименьший масштаб из аннотации и добавляет в таймлайн.</p>
+    <p>GitHub Actions запускает поиск ежедневно и коммитит обновления в <code>pixel_tracker/records.json</code>. График читает этот JSON и строит таймлайн.</p>
+    <p class="note"><strong>Caveats:</strong> scale extraction is heuristic (regex over abstract text) — false positives are possible. The Пиксель ядра DREAM at 10⁻²⁰ m is a theoretical claim, not a measured value. The tracker's job is to see whether published resolution records saturate, not to assert they do.</p>
+  </div>
+
+</div>
+</main>
+
+<script>
+const ARXIV_RECORDS_URL = '../pixel_tracker/records.json';
+const BASELINE_URL = '../pixel_tracker/baseline.json';
+
+async function loadJSON(url){
+  const r = await fetch(url + '?t=' + Date.now());
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  return r.json();
+}
+
+function formatScale(m){
+  if (m >= 1e-9) return (m*1e9).toExponential(1) + ' nm';
+  if (m >= 1e-12) return (m*1e12).toExponential(1) + ' pm';
+  if (m >= 1e-15) return (m*1e15).toExponential(1) + ' fm';
+  if (m >= 1e-18) return (m*1e18).toExponential(1) + ' am';
+  return m.toExponential(1) + ' m';
+}
+
+function formatDate(iso){
+  // Parse YYYY-MM-DD or full ISO
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('en-CA', {year:'numeric', month:'short', day:'numeric'});
+}
+
+async function main(){
+  try {
+    const [records, baseline] = await Promise.all([
+      loadJSON(ARXIV_RECORDS_URL),
+      loadJSON(BASELINE_URL),
+    ]);
+
+    // Last run
+    document.getElementById('last-run').textContent =
+      `Последний запуск: ${records.last_run || 'unknown'}`;
+
+    // Stats
+    const recs = records.records || [];
+    if (recs.length){
+      const smallest = Math.min(...recs.map(r => r.smallest_scale_m));
+      document.getElementById('stat-smallest').textContent = formatScale(smallest);
+    }
+    document.getElementById('stat-total').textContent = String(recs.length);
+
+    // Build chart data
+    const baselineRecs = baseline.baseline_records || [];
+    const baselineData = baselineRecs.map(r => ({
+      value: [`${r.year}-06-01`, r.scale_m],
+      name: r.technique + ' (' + r.scale_str + ')',
+      itemStyle: { color: '#f0c878' },
+    }));
+    const arxivData = recs.map(r => ({
+      value: [r.published, r.smallest_scale_m],
+      name: r.title + ' (' + r.smallest_scale_str + ')',
+      itemStyle: { color: '#8ec5e8' },
+    }));
+
+    // Предсказанный пол DREAM
+    const floorData = [
+      ['1900-01-01', 1e-20],
+      ['2030-12-31', 1e-20],
+    ];
+
+    // Initialize chart
+    const chart = echarts.init(document.getElementById('tracker-chart'), 'dark');
+    chart.setOption({
+      backgroundColor: 'transparent',
+      textStyle: { color: '#cfd4ff', fontFamily: 'Inter, system-ui, sans-serif' },
+      title: { text: 'Наименьший разрешённый масштаб во времени (log scale)',
+        left: 'center', top: 8, textStyle: { color: '#e2e8f0', fontSize: 13, fontWeight: 600 } },
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: 'rgba(15,23,42,.95)',
+        borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0' },
+        formatter: function(p){
+          if (p.seriesName === 'Предсказанный пол DREAM'){
+            return '<b>Пиксель ядра DREAM</b><br/>λ<sub>q</sub> ≈ 10⁻²⁰ m<br/>Структурный предел — никакая инженерия его не сдвинет';
+          }
+          return '<b>' + (p.data.name || '') + '</b><br/>' +
+                 'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
+                 'Scale: ' + formatScale(p.data.value[1]);
+        }
+      },
+      legend: { top: 32, textStyle: { color: '#cfd4ff' },
+        data: ['Ежедневный поиск arXiv', 'Исторический базлайн', 'Предсказанный пол DREAM'] },
+      grid: { left: 80, right: 30, top: 80, bottom: 50 },
+      xAxis: { type: 'time', name: 'Год',
+        nameTextStyle: { color: '#94a3b8' },
+        axisLabel: { color: '#94a3b8' },
+        axisLine: { lineStyle: { color: '#3b4f7a' } } },
+      yAxis: {
+        type: 'log', name: 'Наименьший разрешённый масштаб (м)',
+        min: 1e-22, max: 1e-4,
+        nameTextStyle: { color: '#94a3b8' },
+        axisLabel: {
+          color: '#94a3b8',
+          formatter: function(v){ return v.toExponential(0); }
+        },
+        axisLine: { lineStyle: { color: '#3b4f7a' } },
+        splitLine: { lineStyle: { color: 'rgba(59,79,122,.2)' } },
+      },
+      series: [
+        { name: 'Предсказанный пол DREAM', type: 'line', data: floorData,
+          symbol: 'none', lineStyle: { color: '#7dd3a8', width: 2, type: 'dashed' },
+          tooltip: { trigger: 'item' } },
+        { name: 'Исторический базлайн', type: 'scatter', data: baselineData,
+          symbolSize: 12, itemStyle: { color: '#f0c878', borderColor: '#fff', borderWidth: 1 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#f0c878' } } },
+        { name: 'Ежедневный поиск arXiv', type: 'scatter', data: arxivData,
+          symbolSize: 9, itemStyle: { color: '#8ec5e8', opacity: 0.85 },
+          emphasis: { scale: 1.4, itemStyle: { shadowBlur: 8, shadowColor: '#8ec5e8' } } },
+      ],
+      animationDuration: 1000,
+    });
+    window.addEventListener('resize', () => chart.resize());
+
+    // Records list
+    const list = document.getElementById('record-list');
+    if (recs.length === 0){
+      list.innerHTML = '<div class="record-item">Пока нет записей — поиск заполнит это.</div>';
+    } else {
+      // Show most recent 20
+      const sorted = recs.slice().sort((a,b) => (b.scouted || '').localeCompare(a.scouted || ''));
+      list.innerHTML = sorted.slice(0, 20).map(r => `
+        <div class="record-item">
+          <span class="date">${formatDate(r.published)}</span> ·
+          <span class="scale">${r.smallest_scale_str}</span> ·
+          <a href="${r.link}" target="_blank" rel="noopener">${r.title.substring(0,100)}${r.title.length>100?'…':''}</a>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    console.error('Tracker failed to load:', e);
+    document.getElementById('last-run').textContent = 'Ошибка загрузки трекера: ' + e.message;
+  }
+}
+
+main();
+</script>
+
+<footer class="site-footer" style="margin-top:3rem;padding:1rem;text-align:center;color:var(--muted-2);font-size:.82rem">
+  Трекер границы пикселя — ежедневный поиск через GitHub Actions по API arXiv. Обновляется автоматически.
+</footer>
+
+</body>
+</html>
