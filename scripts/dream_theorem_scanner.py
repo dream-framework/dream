@@ -845,7 +845,14 @@ def test_cosmology_real():
             'homogeneous, not that all structure vanishes). The coexistence '
             'of Saraswati with large-scale homogeneity is exactly what DREAM '
             'predicts: R_HF(λ) ≺ R_corr²(λ) — fine detail decays, but '
-            'topological skeleton (CPI ridges) survives.'
+            'topological skeleton (CPI ridges) survives. 2026 status: the T4 '
+            'CPI-ridge framing survives the 2026 program untouched — F1 targeted '
+            'D-invariance across probes, not CPI ridge persistence. The fractal-'
+            'dimension framing (D_h ≈ 1.7 reported for Saraswati) is now per-probe '
+            '— it is a measurement under a specific probe, not a probe-invariant '
+            'prediction. Different probes may report different D_h values; the '
+            'qualitative claim (fractal structure exists at this scale, CPI ridge '
+            'persists) survives; the specific D_h value is descriptive, not invariant.'
         ),
     })
     print(f'  Saraswati superstructure: CPI ridge at 200-500 Mpc → CONSISTENT (T4)')
