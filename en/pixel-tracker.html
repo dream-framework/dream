@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pixel Boundary Tracker · D.R.E.A.M</title>
 <meta name="description" content="Daily live tracker of optical probing limits — testing DREAM's 'pixel is real' claim that λ_q is a structural cutoff, not an engineering limit.">
+<!-- Cache-bust: force browser to always fetch fresh version of this page -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <link rel="stylesheet" href="../css/global.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
@@ -111,7 +115,7 @@ const ARXIV_RECORDS_URL = '../pixel_tracker/records.json';
 const BASELINE_URL = '../pixel_tracker/baseline.json';
 
 async function loadJSON(url){
-  const r = await fetch(url + '?t=' + Date.now());
+  const r = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return r.json();
 }

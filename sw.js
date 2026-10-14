@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v83-y-grid-fix3';
+const CACHE_VERSION = 'dream-v84-pwa-cache-bust';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -82,6 +82,14 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(
       fetch(request, {cache: 'no-store'})
+        .then((response) => {
+          // Clone and cache the fresh response for offline fallback
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
         .catch(() => caches.match(request).then((cached) => cached || caches.match('./en/index.html')))
     );
     return;
