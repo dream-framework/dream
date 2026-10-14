@@ -6,7 +6,7 @@
       "published": "2023-06-30",
       "link": "http://arxiv.org/abs/2306.17809v2",
       "smallest_scale_m": 3.0000000000000002e-15,
-      "smallest_scale_str": "3 fm",
+      "smallest_scale_str": "3 fm (3.0×10⁻¹⁵ m)",
       "query": "all:\"displacement sensitivity\" AND cat:quant-ph",
       "scouted": "2026-10-13T23:28:15"
     },
@@ -16,7 +16,7 @@
       "published": "2024-11-21",
       "link": "http://arxiv.org/abs/2411.14069v1",
       "smallest_scale_m": 4.599999999999999e-06,
-      "smallest_scale_str": "4.6e+03 nm",
+      "smallest_scale_str": "4.6e+03 nm (4.6×10⁻⁶ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -26,7 +26,7 @@
       "published": "2025-02-23",
       "link": "http://arxiv.org/abs/2502.16672v1",
       "smallest_scale_m": 1.5600000000000002e-07,
-      "smallest_scale_str": "1.6e+02 nm",
+      "smallest_scale_str": "1.6e+02 nm (1.6×10⁻⁷ m)",
       "query": "all:\"super-resolution microscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:11"
     },
@@ -36,7 +36,7 @@
       "published": "2025-04-06",
       "link": "http://arxiv.org/abs/2504.04611v2",
       "smallest_scale_m": 1e-09,
-      "smallest_scale_str": "1 nm",
+      "smallest_scale_str": "1 nm (1.0×10⁻⁹ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -46,7 +46,7 @@
       "published": "2025-05-26",
       "link": "http://arxiv.org/abs/2505.19798v2",
       "smallest_scale_m": 1.0000000000000001e-07,
-      "smallest_scale_str": "1e+02 nm",
+      "smallest_scale_str": "1e+02 nm (1.0×10⁻⁷ m)",
       "query": "all:\"super-resolution microscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:11"
     },
@@ -56,7 +56,7 @@
       "published": "2025-07-09",
       "link": "http://arxiv.org/abs/2507.06718v1",
       "smallest_scale_m": 7e-08,
-      "smallest_scale_str": "70 nm",
+      "smallest_scale_str": "70 nm (7.0×10⁻⁸ m)",
       "query": "all:\"nanoscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:02"
     },
@@ -66,7 +66,7 @@
       "published": "2025-07-14",
       "link": "http://arxiv.org/abs/2507.10129v1",
       "smallest_scale_m": 3.3000000000000004e-08,
-      "smallest_scale_str": "33 nm",
+      "smallest_scale_str": "33 nm (3.3×10⁻⁸ m)",
       "query": "all:\"nanoscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:02"
     },
@@ -76,7 +76,7 @@
       "published": "2025-07-19",
       "link": "http://arxiv.org/abs/2507.14667v1",
       "smallest_scale_m": 7e-08,
-      "smallest_scale_str": "70 nm",
+      "smallest_scale_str": "70 nm (7.0×10⁻⁸ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -86,7 +86,7 @@
       "published": "2025-08-12",
       "link": "http://arxiv.org/abs/2508.08631v1",
       "smallest_scale_m": 5.000000000000001e-07,
-      "smallest_scale_str": "5e+02 nm",
+      "smallest_scale_str": "5e+02 nm (5.0×10⁻⁷ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -96,7 +96,7 @@
       "published": "2025-09-11",
       "link": "http://arxiv.org/abs/2509.09179v1",
       "smallest_scale_m": 1e-08,
-      "smallest_scale_str": "10 nm",
+      "smallest_scale_str": "10 nm (1.0×10⁻⁸ m)",
       "query": "all:\"nanoscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:02"
     },
@@ -106,7 +106,7 @@
       "published": "2025-09-11",
       "link": "http://arxiv.org/abs/2509.09780v1",
       "smallest_scale_m": 4.0000000000000003e-07,
-      "smallest_scale_str": "4e+02 nm",
+      "smallest_scale_str": "4e+02 nm (4.0×10⁻⁷ m)",
       "query": "all:\"wavefront sensing\" AND all:\"resolution\"",
       "scouted": "2026-10-13T23:28:26"
     },
@@ -116,7 +116,7 @@
       "published": "2026-04-01",
       "link": "http://arxiv.org/abs/2604.00413v1",
       "smallest_scale_m": 4e-08,
-      "smallest_scale_str": "40 nm",
+      "smallest_scale_str": "40 nm (4.0×10⁻⁸ m)",
       "query": "all:\"super-resolution microscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:11"
     },
@@ -126,7 +126,7 @@
       "published": "2026-04-27",
       "link": "http://arxiv.org/abs/2604.24168v1",
       "smallest_scale_m": 1.1e-05,
-      "smallest_scale_str": "1.1e+04 nm",
+      "smallest_scale_str": "1.1e+04 nm (1.1×10⁻⁵ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -136,7 +136,7 @@
       "published": "2026-06-08",
       "link": "http://arxiv.org/abs/2606.09197v1",
       "smallest_scale_m": 5.32e-07,
-      "smallest_scale_str": "5.3e+02 nm",
+      "smallest_scale_str": "5.3e+02 nm (5.3×10⁻⁷ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     },
@@ -146,7 +146,7 @@
       "published": "2026-06-15",
       "link": "http://arxiv.org/abs/2606.16556v1",
       "smallest_scale_m": 6.000000000000001e-08,
-      "smallest_scale_str": "60 nm",
+      "smallest_scale_str": "60 nm (6.0×10⁻⁸ m)",
       "query": "all:\"nanoscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:02"
     },
@@ -156,7 +156,7 @@
       "published": "2026-07-18",
       "link": "http://arxiv.org/abs/2607.16849v1",
       "smallest_scale_m": 6.000000000000001e-09,
-      "smallest_scale_str": "6 nm",
+      "smallest_scale_str": "6 nm (6.0×10⁻⁹ m)",
       "query": "all:\"interferometry\" AND all:\"sensitivity\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:18"
     },
@@ -166,7 +166,7 @@
       "published": "2026-08-01",
       "link": "http://arxiv.org/abs/2608.00456v1",
       "smallest_scale_m": 3.7e-08,
-      "smallest_scale_str": "37 nm",
+      "smallest_scale_str": "37 nm (3.7×10⁻⁸ m)",
       "query": "all:\"nanoscopy\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:02"
     },
@@ -176,7 +176,7 @@
       "published": "2026-08-19",
       "link": "http://arxiv.org/abs/2608.18750v1",
       "smallest_scale_m": 8.100000000000001e-07,
-      "smallest_scale_str": "8.1e+02 nm",
+      "smallest_scale_str": "8.1e+02 nm (8.1×10⁻⁷ m)",
       "query": "all:\"interferometry\" AND all:\"sensitivity\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:18"
     },
@@ -186,7 +186,7 @@
       "published": "2026-08-28",
       "link": "http://arxiv.org/abs/2608.28098v1",
       "smallest_scale_m": 8e-09,
-      "smallest_scale_str": "8 nm",
+      "smallest_scale_str": "8 nm (8.0×10⁻⁹ m)",
       "query": "all:\"interferometry\" AND all:\"sensitivity\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:28:18"
     },
@@ -196,7 +196,7 @@
       "published": "2026-09-22",
       "link": "http://arxiv.org/abs/2609.27007v1",
       "smallest_scale_m": 1.1e-06,
-      "smallest_scale_str": "1.1e+03 nm",
+      "smallest_scale_str": "1.1e+03 nm (1.1×10⁻⁶ m)",
       "query": "all:\"optical resolution\" AND cat:physics.optics",
       "scouted": "2026-10-13T23:27:59"
     }

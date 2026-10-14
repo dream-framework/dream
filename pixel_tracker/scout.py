@@ -192,16 +192,23 @@ def main():
         print("\nNEW_RECORDS_JSON:" + json.dumps({'count': len(new_records)}))
 
 def format_scale(m):
-    """Format a length in meters as a human-readable string."""
-    if m >= 1e-9:
-        return f"{m*1e9:.2g} nm"
-    if m >= 1e-12:
-        return f"{m*1e12:.2g} pm"
-    if m >= 1e-15:
-        return f"{m*1e15:.2g} fm"
-    if m >= 1e-18:
-        return f"{m*1e18:.2g} am"
-    return f"{m:.2e} m"
+    """Format a length in meters as dual form: 'named unit (10^-n m)'."""
+    SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵',
+           '6':'⁶','7':'⁷','8':'⁸','9':'⁹'}
+    if m >= 1e-9:       unit = f"{m*1e9:.2g} nm"
+    elif m >= 1e-12:    unit = f"{m*1e12:.2g} pm"
+    elif m >= 1e-15:    unit = f"{m*1e15:.2g} fm"
+    elif m >= 1e-18:    unit = f"{m*1e18:.2g} am"
+    else:               unit = f"{m:.2g} m"
+    import math
+    exp = math.floor(math.log10(max(m, 1e-30)))
+    mant = m / (10 ** exp)
+    exp_str = ''.join(SUP.get(c, c) for c in str(exp))
+    if mant >= 9.95:
+        m_form = "10" + exp_str + " m"
+    else:
+        m_form = f"{mant:.1f}×10" + exp_str + " m"
+    return f"{unit} ({m_form})"
 
 if __name__ == '__main__':
     main()
