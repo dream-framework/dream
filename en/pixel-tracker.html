@@ -143,6 +143,12 @@ function formatDate(iso){
   return d.toLocaleDateString('en-CA', {year:'numeric', month:'short', day:'numeric'});
 }
 
+// Convert integer to unicode superscript string (e.g. -15 → ⁻¹⁵)
+var SUP_MAP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+function toSuperscript(n){
+  return String(n).split('').map(function(c){ return SUP_MAP[c] || c; }).join('');
+}
+
 async function main(){
   try {
     const [records, baseline] = await Promise.all([
@@ -177,23 +183,23 @@ async function main(){
     const baselineStruct = baselineRecs.filter(r => (r.channel || 'structure') === 'structure');
     const baselineField = baselineRecs.filter(r => r.channel === 'field');
     const baselineStructData = baselineStruct.map(r => ({
-      value: [`${r.year}-06-01`, r.scale_m],
+      value: [`${r.year}-06-01`, Math.log10(r.scale_m)],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
       itemStyle: { color: '#f0c878' },
     }));
     const baselineFieldData = baselineField.map(r => ({
-      value: [`${r.year}-06-01`, r.scale_m],
+      value: [`${r.year}-06-01`, Math.log10(r.scale_m)],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
       itemStyle: { color: '#7dd3a8' },
     }));
     // arXiv records split by channel
     const arxivStructData = structRecs.map(r => ({
-      value: [r.published, r.smallest_scale_m],
+      value: [r.published, Math.log10(r.smallest_scale_m)],
       name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
       itemStyle: { color: '#f0a0a0' },
     }));
     const arxivFieldData = fieldRecs.map(r => ({
-      value: [r.published, r.smallest_scale_m],
+      value: [r.published, Math.log10(r.smallest_scale_m)],
       name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
       itemStyle: { color: '#8ec5e8' },
     }));
@@ -212,7 +218,7 @@ async function main(){
         formatter: function(p){
           return '<b>' + (p.data.name || '') + '</b><br/>' +
                  'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
-                 'Scale: ' + formatScale(p.data.value[1]);
+                 'Scale: ' + formatScale(Math.pow(10, p.data.value[1]));
         }
       },
       legend: { top: 32, textStyle: { color: '#cfd4ff' },
@@ -223,21 +229,20 @@ async function main(){
         axisLabel: { color: '#94a3b8' },
         axisLine: { lineStyle: { color: '#3b4f7a' } } },
       yAxis: {
-        type: 'log', name: 'Smallest resolved scale (m)',
-        min: 1e-22, max: 1e-4,
+        type: 'value', name: 'Scale (m) — log scale',
+        min: -22, max: -4,  // log10 of the range: -22 to -4
+        interval: 1,  // one grid line per integer = one per decade
         splitNumber: 18,
         nameTextStyle: { color: '#94a3b8' },
         axisLabel: {
           color: '#94a3b8',
-          formatter: function(v){ return v.toExponential(0); }
+          formatter: function(v){ return '10' + toSuperscript(v); }
         },
         axisLine: { lineStyle: { color: '#3b4f7a' } },
         splitLine: {
           show: true,
-          lineStyle: { color: 'rgba(120,140,200,.45)', width: 1, type: 'dashed' }
+          lineStyle: { color: 'rgba(120,140,200,.5)', width: 1, type: 'dashed' }
         },
-        minorTick: { show: true, splitNumber: 9 },
-        minorSplitLine: { show: true, lineStyle: { color: 'rgba(120,140,200,.15)', width: 1 } },
       },
       series: [
         { name: 'Structure baseline', type: 'scatter', data: baselineStructData,
