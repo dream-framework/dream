@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-14T13:58:53.059287+00:00",
+  "initialized": "2026-10-14T20:26:25.457214+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3983,11 +3983,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=-22.91&longitude=-43.17&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 0.9399,
-      "r2": 0.7473,
+      "D": 0.9323,
+      "r2": 0.745,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.9399, R²=0.7473. D_eff=0.940 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=25.27). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.9323, R²=0.7450. D_eff=0.932 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=25.62). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,

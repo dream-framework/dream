@@ -217,8 +217,8 @@
             <tr><th>Method</th><th class="num">D_meta</th><th class="num">λ_q</th><th class="num">R² / p</th></tr>
           </thead>
           <tbody>
-            <tr><td>Direct-d least squares</td><td class="num">2.052</td><td class="num">1.420</td><td class="num">R²=0.980</td></tr>
-            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.620</td><td class="num">1.448</td><td class="num">R²=0.971</td></tr>
+            <tr><td>Direct-d least squares</td><td class="num">2.051</td><td class="num">1.420</td><td class="num">R²=0.980</td></tr>
+            <tr><td>Linearized: ln[−ln(Ŝ)] vs ln(d)</td><td class="num">1.620</td><td class="num">1.448</td><td class="num">R²=0.972</td></tr>
             <tr><td>Weibull MLE (all 294)</td><td class="num">1.621</td><td class="num">1.431</td><td class="num">KS p=0.001</td></tr>
           </tbody>
         </table>
@@ -235,12 +235,12 @@
           </tbody>
         </table>
 
-        <p>All three shape estimators agree: D_meta ≈ 1.621 (MLE), 2.052 (direct), 1.620 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 2.490, vs Lognormal = 46.270, vs Exponential = 0.000. No alternative distribution fits better.</p>
+        <p>All three shape estimators agree: D_meta ≈ 1.621 (MLE), 2.051 (direct), 1.620 (linearized). <strong>AIC comparison</strong> shows Weibull is the best-fitting parametric distribution: ΔAIC vs Gamma = 2.490, vs Lognormal = 46.260, vs Exponential = 0.000. No alternative distribution fits better.</p>
 
         <p><strong>Lilliefors KS test</strong> gives p = 0.000. {{ks_p_lilliefors_note|safe}} The distribution also shows multimodality (KDE peaks at multiple D values), consistent with DREAM's prediction of distinct regime clusters (natural, threshold, extraction, extreme). Weibull is the best single-distribution approximation; the true distribution appears to be a mixture of regime-specific Weibulls, as DREAM predicts.</p>
 
         <blockquote class="callout warn">
-          <strong>Prospective update — 2026-10-14 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.621. The estimator range is [2.052, 1.620]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.621 as genuinely new, independent systems are added?
+          <strong>Prospective update — 2026-10-14 (revised):</strong> The original stability claim (ΔD = 0.011) was computed on contaminated data. After removing 4 corrupted entries and 3 optimizer-boundary values (D=5.0), the corrected baseline is D_meta(MLE) = 1.621. The estimator range is [2.051, 1.620]. The previous claim of "incremental stability" is <strong>suspended</strong> because the movement was dominated by data cleaning, not by genuine registry expansion. The clean prospective test starts now: does D_meta(MLE) remain near 1.621 as genuinely new, independent systems are added?
         </blockquote>
 
         <h4>Additional fit statistics (n = 294)</h4>
@@ -250,15 +250,15 @@
           </thead>
           <tbody>
             <tr><td>KS test p-value</td><td class="num">0.001</td><td class="right">Cannot reject Weibull</td></tr>
-            <tr><td>Anderson-Darling statistic</td><td class="num">4.020</td><td class="right">Marginal (5% crit ≈ 0.757)</td></tr>
+            <tr><td>Anderson-Darling statistic</td><td class="num">4.016</td><td class="right">Marginal (5% crit ≈ 0.757)</td></tr>
             <tr><td>Weibull AIC</td><td class="num">645.840</td><td class="right">Best fit (ΔAIC = 0.0)</td></tr>
-            <tr><td>Lognormal AIC</td><td class="num">692.110</td><td class="right">Rejected (ΔAIC = +46.3)</td></tr>
+            <tr><td>Lognormal AIC</td><td class="num">692.100</td><td class="right">Rejected (ΔAIC = +46.3)</td></tr>
             <tr><td>Gamma AIC</td><td class="num">648.330</td><td class="right">Rejected (ΔAIC = +2.5)</td></tr>
-            <tr><td>Exponential AIC</td><td class="num">735.610</td><td class="right">Rejected (ΔAIC = +89.770)</td></tr>
+            <tr><td>Exponential AIC</td><td class="num">735.600</td><td class="right">Rejected (ΔAIC = +89.760)</td></tr>
           </tbody>
         </table>
 
-        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.0005), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (4.0197) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +2.49), which is weakly inferior. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
+        <p><strong>Weibull is the single best fit by AIC.</strong> A KS goodness-of-fit test did not reject the fitted Weibull model at the 5% level (p = 0.0005), though this p-value is approximate because the parameters were estimated from the same data. The Anderson-Darling statistic (4.0161) is above the 5% critical value (~0.757), suggesting the fit is marginal. By AIC, the nearest competitor is gamma (ΔAIC = +2.49), which is weakly inferior. The Weibull (S2) hypothesis is the single best fit by AIC.</p>
 
         <h4>Weibull linearization</h4>
         <p>The linearized plot ln[−ln(Ŝ(d))] vs ln(d) should be linear if the Weibull model is correct. The linear fit gives R² = 0.971, but a quadratic fit improves to R² = 0.972 (ΔR² = 0.000), with a quadratic coefficient of -0.011 — indicating <strong>slight concave curvature</strong>. This means the Weibull model is a good first approximation but not exact; the tails deviate systematically from the linear prediction.</p>
@@ -276,7 +276,7 @@
           <tbody>
             <tr>
               <td>GMM ΔBIC = BIC₂ − BIC₁ (uncensored)</td>
-              <td class="num">-63.490</td>
+              <td class="num">-63.480</td>
               <td class="right">2-comp preferred</td>
             </tr>
             <tr>
@@ -297,7 +297,7 @@
           </tbody>
         </table>
 
-        <p><strong>The bimodality evidence is mixed.</strong> The GMM prefers 2 components (ΔBIC = -63.490, where ΔBIC = BIC₂ − BIC₁; negative means 2-component is preferred). The uncensored cluster means are D ≈ 1.099 (87.500%) and D ≈ 2.559 (12.500%).</p>
+        <p><strong>The bimodality evidence is mixed.</strong> The GMM prefers 2 components (ΔBIC = -63.480, where ΔBIC = BIC₂ − BIC₁; negative means 2-component is preferred). The uncensored cluster means are D ≈ 1.099 (87.500%) and D ≈ 2.559 (12.500%).</p>
 
         <p>However, <strong>Silverman's bootstrap test cannot reject unimodality</strong> (p = 0.635). This means the apparent bimodality may be a small-sample artifact — with 294 points, the second mode is not statistically robust. The GMM result should be treated as suggestive, not confirmed.</p>
 
@@ -330,11 +330,11 @@
             <tr><td>weather</td><td class="num">289</td><td class="num">1.618</td><td class="num">0.000</td><td class="num">-0.003</td></tr>
             <tr><td>wikipedia</td><td class="num">287</td><td class="num">1.646</td><td class="num">0.000</td><td class="num">+0.025</td></tr>
             <tr><td>world bank</td><td class="num">289</td><td class="num">1.605</td><td class="num">0.001</td><td class="num">-0.016</td></tr>
-            <tr><td>zenodo</td><td class="num">92</td><td class="num">1.446</td><td class="num">0.317</td><td class="num">-0.174</td></tr>
+            <tr><td>zenodo</td><td class="num">92</td><td class="num">1.446</td><td class="num">0.366</td><td class="num">-0.175</td></tr>
           </tbody>
         </table>
 
-        <p><strong>D_meta is robust to family exclusion.</strong> The largest shift is ΔD = +0.061 (excluding energy-charts) and ΔD = -0.174 (excluding zenodo). In all cases, D_meta remains stable, and the KS test never rejects Weibull. No single family drives the result.</p>
+        <p><strong>D_meta is robust to family exclusion.</strong> The largest shift is ΔD = +0.061 (excluding energy-charts) and ΔD = -0.175 (excluding zenodo). In all cases, D_meta remains stable, and the KS test never rejects Weibull. No single family drives the result.</p>
 
         <h3>Finding 4: Family-level bootstrap confidence interval</h3>
 
@@ -342,7 +342,7 @@
         <ul>
           <li><strong>D_meta point estimate:</strong> 1.621</li>
           <li><strong>Bootstrap mean:</strong> 1.493</li>
-          <li><strong>95% CI:</strong> [1.060, 1.735]</li>
+          <li><strong>95% CI:</strong> [1.060, 1.734]</li>
           <li><strong>CI width:</strong> 0.675</li>
         </ul>
 
@@ -418,7 +418,7 @@
           <li><strong>"The universe is in extraction regime."</strong> This is too strong. The current sample is biased. We can say "within the current dataset, 202 of 294 fitted retention curves have D > 1, corresponding to faster-than-exponential decay in the fitted S2 model," but we cannot generalize to the universe without a random sample.</li>
           <li><strong>"Extraction cascades upward."</strong> This is a proposed mechanism, not an established consequence. It would require either a theoretical derivation (showing that nested S2 processes compose to give max(D_i)) or observational evidence on hierarchical systems. Neither has been provided.</li>
           <li><strong>"S2 is closed under aggregation."</strong> The current analysis shows <em>distributional recurrence</em> (the parameters are Weibull-distributed), not mathematical closure (the composite retention is S2). These are conceptually distinct. Closure would require defining an aggregation operator and proving it maps S2 to S2.</li>
-          <li><strong>"The distribution is bimodal."</strong> Silverman's test cannot reject unimodality (p = 0.635). The GMM's 2-component preference (ΔBIC = -63.490) is suggestive but not conclusive. With n = 294, the second mode may be a small-sample artifact.</li>
+          <li><strong>"The distribution is bimodal."</strong> Silverman's test cannot reject unimodality (p = 0.635). The GMM's 2-component preference (ΔBIC = -63.480) is suggestive but not conclusive. With n = 294, the second mode may be a small-sample artifact.</li>
         </ul>
 
         <h3>How to test it</h3>
@@ -474,7 +474,7 @@
             <ul>
               <li>The 294 systems are not independent — five cryptocurrencies share a market regime, fifteen weather series share a data provider, multiple FRED series share an economic system. Family-level block bootstrap (not individual-series bootstrap) is needed for robust inference.</li>
               <li>15 D values are censored at the D = 5.0 boundary. A higher optimizer ceiling would clarify whether the high-D tail is genuine or artifact.</li>
-              <li>The Weibull MLE (shape=1.621) and direct-d fit (D_meta=2.052) disagree, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
+              <li>The Weibull MLE (shape=1.621) and direct-d fit (D_meta=2.051) disagree, reflecting sensitivity to the fitting method. The true D_meta likely lies between these estimates.</li>
               <li>Silverman's test cannot reject unimodality (p=0.635), so the GMM's 2-component preference should be treated as suggestive, not confirmed.</li>
             </ul>
           </div>
@@ -542,7 +542,7 @@
 
         <blockquote class="callout">
           <strong>Weibull-preferred distributional recurrence.</strong><br><br>
-          As of 2026-10-14, the 294-system registry yields Weibull MLE shape D_meta = 1.621 (KS p = 0.001). The estimator range is [2.052, 1.620]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 2.490, ΔAIC_Lognormal = 46.270). The family-level bootstrap 95% CI is [1.060, 1.735] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
+          As of 2026-10-14, the 294-system registry yields Weibull MLE shape D_meta = 1.621 (KS p = 0.001). The estimator range is [2.051, 1.620]. The Weibull fit is the single best by AIC. Gamma and Lognormal are competitive but inferior (ΔAIC_Gamma = 2.490, ΔAIC_Lognormal = 46.260). The family-level bootstrap 95% CI is [1.060, 1.734] — wide, reflecting the dependence structure. The clean prospective test is pending: does D_meta(MLE) remain stable as genuinely new independent systems are added?
         </blockquote>
 
         <h3>What survives</h3>
@@ -554,8 +554,8 @@
 
         <h3>What does not survive (suspended claims)</h3>
         <ul>
-          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.621 cannot be treated as a kernel invariant or universal exponent. The estimator range is [2.052, 1.620], and movement under data cleaning shows sensitivity to population and method.</li>
-          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +2.49) and Lognormal (ΔAIC = +46.27) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
+          <li><strong>A precise Meta-S2 constant.</strong> D_meta ≈ 1.621 cannot be treated as a kernel invariant or universal exponent. The estimator range is [2.051, 1.620], and movement under data cleaning shows sensitivity to population and method.</li>
+          <li><strong>Exact Weibull recurrence is supported by AIC.</strong> Gamma (ΔAIC = +2.49) and Lognormal (ΔAIC = +46.26) are competitive but not preferred. The distribution belongs to the Weibull family over the current range.</li>
           <li><strong>Incremental stability.</strong> The "first prospective test passed" claim was based on contaminated data. The clean prospective test starts now.</li>
         </ul>
 
