@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v86-tooltip-wrap-xaxis-fix';
+const CACHE_VERSION = 'dream-v88-plotter-responsive-prov';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
