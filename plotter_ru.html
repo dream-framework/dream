@@ -30,6 +30,17 @@
   button{ padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.04); color:var(--fg); }
   button.primary{ background:var(--accent); color:#071218; border-color:transparent; cursor:pointer; font-weight:600 }
   .row{ display:grid; grid-template-columns:1fr 460px; gap:16px; align-items:start }
+  @media (max-width:768px){ .row{ grid-template-columns:1fr !important; gap:10px !important; } }
+  @media (max-width:768px){ .controls{ gap:6px !important; } #dataset{ flex:0 0 100%; max-width:100%; } }
+  @media (max-width:768px){ .grid-container{ grid-template-columns:1fr !important; } }
+  .grid-container{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:12px 0; }
+  .grid-card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; overflow:hidden; }
+  @media (max-width:768px){ .grid-container{ grid-template-columns:1fr !important; } .grid-card{ height:auto !important; min-height:auto; } }
+  details.prov-collapse > summary{ cursor:pointer; font-weight:700; color:var(--fg); padding:.4rem 0; list-style:none; }
+  details.prov-collapse > summary::-webkit-details-marker{ display:none; }
+  details.prov-collapse > summary::before{ content:'▸ '; color:var(--accent); }
+  details.prov-collapse[open] > summary::before{ content:'▾ '; }
+  details.prov-collapse[open] > summary{ margin-bottom:.5rem; }
   .card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; }
   canvas{ width:100%; height:auto !important; aspect-ratio: 1000 / 520; display:block; background:transparent; }
   .meta{ font-size:13px; color:var(--muted) }
@@ -138,7 +149,12 @@
       <div class="meta"><strong class="bold">Готово:</strong> <span id="done">—</span></div>
       <div class="sep"></div>
     </div>
-    <div class="card">
+  </div>
+
+  <!-- Провенанс и Аудит (сворачиваемый, под графиком) -->
+  <details class="card prov-collapse" open style="margin-top:10px;">
+    <summary>Провенанс и Аудит (нажмите, чтобы свернуть)</summary>
+    <div>
       <div class="prov-row">
         <span class="bold">Источник:</span>
         <span id="prov-url"  class="prov-chip">URL: —</span>
@@ -148,10 +164,9 @@
         <span id="dqBadge"   class="prov-chip">Качество данных: —</span>
       </div>
       <div class="prov-actions">
-        <button id="dl-json">Скачать исходный JSON</button>
-        <button id="dl-ret">Скачать TSV удержания</button>
+        <button id="dl-json">Скачать JSON</button>
+        <button id="dl-ret">Скачать TSV</button>
       </div>
-
       <div class="sep"></div>
       <div class="prov-row" aria-live="polite">
         <span class="bold">Аудит:</span>
@@ -159,18 +174,15 @@
         <span class="bold" style="margin-left:8px;">URP:</span>
         <span id="urpBadge" class="prov-chip">—</span>
       </div>
-
-
       <div class="meta">
         <div><strong>Ось X:</strong> <span id="xunits">samples</span></div>
-        <div><strong>Окна:</strong> геометрия от 1 до ≈N·0.55 (адаптивно)</div>
+        <div><strong>Окна:</strong> геометрические от 1 до ≈N·0.55 (адаптивные)</div>
         <div><strong>Контраст:</strong> <i>S</i>(<i>W</i>) = std(mavg<sub><i>W</i></sub>)/std(raw)</div>
       </div>
       <div class="sep"></div>
-
       <div id="explain" class="explain"></div>
     </div>
-  </div>
+  </details>
 
 <div class="grid-container">
 <!-- Card 1: Concept -->
