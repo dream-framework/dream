@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>html,body{margin:0;padding:0;background:#1e293b;font-family:Inter,system-ui,sans-serif}#chart{width:100%;height:400px}</style>
+</head><body><div id="chart"></div>
+<script>
+var R = [500,1000,2000,5000,10000,20000,50000,100000,200000,500000,1000000,2000000];
+var counts = [99,197,385,907,1674,2856,4994,6734,8074,9116,9526,9771];
+var chart = echarts.init(document.getElementById('chart'), 'dark');
+chart.setOption({
+  backgroundColor: 'transparent',
+  title: {text: 'Solar-like Spectral Pixel (10,000 lines) — SATURATING', left: 'center', top: 10,
+    textStyle: {color: '#e2e8f0', fontSize: 13, fontWeight: 600}},
+  tooltip: {trigger: 'axis',
+    backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a',
+    textStyle: {color: '#e2e8f0', fontSize: 11},
+    formatter: function(p) {
+      return 'R = ' + p[0].axisValue + '<br/>Features: <b>' + p[0].data + '</b>';
+    }},
+  grid: {left: 60, right: 20, top: 70, bottom: 40},
+  xAxis: {type: 'log', name: 'Resolving Power R', nameLocation: 'middle', nameGap: 25,
+    axisLabel: {color: '#94a3b8'}, nameTextStyle: {color: '#94a3b8'},
+    axisLine: {lineStyle: {color: '#3b4f7a'}}},
+  yAxis: {type: 'value', name: 'Resolvable Features',
+    nameLocation: 'middle', nameGap: 35,
+    axisLabel: {color: '#94a3b8'}, nameTextStyle: {color: '#94a3b8'},
+    axisLine: {lineStyle: {color: '#3b4f7a'}},
+    splitLine: {lineStyle: {color: 'rgba(120,140,200,.3)', type: 'dashed'}}},
+  series: [{type: 'line', data: counts, smooth: true,
+    itemStyle: {color: '#8ec5e8'}, lineStyle: {width: 2.5, color: '#8ec5e8'},
+    symbol: 'circle', symbolSize: 7,
+    areaStyle: {color: 'rgba(142,197,232,.1)'}}],
+  animationDuration: 1000
+});
+window.addEventListener('resize', function() { chart.resize(); });
+</script></body></html>

@@ -90,7 +90,7 @@
     <p><strong>Key finding:</strong> all four elements show saturation — the number of resolvable lines plateaus well before R=1,000,000. For hydrogen (23 lines), saturation occurs by R~2,000. For iron (~3000 lines), the growth rate drops from 6.17× (first half) to 0.24× (second half). <strong>This is consistent with DREAM's spectral pixel prediction.</strong></p>
     <p class="note"><strong>Caveat:</strong> saturation here is partly because we're approaching the total line count in the catalog. A proper test would use an infinite-line model (e.g., a dense spectrum where new lines appear at higher R). The current result is suggestive but not conclusive — the saturation we see is the catalog limit, not necessarily the kernel's pixel. A stronger test: compare real spectra (with natural linewidths) at different R and check if the continuum between lines grows without new resolved peaks.</p>
     
-    <img src="../img/tests/spectral_pixel_test.png" alt="Spectral pixel test" class="chart-img">
+    <iframe src="../charts/spectral_pixel.html" style="width:100%;height:420px;border:0;border-radius:8px;background:#1e293b" loading="lazy"></iframe>
   </div>
 
   <!-- Correlation Pixel Test -->
@@ -105,7 +105,7 @@
     <p><strong>Verdict: SATURATING.</strong> The correlation function has exactly one resolvable feature regardless of bin size. This is consistent with DREAM's correlation pixel — the ξ(r) structure saturates immediately and finer resolution doesn't add features.</p>
     <p class="note"><strong>Caveat:</strong> the current implementation uses a coarse 3D grid (N=32) which limits the minimum meaningful bin size. A proper test would use direct pair-counting at sub-Mpc bins with the full galaxy catalog. The result is suggestive but needs refinement.</p>
     
-    <img src="../img/tests/correlation_pixel_test.png" alt="Correlation pixel test" class="chart-img">
+    <iframe src="../charts/correlation_pixel.html" style="width:100%;height:420px;border:0;border-radius:8px;background:#1e293b" loading="lazy"></iframe>
   </div>
 
   <!-- Summary -->
@@ -132,7 +132,7 @@
     <h2>Test 4: Solar-like Spectral Pixel (10,000 lines) <span class="verdict-badge verdict-saturating">SATURATING ✓</span></h2>
     <p><strong>Method:</strong> generated a dense solar-like spectrum with 10,000 absorption lines (power-law distributed depths, natural linewidths) on a continuum. Counted resolvable features at R from 500 to 2,000,000. Unlike Round 1 (which had finite catalogs), this model has effectively infinite lines — new weak lines appear at higher R.</p>
     <p><strong>Result:</strong> growth rate drops from 27.85× (first half) to 0.96× (second half). Ratio: 0.034. <strong>SATURATING.</strong> Even with 10,000 lines available, the number of resolvable features plateaus — consistent with DREAM's spectral pixel. The kernel can't resolve infinitely many lines; it hits a floor.</p>
-    <img src="../img/tests/solar_spectral_pixel_test.png" alt="Solar spectral pixel test" class="chart-img">
+    <iframe src="../charts/solar_spectral_pixel.html" style="width:100%;height:420px;border:0;border-radius:8px;background:#1e293b" loading="lazy"></iframe>
   </div>
 
   <!-- Test 5: Momentum Pixel -->
@@ -140,7 +140,7 @@
     <h2>Test 5: Momentum Pixel (Fabry-Perot cavity) <span class="verdict-badge" style="background:rgba(240,200,120,.18);color:var(--warn);border:1px solid rgba(240,200,120,.4)">PREDICTION</span></h2>
     <p><strong>Method:</strong> computed the number of resolvable cavity modes as finesse F increases. Standard physics: N = Δν × F / FSR (linear growth). DREAM: N saturates at N_max = Δν / δν_q (the momentum pixel).</p>
     <p><strong>Result:</strong> this is a <em>prediction</em>, not a test result. The two models diverge at F_q (the finesse where FWHM = δν_q). Below F_q, both agree. Above F_q, standard keeps growing linearly while DREAM saturates. <strong>Requires experimental data</strong> from a real cavity at varying finesse to distinguish.</p>
-    <img src="../img/tests/momentum_pixel_test.png" alt="Momentum pixel test" class="chart-img">
+    <iframe src="../charts/momentum_pixel.html" style="width:100%;height:420px;border:0;border-radius:8px;background:#1e293b" loading="lazy"></iframe>
   </div>
 
   <!-- Test 6: Correlation Pixel — reframed as MACRO pixel -->
@@ -150,7 +150,7 @@
     <p><strong>Macro pixel:</strong> at ~1 Gpc, the fractal dimension D_h → 3 (homogeneity) and stays 3. No amount of better surveying reveals new structure above ~1 Gpc. The universe becomes homogeneous and stays homogeneous. Saraswati supercluster (200-500 Mpc) is the last CPI ridge before the macro pixel — the last structure before D → 3 saturation.</p>
     <p><strong>Result:</strong> Round 1 showed 1 feature at ALL bin sizes — the single zero crossing where ξ(r) → 0 (transition to homogeneity). This IS the macro pixel: D saturates at 3, no new structure above ~1 Gpc. Round 2 (features growing at finer bins) was measuring DOWNWARD (micro direction) where structure genuinely exists — that's not the saturation. The saturation is UPWARD (macro direction) where D → 3 and structure vanishes.</p>
     <p class="note"><strong>Verdict: SATURATING (macro direction).</strong> The correlation function saturates at large scales — D → 3 at ~1 Gpc, ξ(r) → 0, no new structure. Saraswati is the evidence: it's the last ridge before the macro pixel.</p>
-    <img src="../img/tests/correlation_pixel_v2_test.png" alt="Correlation pixel test" class="chart-img">
+    <iframe src="../charts/correlation_pixel.html" style="width:100%;height:420px;border:0;border-radius:8px;background:#1e293b" loading="lazy"></iframe>
   </div>
 
   <!-- Bidirectional pixel -->
@@ -224,5 +224,6 @@
 <footer class="site-footer" style="margin-top:3rem;padding:1rem;text-align:center;color:var(--muted-2);font-size:.82rem">
   Configuration Space Pixel Tests — testing DREAM's claim that the kernel is existentially myopic in every configuration space.
 </footer>
+<script defer src="../js/sw-update.js"></script>
 </body>
 </html>

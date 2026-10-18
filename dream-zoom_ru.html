@@ -22,6 +22,7 @@
     window.location.replace(url.toString());
     // Stop execution so the old page doesn't render
     document.documentElement.innerHTML='<body style="background:#070b14;color:#2dd4bf;font-family:monospace;padding:20px">Loading fresh version…<script defer src="js/nav-dropdown.js"></script>
+<script defer src="js/sw-update.js"></script>
 </body>';
     throw new Error('redirecting to fresh URL');
   }
