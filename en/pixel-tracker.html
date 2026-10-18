@@ -73,10 +73,10 @@
 
   <!-- Stats -->
   <div class="stat-row" id="stat-row">
-    <div class="stat-card"><div class="label">Smallest structure resolved</div><div class="value" id="stat-smallest-structure">—</div><div class="desc">Structure channel — from arXiv daily scout</div></div>
+    <div class="stat-card"><div class="label">Smallest structure resolved</div><div class="value" id="stat-smallest-structure">—</div><div class="desc">Structure channel — microscopy, ptychography, imaging</div></div>
     <div class="stat-card"><div class="label">Smallest field detected</div><div class="value" id="stat-smallest-field">—</div><div class="desc">Field channel — quantum noise, GW, atom interferometry</div></div>
-    <div class="stat-card"><div class="label">Total records tracked</div><div class="value" id="stat-total">—</div><div class="desc">Both channels combined</div></div>
-    <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">λ<sub>q</sub></div><div class="desc">Value not predicted by DREAM — must be measured</div></div>
+    <div class="stat-card"><div class="label">Coldest temp in records</div><div class="value" id="stat-coldest">—</div><div class="desc">Cooling helps field detection but NOT structure resolution (DREAM)</div></div>
+    <div class="stat-card"><div class="label">DREAM kernel pixel</div><div class="value">λ<sub>q</sub></div><div class="desc">Not predicted by DREAM — must be measured</div></div>
   </div>
 
   <!-- Chart -->
@@ -86,10 +86,12 @@
     <p class="note">
       <span style="color:#f0c878">● Gold</span> = <strong>structure resolution</strong> (can you resolve spatial features? — microscopy, ptychography, imaging).
       <span style="color:#8ec5e8">● Blue</span> = <strong>field detection</strong> (can you detect field effects without resolving structure? — LIGO quantum noise, atom interferometry, vacuum fluctuations).
-      <span style="color:#7dd3a8">● Green</span> = <strong>field detection baseline</strong> (curated: LIGO 10⁻²⁰ m, AGIS 10⁻¹⁹ m).
+      <span style="color:#7dd3a8">● Green</span> = <strong>field detection baseline</strong> (curated: LIGO 10⁻²⁰ m, AGIS 10⁻¹⁹ m, NV center 10⁻¹⁵ m at mK).
       <br><br>
-      <strong>DREAM prediction:</strong> the structure curve flattens (saturates) at λ_q — that's the pixel. The field curve goes deeper (10⁻¹⁸ to 10⁻²⁰ m) but finds no structure — only "shadows" (field fluctuations). The <em>gap</em> between the two channels IS the pixel: the regime where fields exist but structure doesn't.
-      DREAM does NOT predict a specific value for λ<sub>q</sub> — it is a measured constant (axiom A4), not a derived one.
+      <strong>DREAM prediction:</strong> the structure curve flattens (saturates) at λ_q — that's the pixel. The field curve goes deeper (10⁻¹⁵ to 10⁻²⁰ m) but finds no structure — only "shadows" (field fluctuations). The <em>gap</em> between the two channels IS the pixel.
+      <br><br>
+      <strong>Temperature test:</strong> the structure floor does NOT move with cooling. Cryo-EM at 4K resolves structure at ~10⁻¹⁰ m. Electron ptychography at 95K resolves at ~10⁻¹¹ m. Optical interferometry at 300K resolves at ~10⁻¹⁴ m. Meanwhile LIGO at 300K detects fields at 10⁻²⁰ m, NV centers at mK detect fields at 10⁻¹⁵ m. <strong>The gap persists across temperature</strong> — consistent with DREAM's claim that the pixel is structural (kernel), not thermal. If structure resolution improves with cooling → standard physics (floor is thermal). If it flattens regardless of T → DREAM supported.
+      DREAM does NOT predict a specific value for λ<sub>q</sub>.
     </p>
   </div>
 
@@ -97,6 +99,13 @@
   <div class="chart-card">
     <h2>Recent scout records</h2>
     <div class="record-list" id="record-list">Loading…</div>
+  </div>
+
+  <!-- Config space pixel tests link -->
+  <div class="card" style="border-left:4px solid var(--accent);margin:1rem 0;">
+    <h2>★ Configuration Space Pixel Tests</h2>
+    <p>The pixel isn't just spatial — it appears in <strong>every configuration space</strong> the kernel produces. We tested the spectral pixel (do resolvable spectral lines saturate?) and the correlation pixel (do ξ(r) features saturate?). <strong>Both saturate</strong> — consistent with DREAM's prediction that the kernel is existentially myopic everywhere.</p>
+    <p><a href="pixel-tests.html" style="color:var(--accent);font-weight:600">→ See the config space pixel tests →</a></p>
   </div>
 
   <!-- Method -->
@@ -164,23 +173,41 @@ async function main(){
     document.getElementById('last-run').textContent =
       `Last scout run: ${records.last_run || 'unknown'}`;
 
-    // Stats — split by channel
+    // Stats — split by channel + coldest temperature
     const recs = records.records || [];
+    const baselineRecsAll = baseline.baseline_records || [];
+    const allRecs = [...recs, ...baselineRecsAll];
     const structRecs = recs.filter(r => (r.channel || 'structure') === 'structure');
     const fieldRecs = recs.filter(r => r.channel === 'field');
     if (structRecs.length){
       const smallest = Math.min(...structRecs.map(r => r.smallest_scale_m));
       document.getElementById('stat-smallest-structure').textContent = formatScale(smallest);
     } else {
-      document.getElementById('stat-smallest-structure').textContent = '—';
+      // Use baseline structure
+      const structBase = baselineRecsAll.filter(r => (r.channel || 'structure') === 'structure');
+      if (structBase.length){
+        const smallest = Math.min(...structBase.map(r => r.scale_m));
+        document.getElementById('stat-smallest-structure').textContent = formatScale(smallest);
+      } else {
+        document.getElementById('stat-smallest-structure').textContent = '—';
+      }
     }
-    if (fieldRecs.length){
-      const smallest = Math.min(...fieldRecs.map(r => r.smallest_scale_m));
+    // Field: use baseline if no arXiv field records yet
+    const allField = [...fieldRecs, ...baselineRecsAll.filter(r => r.channel === 'field')];
+    if (allField.length){
+      const smallest = Math.min(...allField.map(r => r.smallest_scale_m || r.scale_m));
       document.getElementById('stat-smallest-field').textContent = formatScale(smallest);
     } else {
-      document.getElementById('stat-smallest-field').textContent = '10⁻²⁰ m (LIGO)';
+      document.getElementById('stat-smallest-field').textContent = '—';
     }
-    document.getElementById('stat-total').textContent = String(recs.length);
+    // Coldest temperature across all records
+    const temps = allRecs.map(r => r.temperature_k).filter(t => t != null && t > 0);
+    if (temps.length){
+      const coldest = Math.min(...temps);
+      document.getElementById('stat-coldest').textContent = coldest < 1 ? coldest.toExponential(1) + ' K' : coldest + ' K';
+    } else {
+      document.getElementById('stat-coldest').textContent = '—';
+    }
 
     // Build chart data — split baseline by channel
     const baselineRecs = baseline.baseline_records || [];
@@ -190,22 +217,26 @@ async function main(){
     const baselineStructData = baselineStruct.map(r => ({
       value: [`${r.year}-06-01`, Math.log10(r.scale_m)],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
+      temperature: r.temperature_k,
       itemStyle: { color: '#f0c878' },
     }));
     const baselineFieldData = baselineField.map(r => ({
       value: [`${r.year}-06-01`, Math.log10(r.scale_m)],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
+      temperature: r.temperature_k,
       itemStyle: { color: '#7dd3a8' },
     }));
     // arXiv records split by channel
     const arxivStructData = structRecs.map(r => ({
       value: [r.published, Math.log10(r.smallest_scale_m)],
       name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
+      temperature: r.temperature_k,
       itemStyle: { color: '#f0a0a0' },
     }));
     const arxivFieldData = fieldRecs.map(r => ({
       value: [r.published, Math.log10(r.smallest_scale_m)],
       name: r.title + ' (' + formatScale(r.smallest_scale_m) + ')',
+      temperature: r.temperature_k,
       itemStyle: { color: '#8ec5e8' },
     }));
 
@@ -222,10 +253,12 @@ async function main(){
         borderColor: '#3b4f7a', textStyle: { color: '#e2e8f0', fontSize: 11, width: 250 },
         extraCssText: 'max-width:280px; word-break:break-word; white-space:normal;',
         formatter: function(p){
+          var temp = p.data.temperature != null ? p.data.temperature + ' K' : 'N/A';
           return '<div style="max-width:260px;word-break:break-word;white-space:normal;font-size:11px;line-height:1.4">' +
                  '<b>' + (p.data.name || '') + '</b><br/>' +
                  'Date: ' + formatDate(p.data.value[0]) + '<br/>' +
-                 'Scale: ' + formatScale(Math.pow(10, p.data.value[1])) +
+                 'Scale: ' + formatScale(Math.pow(10, p.data.value[1])) + '<br/>' +
+                 'Temperature: ' + temp +
                  '</div>';
         }
       },
@@ -292,6 +325,7 @@ async function main(){
     if (allForList.length === 0){
       list.innerHTML = '<div class="record-item">No records yet.</div>';
     } else {
+<<<<<<< HEAD
       list.innerHTML = allForList.slice(0, 30).map(r => {
         var d = formatDate(r.published);
         var s = formatScale(r.smallest_scale_m);
@@ -302,6 +336,19 @@ async function main(){
         var link = r.link || '#';
         return '<div class="record-item"><span class="date">' + d + '</span> · <span class="scale">' + s + '</span> · ' + c + t + tag + ' <a href="' + link + '" target="_blank" rel="noopener">' + title + '</a></div>';
       }).join('');
+=======
+      // Show most recent 20
+      const sorted = recs.slice().sort((a,b) => (b.scouted || '').localeCompare(a.scouted || ''));
+      list.innerHTML = sorted.slice(0, 20).map(r => `
+        <div class="record-item">
+          <span class="date">${formatDate(r.published)}</span> ·
+          <span class="scale">${formatScale(r.smallest_scale_m)}</span> ·
+          ${r.channel === 'field' ? '<span style="color:#8ec5e8">field</span>' : '<span style="color:#f0c878">struct</span>'} ·
+          ${r.temperature_k != null ? '<span style="color:var(--muted-2)">' + r.temperature_k + ' K</span> ·' : ''}
+          <a href="${r.link}" target="_blank" rel="noopener">${r.title.substring(0,100)}${r.title.length>100?'…':''}</a>
+        </div>
+      `).join('');
+>>>>>>> 13388535b3e4734ac8b1256d86dd155780319242
     }
   } catch (e) {
     console.error('Tracker failed to load:', e);

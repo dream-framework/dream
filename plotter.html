@@ -30,6 +30,9 @@
   button{ padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.04); color:var(--fg); }
   button.primary{ background:var(--accent); color:#071218; border-color:transparent; cursor:pointer; font-weight:600 }
   .row{ display:grid; grid-template-columns:1fr 460px; gap:16px; align-items:start }
+  @media (max-width:768px){ .row{ grid-template-columns:1fr !important; gap:10px !important; } }
+  @media (max-width:768px){ .controls{ gap:6px !important; } #dataset{ flex:0 0 100%; max-width:100%; } }
+  @media (max-width:768px){ .grid-container{ grid-template-columns:1fr !important; } }
   .card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; }
   canvas{ width:100%; height:auto !important; aspect-ratio: 1000 / 520; display:block; background:transparent; }
   .meta{ font-size:13px; color:var(--muted) }
@@ -48,7 +51,14 @@
   .sep{ height:1px; background:var(--border); margin:10px 0 }
   .controls label{ white-space:nowrap; }
   #dataset{ flex:0 0 520px; max-width:520px; }
-  .controls .pill{ margin-left:0; padding:4px 10px; }
+  .grid-container{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:12px 0; }
+  .grid-card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; overflow:hidden; }
+  @media (max-width:768px){ .grid-container{ grid-template-columns:1fr !important; } .grid-card{ height:auto !important; min-height:auto; } }
+  details.prov-collapse > summary{ cursor:pointer; font-weight:700; color:var(--fg); padding:.4rem 0; list-style:none; }
+  details.prov-collapse > summary::-webkit-details-marker{ display:none; }
+  details.prov-collapse > summary::before{ content:'▸ '; color:var(--accent); }
+  details.prov-collapse[open] > summary::before{ content:'▾ '; }
+  details.prov-collapse[open] > summary{ margin-bottom:.5rem; }
   @media (min-width:960px){ .controls{ flex-wrap:nowrap; } }
   #status.meta{ white-space:nowrap; max-width:300px; overflow:hidden; text-overflow:ellipsis; }
 
@@ -138,7 +148,12 @@
       <div class="meta"><strong class="bold">Done:</strong> <span id="done">—</span></div>
       <div class="sep"></div>
     </div>
-    <div class="card">
+  </div>
+
+  <!-- Provenance + Audit (collapsible, below graph) -->
+  <details class="card prov-collapse" open style="margin-top:10px;">
+    <summary>Provenance & Audit (click to collapse)</summary>
+    <div>
       <div class="prov-row">
         <span class="bold">Provenance:</span>
         <span id="prov-url"  class="prov-chip">URL: —</span>
@@ -151,7 +166,6 @@
         <button id="dl-json">Download raw JSON</button>
         <button id="dl-ret">Download retention TSV</button>
       </div>
-
       <div class="sep"></div>
       <div class="prov-row" aria-live="polite">
         <span class="bold">Audit:</span>
@@ -159,18 +173,15 @@
         <span class="bold" style="margin-left:8px;">URP:</span>
         <span id="urpBadge" class="prov-chip">—</span>
       </div>
-
-
       <div class="meta">
         <div><strong>X-axis:</strong> <span id="xunits">samples</span></div>
         <div><strong>Windows:</strong> geometric from 1 up to ≈N·0.55 (adaptive)</div>
         <div><strong>Contrast:</strong> <i>S</i>(<i>W</i>) = std(mavg<sub><i>W</i></sub>)/std(raw)</div>
       </div>
       <div class="sep"></div>
-
       <div id="explain" class="explain"></div>
     </div>
-  </div>
+  </details>
 
 <div class="grid-container">
 <!-- Card 1: Concept -->
