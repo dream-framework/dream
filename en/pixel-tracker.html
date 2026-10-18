@@ -184,8 +184,9 @@ async function main(){
 
     // Build chart data — split baseline by channel
     const baselineRecs = baseline.baseline_records || [];
-    const baselineStruct = baselineRecs.filter(r => (r.channel || 'structure') === 'structure');
-    const baselineField = baselineRecs.filter(r => r.channel === 'field');
+    // Exclude 1873 Abbe from chart (skews x-axis) — kept in timeline below
+    const baselineStruct = baselineRecs.filter(r => (r.channel || 'structure') === 'structure' && r.year > 1873);
+    const baselineField = baselineRecs.filter(r => r.channel === 'field' && r.year > 1873);
     const baselineStructData = baselineStruct.map(r => ({
       value: [`${r.year}-06-01`, Math.log10(r.scale_m)],
       name: r.technique + ' (' + formatScale(r.scale_m) + ')',
@@ -233,7 +234,7 @@ async function main(){
       grid: { left: 20, right: 20, top: 80, bottom: 50, containLabel: true },
       xAxis: {
         type: 'time', name: 'Year',
-        min: new Date('1860-01-01').getTime(),
+        min: new Date('1970-01-01').getTime(),
         max: new Date().getTime(),  // always end at current date
         nameTextStyle: { color: '#94a3b8' },
         axisLabel: { color: '#94a3b8', interval: 0 },  // show ALL year labels
@@ -274,20 +275,33 @@ async function main(){
     });
     window.addEventListener('resize', () => chart.resize());
 
-    // Records list
+    // Records list — merge arXiv + baseline, sort by most recent first (descending)
     const list = document.getElementById('record-list');
-    if (recs.length === 0){
-      list.innerHTML = '<div class="record-item">No records yet — scout will populate this.</div>';
+    const baselineForList = (baseline.baseline_records || []).map(r => ({
+      published: r.year + '-06-01',
+      smallest_scale_m: r.scale_m,
+      title: r.technique,
+      channel: r.channel || 'structure',
+      temperature_k: r.temperature_k,
+      link: '#',
+      is_baseline: true,
+    }));
+    const allForList = [...recs, ...baselineForList];
+    allForList.sort((a, b) => (b.published || '').localeCompare(a.published || ''));
+    
+    if (allForList.length === 0){
+      list.innerHTML = '<div class="record-item">No records yet.</div>';
     } else {
-      // Show most recent 20
-      const sorted = recs.slice().sort((a,b) => (b.scouted || '').localeCompare(a.scouted || ''));
-      list.innerHTML = sorted.slice(0, 20).map(r => `
-        <div class="record-item">
-          <span class="date">${formatDate(r.published)}</span> ·
-          <span class="scale">${formatScale(r.smallest_scale_m)}</span> ·
-          <a href="${r.link}" target="_blank" rel="noopener">${r.title.substring(0,100)}${r.title.length>100?'…':''}</a>
-        </div>
-      `).join('');
+      list.innerHTML = allForList.slice(0, 30).map(r => {
+        var d = formatDate(r.published);
+        var s = formatScale(r.smallest_scale_m);
+        var c = r.channel === 'field' ? '<span style="color:#8ec5e8">field</span>' : '<span style="color:#f0c878">struct</span>';
+        var t = r.temperature_k != null ? ' <span style="color:var(--muted-2)">' + r.temperature_k + 'K</span> ·' : '';
+        var tag = r.is_baseline ? ' <span style="color:var(--muted-2);font-size:.75rem">[baseline]</span>' : '';
+        var title = (r.title || '').substring(0, 120);
+        var link = r.link || '#';
+        return '<div class="record-item"><span class="date">' + d + '</span> · <span class="scale">' + s + '</span> · ' + c + t + tag + ' <a href="' + link + '" target="_blank" rel="noopener">' + title + '</a></div>';
+      }).join('');
     }
   } catch (e) {
     console.error('Tracker failed to load:', e);
