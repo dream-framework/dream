@@ -1,11 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-<<<<<<< HEAD
-const CACHE_VERSION = 'dream-v96-unified-nav';
-=======
-const CACHE_VERSION = 'dream-v96-unified-nav';
->>>>>>> 13388535b3e4734ac8b1256d86dd155780319242
+const CACHE_VERSION = 'dream-v97-unified-nav-fix';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
