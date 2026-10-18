@@ -4,13 +4,13 @@
 <style>html,body{margin:0;padding:0;background:#1e293b;font-family:Inter,system-ui,sans-serif}#chart{width:100%;height:400px}</style>
 </head><body><div id="chart"></div>
 <script>
-var bins = [10,20,50,100,200,500,1000];
+var bins = ['10','20','50','100','200','500','1000'];
 var all = [0,2,7,19,82,246,478];
 var sig = [0,2,7,19,77,217,370];
 var chart = echarts.init(document.getElementById('chart'), 'dark');
 chart.setOption({
   backgroundColor: 'transparent',
-  title: {text: 'Correlation Pixel (SDSS 64³ FFT) — NOT SATURATING (micro)', left: 'center', top: 10,
+  title: {text: 'Correlation Pixel (SDSS 64³ FFT) — features vs bin count', left: 'center', top: 10,
     textStyle: {color: '#e2e8f0', fontSize: 13, fontWeight: 600}},
   tooltip: {trigger: 'axis',
     backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#3b4f7a',
@@ -18,21 +18,22 @@ chart.setOption({
   legend: {top: 35, textStyle: {color: '#cfd4ff', fontSize: 10},
     data: ['All features (includes noise)', 'Significant features (>2σ)']},
   grid: {left: 60, right: 20, top: 80, bottom: 40},
-  xAxis: {type: 'log', name: 'Number of bins (finer →)', nameLocation: 'middle', nameGap: 25,
-    axisLabel: {color: '#94a3b8'}, nameTextStyle: {color: '#94a3b8'},
+  xAxis: {type: 'category', name: 'Number of bins (finer →)', nameLocation: 'middle', nameGap: 25,
+    data: bins,
+    axisLabel: {color: '#94a3b8', fontSize: 10}, nameTextStyle: {color: '#94a3b8'},
     axisLine: {lineStyle: {color: '#3b4f7a'}}},
-  yAxis: {type: 'value', name: 'Features in ξ(r)',
+  yAxis: {type: 'value', name: 'Features in ξ(r)', min: 0,
     nameLocation: 'middle', nameGap: 35,
     axisLabel: {color: '#94a3b8'}, nameTextStyle: {color: '#94a3b8'},
     axisLine: {lineStyle: {color: '#3b4f7a'}},
     splitLine: {lineStyle: {color: 'rgba(120,140,200,.3)', type: 'dashed'}}},
   series: [
-    {name: 'All features (includes noise)', type: 'line', data: all, smooth: true,
+    {name: 'All features (includes noise)', type: 'line', data: all, smooth: false,
       itemStyle: {color: '#f0a0a0'}, lineStyle: {width: 1.5, color: '#f0a0a0', type: 'dashed'},
-      symbol: 'circle', symbolSize: 6},
-    {name: 'Significant features (>2σ)', type: 'line', data: sig, smooth: true,
+      symbol: 'circle', symbolSize: 7, label: {show: true, position: 'top', fontSize: 9, color: '#f0a0a0'}},
+    {name: 'Significant features (>2σ)', type: 'line', data: sig, smooth: false,
       itemStyle: {color: '#8ec5e8'}, lineStyle: {width: 2.5, color: '#8ec5e8'},
-      symbol: 'circle', symbolSize: 7}
+      symbol: 'circle', symbolSize: 8, label: {show: true, position: 'top', fontSize: 9, color: '#8ec5e8'}}
   ],
   animationDuration: 1000
 });
