@@ -21,7 +21,8 @@
     url.searchParams.set('_t', String(now));
     window.location.replace(url.toString());
     // Stop execution so the old page doesn't render
-    document.documentElement.innerHTML='<body style="background:#070b14;color:#2dd4bf;font-family:monospace;padding:20px">Loading fresh version…</body>';
+    document.documentElement.innerHTML='<body style="background:#070b14;color:#2dd4bf;font-family:monospace;padding:20px">Loading fresh version…<script defer src="js/nav-dropdown.js"></script>
+</body>';
     throw new Error('redirecting to fresh URL');
   }
 })();
@@ -34,7 +35,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="DREAM Zoom">
 <meta name="theme-color" content="#070b14">
-<style>
+<link rel="stylesheet" href="css/global.css">
+  <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;overflow:hidden;background:#070b14;color:#eef2f7;font:14px/1.4 system-ui,sans-serif}
 #app{display:grid;grid-template-rows:auto 1fr auto;height:100dvh}
@@ -99,6 +101,40 @@ footer{border-top:1px solid #223047;background:rgba(10,15,26,.95);padding:10px 1
 </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand"><span class="dot" aria-hidden="true"></span><a href="en/index.html">D.R.E.A.M</a></div>
+    <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+      <a class="nav-link" href="en/index.html">Home</a>
+      <a class="nav-link" href="en/case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="en/retention.html">Retention Law</a>
+      <a class="nav-link" href="en/axioms.html">Axioms</a>
+      <a class="nav-link" href="en/theorems.html">Theorems</a>
+      <a class="nav-link" href="en/math.html">Math Frame</a>
+      <a class="nav-link" href="en/kernel.html">Kernel</a>
+      <a class="nav-link" href="en/topology.html">Topology</a>
+      <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
+      <a class="nav-link foundation" href="en/predictions.html">Predictions</a>
+      <a class="nav-link" href="en/falsification.html">Falsification</a>
+      <a class="nav-link" href="en/tests.html">Tests</a>
+      <a class="nav-link" href="en/pixel-tracker.html">Pixel Tracker</a>
+      <a class="nav-link" href="en/pixel-tests.html">Pixel Tests</a>
+      <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="en/about.html">AI Analysis</a>
+      <a class="nav-link" href="en/articles.html">Articles</a>
+      <a class="nav-link" href="en/life.html">Life Toy</a></div>
+      <div class="nav-more">
+      <button class="nav-more-toggle" type="button">More <span class="caret">&#9660;</span></button>
+      <div class="nav-more-menu">
+        <a class="nav-link" href="en/time.html">Time</a>
+        <a class="nav-link" href="en/memory.html">Memory</a>
+        <a class="nav-link" href="npa-calculator.html">NPA Toy</a>
+        <a class="nav-link" href="intervention-simulator.html">Intervention Sim</a>
+        <a class="nav-link" href="t71-toy.html">T7.1 Toy</a>
+        <a class="nav-link" href="math-recharge.html">Math Recharge</a>
+        <a class="nav-link" href="cosmos.html">DREAM Zoom</a>
+      </div>
+    </nav>
+  </header>
 <!-- Hamburger nav panel + backdrop -->
 <div id="nav-backdrop"></div>
 <div id="nav-panel">
