@@ -325,7 +325,6 @@ async function main(){
     if (allForList.length === 0){
       list.innerHTML = '<div class="record-item">No records yet.</div>';
     } else {
-<<<<<<< HEAD
       list.innerHTML = allForList.slice(0, 30).map(r => {
         var d = formatDate(r.published);
         var s = formatScale(r.smallest_scale_m);
@@ -336,19 +335,6 @@ async function main(){
         var link = r.link || '#';
         return '<div class="record-item"><span class="date">' + d + '</span> · <span class="scale">' + s + '</span> · ' + c + t + tag + ' <a href="' + link + '" target="_blank" rel="noopener">' + title + '</a></div>';
       }).join('');
-=======
-      // Show most recent 20
-      const sorted = recs.slice().sort((a,b) => (b.scouted || '').localeCompare(a.scouted || ''));
-      list.innerHTML = sorted.slice(0, 20).map(r => `
-        <div class="record-item">
-          <span class="date">${formatDate(r.published)}</span> ·
-          <span class="scale">${formatScale(r.smallest_scale_m)}</span> ·
-          ${r.channel === 'field' ? '<span style="color:#8ec5e8">field</span>' : '<span style="color:#f0c878">struct</span>'} ·
-          ${r.temperature_k != null ? '<span style="color:var(--muted-2)">' + r.temperature_k + ' K</span> ·' : ''}
-          <a href="${r.link}" target="_blank" rel="noopener">${r.title.substring(0,100)}${r.title.length>100?'…':''}</a>
-        </div>
-      `).join('');
->>>>>>> 13388535b3e4734ac8b1256d86dd155780319242
     }
   } catch (e) {
     console.error('Tracker failed to load:', e);

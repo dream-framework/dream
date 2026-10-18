@@ -2,9 +2,9 @@
 // Caches the app shell and serves stale-while-revalidate for pages
 
 <<<<<<< HEAD
-const CACHE_VERSION = 'dream-v91-pixel-chart-timeline-fix';
+const CACHE_VERSION = 'dream-v92-fix-conflict-markers';
 =======
-const CACHE_VERSION = 'dream-v90-pixel-tests-nav';
+const CACHE_VERSION = 'dream-v92-fix-conflict-markers';
 >>>>>>> 13388535b3e4734ac8b1256d86dd155780319242
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
