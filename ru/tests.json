@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-18T22:38:48Z",
-  "total_tests": 323,
+  "exported_at": "2026-10-19T05:01:41Z",
+  "total_tests": 327,
   "fields": [
     "id",
     "name",
@@ -5048,6 +5048,70 @@
       "source": "auto-scan 2026-10-17",
       "date": "2026-10-17",
       "url": "10.5281/zenodo.23284955"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and Rmarkdown scripts for Finkel et al. Insec",
+      "domain": "scouting",
+      "D": 1.0403,
+      "r2": 0.9958,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 307.8,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=307.8).",
+      "narrative": "D_eff=1.0403, R²=0.9958. D_eff=1.040 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=307.80). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-19",
+      "date": "2026-10-19",
+      "url": "10.5281/zenodo.23464424"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and Rmarkdown scripts for Finkel et al. Insec",
+      "domain": "scouting",
+      "D": 1.4864,
+      "r2": 0.6247,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 0.27,
+      "best_alt": "GAUSS",
+      "model_note": "S2 ties GAUSS (ΔAICc=0.27, within ±2).",
+      "narrative": "D_eff=1.4864, R²=0.6247. D_eff=1.486 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с GAUSS, ΔAICc=0.27).",
+      "source": "auto-scan 2026-10-19",
+      "date": "2026-10-19",
+      "url": "10.5281/zenodo.23464424"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and Rmarkdown scripts for Finkel et al. Insec",
+      "domain": "scouting",
+      "D": 1.0003,
+      "r2": 0.9975,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 3.67,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=3.67).",
+      "narrative": "D_eff=1.0003, R²=0.9975. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=3.67). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-19",
+      "date": "2026-10-19",
+      "url": "10.5281/zenodo.23464424"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and Rmarkdown scripts for Finkel et al. Insec",
+      "domain": "scouting",
+      "D": 1.4262,
+      "r2": 0.9976,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 106.09,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=106.09).",
+      "narrative": "D_eff=1.4262, R²=0.9976. D_eff=1.426 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=106.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-19",
+      "date": "2026-10-19",
+      "url": "10.5281/zenodo.23464424"
     }
   ]
 }
