@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-19T05:02:38.823238+00:00",
+  "initialized": "2026-10-19T15:52:51.159540+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5626, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.94). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5626, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.91). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -11128,6 +11128,176 @@
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=1.4262, R²=0.9976. D_eff=1.426 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=106.09). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Political Discourse Dataset Stance on X Posts",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23405772",
+      "registry_date": "2026-10-19",
+      "D": 0.2654,
+      "r2": 0.8167,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "narrative": "D_eff=0.2654, R²=0.8167. D_eff=0.265 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties GAUSS, ΔAICc=1.75).",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Political Discourse Dataset Stance on X Posts",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23405772",
+      "registry_date": "2026-10-19",
+      "D": 0.2649,
+      "r2": 0.9969,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.2649, R²=0.9969. D_eff=0.265 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.19). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Seasonal patterns in Synechococcus pigment diversi",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23364376",
+      "registry_date": "2026-10-19",
+      "D": 1.364,
+      "r2": 0.9983,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3640, R²=0.9983. D_eff=1.364 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=111.76). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Seasonal patterns in Synechococcus pigment diversi",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23364376",
+      "registry_date": "2026-10-19",
+      "D": 1.1451,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.1451, R²=0.9999. D_eff=1.145 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=1029.82). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Seasonal patterns in Synechococcus pigment diversi",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23364376",
+      "registry_date": "2026-10-19",
+      "D": 1.364,
+      "r2": 0.9983,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.3640, R²=0.9983. D_eff=1.364 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=111.76). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
