@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-19T21:15:18.702069+00:00",
+  "initialized": "2026-10-20T05:10:27.368398+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -11298,6 +11298,74 @@
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
       "narrative": "D_eff=1.3640, R²=0.9983. D_eff=1.364 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=111.76). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Sex differences in GMV, not personality coupling",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23489607",
+      "registry_date": "2026-10-20",
+      "D": 1.9008,
+      "r2": 0.9948,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=1.9008, R²=0.9948. D_eff=1.901 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=118.79). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Sex differences in GMV, not personality coupling",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23489607",
+      "registry_date": "2026-10-20",
+      "D": 0.1439,
+      "r2": 0.8202,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.1439, R²=0.8202. D_eff=0.144 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=2.38). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
