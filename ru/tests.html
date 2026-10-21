@@ -273,7 +273,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "21 Oct 2026 01:04 EST";
+const LAST_REFRESH = "21 Oct 2026 09:59 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -423,7 +423,7 @@ const TESTS = [
   ,{id:"",name:"Open-Meteo: Delhi precipitation_sum (ACF retention)",domain:"environmental",D:0.4205,r2:0.7260,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:45.3400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=45.34). S2+dust fit: D1=0.4586, D2=9.9999, R²=0.8128, AICc=-746.86. S2+dust does NOT beat S2_DUST — needs investigation.",narrative:"D_eff=0.4205, R²=0.7260. D_eff=0.420 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=45.34). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://archive-api.open-meteo.com/v1/archive?latitude=28.61&longitude=77.21&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",image:null}
   ,{id:"",name:"USGS: Potomac River at Point of Rocks, MD (daily discharge) (ACF retention)",domain:"hydrology",D:0.6759,r2:0.6421,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:12.2100,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=12.21). Dust-contaminated: two-scale structure. S2+dust decomposition (predicted by DREAM) should recover the fit. Not a DREAM failure.",narrative:"D_eff=0.6759, R²=0.6421. D_eff=0.676 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=12.21). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://waterservices.usgs.gov/nwis/dv/?sites=01646500&parameterCd=00060&startDT=2020-01-01&endDT=2025-12-31&format=json",image:null}
   ,{id:"",name:"Zenodo: Quantitative Data from a Mixed-Methods Case Study ",domain:"scouting",D:4.4128,r2:0.7188,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:20.0000,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=20.0).",narrative:"D_eff=4.4128, R²=0.7188. D_eff=4.413 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=20.00). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21792075",image:null}
-  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
+  ,{id:"",name:"Energy-Charts: Switzerland electricity spot price (hourly) (ACF retention)",domain:"energy",D:0.1861,r2:0.4325,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:17.0300,best_alt:"BIEXP",model_note:"S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.225, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",narrative:"D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"https://api.energy-charts.info/price?bzn=CH&start=2023-01-01T00%3A00%2B01%3A00&end=2023-12-31T00%3A00%2B01%3A00",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D_eff=1.9486, R²=0.1644. D_eff=1.949 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, LOGNORM поглощает перекрывающиеся процессы (ΔAICc=7.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.0004,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:1330.4400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=1330.44). S2+dust decomposition REJECTED: no D1/D2/R² in model_note (fit not validated). Likely overfitting (6-param model). Treated as S2_LOSES.",narrative:"D_eff=1.0004, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=1330.44). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
   ,{id:"",name:"Zenodo: Data from: \"Speeding by: Modeling animal movement ",domain:"scouting",D:1.9486,r2:0.1644,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:7.2000,best_alt:"LOGNORM",model_note:"S2 loses to LOGNORM (ΔAICc=7.2).",narrative:"D_eff=1.9486, R²=0.1644. D_eff=1.949 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, LOGNORM поглощает перекрывающиеся процессы (ΔAICc=7.20). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-08-04",date:"2026-08-04",url:"10.5281/zenodo.21796558",image:null}
@@ -630,6 +630,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Seasonal patterns in Synechococcus pigment diversi",domain:"scouting",D:1.3640,r2:0.9983,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:111.7600,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=111.76).",narrative:"D_eff=1.3640, R²=0.9983. D_eff=1.364 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=111.76). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-19",date:"2026-10-19",url:"10.5281/zenodo.23364376",image:null}
   ,{id:"",name:"Zenodo: Sex differences in GMV, not personality coupling",domain:"scouting",D:1.9008,r2:0.9948,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:118.7900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=118.79).",narrative:"D_eff=1.9008, R²=0.9948. D_eff=1.901 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=118.79). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-20",date:"2026-10-20",url:"10.5281/zenodo.23489607",image:null}
   ,{id:"",name:"Zenodo: Sex differences in GMV, not personality coupling",domain:"scouting",D:0.1439,r2:0.8202,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:2.3800,best_alt:"POWER",model_note:"S2 loses to POWER (ΔAICc=2.38).",narrative:"D_eff=0.1439, R²=0.8202. D_eff=0.144 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.38). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-20",date:"2026-10-20",url:"10.5281/zenodo.23489607",image:null}
+  ,{id:"",name:"Zenodo: Supplementary files of the article with the title:",domain:"scouting",D:1.3390,r2:0.7249,verdict:"D_GT_1",model_verdict:"S2_TIES",delta_aicc:-1.7800,best_alt:"EXP",model_note:"S2 ties EXP (ΔAICc=-1.78, within ±2).",narrative:"D_eff=1.3390, R²=0.7249. D_eff=1.339 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с EXP, ΔAICc=-1.78).",source:"auto-scan 2026-10-21",date:"2026-10-21",url:"10.5281/zenodo.20592929",image:null}
+  ,{id:"",name:"Zenodo: Supplementary files of the article with the title:",domain:"scouting",D:1.8665,r2:0.9741,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:3.2300,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=3.23).",narrative:"D_eff=1.8665, R²=0.9741. D_eff=1.867 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=3.23). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-21",date:"2026-10-21",url:"10.5281/zenodo.20592929",image:null}
 
 ];
 
@@ -915,33 +917,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 310,
-  "d_mle": 1.6034,
-  "lam_mle": 1.4104,
+  "n": 312,
+  "d_mle": 1.6093,
+  "lam_mle": 1.4131,
   "ks_p": 0.0001,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1243,
-  "ks_boot_mean": 0.0355,
-  "ks_boot_95": 0.0508,
-  "d_direct": 2.0191,
-  "r2_direct": 0.9775,
-  "d_linear": 1.5803,
-  "r2_linear": 0.9668,
+  "ks_stat_obs": 0.1246,
+  "ks_boot_mean": 0.0352,
+  "ks_boot_95": 0.0503,
+  "d_direct": 2.0325,
+  "r2_direct": 0.9774,
+  "d_linear": 1.5834,
+  "r2_linear": 0.9666,
   "natural": 98,
-  "extraction": 212,
-  "mean": 1.2648,
-  "median": 1.2677,
-  "total": 334,
-  "compared": 332,
+  "extraction": 214,
+  "mean": 1.267,
+  "median": 1.2708,
+  "total": 336,
+  "compared": 334,
   "noise": 9,
   "rejected": 0,
-  "ad_stat": 4.5055,
+  "ad_stat": 4.5897,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.28,
-  "delta_aic_lognormal": 52.51,
-  "silverman_p": 0.705,
+  "delta_aic_gamma": 4.58,
+  "delta_aic_lognormal": 53.68,
+  "silverman_p": 0.69,
   "boot_lo": 1.06,
-  "boot_hi": 1.71,
+  "boot_hi": 1.717,
   "date": "2026-10-21"
 };
 

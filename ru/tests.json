@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-21T05:04:15Z",
-  "total_tests": 334,
+  "exported_at": "2026-10-21T13:59:29Z",
+  "total_tests": 336,
   "fields": [
     "id",
     "name",
@@ -1923,7 +1923,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 17.03,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.246, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=17.03). S2+dust fit: D1=0.6438, D2=7.225, R²=0.4930, AICc=-979.08. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.1861, R²=0.4325. D_eff=0.186 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=17.03). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -5224,6 +5224,38 @@
       "source": "auto-scan 2026-10-20",
       "date": "2026-10-20",
       "url": "10.5281/zenodo.23489607"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Supplementary files of the article with the title:",
+      "domain": "scouting",
+      "D": 1.339,
+      "r2": 0.7249,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": -1.78,
+      "best_alt": "EXP",
+      "model_note": "S2 ties EXP (ΔAICc=-1.78, within ±2).",
+      "narrative": "D_eff=1.3390, R²=0.7249. D_eff=1.339 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с EXP, ΔAICc=-1.78).",
+      "source": "auto-scan 2026-10-21",
+      "date": "2026-10-21",
+      "url": "10.5281/zenodo.20592929"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Supplementary files of the article with the title:",
+      "domain": "scouting",
+      "D": 1.8665,
+      "r2": 0.9741,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 3.23,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=3.23).",
+      "narrative": "D_eff=1.8665, R²=0.9741. D_eff=1.867 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=3.23). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-21",
+      "date": "2026-10-21",
+      "url": "10.5281/zenodo.20592929"
     }
   ]
 }
