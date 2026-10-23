@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-22T20:19:37.958434+00:00",
+  "initialized": "2026-10-23T05:11:29.071577+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2997,11 +2997,11 @@
       "family": "fred",
       "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
       "registry_date": "2026-08-04",
-      "D": 0.9615,
+      "D": 0.9616,
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.9615, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.20). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.9616, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.17). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
