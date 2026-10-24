@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-24T04:54:31Z",
-  "total_tests": 339,
+  "exported_at": "2026-10-24T19:01:16Z",
+  "total_tests": 340,
   "fields": [
     "id",
     "name",
@@ -5304,6 +5304,22 @@
       "source": "auto-scan 2026-10-21",
       "date": "2026-10-21",
       "url": "10.5281/zenodo.23548523"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Medication Continuity Cards: what FDA labels state",
+      "domain": "scouting",
+      "D": 8.6646,
+      "r2": 0.8696,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 5.6,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=5.6).",
+      "narrative": "D_eff=8.6646, R²=0.8696. D_eff=8.665 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=5.60). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-24",
+      "date": "2026-10-24",
+      "url": "10.5281/zenodo.23624316"
     }
   ]
 }

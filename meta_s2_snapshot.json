@@ -1,10 +1,10 @@
 {
   "date": "2026-10-24",
   "n": 315,
-  "n_total": 339,
-  "n_censored": 15,
+  "n_total": 340,
+  "n_censored": 16,
   "n_no_d": 0,
-  "n_compared": 337,
+  "n_compared": 338,
   "n_noise": 9,
   "n_rejected": 0,
   "mean": 1.2676,
