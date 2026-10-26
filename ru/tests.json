@@ -5048,6 +5048,20 @@
       "source": "auto-scan 2026-10-17",
       "date": "2026-10-17",
       "url": "10.5281/zenodo.23284955"
+    },
+    {
+      "id": "T12",
+      "name": "Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "NEGATIVE",
+      "model_verdict": "PROJECTOR_FALSIFIED",
+      "narrative": "Movie-projector analogy (kernel has temporal frame rate T_q) tested via Welch PSD cliff detection on 4 independent high-cadence sources. Cliffs detected in all 4, but T_q scatters across 4 orders of magnitude: GOES X-rays T_q=3.6min, GOES Mag T_q=3.7min (pair agreement, likely SWPC processing artifact), USGS Flow T_q=41min, iNaturalist T_q=3.2 days. Max/min ratio=1293. No universal frame rate. The kernel (if it exists) does not behave like a movie projector. The GOES-pair agreement at T_q~3.6 min is most parsimoniously a same-platform processing artifact, not a kernel feature — cross-domain agreement is required for the projector and is absent.",
+      "source": "re-test 2026-10-26",
+      "date": "2026-10-26",
+      "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
+      "image": "img/tests/temporal_cliff_test.png"
     }
   ]
 }

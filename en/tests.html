@@ -221,6 +221,30 @@
     </div>
   </details>
 
+  <!-- Test 12: Movie-Projector / Temporal Cliff (T_q) -->
+  <details class="card" id="temporal-cliff" style="margin-top:.5rem;padding:0" open>
+    <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
+      ⑤ Movie-Projector / Temporal Cliff (T<sub>q</sub>) <span class="badge fail sm">NEGATIVE — No Universal Frame Rate</span>
+      <span style="display:block;margin-top:.3rem;font-size:.85rem;font-weight:400;color:var(--muted)">Hypothesis: if the kernel is a movie projector (not an eye), every time series should show a high-f cliff at a universal T<sub>q</sub>. Test: Welch PSD of 4 sources. Cliffs detected in all 4, but T<sub>q</sub> scatter by factor 1293. Projector analogy falsified.</span>
+    </summary>
+    <div style="padding:0 1rem 1rem">
+    <p><strong>Motivation:</strong> the eye analogy (kernel = lens + focal length) was falsified by Test 11 (e+e- hadrons, D decreases with α_s). But A2 (non-invertible finite-resolution kernel) is broader than any single optical metaphor. This test probes a DIFFERENT analogy: the movie projector — which has TWO quantization grids, a spatial pixel grid (analogous to λ<sub>q</sub>) AND a temporal frame rate. If DREAM's kernel is structurally a projector, every time series should show a sharp high-frequency cliff at a UNIVERSAL T<sub>q</sub>, independent of source.</p>
+    <p><strong>Method:</strong> fetch 4 high-cadence official datasets across independent domains (GOES 1-min X-rays, GOES 1-min Magnetometer, USGS 15-min river flow, iNaturalist daily global observations). Compute Welch periodogram of each. Detect the most-negative 3-bin log-log slope (the "cliff"), excluding the top 25% of bins (near-Nyquist artifacts) and requiring slope < −2 (real drop, not noise).</p>
+    <p><strong>Results:</strong></p>
+    <ul>
+      <li><strong>GOES X-rays</strong> (N=716, Δt=1 min): cliff at f = 4.66 mHz, <strong>T<sub>q</sub> = 3.6 min</strong>, slope = −36 (f/f<sub>Nyq</sub> = 0.56 — clearly below Nyquist, real cliff).</li>
+      <li><strong>GOES Magnetometer</strong> (N=359, Δt=1 min): cliff at f = 4.49 mHz, <strong>T<sub>q</sub> = 3.7 min</strong>, slope = −12 (f/f<sub>Nyq</sub> = 0.54 — real cliff).</li>
+      <li><strong>USGS River Flow</strong> (N=2005, Δt=15 min): cliff at f = 0.41 mHz, <strong>T<sub>q</sub> = 41 min</strong>, slope = −38 (f/f<sub>Nyq</sub> = 0.73 — below cutoff).</li>
+      <li><strong>iNaturalist Global</strong> (N=181, Δt=1 day): cliff at f = 3.6 μHz, <strong>T<sub>q</sub> = 3.2 days</strong>, slope = −31 (f/f<sub>Nyq</sub> = 0.62 — real cliff).</li>
+    </ul>
+    <p><strong>Cross-source comparison:</strong> geometric-mean T<sub>q</sub> = 40 min, but max/min ratio = <strong>1293</strong> — T<sub>q</sub> scatters across 4 orders of magnitude (3.6 min → 3.2 days). No universal frame rate exists.</p>
+    <p><strong>Interpretation:</strong> the GOES pair (X-rays + Mag, both 1-min cadence, both from the same SWPC processing pipeline) agree at T<sub>q</sub> ≈ 3.6 min — within 4% of each other. This agreement is suggestive of either (a) a real shared physical feature, OR (b) a SWPC processing pipeline artifact (rolling window, smoothing filter) shared by both channels. The latter is more parsimonious: the GOES instruments are independent (X-ray flux vs. magnetic field), but the SWPC processing is shared. USGS (independent agency, different physics — river hydraulics) shows T<sub>q</sub> = 41 min — 11× off from GOES. iNaturalist (daily cadence, ecology) shows T<sub>q</sub> = 3.2 days — 1300× off from GOES. Cross-domain agreement is the projector requirement; it is absent.</p>
+    <p><strong>Conclusion:</strong> the movie-projector analogy is <strong>falsified</strong> at the current spec. The kernel (if it exists) does not behave like a movie projector with a single universal temporal frame rate. The GOES-pair agreement at T<sub>q</sub> ≈ 3.6 min is the only positive sub-finding and is most parsimoniously explained as a same-platform processing artifact. The kernel may yet have a sector-specific temporal T<sub>q</sub> per interaction channel (analogous to the per-channel spatial λ<sub>q</sub>), but that is a different hypothesis and would need to be tested against the multi-aperture model (Item 3 in the kernel-analogy program).</p>
+    <iframe src="../charts/temporal_cliff.html" style="width:100%;height:760px;border:0;border-radius:8px;background:#1e293b;margin:.5rem 0" loading="lazy" title="Test 12 — Movie-Projector / Temporal Cliff (T_q) — interactive chart"></iframe>
+    <p class="note">Script: <code>scripts/test12_temporal_cliff.py</code>. Chart builder: <code>scripts/build_test12_chart.py</code>. JSON: <code>scripts/test12_data.json</code>. Sources: <a href="https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json" style="color:var(--accent)">SWPC GOES</a>, <a href="https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01646500&period=P7D&parameterCd=00060" style="color:var(--accent)">USGS NWIS</a>, <a href="https://api.inaturalist.org/v1/observations/histogram" style="color:var(--accent)">iNaturalist</a>.</p>
+    </div>
+  </details>
+
   <!-- Snake-Pit Analysis (collapsible) -->
   <details class="card" id="snake-pit" style="margin-top:.5rem;padding:0">
     <summary style="padding:.8rem 1rem;cursor:pointer;font-size:1rem;font-weight:600">
@@ -403,7 +427,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "18 Oct 2026 14:52 EST";
+const LAST_REFRESH = "27 Oct 2026 09:30 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -750,6 +774,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Dataset on de jure guarantees and de facto judicia",domain:"scouting",D:1.8649,r2:0.0910,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0500,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.05).",narrative:"D_eff=1.8649, R²=0.0910. D_eff=1.865 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.05). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-10-16",date:"2026-10-16",url:"10.5281/zenodo.23424366",image:null}
   ,{id:"",name:"Zenodo: Dataset for: Laboratory-to-clinic translation of h",domain:"scouting",D:1.9175,r2:0.9350,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:22.1300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=22.13).",narrative:"D_eff=1.9175, R²=0.9350. D_eff=1.917 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=22.13). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-10-17",date:"2026-10-17",url:"10.5281/zenodo.23434422",image:null}
   ,{id:"",name:"Zenodo: Required to Test or Inspired to Test? A Survey of ",domain:"scouting",D:0.3280,r2:0.7417,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:6.9100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=6.91).",narrative:"D_eff=0.3280, R²=0.7417. D_eff=0.328 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=6.91). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-10-17",date:"2026-10-17",url:"10.5281/zenodo.23284955",image:null}
+  ,{id:"T12",name:"Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",domain:"kernel-analogy",D:null,r2:null,verdict:"NEGATIVE",model_verdict:"PROJECTOR_FALSIFIED",narrative:"Movie-projector analogy tested via Welch PSD cliff detection on 4 independent high-cadence sources. Cliffs in all 4, but T_q scatter by factor 1293 (GOES X-rays 3.6min, GOES Mag 3.7min, USGS Flow 41min, iNat 3.2 days). No universal frame rate. Kernel does not behave like a movie projector.",source:"re-test 2026-10-26",date:"2026-10-26",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",image:"img/tests/temporal_cliff_test.png"}
 
 ];
 
@@ -1284,6 +1309,10 @@ function computeMetaS2(){
 .verdict-badge.INCONSISTENT{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
 .verdict-badge.PARTIAL{background:rgba(240,173,78,.12);color:#f0ad4e;border:1px solid rgba(240,173,78,.2)}
 .verdict-badge.PENDING{background:rgba(142,197,232,.12);color:#8ec5e8;border:1px solid rgba(142,197,232,.2)}
+.verdict-badge.NEGATIVE{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.verdict-badge.POSITIVE{background:rgba(125,211,168,.12);color:#7dd3a8;border:1px solid rgba(125,211,168,.2)}
+.verdict-badge.AMBIGUOUS{background:rgba(240,173,78,.12);color:#f0ad4e;border:1px solid rgba(240,173,78,.2)}
+.verdict-badge.INDETERMINATE{background:rgba(100,116,139,.12);color:#94a3b8;border:1px solid rgba(100,116,139,.2)}
 
 /* Responsive */
 @media(max-width:768px){

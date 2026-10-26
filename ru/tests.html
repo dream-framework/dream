@@ -619,6 +619,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Dataset on de jure guarantees and de facto judicia",domain:"scouting",D:1.8649,r2:0.0910,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0500,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.05).",narrative:"D_eff=1.8649, R²=0.0910. D_eff=1.865 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.05). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-16",date:"2026-10-16",url:"10.5281/zenodo.23424366",image:null}
   ,{id:"",name:"Zenodo: Dataset for: Laboratory-to-clinic translation of h",domain:"scouting",D:1.9175,r2:0.9350,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:22.1300,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=22.13).",narrative:"D_eff=1.9175, R²=0.9350. D_eff=1.917 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=22.13). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-17",date:"2026-10-17",url:"10.5281/zenodo.23434422",image:null}
   ,{id:"",name:"Zenodo: Required to Test or Inspired to Test? A Survey of ",domain:"scouting",D:0.3280,r2:0.7417,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:6.9100,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=6.91).",narrative:"D_eff=0.3280, R²=0.7417. D_eff=0.328 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=6.91). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-17",date:"2026-10-17",url:"10.5281/zenodo.23284955",image:null}
+  ,{id:"T12",name:"Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",domain:"kernel-analogy",D:null,r2:null,verdict:"NEGATIVE",model_verdict:"PROJECTOR_FALSIFIED",narrative:"Movie-projector analogy tested via Welch PSD cliff detection on 4 independent high-cadence sources. Cliffs in all 4, but T_q scatter by factor 1293 (GOES X-rays 3.6min, GOES Mag 3.7min, USGS Flow 41min, iNat 3.2 days). No universal frame rate. Kernel does not behave like a movie projector.",source:"re-test 2026-10-26",date:"2026-10-26",url:"https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",image:"img/tests/temporal_cliff_test.png"}
 
 ];
 
@@ -1143,6 +1144,10 @@ function computeMetaS2(){
 .verdict-badge.INCONSISTENT{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
 .verdict-badge.PARTIAL{background:rgba(240,173,78,.12);color:#f0ad4e;border:1px solid rgba(240,173,78,.2)}
 .verdict-badge.PENDING{background:rgba(142,197,232,.12);color:#8ec5e8;border:1px solid rgba(142,197,232,.2)}
+.verdict-badge.NEGATIVE{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.verdict-badge.POSITIVE{background:rgba(125,211,168,.12);color:#7dd3a8;border:1px solid rgba(125,211,168,.2)}
+.verdict-badge.AMBIGUOUS{background:rgba(240,173,78,.12);color:#f0ad4e;border:1px solid rgba(240,173,78,.2)}
+.verdict-badge.INDETERMINATE{background:rgba(100,116,139,.12);color:#94a3b8;border:1px solid rgba(100,116,139,.2)}
 
 /* Responsive */
 @media(max-width:768px){
