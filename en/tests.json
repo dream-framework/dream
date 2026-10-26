@@ -5089,6 +5089,34 @@
       "date": "2026-10-26",
       "url": "https://pdg.lbl.gov/",
       "image": "img/tests/hologram_phase_test.png"
+    },
+    {
+      "id": "T12",
+      "name": "Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "NEGATIVE",
+      "model_verdict": "PROJECTOR_FALSIFIED",
+      "narrative": "Movie-projector analogy tested via Welch PSD cliff detection on 4 independent high-cadence sources. Cliffs in all 4, but T_q scatter by factor 1293 (GOES X-rays 3.6min, GOES Mag 3.7min, USGS Flow 41min, iNat 3.2 days). No universal frame rate. Kernel does not behave like a movie projector.",
+      "source": "re-test 2026-10-26",
+      "date": "2026-10-26",
+      "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
+      "image": "img/tests/temporal_cliff_test.png"
+    },
+    {
+      "id": "T13",
+      "name": "Pinhole Array / Multi-Aperture — shared screen test",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "NEGATIVE",
+      "model_verdict": "MULTI_APERTURE_FALSIFIED",
+      "narrative": "Multi-aperture analogy: each sector has own aperture, shared screen. Tested f(alpha) in {alpha, sqrt, cbrt, 1/alpha, log} across 4 sectors. Best f=sqrt(alpha) gives max/min=2.95e6 (6.5 decades) — falsified. Sub-finding: weak+strong+gravity cluster for sqrt(alpha) within factor 12.6 (geo-mean λ_q~7e-16 m ~ QCD scale). EM is 44x outlier.",
+      "source": "re-test 2026-10-26",
+      "date": "2026-10-26",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/pinhole_array_test.png"
     }
   ]
 }
