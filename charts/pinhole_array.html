@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Test 13 — Pinhole Array / Multi-Aperture Hypothesis · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:#1e293b;color:#e2e8f0;font-family:Inter,system-ui,sans-serif}
+  .wrap{padding:12px;max-width:1100px;margin:0 auto}
+  h1{font-size:18px;margin:0 0 4px;color:#8ec5e8;font-weight:600}
+  .kicker{font-size:12px;color:#94a3b8;margin-bottom:8px}
+  .verdict-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:8px;background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.55);color:#ef4444;}
+  .narrative{background:rgba(15,23,42,.6);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.5;margin:8px 0 12px}
+  .chart-wrap{position:relative;width:100%;height:540px;padding:8px 0;box-sizing:border-box}
+  #chart{width:100%;height:100%}
+  h3{font-size:13px;color:#8ec5e8;margin:14px 0 4px;font-weight:600;letter-spacing:.02em}
+  table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:4px}
+  th,td{padding:5px 7px;text-align:left;border-bottom:1px solid rgba(142,197,232,.15)}
+  th{color:#8ec5e8;font-weight:600;background:rgba(15,23,42,.4)}
+  td{color:#cbd5e1}
+  .meta{font-size:11px;color:#64748b;margin-top:12px;line-height:1.45}
+  code{color:#67e8f9;background:rgba(15,23,42,.4);padding:1px 5px;border-radius:3px;font-size:11px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Test 13 — Pinhole Array / Multi-Aperture Hypothesis</h1>
+  <div class="kicker">If the kernel is a pinhole array (each sector has its own aperture projecting onto a shared screen), all sector cutoffs should reduce to a single shared λ_q via some function of α. Test: try f(α) = α, √α, ∛α, etc, check if implied λ_q agrees across sectors.</div>
+  <span class="verdict-badge">VERDICT: NEGATIVE</span>
+  <div class="narrative">Best candidate f(α) = α^(1/2) gives implied λ_q values that scatter by a factor of 2946472 across all sectors (log10 spread = 6.5 decades). No single f(α) reconciles all 4 sector cutoffs with a shared λ_q. The multi-aperture hypothesis is FALSIFIED: the kernel is NOT a pinhole array with a shared screen. Each sector must have its own kernel (or the multi-aperture analogy is wrong). Sub-finding: weak + strong + gravity DO cluster tightly for f = α^(1/2) (within factor ~12, geometric-mean λ_q ≈ 10⁻¹⁵ m, close to QCD scale), but EM is the outlier by 1-2 orders of magnitude. Suggests either (a) a partial multi-aperture model (non-EM sectors share a screen, EM has its own), or (b) the EM focal hierarchy (r_e:λ̄_e:a_0 = α:1:α⁻¹) is a QED coincidence, not a kernel feature.</div>
+
+  <div class="chart-wrap"><div id="chart"></div></div>
+
+  <h3>Sector cutoffs (input data)</h3>
+  <table>
+    <thead><tr>
+      <th>Sector</th><th>Cutoff λ<sub>i</sub> (m)</th><th>Coupling α</th><th>Renormalization scale</th>
+    </tr></thead>
+    <tbody>
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#22d3ee;margin-right:6px"></span>EM (Compton λ̄_e)</td>
+          <td>3.862e-13 m</td>
+          <td>7.297e-03</td>
+          <td>Thomson (low E)</td>
+        </tr>
+
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#67e8f9;margin-right:6px"></span>EM (Bohr a_0)</td>
+          <td>5.292e-11 m</td>
+          <td>7.297e-03</td>
+          <td>Thomson (low E)</td>
+        </tr>
+
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#0891b2;margin-right:6px"></span>EM (classical r_e)</td>
+          <td>2.818e-15 m</td>
+          <td>7.297e-03</td>
+          <td>Thomson (low E)</td>
+        </tr>
+
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#a78bfa;margin-right:6px"></span>Weak (W Compton)</td>
+          <td>2.455e-18 m</td>
+          <td>1.030e-05</td>
+          <td>low-energy Fermi</td>
+        </tr>
+
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#facc15;margin-right:6px"></span>Strong (1/Λ_QCD)</td>
+          <td>9.093e-16 m</td>
+          <td>1.180e-01</td>
+          <td>Q = m_Z (MS-bar, 5 flavors)</td>
+        </tr>
+
+        <tr>
+          <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fb7185;margin-right:6px"></span>Gravity (Planck ℓ_P)</td>
+          <td>1.616e-35 m</td>
+          <td>5.910e-39</td>
+          <td>proton mass scale</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <h3>Test results per candidate f(α)</h3>
+  <table>
+    <thead><tr>
+      <th>f(α)</th><th>max/min ratio (lower = better)</th><th>log10 spread (decades)</th><th>implied shared λ<sub>q</sub> (geometric mean)</th>
+    </tr></thead>
+    <tbody>
+        <tr>
+          <td><code>α^1</code></td>
+          <td>3.549e+17</td>
+          <td>17.55</td>
+          <td>9.520e-10 m</td>
+        </tr>
+
+        <tr>
+          <td><code>α^(1/2)</code> <span style="color:#22c55e;font-weight:600">★ best</span></td>
+          <td>2.946e+06</td>
+          <td>6.47</td>
+          <td>5.831e-14 m</td>
+        </tr>
+
+        <tr>
+          <td><code>α^(1/3)</code></td>
+          <td>3.052e+12</td>
+          <td>12.48</td>
+          <td>2.299e-15 m</td>
+        </tr>
+
+        <tr>
+          <td><code>α^(1/4)</code></td>
+          <td>3.106e+15</td>
+          <td>15.49</td>
+          <td>4.564e-16 m</td>
+        </tr>
+
+        <tr>
+          <td><code>α^(-1)</code></td>
+          <td>4.043e+60</td>
+          <td>60.61</td>
+          <td>1.340e-26 m</td>
+        </tr>
+
+        <tr>
+          <td><code>log(1/α)</code></td>
+          <td>5.857e+25</td>
+          <td>25.77</td>
+          <td>4.479e-19 m</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="meta">
+    Best f(α): <code>α^(1/2)</code> with max/min = 2.95e+06 (log10 spread = 6.47 decades) ·
+    Linear fit log(cutoff) = 0.586 × log(α) + (-12.51), RMS residual = 1.97 decades ·
+    Sub-finding: weak + strong + gravity cluster within factor 12.6 for f = √α (geometric mean λ<sub>q</sub> ≈ 7×10⁻¹⁶ m, close to QCD scale). EM is 44× off — EM has a different kernel mechanism, or the EM focal hierarchy is a QED coincidence. ·
+    Method: each sector cutoff is divided by f(α) for candidate f. If multi-aperture holds, all sectors yield the same implied λ_q. ·
+    Sources: <a href="https://pdg.lbl.gov/" style="color:var(--accent)">PDG 2024</a>, <a href="https://physics.nist.gov/cuu/Constants/" style="color:var(--accent)">CODATA 2018</a>.
+  </div>
+</div>
+
+<script>
+const series = [{"name": "EM (Compton \u03bb\u0304_e)", "type": "scatter", "data": [[-2.136834670439749, -12.413233537746603]], "symbolSize": 18, "itemStyle": {"color": "#22d3ee", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "EM (Compton \u03bb\u0304_e)", "color": "#22d3ee", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#22d3ee", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "EM (Bohr a_0)", "type": "scatter", "data": [[-2.136834670439749, -10.276398867306854]], "symbolSize": 18, "itemStyle": {"color": "#67e8f9", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "EM (Bohr a_0)", "color": "#67e8f9", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#67e8f9", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "EM (classical r_e)", "type": "scatter", "data": [[-2.136834670439749, -14.550068208186353]], "symbolSize": 18, "itemStyle": {"color": "#0891b2", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "EM (classical r_e)", "color": "#0891b2", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#0891b2", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "Weak (W Compton)", "type": "scatter", "data": [[-4.987162775294828, -17.60995612880444]], "symbolSize": 18, "itemStyle": {"color": "#a78bfa", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "Weak (W Compton)", "color": "#a78bfa", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#a78bfa", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "Strong (1/\u039b_QCD)", "type": "scatter", "data": [[-0.9281179926938746, -15.041273263847259]], "symbolSize": 18, "itemStyle": {"color": "#facc15", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "Strong (1/\u039b_QCD)", "color": "#facc15", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#facc15", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "Gravity (Planck \u2113_P)", "type": "scatter", "data": [[-38.22841251911874, -34.79149011215885]], "symbolSize": 18, "itemStyle": {"color": "#fb7185", "borderColor": "#0f172a", "borderWidth": 1.2}, "emphasis": {"focus": "series", "scale": 1.4}, "label": {"show": true, "position": "right", "distance": 8, "formatter": "Gravity (Planck \u2113_P)", "color": "#fb7185", "fontSize": 10, "backgroundColor": "rgba(15,23,42,0.85)", "borderColor": "#fb7185", "borderWidth": 1, "borderRadius": 4, "padding": [3, 6]}}, {"name": "Linear fit (slope=0.59)", "type": "line", "data": [[-38.72841251911874, -35.18966137249386], [-0.4281179926938746, -12.764392877174675]], "symbol": "none", "lineStyle": {"type": "dashed", "color": "#475569", "width": 1.5}, "itemStyle": {"color": "#475569"}, "tooltip": {"show": false}, "silent": true}];
+const chart = echarts.init(document.getElementById('chart'), null, {renderer:'canvas'});
+chart.setOption({
+  backgroundColor: 'transparent',
+  grid: {left: 70, right: 240, top: 30, bottom: 60},
+  xAxis: {
+    type: 'value',
+    name: 'log₁₀(α)',
+    nameLocation: 'middle',
+    nameGap: 35,
+    nameTextStyle: {color: '#8ec5e8', fontSize: 12},
+    axisLine: {lineStyle: {color: '#475569'}},
+    axisLabel: {color: '#cbd5e1', fontSize: 10},
+    splitLine: {show: true, lineStyle: {color: 'rgba(142,197,232,.08)'}},
+    min: -42,
+    max: 4,
+  },
+  yAxis: {
+    type: 'value',
+    name: 'log₁₀(cutoff) [m]',
+    nameLocation: 'middle',
+    nameGap: 50,
+    nameTextStyle: {color: '#8ec5e8', fontSize: 12},
+    axisLine: {lineStyle: {color: '#475569'}},
+    axisLabel: {color: '#cbd5e1', fontSize: 10},
+    splitLine: {show: true, lineStyle: {color: 'rgba(142,197,232,.08)'}},
+    min: -38,
+    max: -8,
+  },
+  tooltip: {
+    show: true,
+    trigger: 'item',
+    backgroundColor: 'rgba(15,23,42,.95)',
+    borderColor: '#475569',
+    textStyle: {color: '#e2e8f0', fontSize: 11},
+    formatter: p => {
+      const s = p.data;
+      return `<span style="color:${p.color}">●</span> ${p.seriesName}<br/>`+
+             `log₁₀(α) = ${s[0].toFixed(2)}  →  α = 10^${s[0].toFixed(1)}<br/>`+
+             `log₁₀(cutoff) = ${s[1].toFixed(2)}  →  cutoff = 10^${s[1].toFixed(1)} m`;
+    }
+  },
+  legend: {
+    show: true,
+    type: 'plain',
+    orient: 'vertical',
+    right: 0,
+    top: 'middle',
+    textStyle: {color: '#cbd5e1', fontSize: 10},
+    inactiveColor: '#475569',
+    itemWidth: 12,
+    itemHeight: 8,
+  },
+  series: series,
+});
+window.addEventListener('resize', () => chart.resize());
+</script>
+</body>
+</html>

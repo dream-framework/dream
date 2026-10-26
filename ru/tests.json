@@ -5062,6 +5062,20 @@
       "date": "2026-10-26",
       "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
       "image": "img/tests/temporal_cliff_test.png"
+    },
+    {
+      "id": "T13",
+      "name": "Pinhole Array / Multi-Aperture — shared screen test",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "NEGATIVE",
+      "model_verdict": "MULTI_APERTURE_FALSIFIED",
+      "narrative": "Multi-aperture (pinhole array) analogy: each interaction sector has its own aperture projecting onto a SHARED 4D screen. Tested by computing implied shared λ_q = sector_cutoff / f(α_i) for each of 6 candidate f's (α, √α, ∛α, ⁴√α, 1/α, log(1/α)) across 4 sectors. Best fit: f = √α gives max/min ratio 2.95 million (6.5 decades) — falsified. Sub-finding: weak + strong + gravity DO cluster for f = √α (within factor 12.6, geometric-mean λ_q ≈ 7e-16 m, close to QCD scale). EM is the outlier (44× off even with best EM cutoff r_e). Suggests either (a) partial multi-aperture model (non-EM sectors share a screen, EM has its own), or (b) the EM focal hierarchy (r_e:λ̄_e:a_0 = α:1:α⁻¹) is a QED coincidence, not a kernel feature.",
+      "source": "re-test 2026-10-26",
+      "date": "2026-10-26",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/pinhole_array_test.png"
     }
   ]
 }
