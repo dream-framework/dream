@@ -5076,6 +5076,20 @@
       "date": "2026-10-26",
       "url": "https://pdg.lbl.gov/",
       "image": "img/tests/pinhole_array_test.png"
+    },
+    {
+      "id": "T14",
+      "name": "Hologram Hypothesis — phase alignment at common Q*",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "AMBIGUOUS",
+      "model_verdict": "HOLOGRAM_MARGINAL",
+      "narrative": "Hologram analogy: complex couplings share a phase at common Q*. 1-loop complexified running of alpha_em, alpha_W, alpha_s. Best alignment at Q* = 10 TeV: max pairwise phase diff = 2.1°. But null control with 1000 random couplings with similar |Im/Re| ratios shows median best alignment = 176.5°, 5th percentile = 3.3°, best = 1.14°. Physical alignment (2.09°) is in the 5th percentile — marginal, not significant. The 1-loop complexification is too crude to confirm or falsify the hologram hypothesis. Sub-finding: EM ↔ weak pair aligns exactly (0.0001 rad) at Q ≈ 193 GeV — close to W-boson threshold, consistent with electroweak unification. QCD is the outlier (2° off EM/weak) because its beta_0 has opposite sign (asymptotic freedom). Verdict AMBIGUOUS: hologram hypothesis survives but is unsupported.",
+      "source": "re-test 2026-10-26",
+      "date": "2026-10-26",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/hologram_phase_test.png"
     }
   ]
 }
