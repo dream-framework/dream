@@ -5048,6 +5048,20 @@
       "source": "auto-scan 2026-10-17",
       "date": "2026-10-17",
       "url": "10.5281/zenodo.23284955"
+    },
+    {
+      "id": "T15",
+      "name": "Real-Data Hologram Test — R(s) + lattice αs + LEP αW",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "AMBIGUOUS",
+      "model_verdict": "HOLOGRAM_MARGINAL_REAL_DATA",
+      "narrative": "Sharper version of Test 14 using real experimental R(s) data from e+e- → hadrons (PDG 2024 compilation: BESIII, CMD-3, SND, BaBar, KLOE). Im[α_em(s)] computed from dispersion relation Im[α_em] = α_em(0) × R(s)/(12π) / (1-Δα_lept-Re[Π_had])². This gives Im[α_em]/Re[α_em] ~ 5-10% in the 1-10 GeV range — 50× larger than Test 14's crude 1-loop model. Best Q* = 161 GeV (just above 2m_W): max pairwise phase diff = 5.72° (passes 6° threshold). But null control with 1000 random couplings with similar |Im/Re| ratios (with 5x Im spread) shows median 159°, 5th pct 14.56°, best 0.92° — physical alignment is in the 5th percentile, marginal not significant. Sub-findings: EM ↔ QCD pair aligns to 1.66° at Q = 1.08 GeV (hadronic threshold region); EM ↔ weak pair aligns to 4.97° at Q = 344.5 GeV (well above 2m_W); weak ↔ QCD pair: NO non-trivial alignment found — they don't share a scale where both have substantial phases. Verdict AMBIGUOUS: the test is sharper than Test 14 (real R(s) gives EM phase ~5° vs 0.1°), but hologram hypothesis still not supported because null control catches the alignment as marginal.",
+      "source": "re-test 2026-10-27",
+      "date": "2026-10-27",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/hologram_real_data_test.png"
     }
   ]
 }
