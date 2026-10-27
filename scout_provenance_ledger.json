@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-27T05:25:15.992001+00:00",
+  "initialized": "2026-10-27T14:48:07.545802+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -2933,7 +2933,7 @@
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=0.5627, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.31). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=0.5627, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.39). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -11017,6 +11017,40 @@
     },
     {
       "id": "",
+      "name": "Real-Data Hologram Test — R(s) + lattice αs + LEP αW",
+      "family": "real-data",
+      "source_url": "https://pdg.lbl.gov/",
+      "registry_date": "2026-10-27",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "HOLOGRAM_MARGINAL_REAL_DATA",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
       "name": "Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",
       "family": "movie-projector",
       "source_url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
@@ -11119,18 +11153,86 @@
     },
     {
       "id": "",
-      "name": "Zenodo: Dataset and Code for: The Discourse Gap Between Pu",
+      "name": "Zenodo: Ley Lines, Tested: Are Ancient Sites in Britain Li",
       "family": "zenodo",
-      "source_url": "10.5281/zenodo.23679359",
+      "source_url": "10.5281/zenodo.23691885",
       "registry_date": "2026-10-27",
-      "D": 8.3677,
-      "r2": 0.7964,
+      "D": 1.4676,
+      "r2": 0.9966,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=8.3677, R²=0.7964. D_eff=8.368 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.07). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=1.4676, R²=0.9966. D_eff=1.468 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=51.27). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
-      "eligibility": "censored",
-      "exclusion_reason": "optimizer boundary",
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ley Lines, Tested: Are Ancient Sites in Britain Li",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23691885",
+      "registry_date": "2026-10-27",
+      "D": 0.7338,
+      "r2": 0.9993,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=0.7338, R²=0.9993. D_eff=0.734 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=122.53). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Ley Lines, Tested: Are Ancient Sites in Britain Li",
+      "family": "zenodo",
+      "source_url": "10.5281/zenodo.23691885",
+      "registry_date": "2026-10-27",
+      "D": 3.4972,
+      "r2": 0.9136,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "narrative": "D_eff=3.4972, R²=0.9136. D_eff=3.497 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.06). Not \"S2 false\" — additional structure detected.",
+      "prospective": true,
+      "eligibility": "uncensored",
+      "exclusion_reason": null,
       "data_hash": null,
       "retrieval_timestamp": null,
       "n_observations": null,
