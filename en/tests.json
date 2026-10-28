@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-28T15:18:22Z",
-  "total_tests": 333,
+  "exported_at": "2026-10-28T21:14:09Z",
+  "total_tests": 334,
   "fields": [
     "id",
     "name",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 10.08,
+      "delta_aicc": 10.05,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=10.08). S2+dust fit: D1=1.0206, D2=2.2068, R²=0.9999, AICc=-3385.97. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9618, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.08). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=10.05). S2+dust fit: D1=1.0204, D2=2.2076, R²=0.9999, AICc=-3386.22. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9618, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.05). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -5196,6 +5196,22 @@
       "source": "auto-scan 2026-10-28",
       "date": "2026-10-28",
       "url": "10.5281/zenodo.23508861"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Versioned Archive and Review of Biotic Interaction",
+      "domain": "scouting",
+      "D": 2.0215,
+      "r2": 0.5633,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.1,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.1).",
+      "narrative": "D_eff=2.0215, R²=0.5633. D_eff=2.022 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.10). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-10-28",
+      "date": "2026-10-28",
+      "url": "10.5281/zenodo.23745827"
     }
   ]
 }

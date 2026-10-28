@@ -273,7 +273,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "28 Oct 2026 11:18 EST";
+const LAST_REFRESH = "28 Oct 2026 17:14 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -629,6 +629,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Optimization trajectories for alloy recycling usin",domain:"scouting",D:0.5881,r2:0.9885,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:246.8000,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=246.8).",narrative:"D_eff=0.5881, R²=0.9885. D_eff=0.588 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=246.80). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-28",date:"2026-10-28",url:"10.5281/zenodo.23731983",image:null}
   ,{id:"",name:"Zenodo: Drug name confusion case reports, 1965–2004: an ar",domain:"scouting",D:0.5118,r2:0.9951,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:161.4400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=161.44).",narrative:"D_eff=0.5118, R²=0.9951. D_eff=0.512 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=161.44). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-28",date:"2026-10-28",url:"10.5281/zenodo.23508861",image:null}
   ,{id:"",name:"Zenodo: Drug name confusion case reports, 1965–2004: an ar",domain:"scouting",D:0.2243,r2:0.8054,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:11.3900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=11.39).",narrative:"D_eff=0.2243, R²=0.8054. D_eff=0.224 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=11.39). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-28",date:"2026-10-28",url:"10.5281/zenodo.23508861",image:null}
+  ,{id:"",name:"Zenodo: Versioned Archive and Review of Biotic Interaction",domain:"scouting",D:2.0215,r2:0.5633,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.1000,best_alt:"GAUSS",model_note:"S2 loses to GAUSS (ΔAICc=2.1).",narrative:"D_eff=2.0215, R²=0.5633. D_eff=2.022 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.10). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-10-28",date:"2026-10-28",url:"10.5281/zenodo.23745827",image:null}
 
 ];
 
@@ -914,31 +915,31 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 305,
-  "d_mle": 1.5898,
-  "lam_mle": 1.4173,
+  "n": 306,
+  "d_mle": 1.5926,
+  "lam_mle": 1.4202,
   "ks_p": 0.0006,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1151,
+  "ks_stat_obs": 0.1148,
   "ks_boot_mean": 0.0357,
-  "ks_boot_95": 0.0508,
-  "d_direct": 1.959,
-  "r2_direct": 0.9798,
-  "d_linear": 1.5856,
-  "r2_linear": 0.9711,
+  "ks_boot_95": 0.0511,
+  "d_direct": 1.9582,
+  "r2_direct": 0.9801,
+  "d_linear": 1.5863,
+  "r2_linear": 0.9713,
   "natural": 99,
-  "extraction": 206,
-  "mean": 1.2713,
-  "median": 1.2654,
-  "total": 333,
-  "compared": 327,
+  "extraction": 207,
+  "mean": 1.2738,
+  "median": 1.2677,
+  "total": 334,
+  "compared": 328,
   "noise": 9,
   "rejected": 0,
-  "ad_stat": 3.8953,
+  "ad_stat": 3.8614,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 2.81,
-  "delta_aic_lognormal": 47.4,
-  "silverman_p": 0.745,
+  "delta_aic_gamma": 3.04,
+  "delta_aic_lognormal": 48.11,
+  "silverman_p": 0.735,
   "boot_lo": 1.06,
   "boot_hi": 1.706,
   "date": "2026-10-28"

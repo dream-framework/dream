@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-28T15:18:23Z",
-  "total_tests": 333,
+  "exported_at": "2026-10-28T21:14:09Z",
+  "total_tests": 334,
   "fields": [
     "id",
     "name",
@@ -5196,6 +5196,22 @@
       "source": "auto-scan 2026-10-28",
       "date": "2026-10-28",
       "url": "10.5281/zenodo.23508861"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Versioned Archive and Review of Biotic Interaction",
+      "domain": "scouting",
+      "D": 2.0215,
+      "r2": 0.5633,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.1,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=2.1).",
+      "narrative": "D_eff=2.0215, R²=0.5633. D_eff=2.022 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, GAUSS поглощает перекрывающиеся процессы (ΔAICc=2.10). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-10-28",
+      "date": "2026-10-28",
+      "url": "10.5281/zenodo.23745827"
     }
   ]
 }
