@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-29T06:02:15Z",
+  "exported_at": "2026-10-29T15:22:35Z",
   "total_tests": 334,
   "fields": [
     "id",
@@ -1245,14 +1245,14 @@
       "id": "",
       "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
       "domain": "financial",
-      "D": 0.5627,
+      "D": 0.5628,
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 369.55,
+      "delta_aicc": 369.74,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=369.55). S2+dust fit: D1=1.0015, D2=0.7513, R²=0.9993, AICc=-2149.78. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5627, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.55). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=369.74). S2+dust fit: D1=1.0012, D2=0.7514, R²=0.9993, AICc=-2150.11. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5628, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.74). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
