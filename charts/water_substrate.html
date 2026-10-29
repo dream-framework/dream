@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Test 19 — Water Substrate · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:#1e293b;color:#e2e8f0;font-family:Inter,system-ui,sans-serif}
+  .wrap{padding:12px;max-width:1100px;margin:0 auto}
+  h1{font-size:18px;margin:0 0 4px;color:#8ec5e8;font-weight:600}
+  .kicker{font-size:12px;color:#94a3b8;margin-bottom:8px}
+  .verdict-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:8px;background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.55);color:#a78bfa}
+  .narrative{background:rgba(15,23,42,.6);border-left:3px solid #a78bfa;padding:10px 14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.5;margin:8px 0 12px}
+  .chart-wrap{position:relative;width:100%;height:480px;padding:8px 0}
+  #chart19{width:100%;height:100%}
+  h3{font-size:13px;color:#8ec5e8;margin:14px 0 4px;font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:4px}
+  th,td{padding:5px 7px;text-align:left;border-bottom:1px solid rgba(142,197,232,.15)}
+  th{color:#8ec5e8;font-weight:600;background:rgba(15,23,42,.4)}
+  td{color:#cbd5e1}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0}
+  .stat-card{background:rgba(15,23,42,.5);border:1px solid rgba(142,197,232,.2);padding:10px;border-radius:6px}
+  .stat-card h4{margin:0 0 6px;color:#8ec5e8;font-size:12px;font-weight:600}
+  .stat-card .val{font-size:18px;font-weight:700;color:#e2e8f0}
+  .meta{font-size:11px;color:#64748b;margin-top:12px;line-height:1.45}
+  code{color:#67e8f9;background:rgba(15,23,42,.4);padding:1px 5px;border-radius:3px;font-size:11px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Test 19 — What is the "water"? Substrate-independence test</h1>
+  <div class="kicker">User question (b): "Investigate what the 'water' (the substance being processed by faucets) actually IS — information? contrast? something else?" Tested 3 candidate substrates on GOES X-rays (718 samples, 1-min cadence).</div>
+  <span class="verdict-badge">VERDICT: INFORMATION PRIMARY</span>
+  <div class="narrative">Tested 3 candidate substrates for the kernel's 'water' on GOES X-ray 6-hour data (718 samples, 1-min cadence): (A) S_contrast = std(mavg_W)/std(raw) — current D.R.E.A.M definition; (B) S_info = std(diff(mavg_W))/std(diff(raw)) — INFORMATION / innovation rate; (C) S_power = sqrt(P_low/P_total) — power spectral low-pass. Results: contrast R² = 0.708 (D = 0.087, λ = 0.332 min); information R² = 0.965 (D = 0.386, λ = 1.317 min); power R² = 0.302. INFORMATION gives the cleanest S2 fit (R² = 0.965, decisively better than contrast R² = 0.708). Verdict: INFORMATION_PRIMARY — the kernel's 'water' is INFORMATION (innovation rate, std of differences), NOT contrast (static std of values) as the current D.R.E.A.M definition assumes. This is a significant refinement: the kernel processes the RATE OF NEW INFORMATION per step (the std of differences), not the static contrast. The current S_contrast definition only approximates this — the more fundamental quantity is S_info. For stationary time series the two coincide; for trending or non-stationary data they diverge, and S_info is the correct one. This may explain why some tests in en/tests.json have poor S2 fits — they may be cases where the contrast and information substrates diverge (e.g., strongly trending data where std(values) is dominated by the trend rather than innovation).</div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <h4>Contrast (current definition)</h4>
+      <div class="val">D = 0.087</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:4px">
+        R² = 0.708<br/>
+        λ = 0.33 min<br/>
+        <em>std(mavg)/std(raw)</em>
+      </div>
+    </div>
+    <div class="stat-card" style="border-color:#a78bfa">
+      <h4 style="color:#a78bfa">★ Information (innovation rate)</h4>
+      <div class="val" style="color:#a78bfa">D = 0.386</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:4px">
+        R² = 0.965 ★ best<br/>
+        λ = 1.32 min<br/>
+        <em>std(diff(mavg))/std(diff(raw))</em>
+      </div>
+    </div>
+    <div class="stat-card">
+      <h4>Power (spectral low-pass)</h4>
+      <div class="val">D = 0.015</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:4px">
+        R² = 0.302<br/>
+        λ = 0.0000 min<br/>
+        <em>sqrt(P_low/P_total)</em>
+      </div>
+    </div>
+  </div>
+
+  <h3>S(W) curves for 3 candidate substrates (interactive)</h3>
+  <div class="chart-wrap"><div id="chart19"></div></div>
+
+  <h3>Static chart (4-panel summary)</h3>
+  <div style="text-align:center;margin:8px 0">
+    <img src="../img/tests/water_substrate_test.png" alt="Test 19 chart" style="max-width:100%;border-radius:8px;border:1px solid rgba(142,197,232,.2)"/>
+  </div>
+
+  <div class="meta">
+    Method: GOES X-rays 6h (SWPC, 718 samples, 1-min cadence). S2 stretched-exponential fit per substrate via linear regression on log-log: ln(-ln S) = β·ln(W) - β·ln(λ). 3 substrates: (A) contrast = std(mavg)/std(raw) — current D.R.E.A.M definition; (B) information = std(diff(mavg))/std(diff(raw)) — innovation rate / differential entropy proxy; (C) power = sqrt(P_low-pass/P_total) — power spectral low-pass ratio. Substrate with highest S2 R² is the kernel's actual "water". Source: <a href="https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json" style="color:var(--accent)">SWPC GOES</a>.
+  </div>
+</div>
+
+<script>
+const series19 = [{"name": "contrast (D=0.087, R\u00b2=0.708)", "type": "line", "data": [[2.0, 0.38583876614863394], [3.0, 0.38583876614863394], [4.0, 0.28530332448461426], [6.0, 0.249741532662894], [7.0, 0.249741532662894], [9.0, 0.23416164963949584], [11.0, 0.22533485261012218], [14.0, 0.21702893792495476], [18.0, 0.21320990002116055], [22.0, 0.21109330641359392], [28.0, 0.2093378973329748], [34.0, 0.20809138173160965], [43.0, 0.20696941165226976], [54.0, 0.20561747317417406], [67.0, 0.20440352020599414], [84.0, 0.2026507726494383], [105.0, 0.20060554605159647], [131.0, 0.19779454267395252], [163.0, 0.19417475510652737], [203.0, 0.18942760105354114], [253.0, 0.18324614393253255], [316.0, 0.17529614643829933], [394.0, 0.1657524693202619]], "smooth": false, "symbol": "circle", "symbolSize": 5, "lineStyle": {"width": 2, "color": "#22d3ee"}, "itemStyle": {"color": "#22d3ee"}}, {"name": "information (D=0.386, R\u00b2=0.965)", "type": "line", "data": [[2.0, 0.33300983514131155], [3.0, 0.33300983514131155], [4.0, 0.19972388288666437], [6.0, 0.14252849910062296], [7.0, 0.14252849910062296], [9.0, 0.1108025200488827], [11.0, 0.09057989703503354], [14.0, 0.06633851189430039], [18.0, 0.052301647342745644], [22.0, 0.04314666226587606], [28.0, 0.03415102578328148], [34.0, 0.0282347888657853], [43.0, 0.02291755054154423], [54.0, 0.01784021660336539], [67.0, 0.014578342734206046], [84.0, 0.011411659863586002], [105.0, 0.009166558675220643], [131.0, 0.00727239593698714], [163.0, 0.005765220891373245], [203.0, 0.004551131332509358], [253.0, 0.0035747246940608054], [316.0, 0.0027681008549644733], [394.0, 0.00215050696309648]], "smooth": false, "symbol": "square", "symbolSize": 5, "lineStyle": {"width": 2, "color": "#a78bfa"}, "itemStyle": {"color": "#a78bfa"}}, {"name": "power (D=0.015, R\u00b2=0.302)", "type": "line", "data": [[2.0, 0.20492321055595888], [3.0, 0.14916115822714518], [4.0, 0.1491111327647397], [6.0, 0.14905403583359347], [7.0, 0.14902947893796317], [9.0, 0.14898787382762102], [11.0, 0.14895220632163064], [14.0, 0.14889952072700793], [18.0, 0.14882857970168545], [22.0, 0.14875479896032381], [28.0, 0.1486678683949429], [34.0, 0.1485786544104715], [43.0, 0.14835198054850407], [54.0, 0.14817956066711865], [67.0, 0.14778260612564575], [84.0, 0.14739277118332075], [105.0, 0.14644677615634172], [131.0, 0.14624834808529946], [163.0, 0.14583167010079987], [203.0, 0.14262677397368498], [253.0, 0.1416707491642625], [316.0, 0.1416707491642625], [394.0, 1.0]], "smooth": false, "symbol": "triangle", "symbolSize": 5, "lineStyle": {"width": 2, "color": "#facc15"}, "itemStyle": {"color": "#facc15"}}];
+const chart19 = echarts.init(document.getElementById('chart19'), null, {renderer:'canvas'});
+chart19.setOption({
+  backgroundColor: 'transparent',
+  grid: {left: 70, right: 30, top: 30, bottom: 50},
+  xAxis: {
+    type: 'log', name: 'Window W (minutes)', nameLocation: 'middle', nameGap: 32,
+    nameTextStyle: {color: '#8ec5e8', fontSize: 11},
+    axisLine: {lineStyle: {color: '#475569'}},
+    axisLabel: {color: '#cbd5e1', fontSize: 10},
+    splitLine: {show: true, lineStyle: {color: 'rgba(142,197,232,.08)'}},
+  },
+  yAxis: {
+    type: 'value', name: 'S(W)', nameLocation: 'middle', nameGap: 45,
+    nameTextStyle: {color: '#8ec5e8', fontSize: 11},
+    axisLine: {lineStyle: {color: '#475569'}},
+    axisLabel: {color: '#cbd5e1', fontSize: 10},
+    splitLine: {show: true, lineStyle: {color: 'rgba(142,197,232,.08)'}},
+    min: 0, max: 1,
+  },
+  tooltip: {
+    trigger: 'axis', backgroundColor: 'rgba(15,23,42,.95)', borderColor: '#475569',
+    textStyle: {color: '#e2e8f0', fontSize: 11},
+    formatter: p => {
+      if(!Array.isArray(p)) p=[p];
+      const W = p[0].data[0];
+      let s = `W = ${W.toFixed(2)} min<br/>`;
+      p.forEach(x => s += `<span style="color:${x.color}">●</span> ${x.seriesName.split(' ')[0]}: S = ${x.data[1].toFixed(4)}<br/>`);
+      return s;
+    }
+  },
+  legend: {show: true, top: 0, textStyle: {color: '#cbd5e1', fontSize: 10}},
+  series: series19,
+});
+window.addEventListener('resize', () => chart19.resize());
+</script>
+</body>
+</html>

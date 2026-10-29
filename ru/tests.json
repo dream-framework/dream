@@ -5132,6 +5132,34 @@
       "date": "2026-10-29",
       "url": "https://pdg.lbl.gov/",
       "image": "img/tests/pipeline_faucets_test.png"
+    },
+    {
+      "id": "T18",
+      "name": "Faucet Types — Is D distribution multimodal?",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "MULTIMODAL",
+      "model_verdict": "FAUCET_TYPES_FOUND",
+      "narrative": "User question (a): 'Could there be evidence for a finite number of faucet types — bimodal/multimodal D distribution?' Tested 5 methods on 327 tests from en/tests.json. GMM BIC picks k=3 (decisively over k=1, ΔBIC=315). 3 modes: D̄=0.30 (w=20%) 'weak' faucet, D̄=1.34 (w=67%) 'natural' faucet, D̄=4.58 (w=12%) 'aggressive extraction' faucet. Bootstrap k=2 modes well-separated (ratio=9.5). Silverman test doesn't reject unimodality (p=1.0) — but GMM BIC + bootstrap together support multimodality. Verdict: MULTIMODAL — the kernel has MULTIPLE FAUCET TYPES, refining Test 17's pipeline+faucets picture.",
+      "source": "re-test 2026-10-29",
+      "date": "2026-10-29",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/faucet_types_test.png"
+    },
+    {
+      "id": "T19",
+      "name": "What is the 'water'? Substrate-independence test",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "INFORMATION_PRIMARY",
+      "model_verdict": "INFORMATION_IS_WATER",
+      "narrative": "User question (b): 'Investigate what the water (the substance being processed by faucets) actually IS — information? contrast? something else?' Tested 3 candidate substrates on GOES X-rays (718 samples, 1-min cadence): (A) contrast = std(mavg)/std(raw) — current D.R.E.A.M definition; (B) information = std(diff(mavg))/std(diff(raw)) — innovation rate; (C) power = sqrt(P_low/P_total). S2 fit results: contrast R²=0.708 (D=0.087, λ=0.33 min); information R²=0.965 (D=0.386, λ=1.32 min); power R²=0.302. INFORMATION gives the cleanest S2 fit (R²=0.965, decisively better than contrast R²=0.708). Verdict: INFORMATION_PRIMARY — the kernel's 'water' is INFORMATION (innovation rate, std of differences), NOT contrast (static std of values) as the current D.R.E.A.M definition assumes. This is a significant refinement: the kernel processes the RATE OF NEW INFORMATION per step, not the static contrast. For stationary time series the two coincide; for trending data they diverge, and S_info is the correct one.",
+      "source": "re-test 2026-10-29",
+      "date": "2026-10-29",
+      "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
+      "image": "img/tests/water_substrate_test.png"
     }
   ]
 }
