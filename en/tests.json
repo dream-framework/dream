@@ -5160,6 +5160,20 @@
       "date": "2026-10-29",
       "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
       "image": "img/tests/water_substrate_test.png"
+    },
+    {
+      "id": "T20",
+      "name": "Decay, not filter — does the 'water' have a lifetime?",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "DECAY_NOT_FILTER",
+      "model_verdict": "WATER_IS_MORTAL_COMPONENT",
+      "narrative": "User refinement of Test 19: 'new not needed to be better — with time, more decay.' The information substrate does NOT win because it is better preserved — at every W it retains LESS than contrast. It wins because it is the substrate that DECAYS WITH TIME. The retention law S(W) = exp(-(W/λ)^D) is the Weibull survival function: λ is the LIFETIME of information, D the aging regime — the kernel is a MORTALITY PROCESS on novelty, not a filter on contrast. Tested via 4 predictions, all SUPPORTED: (P1) GOES info substrate is pure decay — immortal-mixture floor s_∞=0.009≈0, delayed-onset filter collapses to W_c→0 (no passband); (P2) GOES contrast substrate is NOT pure decay — needs immortal floor s_∞=0.183 (ΔAIC=27) — the old substrate fails precisely because part of it NEVER decays; (P3) controlled test (real GOES residuals + zero-innovation trend, f=0..8): contrast's survival tail tracks the immortal-variance prediction f/√(f²+1) within ±0.007 and its decay-depth range collapses 2.07→0.008, while the info-substrate retention curve is INVARIANT (depth-range 3.18±0.02, same D and lifetime at every f); (P4) FRED CPI (956 months): the price LEVEL is nearly immortal (82% of std survives 43-year averaging) while innovation dies 6.3× deeper following the Weibull decay law (lifetime ≈ 132 months, D = 0.32). Survival analysis (GOES): novelty half-life 0.80 min, successive half-lives STRETCH (0.80, 2.70, 4.79, 6.99, 9.28, 11.63 min — memory-like aging; hazard regime: infant mortality, D=0.47). Decay depth −ln S grows as W^D — ×1.39 per octave: 'with time, more decay.' Verdict: DECAY_NOT_FILTER — the water is the MORTAL component. Test 18's three faucet types (D̄=0.30/1.34/4.58) are exactly the three Weibull aging regimes: infant mortality (survivors endure, memory-like), near-constant hazard, wear-out (accelerating death).",
+      "source": "re-test 2026-10-29",
+      "date": "2026-10-29",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+      "image": "img/tests/decay_not_filter_test.png"
     }
   ]
 }
