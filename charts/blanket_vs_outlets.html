@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Test 16 — Blanket vs Myriad Outlets, Same Function · DREAM 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;padding:0;background:#1e293b;color:#e2e8f0;font-family:Inter,system-ui,sans-serif}
+  .wrap{padding:12px;max-width:1100px;margin:0 auto}
+  h1{font-size:18px;margin:0 0 4px;color:#8ec5e8;font-weight:600}
+  .kicker{font-size:12px;color:#94a3b8;margin-bottom:8px}
+  .verdict-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:8px;background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.55);color:#a78bfa;}
+  .narrative{background:rgba(15,23,42,.6);border-left:3px solid #a78bfa;padding:10px 14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.5;margin:8px 0 12px}
+  .chart-wrap{position:relative;width:100%;padding:8px 0;box-sizing:border-box}
+  #chart{width:100%;height:800px}
+  h3{font-size:13px;color:#8ec5e8;margin:14px 0 4px;font-weight:600;letter-spacing:.02em}
+  table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}
+  th,td{padding:4px 6px;text-align:left;border-bottom:1px solid rgba(142,197,232,.15)}
+  th{color:#8ec5e8;font-weight:600;background:rgba(15,23,42,.4)}
+  td{color:#cbd5e1}
+  .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:10px 0}
+  .stat-card{background:rgba(15,23,42,.5);border:1px solid rgba(142,197,232,.2);padding:10px;border-radius:6px}
+  .stat-card h4{margin:0 0 6px;color:#8ec5e8;font-size:12px;font-weight:600}
+  .stat-card .val{font-size:20px;font-weight:700;color:#e2e8f0}
+  .stat-card .desc{font-size:11px;color:#94a3b8;margin-top:4px}
+  .meta{font-size:11px;color:#64748b;margin-top:12px;line-height:1.45}
+  code{color:#67e8f9;background:rgba(15,23,42,.4);padding:1px 5px;border-radius:3px;font-size:11px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Test 16 — "Blanket" vs "Myriad Outlets, Same Function"</h1>
+  <div class="kicker">Two new candidate kernel analogies. (A) Blanket: one uniform field, same parameters (D, λ_q) everywhere. (B) Myriad outlets, same function: many sector-specific outlets, all implementing the same retention function (S2), with different parameters per outlet.</div>
+  <span class="verdict-badge">VERDICT: MYRIAD OUTLETS</span>
+  <div class="narrative">Form invariance = 60.9% (r² > 0.9) — S2 form is broadly applicable across sectors (the 'same function' part). BUT parameter variance is HIGH: D CV = 0.994, D range = [0.047, 9.980] (211× variation), and 85.7% of cross-domain KS tests are statistically distinguishable (p < 0.05). ANOVA η² = 0.081 — 8.1% of D variance is between domains. D values DIFFER systematically by sector (e.g., crypto D≈1.47, cultural D≈0.51, ecological D≈0.90). The kernel is NOT a single uniform blanket (parameters vary too much), but the S2 functional form IS broadly applicable. This supports the MYRIAD OUTLETS, SAME FUNCTION hypothesis: the kernel has many sector-specific 'outlets' that all implement the same retention function (stretched exponential S2), but each outlet has its own effective parameters (D, λ_q).</div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <h4>Form invariance (r² > 0.9)</h4>
+      <div class="val">60.9%</div>
+      <div class="desc">S2 fits well across sectors — "same function" part is broadly supported</div>
+    </div>
+    <div class="stat-card">
+      <h4>D coefficient of variation</h4>
+      <div class="val">0.994</div>
+      <div class="desc">High → D varies wildly (211× range) — NOT a uniform blanket</div>
+    </div>
+    <div class="stat-card">
+      <h4>Cross-domain KS distinguishability</h4>
+      <div class="val">85.7%</div>
+      <div class="desc">24/28 domain pairs distinguishable (p&lt;0.05) → parameters DIFFER by sector</div>
+    </div>
+    <div class="stat-card">
+      <h4>ANOVA η² (between-domain variance)</h4>
+      <div class="val">0.081</div>
+      <div class="desc">8.1% of D variance is between domains — most variance is within (dominated by 'scouting')</div>
+    </div>
+  </div>
+
+  <h3>Static chart (4-panel summary)</h3>
+  <div style="text-align:center;margin:8px 0">
+    <img src="../img/tests/blanket_vs_outlets_test.png" alt="Test 16 chart" style="max-width:100%;border-radius:8px;border:1px solid rgba(142,197,232,.2)"/>
+  </div>
+
+  <h3>D distribution by domain (n ≥ 5 tests)</h3>
+  <table>
+    <thead><tr>
+      <th>Domain</th><th>n</th><th>D mean</th><th>D std</th><th>D min</th><th>D max</th>
+    </tr></thead>
+    <tbody>
+        <tr>
+          <td>scouting</td>
+          <td>225</td>
+          <td>1.751</td>
+          <td>1.702</td>
+          <td>0.129</td>
+          <td>9.980</td>
+        </tr>
+
+        <tr>
+          <td>environmental</td>
+          <td>25</td>
+          <td>0.912</td>
+          <td>0.688</td>
+          <td>0.207</td>
+          <td>2.912</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>18</td>
+          <td>1.465</td>
+          <td>0.159</td>
+          <td>1.178</td>
+          <td>1.665</td>
+        </tr>
+
+        <tr>
+          <td>financial</td>
+          <td>13</td>
+          <td>1.115</td>
+          <td>0.340</td>
+          <td>0.563</td>
+          <td>1.862</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>8</td>
+          <td>0.233</td>
+          <td>0.067</td>
+          <td>0.124</td>
+          <td>0.345</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>7</td>
+          <td>0.495</td>
+          <td>0.272</td>
+          <td>0.113</td>
+          <td>1.050</td>
+        </tr>
+
+        <tr>
+          <td>oceanography</td>
+          <td>6</td>
+          <td>2.211</td>
+          <td>1.306</td>
+          <td>0.555</td>
+          <td>3.573</td>
+        </tr>
+
+        <tr>
+          <td>solar_energy</td>
+          <td>6</td>
+          <td>0.057</td>
+          <td>0.012</td>
+          <td>0.047</td>
+          <td>0.074</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <h3>Cross-domain Kolmogorov-Smirnov tests</h3>
+  <table>
+    <thead><tr>
+      <th>Domain 1</th><th>Domain 2</th><th>D̄₁</th><th>D̄₂</th><th>KS stat</th><th>p-value</th><th>Verdict</th>
+    </tr></thead>
+    <tbody>
+        <tr>
+          <td>crypto</td>
+          <td>cultural</td>
+          <td>1.465</td>
+          <td>0.495</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>energy</td>
+          <td>1.465</td>
+          <td>0.233</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>environmental</td>
+          <td>1.465</td>
+          <td>0.912</td>
+          <td>0.720</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>financial</td>
+          <td>1.465</td>
+          <td>1.115</td>
+          <td>0.658</td>
+          <td>0.0013</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>oceanography</td>
+          <td>1.465</td>
+          <td>2.211</td>
+          <td>0.667</td>
+          <td>0.0254</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>scouting</td>
+          <td>1.465</td>
+          <td>1.751</td>
+          <td>0.369</td>
+          <td>0.0157</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>crypto</td>
+          <td>solar_energy</td>
+          <td>1.465</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>energy</td>
+          <td>0.495</td>
+          <td>0.233</td>
+          <td>0.714</td>
+          <td>0.0326</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>environmental</td>
+          <td>0.495</td>
+          <td>0.912</td>
+          <td>0.337</td>
+          <td>0.4570</td>
+          <td style="color:#22c55e">—</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>financial</td>
+          <td>0.495</td>
+          <td>1.115</td>
+          <td>0.714</td>
+          <td>0.0068</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>oceanography</td>
+          <td>0.495</td>
+          <td>2.211</td>
+          <td>0.714</td>
+          <td>0.0385</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>scouting</td>
+          <td>0.495</td>
+          <td>1.751</td>
+          <td>0.702</td>
+          <td>0.0008</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>cultural</td>
+          <td>solar_energy</td>
+          <td>0.495</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0012</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>environmental</td>
+          <td>0.233</td>
+          <td>0.912</td>
+          <td>0.760</td>
+          <td>0.0005</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>financial</td>
+          <td>0.233</td>
+          <td>1.115</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>oceanography</td>
+          <td>0.233</td>
+          <td>2.211</td>
+          <td>1.000</td>
+          <td>0.0007</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>scouting</td>
+          <td>0.233</td>
+          <td>1.751</td>
+          <td>0.902</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>energy</td>
+          <td>solar_energy</td>
+          <td>0.233</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0007</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>environmental</td>
+          <td>financial</td>
+          <td>0.912</td>
+          <td>1.115</td>
+          <td>0.480</td>
+          <td>0.0284</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>environmental</td>
+          <td>oceanography</td>
+          <td>0.912</td>
+          <td>2.211</td>
+          <td>0.547</td>
+          <td>0.0790</td>
+          <td style="color:#22c55e">—</td>
+        </tr>
+
+        <tr>
+          <td>environmental</td>
+          <td>scouting</td>
+          <td>0.912</td>
+          <td>1.751</td>
+          <td>0.378</td>
+          <td>0.0023</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>environmental</td>
+          <td>solar_energy</td>
+          <td>0.912</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>financial</td>
+          <td>oceanography</td>
+          <td>1.115</td>
+          <td>2.211</td>
+          <td>0.590</td>
+          <td>0.0862</td>
+          <td style="color:#22c55e">—</td>
+        </tr>
+
+        <tr>
+          <td>financial</td>
+          <td>scouting</td>
+          <td>1.115</td>
+          <td>1.751</td>
+          <td>0.383</td>
+          <td>0.0398</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>financial</td>
+          <td>solar_energy</td>
+          <td>1.115</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0001</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>oceanography</td>
+          <td>scouting</td>
+          <td>2.211</td>
+          <td>1.751</td>
+          <td>0.402</td>
+          <td>0.2318</td>
+          <td style="color:#22c55e">—</td>
+        </tr>
+
+        <tr>
+          <td>oceanography</td>
+          <td>solar_energy</td>
+          <td>2.211</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0022</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+
+        <tr>
+          <td>scouting</td>
+          <td>solar_energy</td>
+          <td>1.751</td>
+          <td>0.057</td>
+          <td>1.000</td>
+          <td>0.0000</td>
+          <td style="color:#ef4444">★ DISTINGUISHABLE</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="meta">
+    Method: 327 tests from en/tests.json (auto-scan scouting + curated retention tests). Form invariance = fraction with S2 r² > 0.9.
+    Parameter variance = coefficient of variation (std/|mean|) of D across all tests. Cross-domain KS = Kolmogorov-Smirnov test on D distributions
+    for each domain pair with n ≥ 5 tests; p < 0.05 = distributions are statistically distinguishable. ANOVA η² = between-domain variance / total variance.
+    Thresholds: BLANKET requires form_inv > 80% AND D CV < 0.3 AND KS distinguishability < 30%.
+    MYRIAD_OUTLETS requires form_inv > 50% AND (D CV > 0.3 OR KS distinguishability > 50%).
+    NEITHER: form_inv < 50%. Data: <code>en/tests.json</code> (327 tests, 14 domains).
+  </div>
+</div>
+</body>
+</html>
