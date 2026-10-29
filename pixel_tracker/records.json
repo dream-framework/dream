@@ -263,8 +263,20 @@
       "scouted": "2026-10-13T23:27:59",
       "channel": "structure",
       "temperature_k": null
+    },
+    {
+      "arxiv_id": "2610.29957v1",
+      "title": "A design concept for the High Resolution Imager on the Habitable Worlds Observatory",
+      "published": "2026-10-21",
+      "link": "http://arxiv.org/abs/2610.29957v1",
+      "smallest_scale_m": 9.000000000000001e-07,
+      "smallest_scale_str": "9e+02 nm (9.0\u00d710\u207b\u2077 m)",
+      "channel": "structure",
+      "temperature_k": null,
+      "query": "all:\"wavefront sensing\" AND all:\"resolution\"",
+      "scouted": "2026-10-27T17:46:20"
     }
   ],
-  "last_run": "2026-10-18T15:39:24",
-  "total_records": 22
+  "last_run": "2026-10-28T18:10:49",
+  "total_records": 23
 }
