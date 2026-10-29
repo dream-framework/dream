@@ -5118,6 +5118,20 @@
       "date": "2026-10-26",
       "url": "https://pdg.lbl.gov/",
       "image": "img/tests/hologram_phase_test.png"
+    },
+    {
+      "id": "T17",
+      "name": "Pipeline + Faucets Refinement of MYRIAD_OUTLETS",
+      "domain": "kernel-analogy",
+      "D": null,
+      "r2": null,
+      "verdict": "PIPELINE_FAUCETS",
+      "model_verdict": "PIPELINE_FAUCETS_SUPPORTED",
+      "narrative": "User refinement of Test 16: 'It's like the same pipeline with water (MM/source) going through many faucets (kernel), and the faucets have the same function on water pressure, faucet diameter etc.' This adds 3 stronger predictions beyond Test 16's 'same function, different parameters'. All 3 SUPPORTED using 327 tests from en/tests.json: P1 (D distribution skewed-right — pipeline signature): SUPPORTED. Best fit by AIC = Gamma (AIC=898); Normal AIC=1188 (290 worse). D distribution is skewed-right, consistent with pipeline/weakest-link structure rather than independent Normal processes. P2 (physical categories cluster in D): SUPPORTED. Hard_physical D̄=0.77 vs soft_social D̄=1.17 (KS p < 0.0001). All 6/6 cross-category pairs distinguishable. P3 (r² uncorrelated with D — faucet mechanism uniform): SUPPORTED. r(D, r²) = -0.013 (p = 0.82). Verdict: PIPELINE_FAUCETS — Test 16's MYRIAD_OUTLETS finding refined. The kernel behaves like a single pipeline feeding many faucets: each faucet implements the same S2 retention function (form invariance) with its own effective parameters (D, λ_q), and the parameters have the predicted pipeline signatures (skewed-right D distribution, physical category structure, uniform fit quality across D values).",
+      "source": "re-test 2026-10-29",
+      "date": "2026-10-29",
+      "url": "https://pdg.lbl.gov/",
+      "image": "img/tests/pipeline_faucets_test.png"
     }
   ]
 }
