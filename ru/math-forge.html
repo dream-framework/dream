@@ -62,12 +62,12 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
 .startActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .startActions .btn{flex:1;min-width:140px;padding:10px 14px;font-size:var(--sm)}
 /* Groq floating bubble + docked chat panel (matches site bot UI) */
-#groqBubble{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--green));display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s}
+#groqBubble{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--green));display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s}
 #groqBubble:hover{transform:scale(1.08) translateY(-2px)}
 #groqBubble .bubble-icon{font-size:21px;color:#071018;font-weight:900}
 #groqBubble .bubble-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#ff9a9a;border:2px solid var(--bg)}
 #groqBubble .bubble-dot.ok{background:var(--green)}
-#groqDock{position:fixed;right:22px;bottom:86px;width:380px;max-width:calc(100vw - 44px);height:500px;max-height:calc(100vh - 120px);background:linear-gradient(180deg,#0d1d2b,#081622);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 70px rgba(0,0,0,.5);z-index:101;display:none;flex-direction:column;overflow:hidden}
+#groqDock{position:fixed;right:22px;bottom:86px;width:380px;max-width:calc(100vw - 44px);height:500px;max-height:calc(100vh - 120px);background:linear-gradient(180deg,#0d1d2b,#081622);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 70px rgba(0,0,0,.5);z-index:9998;display:none;flex-direction:column;overflow:hidden}
 #groqDock.show{display:flex}
 .groqDockHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #2d495f}
 .groqDockHeader h3{margin:0;font-size:14px;color:#eff8ff}
