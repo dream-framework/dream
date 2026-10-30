@@ -1,6 +1,31 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<script>
+// SW registration + cache-busting for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('../sw.js').catch(function(){});
+  // Force-check for new SW version on every load
+  navigator.serviceWorker.getRegistration().then(function(reg) {
+    if (!reg) return;
+    reg.update().catch(function(){});
+    if (reg.waiting) { reg.waiting.postMessage({type:'SKIP_WAITING'}); }
+    reg.addEventListener('updatefound', function() {
+      var nw = reg.installing;
+      if (nw) nw.addEventListener('statechange', function() {
+        if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+          nw.postMessage({type:'SKIP_WAITING'});
+        }
+      });
+    });
+  });
+  // Reload once if a new SW took control
+  var rl = sessionStorage.getItem('sw-rl');
+  navigator.serviceWorker.addEventListener('controllerchange', function() {
+    if (!rl) { sessionStorage.setItem('sw-rl','1'); window.location.reload(); }
+  });
+}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Math Forge — Mathematician Track · D.R.E.A.M</title>
