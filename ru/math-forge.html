@@ -50,13 +50,24 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
 .tutorFooter{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:6px;align-items:center}.tutorFooter textarea{resize:none;height:44px;background:#07141f;border:1px solid #35536a;border-radius:8px;color:#eef7ff;padding:7px 8px}.pageMeta{font-size:var(--xs);color:#9fb2c4;white-space:nowrap}
 @media(max-height:760px){.tutorModal{height:92dvh;padding:10px}.tutorBody{grid-template-columns:minmax(0,1fr) 220px}.answerPage{font-size:10px;line-height:1.32}.settingsGrid{gap:5px 8px}.settingsGrid input,.settingsGrid select{padding:5px}}
 .overlay{position:fixed;inset:0;background:rgba(3,9,14,.88);backdrop-filter:blur(8px);display:grid;place-items:center;z-index:20}.hidden{display:none!important}.modal{width:min(760px,92vw);background:#0d1d2b;border:1px solid #3b5c74;border-radius:16px;padding:16px}.modal h2{margin:0 0 6px}.modal p{color:#b6c8d6;font-size:var(--sm);line-height:1.45}.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.road{border:1px solid #2e485e;background:#091723;border-radius:9px;padding:8px;font-size:var(--xs)}@media(max-width:1000px){.layout{grid-template-columns:40vw minmax(0,1fr)}.gate{grid-template-columns:1fr}.right{grid-template-rows:minmax(220px,1fr) auto auto}}@media(max-height:760px){:root{--fs:10px;--sm:9px;--xs:8px}.lessonhead{padding:7px 9px 5px}.theory{padding:8px}.formula{min-height:34px;padding:5px}.gate{padding:5px}.quiz,.prooflab{padding:6px}.ai{padding:5px}.brand p{display:none}}
+
+.startOverlay{z-index:50}
+.startModal{width:min(820px,94vw);max-height:92dvh;overflow:auto;background:linear-gradient(180deg,#0d1d2b,#081622);border:1px solid #3b5c74;border-radius:18px;padding:24px;box-shadow:0 28px 90px rgba(0,0,0,.62)}
+.startModal h2{font-size:clamp(20px,2.4vh,28px);margin:0 0 8px;line-height:1.1}
+.startModal p{color:#b6c8d6;font-size:var(--sm);line-height:1.5;margin:7px 0}
+.startSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.startSum{padding:12px;background:#081522;border:1px solid #314e66;border-radius:10px;text-align:center}
+.startSum b{display:block;font-size:22px;color:var(--cyan)}
+.startSum span{font-size:var(--xs);color:#a9bac8;text-transform:uppercase;letter-spacing:.06em}
+.startActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.startActions .btn{flex:1;min-width:140px;padding:10px 14px;font-size:var(--sm)}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
  <div class="brand"><div class="logo">∴</div><div><h1>Math Forge — Mathematician Track</h1><p>Definition → theorem → proof → counterexample → visual → test → proof reconstruction</p></div></div>
- <div class="topright"><span class="progress" id="progressText"></span><button class="btn primary" id="groqSettingsBtn"><span class="groqDot" id="groqDot"></span>Groq</button><button class="btn" id="roadmapBtn">Roadmap</button><button class="btn" id="exportBtn">Save</button><button class="btn" id="importBtn">Load</button><input type="file" id="importFile" accept=".json" class="hidden"></div>
+ <div class="topright"><span class="progress" id="progressText"></span><button class="btn primary" id="groqSettingsBtn"><span class="groqDot" id="groqDot"></span>Groq</button><button class="btn" id="startPageBtn">Start</button><button class="btn" id="roadmapBtn">Roadmap</button><button class="btn" id="exportBtn">Save</button><button class="btn" id="importBtn">Load</button><input type="file" id="importFile" accept=".json" class="hidden"></div>
 </header>
 <main class="layout">
  <section class="card left">
@@ -84,6 +95,8 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
  </section>
 </main>
 </div>
+
+<div class="overlay startOverlay" id="startOverlay"><div class="modal startModal"><h2>Math Forge — Mathematician Track</h2><p>A proof-oriented spine: definition → theorem → proof → counterexample → visual → test → proof reconstruction. Every lesson requires both the concept check and the proof reconstruction to advance. Progress auto-saves locally; export/import a progress file to back it up or move it between devices.</p><div class="startSummary"><div class="startSum"><b id="startLessons"></b><span>lessons</span></div><div class="startSum"><b id="startModules"></b><span>modules</span></div><div class="startSum"><b id="startProgress"></b><span>saved progress</span></div></div><div class="startActions"><button class="btn primary" id="startResumeBtn">Start course</button><button class="btn" id="startFreshBtn">Start from zero</button><button class="btn" id="startLoadBtn">Load progress file</button></div></div></div>
 
 <div class="overlay hidden" id="roadmapOverlay"><div class="modal"><h2>Mathematician Track</h2><p>This is a proof-oriented spine. Elementary results receive direct proofs; advanced results are explicitly presented as proof sketches when a full proof requires machinery not yet developed.</p><div class="roadmap" id="roadmap"></div><div style="text-align:right;margin-top:10px"><button class="btn primary" id="closeRoadmap">Close</button></div></div></div>
 <div class="overlay hidden" id="helpOverlay"><div class="modal"><h2 id="helpTitle"></h2><p id="helpText"></p><div id="helpFormula" class="formula"></div><div style="display:flex;justify-content:space-between;gap:8px;margin-top:10px"><button class="btn" id="narrateBtn">▶ Narrate</button><button class="btn primary" id="closeHelp">Let me try</button></div></div></div>
@@ -579,6 +592,29 @@ function drawScene(){
  case"dream":let labels=["source Φ","kernel Kλ","observable O","push-forward","retention/spectrum"],xs=[90,265,440,615,790];labels.forEach((lab,i)=>{v.append(S("rect",{x:xs[i]-65,y:200,width:130,height:90,rx:12,fill:i===1?"rgba(110,220,255,.11)":"#0d1b28",stroke:i===1?"#6edcff":"#36566f"}));txt(v,xs[i],250,lab,"#fff",13);if(i<labels.length-1)arrow(v,xs[i]+65,245,xs[i+1]-65,245,"#ffd77a",2)});txt(v,450,410,"verify every arrow separately","#81e2aa",20);break;
  }
 }
+$("startPageBtn").onclick=()=>{$("startOverlay").classList.remove("hidden");updateStartOverlay()};
+// ---- Start overlay (course selector / resume) ----
+function updateStartOverlay(){
+ const total=LESSONS.length;
+ const done=LESSONS.filter(x=>state.quizPassed[x.id]&&state.proofPassed[x.id]).length;
+ const modules=[...new Set(LESSONS.map(x=>x.module))].length;
+ $("startLessons").textContent=total;
+ $("startModules").textContent=modules;
+ $("startProgress").textContent=Math.round(100*done/total)+'%';
+ if(done>0){
+  $("startResumeBtn").textContent=`Resume at lesson ${state.index+1} of ${total}`;
+ }else{
+  $("startResumeBtn").textContent="Start course";
+ }
+}
+$("startResumeBtn").onclick=()=>{$("startOverlay").classList.add("hidden");render()};
+$("startFreshBtn").onclick=()=>{const done=LESSONS.filter(x=>state.quizPassed[x.id]&&state.proofPassed[x.id]).length;if(done===0||confirm('Discard saved progress and start from zero?')){state={index:0,tab:"definition",quizPassed:{},proofPassed:{},proofPick:[],slider:50};save();updateStartOverlay();$("startOverlay").classList.add("hidden");render()}};
+$("startLoadBtn").onclick=()=>$("importFile").click();
+// Show start overlay on load
+updateStartOverlay();
+// Don't auto-show if no saved progress — go straight in
+const hasProgress=LESSONS.some(x=>state.quizPassed[x.id]&&state.proofPassed[x.id]);
+if(!hasProgress){$("startOverlay").classList.add("hidden")}
 render();
 </script>
 <script defer src="../js/sw-update.js"></script>
