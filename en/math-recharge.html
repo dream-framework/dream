@@ -141,6 +141,26 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
  <div class="bottom"><div class="card info"><h3>Live explanation</h3><p id="narrative"></p><p id="connection"></p></div><div class="card info"><h3>Concept microscope</h3><div class="metrics" id="metrics"></div><p id="microText"></p></div></div>
 </section>
 </div>
+
+<div class="overlay helpOverlay hidden" id="helpOverlay">
+ <div class="helpModal">
+  <div class="helpHead">
+   <div><h2 id="helpTitle">Teach me this</h2><p id="helpSub"></p></div>
+   <button class="btn helpClose" id="helpCloseBtn">Close ✕</button>
+  </div>
+  <div class="helpModes">
+   <button class="helpMode active" data-help-mode="simple">Simplify it</button>
+   <button class="helpMode" data-help-mode="visual">Show me visually</button>
+   <button class="helpMode" data-help-mode="analogy">Another angle</button>
+   <button class="helpMode" data-help-mode="formula">Unpack formula</button>
+  </div>
+  <div class="helpBody">
+   <div class="helpPrimary">
+    <h3 id="helpModeTitle">Plain-language theory</h3>
+    <p id="helpText"></p>
+    <div class="helpFormula" id="helpFormula"></div>
+    <div class="helpCue" id="helpCue"></div>
+   </div>
    <div class="helpMemory">
     <h3>Memory anchor</h3>
     <p id="helpMemory"></p>
@@ -159,9 +179,6 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
   </div>
  </div>
 </div>
-
-
-
 <div class="overlay" id="startOverlay"><div class="modal"><h2>Math Recharge — accelerated mathematical physics path</h2><p>This edition is a gated course: every step requires a correct exercise. It auto-saves locally, and you can export/import a progress file. The advanced track explicitly separates established mathematics from DREAM-specific interpretation.</p><div class="summary"><div class="sum"><b id="sumLevels"></b><span>levels</span></div><div class="sum"><b id="sumLessons"></b><span>guided lessons</span></div><div class="sum"><b id="sumProgress"></b><span>saved progress</span></div></div><div class="modalActions"><button class="btn primary" id="resumeBtn">Start course</button><button class="btn" id="freshBtn">Start from zero</button><button class="btn" id="modalLoadBtn">Load progress file</button></div></div></div>
 <script>
 (()=>{"use strict";
@@ -590,6 +607,7 @@ async function groqAsk(question){
  }finally{document.getElementById("groqDockSend").disabled=false}
 }
 // Wire up
+document.getElementById("groqBubble").onclick=groqToggleDock;
 document.getElementById("groqBubble").addEventListener("click",groqToggleDock);
 document.getElementById("groqBubble").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();groqToggleDock()}});
 document.getElementById("groqDockClose").addEventListener("click",groqCloseDock);
@@ -598,7 +616,7 @@ document.querySelectorAll("#groqDockModes button").forEach(b=>b.addEventListener
 document.getElementById("groqDockSend").addEventListener("click",()=>{const q=document.getElementById("groqDockText").value;document.getElementById("groqDockText").value="";groqAsk(q)});
 document.getElementById("groqDockText").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();const q=e.target.value;e.target.value="";groqAsk(q)}});
 window.addEventListener("keydown",e=>{if(e.key==="Escape"){const d=document.getElementById("groqDock");if(d&&d.classList.contains("show"))groqCloseDock()}});
-groqUpdateStatus();
+try{groqUpdateStatus()}catch(e){console.log("groqUpdateStatus error:",e.message)}
 const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels").textContent=LEVELS.length;$("sumLessons").textContent=TOTAL;$("sumProgress").textContent=Math.round(100*completedCount()/TOTAL)+'%';if(completedCount()>0)$("resumeBtn").textContent=`Resume at Level ${prog.level+1}.${prog.step+1}`;updateCourseProgress();initLesson();resize();
 })();
 

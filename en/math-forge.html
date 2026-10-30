@@ -341,6 +341,7 @@ async function groqAsk(question){
  }finally{document.getElementById("groqDockSend").disabled=false}
 }
 // Wire up
+document.getElementById("groqBubble").onclick=groqToggleDock;
 document.getElementById("groqBubble").addEventListener("click",groqToggleDock);
 document.getElementById("groqBubble").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();groqToggleDock()}});
 document.getElementById("groqDockClose").addEventListener("click",groqCloseDock);
