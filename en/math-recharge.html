@@ -180,6 +180,14 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
  </div>
 </div>
 <div class="overlay" id="startOverlay"><div class="modal"><h2>Math Recharge — accelerated mathematical physics path</h2><p>This edition is a gated course: every step requires a correct exercise. It auto-saves locally, and you can export/import a progress file. The advanced track explicitly separates established mathematics from DREAM-specific interpretation.</p><div class="summary"><div class="sum"><b id="sumLevels"></b><span>levels</span></div><div class="sum"><b id="sumLessons"></b><span>guided lessons</span></div><div class="sum"><b id="sumProgress"></b><span>saved progress</span></div></div><div class="modalActions"><button class="btn primary" id="resumeBtn">Start course</button><button class="btn" id="freshBtn">Start from zero</button><button class="btn" id="modalLoadBtn">Load progress file</button></div></div></div>
+<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">✦</span><span class="bubble-dot" id="groqBubbleDot"></span></div>
+<div id="groqDock" aria-hidden="true">
+  <div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">⚙</button><button class="gear" id="groqDockClose" title="Close">✕</button></div>
+  <div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div>
+  <div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson — definitions, proofs, examples, or anything you don't yet believe.</div></div>
+  <div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send, Shift+Enter = newline)"></textarea><button id="groqDockSend">Send</button></div>
+  <div class="groqDockFooter">Powered by Groq · <span id="groqDockModel">qwen/qwen3.8-27b</span></div>
+</div>
 <script>
 (()=>{"use strict";
 const $=id=>document.getElementById(id), $$=q=>[...document.querySelectorAll(q)];
@@ -639,11 +647,7 @@ const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels")
 })();
 </script>
 <script defer src="../js/sw-update.js"></script>
-<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">✦</span><span class="bubble-dot" id="groqBubbleDot"></span></div>
-<div id="groqDock" aria-hidden="true">
-  <div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">⚙</button><button class="gear" id="groqDockClose" title="Close">✕</button></div>
-  <div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div>
-  <div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson — definitions, proofs, examples, or anything you don't yet believe.</div></div>
+
   <div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send, Shift+Enter = newline)"></textarea><button id="groqDockSend">Send</button></div>
   <div class="groqDockFooter">Powered by Groq · <span id="groqDockModel">qwen/qwen3.8-27b</span></div>
 </div>
