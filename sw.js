@@ -1,7 +1,7 @@
 // DREAM Service Worker — PWA offline support
 // Caches the app shell and serves stale-while-revalidate for pages
 
-const CACHE_VERSION = 'dream-v128-final-consistency-pass';
+const CACHE_VERSION = 'dream-v129-math-forge';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -38,7 +38,9 @@ const PRECACHE_URLS = [
   './t71-toy.html',
   './t71-toy_ru.html',
   './en/math-recharge.html',
+  './en/math-forge.html',
   './ru/math-recharge.html',
+  './ru/math-forge.html',
   // NOTE: dream-zoom.html is intentionally NOT precached — it changes
   // frequently and we always want the freshest version. It will be fetched
   // network-first by the navigation handler below.

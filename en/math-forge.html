@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Forge — Mathematician Track · D.R.E.A.M</title>
+<link rel="apple-touch-icon" href="/dream/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/dream/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/dream/img/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/dream/img/icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DREAM Math Forge">
+<meta name="theme-color" content="#071018">
+<meta name="description" content="Math Forge — mathematician track: definition → theorem → proof → counterexample → visual → test → proof reconstruction. A proof-oriented spine from logic to DREAM.">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true},svg:{fontCache:'global'}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{--bg:#071018;--panel:#0c1824;--ink:#eff8ff;--muted:#9eb3c5;--line:#294257;--cyan:#6edcff;--gold:#ffd77a;--green:#81e2aa;--violet:#bca3ff;--red:#ff9a9a;--fs:clamp(11px,1.35vh,15px);--sm:clamp(10px,1.15vh,13px);--xs:clamp(9px,1vh,11px)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:radial-gradient(circle at 10% 0%,rgba(110,220,255,.07),transparent 28%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:var(--fs)}
+button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;max-width:1800px;margin:auto;overflow:hidden}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px}.brand{display:flex;align-items:center;gap:9px}.logo{width:38px;height:38px;border-radius:11px;border:1px solid #35536d;display:grid;place-items:center;background:linear-gradient(145deg,rgba(110,220,255,.19),rgba(188,163,255,.14));font-weight:900}.brand h1{font-size:clamp(16px,2vh,20px);margin:0}.brand p{font-size:var(--xs);color:var(--muted);margin:2px 0 0}.topright{display:flex;gap:6px;align-items:center}.btn{border:1px solid #2c465d;background:#0c1b29;color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer;font-size:var(--sm)}.btn.primary{background:#16364e;border-color:#3b7fa5}.btn:disabled{opacity:.35;cursor:not-allowed}.progress{font-size:var(--xs);color:#b5c7d6}.layout{min-height:0;display:grid;grid-template-columns:minmax(330px,36vw) minmax(0,1fr);gap:8px;overflow:hidden}.card{background:linear-gradient(180deg,rgba(15,30,46,.95),rgba(8,21,33,.97));border:1px solid #223a4f;border-radius:14px;box-shadow:0 15px 45px rgba(0,0,0,.28);min-height:0;min-width:0}.left{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}.lessonhead{padding:10px 11px 8px;border-bottom:1px solid #233b50}.eyebrow{font-size:var(--xs);text-transform:uppercase;letter-spacing:.1em;color:#8fb5cf}.lessonhead h2{font-size:clamp(18px,2.2vh,24px);margin:3px 0 2px;line-height:1.07}.lessonhead p{font-size:var(--xs);margin:0;color:#9eb3c5}.tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #22394d}.tab{border:0;border-right:1px solid #22394d;background:#0b1825;color:#9db2c4;padding:7px 3px;font-size:var(--xs);cursor:pointer}.tab.active{background:#143048;color:#fff}.theory{min-height:0;overflow:hidden;padding:11px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:7px}.formula{border:1px solid #35576f;background:#07141f;border-radius:10px;padding:8px;min-height:42px;display:flex;align-items:center;justify-content:center;overflow:hidden}.formula mjx-container{font-size:.94em!important}.formula mjx-container svg{width:auto!important;height:auto!important;max-width:100%!important;background:transparent!important}.theorytext{font-size:clamp(12px,1.55vh,17px);line-height:1.52;color:#e8f1f8;font-weight:540;overflow:auto;padding-right:4px}
+.theorytext .lessonPara{margin:0 0 .72em}
+.theorytext .lessonBullet{margin:.18em 0 .18em 1.15em}
+.theorytext .lessonHeading{font-weight:800;color:#fff;margin:.82em 0 .36em;font-size:1.03em}
+.theorytext mjx-container{max-width:100%;font-size:.94em!important;line-height:1.15}
+.theorytext mjx-container[display="true"]{margin:.42em 0!important;padding:.08em .05em;overflow:hidden;font-size:.93em!important}
+.theorytext mjx-container svg{width:auto!important;height:auto!important;max-width:100%!important;display:inline!important;background:transparent!important}.nav{padding:7px 10px;border-top:1px solid #22394d;display:flex;align-items:center;justify-content:space-between;gap:6px}.right{display:grid;grid-template-rows:minmax(250px,1fr) auto auto;gap:7px;overflow:hidden}.visual{position:relative;overflow:hidden}.visualtop{position:absolute;z-index:2;left:8px;right:8px;top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px}.visualtitle{background:rgba(7,16,24,.84);border:1px solid #36546b;border-radius:999px;padding:5px 8px;font-size:var(--xs);color:#d7e7f2}.sceneControl{display:flex;gap:5px;align-items:center;background:rgba(7,16,24,.84);border:1px solid #36546b;border-radius:999px;padding:4px 7px;font-size:var(--xs)}.sceneControl input{width:140px;accent-color:#78ddff}#viz{width:100%;height:100%;display:block;background:#07111a}.gate{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.quiz,.prooflab{border:1px solid #2d485e;background:#091723;border-radius:10px;padding:8px;min-width:0}.quiz h3,.prooflab h3{font-size:var(--xs);text-transform:uppercase;letter-spacing:.08em;color:#9ac7dc;margin:0 0 4px}.q{font-size:var(--sm);line-height:1.3;margin-bottom:6px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:4px}.ans,.stepbtn{border:1px solid #2b465b;background:#0c1b29;color:#e9f3fa;border-radius:7px;padding:5px 6px;cursor:pointer;font-size:var(--xs);text-align:left}.ans.good,.stepbtn.good{border-color:#4d8a68;background:rgba(129,226,170,.08)}.ans.bad{border-color:#8a5558;background:rgba(255,154,154,.07)}.feedback{font-size:var(--xs);min-height:1.2em;margin-top:4px;color:#9eb3c5}.feedback.good{color:var(--green)}.proofsteps{display:flex;gap:4px;flex-wrap:wrap}.proofseq{font-size:var(--xs);color:#cbd9e5;margin-top:5px;min-height:1.3em}.actions{display:flex;gap:5px;margin-top:5px}.ai{padding:7px;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:5px;align-items:center}
+.ai select{height:36px;background:#07141f;border:1px solid #2f4c62;border-radius:8px;color:#eef7ff;padding:4px 6px;font-size:var(--xs)}
+.ai textarea{resize:none;height:36px;background:#07141f;border:1px solid #2f4c62;border-radius:8px;color:#eef7ff;padding:6px 8px;font-size:var(--xs)}
+.aiStatus{grid-column:1/-1;font-size:var(--xs);color:#91a8bb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.groqDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6d7f8e;margin-right:4px;vertical-align:middle}
+.groqDot.ok{background:#81e2aa}.groqDot.bad{background:#ff9a9a}
+.settingsGrid{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 10px;align-items:center;margin-top:10px}
+.settingsGrid label{font-size:var(--sm);color:#b7c8d6}.settingsGrid input,.settingsGrid select{width:100%;background:#07141f;border:1px solid #35536a;border-radius:8px;color:#eef7ff;padding:8px}
+.settingsNote{margin-top:10px;padding:9px;border-left:3px solid #ffd77a;background:rgba(255,215,122,.05);font-size:var(--xs);line-height:1.4;color:#e9dfc4}
+.tutorModal{width:min(980px,94vw);height:min(700px,88dvh);display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;gap:8px}
+.tutorHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.tutorHead h2{margin:0}.tutorHead p{margin:3px 0 0;color:#aebfce;font-size:var(--xs)}
+.tutorModes{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.modeBtn{border:1px solid #34536a;background:#0a1927;color:#dce9f3;border-radius:8px;padding:7px 6px;cursor:pointer;font-size:var(--xs);font-weight:700}.modeBtn.active{background:#143b54;border-color:#6edcff;color:#fff}
+.quickPrompts{display:flex;gap:5px;flex-wrap:wrap}.quickPrompts .btn{font-size:var(--xs);padding:5px 7px}
+.tutorBody{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:8px;overflow:hidden}.tutorAnswer,.tutorContext{min-height:0;overflow:hidden;border:1px solid #2d495f;background:#081622;border-radius:10px;padding:10px}.tutorAnswer h3,.tutorContext h3{font-size:var(--xs);text-transform:uppercase;letter-spacing:.08em;color:#9ac7dc;margin:0 0 6px}
+.answerPage{font-size:clamp(11px,1.35vh,15px);line-height:1.52;color:#e9f3fa;white-space:normal}
+.answerPage mjx-container{max-width:100%;font-size:.95em!important;line-height:1.15}
+.answerPage mjx-container[display="true"]{margin:.45em 0!important;padding:.08em .05em;overflow:hidden;font-size:.94em!important}
+.answerPage mjx-container svg{width:auto!important;height:auto!important;max-width:100%!important;display:inline!important;background:transparent!important}
+.answerPage .tutorPara{margin:0 0 .7em}
+.answerPage .tutorBullet{margin:.18em 0 .18em 1.15em}
+.answerPage .tutorHeading{font-weight:800;color:#fff;margin:.8em 0 .35em;font-size:1.04em}
+.answerPage code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0a1b29;border:1px solid #29485f;border-radius:4px;padding:1px 4px}.tutorContext p{font-size:var(--xs);line-height:1.35;color:#cbd9e5;margin:4px 0}.tutorContext b{color:#fff}
+.tutorFooter{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:6px;align-items:center}.tutorFooter textarea{resize:none;height:44px;background:#07141f;border:1px solid #35536a;border-radius:8px;color:#eef7ff;padding:7px 8px}.pageMeta{font-size:var(--xs);color:#9fb2c4;white-space:nowrap}
+@media(max-height:760px){.tutorModal{height:92dvh;padding:10px}.tutorBody{grid-template-columns:minmax(0,1fr) 220px}.answerPage{font-size:10px;line-height:1.32}.settingsGrid{gap:5px 8px}.settingsGrid input,.settingsGrid select{padding:5px}}
+.overlay{position:fixed;inset:0;background:rgba(3,9,14,.88);backdrop-filter:blur(8px);display:grid;place-items:center;z-index:20}.hidden{display:none!important}.modal{width:min(760px,92vw);background:#0d1d2b;border:1px solid #3b5c74;border-radius:16px;padding:16px}.modal h2{margin:0 0 6px}.modal p{color:#b6c8d6;font-size:var(--sm);line-height:1.45}.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.road{border:1px solid #2e485e;background:#091723;border-radius:9px;padding:8px;font-size:var(--xs)}@media(max-width:1000px){.layout{grid-template-columns:40vw minmax(0,1fr)}.gate{grid-template-columns:1fr}.right{grid-template-rows:minmax(220px,1fr) auto auto}}@media(max-height:760px){:root{--fs:10px;--sm:9px;--xs:8px}.lessonhead{padding:7px 9px 5px}.theory{padding:8px}.formula{min-height:34px;padding:5px}.gate{padding:5px}.quiz,.prooflab{padding:6px}.ai{padding:5px}.brand p{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="logo">∴</div><div><h1>Math Forge — Mathematician Track</h1><p>Definition → theorem → proof → counterexample → visual → test → proof reconstruction</p></div></div>
+ <div class="topright"><span class="progress" id="progressText"></span><button class="btn primary" id="groqSettingsBtn"><span class="groqDot" id="groqDot"></span>Groq</button><button class="btn" id="roadmapBtn">Roadmap</button><button class="btn" id="exportBtn">Save</button><button class="btn" id="importBtn">Load</button><input type="file" id="importFile" accept=".json" class="hidden"></div>
+</header>
+<main class="layout">
+ <section class="card left">
+  <div class="lessonhead"><div class="eyebrow" id="eyebrow"></div><h2 id="title"></h2><p>Advance requires both the concept check and proof reconstruction.</p></div>
+  <div class="tabs">
+   <button class="tab active" data-tab="definition">Definition</button><button class="tab" data-tab="intuition">Intuition</button><button class="tab" data-tab="statement">Theorem</button><button class="tab" data-tab="proof">Proof</button><button class="tab" data-tab="counter">Counterexample</button><button class="tab" data-tab="connection">Connections</button>
+  </div>
+  <div class="theory"><div class="formula" id="formula"></div><div class="theorytext" id="theoryText"></div></div>
+  <div class="nav"><button class="btn" id="prevBtn">← Previous</button><button class="btn" id="helpBtn">Teach me</button><button class="btn primary" id="nextBtn" disabled>Next lesson →</button></div>
+ </section>
+
+ <section class="right">
+  <div class="card visual"><div class="visualtop"><div class="visualtitle" id="visualTitle"></div><div class="sceneControl"><span>explore</span><input id="sceneSlider" type="range" min="0" max="100" value="50"></div></div><svg id="viz" viewBox="0 0 900 520"></svg></div>
+  <div class="card gate">
+   <div class="quiz"><h3>Concept check — required</h3><div class="q" id="question"></div><div class="answers" id="answers"></div><div class="feedback" id="quizFeedback"></div><div class="actions"><button class="btn" id="hintBtn">Hint</button></div></div>
+   <div class="prooflab"><h3>Proof reconstruction — required</h3><div class="q">Click the proof steps in logical order.</div><div class="proofsteps" id="proofSteps"></div><div class="proofseq" id="proofSeq"></div><div class="feedback" id="proofFeedback"></div><div class="actions"><button class="btn" id="undoProofBtn">Undo</button><button class="btn" id="resetProofBtn">Reset proof</button></div></div>
+  </div>
+  <div class="card ai">
+   <button class="btn" id="openTutorBtn">Groq tutor</button>
+   <select id="inlineMode" title="Tutor mode"><option value="socratic">Socratic</option><option value="lecturer">Lecturer</option><option value="examiner">Examiner</option><option value="critic">Proof critic</option></select>
+   <textarea id="aiQuestion" placeholder="Ask about this definition, theorem, proof, or something you do not believe yet..."></textarea>
+   <button class="btn primary" id="askAiBtn">Ask</button>
+   <span class="aiStatus" id="aiStatus">Direct Groq is not configured yet. Click Groq.</span>
+  </div>
+ </section>
+</main>
+</div>
+
+<div class="overlay hidden" id="roadmapOverlay"><div class="modal"><h2>Mathematician Track</h2><p>This is a proof-oriented spine. Elementary results receive direct proofs; advanced results are explicitly presented as proof sketches when a full proof requires machinery not yet developed.</p><div class="roadmap" id="roadmap"></div><div style="text-align:right;margin-top:10px"><button class="btn primary" id="closeRoadmap">Close</button></div></div></div>
+<div class="overlay hidden" id="helpOverlay"><div class="modal"><h2 id="helpTitle"></h2><p id="helpText"></p><div id="helpFormula" class="formula"></div><div style="display:flex;justify-content:space-between;gap:8px;margin-top:10px"><button class="btn" id="narrateBtn">▶ Narrate</button><button class="btn primary" id="closeHelp">Let me try</button></div></div></div>
+
+<div class="overlay hidden" id="groqOverlay">
+ <div class="modal">
+  <h2>Groq connection</h2>
+  <p>Math Forge can call Groq directly from this browser. The token is never written into this HTML unless you manually edit the file. Choose whether it lives only for this browser session or is remembered on this device.</p>
+  <div class="settingsGrid">
+   <label for="groqToken">Groq API token</label><input id="groqToken" type="password" autocomplete="off" placeholder="gsk_...">
+   <label for="tokenStorage">Token storage</label><select id="tokenStorage"><option value="session">This session only</option><option value="local">Remember on this device</option><option value="memory">Do not persist</option></select>
+   <label for="groqBaseUrl">API base URL</label><input id="groqBaseUrl" value="https://api.groq.com/openai/v1">
+   <label for="groqModel">Tutor model</label><select id="groqModel"><option value="qwen/qwen3.8-27b">qwen/qwen3.8-27b (preview)</option><option value="openai/gpt-oss-120b">openai/gpt-oss-120b</option><option value="openai/gpt-oss-20b">openai/gpt-oss-20b</option><option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile</option></select>
+  </div>
+  <div class="settingsNote"><b>Security reality:</b> a static browser app cannot keep a shared API key secret. “Remember on this device” means localStorage, which browser JavaScript can read. This is reasonable for your personal PWA/device with a dedicated, rate-limited Groq project key; do not commit the token to GitHub.</div>
+  <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:10px">
+   <button class="btn" id="forgetGroqBtn">Forget token</button>
+   <button class="btn" id="loadModelsBtn">Test + load models</button>
+   <button class="btn" id="closeGroqBtn">Cancel</button>
+   <button class="btn primary" id="saveGroqBtn">Save</button>
+  </div>
+  <p id="groqSettingsStatus" style="font-size:var(--xs);min-height:1.2em;margin-top:8px"></p>
+ </div>
+</div>
+
+<div class="overlay hidden" id="tutorOverlay">
+ <div class="modal tutorModal">
+  <div class="tutorHead"><div><h2>Groq mathematics tutor</h2><p id="tutorLessonLabel"></p></div><button class="btn" id="closeTutorBtn">Close ✕</button></div>
+  <div class="tutorModes">
+   <button class="modeBtn active" data-mode="socratic">Socratic</button>
+   <button class="modeBtn" data-mode="lecturer">Lecturer</button>
+   <button class="modeBtn" data-mode="examiner">Examiner</button>
+   <button class="modeBtn" data-mode="critic">Proof critic</button>
+  </div>
+  <div class="quickPrompts">
+   <button class="btn" data-prompt="I do not yet believe this result. Convince me from the definitions.">Why is this true?</button>
+   <button class="btn" data-prompt="Give me one concrete numerical example, then return to the abstract statement.">Concrete example</button>
+   <button class="btn" data-prompt="Show me a counterexample demonstrating why the hypotheses matter.">Counterexample</button>
+   <button class="btn" data-prompt="Identify the exact prerequisite I am probably missing and reteach only that prerequisite.">What am I missing?</button>
+   <button class="btn" data-prompt="Connect this lesson rigorously to kernels, coarea, Wilson loops, Minkowski geometry, or DREAM where the connection is mathematically legitimate. Do not force a connection.">DREAM bridge</button>
+  </div>
+  <div class="tutorBody">
+   <div class="tutorAnswer"><h3 id="tutorAnswerTitle">Tutor response</h3><div class="answerPage" id="tutorAnswer">Ask a question or choose a prompt above.</div></div>
+   <div class="tutorContext">
+    <h3>Context sent to Groq</h3>
+    <p><b>Lesson</b><br><span id="ctxLesson"></span></p>
+    <p><b>Current view</b><br><span id="ctxTab"></span></p>
+    <p><b>Concept gate</b><br><span id="ctxQuiz"></span></p>
+    <p><b>Proof gate</b><br><span id="ctxProof"></span></p>
+    <p><b>Model</b><br><span id="ctxModel"></span></p>
+    <p style="color:#a4b7c7">The tutor receives the lesson definition, theorem, proof, counterexample, formula, your current progress, and your question.</p>
+   </div>
+  </div>
+  <div class="tutorFooter">
+   <span class="pageMeta" id="tutorPageMeta">Page 1/1</span>
+   <textarea id="tutorQuestion" placeholder="Ask the thing that is actually bothering you..."></textarea>
+   <button class="btn" id="prevTutorPage">←</button>
+   <button class="btn" id="nextTutorPage">→</button>
+   <span></span><span></span><button class="btn" id="clearTutorBtn">Clear</button><button class="btn primary" id="sendTutorBtn">Ask Groq</button>
+  </div>
+ </div>
+</div>
+
+
+<script>
+const LESSONS=[{"id": "logic-quantifiers", "module": "Foundations", "title": "Statements, quantifiers, and negation", "definition": "A proposition is a declarative statement that is either true or false. A predicate P(x) becomes a proposition after x is specified or quantified. The universal quantifier ∀ means 'for every'; the existential quantifier ∃ means 'there exists.'", "intuition": "Quantifiers tell you how much evidence is required. To prove ∀x P(x), handle an arbitrary x. To disprove it, one counterexample is enough. To prove ∃x P(x), one witness is enough.", "statement": "Negating a quantified statement swaps the quantifier and negates the predicate: ¬(∀x P(x)) ⇔ ∃x ¬P(x), and ¬(∃x P(x)) ⇔ ∀x ¬P(x).", "proof": "For ¬(∀x P(x)): saying 'it is not true that every x satisfies P' means at least one x fails P. That is exactly ∃x ¬P(x). The second equivalence is analogous.", "counter": "Common error: negating ∀x P(x) as ∀x ¬P(x). 'Not every student passed' does not mean 'every student failed'; it means at least one failed.", "connection": "This logic appears everywhere: ε-δ limits, compactness, continuity, convergence, and theorem hypotheses are quantifier structures.", "formula": "\\neg(\\forall x\\,P(x))\\iff \\exists x\\,\\neg P(x)", "visual": "logic", "exercise": {"q": "What is the correct negation of 'for every real x, x² ≥ 0'?", "a": ["There exists a real x with x² < 0", "For every real x, x² < 0", "There exists a real x with x² ≥ 0", "For every real x, x² ≤ 0"], "correct": 0, "why": "Negating ∀ swaps it to ∃, and ≥ becomes <."}, "proofsteps": ["Assume the universal claim is false.", "Then it cannot be the case that P(x) holds for every x.", "Therefore at least one x must fail P.", "Hence ∃x ¬P(x)."], "help": "Switch ∀↔∃ first, then negate the inner claim."}, {"id": "functions", "module": "Foundations", "title": "Functions, injectivity, surjectivity, inverse", "definition": "A function f:A→B assigns each x∈A exactly one value f(x)∈B. It is injective if f(x₁)=f(x₂) implies x₁=x₂. It is surjective if every y∈B equals f(x) for some x∈A. It is bijective if both hold.", "intuition": "Injective means no two inputs collide. Surjective means no target point is missed. Bijective means perfect one-to-one correspondence.", "statement": "A function has a two-sided inverse f⁻¹:B→A exactly when f is bijective.", "proof": "If f has an inverse, f(x₁)=f(x₂) implies applying f⁻¹ gives x₁=x₂, so f is injective. Also for any y∈B, x=f⁻¹(y) satisfies f(x)=y, so f is surjective. Conversely, if f is bijective, every y has exactly one preimage x; define f⁻¹(y)=x.", "counter": "f(x)=x² from ℝ to ℝ is neither injective nor surjective: x and −x collide, and negative outputs are missed. Restricting domain and codomain to [0,∞) makes it bijective.", "connection": "Inverse functions become inverse linear maps, coordinate changes, inverse problems, and local inverses via the inverse function theorem.", "formula": "f^{-1}\\circ f=\\operatorname{id}_A,\\qquad f\\circ f^{-1}=\\operatorname{id}_B", "visual": "functionmap", "exercise": {"q": "Why does f(x)=x² fail to have an inverse ℝ→ℝ?", "a": ["It is not injective and not surjective", "It is continuous", "It has a derivative", "Its graph is curved"], "correct": 0, "why": "Both x and −x map to the same value, and negative values are never reached."}, "proofsteps": ["Assume f has a two-sided inverse.", "Equality f(x₁)=f(x₂) survives applying f⁻¹.", "Therefore x₁=x₂, so f is injective.", "For any y, x=f⁻¹(y) satisfies f(x)=y, so f is surjective."], "help": "Think collisions (injective) and missed targets (surjective)."}, {"id": "contradiction", "module": "Proof Craft", "title": "Proof by contradiction: √2 is irrational", "definition": "A proof by contradiction assumes the negation of the desired conclusion and derives an impossibility.", "intuition": "Temporarily enter the world in which the claim is false. If the assumptions force a contradiction, that world cannot exist.", "statement": "√2 is irrational.", "proof": "Assume √2=a/b in lowest terms. Then a²=2b², so a is even: a=2k. Substitution gives b²=2k², so b is even. Thus a and b share factor 2, contradicting lowest terms.", "counter": "A contradiction must contradict an assumption or known fact, not merely produce something surprising.", "connection": "Contradiction recurs in analysis, number theory, topology, uniqueness proofs, and nonexistence arguments.", "formula": "\\sqrt2=\\frac ab\\Rightarrow a^2=2b^2\\Rightarrow 2\\mid a\\text{ and }2\\mid b\\;\\bot", "visual": "sqrt2", "exercise": {"q": "What is the contradiction in the classic √2 proof?", "a": ["a and b are both even despite being chosen coprime", "a² is positive", "b is nonzero", "2 is prime"], "correct": 0, "why": "If both are even, a/b was not in lowest terms."}, "proofsteps": ["Assume √2=a/b in lowest terms.", "Derive a²=2b², so a is even.", "Write a=2k and derive b is even.", "This contradicts the assumption that a and b are coprime."], "help": "The proof needs a minimal representation, then shows that representation was not minimal."}, {"id": "trig-euler", "module": "Geometry & Trigonometry", "title": "Unit circle, complex phase, and Euler’s formula", "definition": "For angle θ on the unit circle, the point has coordinates (cosθ,sinθ). Euler’s formula identifies the same rotation with e^{iθ}=cosθ+i sinθ.", "intuition": "Trigonometric functions are projections of a rotating unit vector. Complex exponentials package the two projections into one algebraic object.", "statement": "Multiplying unit complex numbers adds their angles: e^{iα}e^{iβ}=e^{i(α+β)}.", "proof": "Use Euler’s formula, multiply (cosα+i sinα)(cosβ+i sinβ), group real and imaginary parts, and apply the angle-addition identities.", "counter": "Angles are measured in radians in calculus identities such as d/dx sin x=cos x. Degrees introduce a conversion factor.", "connection": "Complex phases lead to Fourier analysis, oscillations, quantum phase, gauge holonomy, and Wilson loops.", "formula": "e^{i\\theta}=\\cos\\theta+i\\sin\\theta", "visual": "unitcircle", "exercise": {"q": "What does multiplication by e^{iθ} do geometrically?", "a": ["Rotates by θ without changing length", "Doubles the radius", "Reflects across x-axis", "Translates right"], "correct": 0, "why": "Its modulus is 1 and its argument is θ."}, "proofsteps": ["Write both factors using Euler’s formula.", "Multiply and group real and imaginary parts.", "Apply sine and cosine addition identities.", "Recognize e^{i(α+β)}."], "help": "Think rotation first, coordinates second."}, {"id": "vector-space", "module": "Linear Algebra", "title": "Vector spaces, span, independence, and basis", "definition": "A vector space is a set with vector addition and scalar multiplication satisfying the vector-space axioms. Span is all linear combinations. A list is independent if only the zero coefficient combination gives zero. A basis is an independent spanning set.", "intuition": "A basis is a coordinate language. Spanning says the vocabulary can express everything; independence says no basis word is redundant.", "statement": "Coordinates relative to a basis are unique.", "proof": "If v=Σaᵢbᵢ=Σcᵢbᵢ, subtract to get Σ(aᵢ−cᵢ)bᵢ=0. Independence forces every aᵢ−cᵢ=0.", "counter": "Two collinear vectors in ℝ² may span only a line. Three vectors in ℝ² can span the plane but cannot all be independent.", "connection": "Basis choice underlies matrices, Fourier series, eigenbases, tangent spaces, function spaces, and numerical approximation.", "formula": "v=\\sum_{i=1}^n c_i b_i", "visual": "basis", "exercise": {"q": "Why are coordinates in a basis unique?", "a": ["Independence prevents two different coefficient lists from representing the same vector", "Spanning alone guarantees uniqueness", "Every basis is orthogonal", "Matrices are square"], "correct": 0, "why": "Subtract two representations and use independence."}, "proofsteps": ["Assume two basis expansions of the same vector.", "Subtract the expansions.", "Obtain a linear combination equal to zero.", "Use independence to conclude every coefficient difference is zero."], "help": "Span gives existence; independence gives uniqueness."}, {"id": "linear-map", "module": "Linear Algebra", "title": "Linear maps, kernel, image, rank–nullity", "definition": "A linear map T:V→W satisfies T(av+bw)=aT(v)+bT(w). Its kernel is {v:T(v)=0}; its image is {T(v):v∈V}.", "intuition": "The kernel is what the map cannot see. The image is what the map can produce.", "statement": "For finite-dimensional V, dim V = dim ker T + dim im T.", "proof": "Choose a basis of ker T and extend it to a basis of V. The images of the added basis vectors form a basis of im T. Counting gives rank–nullity.", "counter": "A nonzero kernel means T is not injective: v and v+k have the same image for any k∈ker T.", "connection": "Rank–nullity is the finite-dimensional core of identifiability, inverse problems, gauge redundancy, and information loss.", "formula": "\\dim V=\\dim\\ker T+\\dim\\operatorname{im}T", "visual": "linear", "exercise": {"q": "If T:ℝ⁵→ℝ³ has rank 3, what is nullity?", "a": ["2", "3", "5", "8"], "correct": 0, "why": "Rank–nullity gives 5=nullity+3."}, "proofsteps": ["Choose a basis of ker T.", "Extend it to a basis of V.", "Show images of the added vectors span im T.", "Show those images are independent; count dimensions."], "help": "Count input directions as visible directions + invisible directions."}, {"id": "eigen", "module": "Linear Algebra", "title": "Eigenvalues and eigenvectors — from definition to geometry", "definition": "For T:V→V, a nonzero vector v is an eigenvector with eigenvalue λ if T(v)=λv. The line through v is invariant under T.", "intuition": "Most vectors change length and direction. An eigenvector is a preferred direction that does not turn; λ says how it scales or flips.", "statement": "λ is an eigenvalue of a square matrix A exactly when det(A−λI)=0.", "proof": "Av=λv with v≠0 iff (A−λI)v=0 has a nonzero solution. A square matrix has a nontrivial kernel exactly when it is singular, equivalent to determinant zero.", "counter": "The zero vector is not an eigenvector. Also, real matrices can have complex eigenvalues.", "connection": "Eigenstructure controls Aⁿ, normal modes, differential equations, PCA, quantum observables, PSD operators, spectral geometry, and kernel operators.", "formula": "Av=\\lambda v\\quad\\Longleftrightarrow\\quad \\det(A-\\lambda I)=0", "visual": "eigen", "exercise": {"q": "What is the defining geometric property of an eigenvector?", "a": ["Its direction is preserved up to scaling/sign", "Its length is always 1", "It lies in the kernel", "It is perpendicular to every vector"], "correct": 0, "why": "Av=λv means the image lies on the same line as v."}, "proofsteps": ["Start from Av=λv with v≠0.", "Rearrange to (A−λI)v=0.", "A nonzero solution means A−λI has nontrivial kernel.", "For a square matrix this is equivalent to determinant zero."], "help": "Definition first: invariant direction. The determinant equation is a consequence."}, {"id": "projection", "module": "Linear Algebra", "title": "Inner products, orthogonality, projection, least squares", "definition": "An inner product ⟨u,v⟩ measures alignment and induces ||v||=√⟨v,v⟩. Vectors are orthogonal when ⟨u,v⟩=0. Orthogonal projection onto a subspace gives the closest point in that subspace.", "intuition": "Projection decomposes v into a visible component inside the subspace and a perpendicular residual.", "statement": "If p is the orthogonal projection of v onto S, then p uniquely minimizes ||v−s|| over s∈S.", "proof": "For any s∈S, v−s=(v−p)+(p−s), and the terms are orthogonal. Pythagoras gives ||v−s||²=||v−p||²+||p−s||².", "counter": "Dropping a coordinate is not generally orthogonal projection unless the geometry/basis makes it so.", "connection": "Least squares, Fourier coefficients, regression, Hilbert spaces, quantum amplitudes, and signal decomposition are projection problems.", "formula": "v=p+r,\\qquad p\\in S,\\ r\\perp S", "visual": "projection", "exercise": {"q": "Why is orthogonal projection the closest point in a subspace?", "a": ["Pythagoras adds a nonnegative squared residual for every other candidate", "Projection preserves all lengths", "The subspace is finite", "Dot products are always positive"], "correct": 0, "why": "Any other candidate adds the orthogonal component p−s."}, "proofsteps": ["Decompose v−s=(v−p)+(p−s).", "Use orthogonality.", "Apply Pythagoras.", "Conclude every other s has at least as large distance."], "help": "Closest-point proof = right triangle + Pythagoras."}, {"id": "sequence-limit", "module": "Analysis", "title": "Sequences and ε–N convergence", "definition": "a_n→L if for every ε>0 there exists N such that n≥N implies |a_n−L|<ε.", "intuition": "You choose any tolerance. I must eventually trap every later term inside it.", "statement": "1/n→0.", "proof": "Given ε>0, choose N>1/ε. Then n≥N implies 1/n≤1/N<ε.", "counter": "Seeing many terms near a number is not proof; the definition controls all sufficiently late terms.", "connection": "This quantifier pattern is the prototype for function limits, continuity, series, metric convergence, and operator convergence.", "formula": "\\forall\\varepsilon>0\\ \\exists N\\ \\forall n\\ge N:\\ |a_n-L|<\\varepsilon", "visual": "sequence", "exercise": {"q": "For a_n=1/n, which choice guarantees |a_n|<ε for all n≥N?", "a": ["Choose N>1/ε", "Choose N=ε", "Choose N<ε", "Any N works"], "correct": 0, "why": "If n≥N>1/ε then 1/n<ε."}, "proofsteps": ["Let ε>0 be arbitrary.", "Choose N>1/ε.", "For n≥N, compare 1/n with 1/N.", "Conclude |1/n−0|<ε."], "help": "Solve the desired inequality for N."}, {"id": "epsilon-delta", "module": "Analysis", "title": "Function limits and ε–δ reasoning", "definition": "lim_{x→a}f(x)=L means: for every ε>0 there exists δ>0 such that 0<|x−a|<δ implies |f(x)−L|<ε.", "intuition": "The output challenge ε is announced first. You choose an input tolerance δ that guarantees it.", "statement": "lim_{x→2}(3x+1)=7.", "proof": "|(3x+1)−7|=3|x−2|. Given ε>0 choose δ=ε/3.", "counter": "δ generally depends on ε. One fixed δ rarely proves a nonconstant limit.", "connection": "ε–δ formalizes stability of outputs under small input perturbations.", "formula": "\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ 0<|x-a|<\\delta\\Rightarrow|f(x)-L|<\\varepsilon", "visual": "epsilon", "exercise": {"q": "For f(x)=3x+1 at x→2, a valid δ is:", "a": ["ε/3", "3ε", "ε²", "1/ε"], "correct": 0, "why": "Output error is 3 times input error."}, "proofsteps": ["Start with |f(x)−L|<ε.", "Simplify to 3|x−2|<ε.", "Choose δ=ε/3.", "Verify the implication."], "help": "Work backward from the output inequality."}, {"id": "derivative-mvt", "module": "Calculus", "title": "Derivative, Mean Value Theorem, and monotonicity", "definition": "f'(a)=lim_{h→0}[f(a+h)−f(a)]/h is the limiting secant slope and first-order linear approximation coefficient.", "intuition": "Zoom into a smooth curve near a point; it increasingly resembles its tangent line.", "statement": "If f is continuous on [a,b] and differentiable on (a,b), some c satisfies f'(c)=[f(b)−f(a)]/(b−a).", "proof": "Subtract the secant line ℓ: g=f−ℓ has g(a)=g(b). Rolle’s theorem gives g'(c)=0, hence f'(c)=ℓ'.", "counter": "A discontinuity or corner can invalidate the theorem’s hypotheses.", "connection": "MVT turns local derivative information into global monotonicity, uniqueness, and error bounds.", "formula": "f'(c)=\\frac{f(b)-f(a)}{b-a}", "visual": "mvt", "exercise": {"q": "If f'(x)>0 everywhere on an interval, what does MVT imply?", "a": ["f is strictly increasing there", "f is constant", "f has no values", "f must be quadratic"], "correct": 0, "why": "For x₂>x₁, MVT gives f(x₂)−f(x₁)=f'(c)(x₂−x₁)>0."}, "proofsteps": ["Build the endpoint secant line ℓ.", "Define g=f−ℓ so g(a)=g(b).", "Apply Rolle’s theorem.", "Rearrange g'(c)=0 to obtain the secant slope."], "help": "Some tangent is parallel to the endpoint secant."}, {"id": "ftc", "module": "Calculus", "title": "Integral and Fundamental Theorem of Calculus", "definition": "The Riemann integral is a limit of sums f(x_i*)Δx. The accumulation function A(x)=∫_a^x f(t)dt records signed area accumulated up to x.", "intuition": "Move the endpoint by tiny h; the extra area is approximately f(x)h, so area accumulates at rate f(x).", "statement": "If f is continuous, A'(x)=f(x).", "proof": "[A(x+h)−A(x)]/h=(1/h)∫_x^{x+h}f(t)dt, the average value of f on the shrinking interval. Continuity makes this approach f(x).", "counter": "Bad discontinuities can spoil pointwise differentiability of the accumulation function.", "connection": "FTC unifies differentiation and integration as inverse local/global operations.", "formula": "\\frac{d}{dx}\\int_a^x f(t)\\,dt=f(x)", "visual": "ftc", "exercise": {"q": "Why does the difference quotient for A become an average value of f?", "a": ["A(x+h)−A(x)=∫_x^{x+h}f and division by h divides by interval width", "Derivatives equal zero", "f is periodic", "Area is always positive"], "correct": 0, "why": "The numerator is exactly newly accumulated area over width h."}, "proofsteps": ["Write A(x+h)−A(x)=∫_x^{x+h}f.", "Divide by h.", "Recognize an average value.", "Use continuity as h→0."], "help": "New area ≈ height × tiny width."}, {"id": "jacobian-gradient", "module": "Multivariable Calculus", "title": "Derivative as a linear map: Jacobian and gradient", "definition": "Differentiability of F:ℝⁿ→ℝᵐ at x means F(x+h)=F(x)+DF_x(h)+o(||h||). DF_x is linear; its coordinate matrix is the Jacobian. For scalar f, Df_x(h)=∇f(x)·h.", "intuition": "The derivative is fundamentally the best local linear transformation, not merely a list of partial derivatives.", "statement": "For unit u, D_u f=∇f·u≤||∇f||, with equality in the gradient direction.", "proof": "Apply Cauchy–Schwarz: ∇f·u≤||∇f||||u||=||∇f||.", "counter": "Existence of all partial derivatives at a point does not alone guarantee differentiability.", "connection": "Jacobians control coordinate changes, local invertibility, coarea factors, nonlinear dynamics, and backpropagation.", "formula": "F(x+h)=F(x)+J_F(x)h+o(\\|h\\|)", "visual": "jacobian", "exercise": {"q": "Why does the gradient point in steepest-increase direction?", "a": ["Cauchy–Schwarz maximizes ∇f·u when u is parallel to ∇f", "Gradients are always unit", "Contours are circles", "Hessian is zero"], "correct": 0, "why": "Directional derivative is a dot product with a unit vector."}, "proofsteps": ["Write D_u f=∇f·u.", "Apply Cauchy–Schwarz.", "Use ||u||=1.", "Equality occurs when u is parallel to ∇f."], "help": "Directional derivative = projection of gradient onto your direction."}, {"id": "metric-compact", "module": "Analysis", "title": "Metric spaces, open sets, compactness", "definition": "A metric space has a distance d satisfying positivity, symmetry, and triangle inequality. A set is compact if every open cover has a finite subcover.", "intuition": "Compactness is a hidden finiteness principle inside an infinite set.", "statement": "In ℝⁿ, compact iff closed and bounded. Continuous functions on compact sets attain extrema.", "proof": "For the extreme-value result, f(K) is compact because continuous images of compact sets are compact. A nonempty compact subset of ℝ contains its supremum and infimum.", "counter": "[0,∞) is closed but not compact; (0,1) is bounded but not compact.", "connection": "Compactness powers existence proofs, subsequence extraction, operator theory, PDE, and optimization.", "formula": "K\\text{ compact}\\Rightarrow f(K)\\text{ compact for continuous }f", "visual": "compact", "exercise": {"q": "Which set is compact in ℝ?", "a": ["[0,1]", "(0,1)", "[0,∞)", "ℝ"], "correct": 0, "why": "By Heine–Borel, compact subsets of ℝ are exactly closed and bounded."}, "proofsteps": ["Take continuous f on compact K.", "Continuous images preserve compactness.", "Therefore f(K) is compact in ℝ.", "A compact subset of ℝ contains its supremum and infimum."], "help": "In Euclidean space: compact = closed + bounded."}, {"id": "hilbert-kernel", "module": "Operators & Function Spaces", "title": "L², bounded operators, integral kernels", "definition": "L² consists of functions with finite ∫|f|². It is a Hilbert space with inner product ⟨f,g⟩=∫f ḡ. An integral operator can be (Tf)(x)=∫K(x,y)f(y)dy.", "intuition": "Linear algebra survives in infinite dimensions: vectors become functions, matrices become operators, and matrix entries become a kernel K(x,y).", "statement": "If K∈L²(X×Y), the associated integral operator is bounded L²(Y)→L²(X).", "proof": "For each x, Cauchy–Schwarz gives |Tf(x)|²≤(∫|K(x,y)|²dy)||f||². Integrating x yields ||Tf||²≤||K||²_{L²(X×Y)}||f||².", "counter": "Not every linear operator on an infinite-dimensional normed space is bounded.", "connection": "This bridges to smoothing kernels, Green operators, quantum operators, signal transforms, and the DREAM kernel picture.", "formula": "(Tf)(x)=\\int K(x,y)f(y)\\,dy", "visual": "kernel", "exercise": {"q": "What plays the role of a matrix entry in an integral operator?", "a": ["The kernel K(x,y)", "The norm ||f|| only", "The variable x alone", "The integration sign alone"], "correct": 0, "why": "K(x,y) weights how source y contributes to output x."}, "proofsteps": ["Apply Cauchy–Schwarz to the y-integral.", "Bound |Tf(x)|² by a kernel factor times ||f||².", "Integrate the bound over x.", "Recognize the L² norm of K."], "help": "Matrix sum Σ_j A_ijv_j becomes integral ∫K(x,y)f(y)dy."}, {"id": "inverse-problems", "module": "Operators & Function Spaces", "title": "Null spaces, identifiability, inverse problems", "definition": "Given y=Tx, an inverse problem asks for x. Identifiability means distinct admissible inputs produce distinct observations. A nontrivial kernel destroys uniqueness for linear T.", "intuition": "If the forward process erases a direction, no algorithm can uniquely reconstruct that direction from output alone.", "statement": "If k∈ker T and k≠0, then T(x+k)=T(x).", "proof": "Linearity gives T(x+k)=Tx+Tk=Tx.", "counter": "Regularization can select a preferred solution but cannot restore information absent from the data.", "connection": "Central to tomography, deblurring, ML, inverse PDEs, gauge redundancy, and kernel/push-forward interpretation.", "formula": "k\\in\\ker T\\Rightarrow T(x+k)=T(x)", "visual": "inverse", "exercise": {"q": "If T has a nonzero kernel, what fails immediately?", "a": ["Uniqueness of the inverse", "Linearity", "Existence of outputs", "Triangle inequality"], "correct": 0, "why": "Inputs differing by a kernel vector produce identical data."}, "proofsteps": ["Take nonzero k∈ker T.", "Compare x and x+k.", "Use linearity.", "Since Tk=0, outputs are identical."], "help": "Kernel directions are invisible to the measurement."}, {"id": "manifold-stokes", "module": "Geometry & Topology", "title": "Manifolds, differential forms, and Stokes’ theorem", "definition": "A smooth manifold is locally modeled on ℝⁿ via compatible charts. Differential k-forms are coordinate-independent objects designed for integration over oriented k-dimensional pieces.", "intuition": "Coordinates are descriptions, not the geometry itself. Forms are built so integration behaves correctly under coordinate changes.", "statement": "Generalized Stokes theorem: ∫_M dω = ∫_{∂M}ω.", "proof": "A full proof uses partitions of unity: reduce to coordinate patches, apply Euclidean Stokes locally, and cancel contributions on internal patch boundaries.", "counter": "Orientation and regularity hypotheses matter.", "connection": "This contains FTC, Green’s theorem, divergence theorem, and classical Stokes theorem.", "formula": "\\int_M d\\omega=\\int_{\\partial M}\\omega", "visual": "stokes", "exercise": {"q": "What is the structural message of Stokes’ theorem?", "a": ["Bulk derivative integral equals boundary integral of the original form", "Every manifold is flat", "All boundaries vanish", "Coordinates are unique"], "correct": 0, "why": "It converts an interior derivative integral into a boundary integral."}, "proofsteps": ["Cover the manifold by coordinate charts.", "Use a partition of unity.", "Apply Euclidean Stokes on each piece.", "Internal boundaries cancel; only ∂M remains."], "help": "Boundary and bulk are two descriptions of the same differential structure."}, {"id": "wilson", "module": "Gauge & Topology", "title": "Connection, curvature, holonomy, Wilson loops", "definition": "A connection describes parallel transport. In Abelian U(1), locally use a 1-form A; curvature is F=dA. A Wilson loop is W(γ)=exp(i∮_γ A).", "intuition": "Move a phase reference around a closed loop. If it returns changed, the loop detected accumulated gauge/geometric structure.", "statement": "For Abelian U(1), Stokes gives ∮_{∂Σ}A=∫_ΣF, hence W(∂Σ)=exp(i∫_ΣF), when the fields are appropriately defined.", "proof": "Apply Stokes to A: ∫_{∂Σ}A=∫_ΣdA. Substitute F=dA and exponentiate.", "counter": "W(γ)=1 alone does not uniquely determine an integer topological charge without additional global/bundle assumptions.", "connection": "Wilson loops connect local connection data to global loop observables.", "formula": "W(\\gamma)=\\exp\\!\\left(i\\oint_\\gamma A\\right)", "visual": "wilson", "exercise": {"q": "In Abelian gauge theory, what does curvature satisfy locally?", "a": ["F=dA", "F=A² always", "F=0 always", "F is a coordinate scalar"], "correct": 0, "why": "For U(1), curvature is the exterior derivative of the connection 1-form."}, "proofsteps": ["Let γ=∂Σ.", "Apply generalized Stokes to A.", "Replace dA by curvature F.", "Exponentiate to obtain the Wilson-loop phase relation."], "help": "Connection lives on paths; curvature is local; holonomy is the accumulated closed-loop effect."}, {"id": "minkowski", "module": "Relativity", "title": "Minkowski metric and Lorentz invariance", "definition": "Minkowski spacetime is ℝ⁴ with metric signature (−,+,+,+) or the opposite convention. The interval is ds²=−c²dt²+dx²+dy²+dz².", "intuition": "Observers disagree on space and time separately but agree on spacetime interval and causal structure.", "statement": "Lorentz transformations satisfy ΛᵀηΛ=η.", "proof": "For x'=Λx, x'^Tηx'=x^TΛ^TηΛx=x^Tηx.", "counter": "Lorentz transformations are not Euclidean rotations because the metric has mixed signs.", "connection": "ΛᵀηΛ=η is the indefinite-metric analogue of QᵀQ=I.", "formula": "\\Lambda^T\\eta\\Lambda=\\eta", "visual": "minkowski", "exercise": {"q": "What does a Lorentz transformation preserve?", "a": ["The Minkowski interval", "Euclidean spatial distance alone", "Time coordinate alone", "Every coordinate separately"], "correct": 0, "why": "Space and time mix, but the spacetime quadratic form remains invariant."}, "proofsteps": ["Write x'=Λx.", "Compute x'^Tηx'.", "Insert Λ^TηΛ=η.", "Conclude invariance."], "help": "Compare Lorentz transformations with rotations: both preserve a metric."}, {"id": "coarea", "module": "Measure & Geometry", "title": "Fibers, Jacobians, push-forwards, coarea", "definition": "For F:M→N with dim M≥dim N, a fiber F⁻¹(y) is the set of source points mapping to y. Coarea decomposes integration on M into integration over y and then along fibers.", "intuition": "Regroup source points by which output they produce. Local compression is controlled by a Jacobian factor.", "statement": "One form is ∫_M gJ_F = ∫_N(∫_{F⁻¹(y)}g dH^{m−n})dy, under standard regularity assumptions.", "proof": "A full proof is a geometric-measure-theory theorem. Locally choose coordinates adapted to F, use ordinary change of variables in normal directions, integrate tangent/fiber directions, then patch.", "counter": "Small Jacobian can enhance push-forward density, but does not automatically create a singularity; integrability and fiber geometry matter.", "connection": "Coarea links level sets, fibers, Jacobians, tomography, geometric measure theory, and DREAM-style focusing.", "formula": "\\int_M gJ_F=\\int_N\\left(\\int_{F^{-1}(y)}g\\,d\\mathcal H^{m-n}\\right)dy", "visual": "coarea", "exercise": {"q": "What is a fiber F⁻¹(y)?", "a": ["All source points mapped to the same output y", "The derivative matrix only", "A coordinate axis", "The kernel of every map"], "correct": 0, "why": "A fiber is the preimage of one target point."}, "proofsteps": ["Use local coordinates adapted to F.", "Separate normal/output directions from tangent/fiber directions.", "Apply change of variables to output directions.", "Integrate remaining directions along fibers and patch locally."], "help": "Coarea = integrate by output value, then along all source points sharing that value."}, {"id": "dream-synthesis", "module": "DREAM Bridge", "title": "Kernel → push-forward → focusing → retention → spectrum", "definition": "Treat the framework as a composition of mathematical structures: an operator/kernel maps source data to observables; non-invertibility limits identifiability; push-forward geometry may concentrate density; retention laws encode scale dependence; spectral counting laws encode scaling dimension.", "intuition": "Do not treat formulas as isolated facts. Ask what space each object lives in, what map acts, what is invariant, and what information is lost.", "statement": "O(x)=∫K_λ(x;X)Φ(X)dμ(X) is mathematically an integral transform. Claims about invertibility, focusing, retention, or spectral dimension each require separate hypotheses.", "proof": "There is no single theorem proving an entire framework. The rigorous task is modular: establish operator assumptions, analyze kernel/null space, justify any push-forward/coarea step, derive or fit retention under explicit assumptions, and test spectral scaling separately.", "counter": "A visually good fit or suggestive analogy is not a proof of mechanism. Mathematical equivalence, empirical fit, and physical interpretation are different claims.", "connection": "Logic identifies claims; analysis controls limits; operator theory handles invertibility; geometry handles Jacobians/fibers; topology handles loop invariants.", "formula": "O(x)=\\int K_\\lambda(x;X)\\Phi(X)\\,d\\mu(X)", "visual": "dream", "exercise": {"q": "How should a multi-stage mathematical framework be evaluated?", "a": ["Verify the hypotheses and derivation of each bridge separately", "Treat all formulas as one theorem", "Assume a fit proves mechanism", "Ignore identifiability"], "correct": 0, "why": "Different layers require different assumptions and evidence."}, "proofsteps": ["Identify spaces, objects, and maps.", "State hypotheses needed at each step.", "Separate exact derivation from modeling assumptions or empirical fits.", "Test identifiability and alternatives before interpreting the synthesis."], "help": "Do not believe a chain because it is elegant; verify every link."}];
+const $=id=>document.getElementById(id), $$=q=>[...document.querySelectorAll(q)];
+let state={index:0,tab:"definition",quizPassed:{},proofPassed:{},proofPick:[],slider:50};
+try{const s=JSON.parse(localStorage.getItem("mathforge.progress.v1"));if(s)state={...state,...s}}catch{}
+const save=()=>localStorage.setItem("mathforge.progress.v1",JSON.stringify(state));
+const lesson=()=>LESSONS[state.index], passed=()=>!!state.quizPassed[lesson().id]&&!!state.proofPassed[lesson().id];
+function typeset(){if(window.MathJax?.typesetPromise)MathJax.typesetPromise().catch(()=>{})}
+
+function escapeLessonHtml(s){
+ return String(s??"")
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+}
+function autoMathifyLessonText(s){
+ let t=escapeLessonHtml(s).replace(/\r\n/g,"\n");
+
+ // Protect explicit MathJax delimiters if they already exist.
+ const stash=[];
+ t=t.replace(/\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$\$[\s\S]*?\$\$|\$[^$\n]+\$/g,m=>{
+   const k="@@MATH"+stash.length+"@@";stash.push(m);return k;
+ });
+
+ // Wrap compact math-like tokens containing clear operators or arrows.
+ t=t.replace(/(^|[\s(])([^\s<>{}]{0,80}(?:=|≤|≥|≠|→|⇔|∈|⊂|⊆|<|>)[^\s<>{}]{0,80})(?=[\s).,;:]|$)/g,
+   (m,p1,p2)=>`${p1}\\(${p2}\\)`);
+
+ // Wrap compact function/map signatures such as f:A→B or T:V→W if still unwrapped.
+ t=t.replace(/(^|[\s(])([A-Za-z][A-Za-z0-9'⁻^-]*:[^\s]{1,40}→[^\s]{1,40})(?=[\s).,;:]|$)/g,
+   (m,p1,p2)=>`${p1}\\(${p2}\\)`);
+
+ // Restore protected math.
+ stash.forEach((m,i)=>{t=t.replaceAll("@@MATH"+i+"@@",m)});
+ return t;
+}
+function lessonTextToHtml(raw){
+ let s=autoMathifyLessonText(raw);
+ const lines=s.split("\n");
+ let out=[], inList=false;
+ for(const ln0 of lines){
+  const ln=ln0.trimEnd();
+  if(!ln.trim()){
+   if(inList){out.push("</div>");inList=false}
+   continue;
+  }
+  const trimmed=ln.trim();
+  const heading=trimmed.match(/^#{1,4}\s+(.+)$/);
+  const bullet=trimmed.match(/^[-*]\s+(.+)$/);
+  const numbered=trimmed.match(/^\d+[.)]\s+(.+)$/);
+
+  if(heading){
+   if(inList){out.push("</div>");inList=false}
+   out.push(`<div class="lessonHeading">${heading[1]}</div>`);
+  }else if(bullet || numbered){
+   if(!inList){out.push("<div>");inList=true}
+   out.push(`<div class="lessonBullet">• ${bullet?bullet[1]:numbered[1]}</div>`);
+  }else{
+   if(inList){out.push("</div>");inList=false}
+   out.push(`<div class="lessonPara">${ln}</div>`);
+  }
+ }
+ if(inList)out.push("</div>");
+ return out.join("");
+}
+
+function setMath(id,tex){$(id).innerHTML=`\\[${tex}\\]`}
+function render(){
+ const L=lesson();$("eyebrow").textContent=`${L.module} · Lesson ${state.index+1} of ${LESSONS.length}`;$("title").textContent=L.title;setMath("formula",L.formula);$("theoryText").innerHTML=lessonTextToHtml(L[state.tab]);
+ $$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===state.tab));renderQuiz();renderProof();drawScene();
+ $("prevBtn").disabled=state.index===0;$("nextBtn").disabled=!passed();$("progressText").textContent=`${LESSONS.filter(x=>state.quizPassed[x.id]&&state.proofPassed[x.id]).length}/${LESSONS.length} lessons proven`;typeset();save();
+}
+function renderQuiz(){
+ const L=lesson(),done=!!state.quizPassed[L.id];$("question").textContent=L.exercise.q;$("answers").innerHTML=L.exercise.a.map((a,i)=>`<button class="ans ${done&&i===L.exercise.correct?"good":""}" data-i="${i}" ${done?"disabled":""}>${a}</button>`).join("");
+ $("quizFeedback").className="feedback "+(done?"good":"");$("quizFeedback").textContent=done?L.exercise.why:"";
+ $$(".ans").forEach(b=>b.onclick=()=>{if(+b.dataset.i===L.exercise.correct){state.quizPassed[L.id]=true;render()}else{b.classList.add("bad");$("quizFeedback").textContent="Not yet. Return to Definition/Theorem or use Hint.";setTimeout(()=>b.classList.remove("bad"),600)}})
+}
+function shuffled(L){let a=L.proofsteps.map((t,i)=>({t,i})),seed=L.id.split("").reduce((n,c)=>n+c.charCodeAt(0),0);for(let i=a.length-1;i>0;i--){seed=(seed*9301+49297)%233280;let j=Math.floor(seed/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function renderProof(){
+ const L=lesson(),done=!!state.proofPassed[L.id];$("proofSteps").innerHTML=shuffled(L).map(o=>`<button class="stepbtn ${done?"good":""}" data-o="${o.i}" ${done?"disabled":""}>${o.t}</button>`).join("");
+ $("proofSeq").textContent=done?"Proof order verified.":state.proofPick.length?`Selected: ${state.proofPick.map(i=>i+1).join(" → ")}`:"";$("proofFeedback").className="feedback "+(done?"good":"");$("proofFeedback").textContent=done?"Logical dependency reconstructed.":"";
+ $$(".stepbtn").forEach(b=>b.onclick=()=>{state.proofPick.push(+b.dataset.o);if(state.proofPick.length===L.proofsteps.length){let ok=state.proofPick.every((v,i)=>v===i);if(ok){state.proofPassed[L.id]=true;state.proofPick=[];render()}else{$("proofFeedback").textContent="The statements may be true, but the dependency order is wrong. Reset and ask which step justifies the next.";state.proofPick=[];setTimeout(renderProof,650)}}else renderProof()})
+}
+$$(".tab").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;render()});
+$("prevBtn").onclick=()=>{if(state.index>0){state.index--;state.tab="definition";state.proofPick=[];render()}};
+$("nextBtn").onclick=()=>{if(passed()&&state.index<LESSONS.length-1){state.index++;state.tab="definition";state.proofPick=[];render()}};
+$("hintBtn").onclick=()=>{$("quizFeedback").textContent=lesson().help};
+$("undoProofBtn").onclick=()=>{state.proofPick.pop();renderProof()};$("resetProofBtn").onclick=()=>{state.proofPick=[];renderProof()};
+$("helpBtn").onclick=()=>{$("helpTitle").textContent=`Teach me: ${lesson().title}`;$("helpText").textContent=`Definition: ${lesson().definition}  Intuition: ${lesson().intuition}`;setMath("helpFormula",lesson().formula);$("helpOverlay").classList.remove("hidden");typeset()};
+$("closeHelp").onclick=()=>$("helpOverlay").classList.add("hidden");
+$("narrateBtn").onclick=()=>{if("speechSynthesis"in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(`${lesson().title}. ${lesson().definition}. ${lesson().intuition}`);u.rate=.92;speechSynthesis.speak(u)}};
+$("roadmapBtn").onclick=()=>{$("roadmap").innerHTML=[...new Set(LESSONS.map(x=>x.module))].map(m=>`<div class="road"><b>${m}</b><br>${LESSONS.filter(x=>x.module===m).map(x=>x.title).join("<br>")}</div>`).join("");$("roadmapOverlay").classList.remove("hidden")};$("closeRoadmap").onclick=()=>$("roadmapOverlay").classList.add("hidden");
+$("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mathforge-progress.json";a.click();URL.revokeObjectURL(a.href)};
+$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{try{state={...state,...JSON.parse(await e.target.files[0].text())};render()}catch{alert("Invalid progress file.")}};
+$("sceneSlider").oninput=e=>{state.slider=+e.target.value;drawScene();save()};
+
+
+// ---- Direct Groq browser integration ---------------------------------------
+const GROQ_DEFAULTS={
+ baseUrl:"https://api.groq.com/openai/v1",
+ model:"qwen/qwen3.8-27b",
+ storage:"session"
+};
+let groqMemoryToken="";
+let tutorMode="socratic";
+let tutorPages=["Ask a question or choose a prompt above."];
+let tutorPage=0;
+let tutorHistory={};
+
+function groqPrefs(){
+ let p={...GROQ_DEFAULTS};
+ try{Object.assign(p,JSON.parse(localStorage.getItem("mathforge.groq.prefs")||"{}"))}catch{}
+ return p;
+}
+function getGroqToken(){
+ if(groqMemoryToken)return groqMemoryToken;
+ return sessionStorage.getItem("mathforge.groq.token")||localStorage.getItem("mathforge.groq.token")||"";
+}
+function setGroqToken(token,storage){
+ sessionStorage.removeItem("mathforge.groq.token");
+ localStorage.removeItem("mathforge.groq.token");
+ groqMemoryToken="";
+ if(!token)return;
+ if(storage==="local")localStorage.setItem("mathforge.groq.token",token);
+ else if(storage==="session")sessionStorage.setItem("mathforge.groq.token",token);
+ else groqMemoryToken=token;
+}
+function saveGroqPrefs(p){localStorage.setItem("mathforge.groq.prefs",JSON.stringify(p))}
+function groqConfigured(){return !!getGroqToken()}
+function updateGroqStatus(){
+ const ok=groqConfigured(),p=groqPrefs();
+ $("groqDot").classList.toggle("ok",ok);
+ $("groqDot").classList.toggle("bad",!ok);
+ $("aiStatus").textContent=ok?`Direct Groq ready · ${p.model}`:"Direct Groq is not configured yet. Click Groq.";
+ $("ctxModel").textContent=p.model;
+}
+function openGroqSettings(){
+ const p=groqPrefs();
+ $("groqToken").value=getGroqToken();
+ $("tokenStorage").value=p.storage||"session";
+ $("groqBaseUrl").value=p.baseUrl||GROQ_DEFAULTS.baseUrl;
+ ensureModelOption(p.model);
+ $("groqModel").value=p.model||GROQ_DEFAULTS.model;
+ $("groqSettingsStatus").textContent="";
+ $("groqOverlay").classList.remove("hidden");
+}
+function ensureModelOption(id){
+ if(!id)return;
+ if(![...$("groqModel").options].some(o=>o.value===id)){
+  let o=document.createElement("option");o.value=id;o.textContent=id;$("groqModel").append(o);
+ }
+}
+function closeGroqSettings(){$("groqOverlay").classList.add("hidden")}
+async function groqFetch(path,options={}){
+ const token=getGroqToken(),p=groqPrefs();
+ if(!token)throw new Error("No Groq token configured.");
+ const base=(p.baseUrl||GROQ_DEFAULTS.baseUrl).replace(/\/+$/,"");
+ const headers={...(options.headers||{}),"Authorization":`Bearer ${token}`,"Content-Type":"application/json"};
+ const r=await fetch(base+path,{...options,headers});
+ let body=null;try{body=await r.json()}catch{}
+ if(!r.ok){
+  const msg=body?.error?.message||body?.error||`${r.status} ${r.statusText}`;
+  throw new Error(String(msg));
+ }
+ return body;
+}
+async function testAndLoadModels(){
+ $("groqSettingsStatus").textContent="Connecting to Groq...";
+ // Temporarily use values currently visible in settings.
+ const token=$("groqToken").value.trim(),storage=$("tokenStorage").value;
+ const oldPrefs=groqPrefs(),tempPrefs={baseUrl:$("groqBaseUrl").value.trim()||GROQ_DEFAULTS.baseUrl,model:$("groqModel").value||GROQ_DEFAULTS.model,storage};
+ setGroqToken(token,storage);saveGroqPrefs(tempPrefs);
+ try{
+  const d=await groqFetch("/models",{method:"GET"});
+  const current=$("groqModel").value;
+  const skip=/whisper|orpheus|prompt-guard|safeguard/i;
+  const ids=(d.data||[]).map(x=>x.id).filter(id=>!skip.test(id)).sort();
+  $("groqModel").innerHTML="";
+  ids.forEach(id=>{let o=document.createElement("option");o.value=id;o.textContent=id;$("groqModel").append(o)});
+  ensureModelOption(current);$("groqModel").value=ids.includes(current)?current:(ids.includes(GROQ_DEFAULTS.model)?GROQ_DEFAULTS.model:(ids[0]||current));
+  $("groqSettingsStatus").textContent=`Connected. ${ids.length} text-capable model entries loaded.`;
+  $("groqDot").classList.add("ok");$("groqDot").classList.remove("bad");
+ }catch(e){
+  $("groqSettingsStatus").textContent=`Connection failed: ${e.message}`;
+  // Keep entered values in place so the user can correct them.
+  saveGroqPrefs(oldPrefs);
+  $("groqDot").classList.remove("ok");$("groqDot").classList.add("bad");
+ }
+}
+function saveGroqSettings(){
+ const token=$("groqToken").value.trim(),storage=$("tokenStorage").value;
+ const p={baseUrl:$("groqBaseUrl").value.trim()||GROQ_DEFAULTS.baseUrl,model:$("groqModel").value||GROQ_DEFAULTS.model,storage};
+ setGroqToken(token,storage);saveGroqPrefs(p);closeGroqSettings();updateGroqStatus();
+}
+function forgetGroq(){
+ setGroqToken("","memory");
+ localStorage.removeItem("mathforge.groq.prefs");
+ $("groqToken").value="";
+ $("groqSettingsStatus").textContent="Groq token forgotten on this browser.";
+ updateGroqStatus();
+}
+
+const MODE_INSTRUCTIONS={
+ socratic:`Act as a Socratic mathematics tutor. Do not immediately give the final answer. Start from the exact definition, ask one high-value question at a time, diagnose the missing inference, and progressively strengthen hints. If the student asks for a proof, help them construct it rather than merely reciting it.`,
+ lecturer:`Act as an exceptional mathematics lecturer. Give a compact but rigorous mini-lecture: definition, geometric/structural intuition, theorem, why the hypotheses matter, derivation or proof, one concrete example, one counterexample, and the connection to later mathematics.`,
+ examiner:`Act as a demanding but fair oral mathematics examiner. Ask the student to state definitions, identify hypotheses, justify each inference, and repair gaps. Do not praise unsupported answers. Do not reveal the complete proof unless the student explicitly gives up.`,
+ critic:`Act as a proof critic. Analyze the student's reasoning line by line. Identify hidden assumptions, invalid implications, missing hypotheses, circularity, and places where intuition has been substituted for proof. Then give the smallest repair needed.`
+};
+const BASE_TUTOR_SYSTEM=`You are the embedded tutor in Math Forge, a proof-oriented mathematics course.
+The goal is mathematical maturity, not recognition or memorization.
+Always distinguish: definition, intuition, theorem, hypotheses, proof, proof sketch, example, counterexample, empirical/modeling claim.
+Never claim a full proof when only a sketch is available.
+Use LaTeX notation for all mathematical expressions.
+Formatting rules for Math Forge:
+- Inline math MUST use \( ... \).
+- Display equations MUST use \[ ... \].
+- Put important derivations and multi-step algebra on separate display lines.
+- Do not put mathematics inside Markdown backticks.
+- Prefer aligned, readable formulas over dense prose.
+- When proving something, show implication arrows and intermediate equations explicitly instead of compressing several algebraic steps into one sentence.
+For advanced material such as coarea, Stokes on manifolds, gauge theory, or DREAM, explicitly separate established mathematics from framework-specific interpretation.
+Do not invent theorem hypotheses.
+`;
+
+function currentTutorContext(){
+ const L=lesson();
+ return {
+  lessonIndex:state.index+1,
+  lessonCount:LESSONS.length,
+  module:L.module,
+  title:L.title,
+  definition:L.definition,
+  intuition:L.intuition,
+  theorem:L.statement,
+  proofOrSketch:L.proof,
+  counterexample:L.counter,
+  connections:L.connection,
+  formula:L.formula,
+  currentView:state.tab,
+  conceptGatePassed:!!state.quizPassed[L.id],
+  proofGatePassed:!!state.proofPassed[L.id],
+  partialProofOrder:state.proofPick.slice()
+ };
+}
+function splitTutorPages(text,maxChars=1800){
+ const paras=String(text||"").split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
+ let pages=[],cur="";
+ for(const p of paras){
+  if(cur && (cur.length+p.length+2)>maxChars){pages.push(cur);cur=p}
+  else cur+=(cur?"\n\n":"")+p;
+ }
+ if(cur)pages.push(cur);
+ if(!pages.length)pages=["No response text returned."];
+ return pages;
+}
+
+function escapeTutorHtml(s){
+ return String(s??"")
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+}
+function tutorTextToHtml(raw){
+ // Escape provider output first: the tutor is not allowed to inject HTML.
+ let s=escapeTutorHtml(raw).replace(/\r\n/g,"\n");
+
+ // Lightweight readability formatting while leaving LaTeX untouched for MathJax.
+ const lines=s.split("\n");
+ let out=[], inList=false;
+ for(const ln0 of lines){
+  const ln=ln0.trimEnd();
+  if(!ln.trim()){
+   if(inList){out.push("</div>");inList=false}
+   continue;
+  }
+  const trimmed=ln.trim();
+  const heading=trimmed.match(/^#{1,4}\s+(.+)$/);
+  const bullet=trimmed.match(/^[-*]\s+(.+)$/);
+  const numbered=trimmed.match(/^\d+[.)]\s+(.+)$/);
+
+  if(heading){
+   if(inList){out.push("</div>");inList=false}
+   out.push(`<div class="tutorHeading">${heading[1]}</div>`);
+  }else if(bullet || numbered){
+   if(!inList){out.push("<div>");inList=true}
+   out.push(`<div class="tutorBullet">• ${bullet?bullet[1]:numbered[1]}</div>`);
+  }else{
+   if(inList){out.push("</div>");inList=false}
+   out.push(`<div class="tutorPara">${ln}</div>`);
+  }
+ }
+ if(inList)out.push("</div>");
+ return out.join("");
+}
+function typesetTutor(){
+ if(window.MathJax?.typesetPromise){
+  try{MathJax.typesetClear?.([$("tutorAnswer")])}catch{}
+  MathJax.typesetPromise([$("tutorAnswer")]).catch(()=>{});
+ }
+}
+
+function showTutorPage(){
+ $("tutorAnswer").innerHTML=tutorTextToHtml(tutorPages[tutorPage]||"");
+ $("tutorPageMeta").textContent=`Page ${tutorPage+1}/${tutorPages.length}`;
+ $("prevTutorPage").disabled=tutorPage<=0;
+ $("nextTutorPage").disabled=tutorPage>=tutorPages.length-1;
+ typesetTutor();
+}
+function refreshTutorContext(){
+ const L=lesson(),p=groqPrefs();
+ $("tutorLessonLabel").textContent=`${L.module} · ${L.title}`;
+ $("ctxLesson").textContent=L.title;
+ $("ctxTab").textContent=state.tab;
+ $("ctxQuiz").textContent=state.quizPassed[L.id]?"passed":"not yet passed";
+ $("ctxProof").textContent=state.proofPassed[L.id]?"passed":"not yet passed";
+ $("ctxModel").textContent=p.model;
+ $$(".modeBtn").forEach(b=>b.classList.toggle("active",b.dataset.mode===tutorMode));
+}
+function openTutor(question=""){
+ if(!groqConfigured()){openGroqSettings();$("groqSettingsStatus").textContent="Enter your Groq token first. Then reopen the tutor.";return}
+ refreshTutorContext();
+ $("tutorQuestion").value=question;
+ $("tutorOverlay").classList.remove("hidden");
+ showTutorPage();
+}
+function closeTutor(){$("tutorOverlay").classList.add("hidden")}
+async function askGroq(question){
+ question=String(question||"").trim();
+ if(!question)return;
+ if(!groqConfigured()){openGroqSettings();return}
+ const p=groqPrefs(),L=lesson(),ctx=currentTutorContext(),key=L.id;
+ let hist=tutorHistory[key]||[];
+ const userContent=`CURRENT COURSE CONTEXT
+${JSON.stringify(ctx,null,2)}
+
+STUDENT QUESTION
+${question}`;
+ const messages=[
+  {role:"system",content:BASE_TUTOR_SYSTEM+"\n\nCURRENT TUTOR MODE:\n"+MODE_INSTRUCTIONS[tutorMode]+"\n\nOUTPUT FORMAT REMINDER:\nUse \\( ... \\) for inline mathematics and \\[ ... \\] for display mathematics. Put important equations on their own display lines."},
+  ...hist.slice(-6),
+  {role:"user",content:userContent}
+ ];
+ $("tutorAnswer").innerHTML='<div class="tutorPara">Groq is reasoning about the current lesson...</div>';
+ $("tutorAnswerTitle").textContent=`${tutorMode[0].toUpperCase()+tutorMode.slice(1)} tutor`;
+ $("sendTutorBtn").disabled=true;$("askAiBtn").disabled=true;
+ try{
+  const d=await groqFetch("/chat/completions",{method:"POST",body:JSON.stringify({
+   model:p.model,
+   messages,
+   temperature:tutorMode==="critic"?0.15:0.25,
+   max_completion_tokens:2200
+  })});
+  const answer=d?.choices?.[0]?.message?.content||"No textual answer returned.";
+  hist.push({role:"user",content:question},{role:"assistant",content:answer});
+  tutorHistory[key]=hist.slice(-8);
+  tutorPages=splitTutorPages(answer);tutorPage=0;showTutorPage();
+  $("aiStatus").textContent=`Groq answered · ${p.model} · ${tutorMode}`;
+  $("tutorQuestion").value="";
+ }catch(e){
+  tutorPages=splitTutorPages(`Groq request failed.\n\n${e.message}\n\nIf you opened the course directly as file:// and your browser blocks cross-origin requests, serve this same static file from localhost (for example: python -m http.server 8080) or use GitHub Pages. That does not introduce an API proxy; the browser still calls Groq directly.`);
+  tutorPage=0;showTutorPage();$("aiStatus").textContent=`Groq error: ${e.message}`;
+  if(/401|api key|auth|token/i.test(e.message))$("groqDot").classList.add("bad");
+ }finally{$("sendTutorBtn").disabled=false;$("askAiBtn").disabled=false}
+}
+
+// Groq settings UI
+$("groqSettingsBtn").onclick=openGroqSettings;
+$("closeGroqBtn").onclick=closeGroqSettings;
+$("saveGroqBtn").onclick=saveGroqSettings;
+$("forgetGroqBtn").onclick=forgetGroq;
+$("loadModelsBtn").onclick=testAndLoadModels;
+
+// Tutor UI
+$("openTutorBtn").onclick=()=>openTutor();
+$("closeTutorBtn").onclick=closeTutor;
+$$(".modeBtn").forEach(b=>b.onclick=()=>{tutorMode=b.dataset.mode;$("inlineMode").value=tutorMode;refreshTutorContext()});
+$("inlineMode").onchange=e=>{tutorMode=e.target.value;refreshTutorContext()};
+$$("[data-prompt]").forEach(b=>b.onclick=()=>{$("tutorQuestion").value=b.dataset.prompt;askGroq(b.dataset.prompt)});
+$("sendTutorBtn").onclick=()=>askGroq($("tutorQuestion").value);
+$("askAiBtn").onclick=()=>{tutorMode=$("inlineMode").value;const q=$("aiQuestion").value.trim();openTutor(q);if(q)askGroq(q)};
+$("prevTutorPage").onclick=()=>{if(tutorPage>0){tutorPage--;showTutorPage()}};
+$("nextTutorPage").onclick=()=>{if(tutorPage<tutorPages.length-1){tutorPage++;showTutorPage()}};
+$("clearTutorBtn").onclick=()=>{tutorHistory[lesson().id]=[];tutorPages=["Conversation cleared. Ask the current lesson from first principles."];tutorPage=0;showTutorPage()};
+$("tutorQuestion").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();askGroq($("tutorQuestion").value)}});
+
+window.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  if(!$("tutorOverlay").classList.contains("hidden"))closeTutor();
+  else if(!$("groqOverlay").classList.contains("hidden"))closeGroqSettings();
+ }
+});
+updateGroqStatus();
+
+
+function S(tag,a={},t=""){let e=document.createElementNS("http://www.w3.org/2000/svg",tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(t)e.textContent=t;return e}
+function clear(){let v=$("viz");v.innerHTML="";v.append(S("rect",{x:0,y:0,width:900,height:520,fill:"#07111a"}));return v}
+function line(v,x1,y1,x2,y2,c="#6edcff",w=2,d=""){let e=S("line",{x1,y1,x2,y2,stroke:c,"stroke-width":w});if(d)e.setAttribute("stroke-dasharray",d);v.append(e)}
+function circ(v,cx,cy,r,c="#6edcff",f="none",w=2){v.append(S("circle",{cx,cy,r,stroke:c,fill:f,"stroke-width":w}))}
+function txt(v,x,y,t,c="#dceaf4",s=15,a="middle"){v.append(S("text",{x,y,fill:c,"font-size":s,"text-anchor":a,"font-family":"system-ui"},t))}
+function arrow(v,x1,y1,x2,y2,c="#6edcff",w=3){line(v,x1,y1,x2,y2,c,w);let a=Math.atan2(y2-y1,x2-x1),L=10;line(v,x2,y2,x2-L*Math.cos(a-.5),y2-L*Math.sin(a-.5),c,w);line(v,x2,y2,x2-L*Math.cos(a+.5),y2-L*Math.sin(a+.5),c,w)}
+function axes(v){line(v,60,260,840,260,"#526b7f",1);line(v,450,40,450,480,"#526b7f",1)}
+function drawScene(){
+ const L=lesson(),v=clear(),t=state.slider/100;$("visualTitle").textContent=`Visual model · ${L.title}`;
+ switch(L.visual){
+ case"logic":txt(v,150,80,"Universe","#9eb3c5",16);v.append(S("rect",{x:80,y:110,width:740,height:300,rx:25,fill:"#0d1b28",stroke:"#36566f"}));circ(v,335,260,115,"#6edcff","rgba(110,220,255,.05)",3);txt(v,335,260,"P(x) true");circ(v,610,260,75,"#ff9a9a","rgba(255,154,154,.05)",3);txt(v,610,260,"fails P");txt(v,450,455,"¬∀ means: at least one counterexample exists","#ffd77a",18);break;
+ case"functionmap":[150,220,290,360].forEach((y,i)=>{circ(v,210,y,18,"#6edcff","#10283a");circ(v,690,y,18,"#bca3ff","#251d38");txt(v,210,y+5,String(i+1),"#fff",13);txt(v,690,y+5,String.fromCharCode(97+i),"#fff",13)});[0,1,2,3].forEach((i)=>arrow(v,230,150+i*70,670,(t>.55&&i===3)?290:150+i*70,"#81e2aa",2));txt(v,450,445,t>.55?"collision → not injective":"no collisions in this picture","#ffd77a",18);break;
+ case"sqrt2":v.append(S("rect",{x:260,y:110,width:280,height:280,fill:"rgba(110,220,255,.05)",stroke:"#6edcff","stroke-width":3}));line(v,260,110,540,390,"#ffd77a",3);txt(v,430,235,"√2","#ffd77a",22);txt(v,450,450,"Assume √2=a/b in lowest terms; parity forces both a and b even","#dceaf4",17);break;
+ case"unitcircle":axes(v);circ(v,450,260,150,"#526b7f");let th=t*2*Math.PI,x=450+150*Math.cos(th),y=260-150*Math.sin(th);arrow(v,450,260,x,y,"#6edcff",4);line(v,x,y,x,260,"#ffd77a",2,"6 5");line(v,450,260,x,260,"#81e2aa",3);txt(v,(450+x)/2,285,"cos θ","#81e2aa",16);txt(v,x+30,(y+260)/2,"sin θ","#ffd77a",16);break;
+ case"basis":axes(v);let sc=.5+1.2*t;arrow(v,450,260,450+170*sc,220,"#6edcff",4);arrow(v,450,260,390,100,"#ffd77a",4);arrow(v,450,260,450+170*sc-60,60,"#81e2aa",3);txt(v,700,150,"basis coordinates build v","#dceaf4",17);break;
+ case"linear":axes(v);let sh=(t-.5)*1.5;for(let i=-4;i<=4;i++){let xx=450+i*55;line(v,xx+sh*(-180),80,xx+sh*180,440,"#20394d",1);let yy=260+i*45;line(v,230+sh*(yy-260),yy,670+sh*(yy-260),yy,"#20394d",1)}arrow(v,450,260,620,260,"#6edcff",4);arrow(v,450,260,450-sh*140,120,"#ffd77a",4);break;
+ case"eigen":axes(v);let a=(t-.5)*Math.PI,vx=Math.cos(a),vy=Math.sin(a),A=[[2,.7],[0,.6]],wx=A[0][0]*vx+A[0][1]*vy,wy=A[1][0]*vx+A[1][1]*vy,n=Math.hypot(wx,wy)||1;arrow(v,450,260,450+150*vx,260-150*vy,"#6edcff",4);arrow(v,450,260,450+150*wx/n,260-150*wy/n,"#ffd77a",4);txt(v,450,455,"Eigenvector when v and Av are collinear","#dceaf4",19);break;
+ case"projection":axes(v);let px=540+150*t,py=130;arrow(v,450,260,px,py,"#6edcff",4);line(v,200,360,760,160,"#526b7f",3);let dx=560,dy=-200,q=((px-450)*dx+(py-260)*dy)/(dx*dx+dy*dy),qx=450+q*dx,qy=260+q*dy;arrow(v,450,260,qx,qy,"#81e2aa",4);line(v,px,py,qx,qy,"#ffd77a",2,"6 5");break;
+ case"sequence":axes(v);let eps=.08+.45*(1-t),scale=160;line(v,70,260-eps*scale,840,260-eps*scale,"#ffd77a",2,"6 5");line(v,70,260+eps*scale,840,260+eps*scale,"#ffd77a",2,"6 5");for(let n=1;n<=20;n++){let xx=90+n*35,yy=260-(1/n)*scale;circ(v,xx,yy,4,"#6edcff","#6edcff",1)}break;
+ case"epsilon":axes(v);let ep=.3+.8*(1-t),del=ep/3,sx=95,sy=42;for(let i=1;i<300;i++){let x0=-4+(i-1)*8/299,y0=3*x0+1,x1=-4+i*8/299,y1=3*x1+1;line(v,450+x0*sx,260-(y0-7)*sy,450+x1*sx,260-(y1-7)*sy,"#6edcff",2)}v.append(S("rect",{x:450-del*sx,y:60,width:2*del*sx,height:400,fill:"rgba(129,226,170,.07)",stroke:"#81e2aa"}));v.append(S("rect",{x:80,y:260-ep*sy,width:760,height:2*ep*sy,fill:"rgba(255,215,122,.05)",stroke:"#ffd77a"}));break;
+ case"mvt":axes(v);let f=x=>.22*x*x*x-.3*x*x-1.2*x+1,aa=-2.8,bb=2.6,sxx=90,syy=35,pr=null;for(let i=0;i<260;i++){let x0=aa+i*(bb-aa)/259,p=[450+x0*sxx,260-f(x0)*syy];if(pr)line(v,pr[0],pr[1],p[0],p[1],"#6edcff",2);pr=p}let ya=f(aa),yb=f(bb);line(v,450+aa*sxx,260-ya*syy,450+bb*sxx,260-yb*syy,"#ffd77a",2,"7 5");let c=aa+(bb-aa)*t,fc=f(c),mc=.66*c*c-.6*c-1.2;line(v,450+(c-1.2)*sxx,260-(fc-mc*1.2)*syy,450+(c+1.2)*sxx,260-(fc+mc*1.2)*syy,"#81e2aa",3);break;
+ case"ftc":axes(v);let xmax=-2+5*t,ssx=100,ssy=80,ff=x=>1+.45*Math.sin(1.4*x),pv=null;for(let i=0;i<80;i++){let x0=-3+i*6/79,y0=ff(x0),p=[450+x0*ssx,260-y0*ssy];if(pv)line(v,pv[0],pv[1],p[0],p[1],"#6edcff",2);pv=p}for(let x0=-3;x0<xmax;x0+=.12){let y0=ff(x0);v.append(S("rect",{x:450+x0*ssx,y:260-y0*ssy,width:.12*ssx,height:y0*ssy,fill:"rgba(129,226,170,.15)"}))}break;
+ case"jacobian":axes(v);let ang=(t-.5)*.9,cs=Math.cos(ang),sn=Math.sin(ang),M=[[1.4*cs,-.7*sn],[1.4*sn,.7*cs]];for(let i=-4;i<=4;i++){let p=[];for(let j=-4;j<=4;j++){let x0=i*.55,y0=j*.55,xx=M[0][0]*x0+M[0][1]*y0,yy=M[1][0]*x0+M[1][1]*y0;p.push([450+xx*85,260-yy*85])}for(let j=1;j<p.length;j++)line(v,...p[j-1],...p[j],"#244257",1)}arrow(v,450,260,450+M[0][0]*100,260-M[1][0]*100,"#6edcff",4);arrow(v,450,260,450+M[0][1]*100,260-M[1][1]*100,"#ffd77a",4);break;
+ case"compact":v.append(S("rect",{x:220,y:120,width:460,height:260,rx:35,fill:"rgba(110,220,255,.04)",stroke:"#6edcff","stroke-width":3}));for(let i=0;i<7;i++)circ(v,260+i*65,220+50*Math.sin(i),75,"#526b7f","rgba(82,107,127,.04)",1.5);txt(v,450,430,"finite subcover exists","#dceaf4",19);break;
+ case"kernel":axes(v);let sig=.15+1.4*t,ksx=85,ksy=70,src=x=>Math.exp(-3*(x+1.4)**2)+.7*Math.exp(-8*(x-.8)**2)+.35*Math.sin(5*x),conv=x=>{let sm=0,w=0;for(let j=-40;j<=40;j++){let u=j*.06,k=Math.exp(-u*u/(2*sig*sig));sm+=k*src(x-u);w+=k}return sm/w};let p1=null,p2=null;for(let i=0;i<300;i++){let x0=-4+i*8/299,q1=[450+x0*ksx,260-src(x0)*ksy],q2=[450+x0*ksx,260-conv(x0)*ksy];if(p1)line(v,...p1,...q1,"#526b7f",1.5);if(p2)line(v,...p2,...q2,"#6edcff",3);p1=q1;p2=q2}break;
+ case"inverse":axes(v);let loss=t,sep=170*(1-loss);circ(v,360,180,12,"#6edcff","#6edcff");circ(v,540,180,12,"#ffd77a","#ffd77a");arrow(v,360,205,450-sep/2,330,"#6edcff",3);arrow(v,540,205,450+sep/2,330,"#ffd77a",3);circ(v,450-sep/2,330,10,"#6edcff","#6edcff");circ(v,450+sep/2,330,10,"#ffd77a","#ffd77a");break;
+ case"stokes":circ(v,450,260,150,"#6edcff","rgba(110,220,255,.03)",3);for(let a=0;a<Math.PI*2;a+=Math.PI/8){let x0=450+115*Math.cos(a),y0=260+115*Math.sin(a);arrow(v,x0,y0,x0-28*Math.sin(a),y0+28*Math.cos(a),"#ffd77a",2)}txt(v,450,455,"boundary circulation ↔ bulk derivative","#dceaf4",18);break;
+ case"wilson":circ(v,450,260,155,"#6edcff","none",3);let flux=(t-.5)*6*Math.PI;for(let i=-3;i<=3;i++)arrow(v,450+i*28,315,450+i*28,205,"#81e2aa",2);arrow(v,700,260,700+70*Math.cos(flux),260-70*Math.sin(flux),"#ffd77a",4);txt(v,700,355,"holonomy phase","#ffd77a",15);break;
+ case"minkowski":axes(v);line(v,450,260,650,60,"#ffd77a",3);line(v,450,260,250,60,"#ffd77a",3);line(v,450,260,650,460,"#ffd77a",3);line(v,450,260,250,460,"#ffd77a",3);circ(v,450+(t-.5)*260,100,8,"#6edcff","#6edcff");break;
+ case"coarea":axes(v);let ce=.06+.5*(1-t),csx=100,cp=null;for(let i=0;i<260;i++){let x0=-3+i*6/259,y0=x0*x,px=450+x0*csx,py=115+y0*30;if(cp)line(v,...cp,px,py,"#6edcff",2);cp=[px,py]}for(let y0=0;y0<=6;y0+=.75){let x0=Math.sqrt(y0);if(x0<=3){circ(v,450+x0*csx,115+y0*30,4,"#ffd77a","#ffd77a");circ(v,450-x0*csx,115+y0*30,4,"#ffd77a","#ffd77a")}}let dp=null;for(let i=0;i<250;i++){let y0=.02+i*5.8/249,d=1/(Math.sqrt(y0)+ce),px=100+y0*115,py=455-d*35;if(dp)line(v,...dp,px,py,"#81e2aa",2);dp=[px,py]}break;
+ case"dream":let labels=["source Φ","kernel Kλ","observable O","push-forward","retention/spectrum"],xs=[90,265,440,615,790];labels.forEach((lab,i)=>{v.append(S("rect",{x:xs[i]-65,y:200,width:130,height:90,rx:12,fill:i===1?"rgba(110,220,255,.11)":"#0d1b28",stroke:i===1?"#6edcff":"#36566f"}));txt(v,xs[i],250,lab,"#fff",13);if(i<labels.length-1)arrow(v,xs[i]+65,245,xs[i+1]-65,245,"#ffd77a",2)});txt(v,450,410,"verify every arrow separately","#81e2aa",20);break;
+ }
+}
+render();
+</script>
+<script defer src="../js/sw-update.js"></script>
+</body></html>
