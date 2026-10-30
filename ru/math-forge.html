@@ -226,9 +226,6 @@ $("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{
 $("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{try{state={...state,...JSON.parse(await e.target.files[0].text())};render()}catch{alert("Invalid progress file.")}};
 $("sceneSlider").oninput=e=>{state.slider=+e.target.value;drawScene();save()};
 
-
-
-}
 // (old Groq code removed — replaced by floating bubble UI)
 
 
