@@ -88,8 +88,8 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
 #groqBubble .bubble-icon{font-size:21px;color:#071018;font-weight:900}
 #groqBubble .bubble-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#ff9a9a;border:2px solid var(--bg)}
 #groqBubble .bubble-dot.ok{background:var(--green)}
-#groqDock{position:fixed;right:22px;bottom:86px;width:380px;max-width:calc(100vw - 44px);height:500px;max-height:calc(100vh - 120px);background:linear-gradient(180deg,#0d1d2b,#081622);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 70px rgba(0,0,0,.5);z-index:101;display:none;flex-direction:column;overflow:hidden}
-#groqDock.show{display:flex}
+#groqBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9997;display:none}#groqBackdrop.show{display:block}#groqDock{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) translateY(16px);width:min(880px,calc(100vw - 44px));height:min(560px,calc(100vh - 140px));background:rgba(13,29,43,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9998;display:none;flex-direction:column;overflow:hidden;opacity:0;transition:transform .2s,opacity .2s}
+#groqDock.show{display:flex;transform:translate(-50%,-50%);opacity:1}
 .groqDockHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #2d495f}
 .groqDockHeader h3{margin:0;font-size:14px;color:#eff8ff}
 .groqDockHeader .gear{cursor:pointer;color:#9eb3c5;font-size:16px;background:none;border:none;padding:4px}
@@ -111,7 +111,7 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
 .groqDockInput button:hover{background:#1e4865}
 .groqDockInput button:disabled{opacity:.4;cursor:not-allowed}
 .groqDockFooter{padding:4px 14px 6px;font-size:9px;color:#6d7f8e;text-align:center}
-@media(max-width:560px){#groqBubble{width:48px;height:48px;bottom:16px;right:16px}#groqDock{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:calc(100vw - 16px);height:70vh;max-height:calc(100dvh - 120px)}}
+@media(max-width:560px){#groqBubble{width:48px;height:48px;bottom:16px;right:16px}#groqDock{width:calc(100vw - 16px);height:70vh}#groqDock.show{transform:translate(-50%,-50%)}}
 </style>
 </head>
 <body>
@@ -615,15 +615,15 @@ async function groqAsk(question){
 (function(){
 var html = '<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">\u2726</span><span class="bubble-dot" id="groqBubbleDot"></span></div>';
 html += '<div id="groqDock" aria-hidden="true"><div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">\u2699</button><button class="gear" id="groqDockClose" title="Close">\u2715</button></div><div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div><div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson.</div></div><div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send)"></textarea><button id="groqDockSend">Send</button></div><div class="groqDockFooter">Powered by Groq \u00b7 <span id="groqDockModel">qwen/qwen3.8-27b</span></div></div>';
-document.body.insertAdjacentHTML('beforeend', html);
+html += '<div id="groqBackdrop"></div>';document.body.insertAdjacentHTML('beforeend', html);
 var b = document.getElementById('groqBubble');
-b.addEventListener('click', function(){ var d=document.getElementById('groqDock'); d.classList.toggle('show'); if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()} }); b.onclick=function(){var d=document.getElementById('groqDock');d.classList.toggle('show');if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()}};
-document.getElementById('groqDockClose').addEventListener('click', function(){ document.getElementById('groqDock').classList.remove('show') });
+b.addEventListener('click', function(){ var d=document.getElementById('groqDock'); d.classList.toggle('show');document.getElementById('groqBackdrop').classList.toggle('show',d.classList.contains('show')); if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()} }); b.onclick=function(){var d=document.getElementById('groqDock');d.classList.toggle('show');document.getElementById('groqBackdrop').classList.toggle('show',d.classList.contains('show'));if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()}};
+document.getElementById('groqDockClose').addEventListener('click', function(){ document.getElementById('groqDock').classList.remove('show');document.getElementById('groqBackdrop').classList.remove('show') });document.getElementById('groqBackdrop').addEventListener('click', function(){ document.getElementById('groqDock').classList.remove('show');document.getElementById('groqBackdrop').classList.remove('show') });
 document.getElementById('groqGearBtn').addEventListener('click', function(){ var p=groqPrefs(); var token=getGroqToken(); var nt=prompt('Groq API token (leave empty for built-in):',token===GROQ_TOKEN_DEFAULT?'':token); if(nt===null)return; var nm=prompt('Groq model:',p.model||GROQ_DEFAULTS.model); if(nm===null)return; var st=prompt('Token storage (session/local/memory):',p.storage||'session'); if(st===null)return; setGroqToken(nt.trim(),st); saveGroqPrefs({baseUrl:p.baseUrl,model:nm||GROQ_DEFAULTS.model,storage:st}); groqUpdateStatus() });
 document.querySelectorAll('#groqDockModes button').forEach(function(btn){ btn.addEventListener('click', function(){ groqMode=btn.dataset.mode; document.querySelectorAll('#groqDockModes button').forEach(function(x){x.classList.toggle('active',x===btn)}) }) });
 document.getElementById('groqDockSend').addEventListener('click', function(){ var q=document.getElementById('groqDockText').value; document.getElementById('groqDockText').value=''; groqAsk(q) });
 document.getElementById('groqDockText').addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();var q=e.target.value;e.target.value='';groqAsk(q)} });
-window.addEventListener('keydown', function(e){ if(e.key==='Escape'){var d=document.getElementById('groqDock'); if(d&&d.classList.contains('show'))d.classList.remove('show')} });
+window.addEventListener('keydown', function(e){ if(e.key==='Escape'){var d=document.getElementById('groqDock'); if(d&&d.classList.contains('show')){d.classList.remove('show');document.getElementById('groqBackdrop').classList.remove('show')}} });
 groqUpdateStatus();
 })();
 const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels").textContent=LEVELS.length;$("sumLessons").textContent=TOTAL;$("sumProgress").textContent=Math.round(100*completedCount()/TOTAL)+'%';if(completedCount()>0)$("resumeBtn").textContent=`Resume at Level ${prog.level+1}.${prog.step+1}`;updateCourseProgress();initLesson();resize();
