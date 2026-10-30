@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Жизненный цикл информации · D.R.E.A.M</title>
+  <meta name="description" content="Жизненный цикл информации — как новизна рождается, стареет и умирает в каждой измеримой области. Вейбулловская смертность информации, средние времена жизни, инженерная валидация на 44 000 реальных активов и оценка трубопровода (спекулятивный блок отозван как противоречащий КБ)." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { displayAlign:'center', displayIndent:'0' },
+    svg:   { displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body data-lang="ru" class="">
+
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+        <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+      <a class="nav-link" href="index.html">Главная</a>
+      <a class="nav-link" href="case.html">Доводы</a>
+      <a class="nav-link" href="retention.html">Retention</a>
+      <a class="nav-link" href="axioms.html">Аксиомы</a>
+      <a class="nav-link" href="theorems.html">Теоремы</a>
+      <a class="nav-link" href="math.html">Математика</a>
+      <a class="nav-link" href="kernel.html">Ядро</a>
+      <a class="nav-link" href="lifecycle.html">Цикл информации</a>
+      <a class="nav-link" href="tests.html">Тесты</a>
+      <a class="nav-link" href="pixel-tracker.html">Пиксель-трекер</a>
+      <a class="nav-link" href="predictions.html">Предсказания</a>
+      <a class="nav-link" href="falsification.html">Фальсификация</a>
+      <a class="nav-link" href="faq.html">FAQ</a>
+      <a class="nav-link" href="about.html">AI-анализ</a>
+      <a class="nav-link" href="articles.html">Статьи</a></div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+  <div class="card hero" style="margin-top:1rem">
+    <h1>Жизненный цикл информации</h1>
+    <p class="lead">Тринадцать тестов (T19–T31), превративших один вопрос — <em>что такое «вода» ядра?</em> — в количественную науку о жизненном цикле: информация рождается, стареет и умирает по закону Вейбулла в каждой области, где мы можем измерять. Валидировано на солнечных вспышках, макроэкономике, погоде, приливах, 15 873 колумбийских трансформаторах, 17 939 канадских трансформаторах и 10 000 станках ЧПУ. Последний тест (T31) попытался экстраполировать агрегат на сам трубопровод; его спекулятивный блок был <strong>отозван в тот же день</strong> как противоречащий Базе Знаний.</p>
+    <p style="background:rgba(125,211,168,.08);border-left:3px solid var(--good);padding:.6rem .9rem;border-radius:0 6px 6px 0"><strong>Главные результаты:</strong> закон удержания $S(W)=\exp(-(W/\lambda)^D)$ — это <strong>функция выживания Вейбулла</strong>: $\lambda$ — <em>время жизни</em>, $D$ — <em>режим старения</em> (T20). Интеграл $\int S\,dW = \mathbb{E}[T]=\lambda\,\Gamma(1+1/D)$ восстанавливает <strong>физический масштаб времени</strong> каждого явления — от минут (вспышки) до десятилетий (уровни цен) (T21). Тот же интеграл на реальных активах восстанавливает табличные инженерные сроки службы с корректной обработкой цензурирования (T22–T26). Агрегат по 323 измеренным областям — допустимая описательная статистика 4D-распределения D (T31), но его спекулятивная экстраполяция на Мета-Многообразие («MM истощается», «пиксель — следствие конечности трубопровода») <strong>отозвана</strong> — см. §5.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>1 · Распад, а не фильтр <span class="badge ok sm">DECAY_NOT_FILTER — 4/4</span></h2>
+    <p>Ядро описывали как фильтр (полоса пропускания). T20 опроверг эту рамку: фильтр предсказывает полосу пропускания и/или бессмертный пол — информационный субстрат не показывает ни того, ни другого. Пол $s_\infty=0.009\approx0$; начало потерь $W_c\to0$ — потери на <em>каждом</em> масштабе. Старый субстрат (контраст) проигрывает именно потому, что часть его никогда не распадается: $s_\infty=0.183$, $\Delta\mathrm{AIC}=27$. Контролируемый тест с трендом нулевой новизны: кривая удержания информации <em>инвариантна</em> (глубина 3.18±0.02 при любом $f$), а контраст отслеживает $f/\sqrt{f^2+1}$.</p>
+    <p>$S(W)=\exp(-(W/\lambda)^D)$ — <strong>функция выживания Вейбулла</strong>. $\lambda$ — характерное <strong>время жизни информации</strong>; $D$ — <strong>режим старения</strong>: $D&lt;1$ младенческая смертность (новизна гаснет быстрой, когда свежа; выжившие живут дольше — похоже на память), $D\approx1$ без памяти, $D&gt;1$ износ (чем старше информация, тем быстрее она умирает).</p>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/decay_not_filter_test.png" alt="T20 — распад, а не фильтр" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Слева: на информационном субстрате (синий) удержание падает без пола и полосы; контраст (жёлтый) выходит на бессмертный пол. Справа: последовательные полупериоды новизны растягиваются: 0.80 → 2.70 → 4.79 → 6.99 → 9.28 → 11.63 мин — численный след «настоящее ощущается вечным».</figcaption>
+    </figure>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>2 · Интеграл: среднее время жизни информации <span class="badge ok sm">E[T] = λ·Γ(1+1/D)</span></h2>
+    <p>Интегрирование кривой выживания сворачивает $(\lambda, D)$ в одно число на область — <strong>среднее время жизни информации</strong>:</p>
+    $$\int_0^\infty S(W)\,dW = \mathbb{E}[T] = \lambda\,\Gamma(1+1/D)$$
+    <p>Интеграл возвращает <strong>физический масштаб времени</strong> явления: рентгеновские вспышки ≈ 4 мин; осадки в Нью-Йорке ≈ 4 дня; прилимы ≈ 8–11 ч (≈ один лунный цикл, затем поглощаются следующим); S&amp;P 500 ≈ 25 дней (один торговый режим); инновации ИПЦ ≈ 76 лет (живучесть инфляционных режимов). Приливы — чистейшая иллюстрация интерпретации смертности: единица приливной информации живёт один цикл прилива, затем её поглощает следующий.</p>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/per_faucet_lifetimes_test.png" alt="T21 — плоскость (D, E[T])" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Слева: плоскость (D, время жизни) — периодические данные (красные) — единственный кластер износа на информационном субстрате. Справа: λ почти идеально предсказывает E[T] (ρ=0.958); D модулирует (ρ=−0.275).</figcaption>
+    </figure>
+    <p style="background:rgba(251,191,36,.07);border-left:3px solid #fbbf24;padding:.5rem .9rem;border-radius:0 6px 6px 0"><strong>Уточнение T18:</strong> три «типа кранов», найденные на субстрате контраста, не организуют времена жизни на информационном субстрате (p=0.13). На честном субстрате почти все непериодические данные — младенческая смертность ($D&lt;0.7$); износ — только периодические данные. Режимы T18 были отчасти артефактом субстрата.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>3 · Инженерная валидация: 44 000 реальных активов <span class="badge ok sm">T22–T26</span></h2>
+    <p>Если интеграл — реальная физическая величина, он должен восстанавливать известные инженерные сроки службы. Три датасета, всё более строгая статистика: моментная оценка → Каплан–Мейер с цензурированием → полный Вейбулл MLE по когортам.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      <tr style="border-bottom:1px solid var(--muted)"><th style="text-align:left;padding:.4rem">Тест</th><th style="text-align:left;padding:.4rem">Датасет</th><th style="text-align:left;padding:.4rem">Итог</th></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T22</td><td style="padding:.4rem">15 873 колумбийских трансформатора</td><td style="padding:.4rem">4/5 — E[T]=22.1 г (литература 15–30); доминирующая ось — самозащита, не размер</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T23</td><td style="padding:.4rem">17 939 канадских трансформаторов (1942–2024)</td><td style="padding:.4rem">4/5 — RMST=38.9 г, полупериод=44.5 г; производитель важнее размера (1.46× против 1.13×)</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T24</td><td style="padding:.4rem">тот же, Вейбулл MLE</td><td style="padding:.4rem"><strong>5/5</strong> — износ подтверждён: 19/21 когорт D&gt;1.1, медиана D≈1.7; GMM находит 4 режима старения</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T25</td><td style="padding:.4rem">ретест Bravo (2-годовое отношение рисков)</td><td style="padding:.4rem">4/5 — <strong>младенческая смертность</strong> (D≈0.83): противоположный режим; оценка 1/h смещена до 2.3×</td></tr>
+      <tr><td style="padding:.4rem">T26</td><td style="padding:.4rem">10 000 станков ЧПУ (AI4I 2020)</td><td style="padding:.4rem">4/5 — 8/8 за Вейбулла; <strong>E[T] износа инструмента = 241 мин восстанавливает физический порог замены (200–240 мин) прямо из данных</strong></td></tr>
+    </table>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/weibull_aging_regimes_test.png" alt="T24 — режимы старения по когортам" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Канадский парк: все когорты производителей в режиме износа (D&gt;1) — FPR D=2.0 изнашивается быстрее и агрессивнее всех; CAMT/ABB (D≈1.2–1.3) — постепенно и дольше всех.</figcaption>
+    </figure>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/cnc_weibull_lifetimes_test.png" alt="T26 — D по режимам отказа ЧПУ" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Станки ЧПУ: D — отпечаток механизма отказа: пороговые механизмы (износ инструмента, перегрузка) — D≈18–24; мгновенные (питание) — D≈1.3; разброс 18×.</figcaption>
+    </figure>
+    <p><strong>В природе существуют оба режима старения.</strong> Канадский парк изнашивается; колумбийский показывает младенческую смертность. $D$ зависит от данных и физически осмыслен; приближение постоянного риска $1/h$ может ошибаться в 2 раза в любую сторону.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>4 · Прогнозный выигрыш: убрать пустоту информации, затем классифицировать <span class="badge ok sm">T27–T30</span></h2>
+    <p>Улучшает ли модель жизненного цикла предсказание? Три архитектуры (кросс-валидация):</p>
+    <ul>
+      <li><strong>Параллельно (T27):</strong> Вейбулл-риск как признак ML. Гибрид обгоняет логистическую регрессию на +12.9% AUC (0.798 → 0.900) и даёт <strong>+23–35% precision@K</strong> в топе 1–20% рейтинга риска. Чистый Вейбулл по AUC проигрывает — он несёт только время и когорту.</li>
+      <li><strong>Многомерно (T28):</strong> Вейбулл AFT, $\log\lambda = \beta_0 + \sum \beta_i x_i$ — время и все ковариаты одновременно. Меняет AUC на то, чего не может ML: глобальный режим старения $D$, физически знаковые коэффициенты и <em>проекцию во времени</em> (когда, а не только случится ли).</li>
+      <li><strong>Последовательно (T29):</strong> <em>инсайт пользователя — «сначала оценим распад новизны, затем применим ML к выжившей новизне — устраним пустоту информации, шум».</em> (1) AFT-базлайн → (2) остаток = δ − базлайн → (3) ML-регрессия на остатке → (4) сумма. AUC — вровень с ML, но <strong>победа в топе</strong>: precision@1% = 0.990 против 0.890 у RF (+11.2%); @2% +28.2%. Выигрыш концентрируется ровно там, где живут бюджеты предиктивного обслуживания.</li>
+    </ul>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/sequential_weibull_ml_test.png" alt="T29 — последовательная архитектура" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Последовательная архитектура: AUC вровень с ML (слева), precision в топе рейтинга — решающая победа (справа).</figcaption>
+    </figure>
+    <p style="background:rgba(251,191,36,.07);border-left:3px solid #fbbf24;padding:.5rem .9rem;border-radius:0 6px 6px 0"><strong>Сюрприз T30:</strong> <em>лучший</em> базлайн даёт <em>худшую</em> последовательную модель. Базлайн по когортам (сам AUC 0.545 против 0.156) проигрывает «неправильному» глобальному AFT-базлайну (0.683 против 0.831) — потому что забирает у ML сигнал производителя. Оптимальный базлайн убирает сигнал <em>времени</em>, сохраняя сигнал <em>признаков</em>.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2 id="sec5">5 · Оценка трубопровода <span class="badge sm" style="background:rgba(239,68,68,.08);color:#fca5a5;border:1px solid rgba(239,68,68,.4)">PIPELINE_D_UNSTABLE_TO_IMPUTATION — СПЕКУЛЯТИВНЫЙ БЛОК ОТЗВАН</span></h2>
+    <p>Вопрос пользователя: <em>«можно ли оценить объём трубопровода? Хотя бы давление? И если масштабировать — нельзя ли сделать что-то по-настоящему странное?»</em></p>
+    <p>Агрегат по всем кранам — допустимая статистическая операция:</p>
+    $$S_{\text{pipeline}}(t) = \frac{1}{N}\sum_q \exp\!\big(-(t/\lambda_q)^{D_q}\big)$$
+    <p>Но исходные спекулятивные выводы T31 — что <em>Мета-Многообразие в режиме младенческой смертности</em>, что <em>производство новизны убывает</em> и что <em>пиксель — следствие конечности трубопровода</em> — <strong>ОТЗВАНЫ</strong>. Они противоречат Базе Знаний и не проходят три эмпирические перепроверки:</p>
+    <ul>
+      <li><strong>Категориальная ошибка времени (ср. КБ §6.1):</strong> в КБ сказано: «Время — проекционный причинный порядок» — время <em>порождается</em> проекцией, а не существует в MM до неё. У MM нет оси времени, по которой она могла бы «истощаться». Кривая смеси T31 — <em>поперечное</em> среднее по кранам в один момент анализа; назвать её «истощающейся» — смешать поперечную форму с продольным изменением. T20 (покрановое, продольное) — реально; T31 (межкрановое, поперечное) — нет.</li>
+      <li><strong>Ошибка композиции 10D↔4D (ср. КБ §1.1):</strong> 4D-координаты $x$ — образ необратимого push-forward из 10D $X$; общих осей нет. Агрегирование 323 4D-значений D крана и подгонка нового Вейбулла измеряет момент 4D-распределения D, а не величину на стороне MM. Тест идентичности трубопровода: случайное разбиение 323 значений D даёт $D_{\text{pipeline}} \in [0{,}37,\,1{,}59]$ — 0.44 свободно попадает в разброс фейковых трубопроводов. «Единого» $D$ трубопровода нет.</li>
+      <li><strong>Чувствительность к импутации (перепроверка опровергает предыдущую «устойчивую» оговорку):</strong> при равномерном $\lambda$ (единственной защитимой нормировке, когда покрановое $\lambda$ не на диске) $D_{\text{pipeline}}\approx 0{,}92$ (режим постоянства); при лог-нормальной импутированной $\lambda$ из 20 инженерных когорт $D_{\text{pipeline}}\approx 0{,}44$ (младенческая смертность). <em>Знак</em> $D-1$ меняется с импутацией.</li>
+      <li><strong>Тест временной привязки:</strong> Спирмен покранового $D$ против даты измерения: $\rho=+0{,}18$, $p=0{,}0012$ ($n=323$). Тренд значим, но в <em>обратном</em> направлении от «истощения» — D, измеренные позже, слегка <em>выше</em>. Скорее смещение выбора (более поздние тесты на более структурированных/периодических данных), чем временной вывод о MM.</li>
+    </ul>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/pipeline_estimation_test.png" alt="T31 — спектр кранов, кривая смеси, чувствительность к импутации" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Слева: спектр 323 кранов (28% младенческая / 12% постоянный / 59% износ). Центр: поперечная смесь — допустимое среднее, но её вейбулловская подгонка неустойчива к импутации $\lambda$ (равномерное $\lambda$ → D≈0.92, лог-нормальное $\lambda$ → D≈0.44). Справа: случайные подвыборки дают $D_{\text{pipeline}} \in [0{,}37,\,1{,}59]$ — агрегат — момент 4D-распределения D, а не величина на стороне MM.</figcaption>
+    </figure>
+    <p style="background:rgba(239,68,68,.06);border-left:3px solid var(--bad,#ef4444);padding:.6rem .9rem;border-radius:0 6px 6px 0"><strong>Что отозвано (противоречит КБ):</strong> «Мета-Многообразие истощается»; «минимум новизны / вселенная исчерпывает удивление»; «пиксель — следствие конечности трубопровода». A2 гласит, что ядро имеет конечное разрешение; обращение этого так, чтобы пиксель <em>порождал</em> конечность трубопровода, инвертирует порядок КБ. <strong>Что остаётся:</strong> смесь по кранам — допустимая описательная статистика 4D-распределения D; покрановые выводы о режимах старения (T24–T26) и покрановый продольный вывод «вода убывает» (T20) остаются в силе. Агрегат T31 не добавляет ничего о MM сверх того, что уже содержалось в значениях D кранов.</p>
+    <p style="color:var(--muted);font-size:.9rem">Скрипт перепроверки: <code>scripts/t31_recheck_against_manifesto.py</code>. Спекулятивный блок был введён 2026-10-30 и отозван в тот же день после замечания пользователя, что MM вневременна, а оси 10D не имеют общих осей с 4D — оба пункта опираются на КБ §1.1 и §6.1.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>Что основа, что спекуляция</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:.92rem">
+      <tr style="border-bottom:1px solid var(--muted)"><th style="text-align:left;padding:.4rem">Утверждение</th><th style="text-align:left;padding:.4rem">Статус</th><th style="text-align:left;padding:.4rem">Доказательства</th></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Вода = информация (скорость новизны)</td><td style="padding:.4rem"><strong>Основа</strong></td><td style="padding:.4rem">T19: R² 0.965 против 0.708; контролируемый тест T20</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Закон удержания = смертность Вейбулла</td><td style="padding:.4rem"><strong>Основа</strong></td><td style="padding:.4rem">T20: 4/4; T24: 5/5 на 17 939 активах; T26: 8/8</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">∫S dW = E[T] = физический масштаб времени</td><td style="padding:.4rem"><strong>Основа</strong></td><td style="padding:.4rem">T21 точная математика; T26 восстанавливает порог замены инструмента</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Оба режима старения встречаются в реальности</td><td style="padding:.4rem"><strong>Основа</strong></td><td style="padding:.4rem">T24 (D≈1.7) против T25 (D≈0.83); T26: разброс 18×</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Последовательная архитектура улучшает top-K precision</td><td style="padding:.4rem"><strong>Основа</strong> (эмпирически)</td><td style="padding:.4rem">T29: +11–28% @1–2% на двух датасетах</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Межкрановая смесь $S_{\text{pipeline}}(t)$ — допустимая описательная статистика 4D-распределения D</td><td style="padding:.4rem"><strong>Основа</strong> (только описательно)</td><td style="padding:.4rem">T31: агрегат по 323 кранам; корректное усреднение</td></tr>
+      <tr style="border-bottom:1px solid rgba(239,68,68,.25)"><td style="padding:.4rem">Агрегатный $D&lt;1$ («MM в младенческой смертности»)</td><td style="padding:.4rem"><strong>ОТЗВАНО</strong></td><td style="padding:.4rem">Знак $D-1$ меняется с импутацией $\lambda$ (равномерное → D≈0.92; лог-нормальное → 0.44); тест идентичности трубопровода вписывает 0.44 в [0.37, 1.59]</td></tr>
+      <tr style="border-bottom:1px solid rgba(239,68,68,.25)"><td style="padding:.4rem">«Мета-Многообразие истощается» / «минимум новизны»</td><td style="padding:.4rem"><strong>ОТЗВАНО</strong></td><td style="padding:.4rem">Противоречит КБ §6.1 (MM вневременна; время 4D-проекционно); поперечное ≠ продольное; тренд временной привязки +0.18 (неверное направление)</td></tr>
+      <tr><td style="padding:.4rem">Пиксель = следствие конечного трубопровода</td><td style="padding:.4rem"><strong>ОТЗВАНО</strong></td><td style="padding:.4rem">Противечит КБ §1.1 (10D↔4D общих осей нет); инвертирует порядок A2 (ядро конечно → пиксель, а не трубопровод конечен → пиксель)</td></tr>
+    </table>
+    <p style="margin-top:.8rem;color:var(--muted);font-size:.9rem">Полные записи тестов со всеми числами: <a href="tests.html" style="color:var(--accent)">Тесты</a>. Цепочка аналогий от глаза до трубопровода: <a href="kernel.html" style="color:var(--accent)">Ядро</a>.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h2>Контекст отзыва</h2>
+    <p>Спекулятивный блок T31 («MM истощается», «минимум новизны», «пиксель — следствие конечности трубопровода») был введён 2026-10-30 и отозван в тот же день. Отзыв — по основанию согласованности с КБ, а не только по статистике:</p>
+    <ul>
+      <li><strong>КБ §6.1:</strong> «Время — проекционный причинный порядок» — у MM нет оси времени до проекции; приписывать MM временнoй распад — категориальная ошибка.</li>
+      <li><strong>КБ §1.1:</strong> 4D-наблюдаемое — образ необратимого push-forward из 10D-источника; общих осей нет. Момент 4D-распределения D — не величина на стороне MM.</li>
+      <li><strong>A2 (КБ §1.4):</strong> ядро — конечноразрешающая сущность; утверждение, что пиксель <em>следует из</em> конечности трубопровода, обращает заявленный в КБ порядок.</li>
+    </ul>
+    <p>Эмпирическая перепроверка (<code>scripts/t31_recheck_against_manifesto.py</code>) подтвердила необоснованность спекулятивного блока: результат $D&lt;1$ неустойчив к импутации $\lambda$ (меняет знак), случайные разбиения 323 значений D дают $D_{\text{pipeline}}\in[0{,}37,\,1{,}59]$, а тренд временной привязки направлен в обратную сторону. Покрановые выводы (T20, T24, T25, T26) и выводы о прогнозном выигрыше (T27–T30) не затронуты.</p>
+  </div>
+
+  </main>
+
+    <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–<span id="currentYear"></span> DREAM Framework — прототип; основная наука и спекуляции чётко разделены.</small>
+    </div>
+  </footer>
+
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+<script defer src="../js/fractal.js"></script>
+<script defer src="../js/nav-mobile.js"></script>
+<script defer src="../js/pull-to-refresh.js"></script>
+<script defer src="../js/nav-dropdown.js"></script>
+<script defer src="../js/nav-autoscroll.js"></script>
+<script defer src="../js/bot.js"></script>
+<script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Information Lifecycle · D.R.E.A.M</title>
+  <meta name="description" content="The Information Lifecycle — how novelty is born, ages and dies across every measured domain. Weibull mortality of information, mean information lifetimes, engineering validation on 44,000 real assets, and the pipeline estimate (speculative block retracted as contradicting the KB)." />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { displayAlign:'center', displayIndent:'0' },
+    svg:   { displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body data-lang="en" class="">
+
+  <div id="fx" aria-hidden="true">
+    <canvas id="mb"></canvas>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="index.html">D.R.E.A.M</a>
+    </div>
+        <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="case.html">Case for D.R.E.A.M</a>
+      <a class="nav-link" href="retention.html">Retention Law</a>
+      <a class="nav-link" href="axioms.html">Axioms</a>
+      <a class="nav-link" href="theorems.html">Theorems</a>
+      <a class="nav-link" href="math.html">Math Frame</a>
+      <a class="nav-link" href="kernel.html">Kernel</a>
+      <a class="nav-link" href="lifecycle.html">Lifecycle</a>
+      <a class="nav-link" href="tests.html">Tests</a>
+      <a class="nav-link" href="pixel-tracker.html">Pixel Tracker</a>
+      <a class="nav-link" href="predictions.html">Predictions</a>
+      <a class="nav-link" href="falsification.html">Falsification</a>
+      <a class="nav-link" href="faq.html">FAQ Clouds</a>
+      <a class="nav-link" href="about.html">AI Analysis</a>
+      <a class="nav-link" href="articles.html">Articles</a></div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+  <!-- HERO -->
+  <div class="card hero" style="margin-top:1rem">
+    <h1>The Information Lifecycle</h1>
+    <p class="lead">Thirteen tests (T19–T31) that turned one question — <em>what is the kernel's "water"?</em> — into a quantitative lifecycle science: information is born, ages, and dies by a Weibull mortality law in every domain we can measure. Validated on solar X-rays, macroeconomics, weather, tides, 15,873 Colombian transformers, 17,939 Canadian transformers, and 10,000 CNC machines. The final test (T31) attempted to extrapolate the aggregate to the pipeline itself; its speculative block was <strong>retracted the same day</strong> as contradicting the Knowledge Base.</p>
+    <p style="background:rgba(125,211,168,.08);border-left:3px solid var(--good);padding:.6rem .9rem;border-radius:0 6px 6px 0"><strong>Headline results:</strong> the retention law $S(W)=\exp(-(W/\lambda)^D)$ is the <strong>Weibull survival function</strong> — $\lambda$ is a <em>lifetime</em>, $D$ an <em>aging regime</em> (T20). The integral $\int S\,dW = \mathbb{E}[T]=\lambda\,\Gamma(1+1/D)$ recovers the <strong>physical timescale</strong> of each phenomenon, from minutes (solar flares) to decades (price levels) (T21). The same integral on real assets recovers textbook engineering lifetimes with censoring handled properly (T22–T26). The aggregate over 323 measured domains is a valid descriptive statistic of the 4D-D distribution (T31), but its speculative extrapolation to the Meta-Manifold ("MM is draining," "pixel = consequence of finite pipeline") is <strong>retracted</strong> — see §5.</p>
+  </div>
+
+  <!-- CHAIN -->
+  <div class="card" style="margin-top:1rem">
+    <h2>The question chain</h2>
+    <p>Each link below was asked, formalized into falsifiable predictions, and tested on real data. Every arrow survived; two early conclusions were corrected by their own follow-up tests.</p>
+    <ol>
+      <li><strong>T19 — What is the water?</strong> Information (innovation rate), not contrast (static std). $R^2=0.965$ vs $0.708$ on GOES X-rays.</li>
+      <li><strong>T20 — Why does it win?</strong> Not by being better preserved — by <em>decaying with time</em>. The retention law is a mortality process. Successive novelty half-lives on GOES stretch: 0.80 → 2.70 → 4.79 → 6.99 → 9.28 → 11.63 min.</li>
+      <li><strong>T21 — Integrate the curve.</strong> $\int S\,dW=\lambda\Gamma(1+1/D)$ = mean information lifetime. E[T] is a genuinely new dimension ($\rho(D,\log \mathbb{E}[T])=-0.275$).</li>
+      <li><strong>T22–T26 — Engineering validation.</strong> The same integral on 44,000 real assets across three datasets and two asset classes recovers known lifetimes, known thresholds, and both aging regimes.</li>
+      <li><strong>T27–T30 — Prediction gain.</strong> Weibull-first, ML-second beats ML alone where it matters: the top of the risk ranking (+11–28% precision@1–2%).</li>
+      <li><strong>T31 — Estimate the pipeline.</strong> Aggregate over all faucets: the mixture has its own Weibull fit, but the speculative conclusions (MM draining, pixel = consequence of pipeline) were <em>retracted</em> the same day — they contradict the KB (MM is atemporal per §6.1; 10D↔4D share no axes per §1.1) and the $D&lt;1$ result is not robust to the $\lambda$ imputation.</li>
+    </ol>
+  </div>
+
+  <!-- T20 -->
+  <div class="card" style="margin-top:1rem">
+    <h2>1 · Decay, not filter <span class="badge ok sm">DECAY_NOT_FILTER — 4/4</span></h2>
+    <p>The kernel was described as a filter (a bandwidth limit on what passes from Meta-Manifold to 4D). T20 falsified that framing. A filter predicts a <em>passband</em> — no loss below a cutoff — and/or an immortal floor. The information substrate shows neither:</p>
+    <ul>
+      <li><strong>No floor:</strong> immortal-mixture fit collapses to $s_\infty = 0.009 \approx 0$ (GOES).</li>
+      <li><strong>No passband:</strong> delayed-onset model collapses to $W_c \to 0$ — loss at <em>every</em> scale.</li>
+      <li><strong>Contrast fails because part of it never decays:</strong> $s_\infty = 0.183$, $\Delta\mathrm{AIC}=27$ — the persistent background survives all averaging.</li>
+      <li><strong>Controlled mechanism test:</strong> add a zero-innovation trend of strength $f$ — contrast's survival tail tracks $f/\sqrt{f^2+1}$ (the immortal variance) while the information retention curve is <em>invariant</em> (depth-range 3.18 ± 0.02 at every $f$).</li>
+    </ul>
+    <p>$S(W)=\exp(-(W/\lambda)^D)$ is the <strong>Weibull survival function</strong> from reliability engineering. $\lambda$ = characteristic <strong>lifetime of information</strong>. $D$ = <strong>aging regime</strong>: $D&lt;1$ infant mortality (novelty fades fast when fresh; survivors endure — memory-like), $D\approx1$ memoryless, $D&gt;1$ wear-out (the older information is, the faster it dies).</p>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/decay_not_filter_test.png" alt="T20 — decay not filter: GOES retention curves and stretching half-lives" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Left: on the info substrate (blue) retention falls without floor or passband; the old contrast substrate (yellow) plateaus at an immortal floor $s_\infty=0.183$ — which is exactly why it fit worse in T19. Right: successive half-lives of surviving novelty stretch — each halving takes longer than the last. This is the numerical fingerprint of "the present feels eternal."</figcaption>
+    </figure>
+    <p style="color:var(--muted);font-size:.9rem">See <a href="tests.html" style="color:var(--accent)">Tests · T20</a> for the full prediction set.</p>
+  </div>
+
+  <!-- T21 -->
+  <div class="card" style="margin-top:1rem">
+    <h2>2 · The integral: mean information lifetime <span class="badge ok sm">E[T] = λ·Γ(1+1/D)</span></h2>
+    <p>Integrating the survival curve — the standard reliability calculation — collapses $(\lambda, D)$ into one number per domain: the <strong>mean information lifetime</strong>, the average lifespan of one unit of novelty before the kernel consumes it.</p>
+    $$\int_0^\infty S(W)\,dW \;=\; \mathbb{E}[T] \;=\; \lambda\,\Gamma\!\left(1+\tfrac{1}{D}\right)$$
+    <p>Across 20 datasets, $\lambda$ carries most of the variation ($\rho(\log\lambda,\log \mathbb{E}[T])=0.958$) while $D$ modulates — the integral is a genuinely new dimension, not a re-parameterization of $D$ ($\rho(D,\log\mathbb{E}[T])=-0.275$). And the integral gives back the <strong>physical timescale</strong> of each phenomenon:</p>
+    <table style="width:100%;border-collapse:collapse;font-size:.92rem">
+      <tr style="border-bottom:1px solid var(--muted)"><th style="text-align:left;padding:.4rem">Phenomenon</th><th style="text-align:left;padding:.4rem">E[T]</th><th style="text-align:left;padding:.4rem">Physical reading</th></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">GOES X-rays</td><td style="padding:.4rem">≈ 4 min</td><td style="padding:.4rem">sub-hourly flare variability</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">NYC precipitation</td><td style="padding:.4rem">≈ 4 days</td><td style="padding:.4rem">one weather system</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">NOAA tides</td><td style="padding:.4rem">8–11 h</td><td style="padding:.4rem">≈ one lunar cycle, then consumed by the next</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">FRED S&amp;P 500</td><td style="padding:.4rem">≈ 25 days</td><td style="padding:.4rem">one trading regime</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">FRED CPI (innovation)</td><td style="padding:.4rem">≈ 76 yr</td><td style="padding:.4rem">inflation-regime persistence — price surprises outlive careers</td></tr>
+      <tr><td style="padding:.4rem">FRED GDP, M2</td><td style="padding:.4rem">19–28 yr</td><td style="padding:.4rem">macro-aggregate persistence</td></tr>
+    </table>
+    <p style="margin-top:.8rem">The tides are the cleanest illustration of the mortality interpretation: a unit of tidal information lives about one tidal cycle, then is consumed by the next. The CPI is the inverse pole: the <em>level</em> is nearly immortal (82% survives 43-year averaging) while the <em>innovation</em> dies 6.3× deeper — and it is the innovation that is the water.</p>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/per_faucet_lifetimes_test.png" alt="T21 — the (D, lifetime) plane and λ vs E[T]" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Left: the (D, E[T]) plane — periodic data (red) is the only wear-out cluster on the info substrate. Right: λ alone predicts E[T] almost perfectly; D modulates.</figcaption>
+    </figure>
+    <p style="background:rgba(251,191,36,.07);border-left:3px solid #fbbf24;padding:.5rem .9rem;border-radius:0 6px 6px 0"><strong>Correction of T18:</strong> the three faucet "types" found on the contrast substrate do not organize the info-substrate lifetimes (p=0.13). On the honest substrate, nearly all aperiodic real-world data is infant-mortality ($D&lt;0.7$); only periodic data sits in wear-out. T18's modes were partly an artifact of measuring static contrast on trending data.</p>
+  </div>
+
+  <!-- T22-26 -->
+  <div class="card" style="margin-top:1rem">
+    <h2>3 · Engineering validation: 44,000 real assets <span class="badge ok sm">T22–T26</span></h2>
+    <p>If the integral is a real physical quantity, it must recover known engineering lifetimes. We tested three datasets — two transformer fleets and one CNC-milling dataset — with progressively better statistics: snapshot hazard → Kaplan-Meier with right-censoring → full Weibull MLE per cohort.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      <tr style="border-bottom:1px solid var(--muted)">
+        <th style="text-align:left;padding:.4rem">Test</th><th style="text-align:left;padding:.4rem">Dataset</th><th style="text-align:left;padding:.4rem">Method</th><th style="text-align:left;padding:.4rem">Verdict</th></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T22</td><td style="padding:.4rem">15,873 Colombian transformers (Bravo 2021)</td><td style="padding:.4rem">snapshot hazard, E[T]=1/h</td><td style="padding:.4rem">4/5 — E[T]=22.1 yr (literature: 15–30); dominant axis = self-protection, not size</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T23</td><td style="padding:.4rem">17,939 Canadian transformers (user data, 1942–2024)</td><td style="padding:.4rem">Kaplan-Meier, RMST=∫S<sub>KM</sub>dt</td><td style="padding:.4rem">4/5 — RMST=38.9 yr, half-life=44.5 yr; manufacturer &gt; size (1.46× vs 1.13× spread)</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T24</td><td style="padding:.4rem">same (Weibull MLE, censoring-aware)</td><td style="padding:.4rem">lifelines WeibullFitter</td><td style="padding:.4rem"><strong>5/5</strong> — wear-out confirmed: 19/21 cohorts D&gt;1.1, median D≈1.7; GMM finds 4 aging regimes</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">T25</td><td style="padding:.4rem">Bravo retest (2-year hazard ratio)</td><td style="padding:.4rem">D = log(h₂/h₁+1)/log 2</td><td style="padding:.4rem">4/5 — <strong>infant mortality</strong> (D≈0.83): the opposite regime; constant-hazard shortcut biased up to 2.3×</td></tr>
+      <tr><td style="padding:.4rem">T26</td><td style="padding:.4rem">10,000 CNC machines (AI4I 2020)</td><td style="padding:.4rem">Weibull per Type + per failure mode</td><td style="padding:.4rem">4/5 — 8/8 prefer Weibull; <strong>TWF E[T]=241 min recovers the physical tool-replacement threshold (200–240 min) from data alone</strong></td></tr>
+    </table>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/weibull_aging_regimes_test.png" alt="T24 — Weibull aging regimes per cohort" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Canadian fleet: every manufacturer cohort sits in wear-out (D&gt;1) — FPR D=2.0 fails fastest and most aggressively; CAMT/ABB (D≈1.2–1.3) age most gradually and live longest. Different physical degradation → different D.</figcaption>
+    </figure>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/cnc_weibull_lifetimes_test.png" alt="T26 — CNC failure-mode D values" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">CNC machines: D is a fingerprint of the failure mechanism — threshold mechanisms (tool wear, overstrain) have D≈18–24; instantaneous ones (power) have D≈1.3; 18× spread.</figcaption>
+    </figure>
+    <p><strong>Both aging regimes exist in the wild.</strong> The Canadian fleet wears out (failures accelerate with age); the Colombian fleet shows infant mortality (survivors endure). Neither is "the" regime — $D$ is data-dependent and physically meaningful, and the constant-hazard shortcut $1/h$ can be off by 2× in either direction depending on the true $D$.</p>
+  </div>
+
+  <!-- T27-30 -->
+  <div class="card" style="margin-top:1rem">
+    <h2>4 · Prediction gain: eliminate the info void, then classify <span class="badge ok sm">T27–T30</span></h2>
+    <p>Does the lifecycle model improve prediction? Three architectures, cross-validated:</p>
+    <ul>
+      <li><strong>Parallel (T27):</strong> Weibull risk as an ML feature. Hybrid beats logistic by +12.9% AUC on the Canadian fleet (0.798 → 0.900) and <strong>+23–35% precision@K</strong> across the top 1–20% of the risk ranking. Pure Weibull <em>loses</em> on AUC — it carries time and cohort only, no per-unit features.</li>
+      <li><strong>Multidimensional (T28):</strong> Weibull AFT, $\log\lambda = \beta_0 + \sum \beta_i x_i$ — time and all covariates simultaneously. Trades AUC (loses to GBM) for what ML cannot give: the global aging regime $D$, physically-signed coefficients (torque −, heat dissipation +), and <em>time projection</em> (when, not just whether).</li>
+      <li><strong>Sequential (T29):</strong> <em>user insight — "first estimate novelty decay, then apply ML to surviving novelty; we eliminate info void, noise."</em> (1) AFT baseline → (2) residual = δ − baseline → (3) ML regression on residual → (4) combined. Ties ML on AUC but <strong>wins at the top</strong>: precision@1% = 0.990 vs RF 0.890 (+11.2%); @2% 0.955 vs 0.745 (+28.2%). The gain concentrates exactly where predictive maintenance budgets live.</li>
+    </ul>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/sequential_weibull_ml_test.png" alt="T29 — sequential Weibull to ML" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Sequential architecture: AUC ties ML (left), precision at the top of the ranking wins decisively (right).</figcaption>
+    </figure>
+    <p style="background:rgba(251,191,36,.07);border-left:3px solid #fbbf24;padding:.5rem .9rem;border-radius:0 6px 6px 0"><strong>T30 surprise:</strong> a <em>better</em> baseline makes a <em>worse</em> sequential model. The per-cohort Weibull baseline (standalone AUC 0.545 vs 0.156) loses to the "wrong" global-AFT baseline (sequential AUC 0.683 vs 0.831) — because it removes the manufacturer signal ML needs. The optimal baseline removes the <em>time</em> signal but preserves the <em>feature</em> signal. Bias-variance tradeoff, in residual form.</p>
+  </div>
+
+  <!-- T31 -->
+  <div class="card" style="margin-top:1rem">
+    <h2 id="sec5">5 · The pipeline estimate <span class="badge sm" style="background:rgba(239,68,68,.08);color:#fca5a5;border:1px solid rgba(239,68,68,.4)">PIPELINE_D_UNSTABLE_TO_IMPUTATION — SPECULATIVE BLOCK RETRACTED</span></h2>
+    <p style="class:lead">User question: <em>"can we estimate the volume of the pipeline at all? Or at least the pressure? And if we scale it, can we do something really bizarre?"</em></p>
+    <p>The aggregate over all faucets is a well-defined statistical operation:</p>
+    $$S_{\text{pipeline}}(t) \;=\; \frac{1}{N}\sum_q \exp\!\big(-(t/\lambda_q)^{D_q}\big)$$
+    <p>But T31's original speculative conclusions — that <em>the Meta-Manifold is in infant mortality</em>, that <em>novelty production is declining</em>, and that <em>the pixel is a consequence of the finite pipeline</em> — are <strong>RETRACTED</strong>. They contradict the Knowledge Base and fail three empirical recheck tests:</p>
+    <ul>
+      <li><strong>Temporal category error (vs KB §6.1):</strong> the KB states "Time is projected causal order" — time is <em>produced by</em> the projection, not present in MM before it. MM has no time axis to "drain" on. The T31 mixture curve is a <em>cross-sectional</em> average over faucets at one moment of analysis; calling it "draining" conflates cross-sectional shape with longitudinal change. T20 (per-faucet, longitudinal) is real; T31 (cross-faucet, cross-sectional) is not.</li>
+      <li><strong>10D↔4D composition error (vs KB §1.1):</strong> the 4D coordinates $x$ are the image of a non-invertible push-forward from 10D $X$ — they share no axes. Aggregating 323 4D faucet D values and fitting a new Weibull measures a moment of the 4D-D distribution; it does not measure any MM-side quantity. Pipeline-identity test: random repartition of the 323 D values yields $D_{\text{pipeline}} \in [0.37, 1.59]$ — the reported 0.44 sits freely inside the spread of fake pipelines. There is no "the" pipeline D.</li>
+      <li><strong>Imputation sensitivity (recheck refutes the earlier "robust" caveat):</strong> with uniform $\lambda$ (the only defensible normalization when per-faucet $\lambda$ is not on disk), $D_{\text{pipeline}}\approx 0.92$ (constant regime); with lognormal-imputed $\lambda$ from 20 engineering cohorts, $D_{\text{pipeline}}\approx 0.44$ (infant mortality). The <em>sign</em> of $D-1$ flips with the imputation.</li>
+      <li><strong>Temporal-anchor test:</strong> Spearman of per-faucet $D$ vs measurement date: $\rho=+0.18$, $p=0.0012$ ($n=323$). The trend is significant but in the <em>opposite</em> direction from "draining" — D values measured later are slightly <em>higher</em>. More plausibly selection bias (later tests on more structured/periodic data) than a temporal claim about MM.</li>
+    </ul>
+    <figure style="margin:1rem 0">
+      <img src="../img/tests/pipeline_estimation_test.png" alt="T31 — faucet spectrum, pipeline mixture curve, imputation sensitivity" style="width:100%;border-radius:8px" loading="lazy">
+      <figcaption style="color:var(--muted);font-size:.85rem">Left: the 323-faucet D spectrum (28% infant / 12% constant / 59% wear-out). Center: the cross-sectional mixture is a well-defined average, but its own-Weibull fit is unstable to the $\lambda$ imputation (uniform $\lambda$ → D≈0.92, lognormal-imputed $\lambda$ → D≈0.44). Right: random subsets give $D_{\text{pipeline}} \in [0.37, 1.59]$ — the aggregate is a moment of the 4D-D distribution, not an MM-side quantity.</figcaption>
+    </figure>
+    <p style="background:rgba(239,68,68,.06);border-left:3px solid var(--bad,#ef4444);padding:.6rem .9rem;border-radius:0 6px 6px 0"><strong>What is retracted (contradicts KB):</strong> "the Meta-Manifold is draining"; "novelty minimum / the universe runs out of surprise"; "the pixel is a consequence of the finite pipeline." A2 states the kernel has finite resolution; reversing this so the pixel <em>causes</em> the pipeline's finiteness inverts the KB's stated order. <strong>What survives:</strong> the cross-faucet mixture is a valid descriptive statistic of the 4D-D distribution; the per-faucet Weibull aging-regime findings (T24–T26) and the per-faucet longitudinal "water is diminishing" finding (T20) remain intact. The T31 aggregate adds nothing about MM beyond what the faucet D values already contained.</p>
+    <p style="color:var(--muted);font-size:.9rem">Recheck script: <code>scripts/t31_recheck_against_manifesto.py</code>. The speculative block was introduced on 2026-10-30 and retracted the same day after the user flagged that MM is atemporal and that 10D axes share none with 4D — both points grounded in KB §1.1 and §6.1.</p>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card" style="margin-top:1rem">
+    <h2>What is core, what is speculative</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:.92rem">
+      <tr style="border-bottom:1px solid var(--muted)"><th style="text-align:left;padding:.4rem">Claim</th><th style="text-align:left;padding:.4rem">Status</th><th style="text-align:left;padding:.4rem">Evidence</th></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Water = information (innovation rate)</td><td style="padding:.4rem"><strong>Core</strong></td><td style="padding:.4rem">T19: R² 0.965 vs 0.708; T20 controlled test</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Retention law = Weibull mortality; λ lifetime, D aging regime</td><td style="padding:.4rem"><strong>Core</strong></td><td style="padding:.4rem">T20: 4/4; T24: 5/5 on 17,939 assets; T26: 8/8</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">∫S dW = E[T] = physical timescale</td><td style="padding:.4rem"><strong>Core</strong></td><td style="padding:.4rem">T21 exact math; T26 recovers tool threshold 241 vs 200–240 min</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Both aging regimes occur (wear-out & infant mortality)</td><td style="padding:.4rem"><strong>Core</strong></td><td style="padding:.4rem">T24 (D≈1.7) vs T25 (D≈0.83); T26 failure modes 18× spread</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Weibull-first sequential ML improves top-K precision</td><td style="padding:.4rem"><strong>Core</strong> (empirical)</td><td style="padding:.4rem">T29: +11–28% @1–2% on two datasets</td></tr>
+      <tr style="border-bottom:1px solid rgba(148,163,184,.2)"><td style="padding:.4rem">Cross-faucet mixture $S_{\text{pipeline}}(t)$ is a valid descriptive statistic of the 4D-D distribution</td><td style="padding:.4rem"><strong>Core</strong> (descriptive only)</td><td style="padding:.4rem">T31: aggregate over 323 faucets; well-defined averaging</td></tr>
+      <tr style="border-bottom:1px solid rgba(239,68,68,.25)"><td style="padding:.4rem">Pipeline aggregate $D&lt;1$ ("MM is in infant mortality")</td><td style="padding:.4rem"><strong>RETRACTED</strong></td><td style="padding:.4rem">Sign of $D-1$ flips with $\lambda$ imputation (uniform → D≈0.92; lognormal → 0.44); pipeline-identity test brackets 0.44 inside [0.37, 1.59]</td></tr>
+      <tr style="border-bottom:1px solid rgba(239,68,68,.25)"><td style="padding:.4rem">"Meta-Manifold is draining" / "novelty minimum end-state"</td><td style="padding:.4rem"><strong>RETRACTED</strong></td><td style="padding:.4rem">Contradicts KB §6.1 (MM is atemporal; time is 4D-projected); cross-sectional ≠ longitudinal; temporal-anchor test trend is +0.18 (wrong direction)</td></tr>
+      <tr><td style="padding:.4rem">Pixel = consequence of finite pipeline (A2 re-reading)</td><td style="padding:.4rem"><strong>RETRACTED</strong></td><td style="padding:.4rem">Contradicts KB §1.1 (10D↔4D share no axes); inverts A2's stated order (kernel finite → pixel, not pipeline finite → pixel)</td></tr>
+    </table>
+  </div>
+
+  <!-- RETRACTION CONTEXT -->
+  <div class="card" style="margin-top:1rem">
+    <h2>Retraction context</h2>
+    <p>The speculative T31 block ("MM is draining," "novelty minimum," "pixel = consequence of finite pipeline") was introduced 2026-10-30 and retracted the same day. The retraction is on KB-consistency grounds, not on statistical grounds alone:</p>
+    <ul>
+      <li><strong>KB §6.1:</strong> "Time is projected causal order" — MM has no time axis before projection; attributing a temporal decay to MM is a category error.</li>
+      <li><strong>KB §1.1:</strong> the 4D observable is the image of a non-invertible push-forward from 10D source — the two share no axes. A moment of the 4D-D distribution is not an MM-side quantity.</li>
+      <li><strong>A2 (KB §1.4):</strong> the kernel is the finite-resolution entity; saying the pixel <em>follows from</em> the pipeline being finite reverses the KB's stated order.</li>
+    </ul>
+    <p>The empirical recheck (<code>scripts/t31_recheck_against_manifesto.py</code>) confirmed the speculative block was unsupported: the $D&lt;1$ result is not robust to the $\lambda$ imputation (flips sign), random repartitions of the 323 D values give $D_{\text{pipeline}}\in[0.37,1.59]$, and the temporal-anchor test trend is in the wrong direction. The per-faucet findings (T20, T24, T25, T26) and the prediction-gain findings (T27–T30) are unaffected.</p>
+    <p style="color:var(--muted);font-size:.9rem">Full test entries with all numbers: <a href="tests.html" style="color:var(--accent)">Tests</a>. The analogy chain from the eye to the pipeline: <a href="kernel.html" style="color:var(--accent)">Kernel</a>.</p>
+  </div>
+
+  </main>
+
+    <footer class="site-footer">
+    <div class="footer-content">
+      <small>© 2024–<span id="currentYear"></span> DREAM Framework — prototype; core science and speculation are clearly separated.</small>
+    </div>
+  </footer>
+
+<script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+<script defer src="../js/fractal.js"></script>
+<script defer src="../js/nav-mobile.js"></script>
+<script defer src="../js/pull-to-refresh.js"></script>
+<script defer src="../js/nav-dropdown.js"></script>
+<script defer src="../js/nav-autoscroll.js"></script>
+<script defer src="../js/bot.js"></script>
+<script defer src="../js/fs-toggle.js"></script>
+</body>
+</html>
