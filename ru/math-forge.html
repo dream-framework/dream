@@ -128,11 +128,7 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
 
 
 
-<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">✦</span><span class="bubble-dot" id="groqBubbleDot"></span></div>
-<div id="groqDock" aria-hidden="true">
-  <div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">⚙</button><button class="gear" id="groqDockClose" title="Close">✕</button></div>
-  <div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div>
-  <div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson — definitions, proofs, examples, or anything you don't yet believe.</div></div>
+
   <div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send, Shift+Enter = newline)"></textarea><button id="groqDockSend">Send</button></div>
   <div class="groqDockFooter">Powered by Groq · <span id="groqDockModel">qwen/qwen3.8-27b</span></div>
 </div>
@@ -349,17 +345,22 @@ async function groqAsk(question){
   groqAddMsg("bot",`<div class="tutorPara">Groq error: ${escapeGroqHtml(e.message)}</div><div class="tutorPara">If you opened this as file://, serve from localhost or use GitHub Pages.</div>`);
  }finally{document.getElementById("groqDockSend").disabled=false}
 }
-// Wire up
-document.getElementById("groqBubble").onclick=groqToggleDock;
-document.getElementById("groqBubble").addEventListener("click",groqToggleDock);
-document.getElementById("groqBubble").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();groqToggleDock()}});
-document.getElementById("groqDockClose").addEventListener("click",groqCloseDock);
-document.getElementById("groqGearBtn").addEventListener("click",groqOpenSettings);
-document.querySelectorAll("#groqDockModes button").forEach(b=>b.addEventListener("click",()=>{groqMode=b.dataset.mode;document.querySelectorAll("#groqDockModes button").forEach(x=>x.classList.toggle("active",x===b))}));
-document.getElementById("groqDockSend").addEventListener("click",()=>{const q=document.getElementById("groqDockText").value;document.getElementById("groqDockText").value="";groqAsk(q)});
-document.getElementById("groqDockText").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();const q=e.target.value;e.target.value="";groqAsk(q)}});
-window.addEventListener("keydown",e=>{if(e.key==="Escape"){const d=document.getElementById("groqDock");if(d&&d.classList.contains("show"))groqCloseDock()}});
+
+// ---- Groq bubble injection (matches site bot.js pattern) ----
+(function(){
+var html = '<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">\u2726</span><span class="bubble-dot" id="groqBubbleDot"></span></div>';
+html += '<div id="groqDock" aria-hidden="true"><div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">\u2699</button><button class="gear" id="groqDockClose" title="Close">\u2715</button></div><div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div><div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson.</div></div><div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send)"></textarea><button id="groqDockSend">Send</button></div><div class="groqDockFooter">Powered by Groq \u00b7 <span id="groqDockModel">qwen/qwen3.8-27b</span></div></div>';
+document.body.insertAdjacentHTML('beforeend', html);
+var b = document.getElementById('groqBubble');
+b.addEventListener('click', function(){ var d=document.getElementById('groqDock'); d.classList.toggle('show'); if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()} }); b.onclick=function(){var d=document.getElementById('groqDock');d.classList.toggle('show');if(d.classList.contains('show')){d.setAttribute('aria-hidden','false');document.getElementById('groqDockText').focus()}};
+document.getElementById('groqDockClose').addEventListener('click', function(){ document.getElementById('groqDock').classList.remove('show') });
+document.getElementById('groqGearBtn').addEventListener('click', function(){ var p=groqPrefs(); var token=getGroqToken(); var nt=prompt('Groq API token (leave empty for built-in):',token===GROQ_TOKEN_DEFAULT?'':token); if(nt===null)return; var nm=prompt('Groq model:',p.model||GROQ_DEFAULTS.model); if(nm===null)return; var st=prompt('Token storage (session/local/memory):',p.storage||'session'); if(st===null)return; setGroqToken(nt.trim(),st); saveGroqPrefs({baseUrl:p.baseUrl,model:nm||GROQ_DEFAULTS.model,storage:st}); groqUpdateStatus() });
+document.querySelectorAll('#groqDockModes button').forEach(function(btn){ btn.addEventListener('click', function(){ groqMode=btn.dataset.mode; document.querySelectorAll('#groqDockModes button').forEach(function(x){x.classList.toggle('active',x===btn)}) }) });
+document.getElementById('groqDockSend').addEventListener('click', function(){ var q=document.getElementById('groqDockText').value; document.getElementById('groqDockText').value=''; groqAsk(q) });
+document.getElementById('groqDockText').addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();var q=e.target.value;e.target.value='';groqAsk(q)} });
+window.addEventListener('keydown', function(e){ if(e.key==='Escape'){var d=document.getElementById('groqDock'); if(d&&d.classList.contains('show'))d.classList.remove('show')} });
 groqUpdateStatus();
+})();
 render();
 </script>
 <script defer src="../js/sw-update.js"></script>
