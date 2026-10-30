@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-30T06:07:26Z",
+  "exported_at": "2026-10-30T15:17:17Z",
   "total_tests": 337,
   "fields": [
     "id",
@@ -5212,14 +5212,14 @@
       "date": "2026-10-29"
     },
     {
-      "id": "T31",
+      "id": "",
       "name": "Pipeline estimation — cross-faucet mixture",
       "domain": "kernel-analogy",
       "D": null,
       "r2": null,
-      "verdict": "PIPELINE_AGGREGATE_DESCRIPTIVE",
+      "verdict": "PENDING",
       "model_verdict": "4D_DISTRIBUTION_MOMENT",
-      "narrative": "Агрегат по 323 измеренным кранам: S_pipeline(t)=(1/N)Σexp(−(t/λ_q)^D_q). Межкрановая смесь — допустимая описательная статистика 4D-распределения D.",
+      "narrative": "S2-подгонка ожидается — данные получены, но не проанализированы.",
       "source": "re-test 2026-10-29",
       "date": "2026-10-29"
     }

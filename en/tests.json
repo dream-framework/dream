@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-30T06:07:26Z",
+  "exported_at": "2026-10-30T15:17:17Z",
   "total_tests": 337,
   "fields": [
     "id",
@@ -1249,10 +1249,10 @@
       "r2": 0.9955,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 369.74,
+      "delta_aicc": 369.91,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=369.74). S2+dust fit: D1=1.0012, D2=0.7515, R²=0.9993, AICc=-2150.11. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5628, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.74). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=369.91). S2+dust fit: D1=1.001, D2=0.7515, R²=0.9993, AICc=-2150.41. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5628, R²=0.9955. D_eff=0.563 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=369.91). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -5212,14 +5212,14 @@
       "date": "2026-10-29"
     },
     {
-      "id": "T31",
+      "id": "",
       "name": "Pipeline estimation — cross-faucet mixture",
       "domain": "kernel-analogy",
       "D": null,
       "r2": null,
-      "verdict": "PIPELINE_AGGREGATE_DESCRIPTIVE",
+      "verdict": "PENDING",
       "model_verdict": "4D_DISTRIBUTION_MOMENT",
-      "narrative": "Aggregate over 323 measured faucets: S_pipeline(t)=(1/N)Σexp(−(t/λ_q)^D_q). Cross-faucet mixture is a valid descriptive statistic of the 4D-D distribution.",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
       "source": "re-test 2026-10-29",
       "date": "2026-10-29"
     }
