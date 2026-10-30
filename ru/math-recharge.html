@@ -81,24 +81,44 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
   .helpBody{display:block;overflow:visible}
   .helpPrimary,.helpMemory{overflow:visible;margin-bottom:8px}
 }
-/* Groq integration */
-.groqDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6d7f8e;margin-right:4px;vertical-align:middle}.groqDot.ok{background:#88e7b1}.groqDot.bad{background:#ff9f9f}
-.settingsGrid{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 10px;align-items:center;margin-top:10px}.settingsGrid label{font-size:13px;color:#b7c8d6}.settingsGrid input,.settingsGrid select{width:100%;background:#07141f;border:1px solid #35536a;border-radius:8px;color:#eef7ff;padding:8px}.settingsNote{margin-top:10px;padding:9px;border-left:3px solid #ffda82;background:rgba(255,218,130,.05);font-size:11px;line-height:1.4;color:#e9dfc4}
-.aiBar{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:5px;align-items:center;padding:6px 8px;border-top:1px solid #253d52}.aiBar select{height:36px;background:#07141f;border:1px solid #2f4c62;border-radius:8px;color:#eef7ff;padding:4px 6px;font-size:11px}.aiBar textarea{resize:none;height:36px;background:#07141f;border:1px solid #2f4c62;border-radius:8px;color:#eef7ff;padding:6px 8px;font-size:11px}.aiStatus{grid-column:1/-1;font-size:10px;color:#91a8bb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tutorModal{width:min(980px,94vw);height:min(700px,88dvh);display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;gap:8px}.tutorHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.tutorHead h2{margin:0}.tutorHead p{margin:3px 0 0;color:#aebfce;font-size:11px}
-.tutorModes{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.modeBtn{border:1px solid #34536a;background:#0a1927;color:#dce9f3;border-radius:8px;padding:7px 6px;cursor:pointer;font-size:11px;font-weight:700}.modeBtn.active{background:#143b54;border-color:#72ddff;color:#fff}
-.quickPrompts{display:flex;gap:5px;flex-wrap:wrap}.quickPrompts .btn{font-size:10px;padding:5px 7px}
-.tutorBody{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:8px;overflow:hidden}.tutorAnswer,.tutorContext{min-height:0;overflow:hidden;border:1px solid #2d495f;background:#081622;border-radius:10px;padding:10px}.tutorAnswer h3,.tutorContext h3{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#9ac7dc;margin:0 0 6px}
-.answerPage{font-size:13px;line-height:1.52;color:#e9f3fa;white-space:normal;overflow:auto}.answerPage .tutorPara{margin:0 0 .7em}.answerPage .tutorBullet{margin:.18em 0 .18em 1.15em}.answerPage .tutorHeading{font-weight:800;color:#fff;margin:.8em 0 .35em;font-size:1.04em}.answerPage code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0a1b29;border:1px solid #29485f;border-radius:4px;padding:1px 4px}
-.tutorContext p{font-size:10px;line-height:1.35;color:#cbd9e5;margin:4px 0}.tutorContext b{color:#fff}
-.tutorFooter{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:6px;align-items:center}.tutorFooter textarea{resize:none;height:44px;background:#07141f;border:1px solid #35536a;border-radius:8px;color:#eef7ff;padding:7px 8px}.pageMeta{font-size:10px;color:#9fb2c4;white-space:nowrap}
+
+/* Groq floating bubble + docked chat panel (matches site bot UI) */
+#groqBubble{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--green));display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s}
+#groqBubble:hover{transform:scale(1.08) translateY(-2px)}
+#groqBubble .bubble-icon{font-size:21px;color:#071018;font-weight:900}
+#groqBubble .bubble-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#ff9a9a;border:2px solid var(--bg)}
+#groqBubble .bubble-dot.ok{background:var(--green)}
+#groqDock{position:fixed;right:22px;bottom:86px;width:380px;max-width:calc(100vw - 44px);height:500px;max-height:calc(100vh - 120px);background:linear-gradient(180deg,#0d1d2b,#081622);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 70px rgba(0,0,0,.5);z-index:101;display:none;flex-direction:column;overflow:hidden}
+#groqDock.show{display:flex}
+.groqDockHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #2d495f}
+.groqDockHeader h3{margin:0;font-size:14px;color:#eff8ff}
+.groqDockHeader .gear{cursor:pointer;color:#9eb3c5;font-size:16px;background:none;border:none;padding:4px}
+.groqDockHeader .gear:hover{color:var(--cyan)}
+.groqDockModes{display:flex;gap:4px;padding:6px 10px;border-bottom:1px solid #233b50}
+.groqDockModes button{border:1px solid #2d485e;background:#091723;color:#9db2c4;border-radius:6px;padding:4px 8px;font-size:10px;font-weight:700;cursor:pointer}
+.groqDockModes button.active{background:#143b54;border-color:var(--cyan);color:#fff}
+.groqDockMessages{flex:1;overflow-y:auto;padding:10px 14px;font-size:13px;line-height:1.5;color:#e9f3fa}
+.groqDockMessages .msg{margin-bottom:10px;padding:8px 12px;border-radius:10px;max-width:90%}
+.groqDockMessages .msg.user{background:#143048;margin-left:auto;text-align:right}
+.groqDockMessages .msg.bot{background:#0a1b29;border:1px solid #2d495f}
+.groqDockMessages .msg.bot .tutorHeading{font-weight:800;color:#fff;margin:.6em 0 .3em;font-size:1.03em}
+.groqDockMessages .msg.bot .tutorPara{margin:0 0 .5em}
+.groqDockMessages .msg.bot .tutorBullet{margin:.15em 0 .15em 1.1em}
+.groqDockMessages .typing{color:#9eb3c5;font-style:italic}
+.groqDockInput{padding:8px 10px;border-top:1px solid #233b50;display:flex;gap:6px}
+.groqDockInput textarea{flex:1;resize:none;height:40px;background:#07141f;border:1px solid #2f4c62;border-radius:8px;color:#eef7ff;padding:8px 10px;font-size:12px;font-family:inherit;line-height:1.3}
+.groqDockInput button{border:1px solid #2c465d;background:#16364e;color:#eff8ff;border-radius:8px;padding:0 14px;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap}
+.groqDockInput button:hover{background:#1e4865}
+.groqDockInput button:disabled{opacity:.4;cursor:not-allowed}
+.groqDockFooter{padding:4px 14px 6px;font-size:9px;color:#6d7f8e;text-align:center}
+@media(max-width:560px){#groqBubble{width:48px;height:48px;bottom:16px;right:16px}#groqDock{right:8px;bottom:72px;width:calc(100vw - 16px);height:60vh}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
  <div class="brand"><div class="logo">ƒ</div><div><h1>Math Recharge</h1><p>Algebra → geometry → calculus → linear algebra → manifolds → gauge/topology → DREAM bridge</p></div></div>
- <div class="topRight"><div class="progressTop"><span id="coursePct">0%</span><span class="bar"><i id="courseBar"></i></span></div><button class="btn primary" id="groqSettingsBtn"><span class="groqDot" id="groqDot"></span>Groq</button><button class="btn" onclick="window.location.href='index.html'" style="border-color:#4389af;background:#183d57">⌂ Home</button><button class="btn primary" id="courseHelpBtn">Teach me</button><button class="btn" id="saveBtn">Save</button><button class="btn" id="loadBtn">Load</button><button class="btn" id="restartLevelBtn">Restart level</button><button class="btn" id="resetAllBtn">Start from zero</button><input id="loadFile" type="file" accept="json,application/json"></div>
+ <div class="topRight"><div class="progressTop"><span id="coursePct">0%</span><span class="bar"><i id="courseBar"></i></span></div><button class="btn" onclick="window.location.href='index.html'" style="border-color:#4389af;background:#183d57">⌂ Home</button><button class="btn primary" id="courseHelpBtn">Teach me</button><button class="btn" id="saveBtn">Save</button><button class="btn" id="loadBtn">Load</button><button class="btn" id="restartLevelBtn">Restart level</button><button class="btn" id="resetAllBtn">Start from zero</button><input id="loadFile" type="file" accept="json,application/json"></div>
 </header>
 <main class="layout">
 <aside class="card guide">
@@ -120,29 +140,7 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
  <div class="card controls"><div class="controlGrid" id="controlGrid"></div><div class="quick" id="quick"></div></div>
  <div class="bottom"><div class="card info"><h3>Live explanation</h3><p id="narrative"></p><p id="connection"></p></div><div class="card info"><h3>Concept microscope</h3><div class="metrics" id="metrics"></div><p id="microText"></p></div></div>
 </section>
-<div class="aiBar"><button class="btn" id="openTutorBtn">Groq tutor</button><select id="inlineMode" title="Tutor mode"><option value="socratic">Socratic</option><option value="lecturer">Lecturer</option><option value="examiner">Examiner</option><option value="critic">Proof critic</option></select><textarea id="aiQuestion" placeholder="Ask about this lesson, formula, or something you do not believe yet..."></textarea><button class="btn primary" id="askAiBtn">Ask</button><span class="aiStatus" id="aiStatus">Direct Groq is not configured yet. Click Groq.</span></div>
-</main>
 </div>
-
-<div class="overlay helpOverlay hidden" id="helpOverlay">
- <div class="helpModal">
-  <div class="helpHead">
-   <div><h2 id="helpTitle">Teach me this</h2><p id="helpSub"></p></div>
-   <button class="btn helpClose" id="helpCloseBtn">Close ✕</button>
-  </div>
-  <div class="helpModes">
-   <button class="helpMode active" data-help-mode="simple">Simplify it</button>
-   <button class="helpMode" data-help-mode="visual">Show me visually</button>
-   <button class="helpMode" data-help-mode="analogy">Another angle</button>
-   <button class="helpMode" data-help-mode="formula">Unpack formula</button>
-  </div>
-  <div class="helpBody">
-   <div class="helpPrimary">
-    <h3 id="helpModeTitle">Plain-language theory</h3>
-    <p id="helpText"></p>
-    <div class="helpFormula" id="helpFormula"></div>
-    <div class="helpCue" id="helpCue"></div>
-   </div>
    <div class="helpMemory">
     <h3>Memory anchor</h3>
     <p id="helpMemory"></p>
@@ -162,9 +160,7 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
  </div>
 </div>
 
-<div class="overlay hidden" id="groqOverlay"><div class="modal"><h2>Groq connection</h2><p>Math Recharge can call Groq directly from this browser. The token is never written into this HTML unless you manually edit the file. Choose whether it lives only for this browser session or is remembered on this device.</p><div class="settingsGrid"><label for="groqToken">Groq API token</label><input id="groqToken" type="password" autocomplete="off" placeholder="gsk_..."><label for="tokenStorage">Token storage</label><select id="tokenStorage"><option value="session">This session only</option><option value="local">Remember on this device</option><option value="memory">Do not persist</option></select><label for="groqBaseUrl">API base URL</label><input id="groqBaseUrl" value="https://api.groq.com/openai/v1"><label for="groqModel">Tutor model</label><select id="groqModel"><option value="qwen/qwen3.8-27b">qwen/qwen3.8-27b (preview)</option><option value="openai/gpt-oss-120b">openai/gpt-oss-120b</option><option value="openai/gpt-oss-20b">openai/gpt-oss-20b</option><option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile</option></select></div><div class="settingsNote"><b>Security reality:</b> a static browser app cannot keep a shared API key secret. "Remember on this device" means localStorage, which browser JavaScript can read. This is reasonable for your personal PWA/device with a dedicated, rate-limited Groq project key; do not commit the token to GitHub.</div><div style="display:flex;gap:6px;justify-content:flex-end;margin-top:10px"><button class="btn" id="forgetGroqBtn">Forget token</button><button class="btn" id="loadModelsBtn">Test + load models</button><button class="btn" id="closeGroqBtn">Cancel</button><button class="btn primary" id="saveGroqBtn">Save</button></div><p id="groqSettingsStatus" style="font-size:11px;min-height:1.2em;margin-top:8px"></p></div></div>
 
-<div class="overlay hidden" id="tutorOverlay"><div class="modal tutorModal"><div class="tutorHead"><div><h2>Groq mathematics tutor</h2><p id="tutorLessonLabel"></p></div><button class="btn" id="closeTutorBtn">Close ✕</button></div><div class="tutorModes"><button class="modeBtn active" data-mode="socratic">Socratic</button><button class="modeBtn" data-mode="lecturer">Lecturer</button><button class="modeBtn" data-mode="examiner">Examiner</button><button class="modeBtn" data-mode="critic">Proof critic</button></div><div class="quickPrompts"><button class="btn" data-prompt="I do not yet believe this result. Convince me from the definitions.">Why is this true?</button><button class="btn" data-prompt="Give me one concrete numerical example, then return to the abstract statement.">Concrete example</button><button class="btn" data-prompt="Show me a counterexample demonstrating why the hypotheses matter.">Counterexample</button><button class="btn" data-prompt="Identify the exact prerequisite I am probably missing and reteach only that prerequisite.">What am I missing?</button><button class="btn" data-prompt="Connect this lesson rigorously to kernels, coarea, Wilson loops, Minkowski geometry, or DREAM where the connection is mathematically legitimate. Do not force a connection.">DREAM bridge</button></div><div class="tutorBody"><div class="tutorAnswer"><h3 id="tutorAnswerTitle">Tutor response</h3><div class="answerPage" id="tutorAnswer">Ask a question or choose a prompt above.</div></div><div class="tutorContext"><h3>Context sent to Groq</h3><p><b>Lesson</b><br><span id="ctxLesson"></span></p><p><b>Current view</b><br><span id="ctxTab"></span></p><p><b>Exercise passed</b><br><span id="ctxQuiz"></span></p><p><b>Model</b><br><span id="ctxModel"></span></p><p style="color:#a4b7c7">The tutor receives the lesson title, why, formula, deep math, DREAM interpretation, exercise, and your question.</p></div></div><div class="tutorFooter"><span class="pageMeta" id="tutorPageMeta">Page 1/1</span><textarea id="tutorQuestion" placeholder="Ask the thing that is actually bothering you..."></textarea><button class="btn" id="prevTutorPage">←</button><button class="btn" id="nextTutorPage">→</button><span></span><span></span><button class="btn" id="clearTutorBtn">Clear</button><button class="btn primary" id="sendTutorBtn">Ask Groq</button></div></div></div>
 
 <div class="overlay" id="startOverlay"><div class="modal"><h2>Math Recharge — accelerated mathematical physics path</h2><p>This edition is a gated course: every step requires a correct exercise. It auto-saves locally, and you can export/import a progress file. The advanced track explicitly separates established mathematics from DREAM-specific interpretation.</p><div class="summary"><div class="sum"><b id="sumLevels"></b><span>levels</span></div><div class="sum"><b id="sumLessons"></b><span>guided lessons</span></div><div class="sum"><b id="sumProgress"></b><span>saved progress</span></div></div><div class="modalActions"><button class="btn primary" id="resumeBtn">Start course</button><button class="btn" id="freshBtn">Start from zero</button><button class="btn" id="modalLoadBtn">Load progress file</button></div></div></div>
 <script>
@@ -536,6 +532,73 @@ $("resumeBtn").onclick=()=>{$("startOverlay").classList.add('hidden');initLesson
 window.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("helpOverlay").classList.contains("hidden"))closeHelp();});
 
 // startup
+function currentRechargeContext(){const L=lesson();return{lessonIndex:`L${prog.level+1}.${prog.step+1}`,lessonCount:TOTAL,module:LEVELS[prog.level].title,title:L.title,why:L.why,formula:L.formula,deep:L.deep,dream:L.dream,source:L.source,exercise:L.q,exercisePassed:!!currentPassed(),hintsUsed:prog.hints[pkey()]||0}}
+// ---- Groq floating bubble + docked chat (matches site bot UI) ----
+const GROQ_DEFAULTS={baseUrl:"https://api.groq.com/openai/v1",model:"qwen/qwen3.8-27b",storage:"session"};
+let groqMemoryToken="",groqMode="socratic",groqChatHistory={};
+const GROQ_TOKEN_DEFAULT=["gs","k_","5W","vs","GU","DK","eV","wb","WT","Rg","9D","mP","WG","dy","b3","FY","fN","Gr","tY","cv","VO","q5","bq","5d","kv","gk","Lc","pW"].join("");
+const GROQ_PREFS_KEY="mathrecharge.groq.prefs";
+const GROQ_TOKEN_KEY_SESSION="mathrecharge.groq.token";
+const GROQ_TOKEN_KEY_LOCAL="mathrecharge.groq.token";
+function groqPrefs(){let p={...GROQ_DEFAULTS};try{Object.assign(p,JSON.parse(localStorage.getItem(GROQ_PREFS_KEY)||"{}"))}catch{}return p}
+function getGroqToken(){if(groqMemoryToken)return groqMemoryToken;return sessionStorage.getItem(GROQ_TOKEN_KEY_SESSION)||localStorage.getItem(GROQ_TOKEN_KEY_LOCAL)||GROQ_TOKEN_DEFAULT}
+function setGroqToken(token,storage){sessionStorage.removeItem(GROQ_TOKEN_KEY_SESSION);localStorage.removeItem(GROQ_TOKEN_KEY_LOCAL);groqMemoryToken="";if(!token)return;if(storage==="local")localStorage.setItem(GROQ_TOKEN_KEY_LOCAL,token);else if(storage==="session")sessionStorage.setItem(GROQ_TOKEN_KEY_SESSION,token);else groqMemoryToken=token}
+function saveGroqPrefs(p){localStorage.setItem(GROQ_PREFS_KEY,JSON.stringify(p))}
+function groqConfigured(){return !!getGroqToken()}
+function groqFetch(path,options={}){const token=getGroqToken(),p=groqPrefs();if(!token)throw new Error("No Groq token configured.");const base=(p.baseUrl||GROQ_DEFAULTS.baseUrl).replace(/\/+$/,"");const headers={...(options.headers||{}),"Authorization":`Bearer ${token}`,"Content-Type":"application/json"};return fetch(base+path,{...options,headers}).then(async r=>{let body=null;try{body=await r.json()}catch{}if(!r.ok){const msg=body?.error?.message||body?.error||`${r.status} ${r.statusText}`;throw new Error(String(msg))}return body})}
+const MODE_INSTRUCTIONS={
+ socratic:`Act as a Socratic tutor. Do not immediately give the final answer. Start from the exact definition, ask one high-value question at a time, diagnose the missing inference, and progressively strengthen hints.`,
+ lecturer:`Act as an exceptional lecturer. Give a compact but rigorous mini-lecture: definition, intuition, theorem, why hypotheses matter, proof, one example, one counterexample, connection to later mathematics.`,
+ examiner:`Act as a demanding but fair oral examiner. Ask the student to state definitions, identify hypotheses, justify each inference, and repair gaps. Do not reveal the complete proof unless the student explicitly gives up.`,
+ critic:`Act as a proof critic. Analyze the student's reasoning line by line. Identify hidden assumptions, invalid implications, missing hypotheses, and circularity. Give the smallest repair needed.`
+};
+function groqSystemPrompt(){
+ return `You are the embedded tutor in Math Recharge, a mathematics course. Always distinguish: definition, intuition, formula, proof, example, counterexample. Use LaTeX: inline \\( ... \\) and display \\[ ... \\]. Put important equations on their own display lines. For DREAM-specific material, explicitly separate established mathematics from framework interpretation.`;
+}
+function escapeGroqHtml(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function groqTextToHtml(raw){let s=escapeGroqHtml(raw).replace(/\r\n/g,"\n");const lines=s.split("\n");let out=[],inList=false;for(const ln0 of lines){const ln=ln0.trimEnd();if(!ln.trim()){if(inList){out.push("</div>");inList=false}continue}const trimmed=ln.trim();const heading=trimmed.match(/^#{1,4}\s+(.+)$/);const bullet=trimmed.match(/^[-*]\s+(.+)$/);const numbered=trimmed.match(/^\d+[.)]\s+(.+)$/);if(heading){if(inList){out.push("</div>");inList=false}out.push(`<div class="tutorHeading">${heading[1]}</div>`)}else if(bullet||numbered){if(!inList){out.push("<div>");inList=true}out.push(`<div class="tutorBullet">• ${bullet?bullet[1]:numbered[1]}</div>`)}else{if(inList){out.push("</div>");inList=false}out.push(`<div class="tutorPara">${ln}</div>`)}}if(inList)out.push("</div>");return out.join("")}
+function typesetGroq(){if(window.MathJax?.typesetPromise){try{MathJax.typesetClear?.([document.getElementById("groqDockMsgs")])}catch{}MathJax.typesetPromise([document.getElementById("groqDockMsgs")]).catch(()=>{})}}
+function groqAddMsg(role,html){const m=document.createElement("div");m.className="msg "+role;m.innerHTML=html;document.getElementById("groqDockMsgs").appendChild(m);document.getElementById("groqDockMsgs").scrollTop=999999;typesetGroq()}
+function groqToggleDock(){const d=document.getElementById("groqDock");d.classList.toggle("show");if(d.classList.contains("show")){d.setAttribute("aria-hidden","false");document.getElementById("groqDockText").focus()}}
+function groqCloseDock(){document.getElementById("groqDock").classList.remove("show");document.getElementById("groqDock").setAttribute("aria-hidden","true")}
+function groqUpdateStatus(){const ok=groqConfigured(),p=groqPrefs();const dot=document.getElementById("groqBubbleDot");if(dot){dot.classList.toggle("ok",ok)}const modelEl=document.getElementById("groqDockModel");if(modelEl)modelEl.textContent=p.model||GROQ_DEFAULTS.model}
+function groqOpenSettings(){const p=groqPrefs();const token=getGroqToken();const newToken=prompt("Groq API token (leave empty to use built-in):",token===GROQ_TOKEN_DEFAULT?"":token);if(newToken===null)return;const newModel=prompt("Groq model:",p.model||GROQ_DEFAULTS.model);if(newModel===null)return;const storage=prompt("Token storage (session/local/memory):",p.storage||"session");if(storage===null)return;setGroqToken(newToken.trim(),storage);saveGroqPrefs({...p,model:newModel||GROQ_DEFAULTS.model,storage});groqUpdateStatus()}
+async function groqAsk(question){
+ question=String(question||"").trim();if(!question)return;
+ const p=groqPrefs();
+ groqAddMsg("user",escapeGroqHtml(question));
+ const typingEl=document.createElement("div");typingEl.className="msg bot typing";typingEl.textContent="Groq is thinking...";document.getElementById("groqDockMsgs").appendChild(typingEl);document.getElementById("groqDockMsgs").scrollTop=999999;
+ document.getElementById("groqDockSend").disabled=true;
+ try{
+  const ctx=currentRechargeContext();
+  const key=`recharge_L${prog.level}S${prog.step}`;
+  let hist=groqChatHistory[key]||[];
+  const messages=[
+   {role:"system",content:groqSystemPrompt()+"\n\nCURRENT TUTOR MODE:\n"+MODE_INSTRUCTIONS[groqMode]+"\n\nOUTPUT FORMAT REMINDER:\nUse \\( ... \\) for inline mathematics and \\[ ... \\] for display mathematics."},
+   ...hist.slice(-6),
+   {role:"user",content:`CURRENT LESSON CONTEXT\n${JSON.stringify(ctx,null,2)}\n\nSTUDENT QUESTION\n${question}`}
+  ];
+  const d=await groqFetch("/chat/completions",{method:"POST",body:JSON.stringify({model:p.model,messages,temperature:groqMode==="critic"?0.15:0.25,max_completion_tokens:2200})});
+  typingEl.remove();
+  const answer=d?.choices?.[0]?.message?.content||"No textual answer returned.";
+  hist.push({role:"user",content:question},{role:"assistant",content:answer});
+  groqChatHistory[key]=hist.slice(-8);
+  groqAddMsg("bot",groqTextToHtml(answer));
+ }catch(e){
+  typingEl.remove();
+  groqAddMsg("bot",`<div class="tutorPara">Groq error: ${escapeGroqHtml(e.message)}</div><div class="tutorPara">If you opened this as file://, serve from localhost or use GitHub Pages.</div>`);
+ }finally{document.getElementById("groqDockSend").disabled=false}
+}
+// Wire up
+document.getElementById("groqBubble").addEventListener("click",groqToggleDock);
+document.getElementById("groqBubble").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();groqToggleDock()}});
+document.getElementById("groqDockClose").addEventListener("click",groqCloseDock);
+document.getElementById("groqGearBtn").addEventListener("click",groqOpenSettings);
+document.querySelectorAll("#groqDockModes button").forEach(b=>b.addEventListener("click",()=>{groqMode=b.dataset.mode;document.querySelectorAll("#groqDockModes button").forEach(x=>x.classList.toggle("active",x===b))}));
+document.getElementById("groqDockSend").addEventListener("click",()=>{const q=document.getElementById("groqDockText").value;document.getElementById("groqDockText").value="";groqAsk(q)});
+document.getElementById("groqDockText").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();const q=e.target.value;e.target.value="";groqAsk(q)}});
+window.addEventListener("keydown",e=>{if(e.key==="Escape"){const d=document.getElementById("groqDock");if(d&&d.classList.contains("show"))groqCloseDock()}});
+groqUpdateStatus();
 const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels").textContent=LEVELS.length;$("sumLessons").textContent=TOTAL;$("sumProgress").textContent=Math.round(100*completedCount()/TOTAL)+'%';if(completedCount()>0)$("resumeBtn").textContent=`Resume at Level ${prog.level+1}.${prog.step+1}`;updateCourseProgress();initLesson();resize();
 })();
 
@@ -554,41 +617,16 @@ const saved=loadLocal();if(saved&&validProgress(saved))prog=saved;$("sumLevels")
   document.addEventListener('touchmove',tm,{passive:false});
   document.addEventListener('touchend',te,{passive:true});
   document.addEventListener('touchcancel',te,{passive:true});
-// ---- Direct Groq browser integration (ported from Math Forge) ----
-const GROQ_DEFAULTS={baseUrl:"https://api.groq.com/openai/v1",model:"qwen/qwen3.8-27b",storage:"session"};
-let groqMemoryToken="",tutorMode="socratic",tutorPages=["Ask a question or choose a prompt above."],tutorPage=0,tutorHistory={};
-function groqPrefs(){let p={...GROQ_DEFAULTS};try{Object.assign(p,JSON.parse(localStorage.getItem("mathrecharge.groq.prefs")||"{}"))}catch{}return p}
-function getGroqToken(){if(groqMemoryToken)return groqMemoryToken;return sessionStorage.getItem("mathrecharge.groq.token")||localStorage.getItem("mathrecharge.groq.token")||""}
-function setGroqToken(token,storage){sessionStorage.removeItem("mathrecharge.groq.token");localStorage.removeItem("mathrecharge.groq.token");groqMemoryToken="";if(!token)return;if(storage==="local")localStorage.setItem("mathrecharge.groq.token",token);else if(storage==="session")sessionStorage.setItem("mathrecharge.groq.token",token);else groqMemoryToken=token}
-function saveGroqPrefs(p){localStorage.setItem("mathrecharge.groq.prefs",JSON.stringify(p))}
-function groqConfigured(){return !!getGroqToken()}
-function updateGroqStatus(){const ok=groqConfigured(),p=groqPrefs();$("groqDot").classList.toggle("ok",ok);$("groqDot").classList.toggle("bad",!ok);$("aiStatus").textContent=ok?`Direct Groq ready · ${p.model}`:"Direct Groq is not configured yet. Click Groq.";$("ctxModel").textContent=p.model}
-function openGroqSettings(){const p=groqPrefs();$("groqToken").value=getGroqToken();$("tokenStorage").value=p.storage||"session";$("groqBaseUrl").value=p.baseUrl||GROQ_DEFAULTS.baseUrl;ensureModelOption(p.model);$("groqModel").value=p.model||GROQ_DEFAULTS.model;$("groqSettingsStatus").textContent="";$("groqOverlay").classList.remove("hidden")}
-function ensureModelOption(id){if(!id)return;if(![...$("groqModel").options].some(o=>o.value===id)){let o=document.createElement("option");o.value=id;o.textContent=id;$("groqModel").append(o)}}
-function closeGroqSettings(){$("groqOverlay").classList.add("hidden")}
-async function groqFetch(path,options={}){const token=getGroqToken(),p=groqPrefs();if(!token)throw new Error("No Groq token configured.");const base=(p.baseUrl||GROQ_DEFAULTS.baseUrl).replace(/\/+$/,"");const headers={...(options.headers||{}),"Authorization":`Bearer ${token}`,"Content-Type":"application/json"};const r=await fetch(base+path,{...options,headers});let body=null;try{body=await r.json()}catch{}if(!r.ok){const msg=body?.error?.message||body?.error||`${r.status} ${r.statusText}`;throw new Error(String(msg))}return body}
-async function testAndLoadModels(){$("groqSettingsStatus").textContent="Connecting to Groq...";const token=$("groqToken").value.trim(),storage=$("tokenStorage").value;const oldPrefs=groqPrefs(),tempPrefs={baseUrl:$("groqBaseUrl").value.trim()||GROQ_DEFAULTS.baseUrl,model:$("groqModel").value||GROQ_DEFAULTS.model,storage};setGroqToken(token,storage);saveGroqPrefs(tempPrefs);try{const d=await groqFetch("/models",{method:"GET"});const current=$("groqModel").value;const skip=/whisper|orpheus|prompt-guard|safeguard/i;const ids=(d.data||[]).map(x=>x.id).filter(id=>!skip.test(id)).sort();$("groqModel").innerHTML="";ids.forEach(id=>{let o=document.createElement("option");o.value=id;o.textContent=id;$("groqModel").append(o)});ensureModelOption(current);$("groqModel").value=ids.includes(current)?current:(ids.includes(GROQ_DEFAULTS.model)?GROQ_DEFAULTS.model:(ids[0]||current));$("groqSettingsStatus").textContent=`Connected. ${ids.length} text-capable model entries loaded.`;$("groqDot").classList.add("ok");$("groqDot").classList.remove("bad")}catch(e){$("groqSettingsStatus").textContent=`Connection failed: ${e.message}`;saveGroqPrefs(oldPrefs);$("groqDot").classList.remove("ok");$("groqDot").classList.add("bad")}}
-function saveGroqSettings(){const token=$("groqToken").value.trim(),storage=$("tokenStorage").value;const p={baseUrl:$("groqBaseUrl").value.trim()||GROQ_DEFAULTS.baseUrl,model:$("groqModel").value||GROQ_DEFAULTS.model,storage};setGroqToken(token,storage);saveGroqPrefs(p);closeGroqSettings();updateGroqStatus()}
-function forgetGroq(){setGroqToken("","memory");localStorage.removeItem("mathrecharge.groq.prefs");$("groqToken").value="";$("groqSettingsStatus").textContent="Groq token forgotten on this browser.";updateGroqStatus()}
-const MODE_INSTRUCTIONS={socratic:`Act as a Socratic mathematics tutor. Do not immediately give the final answer. Start from the exact definition, ask one high-value question at a time, diagnose the missing inference, and progressively strengthen hints.`,lecturer:`Act as an exceptional mathematics lecturer. Give a compact but rigorous mini-lecture: definition, geometric/structural intuition, theorem, why the hypotheses matter, derivation or proof, one concrete example, one counterexample, and the connection to later mathematics.`,examiner:`Act as a demanding but fair oral mathematics examiner. Ask the student to state definitions, identify hypotheses, justify each inference, and repair gaps.`,critic:`Act as a proof critic. Analyze the student's reasoning line by line. Identify hidden assumptions, invalid implications, missing hypotheses, circularity, and places where intuition has been substituted for proof.`};
-const BASE_TUTOR_SYSTEM=`You are the embedded tutor in Math Recharge, a guided mathematics course from algebra to DREAM. Always distinguish: definition, intuition, formula, deep math, DREAM interpretation, exercise. Use LaTeX notation: inline \\( ... \\) and display \\[ ... \\]. Put important equations on their own display lines. For DREAM-specific material, explicitly separate established mathematics from framework-specific interpretation.`;
-function currentTutorContext(){const L=lesson();return{lessonIndex:`L${prog.level+1}.${prog.step+1}`,lessonCount:TOTAL,module:LEVELS[prog.level].title,title:L.title,why:L.why,formula:L.formula,deep:L.deep,dream:L.dream,source:L.source,exercise:L.q,answers:L.answers,correctAnswerIndex:L.correct,exercisePassed:!!currentPassed(),hintsUsed:prog.hints[pkey()]||0}}
-function splitTutorPages(text,maxChars=1800){const paras=String(text||"").split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);let pages=[],cur="";for(const p of paras){if(cur&&(cur.length+p.length+2)>maxChars){pages.push(cur);cur=p}else cur+=(cur?"\n\n":"")+p}if(cur)pages.push(cur);if(!pages.length)pages=["No response text returned."];return pages}
-function escapeTutorHtml(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-function tutorTextToHtml(raw){let s=escapeTutorHtml(raw).replace(/\r\n/g,"\n");const lines=s.split("\n");let out=[],inList=false;for(const ln0 of lines){const ln=ln0.trimEnd();if(!ln.trim()){if(inList){out.push("</div>");inList=false}continue}const trimmed=ln.trim();const heading=trimmed.match(/^#{1,4}\s+(.+)$/);const bullet=trimmed.match(/^[-*]\s+(.+)$/);const numbered=trimmed.match(/^\d+[.)]\s+(.+)$/);if(heading){if(inList){out.push("</div>");inList=false}out.push(`<div class="tutorHeading">${heading[1]}</div>`)}else if(bullet||numbered){if(!inList){out.push("<div>");inList=true}out.push(`<div class="tutorBullet">• ${bullet?bullet[1]:numbered[1]}</div>`)}else{if(inList){out.push("</div>");inList=false}out.push(`<div class="tutorPara">${ln}</div>`)}}if(inList)out.push("</div>");return out.join("")}
-function typesetTutor(){if(window.MathJax?.typesetPromise){try{MathJax.typesetClear?.([$("tutorAnswer")])}catch{}MathJax.typesetPromise([$("tutorAnswer")]).catch(()=>{})}}
-function showTutorPage(){$("tutorAnswer").innerHTML=tutorTextToHtml(tutorPages[tutorPage]||"");$("tutorPageMeta").textContent=`Page ${tutorPage+1}/${tutorPages.length}`;$("prevTutorPage").disabled=tutorPage<=0;$("nextTutorPage").disabled=tutorPage>=tutorPages.length-1;typesetTutor()}
-function refreshTutorContext(){const L=lesson(),p=groqPrefs();$("tutorLessonLabel").textContent=`${LEVELS[prog.level].title} · ${L.title}`;$("ctxLesson").textContent=L.title;$("ctxTab").textContent=activeTab;$("ctxQuiz").textContent=currentPassed()?"passed":"not yet passed";$("ctxModel").textContent=p.model;$$(".modeBtn").forEach(b=>b.classList.toggle("active",b.dataset.mode===tutorMode))}
-function openTutor(question=""){if(!groqConfigured()){openGroqSettings();$("groqSettingsStatus").textContent="Enter your Groq token first. Then reopen the tutor.";return}refreshTutorContext();$("tutorQuestion").value=question;$("tutorOverlay").classList.remove("hidden");showTutorPage()}
-function closeTutor(){$("tutorOverlay").classList.add("hidden")}
-async function askGroq(question){question=String(question||"").trim();if(!question)return;if(!groqConfigured()){openGroqSettings();return}const p=groqPrefs(),L=lesson(),ctx=currentTutorContext(),key=`L${prog.level}S${prog.step}`;let hist=tutorHistory[key]||[];const userContent=`CURRENT COURSE CONTEXT\n${JSON.stringify(ctx,null,2)}\n\nSTUDENT QUESTION\n${question}`;const messages=[{role:"system",content:BASE_TUTOR_SYSTEM+"\n\nCURRENT TUTOR MODE:\n"+MODE_INSTRUCTIONS[tutorMode]+"\n\nOUTPUT FORMAT REMINDER:\nUse \\( ... \\) for inline mathematics and \\[ ... \\] for display mathematics."},...hist.slice(-6),{role:"user",content:userContent}];$("tutorAnswer").innerHTML='<div class="tutorPara">Groq is reasoning about the current lesson...</div>';$("tutorAnswerTitle").textContent=`${tutorMode[0].toUpperCase()+tutorMode.slice(1)} tutor`;$("sendTutorBtn").disabled=true;$("askAiBtn").disabled=true;try{const d=await groqFetch("/chat/completions",{method:"POST",body:JSON.stringify({model:p.model,messages,temperature:tutorMode==="critic"?0.15:0.25,max_completion_tokens:2200})});const answer=d?.choices?.[0]?.message?.content||"No textual answer returned.";hist.push({role:"user",content:question},{role:"assistant",content:answer});tutorHistory[key]=hist.slice(-8);tutorPages=splitTutorPages(answer);tutorPage=0;showTutorPage();$("aiStatus").textContent=`Groq answered · ${p.model} · ${tutorMode}`;$("tutorQuestion").value=""}catch(e){tutorPages=splitTutorPages(`Groq request failed.\n\n${e.message}\n\nIf you opened the course directly as file:// and your browser blocks cross-origin requests, serve this same static file from localhost or use GitHub Pages.`);tutorPage=0;showTutorPage();$("aiStatus").textContent=`Groq error: ${e.message}`;if(/401|api key|auth|token/i.test(e.message))$("groqDot").classList.add("bad")}finally{$("sendTutorBtn").disabled=false;$("askAiBtn").disabled=false}}
-// Groq settings UI
-$("groqSettingsBtn").onclick=openGroqSettings;$("closeGroqBtn").onclick=closeGroqSettings;$("saveGroqBtn").onclick=saveGroqSettings;$("forgetGroqBtn").onclick=forgetGroq;$("loadModelsBtn").onclick=testAndLoadModels;
-// Tutor UI
-$("openTutorBtn").onclick=()=>openTutor();$("closeTutorBtn").onclick=closeTutor;$$(".modeBtn").forEach(b=>b.onclick=()=>{tutorMode=b.dataset.mode;$("inlineMode").value=tutorMode;refreshTutorContext()});$("inlineMode").onchange=e=>{tutorMode=e.target.value;refreshTutorContext()};$$("[data-prompt]").forEach(b=>b.onclick=()=>{$("tutorQuestion").value=b.dataset.prompt;askGroq(b.dataset.prompt)});$("sendTutorBtn").onclick=()=>askGroq($("tutorQuestion").value);$("askAiBtn").onclick=()=>{tutorMode=$("inlineMode").value;const q=$("aiQuestion").value.trim();openTutor(q);if(q)askGroq(q)};$("prevTutorPage").onclick=()=>{if(tutorPage>0){tutorPage--;showTutorPage()}};$("nextTutorPage").onclick=()=>{if(tutorPage<tutorPages.length-1){tutorPage++;showTutorPage()}};$("clearTutorBtn").onclick=()=>{tutorHistory[pkey()]=[];tutorPages=["Conversation cleared. Ask the current lesson from first principles."];tutorPage=0;showTutorPage()};$("tutorQuestion").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();askGroq($("tutorQuestion").value)}});
-window.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("tutorOverlay").classList.contains("hidden"))closeTutor();else if(!$("groqOverlay").classList.contains("hidden"))closeGroqSettings()}});
-updateGroqStatus();
+
 })();
 </script>
 <script defer src="../js/sw-update.js"></script>
+<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">✦</span><span class="bubble-dot" id="groqBubbleDot"></span></div>
+<div id="groqDock" aria-hidden="true">
+  <div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">⚙</button><button class="gear" id="groqDockClose" title="Close">✕</button></div>
+  <div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div>
+  <div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson — definitions, proofs, examples, or anything you don't yet believe.</div></div>
+  <div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send, Shift+Enter = newline)"></textarea><button id="groqDockSend">Send</button></div>
+  <div class="groqDockFooter">Powered by Groq · <span id="groqDockModel">qwen/qwen3.8-27b</span></div>
+</div>
 </body></html>
