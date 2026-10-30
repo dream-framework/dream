@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "initialized": "2026-10-29T21:19:40.064690+00:00",
+  "initialized": "2026-10-30T06:08:22.542079+00:00",
   "prospective_baseline_date": "2026-07-31",
   "protocol": {
     "acf_definition": "R(λ) = autocorrelation at lag λ, normalized by R(0)",
@@ -3813,11 +3813,11 @@
       "family": "open-meteo",
       "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date=2025-01-01&end_date=2026-07-01&daily=precipitation_sum",
       "registry_date": "2026-08-04",
-      "D": 2.9027,
+      "D": 2.9028,
       "r2": 0.7908,
       "verdict": "D_GT_1",
       "model_verdict": "S2_LOSES",
-      "narrative": "D_eff=2.9027, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
+      "narrative": "D_eff=2.9028, R²=0.7908. D_eff=2.903 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=2.09). Not \"S2 false\" — additional structure detected.",
       "prospective": true,
       "eligibility": "uncensored",
       "exclusion_reason": null,
@@ -11017,218 +11017,14 @@
     },
     {
       "id": "",
-      "name": "Blanket vs Myriad Outlets, Same Function — single kernel or many outlets?",
-      "family": "blanket",
-      "source_url": "https://pdg.lbl.gov/",
-      "registry_date": "2026-10-29",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "MYRIAD_OUTLETS_SAME_FUNCTION",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Movie-Projector / Temporal Cliff (T_q) — universal frame rate?",
-      "family": "movie-projector",
-      "source_url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
-      "registry_date": "2026-10-26",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "PROJECTOR_FALSIFIED",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Pinhole Array / Multi-Aperture — shared screen test",
-      "family": "pinhole",
-      "source_url": "https://pdg.lbl.gov/",
-      "registry_date": "2026-10-26",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "MULTI_APERTURE_FALSIFIED",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Hologram Hypothesis — phase alignment at common Q*",
-      "family": "hologram",
-      "source_url": "https://pdg.lbl.gov/",
-      "registry_date": "2026-10-26",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "HOLOGRAM_MARGINAL",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Real-Data Hologram Test — R(s) + lattice αs + LEP αW",
-      "family": "real-data",
-      "source_url": "https://pdg.lbl.gov/",
-      "registry_date": "2026-10-29",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "HOLOGRAM_MARGINAL_REAL_DATA",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Pipeline + Faucets Refinement of MYRIAD_OUTLETS",
-      "family": "pipeline",
-      "source_url": "https://pdg.lbl.gov/",
-      "registry_date": "2026-10-29",
-      "D": null,
-      "r2": null,
-      "verdict": "PENDING",
-      "model_verdict": "PIPELINE_FAUCETS_SUPPORTED",
-      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
-      "prospective": true,
-      "eligibility": "pending",
-      "exclusion_reason": "S2 fit not yet attempted",
-      "data_hash": null,
-      "retrieval_timestamp": null,
-      "n_observations": null,
-      "acf_lag_window": null,
-      "missing_data_treatment": "drop",
-      "parameter_bounds": {
-        "D": [
-          0.01,
-          10.0
-        ],
-        "lambda_q": [
-          0.01,
-          1000.0
-        ]
-      },
-      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
-      "aicc_ranking": null,
-      "out_of_sample_score": null,
-      "simulation_calibration": null
-    },
-    {
-      "id": "",
-      "name": "Faucet Types — Is D distribution multimodal?",
+      "name": "Faucet types — is the D distribution multimodal?",
       "family": "faucet",
-      "source_url": "https://pdg.lbl.gov/",
+      "source_url": "",
       "registry_date": "2026-10-29",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "model_verdict": "FAUCET_TYPES_FOUND",
+      "model_verdict": "THREE_FAUCET_TYPES",
       "narrative": "S2 fit pending — data acquired but not yet analyzed.",
       "prospective": true,
       "eligibility": "pending",
@@ -11255,14 +11051,14 @@
     },
     {
       "id": "",
-      "name": "What is the 'water'? Substrate-independence test",
+      "name": "What is the water? — substrate comparison on GOES X-rays",
       "family": "what",
       "source_url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
       "registry_date": "2026-10-29",
       "D": null,
       "r2": null,
       "verdict": "PENDING",
-      "model_verdict": "INFORMATION_IS_WATER",
+      "model_verdict": "WATER_IS_INFORMATION",
       "narrative": "S2 fit pending — data acquired but not yet analyzed.",
       "prospective": true,
       "eligibility": "pending",
@@ -11289,7 +11085,7 @@
     },
     {
       "id": "",
-      "name": "Decay, not filter — does the 'water' have a lifetime?",
+      "name": "Decay, not filter — does the water have a lifetime?",
       "family": "decay,",
       "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
       "registry_date": "2026-10-29",
@@ -11297,6 +11093,380 @@
       "r2": null,
       "verdict": "PENDING",
       "model_verdict": "WATER_IS_MORTAL_COMPONENT",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Per-faucet lifetimes — the integral of the S2 curve",
+      "family": "per-faucet",
+      "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "INTEGRAL_IS_PHYSICAL_TIMESCALE",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Transformer cohort lifetimes via ∫S(t)dt=1/h — engineering application",
+      "family": "transformer",
+      "source_url": "https://data.mendeley.com/datasets/yzyj46xpmy/4",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "INTEGRAL_IS_LIFETIME",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "User's 17,939-transformer dataset via Kaplan-Meier (censoring-aware)",
+      "family": "user's",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "INTEGRAL_IS_RMST",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Weibull aging regimes per cohort — wear-out is real (user dataset)",
+      "family": "weibull",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "WEAR_OUT_AGING_REGIMES",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Weibull retest on Bravo et al. — infant mortality wins there",
+      "family": "weibull",
+      "source_url": "https://data.mendeley.com/datasets/yzyj46xpmy/4",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "WEIBULL_WINS_INFANT_MORTALITY",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "AI4I 2020 CNC machines — different asset class, framework generalizes",
+      "family": "ai4i",
+      "source_url": "https://archive.ics.uci.edu/dataset/601",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "WEAR_OUT_ON_CNC_MACHINES",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Prediction gain — Weibull survival vs standard classifiers",
+      "family": "prediction",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "INTEGRAL_IS_LIFETIME",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Multidimensional Weibull AFT — time + all covariates",
+      "family": "multidimensional",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "MULTIDIM_WEIBULL_AFT",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Sequential Weibull→ML — eliminate the info void, then classify",
+      "family": "sequential",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "SEQUENTIAL_ARCHITECTURE",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Per-cohort vs global-AFT baseline for sequential ML",
+      "family": "per-cohort",
+      "source_url": "",
+      "registry_date": "2026-10-29",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "BIAS_VARIANCE_IN_RESIDUALS",
+      "narrative": "S2 fit pending — data acquired but not yet analyzed.",
+      "prospective": true,
+      "eligibility": "pending",
+      "exclusion_reason": "S2 fit not yet attempted",
+      "data_hash": null,
+      "retrieval_timestamp": null,
+      "n_observations": null,
+      "acf_lag_window": null,
+      "missing_data_treatment": "drop",
+      "parameter_bounds": {
+        "D": [
+          0.01,
+          10.0
+        ],
+        "lambda_q": [
+          0.01,
+          1000.0
+        ]
+      },
+      "optimizer": "scipy.optimize.curve_fit (Levenberg-Marquardt)",
+      "aicc_ranking": null,
+      "out_of_sample_score": null,
+      "simulation_calibration": null
+    },
+    {
+      "id": "",
+      "name": "Pipeline estimation — aggregate is a 4D moment, not an MM-side quantity (speculative block RETRACTED)",
+      "family": "pipeline",
+      "source_url": "",
+      "registry_date": "2026-10-30",
+      "D": null,
+      "r2": null,
+      "verdict": "PENDING",
+      "model_verdict": "SPECULATIVE_BLOCK_RETRACTED",
       "narrative": "S2 fit pending — data acquired but not yet analyzed.",
       "prospective": true,
       "eligibility": "pending",
