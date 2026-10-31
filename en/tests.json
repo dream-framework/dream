@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-30T15:17:17Z",
-  "total_tests": 337,
+  "exported_at": "2026-10-31T06:04:47Z",
+  "total_tests": 338,
   "fields": [
     "id",
     "name",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 10.03,
+      "delta_aicc": 10.01,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=10.03). S2+dust fit: D1=1.0203, D2=2.2083, R²=0.9999, AICc=-3386.43. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9619, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.03). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=10.01). S2+dust fit: D1=1.0201, D2=2.2092, R²=0.9999, AICc=-3386.63. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9619, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=10.01). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -5222,6 +5222,22 @@
       "narrative": "S2 fit pending — data acquired but not yet analyzed.",
       "source": "re-test 2026-10-29",
       "date": "2026-10-29"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and code for: Can open language models classi",
+      "domain": "scouting",
+      "D": 0.1679,
+      "r2": 0.7697,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 1.95,
+      "best_alt": "POWER",
+      "model_note": "S2 ties POWER (ΔAICc=1.95, within ±2).",
+      "narrative": "D_eff=0.1679, R²=0.7697. D_eff=0.168 < 1 (probe-scale effective parameter). Single-scale S2 marginal (ties POWER, ΔAICc=1.95).",
+      "source": "auto-scan 2026-10-31",
+      "date": "2026-10-31",
+      "url": "10.5281/zenodo.23827295"
     }
   ]
 }

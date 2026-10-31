@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-10-30T15:17:17Z",
-  "total_tests": 337,
+  "exported_at": "2026-10-31T06:04:47Z",
+  "total_tests": 338,
   "fields": [
     "id",
     "name",
@@ -5222,6 +5222,22 @@
       "narrative": "S2-подгонка ожидается — данные получены, но не проанализированы.",
       "source": "re-test 2026-10-29",
       "date": "2026-10-29"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Data and code for: Can open language models classi",
+      "domain": "scouting",
+      "D": 0.1679,
+      "r2": 0.7697,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 1.95,
+      "best_alt": "POWER",
+      "model_note": "S2 ties POWER (ΔAICc=1.95, within ±2).",
+      "narrative": "D_eff=0.1679, R²=0.7697. D_eff=0.168 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с POWER, ΔAICc=1.95).",
+      "source": "auto-scan 2026-10-31",
+      "date": "2026-10-31",
+      "url": "10.5281/zenodo.23827295"
     }
   ]
 }
