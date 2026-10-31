@@ -101,7 +101,7 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
 /* ---- Header / Nav ---- */
 .site-header{
   position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
   flex-wrap: nowrap;
   padding: 10px 14px;
   background: rgba(23, 32, 51, .85);
@@ -129,7 +129,11 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
 
 .nav{
   display: flex; flex-wrap: nowrap; gap: 2px; align-items: center;
-  flex: 1 1 auto; min-width: 0; justify-content: flex-start;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  max-width: min(820px, calc(100vw - 360px));
   padding: 0;
   overflow: visible;
 }
