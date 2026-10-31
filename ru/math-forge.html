@@ -92,8 +92,8 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
 #groqBubble .bubble-icon{font-size:21px;color:#071018;font-weight:900}
 #groqBubble .bubble-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#ff9a9a;border:2px solid var(--bg)}
 #groqBubble .bubble-dot.ok{background:var(--green)}
-#groqBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9997;display:none}#groqBackdrop.show{display:block}#groqDock{position:fixed;right:22px;bottom:90px;width:min(880px,calc(100vw - 44px));height:min(560px,calc(100vh - 140px));background:rgba(13,29,43,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9998;display:none;flex-direction:column;overflow:hidden;transform:translateY(16px);opacity:0;transition:transform .2s,opacity .2s}
-#groqDock.show{display:flex;transform:none;opacity:1}
+#groqBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9997;display:none}#groqBackdrop.show{display:block}#groqDock{position:fixed;top:50%;left:50%;width:min(880px,calc(var(--dvw, 100vw) - 24px));height:min(560px,calc(var(--dvh, 100vh) - 24px));max-width:calc(var(--dvw, 100vw) - 24px);max-height:calc(var(--dvh, 100vh) - 24px);background:rgba(13,29,43,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9998;display:none;flex-direction:column;overflow:hidden;transform:translate(-50%,-50%) translateY(16px);opacity:0;transition:transform .2s,opacity .2s}
+#groqDock.show{display:flex;transform:translate(-50%,-50%);opacity:1}
 .groqDockHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #2d495f}
 .groqDockHeader h3{margin:0;font-size:14px;color:#eff8ff}
 .groqDockHeader .gear{cursor:pointer;color:#9eb3c5;font-size:16px;background:none;border:none;padding:4px}
@@ -115,7 +115,7 @@ button,input,textarea{font:inherit}.app{height:100dvh;padding:8px;display:grid;g
 .groqDockInput button:hover{background:#1e4865}
 .groqDockInput button:disabled{opacity:.4;cursor:not-allowed}
 .groqDockFooter{padding:4px 14px 6px;font-size:9px;color:#6d7f8e;text-align:center}
-@media(max-width:900px){#groqBubble{width:48px;height:48px;bottom:16px;right:16px}#groqDock{right:14px;bottom:76px}}
+@media(max-width:900px){#groqBubble{width:48px;height:48px;bottom:16px;right:16px}}
 </style>
 </head>
 <body>
@@ -370,6 +370,13 @@ async function groqAsk(question){
 
 // ---- Groq bubble injection (matches site bot.js pattern) ----
 (function(){
+// Visual-viewport sizing: keeps the modal inside the visible viewport
+// in portrait/landscape and when the mobile keyboard is open.
+function updVV(){var vv=window.visualViewport,w=vv?vv.width:window.innerWidth,h=vv?vv.height:window.innerHeight,rs=document.documentElement.style;rs.setProperty('--dvw',w+'px');rs.setProperty('--dvh',h+'px')}
+if(window.visualViewport){window.visualViewport.addEventListener('resize',updVV);window.visualViewport.addEventListener('scroll',updVV)}
+window.addEventListener('resize',updVV);
+window.addEventListener('orientationchange',function(){setTimeout(updVV,250);setTimeout(updVV,1000)});
+updVV();
 var html = '<div id="groqBubble" aria-label="Groq tutor" title="Groq tutor" role="button" tabindex="0"><span class="bubble-icon">\u2726</span><span class="bubble-dot" id="groqBubbleDot"></span></div>';
 html += '<div id="groqDock" aria-hidden="true"><div class="groqDockHeader"><h3>Groq Tutor</h3><button class="gear" id="groqGearBtn" title="Settings">\u2699</button><button class="gear" id="groqDockClose" title="Close">\u2715</button></div><div class="groqDockModes" id="groqDockModes"><button class="active" data-mode="socratic">Socratic</button><button data-mode="lecturer">Lecturer</button><button data-mode="examiner">Examiner</button><button data-mode="critic">Critic</button></div><div class="groqDockMessages" id="groqDockMsgs"><div class="msg bot">Ask me about the current lesson.</div></div><div class="groqDockInput"><textarea id="groqDockText" placeholder="Ask about this lesson... (Enter = send, Shift+Enter = newline)"></textarea><button id="groqDockSend">Send</button></div><div class="groqDockFooter">Powered by Groq \u00b7 <span id="groqDockModel">qwen/qwen3.8-27b</span></div></div>';
 html += '<div id="groqBackdrop"></div>';document.body.insertAdjacentHTML('beforeend', html);
