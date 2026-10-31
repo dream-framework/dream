@@ -113,7 +113,7 @@ button,input,select{font:inherit}button{color:inherit}.hidden{display:none!impor
 #groqBubble .bubble-icon{font-size:21px;color:#071018;font-weight:900}
 #groqBubble .bubble-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#ff9a9a;border:2px solid var(--bg)}
 #groqBubble .bubble-dot.ok{background:var(--green)}
-#groqBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9997;display:none}#groqBackdrop.show{display:block}#groqDock{position:fixed;top:50%;left:50%;width:min(880px,calc(var(--dvw, 100vw) - 24px));height:min(560px,calc(var(--dvh, 100vh) - 24px));max-width:calc(var(--dvw, 100vw) - 24px);max-height:calc(var(--dvh, 100vh) - 24px);background:rgba(13,29,43,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9998;display:none;flex-direction:column;overflow:hidden;transform:translate(-50%,-50%) translateY(16px);opacity:0;transition:transform .2s,opacity .2s}
+#groqBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9997;display:none}#groqBackdrop.show{display:block}#groqDock{position:fixed;top:calc(var(--vvTop, 0px) + var(--dvh, 100vh)/2);left:calc(var(--vvLeft, 0px) + var(--dvw, 100vw)/2);width:min(880px,calc(var(--dvw, 100vw) - 24px));height:min(560px,calc(var(--dvh, 100vh) - 24px));max-width:calc(var(--dvw, 100vw) - 24px);max-height:calc(var(--dvh, 100vh) - 24px);background:rgba(13,29,43,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid #3b5c74;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9998;display:none;flex-direction:column;overflow:hidden;transform:translate(-50%,-50%) translateY(16px);opacity:0;transition:transform .2s,opacity .2s}
 #groqDock.show{display:flex;transform:translate(-50%,-50%);opacity:1}
 .groqDockHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #2d495f}
 .groqDockHeader h3{margin:0;font-size:14px;color:#eff8ff}
@@ -637,7 +637,7 @@ async function groqAsk(question){
 (function(){
 // Visual-viewport sizing: keeps the modal inside the visible viewport
 // in portrait/landscape and when the mobile keyboard is open.
-function updVV(){var vv=window.visualViewport,w=vv?vv.width:window.innerWidth,h=vv?vv.height:window.innerHeight,rs=document.documentElement.style;rs.setProperty('--dvw',w+'px');rs.setProperty('--dvh',h+'px')}
+function updVV(){var vv=window.visualViewport,w=vv?vv.width:window.innerWidth,h=vv?vv.height:window.innerHeight,rs=document.documentElement.style;rs.setProperty('--dvw',w+'px');rs.setProperty('--dvh',h+'px');rs.setProperty('--vvTop',(vv?vv.offsetTop:0)+'px');rs.setProperty('--vvLeft',(vv?vv.offsetLeft:0)+'px')}
 if(window.visualViewport){window.visualViewport.addEventListener('resize',updVV);window.visualViewport.addEventListener('scroll',updVV)}
 window.addEventListener('resize',updVV);
 window.addEventListener('orientationchange',function(){setTimeout(updVV,250);setTimeout(updVV,1000)});
