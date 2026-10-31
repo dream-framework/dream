@@ -159,6 +159,11 @@ hr{ border:0; border-top:1px solid var(--border); margin:1.5rem 0; }
   transition: var(--transition);
 }
 .nav-more-toggle:hover{ color: var(--fg); background: rgba(142,197,232,.10); border-color: var(--border-2); }
+.nav-more-toggle.active{
+  color: var(--fg);
+  background: linear-gradient(90deg, rgba(142,197,232,.22), rgba(240,200,120,.18));
+  border-color: rgba(142,197,232,.45);
+}
 .nav-more-toggle .caret{ font-size: 8px; transition: transform .2s ease; }
 .nav-more.open .nav-more-toggle .caret{ transform: rotate(180deg); }
 .nav-more-menu{

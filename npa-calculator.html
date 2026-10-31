@@ -558,28 +558,29 @@ button:active{ transform: translateY(0); }
       <a class="nav-link" href="en/theorems.html">Theorems</a>
       <a class="nav-link" href="en/math.html">Math Frame</a>
       <a class="nav-link" href="en/kernel.html">Kernel</a>
-      <a class="nav-link" href="en/topology.html">Topology</a>
-      <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
       <a class="nav-link" href="en/predictions.html">Predictions</a>
       <a class="nav-link" href="en/falsification.html">Falsification</a>
-      <a class="nav-link" href="en/tests.html">Tests</a>
-      <a class="nav-link" href="en/pixel-tracker.html">Pixel Tracker</a>
-      <a class="nav-link" href="en/pixel-tests.html">Pixel Tests</a>
-      <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
-      <a class="nav-link" href="en/about.html">AI Analysis</a>
-      <a class="nav-link" href="en/articles.html">Articles</a>
-      <a class="nav-link" href="en/life.html">Life Toy</a></div>
-      <div class="nav-more">
-      <button class="nav-more-toggle" type="button">More <span class="caret">&#9660;</span></button>
+      <a class="nav-link" href="en/tests.html">Tests</a></div>
+      <div class="nav-more active">
+      <button class="nav-more-toggle active" type="button">More <span class="caret">&#9660;</span></button>
       <div class="nav-more-menu">
+        <a class="nav-link" href="en/lifecycle.html">Lifecycle</a>
+        <a class="nav-link" href="en/topology.html">Topology</a>
+        <a class="nav-link" href="en/spectrum.html">Fractal Spectrum</a>
         <a class="nav-link" href="en/time.html">Time</a>
         <a class="nav-link" href="en/memory.html">Memory</a>
-        <a class="nav-link" href="en/npa-calculator.html">NPA Toy</a>
-        <a class="nav-link" href="en/intervention-simulator.html">Intervention Sim</a>
-        <a class="nav-link" href="en/t71-toy.html">T7.1 Toy</a>
+        <a class="nav-link" href="en/pixel-tracker.html">Pixel Tracker</a>
+        <a class="nav-link" href="en/pixel-tests.html">Pixel Tests</a>
+        <a class="nav-link" href="en/faq.html">FAQ Clouds</a>
+        <a class="nav-link" href="en/about.html">AI Analysis</a>
+        <a class="nav-link" href="en/articles.html">Articles</a>
+        <a class="nav-link" href="en/life.html">Life Toy</a>
         <a class="nav-link" href="en/math-recharge.html">Math Recharge</a>
         <a class="nav-link" href="en/math-forge.html">Math Forge</a>
-        <a class="nav-link" href="en/cosmos.html">DREAM Zoom</a>
+        <a class="nav-link" href="t71-toy.html">T7.1 Toy</a>
+        <a class="nav-link active" href="npa-calculator.html">NPA Toy</a>
+        <a class="nav-link" href="intervention-simulator.html">Intervention Sim</a>
+        <a class="nav-link" href="cosmos.html">DREAM Zoom</a>
       </div>
     </nav>
   <div class="controls" style="gap:6px;">
@@ -882,6 +883,8 @@ let LANG = localStorage.getItem("lang") || "en";
 function t(){ return I18N[LANG]; }
 
 // Nav links — bilingual labels + hrefs. EN points to en/, RU points to ru/.
+// Primary row keeps the 10 core framework items; everything else folds into
+// the "More" dropdown so the nav bar stays narrow on mobile.
 const NAV_LINKS = [
   {en:{t:"Home",            h:"en/index.html"},            ru:{t:"Главная",           h:"ru/index.html"}},
   {en:{t:"Case for D.R.E.A.M",h:"en/case.html"},           ru:{t:"Сила D.R.E.A.M",    h:"ru/case.html"}},
@@ -890,20 +893,30 @@ const NAV_LINKS = [
   {en:{t:"Theorems",        h:"en/theorems.html"},         ru:{t:"Теоремы",           h:"ru/theorems.html"}},
   {en:{t:"Math Frame",      h:"en/math.html"},             ru:{t:"Матмодель",         h:"ru/math.html"}},
   {en:{t:"Kernel",          h:"en/kernel.html"},           ru:{t:"Проекция",          h:"ru/kernel.html"}},
-  {en:{t:"Topology",        h:"en/topology.html"},         ru:{t:"Топология",          h:"ru/topology.html"}},
-  {en:{t:"Fractal Spectrum",h:"en/spectrum.html"},         ru:{t:"Фрактальность",     h:"ru/spectrum.html"}},
   {en:{t:"Predictions",     h:"en/predictions.html", cls:"foundation"}, ru:{t:"Предсказания", h:"ru/predictions.html", cls:"foundation"}},
   {en:{t:"Falsification",   h:"en/falsification.html"},    ru:{t:"Фальсификация",     h:"ru/falsification.html"}},
   {en:{t:"Tests",           h:"en/tests.html"},            ru:{t:"Тесты",              h:"ru/tests.html"}},
-  {en:{t:"FAQ Clouds",      h:"en/faq.html"},              ru:{t:"Вопрос-Ответ",       h:"ru/faq.html"}},
-  {en:{t:"AI Analysis",     h:"en/about.html"},            ru:{t:"Оценка ИИ",          h:"ru/about.html"}},
-  {en:{t:"Articles",        h:"en/articles.html"},         ru:{t:"Статьи",             h:"ru/articles.html"}},
-  // Dropdown: Time, Memory, NPA Toy, Intervention Sim
+  // "More" dropdown — Lifecycle, Topology, Fractal Spectrum, Time, Memory,
+  // Pixel Tracker, Pixel Tests, FAQ, AI Analysis, Articles, Life Toy,
+  // Math Recharge, Math Forge, T7.1 Toy, NPA Toy, Intervention Sim, DREAM Zoom
   {dropdown:true, en:{t:"More"}, ru:{t:"Ещё"}, items:[
+    {en:{t:"Lifecycle",      h:"en/lifecycle.html"},        ru:{t:"Цикл информации",  h:"ru/lifecycle.html"}},
+    {en:{t:"Topology",        h:"en/topology.html"},         ru:{t:"Топология",          h:"ru/topology.html"}},
+    {en:{t:"Fractal Spectrum",h:"en/spectrum.html"},         ru:{t:"Фрактальность",     h:"ru/spectrum.html"}},
     {en:{t:"Time",            h:"en/time.html"},             ru:{t:"Время",              h:"ru/time.html"}},
     {en:{t:"Memory",          h:"en/memory.html"},           ru:{t:"Память",             h:"ru/memory.html"}},
+    {en:{t:"Pixel Tracker",   h:"en/pixel-tracker.html"},    ru:{t:"Пиксель-трекер",     h:"ru/pixel-tracker.html"}},
+    {en:{t:"Pixel Tests",     h:"en/pixel-tests.html"},      ru:{t:"Тесты пикселя",      h:"ru/pixel-tests.html"}},
+    {en:{t:"FAQ Clouds",      h:"en/faq.html"},              ru:{t:"Вопрос-Ответ",       h:"ru/faq.html"}},
+    {en:{t:"AI Analysis",     h:"en/about.html"},            ru:{t:"Оценка ИИ",          h:"ru/about.html"}},
+    {en:{t:"Articles",        h:"en/articles.html"},         ru:{t:"Статьи",             h:"ru/articles.html"}},
+    {en:{t:"Life Toy",        h:"en/life.html"},             ru:{t:"Life Toy",           h:"ru/life.html"}},
+    {en:{t:"Math Recharge",   h:"en/math-recharge.html"},    ru:{t:"Math Recharge",      h:"ru/math-recharge.html"}},
+    {en:{t:"Math Forge",      h:"en/math-forge.html"},       ru:{t:"Math Forge",         h:"ru/math-forge.html"}},
+    {en:{t:"T7.1 Toy",        h:"t71-toy.html"},             ru:{t:"T7.1 Toy",           h:"t71-toy.html"}},
     {en:{t:"NPA Toy",         h:"npa-calculator.html", active:true}, ru:{t:"NPA Калькулятор", h:"npa-calculator.html", active:true}},
     {en:{t:"Intervention Sim",h:"intervention-simulator.html"}, ru:{t:"Симулятор Вмешательства", h:"intervention-simulator.html"}},
+    {en:{t:"DREAM Zoom",      h:"cosmos.html"},              ru:{t:"DREAM Zoom",         h:"cosmos.html"}},
   ]},
 ];
 
