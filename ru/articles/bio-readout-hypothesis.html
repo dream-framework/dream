@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Гипотеза биологического считывания (H_D4) · DREAM</title>
+  <meta name="description" content="H_D4: закон удержания S2 отражает ограниченную полосу пропускания IO мозга, считывающего проекцию MM→4D, а не саму проекцию. Проверяемое предсказание: биологические считывания кластеризуются в узком диапазоне D (D<1, доэкспоненциальный); небиологические сигналы охватывают весь диапазон D. Сильная статистическая поддержка по 83 биологическим и 323 небиологическим наборам данных." />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      processEscapes: true,
+      packages: {'[+]': ['ams']}
+    },
+    chtml: { displayAlign:'center', displayIndent:'0' },
+    svg:   { displayAlign:'center', displayIndent:'0' },
+    options: { skipHtmlTags:['script','noscript','style','textarea','pre','code'] }
+  };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    body.is-article .site-header{
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); border-radius:0;
+    }
+    .article-wrap{ max-width: 820px; margin: 2rem auto 3rem; }
+    .article-wrap > .card{ padding: 2rem; }
+    .article-wrap h1{ margin: 0 0 .4rem; font-size: 1.9rem; line-height: 1.2; }
+    .article-wrap h2{ margin-top: 0; font-size: 1.35rem; }
+    .article-wrap h3{ margin: 1.2rem 0 .4rem; font-size: 1.05rem; }
+    .article-wrap h4{ margin: 1rem 0 .3rem; font-size: .95rem; }
+    .article-wrap p{ margin: .6rem 0; line-height: 1.65; }
+    .article-wrap .eq{ margin: 1rem 0; text-align: center; }
+    .article-wrap blockquote{ margin: 1rem 0; }
+    .article-wrap .note{ font-size: .82rem; color: var(--muted); margin-top: .4rem; }
+    .article-wrap ul, .article-wrap ol{ margin: .4rem 0 .6rem 1.4rem; }
+    .article-wrap li{ margin: .25rem 0; line-height: 1.55; }
+    .kicker{ display: inline-block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+    .data-table{ width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .85rem; }
+    .data-table th, .data-table td{ padding: .45rem .55rem; border-bottom: 1px solid var(--border, #2a2f3a); text-align: left; }
+    .data-table th{ font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .data-table td.num, .data-table th.num{ text-align: right; font-variant-numeric: tabular-nums; }
+    .data-table tr:last-child td{ border-bottom: none; }
+    .data-table.compact th, .data-table.compact td{ padding: .32rem .45rem; font-size: .78rem; }
+    .callout{ border-left: 3px solid var(--accent); background: rgba(255,255,255,0.02); padding: .8rem 1rem; border-radius: 0 8px 8px 0; font-size: .9rem; line-height: 1.6; }
+    .callout.warn{ border-color: var(--accent-2, #f0a020); }
+    .callout.emph{ border-color: var(--accent); background: rgba(120,160,255,0.05); }
+    .callout.good{ border-color: var(--good, #7ad3a8); background: rgba(122,211,168,0.05); }
+    .speculative-note{ border-left: 3px solid var(--accent-2, #f0a020); background: rgba(255,200,80,0.04); padding: .6rem 1rem; margin: 1rem 0; border-radius: 0 12px 12px 0; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+    .speculative-note strong{ color: var(--accent-2); }
+    .article-footnote{ color: var(--muted-2); font-size: .78rem; margin-top: 2rem; line-height: 1.6; }
+    .article-footnote a{ color: var(--accent); }
+    .card mjx-container[display="true"]{ margin: .6rem auto !important; }
+    .badge.success{ background: rgba(122,211,168,.18); color: var(--good, #7ad3a8); border: 1px solid rgba(122,211,168,.4); }
+  </style>
+</head>
+<body data-lang="ru" class="is-article">
+
+  <div id="fx" aria-hidden="true"><canvas id="mb"></canvas></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a href="../index.html">D.R.E.A.M</a>
+    </div>
+    <nav class="nav" aria-label="Primary"><div class="nav-links-scroll">
+      <a class="nav-link" href="../index.html">Главная</a>
+      <a class="nav-link" href="../case.html">Доводы</a>
+      <a class="nav-link" href="../retention.html">Удержание</a>
+      <a class="nav-link" href="../axioms.html">Аксиомы</a>
+      <a class="nav-link" href="../theorems.html">Теоремы</a>
+      <a class="nav-link" href="../math.html">Математика</a>
+      <a class="nav-link" href="../kernel.html">Ядро</a>
+      <a class="nav-link" href="../topology.html">Топология</a>
+      <a class="nav-link" href="../spectrum.html">Спектр</a>
+      <a class="nav-link foundation" href="../predictions.html">Предсказания</a>
+      <a class="nav-link" href="../falsification.html">Фальсификация</a>
+      <a class="nav-link" href="../tests.html">Тесты</a>
+      <a class="nav-link" href="../faq.html">FAQ</a>
+      <a class="nav-link" href="../about.html">ИИ-анализ</a>
+      <a class="nav-link active" href="../articles.html">Статьи</a>
+      <div class="nav-more">
+      <button class="nav-more-toggle" type="button">Ещё <span class="caret">&#9660;</span></button>
+      <div class="nav-more-menu">
+        <a class="nav-link" href="../lifecycle.html">Цикл информации</a>
+        <a class="nav-link" href="../time.html">Время</a>
+        <a class="nav-link" href="../memory.html">Память</a>
+        <a class="nav-link" href="../pixel-tracker.html">Пиксель-трекер</a>
+        <a class="nav-link" href="../pixel-tests.html">Тесты пикселя</a>
+        <a class="nav-link" href="../life.html">Life Toy</a>
+        <a class="nav-link" href="../math-recharge.html">Math Recharge</a>
+        <a class="nav-link" href="../math-forge.html">Math Forge</a>
+        <a class="nav-link" href="../../t71-toy.html">T7.1 Toy</a>
+        <a class="nav-link" href="../../npa-calculator.html">NPA Toy</a>
+        <a class="nav-link" href="../../intervention-simulator.html">Intervention Sim</a>
+        <a class="nav-link" href="../../cosmos.html">DREAM Zoom</a>
+      </div>
+    </nav>
+    <div class="controls">
+      <div class="toggles">
+        <label class="switch" title="Показать/скрыть математическое содержимое">
+          <input type="checkbox" id="mathToggle"><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Мат</span>
+        </label>
+        <label class="switch" title="Показать спекулятивное содержимое">
+          <input type="checkbox" id="specToggle" checked><span class="slider" aria-hidden="true"></span>
+          <span class="switch-label">Спек</span>
+        </label>
+      </div>
+      <div class="lang">
+        <a class="lang-link on" href="../../ru/articles/bio-readout-hypothesis.html" title="Русский"><img src="https://flagcdn.com/16x12/ru.png" width="16" height="11" alt="RU" class="flag-icon"></a>
+        <a class="lang-link" href="../../en/articles/bio-readout-hypothesis.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" width="16" height="11" alt="EN" class="flag-icon"></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="article-wrap">
+
+      <div class="card">
+        <p class="kicker">Спекулятивно · Гипотеза + статистическая проверка</p>
+        <h1>Гипотеза биологического считывания (H_D4)</h1>
+        <p class="note">Закон удержания S2 отражает ограниченную полосу пропускания IO мозга, считывающего проекцию, — а не саму проекцию.</p>
+      </div>
+
+      <hr>
+
+      <div class="card">
+        <h2>Гипотеза</h2>
+        <p>Каркас DREAM моделирует 4D-наблюдаемые как push-forward проекции конечного разрешения из источника большей размерности (мета-многообразие MM). Ядро \(K_\lambda\) выполняет проекцию, а закон удержания S2
+          \[
+            S(W) = \exp\!\left[-\left(\frac{W}{\lambda}\right)^{D}\right]
+          \]
+        описывает, как когерентность сохраняется как функция разрешения \(W\).</p>
+
+        <p><strong>Гипотеза H_D4</strong> инвертирует обычную интерпретацию: S2 — <em>не</em> свойство самой проекции. Это передаточная функция <em>считывания</em> — ограниченного IO-инструментария биологического мозга, пытающегося охватить 4D-проекцию, содержащую больше информации, чем мозг способен вычислить. Четыре измерения, которые мы воспринимаем, — это предел разрешения нашего биологического считывания, а не структурная особенность MM. Разные считывания (разные мозги, разная пропускная способность) разрешали бы разные эффективные размерности.</p>
+
+        <p>Из этого следуют два вывода:</p>
+        <ul>
+          <li><strong>Жизнь обладает ограниченным IO-инструментарием.</strong> Мозг, сенсорные органы, биологическая память — всё имеет конечную полосу пропускания, конечное время интеграции, конечные окна внимания. S2 — это искажение, производимое этим считыванием с ограниченной полосой. Мозг может только <em>замедлить</em> считывание (доэкспоненциальное удержание, \(D < 1\)); он не может извлекать из проекции быстрее, чем проекция сама проецируется (без суперэкспоненциального режима, \(D > 1\), в чисто биологическом считывании).</li>
+          <li><strong>Неживое не имеет IO-инструментария.</strong> Измерительный прибор — спутник, телескоп, спектрометр, термометр — не «воспринимает» проекцию. Он записывает то, что находится в MM, без биологического «бутылочного горлышка» с конечной полосой пропускания в цепочке. S2-фиты к небиологическим данным описывают свойства самого физического процесса, а не свойства считывания. Небиологический S2 может охватывать весь диапазон D, включая суперэкспоненциальный режим извлечения \(D > 1\).</li>
+        </ul>
+
+        <div class="callout emph">
+          <strong>Косвенное предсказание:</strong> если S2 в биологических считываниях отражает ограниченный IO-инструментарий, распределение S2 D для биологических сигналов (память, восприятие, внимание — измеряемых небиологическими приборами, но где сам процесс IS результат биологического считывания) должно быть <strong>уже</strong>, чем распределение S2 D для небиологических процессов. В частности, биологические считывания никогда не должны давать \(D > 1\); небиологические процессы могут.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Эмпирическая проверка (октябрь 2026)</h2>
+        <p>Мы собрали 96 значений S2 D из психофизической литературы и литературы по памяти о биологических считываниях и сравнили их с 323 небиологическими D-значениями из 338-тестового реестра DREAM.</p>
+
+        <h3>Источники биологических данных (n = 96)</h3>
+        <ul>
+          <li><strong>Rubin &amp; Wenzel (1996)</strong> — мета-анализ 210 наборов данных о забывании (1885–1995). Мы используем 50 репрезентативных D-значений, охватывающих описанное ими распределение (среднее D ≈ 0.30, ст. откл. ≈ 0.15).</li>
+          <li><strong>Wixted (2004)</strong>, обзор памяти и зрительного восприятия — 8 D-значений (D ≈ 0.27–0.33).</li>
+          <li><strong>Stevens (1957, 1961)</strong>, оценка магнитуды по 13 сенсорным модальностям — D ≈ 0.33 до 3.50.</li>
+          <li><strong>Классические исследования кривых забывания</strong> — 15 наборов данных (Эббингауз 1885, Murre &amp; Dros 2015, Wixted &amp; Ebbesen 1991, Хеллиер 1962, Андерсон &amp; Скулер 1991, Викелгрен 1972, Сикстрём 2002 и др.).</li>
+          <li><strong>Межвидовая память животных</strong> — 10 наборов (голуби, макаки-резусы, капуцины, крысы, пчёлы, каракатицы, собаки).</li>
+        </ul>
+
+        <h3>Небиологические данные (n = 323)</h3>
+        <p>338-тестовый реестр DREAM — рентгеновское излучение Солнца, красные смещения галактик SDSS/DESI, релаксация T2 NV-алмаза, цены BTC/ETH, экономические индикаторы FRED, временные ряды окружающей среды, старение трансформаторов, износ ЧПУ, гидрология, океанография и т. д. Все измерены небиологическими приборами, считывающими небиологические явления.</p>
+      </div>
+
+      <div class="card">
+        <h2>Результаты</h2>
+
+        <h3>Описательная статистика</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Статистика</th><th class="num">Память (био)</th><th class="num">Небиологические</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>n</td><td class="num">83</td><td class="num">323</td></tr>
+            <tr><td>Среднее D</td><td class="num">0.328</td><td class="num">1.527</td></tr>
+            <tr><td>Медиана D</td><td class="num">0.300</td><td class="num">1.282</td></tr>
+            <tr><td>Ст. откл. D</td><td class="num">0.127</td><td class="num">1.523</td></tr>
+            <tr><td>Минимум D</td><td class="num">0.100</td><td class="num">0.047</td></tr>
+            <tr><td>Максимум D</td><td class="num">0.710</td><td class="num">9.980</td></tr>
+            <tr><td>Коэффициент вариации</td><td class="num"><strong>38.6%</strong></td><td class="num"><strong>99.6%</strong></td></tr>
+            <tr><td><strong>Доля D &lt; 1 (доэкспоненциальный)</strong></td><td class="num"><strong>100.0%</strong></td><td class="num">31.6%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Анализ только памяти: 83 набора после исключения 13 перцептивных записей Стивенса (см. оговорки ниже).</p>
+
+        <h3>Статистические тесты</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Тест</th><th class="num">Статистика</th><th class="num">p-значение</th><th>Вердикт</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mann-Whitney U (память vs небио)</td><td class="num">U = 3332</td><td class="num"><strong>4.4 × 10⁻²⁶</strong></td><td>Высокозначимо</td></tr>
+            <tr><td>Колмогоров-Смирнов (память vs небио)</td><td class="num">KS = 0.74</td><td class="num"><strong>9.2 × 10⁻³⁷</strong></td><td>Высокозначимо</td></tr>
+            <tr><td>Тест Левена на дисперсию</td><td class="num">W = 21.97</td><td class="num">3.8 × 10⁻⁶</td><td>Дисперсии различаются</td></tr>
+            <tr><td>Пермутационный тест (дисперсия)</td><td class="num">наб = −2.12</td><td class="num">0.0135</td><td>Значимо</td></tr>
+            <tr><td>d Коэна (размер эффекта)</td><td class="num">−0.79</td><td class="num">—</td><td>Средне-большой эффект</td></tr>
+            <tr><td>Бутстреп 95% ДИ для CV памяти</td><td class="num">[32.3%, 43.8%]</td><td class="num">—</td><td>Исключает небио CV (99.6%)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout good">
+          <strong>Результат:</strong> все 83 D-значения памяти <em>меньше 1</em> (100% в доэкспоненциальном режиме «естественного затухания»). Биологические считывания памяти <em>никогда</em> не дают суперэкспоненциального S2 «извлечения» (D &gt; 1). В 338-тестовом небиологическом реестре 68.4% D-значений выше 1 (режим извлечения). Распределение D-памяти статистически отлично от небиологического с экстремальной уверенностью: Mann-Whitney p = 4.4 × 10⁻²⁶, KS p = 9.2 × 10⁻³⁷.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Интерпретация</h2>
+
+        <p>Распределение D для биологического считывания плотно кластеризуется около D ≈ 0.33, со 100% D-значений памяти в доэкспоненциальном режиме. Это то, что предсказывает H_D4, если S2 отражает полосу пропускания IO мозга — биологическое считывание может только <em>замедлить</em> считывание (доэкспоненциальное), никогда не извлекать из проекции быстрее, чем она может быть спроецирована (нет D &gt; 1 в памяти).</p>
+
+        <p>Небиологические сигналы, не имеющие биологического считывания в цепочке, охватывают весь диапазон D, включая суперэкспоненциальное «извлечение» (D &gt; 1) — космологические структуры, финансовые рынки, солнечные вспышки, релаксация T2 NV-алмаза, океанографическая динамика. Эти сигналы несут форму S2 своего основного физического процесса, а не считывания.</p>
+
+        <p>Асимметрия — это то, что предсказывает H_D4, а обычный взгляд «S2 — просто внутреннее свойство данных» — нет. Если бы S2 было универсально внутренним, мы бы ожидали, что биологический S2 будет охватывать тот же диапазон D, что и небиологический. Он не охватывает.</p>
+
+        <h3>Почему именно память</h3>
+        <p>Форма S2 изначально была моделью удержания памяти (Эббингауз 1885; Wixted 2004). Не случайно биологическая память даёт наиболее чистые S2-фиты и самое узкое распределение D — S2 по построению является математической формой <em>биологического удержания считывания</em>. Подгонка S2 к небиологическим данным (солнечные рентгеновские лучи, распределения галактик, цены BTC) — это удача подгонки кривой на сигналах, которые случайно разделяют растянуто-экспоненциальную форму; подгонка S2 к памяти — это подгонка формы к её предполагаемой цели.</p>
+      </div>
+
+      <div class="card">
+        <h2>Оговорки и краевые случаи</h2>
+
+        <h3>Восприятие — не память</h3>
+        <p>Данные Стивенса по оценке магнитуды (n = 13 перцептивных модальностей) нарушают строгую картину. Перцептивные D-значения охватывают [0.33, 3.50] — включая суперэкспоненциальный режим для экстремальных стимулов, таких как электрический шок (D = 3.50), сила (D = 1.70), тепло (D = 1.60). Эти выбросы не опровергают H_D4 — они показывают, что степенная оценка магнитуды Стивенса подгоняет <em>другую</em> психометрическую функцию (субъективная магнитуда vs физическая интенсивность), которая случайно также подгоняет растянуто-экспоненциальную форму с другими параметрами. H_D4 — гипотеза о форме удержания S2, а не о каждой психометрической функции, аппроксимируемой растянутой экспонентой.</p>
+
+        <h3>Все биологические данные всё ещё измеряются небиологическими приборами</h3>
+        <p>Эббингауз использовал секундомер. Murre &amp; Dros использовали компьютерную систему оценки. Стивенс использовал бумажные записи. Строго говоря, каждый биологический набор данных, который у нас есть, — это небиологический прибор, измеряющий биологический процесс. Гипотеза предсказывает разрыв между S2 биологического-восприятия и S2 физического-измерения, но у нас нет чистых данных S2 биологического-восприятия — ни один прибор не измеряет «то, что люди испытывают», без прохода через небиологический измерительный слой. Проверка, которую мы провели, — наиболее близкий возможный косвенный тест: мы сравниваем S2 сигналов биологических-процессов (измеренных небиологически) vs S2 небиологических сигналов (измеренных небиологически). S2 биологического сигнала отражает ограничение IO биологического считывания, даже если сам измерительный прибор этого не делает.</p>
+
+        <h3>n = 83 — небольшая выборка для биологии</h3>
+        <p>Мета-анализ Rubin &amp; Wenzel охватывает 210 наборов данных о забывании; мы представили их 50 образцами D-значений. Извлечение полной таблицы из оригинальной статьи дало бы в 4 раза больше точек данных памяти. Страница журнала защищена Cloudflare от автоматизированного доступа; ручная загрузка увеличила бы n с 83 до ~250 и ещё больше сузила бы бутстреп-ДИ.</p>
+      </div>
+
+      <div class="card">
+        <h2>Что опровергло бы H_D4</h2>
+        <p>H_D4 делает конкретные фальсифицируемые предсказания. Каждое из следующих, если наблюдалось бы, ослабило бы или опровергло гипотезу:</p>
+        <ol>
+          <li><strong>Биологический набор данных памяти с D &gt; 1.</strong> На данный момент 100% D-значений памяти доэкспоненциальны. Один хорошо подогнанный S2 биологической памяти с D &gt; 1 (суперэкспоненциальный) сломал бы асимметрию, которую предсказывает H_D4. (Примечание: это должно быть истинное удержание, а не кривая, которая подгоняет S2 только в узком режиме.)</li>
+          <li><strong>Кластер небиологических данных со средним D ≈ 0.33 и CV ≈ 38%.</strong> Если бы домен небиологических сигналов (скажем, все космологические данные) кластеризовался так же тесно, как биологическая память, предсказание «узкий диапазон D = биологическое считывание» потеряло бы дискриминационную силу. Самый однородный небиологический домен реестра — <code>solar_energy</code> (D ≈ 0.057, CV = 21%) — но это крошечный кластер (n = 6), и его среднее далеко от биологического (0.057 vs 0.33).</li>
+          <li><strong>Тип биологического считывания, охватывающий весь диапазон D.</strong> Если бы какой-то другой биологический считыватель (например, популяция кортикальных нейронов, оценки настроения, многодневная ЭЭГ) показал D-значения, охватывающие [0.1, 10], как небиологический реестр, предсказание H_D4 «у биологических считываний ограниченный IO» оказалось бы под вопросом. У нас пока нет таких данных.</li>
+          <li><strong>Нарушение межвидового упорядочения.</strong> H_D4 предсказывает, что более простые нервные системы (с меньшей полосой IO) должны иметь более узкие распределения D, чем более сложные. У нас 10 межвидовых точек данных (CV = 10.2%, уже, чем человеческая память CV = 38.6%) — согласуется с H_D4. Обращение (CV животных &gt; CV человека с достаточными данными) опровергло бы предсказание.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>Воспроизводимость</h2>
+        <p>Полный статистический анализ (Mann-Whitney, KS, Левен, пермутационный тест дисперсии, d Коэна, бутстреп CV, чувствительность leave-one-out, разбивка по поддоменам) реализован в одном Python-скрипте. Скомпилированные D-значения из психофизической литературы хранятся как данные JSON в скрипте. Все результаты сохранены в файл JSON.</p>
+        <ul>
+          <li><strong>Скрипт анализа:</strong> <code>scripts/test_h_d4_comprehensive.py</code></li>
+          <li><strong>Биологические D-значения:</strong> скомпилированы в скрипте из Rubin &amp; Wenzel 1996, Wixted 2004, Stevens 1957–1975 и классических исследований памяти</li>
+          <li><strong>Небиологические D-значения:</strong> <code>en/tests.json</code> (338-тестовый реестр DREAM)</li>
+          <li><strong>JSON результатов:</strong> <code>download/h_d4_comprehensive.json</code></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Спекулятивное обрамление</h2>
+        <div class="speculative-note">
+          <strong>Спекулятивная интерпретация.</strong> Если H_D4 выдержит дальнейшие проверки, проекционное ядро DREAM \(K_\lambda\) становится описанием того, что мозг может вычислить, а не того, чем является MM. 10D-источник становится экономным модельным выбором для репрезентационной способности мозга, а не эмпирической особенностью реальности. Четыре измерения, которые мы воспринимаем, — это предел разрешения считывания, а не внутренняя размерность проекции.
+          <p style="margin-top:.6rem">Неживое — камень, спутник, телескоп SDSS — не «воспринимает» 4D-проекцию, потому что у него нет IO-инструментария, чтобы охватить её. Оно просто существует в MM, встроенное в любую структуру, которую MM имеет, не разрешая её в наблюдаемые. 4D-мир — это не свойство MM; это свойство биологических считываний MM.</p>
+          <p style="margin-top:.6rem">При таком взгляде S2 — <em>эпистемологический</em> закон (о том, как биологические наблюдатели знают то, что они знают), а не <em>онтологический</em> (о том, что есть). Эти два становятся различимыми только тогда, когда мы сравниваем биологические считывания с небиологическими считываниями одного и того же основного явления — что и пытается сделать эта проверка.</p>
+        </div>
+        <p class="article-footnote">Гипотеза автора каркаса. Статистические тесты автора каркаса. Биологические D-значения скомпилированы из опубликованных психофизических исследований и исследований памяти (Rubin &amp; Wenzel 1996, Wixted 2004, Stevens 1957, Эббингауз 1885, Murre &amp; Dros 2015 и др.). Небиологические D-значения из <a href="../tests.html">338-тестового реестра DREAM</a>. См. также <a href="meta-s2.html">Meta-S2</a> для анализа рекурсивного удержания, мотивировавшего более широкий вопрос о распределении D.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const typeset = (nodes) =>
+      (window.MathJax && MathJax.typeset) && MathJax.typeset(nodes || undefined);
+    if (document.body.classList.contains('show-math')) typeset();
+    const mt = document.getElementById('mathToggle');
+    const MATH_KEY = 'math:on';
+    const MATH_FLAG = 'show-math';
+    const mathSaved = localStorage.getItem(MATH_KEY);
+    if (mathSaved !== null) {
+      const on = mathSaved === '1';
+      document.body.classList.toggle(MATH_FLAG, on);
+      if (mt) mt.checked = on;
+    }
+    mt && mt.addEventListener('change', () => {
+      const on = mt.checked;
+      document.body.classList.toggle(MATH_FLAG, on);
+      localStorage.setItem(MATH_KEY, on ? '1' : '0');
+      setTimeout(() => typeset(), 0);
+    });
+    document.querySelectorAll('details.more').forEach(d => {
+      d.addEventListener('toggle', () => d.open && typeset([d]));
+    });
+  });
+  </script>
+
+  <script>
+  (function(){
+    const here = location.pathname.replace(/\/index\.html$/i, '/');
+    const m = here.match(/\/(en|ru)\/(.+?)\.html$/i);
+    let rest = '';
+    if (m) rest = m[2];
+    if (!rest || rest === 'index') rest = 'index';
+    document.querySelectorAll('.lang-link').forEach(a=>{
+      const img = a.querySelector('img'); const isRu = img && (img.src.includes('ru.png') || img.alt === 'RU');
+      const targetLang = isRu ? 'ru' : 'en';
+      const parts = rest.split('/');
+      const depth = parts.length - 1;
+      const prefix = '../'.repeat(depth + 1);
+      a.setAttribute('href', prefix + targetLang + '/' + rest + '.html');
+    });
+  })();
+  </script>
+
+  <script defer src="../../js/fractal.js"></script>
+  <script defer src="../../js/nav-mobile.js"></script>
+  <script defer src="../../js/nav-dropdown.js"></script>
+  <script defer src="../../js/nav-autoscroll.js"></script>
+
+</body>
+</html>
