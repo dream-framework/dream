@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Biological Readout Hypothesis (H_D4) · DREAM</title>
-  <meta name="description" content="H_D4: S2 retention reflects the brain's finite IO bandwidth reading the MM→4D projection. Testable prediction: biological readouts cluster in a narrow D-range (D<1, sub-exponential); non-biological signals span the full D-range. Strong statistical support across 83 biological vs 323 non-biological datasets." />
+  <meta name="description" content="H_D4: S2 fits to biological readout data (memory, attention, perception) cluster in a constrained D-range (D<1, sub-exponential) that is statistically distinct from S2 fits to non-biological data. A falsifiable empirical claim about observable fits, no claim about MM or the kernel. Strong statistical support across 83 biological vs 323 non-biological datasets." />
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <script>
@@ -129,7 +129,7 @@
       <div class="card">
         <p class="kicker">Speculative · Hypothesis + statistical test</p>
         <h1>The Biological Readout Hypothesis (H_D4)</h1>
-        <p class="note">S2 retention reflects the brain's finite IO toolkit reading the projection — not the projection itself.</p>
+        <p class="note">S2 fits to biological readout data cluster in a constrained D-range (D &lt; 1) that is statistically distinct from S2 fits to non-biological data. A falsifiable empirical claim about observable fits — no claim about MM, the kernel, or any hidden domain.</p>
       </div>
 
       <hr>
@@ -137,23 +137,25 @@
       <!-- ===== The Hypothesis ===== -->
       <div class="card">
         <h2>The hypothesis</h2>
-        <p>The DREAM framework models 4D observables as finite-resolution pushforwards of a higher-dimensional source (the meta-manifold MM). The kernel \(K_\lambda\) produces the projection, and the S2 retention law
+        <p>Per DREAM's axioms (<a href="../axioms.html">A1, A2, A3</a>), MM and the projection kernel \(K_\lambda\) are <em>mathematical devices used to represent inaccessible structure and derive consequences testable in the observable domain</em>. Observers have access to the projected 4D world but not independently to \(\Phi\), \(K_\lambda\), or the full structure of \(\mathcal{M}\). The S2 retention law
           \[
             S(W) = \exp\!\left[-\left(\frac{W}{\lambda}\right)^{D}\right]
           \]
-        describes how coherence is retained as a function of resolution \(W\).</p>
+        is, per A3, a stretched-exponential coarse-graining regularity that appears across observable domains with r² &gt; 0.96 in five of them. The 2026 falsification program showed the S2 <em>form</em> survives but the parameter \(D\) is probe-dependent (F1), so the parameters are descriptive summaries of observable fits, not invariants of any hidden structure.</p>
 
-        <p><strong>Hypothesis H_D4</strong> inverts the usual interpretation: S2 is <em>not</em> a property of the projection itself. It is the transfer function of the <em>readout</em> — the biological brain's finite IO toolkit trying to grasp a 4D projection that contains more information than the brain can compute. The four dimensions we perceive are the resolution limit of our biological readout, not a structural feature of MM. Different readouts (different brains, different bandwidths) would resolve different effective dimensionalities.</p>
-
-        <p>Two corollaries follow:</p>
+        <p><strong>Hypothesis H_D4</strong> is a falsifiable claim about <em>where</em> the S2 form and its constrained D-range appear in observable data, not a claim about MM:</p>
         <ul>
-          <li><strong>Life has a limited IO toolkit.</strong> Brains, sensory organs, biological memory — all have finite bandwidth, finite integration time, finite attention windows. S2 retention is the scrambling produced by this finite-bandwidth readout. The brain can only <em>slow down</em> the readout (sub-exponential retention, \(D < 1\)); it cannot extract from the projection faster than the projection itself (no super-exponential regime, \(D > 1\), in pure biological readout).</li>
-          <li><strong>Non-life has no IO toolkit.</strong> A measurement device — a satellite, a telescope, a spectrometer, a thermometer — does not "perceive" the projection. It records what is in MM directly, with no finite-bandwidth biological bottleneck in the chain. S2 fits to non-biological data describe properties of the underlying physical process, not properties of a readout. Non-biological S2 can span the full D-range, including the super-exponential extraction regime \(D > 1\).</li>
+          <li>S2 fits to <em>biological readout</em> data (memory retention, attention decay, perceptual magnitude estimation) — datasets whose underlying process is the output of a biological readout — should cluster in a constrained D-range (specifically, the sub-exponential regime \(D < 1\)).</li>
+          <li>S2 fits to <em>non-biological</em> data — solar X-ray flux, galaxy redshifts, NV-diamond T2 relaxation, financial time series — should not be constrained the same way. They may fall anywhere in the D-range, including the super-exponential regime \(D > 1\).</li>
         </ul>
 
+        <p>The motivation for the asymmetry is the observation that S2 was originally a model of biological memory retention (Ebbinghaus 1885; Wixted 2004). It is no accident that biological memory produces clean S2 fits — S2 is, by construction, the mathematical shape of biological readout retention. The hypothesis is that this is not a coincidence: the S2 form is a regularity of biological readout data specifically. Fitting S2 to non-biological data is curve-fitting on signals that happen to share the stretched-exponential form; fitting S2 to biological memory is fitting the form to its intended target.</p>
+
         <div class="callout emph">
-          <strong>Indirect prediction:</strong> if S2 in biological readouts reflects a constrained IO toolkit, the S2 D-distribution for biological signals (memory, perception, attention — measured by non-life instruments, but the underlying process IS the biological readout's output) should be <strong>narrower</strong> than the S2 D-distribution for non-biological processes. Specifically, biological readouts should never produce \(D > 1\); non-biological processes can.
+          <strong>Testable prediction:</strong> the S2 D-distribution for biological readout data should be statistically distinct from the S2 D-distribution for non-biological data — specifically narrower, and confined to the sub-exponential regime \(D < 1\). The non-biological distribution should be wider and include \(D > 1\). This is a claim about observable fits, not about MM or the kernel.
         </div>
+
+        <p>The hypothesis makes no claim about MM, the kernel, or any hidden domain. It uses MM and the kernel only as the framework's existing mathematical vocabulary for talking about observables. The empirical content is entirely on the projection side: biological readouts produce constrained S2; non-biological measurements produce unconstrained S2.</p>
       </div>
 
       <!-- ===== Empirical Test ===== -->
@@ -223,7 +225,7 @@
       <div class="card">
         <h2>Interpretation</h2>
 
-        <p>The biological readout D-distribution clusters tightly around D ≈ 0.33, with 100% of memory D-values in the sub-exponential regime. This is what H_D4 predicts if S2 reflects the brain's IO bandwidth — a biological readout can only <em>slow down</em> the readout (sub-exponential), never extract from the projection faster than it can be projected (no D &gt; 1 in memory).</p>
+        <p>The biological readout D-distribution clusters tightly around D ≈ 0.33, with 100% of memory D-values in the sub-exponential regime. This is the pattern H_D4 predicts — biological readouts produce constrained S2 (D &lt; 1, never the super-exponential regime) and a tight D-distribution. The fact that the constraint appears empirically in biological readout data and not in non-biological data is what the hypothesis predicts. It does not require us to know <em>why</em> biological readouts scramble in this particular way — only that they do, observably, in the data we have.</p>
 
         <p>Non-biological signals, having no biological readout in the chain, span the full D-range including super-exponential "extraction" (D &gt; 1) — cosmological structures, financial markets, solar flares, NV-diamond T2 relaxation, oceanographic dynamics. These signals carry the S2 form of their underlying physical process, not of a readout.</p>
 
@@ -273,15 +275,15 @@
         <ul>
           <li><strong>D measures the SHAPE of the retention function.</strong> Lower D = more sub-exponential = slower scrambling. Higher D = closer to exponential (and at D &gt; 1, super-exponential = "extraction"). A fly and a monkey can have similar D (≈ 0.28) because their retention functions have similar shape — both are sub-exponential, both never extract.</li>
           <li><strong>D-band width (CV) measures CONSISTENCY of the readout across paradigms.</strong> A fly has narrow D-band because all its memory paradigms produce D ≈ 0.28. A human has wide D-band because different paradigms (free recall, Stroop, RT distributions, visual perception) produce D = 0.15–0.33. The width is not the IO bandwidth; it's the variability across readout modes.</li>
-          <li><strong>Behavioral complexity tracks neither D nor D-band width directly.</strong> It tracks the readout's <em>capacity</em> — channel count, integration time, processing speed, modality diversity, plasticity. These are orthogonal to the S2 retention shape. A fly and a monkey can both have D ≈ 0.28 (same retention shape) but the monkey has more channels, faster integration, more plasticity — hence more complex behavior. S2 D measures the scrambling rate of one channel, not the number of channels.</li>
+          <li><strong>Behavioral complexity tracks neither D nor D-band width directly.</strong> It tracks the readout's <em>capacity</em> — channel count, integration time, processing speed, modality diversity, plasticity. These are orthogonal to the S2 retention shape. A fly and a monkey can both have D ≈ 0.28 (similar retention shape) but the monkey has more channels, faster integration, more plasticity — hence more complex behavior. S2 D is the stretch exponent of one retention curve, not a count of channels.</li>
         </ul>
 
         <p>This refines H_D4: the S2 D parameter measures the <em>shape</em> of the biological readout's retention transfer function, not the readout's <em>capacity</em>. Mean D tracks a real biological property (nervous-system complexity, behavior complexity per neuron) — but D-band width tracks consistency across paradigms, which is a different question. The fly-vs-monkey gap in behavior is in capacity, not in retention shape.</p>
 
         <h3>An interesting pattern in mean D</h3>
-        <p>Mean D does not strictly track neuron count — honeybees (D = 0.31) have higher mean D than rats (D = 0.24) despite 200× fewer neurons. This is consistent with the well-documented behavioral complexity of bees (waggle dance, multi-modal navigation, social learning) relative to their tiny nervous system. If mean D tracks "behavioral complexity per neuron" or "IO toolkit efficiency," then bees punch above their neuron count — which matches observation.</p>
+        <p>Mean D does not strictly track neuron count — honeybees (D = 0.31) have higher mean D than rats (D = 0.24) despite 200× fewer neurons. This is consistent with the well-documented behavioral complexity of bees (waggle dance, multi-modal navigation, social learning) relative to their tiny nervous system: bees' S2 fits look more like vertebrates' than their neuron count would suggest. The hypothesis does not claim to know <em>why</em>; it observes the pattern in the data.</p>
 
-        <p>Conversely, <em>C. elegans</em> (302 neurons, D = 0.17) and sea slugs (20K neurons, D = 0.20) sit at the bottom of the mean-D range, consistent with their dramatically simpler behavioral repertoires (mostly habituation and sensitization). The mean D tracks behavioral complexity more faithfully than it tracks raw neuron count — exactly what H_D4 predicts if D measures the readout's scrambling rate (simpler readout → more sub-exponential → lower D).</p>
+        <p>Conversely, <em>C. elegans</em> (302 neurons, D = 0.17) and sea slugs (20K neurons, D = 0.20) sit at the bottom of the mean-D range, consistent with their dramatically simpler behavioral repertoires (mostly habituation and sensitization). The mean D tracks behavioral complexity more faithfully than it tracks raw neuron count. H_D4 predicts the constrained D-range pattern; the cross-species correlation refines where the constraint shows up. The underlying mechanism — why biological readouts produce sub-exponential retention and why mean D tracks nervous-system complexity — is not part of the hypothesis, which stays on the observable side.</p>
       </div>
 
       <!-- ===== Caveats ===== -->
@@ -305,7 +307,7 @@
         <ol>
           <li><strong>A biological memory dataset with D &gt; 1.</strong> Currently 100% of memory D-values are sub-exponential. A single well-fit biological memory S2 with D &gt; 1 (super-exponential) would break the asymmetry that H_D4 predicts. (Note: this would have to be true retention, not a curve that fits S2 only over a narrow regime.)</li>
           <li><strong>A non-biological dataset cluster with mean D ≈ 0.33 and CV ≈ 38%.</strong> If a domain of non-biological signals (say, all cosmological data) clusters as tightly as biological memory, the "narrow D-range = biological readout" prediction loses discriminative power. The registry's most homogeneous non-biological domain is <code>solar_energy</code> (D ≈ 0.057, CV = 21%) — but it's a tiny cluster (n = 6), and its mean is far from biological (0.057 vs 0.33).</li>
-          <li><strong>A biological readout type that spans the full D-range.</strong> If some other biological readout (e.g., a population of cortical neurons, mood ratings, multi-day EEG) showed D values spanning [0.1, 10] like the non-biological registry, H_D4's "biological readouts have constrained IO" prediction would be in trouble. We don't have such data yet.</li>
+          <li><strong>A biological readout type that spans the full D-range.</strong> If some other biological readout (e.g., a population of cortical neurons, mood ratings, multi-day EEG) showed D values spanning [0.1, 10] like the non-biological registry, H_D4's "biological readouts produce constrained S2" prediction would be in trouble. We don't have such data yet.</li>
           <li><strong>Cross-species mean-D ordering violation.</strong> Refined H_D4 predicts that mean D tracks nervous-system complexity (r = +0.69 across 10 species, p = 0.029). A well-sampled species with high behavioral complexity but anomalously low mean D — or vice versa — would weaken this prediction. Currently, the honeybee (high D for its neuron count) and <em>C. elegans</em> (low D for its behavioral simplicity) both fit the prediction; a reversal in either direction with more data would challenge it.</li>
           <li><strong>A species with high neuron count but tight D-band.</strong> Currently, humans are the only species with a wide D-band (CV = 18.4%); all other species cluster at CV = 3–8%. If a well-sampled non-human species (say, a dolphin or a corvid) showed a wide D-band like humans, this would suggest that D-band width tracks something other than nervous-system complexity — perhaps paradigm diversity in the literature rather than actual readout variability.</li>
         </ol>
@@ -327,9 +329,9 @@
       <div class="card">
         <h2>Speculative framing</h2>
         <div class="speculative-note">
-          <strong>Speculative interpretation.</strong> If H_D4 holds up under further testing, the DREAM projection kernel \(K_\lambda\) becomes an account of what the brain can compute, not of what MM is. The 10D source becomes a parsimonious modeling choice for the brain's representational capacity, not an empirical feature of reality. The four dimensions we perceive are the readout's resolution limit, not the projection's intrinsic dimensionality.
-          <p style="margin-top:.6rem">Non-life — a rock, a satellite, an SDSS telescope — does not "perceive" a 4D projection because it does not have an IO toolkit to grasp one. It simply exists within MM, embedded in whatever structure MM has, without resolving it into observables. The 4D world is not a feature of MM; it is a feature of biological readouts of MM.</p>
-          <p style="margin-top:.6rem">Under this view, S2 is an <em>epistemological</em> law (about how biological observers know what they know) rather than an <em>ontological</em> law (about what is). The two become distinguishable only when we compare biological readouts to non-biological readouts of the same underlying phenomenon — which is what this test attempts.</p>
+          <strong>Speculative interpretation.</strong> If H_D4 holds up under further testing, the DREAM projection kernel \(K_\lambda\) is recast as a model of the biological readout's transfer function — the empirical object the framework has access to — rather than a model of the inaccessible source domain. The axioms (<a href="../axioms.html">A1, A2</a>) already state that MM and the kernel are <em>mathematical devices used to represent inaccessible structure</em>; H_D4 sharpens this by adding a falsifiable empirical prediction: the S2 form and its constrained D-range appear in biological readout data, while the same form appears without that constraint in non-biological data.
+          <p style="margin-top:.6rem">This says nothing about MM as an object. The 4D world, the kernel, the 10D modeling choice are all (per the axioms) instruments for deriving testable consequences, not descriptions of an independently observable reality. What H_D4 <em>does</em> say: when we fit S2 to a measurement, whether the fit falls in the biological readout cluster (D &lt; 1, CV ≈ 38%) or in the non-biological cluster (any D, CV ≈ 99%) is an observable property of the measurement chain, not of MM. The biological readout's S2 is what it is because biological readouts scramble retention in a constrained way; the non-biological measurement's S2 is whatever it is for that physical process.</p>
+          <p style="margin-top:.6rem">The 4D observables we measure — redshifts, X-ray fluxes, memory retention curves — are all on the projection side (the accessible side). H_D4 makes no claim about the hidden domain. It claims that the S2 form on the accessible side carries information about the measurement chain (biological readout vs non-biological measurement) that is observable in the D-distribution. That is the testable content; everything else stays, as the axioms require, in the modeled realm.</p>
         </div>
         <p class="article-footnote">Hypothesis by the framework author. Statistical tests by the framework author. Biological D-values compiled from publicly published psychophysics and memory research (Rubin &amp; Wenzel 1996, Wixted 2004, Stevens 1957, Ebbinghaus 1885, Murre &amp; Dros 2015, and others). Non-biological D-values from the <a href="../tests.html">DREAM 338-test registry</a>. See also <a href="meta-s2.html">Meta-S2</a> for the recursive-retention analysis that motivated the broader D-distribution question.</p>
       </div>
