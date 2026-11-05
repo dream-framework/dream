@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-04T20:01:47Z",
-  "total_tests": 349,
+  "exported_at": "2026-11-05T07:08:31Z",
+  "total_tests": 350,
   "fields": [
     "id",
     "name",
@@ -1277,14 +1277,14 @@
       "id": "",
       "name": "FRED DGS10 (10-Year Treasury Rate) (ACF retention)",
       "domain": "financial",
-      "D": 0.962,
+      "D": 0.9621,
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.98,
+      "delta_aicc": 9.97,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.98). S2+dust fit: D1=1.0195, D2=2.2109, R²=0.9999, AICc=-3386.97. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9620, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.98). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.97). S2+dust fit: D1=1.0192, D2=2.2117, R²=0.9999, AICc=-3387.08. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9621, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.97). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -1795,7 +1795,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 12.38,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0353, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=12.38). S2+dust fit: D1=0.6303, D2=5.0357, R²=0.5062, AICc=-896.22. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.2322, R²=0.4585. D_eff=0.232 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=12.38). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -5414,6 +5414,22 @@
       "source": "auto-scan 2026-11-04",
       "date": "2026-11-04",
       "url": "10.5281/zenodo.23934750"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: 365 Sound Actions",
+      "domain": "scouting",
+      "D": 1.3862,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 441.51,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=441.51).",
+      "narrative": "D_eff=1.3862, R²=0.9985. D_eff=1.386 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=441.51). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-05",
+      "date": "2026-11-05",
+      "url": "10.5281/zenodo.23971067"
     }
   ]
 }
