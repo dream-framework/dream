@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-08T06:22:49Z",
-  "total_tests": 360,
+  "exported_at": "2026-11-08T13:45:17Z",
+  "total_tests": 363,
   "fields": [
     "id",
     "name",
@@ -5590,6 +5590,54 @@
       "source": "auto-scan 2026-11-06",
       "date": "2026-11-06",
       "url": "10.5281/zenodo.23990714"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",
+      "domain": "scouting",
+      "D": 0.1989,
+      "r2": 0.8328,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 1.13,
+      "best_alt": "POWER",
+      "model_note": "S2 ties POWER (ΔAICc=1.13, within ±2).",
+      "narrative": "D_eff=0.1989, R²=0.8328. D_eff=0.199 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с POWER, ΔAICc=1.13).",
+      "source": "auto-scan 2026-11-08",
+      "date": "2026-11-08",
+      "url": "10.5281/zenodo.24051689"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",
+      "domain": "scouting",
+      "D": 0.1173,
+      "r2": 0.8461,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_TIES",
+      "delta_aicc": 1.61,
+      "best_alt": "BIEXP",
+      "model_note": "S2 ties BIEXP (ΔAICc=1.61, within ±2).",
+      "narrative": "D_eff=0.1173, R²=0.8461. D_eff=0.117 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с BIEXP, ΔAICc=1.61).",
+      "source": "auto-scan 2026-11-08",
+      "date": "2026-11-08",
+      "url": "10.5281/zenodo.24051689"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",
+      "domain": "scouting",
+      "D": 0.3386,
+      "r2": 0.8997,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 55.99,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=55.99).",
+      "narrative": "D_eff=0.3386, R²=0.8997. D_eff=0.339 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=55.99). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-08",
+      "date": "2026-11-08",
+      "url": "10.5281/zenodo.24051689"
     }
   ]
 }

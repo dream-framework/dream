@@ -275,7 +275,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "8 Nov 2026 01:22 EST";
+const LAST_REFRESH = "8 Nov 2026 08:45 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -658,6 +658,9 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Maximum entropy distributions of dark matter in ΛC",domain:"scouting",D:1.0688,r2:0.9997,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:28.4500,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=28.45).",narrative:"D_eff=1.0688, R²=0.9997. D_eff=1.069 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=28.45). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-06",date:"2026-11-06",url:"10.5281/zenodo.23990714",image:null}
   ,{id:"",name:"Zenodo: Maximum entropy distributions of dark matter in ΛC",domain:"scouting",D:1.0520,r2:1.0000,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2763.3700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=2763.37).",narrative:"D_eff=1.0520, R²=1.0000. D_eff=1.052 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=2763.37). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-06",date:"2026-11-06",url:"10.5281/zenodo.23990714",image:null}
   ,{id:"",name:"Zenodo: Maximum entropy distributions of dark matter in ΛC",domain:"scouting",D:0.8472,r2:0.9993,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:487.5400,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=487.54).",narrative:"D_eff=0.8472, R²=0.9993. D_eff=0.847 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=487.54). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-06",date:"2026-11-06",url:"10.5281/zenodo.23990714",image:null}
+  ,{id:"",name:"Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",domain:"scouting",D:0.1989,r2:0.8328,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.1300,best_alt:"POWER",model_note:"S2 ties POWER (ΔAICc=1.13, within ±2).",narrative:"D_eff=0.1989, R²=0.8328. D_eff=0.199 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с POWER, ΔAICc=1.13).",source:"auto-scan 2026-11-08",date:"2026-11-08",url:"10.5281/zenodo.24051689",image:null}
+  ,{id:"",name:"Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",domain:"scouting",D:0.1173,r2:0.8461,verdict:"D_LT_1",model_verdict:"S2_TIES",delta_aicc:1.6100,best_alt:"BIEXP",model_note:"S2 ties BIEXP (ΔAICc=1.61, within ±2).",narrative:"D_eff=0.1173, R²=0.8461. D_eff=0.117 < 1 (эффективный параметр масштаба зонда). Одномасштабная S2 маргинальна (сравнима с BIEXP, ΔAICc=1.61).",source:"auto-scan 2026-11-08",date:"2026-11-08",url:"10.5281/zenodo.24051689",image:null}
+  ,{id:"",name:"Zenodo: Mobile Gaming QoE Dataset: Encrypted Network Traff",domain:"scouting",D:0.3386,r2:0.8997,verdict:"D_LT_1",model_verdict:"S2_LOSES",delta_aicc:55.9900,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=55.99).",narrative:"D_eff=0.3386, R²=0.8997. D_eff=0.339 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=55.99). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-08",date:"2026-11-08",url:"10.5281/zenodo.24051689",image:null}
 
 ];
 
@@ -943,33 +946,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 318,
-  "d_mle": 1.6194,
-  "lam_mle": 1.4087,
+  "n": 321,
+  "d_mle": 1.5984,
+  "lam_mle": 1.396,
   "ks_p": 0.0001,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1245,
-  "ks_boot_mean": 0.0351,
-  "ks_boot_95": 0.05,
-  "d_direct": 2.0608,
-  "r2_direct": 0.9796,
-  "d_linear": 1.6041,
-  "r2_linear": 0.9679,
-  "natural": 100,
+  "ks_stat_obs": 0.1251,
+  "ks_boot_mean": 0.0349,
+  "ks_boot_95": 0.0496,
+  "d_direct": 2.0078,
+  "r2_direct": 0.9787,
+  "d_linear": 1.5763,
+  "r2_linear": 0.9669,
+  "natural": 103,
   "extraction": 218,
-  "mean": 1.262,
-  "median": 1.2547,
-  "total": 360,
-  "compared": 344,
+  "mean": 1.2522,
+  "median": 1.2378,
+  "total": 363,
+  "compared": 347,
   "noise": 9,
   "rejected": 0,
-  "ad_stat": 4.4686,
+  "ad_stat": 4.4951,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.82,
-  "delta_aic_lognormal": 52.97,
-  "silverman_p": 0.68,
+  "delta_aic_gamma": 4.29,
+  "delta_aic_lognormal": 54.06,
+  "silverman_p": 0.655,
   "boot_lo": 1.06,
-  "boot_hi": 1.726,
+  "boot_hi": 1.707,
   "date": "2026-11-08"
 };
 
