@@ -36,7 +36,7 @@
   "r2_lin_delta": 0.0,
   "quad_coeff": -0.0051,
   "pl_exponent": 0.9743,
-  "ad_stat": 4.4585,
+  "ad_stat": 4.4586,
   "aic_weibull": 703.29,
   "aic_gamma": 707.26,
   "aic_lognormal": 756.56,
@@ -56,7 +56,7 @@
   "boot_hi": 1.704,
   "boot_width": 0.644,
   "shape2": 20.11,
-  "ks_p2": 0.006,
+  "ks_p2": 0.0061,
   "shape_uncens": 1.5915,
   "scale_uncens": 1.4034,
   "ks_p_uncens": 0.0001
