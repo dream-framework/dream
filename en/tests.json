@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-09T22:34:24Z",
-  "total_tests": 364,
+  "exported_at": "2026-11-10T07:31:38Z",
+  "total_tests": 368,
   "fields": [
     "id",
     "name",
@@ -5654,6 +5654,70 @@
       "source": "auto-scan 2026-11-09",
       "date": "2026-11-09",
       "url": "10.5281/zenodo.24067290"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Nonequilibrium training dynamics and scaling laws ",
+      "domain": "scouting",
+      "D": 1.1788,
+      "r2": 0.9987,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 281.74,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=281.74).",
+      "narrative": "D_eff=1.1788, R²=0.9987. D_eff=1.179 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=281.74). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-10",
+      "date": "2026-11-10",
+      "url": "10.5281/zenodo.24096774"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Nonequilibrium training dynamics and scaling laws ",
+      "domain": "scouting",
+      "D": 1.1863,
+      "r2": 0.9987,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 272.37,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=272.37).",
+      "narrative": "D_eff=1.1863, R²=0.9987. D_eff=1.186 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=272.37). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-10",
+      "date": "2026-11-10",
+      "url": "10.5281/zenodo.24096774"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Nonequilibrium training dynamics and scaling laws ",
+      "domain": "scouting",
+      "D": 0.3805,
+      "r2": 0.9998,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 4.11,
+      "best_alt": "POWER",
+      "model_note": "S2 loses to POWER (ΔAICc=4.11).",
+      "narrative": "D_eff=0.3805, R²=0.9998. D_eff=0.381 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, POWER absorbs overlapping processes (ΔAICc=4.11). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-10",
+      "date": "2026-11-10",
+      "url": "10.5281/zenodo.24096774"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Nonequilibrium training dynamics and scaling laws ",
+      "domain": "scouting",
+      "D": 1.134,
+      "r2": 0.9985,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 309.17,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=309.17).",
+      "narrative": "D_eff=1.1340, R²=0.9985. D_eff=1.134 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=309.17). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-10",
+      "date": "2026-11-10",
+      "url": "10.5281/zenodo.24096774"
     }
   ]
 }
