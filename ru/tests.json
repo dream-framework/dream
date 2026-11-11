@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-11T06:44:20Z",
-  "total_tests": 370,
+  "exported_at": "2026-11-11T19:48:23Z",
+  "total_tests": 371,
   "fields": [
     "id",
     "name",
@@ -5750,6 +5750,22 @@
       "source": "auto-scan 2026-11-11",
       "date": "2026-11-11",
       "url": "10.5281/zenodo.24123997"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Relative density thresholds for gross growth, net ",
+      "domain": "scouting",
+      "D": 1.1255,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 325.36,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=325.36).",
+      "narrative": "D_eff=1.1255, R²=0.9999. D_eff=1.125 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=325.36). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24144728"
     }
   ]
 }

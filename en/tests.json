@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-11T06:44:20Z",
-  "total_tests": 370,
+  "exported_at": "2026-11-11T19:48:23Z",
+  "total_tests": 371,
   "fields": [
     "id",
     "name",
@@ -1251,7 +1251,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 368.45,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=368.45). S2+dust fit: D1=1.0025, D2=0.7489, R²=0.9993, AICc=-2148.18. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=368.45). S2+dust fit: D1=1.0026, D2=0.7489, R²=0.9993, AICc=-2148.17. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.5624, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.45). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -5750,6 +5750,22 @@
       "source": "auto-scan 2026-11-11",
       "date": "2026-11-11",
       "url": "10.5281/zenodo.24123997"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Relative density thresholds for gross growth, net ",
+      "domain": "scouting",
+      "D": 1.1255,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 325.36,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=325.36).",
+      "narrative": "D_eff=1.1255, R²=0.9999. D_eff=1.125 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=325.36). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24144728"
     }
   ]
 }
