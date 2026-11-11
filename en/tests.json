@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-10T19:56:37Z",
-  "total_tests": 368,
+  "exported_at": "2026-11-11T06:44:20Z",
+  "total_tests": 370,
   "fields": [
     "id",
     "name",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.96,
+      "delta_aicc": 9.97,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.96). S2+dust fit: D1=1.0179, D2=2.2142, R²=0.9999, AICc=-3387.29. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9622, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.96). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.97). S2+dust fit: D1=1.0174, D2=2.2149, R²=0.9999, AICc=-3387.28. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9622, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.97). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
@@ -5718,6 +5718,38 @@
       "source": "auto-scan 2026-11-10",
       "date": "2026-11-10",
       "url": "10.5281/zenodo.24096774"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Out-of-Distribution Failures of HIP Molecular Hess",
+      "domain": "scouting",
+      "D": 1.3229,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 78.07,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=78.07).",
+      "narrative": "D_eff=1.3229, R²=0.9985. D_eff=1.323 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=78.07). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24123997"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Out-of-Distribution Failures of HIP Molecular Hess",
+      "domain": "scouting",
+      "D": 1.3708,
+      "r2": 0.9984,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 163.72,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=163.72).",
+      "narrative": "D_eff=1.3708, R²=0.9984. D_eff=1.371 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=163.72). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24123997"
     }
   ]
 }

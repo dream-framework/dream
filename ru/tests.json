@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-10T19:56:37Z",
-  "total_tests": 368,
+  "exported_at": "2026-11-11T06:44:20Z",
+  "total_tests": 370,
   "fields": [
     "id",
     "name",
@@ -5718,6 +5718,38 @@
       "source": "auto-scan 2026-11-10",
       "date": "2026-11-10",
       "url": "10.5281/zenodo.24096774"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Out-of-Distribution Failures of HIP Molecular Hess",
+      "domain": "scouting",
+      "D": 1.3229,
+      "r2": 0.9985,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 78.07,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=78.07).",
+      "narrative": "D_eff=1.3229, R²=0.9985. D_eff=1.323 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=78.07). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24123997"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Out-of-Distribution Failures of HIP Molecular Hess",
+      "domain": "scouting",
+      "D": 1.3708,
+      "r2": 0.9984,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 163.72,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=163.72).",
+      "narrative": "D_eff=1.3708, R²=0.9984. D_eff=1.371 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=163.72). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-11",
+      "date": "2026-11-11",
+      "url": "10.5281/zenodo.24123997"
     }
   ]
 }
