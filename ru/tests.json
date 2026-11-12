@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-11T19:48:23Z",
-  "total_tests": 371,
+  "exported_at": "2026-11-12T07:27:44Z",
+  "total_tests": 373,
   "fields": [
     "id",
     "name",
@@ -5766,6 +5766,38 @@
       "source": "auto-scan 2026-11-11",
       "date": "2026-11-11",
       "url": "10.5281/zenodo.24144728"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Dataset for \"Flexural arch decompression and mantl",
+      "domain": "scouting",
+      "D": 1.885,
+      "r2": 0.9803,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 177.51,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=177.51).",
+      "narrative": "D_eff=1.8850, R²=0.9803. D_eff=1.885 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=177.51). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-12",
+      "date": "2026-11-12",
+      "url": "10.5281/zenodo.24153855"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Dataset for \"Flexural arch decompression and mantl",
+      "domain": "scouting",
+      "D": 1.885,
+      "r2": 0.9803,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 177.51,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=177.51).",
+      "narrative": "D_eff=1.8850, R²=0.9803. D_eff=1.885 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=177.51). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-12",
+      "date": "2026-11-12",
+      "url": "10.5281/zenodo.24153855"
     }
   ]
 }
