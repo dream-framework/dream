@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-11-12T07:27:44Z",
+  "exported_at": "2026-11-12T20:08:12Z",
   "total_tests": 373,
   "fields": [
     "id",
@@ -1251,7 +1251,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 368.45,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=368.45). S2+dust fit: D1=1.0026, D2=0.7489, R²=0.9993, AICc=-2148.17. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=368.45). S2+dust fit: D1=1.0028, D2=0.7486, R²=0.9993, AICc=-2148.34. S2+dust does NOT beat S2_DUST — needs investigation.",
       "narrative": "D_eff=0.5624, R²=0.9955. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.45). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
