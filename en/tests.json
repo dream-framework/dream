@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-11-12T20:08:12Z",
+  "exported_at": "2026-11-13T06:58:43Z",
   "total_tests": 373,
   "fields": [
     "id",
@@ -1281,10 +1281,10 @@
       "r2": 0.9999,
       "verdict": "D_NEAR_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 9.97,
+      "delta_aicc": 9.98,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=9.97). S2+dust fit: D1=1.0174, D2=2.2149, R²=0.9999, AICc=-3387.28. S2+dust does NOT beat BIEXP — needs investigation.",
-      "narrative": "D_eff=0.9622, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.97). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=9.98). S2+dust fit: D1=1.017, D2=2.2154, R²=0.9999, AICc=-3387.22. S2+dust does NOT beat BIEXP — needs investigation.",
+      "narrative": "D_eff=0.9622, R²=0.9999. D_eff=0.962 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, BIEXP absorbs overlapping processes (ΔAICc=9.98). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10"
