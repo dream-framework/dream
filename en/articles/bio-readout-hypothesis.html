@@ -354,6 +354,13 @@
 
         <p>This is the color-filter signature in its purest form. Each probe passes a different aspect of the underlying signal — Gaussian gives the lowest D, PCA the highest, Fourier / Wavelet / Box in between — and the order is preserved across cosmological, financial, and biological datasets. The pattern is not specific to biology; it appears whenever different probes are applied to the same signal.</p>
 
+        <h3>Boundary check: 31 multi-entry non-biological datasets (111 D-values)</h3>
+        <p>To test the boundary of H_CF, we also ran the same kind of analysis on the 31 non-biological registry datasets that have 3+ entries (111 D-values total). Each dataset's multiple entries represent different fits on the same underlying signal. If H_CF generalizes to "different fits on the same data," the within-dataset D-variance should exceed what noise alone would produce.</p>
+
+        <p><strong>Result:</strong> the within-dataset D-variance is <em>less</em> than random label-shuffle would produce (permutation p = 0.83). The 31 multi-entry datasets have characteristic D-ranges (between-dataset effect η² = 34%, marginal p = 0.10), but within each dataset, the multiple fits are more consistent than random — different parameter initializations converging to similar fits, not different measurement probes.</p>
+
+        <p><strong>Interpretation:</strong> H_CF is supported for <em>named probes</em> (F1's Gaussian / Fourier / Box / Wavelet / PCA — different measurement functions applied to the same data, producing systematically different D with consistent rank-ordering), but not for <em>unnamed multi-fits</em> (the scanner's multiple fits on the same data, which converge to similar D). The color-filter pattern requires genuine probe variation — different measurement functions — not just multiple fits of the same form. This is a useful boundary on H_CF: it tells us where the pattern lives (probe choice) and where it doesn't (parameter initialization noise).</p>
+
         <h3>What H_D4 vs H_CF together say</h3>
         <p>H_CF (color filter) is more general than H_D4. The color-filter pattern — different probes / readouts producing systematically different D-values, with consistent rank-ordering — appears in both biological and non-biological data. H_D4 (biological readout) is the special case: biological readouts add a <em>constraint</em> that non-biological probes don't share — biological readout D-values are confined to the sub-exponential regime \(D < 1\), while non-biological probes span the full range (D = 0.30 to 10.0 in the F1 matrix above).</p>
 
