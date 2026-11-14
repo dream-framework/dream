@@ -312,6 +312,45 @@
       </div>
     </details>
 
+    <!-- F7: Biological Readout Hypothesis (H_D4 + H_CF) -->
+    <details class="card" id="f7-bio-readout" style="border-left: 4px solid var(--accent);">
+      <summary>
+        <strong>F7 — Biological Readout Hypothesis (H_D4 + H_CF)</strong> <span class="badge ok sm">Strong initial support · not yet independently replicated</span>
+        <span style="display:block;margin-top:.25rem;font-size:.88rem;font-weight:400;color:var(--muted)">S2 fits to biological readout data cluster in a constrained D-range (D&lt;1, sub-exponential); non-biological signals span the full range (D up to 10). Color-filter analogue: different probes/readouts on the same signal produce systematically different D-values with consistent rank-ordering. Click for details.</span>
+      </summary>
+      <div>
+      <p class="core"><strong>Claim (H_D4):</strong> S2 fits to biological readout data (memory, attention, perception — datasets whose underlying process is the output of a biological readout) cluster in a constrained D-range (D &lt; 1, sub-exponential); S2 fits to non-biological data span the full D-range, including the super-exponential regime (D &gt; 1). The biological-vs-non-biological distinction is observable in the D-distribution.</p>
+      <p class="core"><strong>Generalized claim (H_CF — color filter analogue):</strong> different measurement probes / readouts on the same underlying signal produce systematically different S2 D-values — each probe passes a different aspect of the signal, like color filters passing different wavelengths. The pattern is general (appears in both biological and non-biological data); H_D4 is the special case where biological readouts add the D&lt;1 constraint.</p>
+      <p><strong>Empirical test (Oct 2026):</strong> compiled 83 biological D-values from psychophysics literature (memory, attention, perception — Rubin &amp; Wenzel 1996 meta-analysis + Wixted 2004 + classic memory studies + cross-species animal memory) and compared against 323 non-biological D-values from the DREAM 338-test registry (solar, cosmological, financial, environmental, NV-diamond, etc.).</p>
+      <p><strong>Statistical results:</strong></p>
+      <ul>
+        <li>Mann-Whitney U (memory vs non-bio): U = 3332, p = <strong>4.4 × 10⁻²⁶</strong></li>
+        <li>Kolmogorov-Smirnov: KS = 0.74, p = <strong>9.2 × 10⁻³⁷</strong></li>
+        <li>Memory CV = 38.6% (95% bootstrap CI [32.3%, 43.8%]) vs non-bio CV = 99.6% — CIs exclude each other</li>
+        <li>100% of memory D-values are sub-exponential (D &lt; 1); 68.4% of non-bio D-values are super-exponential (D &gt; 1)</li>
+        <li>Cohen's d = −0.79 (medium-large effect)</li>
+        <li>Leave-one-out: biological CV stays under 50% under any single-data-point exclusion</li>
+      </ul>
+      <p><strong>Color-filter analogue tests:</strong></p>
+      <ul>
+        <li><em>Biological data</em> — 10 paradigms on humans (n = 53 D-values): one-way ANOVA F(9, 43) = 31.30, p = 4.6 × 10⁻¹⁶; permutation ANOVA p = 0 (0/10000); effect size η² = 86.8%; 80% of paradigm pairs have non-overlapping 95% bootstrap CIs. Each paradigm has its own characteristic D-band: relearning at D ≈ 0.19, perceptual identification at D ≈ 0.32, with free recall, cued recall, RT, recognition in between.</li>
+        <li><em>Non-biological data</em> — F1 probe-invariance (5 probes × 5 datasets = 25 D-values): two-way ANOVA — probe identity explains 65.8% of D-variance, dataset identity explains 15.2%, residual 19.0%. Kendall's W (rank concordance across datasets) = <strong>1.000</strong> — perfect rank ordering. The five probes (Gaussian &lt; Box &lt; Fourier &lt; Wavelet &lt; PCA) preserve the same D-rank on SDSS, DESI, Bitcoin, Ethereum, and Cognitive RT alike.</li>
+        <li><em>Cross-species</em> — 10 species spanning 9 orders of magnitude in neuron count: mean D correlates with log₁₀(neurons) r = +0.69, p = 0.029 (significant); honeybees (D = 0.31) and <em>C. elegans</em> (D = 0.17) fit the predicted pattern (bees punch above their neuron count; nematodes at the bottom of the D-range).</li>
+      </ul>
+      <p><strong>Test status:</strong> <span class="badge ok sm">Strong initial support · not yet independently replicated</span>. The statistics are at the level of confirmed framework claims (T7.1, F1), but the data is meta-analysis of published literature rather than original measurement, and no independent group has replicated the biological-vs-non-biological D-distribution gap yet.</p>
+      <p><strong>Full long-form treatment:</strong> <a href="articles/bio-readout-hypothesis.html" style="color:var(--accent)">The Biological Readout Hypothesis (H_D4) — full article</a>. Includes the cross-species analysis, the color-filter analogue on biological and non-biological data, caveats (Stevens magnitude-estimation edge cases; all biological data still measured by non-life instruments), and explicit "what would refute H_D4" predictions.</p>
+      <p><strong>What would refute:</strong></p>
+      <ol>
+        <li>A biological memory dataset with D &gt; 1 (currently 0/83).</li>
+        <li>A non-biological dataset cluster with mean D ≈ 0.33 and CV ≈ 38% (i.e., a non-biological domain that mimics the biological readout pattern).</li>
+        <li>A biological readout type that spans the full D-range [0.1, 10] like the non-biological registry.</li>
+        <li>A cross-species reversal: high-complexity species with anomalously low mean D, or vice versa, with sufficient data.</li>
+        <li>A probe-rank reversal: a dataset where the probe order (Gaussian &lt; Box &lt; Fourier &lt; Wavelet &lt; PCA) breaks — would suggest the color-filter pattern is probe-specific, not universal.</li>
+      </ol>
+      <p><strong>Axiom compliance:</strong> the hypothesis makes no claim about MM, the kernel, or any hidden domain. It uses MM and the kernel only as the framework's existing mathematical vocabulary for talking about observables. The empirical content is entirely on the projection side: biological readouts produce constrained S2; non-biological measurements produce unconstrained S2; different probes/readouts produce different D-values with consistent rank-ordering.</p>
+      </div>
+    </details>
+
     <!-- Decision tree -->
     <div class="card">
       <h2>Decision tree (updated 2026)</h2>
@@ -322,6 +361,7 @@
         <li><strong>z_depth trend:</strong> NOT a kernel signal (F4). Real but attributable to standard survey systematics. Probe-as-manifestation proposal loses its last empirical hook.</li>
         <li><strong>Snake pit (multi-S2 field):</strong> REJECTED (F5). Adds DOFs without adding predictive power.</li>
         <li><strong>The pixel is real (F6):</strong> OPEN — live tracker running. DREAM's strongest surviving claim: λ<sub>q</sub> is a structural cutoff, not an engineering limit. Tests by daily arXiv scout for resolution saturation at SOME scale (DREAM does not predict a specific value for λ<sub>q</sub>). <a href="pixel-tracker.html" style="color:var(--accent)">★ Live tracker</a>.</li>
+        <li><strong>Biological readout hypothesis (F7 — H_D4 + H_CF):</strong> STRONG INITIAL SUPPORT — not yet independently replicated. Biological readouts cluster at D &lt; 1 with CV ≈ 38%; non-biological measurements span D up to 10 with CV ≈ 99%. Mann-Whitney p = 4.4×10⁻²⁶, η² = 86.8% (paradigm explains D-variance on biological data), Kendall's W = 1.000 (probe rank order on non-biological F1 data). Statistics at the level of confirmed claims (T7.1, F1) but data is meta-analysis of published literature, not original measurement, and no independent replication yet. Awaiting either: (a) an original-data test that confirms the pattern, or (b) a counterexample that breaks it. <a href="articles/bio-readout-hypothesis.html" style="color:var(--accent)">Full article</a>.</li>
         <li><strong>S2 form null (hypothetical future):</strong> if multiple platforms show no stretched-exponential fit, the framework fails → treat S3–S5 as phenomenology only.</li>
         <li><strong>S2 form confirmed + S3/S5 support:</strong> strongest remaining case; retain \(\widehat{D}_{\mathrm{eff}},\widehat{\lambda}_q\) as probe-dependent summaries across domains.</li>
         <li><strong>S2 form confirmed + S4 null:</strong> retention form intact; set upper bounds on vacuum-energy modulation.</li>
