@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-15T06:47:44Z",
-  "total_tests": 374,
+  "exported_at": "2026-11-15T19:05:12Z",
+  "total_tests": 375,
   "fields": [
     "id",
     "name",
@@ -5814,6 +5814,22 @@
       "source": "auto-scan 2026-11-14",
       "date": "2026-11-14",
       "url": "10.5281/zenodo.24220648"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Horizontal correlation length of cone resistance i",
+      "domain": "scouting",
+      "D": 2.2532,
+      "r2": 0.9673,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 118.81,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=118.81).",
+      "narrative": "D_eff=2.2532, R²=0.9673. D_eff=2.253 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=118.81). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-15",
+      "date": "2026-11-15",
+      "url": "10.5281/zenodo.24254383"
     }
   ]
 }
