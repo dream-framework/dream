@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-15T19:05:12Z",
-  "total_tests": 375,
+  "exported_at": "2026-11-16T06:48:19Z",
+  "total_tests": 376,
   "fields": [
     "id",
     "name",
@@ -5830,6 +5830,22 @@
       "source": "auto-scan 2026-11-15",
       "date": "2026-11-15",
       "url": "10.5281/zenodo.24254383"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Regional Growth Decomposition and Fiscal Equalizat",
+      "domain": "scouting",
+      "D": 0.5415,
+      "r2": 0.8292,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 5.32,
+      "best_alt": "GAUSS",
+      "model_note": "S2 loses to GAUSS (ΔAICc=5.32).",
+      "narrative": "D_eff=0.5415, R²=0.8292. D_eff=0.541 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, GAUSS absorbs overlapping processes (ΔAICc=5.32). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-16",
+      "date": "2026-11-16",
+      "url": "10.5281/zenodo.24271686"
     }
   ]
 }
