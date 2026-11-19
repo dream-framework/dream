@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-19T07:48:49Z",
-  "total_tests": 384,
+  "exported_at": "2026-11-19T20:57:20Z",
+  "total_tests": 386,
   "fields": [
     "id",
     "name",
@@ -1245,14 +1245,14 @@
       "id": "",
       "name": "FRED VIXCLS (VIX Volatility Index) (ACF retention)",
       "domain": "financial",
-      "D": 0.5622,
+      "D": 0.562,
       "r2": 0.9954,
       "verdict": "D_LT_1",
       "model_verdict": "S2_LOSES",
-      "delta_aicc": 368.7,
+      "delta_aicc": 368.86,
       "best_alt": "S2_DUST",
-      "model_note": "S2 loses to S2_DUST (ΔAICc=368.70). S2+dust fit: D1=1.0027, D2=0.7483, R²=0.9993, AICc=-2147.95. S2+dust does NOT beat S2_DUST — needs investigation.",
-      "narrative": "D_eff=0.5622, R²=0.9954. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.70). Not \"S2 false\" — additional structure detected.",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=368.86). S2+dust fit: D1=1.0024, D2=0.7483, R²=0.9993, AICc=-2147.72. S2+dust does NOT beat S2_DUST — needs investigation.",
+      "narrative": "D_eff=0.5620, R²=0.9954. D_eff=0.562 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=368.86). Not \"S2 false\" — additional structure detected.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS"
@@ -5974,6 +5974,38 @@
       "source": "auto-scan 2026-11-18",
       "date": "2026-11-18",
       "url": "10.5281/zenodo.24353508"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A large-scale corpus of tropical coastal Sentinel-",
+      "domain": "scouting",
+      "D": 0.7872,
+      "r2": 0.9971,
+      "verdict": "D_LT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 203.61,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=203.61).",
+      "narrative": "D_eff=0.7872, R²=0.9971. D_eff=0.787 < 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=203.61). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-19",
+      "date": "2026-11-19",
+      "url": "10.5281/zenodo.23313478"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: A large-scale corpus of tropical coastal Sentinel-",
+      "domain": "scouting",
+      "D": 0.9864,
+      "r2": 0.9999,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 569.07,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=569.07).",
+      "narrative": "D_eff=0.9864, R²=0.9999. D_eff=0.986 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=569.07). Not \"S2 false\" — additional structure detected.",
+      "source": "auto-scan 2026-11-19",
+      "date": "2026-11-19",
+      "url": "10.5281/zenodo.23313478"
     }
   ]
 }
