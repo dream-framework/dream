@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-11-22T19:53:24Z",
+  "exported_at": "2026-11-23T07:57:17Z",
   "total_tests": 388,
   "fields": [
     "id",
@@ -1507,7 +1507,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 2.09,
       "best_alt": "POWER",
-      "model_note": "S2 loses to POWER (ΔAICc=2.09). S2+dust fit: D1=1.3249, D2=1.6644, R²=0.0339, AICc=-400.03. S2+dust does NOT beat POWER — needs investigation.",
+      "model_note": "S2 loses to POWER (ΔAICc=2.09). S2+dust fit: D1=1.3243, D2=1.6644, R²=0.0339, AICc=-400.03. S2+dust does NOT beat POWER — needs investigation.",
       "narrative": "D_eff=0.0750, R²=0.0296. D_eff=0.075 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, POWER поглощает перекрывающиеся процессы (ΔAICc=2.09). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
