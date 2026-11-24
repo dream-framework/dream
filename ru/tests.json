@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-24T10:11:05Z",
-  "total_tests": 390,
+  "exported_at": "2026-11-24T22:40:06Z",
+  "total_tests": 391,
   "fields": [
     "id",
     "name",
@@ -6070,6 +6070,22 @@
       "source": "auto-scan 2026-11-24",
       "date": "2026-11-24",
       "url": "10.5281/zenodo.24495058"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Out-of-sample tests of a frozen sequential origin-",
+      "domain": "scouting",
+      "D": 0.9724,
+      "r2": 0.8706,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 2.26,
+      "best_alt": "EXP",
+      "model_note": "S2 loses to EXP (ΔAICc=2.26).",
+      "narrative": "D_eff=0.9724, R²=0.8706. D_eff=0.972 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=2.26). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-24",
+      "date": "2026-11-24",
+      "url": "10.5281/zenodo.24516815"
     }
   ]
 }

@@ -275,7 +275,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "24 Nov 2026 05:11 EST";
+const LAST_REFRESH = "24 Nov 2026 17:40 EST";
 /* ============================================================================
    D.R.E.A.M — Данные реестра тестов
    ----------------------------------------------------------------------------
@@ -688,6 +688,7 @@ const TESTS = [
   ,{id:"",name:"Zenodo: Equilibrium-range level of ocean wave spectra from",domain:"scouting",D:1.6515,r2:0.9994,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.06).",narrative:"D_eff=1.6515, R²=0.9994. D_eff=1.651 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=2.06). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-20",date:"2026-11-20",url:"10.5281/zenodo.24386545",image:null}
   ,{id:"",name:"Zenodo: Combining mechanistic modelling with biobank data ",domain:"scouting",D:1.2830,r2:0.9986,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-12.2300,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-12.23).",narrative:"D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-12.23).",source:"auto-scan 2026-11-24",date:"2026-11-24",url:"10.5281/zenodo.24495058",image:null}
   ,{id:"",name:"Zenodo: Combining mechanistic modelling with biobank data ",domain:"scouting",D:1.2830,r2:0.9986,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-12.2300,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-12.23).",narrative:"D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-12.23).",source:"auto-scan 2026-11-24",date:"2026-11-24",url:"10.5281/zenodo.24495058",image:null}
+  ,{id:"",name:"Zenodo: Out-of-sample tests of a frozen sequential origin-",domain:"scouting",D:0.9724,r2:0.8706,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:2.2600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.26).",narrative:"D_eff=0.9724, R²=0.8706. D_eff=0.972 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, EXP поглощает перекрывающиеся процессы (ΔAICc=2.26). Не \"S2 ложна\" — обнаружена дополнительная структура.",source:"auto-scan 2026-11-24",date:"2026-11-24",url:"10.5281/zenodo.24516815",image:null}
 
 ];
 
@@ -973,33 +974,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // META-S2: Display canonical values from server-side computation
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 347,
-  "d_mle": 1.6203,
-  "lam_mle": 1.4143,
+  "n": 348,
+  "d_mle": 1.6217,
+  "lam_mle": 1.4134,
   "ks_p": 0.0,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1248,
-  "ks_boot_mean": 0.0335,
-  "ks_boot_95": 0.0479,
-  "d_direct": 2.064,
-  "r2_direct": 0.9791,
-  "d_linear": 1.6071,
-  "r2_linear": 0.9685,
-  "natural": 109,
+  "ks_stat_obs": 0.123,
+  "ks_boot_mean": 0.0336,
+  "ks_boot_95": 0.048,
+  "d_direct": 2.0693,
+  "r2_direct": 0.9793,
+  "d_linear": 1.6095,
+  "r2_linear": 0.9686,
+  "natural": 110,
   "extraction": 238,
-  "mean": 1.2669,
-  "median": 1.254,
-  "total": 390,
-  "compared": 374,
+  "mean": 1.2661,
+  "median": 1.2459,
+  "total": 391,
+  "compared": 375,
   "noise": 9,
   "rejected": 0,
-  "ad_stat": 4.852,
+  "ad_stat": 4.8622,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 4.06,
+  "delta_aic_gamma": 3.97,
   "delta_aic_lognormal": 57.31,
-  "silverman_p": 0.845,
+  "silverman_p": 0.68,
   "boot_lo": 1.06,
-  "boot_hi": 1.717,
+  "boot_hi": 1.718,
   "date": "2026-11-24"
 };
 
