@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-23",
+  "date": "2026-11-24",
   "n": 345,
   "n_total": 388,
   "n_censored": 20,
@@ -36,7 +36,7 @@
   "r2_lin_delta": 0.0,
   "quad_coeff": -0.0043,
   "pl_exponent": 0.993,
-  "ad_stat": 4.6843,
+  "ad_stat": 4.6842,
   "aic_weibull": 751.36,
   "aic_gamma": 755.31,
   "aic_lognormal": 807.91,
