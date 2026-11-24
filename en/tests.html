@@ -695,7 +695,7 @@
 </div>
 
 <script>
-const LAST_REFRESH = "23 Nov 2026 19:07 EST";
+const LAST_REFRESH = "24 Nov 2026 05:11 EST";
 /* ============================================================================
    D.R.E.A.M — Test Registry data
    ----------------------------------------------------------------------------
@@ -1107,6 +1107,8 @@ const TESTS = [
   ,{id:"",name:"Zenodo: A large-scale corpus of tropical coastal Sentinel-",domain:"scouting",D:0.9864,r2:0.9999,verdict:"D_NEAR_1",model_verdict:"S2_LOSES",delta_aicc:569.0700,best_alt:"S2_DUST",model_note:"S2 loses to S2_DUST (ΔAICc=569.07).",narrative:"D_eff=0.9864, R²=0.9999. D_eff=0.986 ≈ 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, S2_DUST absorbs overlapping processes (ΔAICc=569.07). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-11-19",date:"2026-11-19",url:"10.5281/zenodo.23313478",image:null}
   ,{id:"",name:"Zenodo: Equilibrium-range level of ocean wave spectra from",domain:"scouting",D:3.0142,r2:0.9993,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.06).",narrative:"D_eff=3.0142, R²=0.9993. D_eff=3.014 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.06). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-11-20",date:"2026-11-20",url:"10.5281/zenodo.24386545",image:null}
   ,{id:"",name:"Zenodo: Equilibrium-range level of ocean wave spectra from",domain:"scouting",D:1.6515,r2:0.9994,verdict:"D_GT_1",model_verdict:"S2_LOSES",delta_aicc:2.0600,best_alt:"EXP",model_note:"S2 loses to EXP (ΔAICc=2.06).",narrative:"D_eff=1.6515, R²=0.9994. D_eff=1.651 > 1 (probe-scale effective parameter). Interference: single-scale S2 insufficient, EXP absorbs overlapping processes (ΔAICc=2.06). Not \"S2 false\" — additional structure detected.",source:"auto-scan 2026-11-20",date:"2026-11-20",url:"10.5281/zenodo.24386545",image:null}
+  ,{id:"",name:"Zenodo: Combining mechanistic modelling with biobank data ",domain:"scouting",D:1.2830,r2:0.9986,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-12.2300,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-12.23).",narrative:"D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats EXP, ΔAICc=-12.23).",source:"auto-scan 2026-11-24",date:"2026-11-24",url:"10.5281/zenodo.24495058",image:null}
+  ,{id:"",name:"Zenodo: Combining mechanistic modelling with biobank data ",domain:"scouting",D:1.2830,r2:0.9986,verdict:"D_GT_1",model_verdict:"S2_WINS",delta_aicc:-12.2300,best_alt:"EXP",model_note:"S2 beats EXP (ΔAICc=-12.23).",narrative:"D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (probe-scale effective parameter). Single-scale S2 adequate (beats EXP, ΔAICc=-12.23).",source:"auto-scan 2026-11-24",date:"2026-11-24",url:"10.5281/zenodo.24495058",image:null}
 
 ];
 
@@ -1404,33 +1406,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // to ensure the live readout matches the article exactly.
 // ═══════════════════════════════════════════════════════════════
 const META_S2_SNAPSHOT = {
-  "n": 345,
-  "d_mle": 1.6153,
-  "lam_mle": 1.4139,
+  "n": 347,
+  "d_mle": 1.6203,
+  "lam_mle": 1.4143,
   "ks_p": 0.0,
   "ks_p_lilliefors": 0.0002,
-  "ks_stat_obs": 0.1238,
-  "ks_boot_mean": 0.0336,
-  "ks_boot_95": 0.0481,
-  "d_direct": 2.0441,
-  "r2_direct": 0.9796,
-  "d_linear": 1.6031,
-  "r2_linear": 0.969,
+  "ks_stat_obs": 0.1248,
+  "ks_boot_mean": 0.0335,
+  "ks_boot_95": 0.0479,
+  "d_direct": 2.064,
+  "r2_direct": 0.979,
+  "d_linear": 1.607,
+  "r2_linear": 0.9685,
   "natural": 109,
-  "extraction": 236,
-  "mean": 1.2668,
-  "median": 1.2378,
-  "total": 388,
-  "compared": 372,
+  "extraction": 238,
+  "mean": 1.2669,
+  "median": 1.254,
+  "total": 390,
+  "compared": 374,
   "noise": 9,
   "rejected": 0,
-  "ad_stat": 4.6842,
+  "ad_stat": 4.8534,
   "delta_aic_weibull": 0.0,
-  "delta_aic_gamma": 3.96,
-  "delta_aic_lognormal": 56.55,
-  "silverman_p": 0.785,
+  "delta_aic_gamma": 4.06,
+  "delta_aic_lognormal": 57.31,
+  "silverman_p": 0.845,
   "boot_lo": 1.06,
-  "boot_hi": 1.711,
+  "boot_hi": 1.717,
   "date": "2026-11-24"
 };
 

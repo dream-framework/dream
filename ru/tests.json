@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-24T00:07:45Z",
-  "total_tests": 388,
+  "exported_at": "2026-11-24T10:11:05Z",
+  "total_tests": 390,
   "fields": [
     "id",
     "name",
@@ -6038,6 +6038,38 @@
       "source": "auto-scan 2026-11-20",
       "date": "2026-11-20",
       "url": "10.5281/zenodo.24386545"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Combining mechanistic modelling with biobank data ",
+      "domain": "scouting",
+      "D": 1.283,
+      "r2": 0.9986,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -12.23,
+      "best_alt": "EXP",
+      "model_note": "S2 beats EXP (ΔAICc=-12.23).",
+      "narrative": "D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-12.23).",
+      "source": "auto-scan 2026-11-24",
+      "date": "2026-11-24",
+      "url": "10.5281/zenodo.24495058"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: Combining mechanistic modelling with biobank data ",
+      "domain": "scouting",
+      "D": 1.283,
+      "r2": 0.9986,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_WINS",
+      "delta_aicc": -12.23,
+      "best_alt": "EXP",
+      "model_note": "S2 beats EXP (ΔAICc=-12.23).",
+      "narrative": "D_eff=1.2830, R²=0.9986. D_eff=1.283 > 1 (эффективный параметр масштаба зонда). Одномасштабная S2 адекватна (превосходит EXP, ΔAICc=-12.23).",
+      "source": "auto-scan 2026-11-24",
+      "date": "2026-11-24",
+      "url": "10.5281/zenodo.24495058"
     }
   ]
 }
