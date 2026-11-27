@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-11-27T08:52:54Z",
-  "total_tests": 394,
+  "exported_at": "2026-11-27T21:33:38Z",
+  "total_tests": 396,
   "fields": [
     "id",
     "name",
@@ -1379,7 +1379,7 @@
       "model_verdict": "S2_LOSES",
       "delta_aicc": 4.47,
       "best_alt": "BIEXP",
-      "model_note": "S2 loses to BIEXP (ΔAICc=4.47). S2+dust fit: D1=0.4762, D2=5.6257, R²=0.3282, AICc=-784.44. S2+dust does NOT beat BIEXP — needs investigation.",
+      "model_note": "S2 loses to BIEXP (ΔAICc=4.47). S2+dust fit: D1=0.4762, D2=5.6272, R²=0.3282, AICc=-784.44. S2+dust does NOT beat BIEXP — needs investigation.",
       "narrative": "D_eff=0.2021, R²=0.3005. D_eff=0.202 < 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, BIEXP поглощает перекрывающиеся процессы (ΔAICc=4.47). Не \"S2 ложна\" — обнаружена дополнительная структура.",
       "source": "auto-scan 2026-08-04",
       "date": "2026-08-04",
@@ -6134,6 +6134,38 @@
       "source": "auto-scan 2026-11-27",
       "date": "2026-11-27",
       "url": "10.5281/zenodo.24399081"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: IoT-ANN-IDS",
+      "domain": "scouting",
+      "D": 1.0003,
+      "r2": 1.0,
+      "verdict": "D_NEAR_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 993.96,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=993.96).",
+      "narrative": "D_eff=1.0003, R²=1.0000. D_eff=1.000 ≈ 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=993.96). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-27",
+      "date": "2026-11-27",
+      "url": "10.5281/zenodo.24606556"
+    },
+    {
+      "id": "",
+      "name": "Zenodo: IoT-ANN-IDS",
+      "domain": "scouting",
+      "D": 1.3336,
+      "r2": 0.9983,
+      "verdict": "D_GT_1",
+      "model_verdict": "S2_LOSES",
+      "delta_aicc": 58.13,
+      "best_alt": "S2_DUST",
+      "model_note": "S2 loses to S2_DUST (ΔAICc=58.13).",
+      "narrative": "D_eff=1.3336, R²=0.9983. D_eff=1.334 > 1 (эффективный параметр масштаба зонда). Интерференция: одномасштабная S2 недостаточна, S2_DUST поглощает перекрывающиеся процессы (ΔAICc=58.13). Не \"S2 ложна\" — обнаружена дополнительная структура.",
+      "source": "auto-scan 2026-11-27",
+      "date": "2026-11-27",
+      "url": "10.5281/zenodo.24606556"
     }
   ]
 }
